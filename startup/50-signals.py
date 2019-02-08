@@ -1,3 +1,5 @@
+print(f'Loading {__file__}...')
+
 from ophyd import EpicsSignalRO
 
 # These might need/make more sense to be split up into separate files later on.

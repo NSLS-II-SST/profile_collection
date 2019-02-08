@@ -1,5 +1,8 @@
+print(f'Loading {__file__}...')
+
+import os
 import nslsii
-nslsii.configure_base(get_ipython().user_ns, 'sst')
+nslsii.configure_base(get_ipython().user_ns, 'rsoxs')
 
 # After the above call, you will now have the following in your namespace:
 # 
@@ -30,4 +33,10 @@ def print_scan_ids(name, start_doc):
 
 RE.subscribe(print_scan_ids, 'start')
 
+control_layer = os.getenv('OPHYD_CONTROL_LAYER')
 
+print(f'You are using the "{control_layer}" control layer')
+
+# from bluesky.callbacks.best_effort import BestEffortCallback
+# bec = BestEffortCallback()
+# RE.subscribe(bec)
