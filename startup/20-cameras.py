@@ -122,10 +122,11 @@ class StandardProsilicaWithTIFFV33(StandardProsilicaV33):
                reg=db.reg)
 
 
-xray_eye1 = StandardProsilica('XF:07ID1-ES:1{Scr:1}', name='xray_eye1')
-xray_eye1_writing = StandardProsilicaWithTIFF('XF:07ID1-ES:1{Scr:1}', name='xray_eye1')
+Sample_cam = StandardProsilica('XF:07ID1-ES:1{Scr:1}', name='Sample_cam')
+DetW_cam = StandardProsilica('XF:07ID1-ES:1{Scr:2}', name='DetW_cam')
+Izero_cam = StandardProsilica('XF:07ID1-ES:1{Scr:3}', name='Izero_cam')
 
-all_standard_pros = [xray_eye1, xray_eye1_writing]
+all_standard_pros = [Sample_cam, DetW_cam, Izero_cam]
 for camera in all_standard_pros:
     camera.read_attrs = ['stats1', 'stats2', 'stats3', 'stats4', 'stats5']
     # camera.tiff.read_attrs = []  # leaving just the 'image'
@@ -142,7 +143,3 @@ for camera in all_standard_pros:
     # camera.cam.ensure_nonblocking()
 
     camera.stage_sigs[camera.cam.trigger_mode] = 'Fixed Rate'
-
-for camera in [xray_eye1_writing]:
-    camera.read_attrs.append('tiff')
-    camera.tiff.read_attrs = []

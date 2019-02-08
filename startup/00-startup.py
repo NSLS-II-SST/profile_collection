@@ -37,6 +37,9 @@ control_layer = os.getenv('OPHYD_CONTROL_LAYER')
 
 print(f'You are using the "{control_layer}" control layer')
 
+# getting rid of the warnings
+import logging
+logging.getLogger('caproto').setLevel('ERROR')
 # from bluesky.callbacks.best_effort import BestEffortCallback
 # bec = BestEffortCallback()
 # RE.subscribe(bec)
