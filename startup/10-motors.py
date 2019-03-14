@@ -5,6 +5,7 @@ sam_X = EpicsMotor('XF:07ID2-ES1{Stg-Ax:X}Mtr', name='sam_X')
 sam_Y = EpicsMotor('XF:07ID2-ES1{Stg-Ax:Y}Mtr', name='sam_Y')
 sam_Z = EpicsMotor('XF:07ID2-ES1{Stg-Ax:Z}Mtr', name='sam_Z')
 sam_Th = EpicsMotor('XF:07ID2-ES1{Stg-Ax:Yaw}Mtr', name='sam_Th')
+sam_Th.kind = 'hinted'
 BeamStopW = EpicsMotor('XF:07ID2-ES1{BS-Ax:1}Mtr', name='BeamStopW')
 BeamStopS = EpicsMotor('XF:07ID2-ES1{BS-Ax:2}Mtr', name='BeamStopS')
 Slt1_T = EpicsMotor('XF:07ID2-ES1{Slt1-Ax:T}Mtr', name='Slt1_T')
