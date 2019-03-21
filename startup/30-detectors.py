@@ -65,6 +65,10 @@ class SyncedDetectors(Device):
         saxs_status = self.saxs.trigger()  # not sure this is needed?
         return saxs_status & waxs_status
 
+    def collect_asset_docs(self, *args, **kwargs):
+        yield from self.saxs.collect_asset_docs(*args, **kwargs)
+        yield from self.waxs.collect_asset_docs(*args, **kwargs)
+
 sw_det = SyncedDetectors('', name='sw_det')
 
 for det in [saxs_det, waxs_det,sw_det.waxs,sw_det.saxs]:
