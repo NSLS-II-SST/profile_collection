@@ -1,18 +1,13 @@
 print(f'Loading {__file__}...')
 
-import os
-import ophyd
+import time
 from ophyd import Component as C
-from ophyd import Signal, EpicsSignal, EpicsSignalRO
+from ophyd import EpicsSignalRO, Device
 from ophyd.areadetector.trigger_mixins import SingleTrigger
 from ophyd.areadetector import (GreatEyesDetector, GreatEyesDetectorCam,
-                                ImagePlugin, TIFFPlugin, StatsPlugin, HDF5Plugin,
+                                ImagePlugin, TIFFPlugin, StatsPlugin,
                                 ProcessPlugin, ROIPlugin, TransformPlugin)
-from ophyd.areadetector.filestore_mixins import (FileStoreIterativeWrite,
-                                                 FileStoreHDF5IterativeWrite,
-                                                 FileStoreTIFFIterativeWrite,
-                                                 FileStoreTIFFSquashing,
-                                                 FileStoreTIFF)
+from ophyd.areadetector.filestore_mixins import FileStoreTIFFIterativeWrite
 
 
 class TIFFPluginWithFileStore(TIFFPlugin, FileStoreTIFFIterativeWrite):
@@ -49,12 +44,31 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+    #sudo mount -t cifs //10.7.0.217/data/ /mnt/zdrive -o user=linuxuser,pass=greateyes
+    #needs to be run on the server
 
 
 saxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:1}', name='saxs_det',
                                   read_attrs=['tiff', 'stats1.total'])
 waxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:2}', name='waxs_det',
                                   read_attrs=['tiff', 'stats1.total'])
-for det in [saxs_det, waxs_det]:
+
+
+class SyncedDetectors(Device):
+    saxs = C(RSOXSGreatEyesDetector, 'XF:07ID1-ES:1{GE:1}',read_attrs=['tiff', 'stats1.total'])
+    waxs = C(RSOXSGreatEyesDetector, 'XF:07ID1-ES:1{GE:2}',read_attrs=['tiff', 'stats1.total'])
+
+    def trigger(self):
+        self.waxs.cam.trigger_mode.put(0)
+        waxs_status = self.waxs.trigger()
+        time.sleep(0.005)
+        saxs_status = self.saxs.trigger()  # not sure this is needed?
+        return saxs_status & waxs_status
+
+sw_det = SyncedDetectors('', name='sw_det')
+
+for det in [saxs_det, waxs_det,sw_det.waxs,sw_det.saxs]:
+    det.kind = 'hinted'
     det.stats1.kind = 'hinted'
     det.stats1.total.kind = 'hinted'
+sw_det.kind = 'hinted'

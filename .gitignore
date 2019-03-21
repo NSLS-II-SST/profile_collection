@@ -105,5 +105,6 @@ ENV/
 startup/.idea/
 
 # ipython
+db/
 static/
 history.sqlite
