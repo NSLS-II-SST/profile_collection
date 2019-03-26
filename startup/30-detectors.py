@@ -69,6 +69,10 @@ class SyncedDetectors(Device):
         yield from self.saxs.collect_asset_docs(*args, **kwargs)
         yield from self.waxs.collect_asset_docs(*args, **kwargs)
 
+    def setexp(self,seconds):
+        self.waxs.cam.acquire_time.set(seconds)
+        self.saxs.cam.acquire_time.set(seconds)
+
 sw_det = SyncedDetectors('', name='sw_det')
 
 for det in [saxs_det, waxs_det,sw_det.waxs,sw_det.saxs]:

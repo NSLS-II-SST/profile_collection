@@ -1,5 +1,6 @@
 print(f'Loading {__file__}...')
 
+import datetime
 import bluesky.plans as bp
 import bluesky.plan_stubs as bps
 import bluesky.preprocessors as bpp
@@ -33,5 +34,27 @@ def newsample(sample,sampleid='',sample_desc='',sampleset='',creator='',institut
     RE.md['dim3']=dim3
     RE.md['notes']=notes
 
+def snapsw(seconds,samplename='snap',sampleid='', md={}):
+    # TODO: do it more generally
+    # yield from bps.mv(sw_det.setexp, seconds)
+    yield from bps.mv(sw_det.waxs.cam.acquire_time, seconds)
+    yield from bps.mv(sw_det.saxs.cam.acquire_time, seconds)
+
+    md['sample'] = samplename
+    md['sampleid'] = sampleid
+    uid = (yield from bp.count([sw_det], num=1, md=md))
+    hdr = db[uid]
+    dt = datetime.datetime.fromtimestamp(hdr.start['time'])
+    formatted_date = dt.strftime('%Y-%m-%d')
+    tiff_series.export(hdr.documents(fill=True),
+        file_prefix=('{start[institution]}/'
+                    '{start[user]}/'
+                    '{start[project]}/'
+                    f'{formatted_date}/'
+                    '{start[scan_id]}-{start[sample]}-'),
+        directory='Z:/images/users/'
+    )
+
 def myplan(dets, motor, start, stop, num):
     yield from bp.scan(dets, motor, start, stop, num)
+

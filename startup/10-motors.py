@@ -1,6 +1,6 @@
 print(f'Loading {__file__}...')
 
-from ophyd import EpicsMotor
+from ophyd import EpicsMotor, EpicsSignal
 sam_X = EpicsMotor('XF:07ID2-ES1{Stg-Ax:X}Mtr', name='sam_X')
 sam_Y = EpicsMotor('XF:07ID2-ES1{Stg-Ax:Y}Mtr', name='sam_Y')
 sam_Z = EpicsMotor('XF:07ID2-ES1{Stg-Ax:Z}Mtr', name='sam_Z')
@@ -24,11 +24,29 @@ Det_W = EpicsMotor('XF:07ID2-ES1{Det-Ax:1}Mtr', name='Det_W')
 Det_S = EpicsMotor('XF:07ID2-ES1{Det-Ax:2}Mtr', name='Det_S')
 Shutter_Y = EpicsMotor('XF:07ID2-ES1{FSh-Ax:1}Mtr', name='Shutter_Y')
 Izero_Y = EpicsMotor('XF:07ID2-ES1{Scr-Ax:1}Mtr', name='Izero_Y')
-
-
-
-
-from ophyd import EpicsMotor
+#epu_gap = EpicsMotor('SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr', name='epu_gap')
 
 ## monochromator
 # dcm_bragg = BraggEpicsMotor('XF:07ID6-OP{Mono:DCM1-Ax:Bragg}Mtr', name='dcm_bragg')
+mono_en = EpicsSignal(read_pv='XF:07ID1-OP{Mono:PGM1-Ax::ENERGY_MON',
+                     write_pv='XF:07ID1-OP{Mono:PGM1-Ax::ENERGY_SP',
+                     name='mono_en')
+
+from ophyd import PVPositioner, EpicsSignalRO
+from ophyd import Component as Cpt
+
+class undulatorgap(PVPositioner):
+    setpoint = Cpt(EpicsSignal,'-Ax:Gap}-Mtr-SP')
+    readback = Cpt(EpicsSignalRO, '-Ax:Gap}-Mtr.RBV')
+    done = Cpt(EpicsSignalRO, '-Ax:Gap}-Mtr.MOVN')
+    done_value = 0
+    stop_signal = Cpt(EpicsSignal, '-Ax:Gap}-Mtr.STOP')
+
+print('SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr-SP')
+epu_gap = undulatorgap('SR:C07-ID:G1A{SST1:1',name='epu_gap', read_attrs=['readback'],
+                configuration_attrs=[])
+
+
+    #EpicsSignal(read_pv='SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr.RBV',
+    #                 write_pv='SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr-SP',
+    #                name='epu_gap')

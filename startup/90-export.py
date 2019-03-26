@@ -16,7 +16,6 @@ from suitcase import tiff_series, tiff_stack
 from event_model import Filler
 
 USERDIR = 'Z:/images/users/{}'
-
 filler = Filler(db.reg.handler_reg)
 RE.subscribe(filler)
 
