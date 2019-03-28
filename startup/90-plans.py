@@ -34,12 +34,12 @@ def newsample(sample,sampleid='',sample_desc='',sampleset='',creator='',institut
     RE.md['dim3']=dim3
     RE.md['notes']=notes
 
-def snapsw(seconds,samplename='snap',sampleid='', md={}):
+def snapsw(seconds,samplename='snap',sampleid=''):
     # TODO: do it more generally
     # yield from bps.mv(sw_det.setexp, seconds)
     yield from bps.mv(sw_det.waxs.cam.acquire_time, seconds)
     yield from bps.mv(sw_det.saxs.cam.acquire_time, seconds)
-
+    md=RE.md
     md['sample'] = samplename
     md['sampleid'] = sampleid
     uid = (yield from bp.count([sw_det], num=1, md=md))
