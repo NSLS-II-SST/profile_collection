@@ -16,11 +16,11 @@ from suitcase import tiff_series, tiff_stack
 from event_model import Filler
 
 USERDIR = 'Z:/images/users/{}'
-filler = Filler(db.reg.handler_reg)
-RE.subscribe(filler)
+# filler = Filler(db.reg.handler_reg)
+# RE.subscribe(filler)
 
-serializer = tiff_series.Serializer(file_prefix='{start[institution]}-Eph={event[data][energy]}-{start[scan_id]}-',
-                                    directory=USERDIR.format('DAMA'))
+# serializer = tiff_series.Serializer(file_prefix='{start[institution]}-Eph={event[data][energy]}-{start[scan_id]}-',
+#                                     directory=USERDIR.format('DAMA'))
 
 # TODO: figure out how to properly use it as a callback.
 

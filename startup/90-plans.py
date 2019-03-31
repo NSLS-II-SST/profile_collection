@@ -1,9 +1,12 @@
 print(f'Loading {__file__}...')
 
+import numpy as np
 import datetime
 import bluesky.plans as bp
 import bluesky.plan_stubs as bps
 import bluesky.preprocessors as bpp
+from suitcase import tiff_series, json_metadata, csv
+
 
 def newuser(user='nochange',userid='nochange',proposal_id='nochange',institution='nochange',project='nochange'):
     if(user is not 'nochange'):
@@ -34,7 +37,7 @@ def newsample(sample,sampleid='',sample_desc='',sampleset='',creator='',institut
     RE.md['dim3']=dim3
     RE.md['notes']=notes
 
-def snapsw(seconds,samplename='snap',sampleid=''):
+def snapsw(seconds,samplename='snap',sampleid='', num_images=1):
     # TODO: do it more generally
     # yield from bps.mv(sw_det.setexp, seconds)
     yield from bps.mv(sw_det.waxs.cam.acquire_time, seconds)
@@ -42,18 +45,91 @@ def snapsw(seconds,samplename='snap',sampleid=''):
     md=RE.md
     md['sample'] = samplename
     md['sampleid'] = sampleid
-    uid = (yield from bp.count([sw_det], num=1, md=md))
+    uid = (yield from bp.count([sw_det], num=num_images, md=md))
     hdr = db[uid]
     dt = datetime.datetime.fromtimestamp(hdr.start['time'])
     formatted_date = dt.strftime('%Y-%m-%d')
+    energy = hdr.table(stream_name='baseline')['en_energy'][1]
     tiff_series.export(hdr.documents(fill=True),
         file_prefix=('{start[institution]}/'
                     '{start[user]}/'
                     '{start[project]}/'
                     f'{formatted_date}/'
-                    '{start[scan_id]}-{start[sample]}-'),
-        directory='Z:/images/users/'
-    )
+                    '{start[scan_id]}-{start[sample]}-'
+                    f'{energy:.2f}eV-'),
+        directory='Z:/images/users/')
+    json_metadata.export(hdr.documents(),
+        file_prefix=('{institution}/'
+                     '{user}/'
+                     '{project}/'
+                     f'{formatted_date}/'
+                     '{scan_id}-{sample}-'
+                     f'{energy:.2f}eV-'),
+        directory='Z:/images/users/',
+        sort_keys=True, indent=2)
+    csv.export(hdr.documents(stream_name='IzeroMesh_monitor'),
+        file_prefix=('{institution}/'
+                     '{user}/'
+                     '{project}/'
+                     f'{formatted_date}/'
+                     '{scan_id}-{sample}-'
+                     f'{energy:.2f}eV-'),
+        directory='Z:/images/users/')
+
+def enscansw(seconds, enstart, enstop, steps,samplename='enscan',sampleid=''):
+    # TODO: do it more generally
+    # yield from bps.mv(sw_det.setexp, seconds)
+    yield from bps.mv(sw_det.waxs.cam.acquire_time, seconds)
+    yield from bps.mv(sw_det.saxs.cam.acquire_time, seconds)
+    md = RE.md
+    md['sample'] = samplename
+    md['sampleid'] = sampleid
+    first_scan_id = None
+    for i, pos in enumerate(np.linspace(enstart, enstop, steps)):
+        yield from bps.mv(en, pos)
+        uid = (yield from bp.count([sw_det], md=md))
+        hdr = db[uid]
+        if i == 0:
+            first_scan_id = hdr.start['scan_id']
+        dt = datetime.datetime.fromtimestamp(hdr.start['time'])
+        formatted_date = dt.strftime('%Y-%m-%d')
+        tiff_series.export(hdr.documents(fill=True),
+            file_prefix=('{start[institution]}/'
+                         '{start[user]}/'
+                         '{start[project]}/'
+                         f'{formatted_date}/'
+                         f'{first_scan_id}-'
+                         '{start[scan_id]}-{start[sample]}-'
+                         f'{pos:.2f}eV-'),
+            directory='Z:/images/users/')
+        json_metadata.export(hdr.documents(),
+            file_prefix=('{institution}/'
+                         '{user}/'
+                         '{project}/'
+                         f'{formatted_date}/'
+                         '{scan_id}-{sample}-'
+                         f'{pos:.2f}eV-'),
+            directory='Z:/images/users/')
+        csv.export(hdr.documents(stream_name='IzeroMesh_monitor'),
+            file_prefix=('{institution}/'
+                         '{user}/'
+                         '{project}/'
+                         f'{formatted_date}/'
+                         '{scan_id}-{sample}-'
+                         f'{pos:.2f}eV-'),
+            directory='Z:/images/users/')
+
+    # uid = (yield from bp.scan([sw_det], en, enstart, enstop,steps, md=md))
+    # hdr = db[uid]
+    # dt = datetime.datetime.fromtimestamp(hdr.start['time'])
+    # formatted_date = dt.strftime('%Y-%m-%d')
+    # tiff_series.export(hdr.documents(fill=True),
+    #     file_prefix=('{start[institution]}/'
+    #                 '{start[user]}/'
+    #                 '{start[project]}/'
+    #                 f'{formatted_date}/'
+    #                 '{start[scan_id]}-{start[sample]}-{event[data][en_energy]:.2f}eV-'), # not working, need energy in each filename
+    #     directory='Z:/images/users/')
 
 def myplan(dets, motor, start, stop, num):
     yield from bp.scan(dets, motor, start, stop, num)

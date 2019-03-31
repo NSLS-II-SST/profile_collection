@@ -80,3 +80,4 @@ for det in [saxs_det, waxs_det,sw_det.waxs,sw_det.saxs]:
     det.stats1.kind = 'hinted'
     det.stats1.total.kind = 'hinted'
 sw_det.kind = 'hinted'
+sd.baseline.extend([waxs_det.cam.temperature_actual, saxs_det.cam.temperature_actual, waxs_det.cam.hot_side_temp, saxs_det.cam.hot_side_temp ])
