@@ -124,9 +124,9 @@ class StandardProsilicaWithTIFFV33(StandardProsilicaV33):
                reg=db.reg)
 
 
-Sample_cam = StandardProsilica('XF:07ID1-ES:1{Scr:1}', name='Sample_cam')
-DetW_cam = StandardProsilica('XF:07ID1-ES:1{Scr:2}', name='DetW_cam')
-Izero_cam = StandardProsilica('XF:07ID1-ES:1{Scr:3}', name='Izero_cam')
+Sample_cam = StandardProsilica('XF:07ID1-ES:1{Scr:1}', name='RSoXS Sample Area Camera')
+DetW_cam = StandardProsilica('XF:07ID1-ES:1{Scr:2}', name='WAXS Detector Area Camera')
+Izero_cam = StandardProsilica('XF:07ID1-ES:1{Scr:3}', name='Izero YAG Camera')
 
 all_standard_pros = [Sample_cam, DetW_cam, Izero_cam]
 for camera in all_standard_pros:

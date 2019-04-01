@@ -48,9 +48,9 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
     #needs to be run on the server
 
 
-saxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:1}', name='saxs_det',
+saxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:1}', name='Small Angle CCD Detector',
                                   read_attrs=['tiff', 'stats1.total'])
-waxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:2}', name='waxs_det',
+waxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:2}', name='Wide Angle CCD Detector',
                                   read_attrs=['tiff', 'stats1.total'])
 
 
@@ -73,11 +73,13 @@ class SyncedDetectors(Device):
         self.waxs.cam.acquire_time.set(seconds)
         self.saxs.cam.acquire_time.set(seconds)
 
-sw_det = SyncedDetectors('', name='sw_det')
+sw_det = SyncedDetectors('', name='Small and Wide Angle Synced CCD Detectors')
 
 for det in [saxs_det, waxs_det,sw_det.waxs,sw_det.saxs]:
     det.kind = 'hinted'
     det.stats1.kind = 'hinted'
     det.stats1.total.kind = 'hinted'
 sw_det.kind = 'hinted'
+waxs_det.cam.temperature_actual.kind = 'hinted'
+saxs_det.cam.temperature_actual.kind = 'hinted'
 sd.baseline.extend([waxs_det.cam.temperature_actual, saxs_det.cam.temperature_actual, waxs_det.cam.hot_side_temp, saxs_det.cam.hot_side_temp ])

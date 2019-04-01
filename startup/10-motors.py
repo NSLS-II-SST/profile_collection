@@ -1,18 +1,18 @@
 print(f'Loading {__file__}...')
 
 from ophyd import EpicsMotor, EpicsSignal
-sam_X = EpicsMotor('XF:07ID2-ES1{Stg-Ax:X}Mtr', name='sam_X')
-sam_Y = EpicsMotor('XF:07ID2-ES1{Stg-Ax:Y}Mtr', name='sam_Y')
-sam_Z = EpicsMotor('XF:07ID2-ES1{Stg-Ax:Z}Mtr', name='sam_Z')
-sam_Th = EpicsMotor('XF:07ID2-ES1{Stg-Ax:Yaw}Mtr', name='sam_Th')
-sam_Th.kind = 'hinted'
-BSw = BeamStopW = EpicsMotor('XF:07ID2-ES1{BS-Ax:1}Mtr', name='BeamStopW')
-BSs = BeamStopS = EpicsMotor('XF:07ID2-ES1{BS-Ax:2}Mtr', name='BeamStopS')
-Det_W = EpicsMotor('XF:07ID2-ES1{Det-Ax:1}Mtr', name='Det_W')
-Det_S = EpicsMotor('XF:07ID2-ES1{Det-Ax:2}Mtr', name='Det_S')
-Shutter_Y = EpicsMotor('XF:07ID2-ES1{FSh-Ax:1}Mtr', name='Shutter_Y')
-Izero_Y = EpicsMotor('XF:07ID2-ES1{Scr-Ax:1}Mtr', name='Izero_Y')
-MirrorType = EpicsSignal('XF:07ID1-OP{Mono:PGM1-Ax:MirX}Mtr_TYPE_MON',name='MirrorType')
+sam_X = EpicsMotor('XF:07ID2-ES1{Stg-Ax:X}Mtr', name='RSoXS Sample Outboard-Inboard',kind='hinted')
+sam_Y = EpicsMotor('XF:07ID2-ES1{Stg-Ax:Y}Mtr', name='RSoXS Sample Up-Down',kind='hinted')
+sam_Z = EpicsMotor('XF:07ID2-ES1{Stg-Ax:Z}Mtr', name='RSoXS Sample Downstream-Upstream',kind='hinted')
+sam_Th = EpicsMotor('XF:07ID2-ES1{Stg-Ax:Yaw}Mtr', name='RSoXS Sample Rotation',kind='hinted')
+BSw = BeamStopW = EpicsMotor('XF:07ID2-ES1{BS-Ax:1}Mtr', name='Beam Stop WAXS',kind='hinted')
+BSs = BeamStopS = EpicsMotor('XF:07ID2-ES1{BS-Ax:2}Mtr', name='Beam Stop SAXS',kind='hinted')
+Det_W = EpicsMotor('XF:07ID2-ES1{Det-Ax:1}Mtr', name='Detector WAXS Translation',kind='hinted')
+Det_S = EpicsMotor('XF:07ID2-ES1{Det-Ax:2}Mtr', name='Detector SAXS Translation',kind='hinted')
+Shutter_Y = EpicsMotor('XF:07ID2-ES1{FSh-Ax:1}Mtr', name='Shutter Vertical Translation',kind='omitted')
+Izero_Y = EpicsMotor('XF:07ID2-ES1{Scr-Ax:1}Mtr', name='Izero Assembly Vertical Translation',kind='omitted')
+Izero_ds = EpicsMotor('XF:07ID2-BI{Diag:07-Ax:Y}Mtr', name='Downstream Izero DM7 Vertical Translation',kind='omitted')
+Exit_Slit = EpicsMotor('XF:07ID2-BI{Slt:11-Ax:YGap}Mtr', name='Exit Slit of Mono Vertical Gap',kind='normal')
 #epu_gap = EpicsMotor('SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr', name='epu_gap')
 
 ## monochromator
@@ -36,7 +36,7 @@ from ophyd.pseudopos import (pseudo_position_argument,
 class UndulatorMotor(EpicsMotor):
     user_setpoint = Cpt(EpicsSignal, '-SP', limits=True)
 
-epu_gap = UndulatorMotor('SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr', name='epu_gap')
+epu_gap = UndulatorMotor('SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr', name='EPU 60 Gap',kind='hinted')
 
 class Monochromator(PVPositioner):
     setpoint = Cpt(EpicsSignal,'ENERGY_SP')
@@ -45,7 +45,7 @@ class Monochromator(PVPositioner):
     done_value = 1
     stop_signal = Cpt(EpicsSignal, 'ENERGY_ST_CMD')
 
-mono_en= Monochromator('XF:07ID1-OP{Mono:PGM1-Ax::', name='mono_en')
+mono_en= Monochromator('XF:07ID1-OP{Mono:PGM1-Ax::', name='Monochromator Energy',kind='normal')
 
 def epugap_from_energy(energy):
     gap = 6401.9 +\
@@ -75,8 +75,8 @@ class EnPos(PseudoPositioner):
     # monoen = Cpt(monochromator, 'XF:07ID1-OP{Mono:PGM1-Ax::', read_attrs=['readback'],
     #                        configuration_attrs=[])
 
-    epugap = Cpt(UndulatorMotor, 'SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr')
-    monoen = Cpt(Monochromator, 'XF:07ID1-OP{Mono:PGM1-Ax::')
+    epugap = Cpt(UndulatorMotor, 'SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr',kind='normal')
+    monoen = Cpt(Monochromator, 'XF:07ID1-OP{Mono:PGM1-Ax::',kind='normal')
 
     @pseudo_position_argument
     def forward(self, pseudo_pos):
@@ -89,7 +89,8 @@ class EnPos(PseudoPositioner):
         '''Run an inverse (real -> pseudo) calculation'''
         return self.PseudoPosition( energy = real_pos.monoen )
 
-en = EnPos('', name='en')
+en = EnPos('', name='Beamline Energy')
 
-sd.baseline.extend([en, sam_X, sam_Y, sam_Z, sam_Th, BeamStopS, BeamStopW, Det_S, Det_W, Shutter_Y, Izero_Y])
+
+sd.baseline.extend([en, sam_X, sam_Y, sam_Z, sam_Th, BeamStopS, BeamStopW, Det_S, Det_W, Shutter_Y, Izero_Y, Izero_ds])
 

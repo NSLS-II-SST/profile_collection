@@ -25,16 +25,16 @@ class Slits(PseudoPositioner):
   #      boxedtext(self.name, self.where(), 'cyan') #bruce's
 
     # The pseudo positioner axes:
-    vsize   = Cpt(PseudoSingle, limits=(-1, 20))
-    vcenter = Cpt(PseudoSingle, limits=(-10, 10))
-    hsize   = Cpt(PseudoSingle, limits=(-1, 20))
-    hcenter = Cpt(PseudoSingle, limits=(-10, 10))
+    vsize   = Cpt(PseudoSingle, limits=(-1, 20),kind='hinted')
+    vcenter = Cpt(PseudoSingle, limits=(-10, 10),kind='omitted')
+    hsize   = Cpt(PseudoSingle, limits=(-1, 20),kind='hinted')
+    hcenter = Cpt(PseudoSingle, limits=(-10, 10),kind='omitted')
 
     # The real (or physical) positioners:
-    top      = Cpt(EpicsMotor, 'T}Mtr')
-    bottom   = Cpt(EpicsMotor, 'B}Mtr')
-    inboard  = Cpt(EpicsMotor, 'I}Mtr')
-    outboard = Cpt(EpicsMotor, 'O}Mtr')
+    top      = Cpt(EpicsMotor, 'T}Mtr',kind='omitted')
+    bottom   = Cpt(EpicsMotor, 'B}Mtr',kind='omitted')
+    inboard  = Cpt(EpicsMotor, 'I}Mtr',kind='omitted')
+    outboard = Cpt(EpicsMotor, 'O}Mtr',kind='omitted')
 
     @pseudo_position_argument
     def forward(self, pseudo_pos):
@@ -57,9 +57,22 @@ class Slits(PseudoPositioner):
 
 
 
-slits1 = Slits('XF:07ID2-ES1{Slt1-Ax:',  name='slits1')
-slits2 = Slits('XF:07ID2-ES1{Slt2-Ax:',  name='slits2')
-slits3 = Slits('XF:07ID2-ES1{Slt3-Ax:',  name='slits3')
+slits1 = Slits('XF:07ID2-ES1{Slt1-Ax:',  name='Upstream Scatter Slits', kind='normal')
+slits2 = Slits('XF:07ID2-ES1{Slt2-Ax:',  name='Middle Scatter Slits', kind='normal')
+slits3 = Slits('XF:07ID2-ES1{Slt3-Ax:',  name='Final Scatter Slits', kind='normal')
+slits3.bottom.user_offset.set(-1.39)
+slits3.top.user_offset.set(-1.546)
+slits3.outboard.user_offset.set(-.651)
+slits3.inboard.user_offset.set(.615)
+slits2.inboard.user_offset.set(-0.59)
+slits2.outboard.user_offset.set(-1.705)
+slits2.bottom.user_offset.set(-1.199)
+slits2.top.user_offset.set(-1.71)
+slits1.inboard.user_offset.set(-.223)
+slits1.outboard.user_offset.set(-2.0550)
+slits1.top.user_offset.set(-1.39)
+slits1.bottom.user_offset.set(-.71)
+
 #slits2.top.user_offset.put(-0.038)
 #slits2.bottom.user_offset.put(0.264)
 sd.baseline.extend([slits1, slits2, slits3 ])
