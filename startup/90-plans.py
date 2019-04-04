@@ -7,6 +7,7 @@ import bluesky.plan_stubs as bps
 import bluesky.preprocessors as bpp
 from suitcase import tiff_series, json_metadata, csv
 
+from matplotlib.colors import LogNorm
 
 def newuser(user='nochange',userid='nochange',proposal_id='nochange',institution='nochange',project='nochange'):
     if(user is not 'nochange'):
@@ -37,6 +38,23 @@ def newsample(sample,sampleid='',sample_desc='',sampleset='',creator='',institut
     RE.md['dim3']=dim3
     RE.md['notes']=notes
 
+
+def quick_view(hdr):
+    wax = next(hdr.data('Small and Wide Angle Synced CCD Detectors_waxs_image'))
+    sax = next(hdr.data('Small and Wide Angle Synced CCD Detectors_saxs_image'))
+    fig = plt.figure('wax/sax snap')
+    if not fig.axes:
+        wax_ax, sax_ax = fig.subplots(1, 2)
+        wax_ax.set_title('wax')
+        sax_ax.set_title('sax')
+        wax_ax.imshow(wax,norm=LogNorm())
+        sax_ax.imshow(sax,norm=LogNorm())
+    else:
+        wax_ax, sax_ax = fig.axes
+        wax_ax.images[0].set_data(wax)
+        sax_ax.images[0].set_data(sax)
+
+
 def snapsw(seconds,samplename='snap',sampleid='', num_images=1):
     # TODO: do it more generally
     # yield from bps.mv(sw_det.setexp, seconds)
@@ -47,6 +65,7 @@ def snapsw(seconds,samplename='snap',sampleid='', num_images=1):
     md['sampleid'] = sampleid
     uid = (yield from bp.count([sw_det], num=num_images, md=md))
     hdr = db[uid]
+    quick_view(hdr)
     dt = datetime.datetime.fromtimestamp(hdr.start['time'])
     formatted_date = dt.strftime('%Y-%m-%d')
     energy = hdr.table(stream_name='baseline')['Beamline Energy_energy'][1]

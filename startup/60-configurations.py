@@ -76,28 +76,29 @@ def slits_in():
                       slits3.hcenter, 0)
 
 def mirror3_pos():
-    yield from bps.mv(mir3.X, 26.15,
-                      mir3.Y, 18.05,
-                      mir3.Z, -9e-6,
-                      mir3.Roll, 7e-5,
-                      mir3.Pitch, 8.031,
-                      mir3.Yaw, 5e-5)
-
-def mirror1_pos():
-    yield from bps.mv(mir1.X, 0.0001,
-                      mir1.Y, -18,
-                      mir1.Z, 1.49e-4,
-                      mir1.Roll, -9e-6,
-                      mir1.Pitch, 0.679,
-                      mir1.Yaw, -4e-5)
+    yield from bps.mv(mir3.Pitch, 8.031)
+    yield from bps.mv(mir3.X, 26.15)
+    yield from bps.mv(mir3.Y, 18.05)
+    yield from bps.mv(mir3.Z, 0)
+    yield from bps.mv(mir3.Roll, 0)
+    yield from bps.mv(mir3.Yaw, 0)
 
 def mirror3_NEXAFSpos():
-    yield from bps.mv(mir3.X, 26.15,
-                      mir3.Y, 18.05,
-                      mir3.Z, 0,
-                      mir3.Roll, 0,
-                      mir3.Pitch, 8.151,
-                      mir3.Yaw, 0)
+    yield from bps.mv(mir3.Pitch, 8.151)
+    yield from bps.mv(mir3.X, 26.15)
+    yield from bps.mv(mir3.Y, 18.05)
+    yield from bps.mv(mir3.Z, 0)
+    yield from bps.mv(mir3.Roll, 0)
+    yield from bps.mv(mir3.Yaw, 0)
+
+def mirror1_pos():
+    yield from bps.mv(mir1.X, 0,
+                      mir1.Y, -18,
+                      mir1.Z, 0,
+                      mir1.Roll, 0,
+                      mir1.Pitch, 0.679,
+                      mir1.Yaw, 0)
+
 
 def mirror1_NEXAFSpos():
     yield from bps.mv(mir1.X, 0,

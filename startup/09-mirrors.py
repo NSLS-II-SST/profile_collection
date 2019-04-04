@@ -10,13 +10,13 @@ class HexapodMirror(Device):
     Roll = Cpt(EpicsSignal, 'R}Mtr_MON',write_pv='R}Mtr_SP',kind='omitted')
     Pitch = Cpt(EpicsSignal, 'P}Mtr_MON',write_pv='P}Mtr_SP',kind='omitted')
     Yaw = Cpt(EpicsSignal, 'Yaw}Mtr_MON',write_pv='Yaw}Mtr_SP',kind='omitted')
-    def read(self):
-        print (self.X.read(),
-        self.Y.read(),
-        self.Z.read(),
-        self.Roll.read(),
-        self.Pitch.read(),
-        self.Yaw.read(),)
+#    def read(self):
+#        self.X.read()
+#        self.Y.read()
+#        self.Z.read()
+#        self.Roll.read()
+#        self.Pitch.read()
+#        self.Yaw.read()
 
 
 
