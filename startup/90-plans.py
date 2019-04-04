@@ -55,7 +55,8 @@ def snapsw(seconds,samplename='snap',sampleid='', num_images=1):
                     '{start[user]}/'
                     '{start[project]}/'
                     f'{formatted_date}/'
-                    '{start[scan_id]}-{start[sample]}-'
+                    '{start[scan_id]}-'
+                    '{start[sample]}-'
                     f'{energy:.2f}eV-'),
         directory='Z:/images/users/')
     csv.export(hdr.documents(stream_name='baseline'),
@@ -63,7 +64,8 @@ def snapsw(seconds,samplename='snap',sampleid='', num_images=1):
                      '{user}/'
                      '{project}/'
                      f'{formatted_date}/'
-                     '{scan_id}-{sample}-'
+                     '{scan_id}-'
+                     '{sample}-'
                      f'{energy:.2f}eV-'),
         directory='Z:/images/users/')
     csv.export(hdr.documents(stream_name='Izero Mesh Drain Current_monitor'),
@@ -71,7 +73,8 @@ def snapsw(seconds,samplename='snap',sampleid='', num_images=1):
                      '{user}/'
                      '{project}/'
                      f'{formatted_date}/'
-                     '{scan_id}-{sample}-'
+                     '{scan_id}-'
+                     '{sample}-'
                      f'{energy:.2f}eV-'),
         directory='Z:/images/users/')
 
@@ -84,21 +87,23 @@ def enscansw(seconds, enstart, enstop, steps,samplename='enscan',sampleid=''):
     md['sample'] = samplename
     md['sampleid'] = sampleid
     first_scan_id = None
+    dt = datetime.datetime.now()
+    formatted_date = dt.strftime('%Y-%m-%d')
     for i, pos in enumerate(np.linspace(enstart, enstop, steps)):
         yield from bps.mv(en, pos)
         uid = (yield from bp.count([sw_det], md=md))
         hdr = db[uid]
         if i == 0:
             first_scan_id = hdr.start['scan_id']
-        dt = datetime.datetime.fromtimestamp(hdr.start['time'])
-        formatted_date = dt.strftime('%Y-%m-%d')
+            dt = datetime.datetime.fromtimestamp(hdr.start['time'])
+            formatted_date = dt.strftime('%Y-%m-%d')
         tiff_series.export(hdr.documents(fill=True),
             file_prefix=('{start[institution]}/'
                          '{start[user]}/'
                          '{start[project]}/'
                          f'{formatted_date}/'
                          f'{first_scan_id}-'
-                         f'{first_scan_id}'
+                         '-{start[scan_id]}-'
                          '-{start[sample]}-'
                          f'{pos:.2f}eV-'),
             directory='Z:/images/users/')
@@ -107,7 +112,9 @@ def enscansw(seconds, enstart, enstop, steps,samplename='enscan',sampleid=''):
                          '{user}/'
                          '{project}/'
                          f'{formatted_date}/'
-                         '{scan_id}-{sample}-'
+                         f'{first_scan_id}-'
+                         '{scan_id}-'
+                         '{sample}-'
                          f'{pos:.2f}eV-'),
             directory='Z:/images/users/')
         csv.export(hdr.documents(stream_name='Izero Mesh Drain Current_monitor'),
@@ -115,7 +122,9 @@ def enscansw(seconds, enstart, enstop, steps,samplename='enscan',sampleid=''):
                          '{user}/'
                          '{project}/'
                          f'{formatted_date}/'
-                         '{scan_id}-{sample}-'
+                         f'{first_scan_id}-'
+                         '{scan_id}-'
+                         '{sample}-'
                          f'{pos:.2f}eV-'),
             directory='Z:/images/users/')
 
@@ -139,14 +148,16 @@ def motscansw(seconds,motor, start, stop, steps,samplename='motscan',sampleid=''
     md['sample'] = samplename
     md['sampleid'] = sampleid
     first_scan_id = None
+    dt = datetime.datetime.now()
+    formatted_date = dt.strftime('%Y-%m-%d')
     for i, pos in enumerate(np.linspace(start, stop, steps)):
         yield from bps.mv(motor, pos)
         uid = (yield from bp.count([sw_det], md=md))
         hdr = db[uid]
         if i == 0:
             first_scan_id = hdr.start['scan_id']
-        dt = datetime.datetime.fromtimestamp(hdr.start['time'])
-        formatted_date = dt.strftime('%Y-%m-%d')
+            dt = datetime.datetime.fromtimestamp(hdr.start['time'])
+            formatted_date = dt.strftime('%Y-%m-%d')
         tiff_series.export(hdr.documents(fill=True),
             file_prefix=('{start[institution]}/'
                          '{start[user]}/'

@@ -91,3 +91,18 @@ def mirror1_pos():
                       mir1.Pitch, 0.679,
                       mir1.Yaw, -4e-5)
 
+def mirror3_NEXAFSpos():
+    yield from bps.mv(mir3.X, 26.15,
+                      mir3.Y, 18.05,
+                      mir3.Z, 0,
+                      mir3.Roll, 0,
+                      mir3.Pitch, 8.151,
+                      mir3.Yaw, -0)
+
+def mirror1_NEXAFSpos():
+    yield from bps.mv(mir1.X, 0,
+                      mir1.Y, -18,
+                      mir1.Z, 0,
+                      mir1.Roll, 0,
+                      mir1.Pitch, 0.691,
+                      mir1.Yaw, 0)
