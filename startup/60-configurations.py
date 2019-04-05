@@ -143,9 +143,9 @@ def mirror1_NEXAFSpos():
     yield from bps.mv(mir1.Yaw, 0)
 
 def SAXSmode():
-    mirror1_pos()
-    mirror3_pos()
-    slits_in_SAXS()
+    yield from mirror1_pos()
+    yield from mirror3_pos()
+    yield from slits_in_SAXS()
     yield from bps.mv(Shutter_Y, 3,
                       Izero_Y, -29,
                       Det_W, -94,
@@ -154,9 +154,9 @@ def SAXSmode():
                       sam_Y, -125)
 
 def WAXSmode():
-    mirror1_pos()
-    mirror3_pos()
-    slits_in_WAXS()
+    yield from mirror1_pos()
+    yield from mirror3_pos()
+    yield from slits_in_WAXS()
     yield from bps.mv(Shutter_Y, 3,
                       Izero_Y, -29,
                       Det_W, -36,
