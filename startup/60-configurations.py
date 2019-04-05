@@ -166,13 +166,13 @@ def WAXSmode():
                       sam_Y, -125)
 
 def all_out():
-    psh10.close()
+    yield from psh10.close()
     print('Moving Mirror 1 to NEXAFS position')
-    mirror1_NEXAFSpos()
+    yield from mirror1_NEXAFSpos()
     print('Moving Mirror 3 to NEXAFS position')
-    mirror3_NEXAFSpos()
+    yield from mirror3_NEXAFSpos()
     print('Retracting Slits to 1 cm gap')
-    slits_out()
+    yield from slits_out()
     print('Moving the rest of RSoXS components')
     yield from bps.mv(Shutter_Y, 44,
                       Izero_Y, 144,
