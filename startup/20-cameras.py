@@ -43,7 +43,7 @@ class ProsilicaDetectorCamV33(ProsilicaDetectorCam):
 process
     '''
     wait_for_plugins = Cpt(EpicsSignal, 'WaitForPlugins',
-                           string=True, kind='config')
+                           string=True, kind='hinted')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -3,7 +3,7 @@ import bluesky.plans as bp
 import bluesky.plan_stubs as bps
 
 def Shutter_in():
-    yield from bps.mv(Shutter_Y, 2)
+    yield from bps.mv(Shutter_Y, 3)
 def Shutter_out():
     yield from bps.mv(Shutter_Y,44)
 
@@ -101,9 +101,9 @@ def mirror1_pos():
 
 
 def mirror1_NEXAFSpos():
-    yield from bps.mv(mir1.X, 0,
+    yield from bps.mv(mir1.Pitch, 0.691,
+                      mir1.X, 0,
                       mir1.Y, -18,
                       mir1.Z, 0,
                       mir1.Roll, 0,
-                      mir1.Pitch, 0.691,
                       mir1.Yaw, 0)

@@ -26,15 +26,15 @@ class Slits(PseudoPositioner):
 
     # The pseudo positioner axes:
     vsize   = Cpt(PseudoSingle, limits=(-1, 20),kind='hinted')
-    vcenter = Cpt(PseudoSingle, limits=(-10, 10),kind='omitted')
+    vcenter = Cpt(PseudoSingle, limits=(-10, 10),kind='hinted')
     hsize   = Cpt(PseudoSingle, limits=(-1, 20),kind='hinted')
-    hcenter = Cpt(PseudoSingle, limits=(-10, 10),kind='omitted')
+    hcenter = Cpt(PseudoSingle, limits=(-10, 10),kind='hinted')
 
     # The real (or physical) positioners:
-    top      = Cpt(EpicsMotor, 'T}Mtr',kind='omitted')
-    bottom   = Cpt(EpicsMotor, 'B}Mtr',kind='omitted')
-    inboard  = Cpt(EpicsMotor, 'I}Mtr',kind='omitted')
-    outboard = Cpt(EpicsMotor, 'O}Mtr',kind='omitted')
+    top      = Cpt(EpicsMotor, 'T}Mtr',kind='hinted')
+    bottom   = Cpt(EpicsMotor, 'B}Mtr',kind='hinted')
+    inboard  = Cpt(EpicsMotor, 'I}Mtr',kind='hinted')
+    outboard = Cpt(EpicsMotor, 'O}Mtr',kind='hinted')
 
     @pseudo_position_argument
     def forward(self, pseudo_pos):
@@ -57,9 +57,9 @@ class Slits(PseudoPositioner):
 
 
 
-slits1 = Slits('XF:07ID2-ES1{Slt1-Ax:',  name='Upstream Scatter Slits', kind='normal')
-slits2 = Slits('XF:07ID2-ES1{Slt2-Ax:',  name='Middle Scatter Slits', kind='normal')
-slits3 = Slits('XF:07ID2-ES1{Slt3-Ax:',  name='Final Scatter Slits', kind='normal')
+slits1 = Slits('XF:07ID2-ES1{Slt1-Ax:',  name='Upstream Scatter Slits', kind='hinted')
+slits2 = Slits('XF:07ID2-ES1{Slt2-Ax:',  name='Middle Scatter Slits', kind='hinted')
+slits3 = Slits('XF:07ID2-ES1{Slt3-Ax:',  name='Final Scatter Slits', kind='hinted')
 slits3.bottom.user_offset.set(-1.39)
 slits3.top.user_offset.set(-1.546)
 slits3.outboard.user_offset.set(-.651)

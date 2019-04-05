@@ -24,7 +24,7 @@ nslsii.configure_base(get_ipython().user_ns, 'rsoxs')
 #	bpp : bluesky.preprocessors
 
 # Optional: set any metadata that rarely changes.
-# RE.md['beamline_id'] = 'YOUR_BEAMLINE_HERE'
+RE.md['beamline_id'] = 'SST-1 RSoXS'
 
 # Add a callback that prints scan IDs at the start of each scan.
 def print_scan_ids(name, start_doc):
@@ -40,6 +40,4 @@ print(f'You are using the "{control_layer}" control layer')
 # getting rid of the warnings
 import logging
 logging.getLogger('caproto').setLevel('ERROR')
-# from bluesky.callbacks.best_effort import BestEffortCallback
-# bec = BestEffortCallback()
-# RE.subscribe(bec)
+bec.disable_baseline()

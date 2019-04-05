@@ -38,21 +38,35 @@ def newsample(sample,sampleid='',sample_desc='',sampleset='',creator='',institut
     RE.md['dim3']=dim3
     RE.md['notes']=notes
 
-
 def quick_view(hdr):
-    wax = next(hdr.data('Small and Wide Angle Synced CCD Detectors_waxs_image'))
-    sax = next(hdr.data('Small and Wide Angle Synced CCD Detectors_saxs_image'))
-    fig = plt.figure('wax/sax snap')
+    waxs = next(hdr.data('Small and Wide Angle Synced CCD Detectors_waxs_image'))
+    saxs = next(hdr.data('Small and Wide Angle Synced CCD Detectors_saxs_image'))
+    fig = plt.figure('SAXS / WAXS RSoXS snap')
+    fig.set_tight_layout(1)
+
     if not fig.axes:
-        wax_ax, sax_ax = fig.subplots(1, 2)
-        wax_ax.set_title('wax')
-        sax_ax.set_title('sax')
-        wax_ax.imshow(wax,norm=LogNorm())
-        sax_ax.imshow(sax,norm=LogNorm())
+        saxs_ax, waxs_ax = fig.subplots(1, 2)
+        waxs_ax.set_title('Wide Angle')
+        saxs_ax.set_title('Small Angle')
+        waxsim = waxs_ax.imshow(waxs,norm=LogNorm())
+        waxsbar = plt.colorbar(waxsim, ax=waxs_ax)
+        saxsim =  saxs_ax.imshow(saxs,norm=LogNorm())
+        saxsbar = plt.colorbar(saxsim, ax=saxs_ax)
+        mngr = plt.get_current_fig_manager()
+        mngr.window.setGeometry(-1920, 30, 1850, 1050)
     else:
-        wax_ax, sax_ax = fig.axes
-        wax_ax.images[0].set_data(wax)
-        sax_ax.images[0].set_data(sax)
+        saxs_ax, waxs_ax,w2,s2 = fig.axes
+        waxs_ax.images[0].set_data(waxs)
+        saxs_ax.images[0].set_data(saxs)
+        waxs_ax.images[0].set_norm(LogNorm())
+        saxs_ax.images[0].set_norm(LogNorm())
+        waxsbar = waxs_ax.images[0].colorbar
+        saxsbar = saxs_ax.images[0].colorbar
+    num_ticks = 2
+    waxsbar.set_ticks(np.linspace(np.ceil(waxs.min())+10, np.floor(waxs.max()-10), num_ticks),update_ticks=True)
+    waxsbar.update_ticks()
+    saxsbar.set_ticks(np.linspace(np.ceil(saxs.min())+10, np.floor(saxs.max()-10), num_ticks),update_ticks=True)
+    saxsbar.update_ticks()
 
 
 def snapsw(seconds,samplename='snap',sampleid='', num_images=1):
@@ -112,6 +126,7 @@ def enscansw(seconds, enstart, enstop, steps,samplename='enscan',sampleid=''):
         yield from bps.mv(en, pos)
         uid = (yield from bp.count([sw_det], md=md))
         hdr = db[uid]
+        quick_view(hdr)
         if i == 0:
             first_scan_id = hdr.start['scan_id']
             dt = datetime.datetime.fromtimestamp(hdr.start['time'])
@@ -173,6 +188,7 @@ def motscansw(seconds,motor, start, stop, steps,samplename='motscan',sampleid=''
         yield from bps.mv(motor, pos)
         uid = (yield from bp.count([sw_det], md=md))
         hdr = db[uid]
+        quick_view(hdr)
         if i == 0:
             first_scan_id = hdr.start['scan_id']
             dt = datetime.datetime.fromtimestamp(hdr.start['time'])
@@ -208,3 +224,17 @@ def motscansw(seconds,motor, start, stop, steps,samplename='motscan',sampleid=''
 def myplan(dets, motor, start, stop, num):
     yield from bp.scan(dets, motor, start, stop, num)
 
+
+
+def buildeputable():
+    ens = [250,260,270,280,285,290,300,310,320,340,350,370,390,400,410,420,450,470,490,500,520,550,575,600,625,650,675,700,725,750,800,850,900,950,1000]
+    gaps = []
+    IzeroMesh.kind= 'hinted'
+    startinggap = epugap_from_energy(250)
+    for energy in ens:
+        yield from bps.mv(mono_en,energy)
+        yield from bps.mv(epu_gap,startinggap-500)
+        yield from bp.scan([IzeroMesh],epu_gap,startinggap-500,startinggap+1500,21)
+        gaps.append(bec.peaks.max["Izero Mesh Drain Current"][0])
+        startinggap = bec.peaks.max["Izero Mesh Drain Current"][0]
+    print(ens,gaps)
