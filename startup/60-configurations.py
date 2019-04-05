@@ -1,6 +1,7 @@
 print(f'Loading {__file__}...')
 import bluesky.plans as bp
 import bluesky.plan_stubs as bps
+import time
 
 def Shutter_in():
     yield from bps.mv(Shutter_Y, 3)
@@ -21,11 +22,13 @@ def DetS_out():
 
 def DetW_edge():
     yield from bps.mv(Det_W,-50)
+def DetW_in():
+    yield from bps.mv(Det_W,-35)
 def DetW_out():
     yield from bps.mv(Det_W,-94)
 
 def BSw_in():
-    yield from bps.mv(BSw,68)
+    yield from bps.mv(BSw,70.035)
 def BSw_out():
     yield from bps.mv(BSw,3)
 
@@ -46,22 +49,9 @@ def BS_out():
     yield from bps.mv(BSw,3,
                       BSs,3)
 
-def all_out():
-    yield from bps.mv(BSw,3,
-                      BSs,3,
-                      Det_S,-94,
-                      Det_W,-94,
-                      slits1.vsize, 10,
-                      slits1.hsize, 10,
-                      slits2.vsize, 10,
-                      slits2.hsize, 10,
-                      slits3.vsize, 10,
-                      slits3.hsize, 10,
-                      Shutter_Y,44,
-                      Izero_Y, 145,
-                      sam_Y, 345)
 
-def slits_in():
+
+def slits_in_SAXS():
     yield from bps.mv(slits1.vsize, .2,
                       slits1.hsize, .2,
                       slits2.vsize, .6,
@@ -74,36 +64,124 @@ def slits_in():
                       slits2.hcenter, .1,
                       slits3.vcenter, 0,
                       slits3.hcenter, 0)
+def slits_out():
+    yield from bps.mv(slits1.vsize, 10,
+                      slits1.hsize, 10,
+                      slits2.vsize, 10,
+                      slits2.hsize, 10,
+                      slits3.vsize, 10,
+                      slits3.hsize, 10)
+def slits_in_WAXS():
+    yield from bps.mv(slits1.vsize, .3,
+                      slits1.hsize, .5,
+                      slits2.vsize, .5,
+                      slits2.hsize, .8,
+                      slits3.vsize, 1,
+                      slits3.hsize, 1.2,
+                      slits1.vcenter, 0.08,
+                      slits1.hcenter, 0.04,
+                      slits2.vcenter, .151,
+                      slits2.hcenter, .111,
+                      slits3.vcenter, 0.203,
+                      slits3.hcenter, 0.2)
 
 def mirror3_pos():
     yield from bps.mv(mir3.Pitch, 8.031)
+    time.sleep(3)
     yield from bps.mv(mir3.X, 26.15)
+    time.sleep(3)
     yield from bps.mv(mir3.Y, 18.05)
+    time.sleep(3)
     yield from bps.mv(mir3.Z, 0)
+    time.sleep(3)
     yield from bps.mv(mir3.Roll, 0)
+    time.sleep(3)
     yield from bps.mv(mir3.Yaw, 0)
+    time.sleep(3)
 
 def mirror3_NEXAFSpos():
     yield from bps.mv(mir3.Pitch, 8.151)
+    time.sleep(3)
     yield from bps.mv(mir3.X, 26.15)
+    time.sleep(3)
     yield from bps.mv(mir3.Y, 18.05)
+    time.sleep(3)
     yield from bps.mv(mir3.Z, 0)
+    time.sleep(3)
     yield from bps.mv(mir3.Roll, 0)
+    time.sleep(3)
     yield from bps.mv(mir3.Yaw, 0)
+    time.sleep(3)
 
 def mirror1_pos():
-    yield from bps.mv(mir1.X, 0,
-                      mir1.Y, -18,
-                      mir1.Z, 0,
-                      mir1.Roll, 0,
-                      mir1.Pitch, 0.679,
-                      mir1.Yaw, 0)
+    yield from bps.mv(mir1.Pitch, 0.6702)
+    time.sleep(3)
+    yield from bps.mv(mir1.X, 0)
+    time.sleep(3)
+    yield from bps.mv(mir1.Y, -17.86)
+    time.sleep(3)
+    yield from bps.mv(mir1.Z, -0.01)
+    time.sleep(3)
+    yield from bps.mv(mir1.Roll, .2)
+    time.sleep(3)
+    yield from bps.mv(mir1.Pitch, 0.6702)
+    time.sleep(3)
+    yield from bps.mv(mir1.Yaw, .3)
 
 
 def mirror1_NEXAFSpos():
-    yield from bps.mv(mir1.Pitch, 0.691,
-                      mir1.X, 0,
-                      mir1.Y, -18,
-                      mir1.Z, 0,
-                      mir1.Roll, 0,
-                      mir1.Yaw, 0)
+    yield from bps.mv(mir1.Pitch, 0.691)
+    time.sleep(3)
+    yield from bps.mv(mir1.X, 0)
+    time.sleep(3)
+    yield from bps.mv(mir1.Y, -18)
+    time.sleep(3)
+    yield from bps.mv(mir1.Z, 0)
+    time.sleep(3)
+    yield from bps.mv(mir1.Roll, 0)
+    time.sleep(3)
+    yield from bps.mv(mir1.Yaw, 0)
+
+def SAXSmode():
+    mirror1_pos()
+    mirror3_pos()
+    slits_in_SAXS()
+    yield from bps.mv(Shutter_Y, 3,
+                      Izero_Y, -29,
+                      Det_W, -94,
+                      BSw, 3,
+                      BSs, 67.4,
+                      sam_Y, -125)
+
+def WAXSmode():
+    mirror1_pos()
+    mirror3_pos()
+    slits_in_WAXS()
+    yield from bps.mv(Shutter_Y, 3,
+                      Izero_Y, -29,
+                      Det_W, -36,
+                      Det_S, -94,
+                      BSw, 70.7035,
+                      BSs, 3,
+                      sam_Y, -125)
+
+def all_out():
+    psh10.close()
+    print('Moving Mirror 1 to NEXAFS position')
+    mirror1_NEXAFSpos()
+    print('Moving Mirror 3 to NEXAFS position')
+    mirror3_NEXAFSpos()
+    print('Retracting Slits to 1 cm gap')
+    slits_out()
+    print('Moving the rest of RSoXS components')
+    yield from bps.mv(Shutter_Y, 44,
+                      Izero_Y, 144,
+                      Det_W, -94,
+                      Det_S, -94,
+                      BSw, 3,
+                      BSs, 3,
+                      sam_Y, 345,
+                      sam_X, 0,
+                      sam_Z, 0,
+                      sam_Th, 0)
+    print('All done - Happy NEXAFSing')

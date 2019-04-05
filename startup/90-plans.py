@@ -69,14 +69,27 @@ def quick_view(hdr):
     saxsbar.update_ticks()
 
 
-def snapsw(seconds,samplename='snap',sampleid='', num_images=1):
+def snapsw(seconds,samplename='',sampleid='', num_images=1,dark=0):
     # TODO: do it more generally
     # yield from bps.mv(sw_det.setexp, seconds)
     yield from bps.mv(sw_det.waxs.cam.acquire_time, seconds)
     yield from bps.mv(sw_det.saxs.cam.acquire_time, seconds)
+    yield from bps.mv(sw_det.waxs.cam.shutter_close_delay,200)
+    yield from bps.mv(sw_det.saxs.cam.shutter_close_delay,200)
+    yield from bps.mv(sw_det.waxs.cam.shutter_open_delay,200)
+    yield from bps.mv(sw_det.saxs.cam.shutter_open_delay,200)
+    if(dark):
+        yield from bps.mv(sw_det.saxs.cam.shutter_mode, 0)
+        if samplename is "":
+            samplename = "dark"
+    else:
+        yield from bps.mv(sw_det.saxs.cam.shutter_mode, 2)
+        if samplename is "":
+            samplename = "snap"
     md=RE.md
     md['sample'] = samplename
     md['sampleid'] = sampleid
+    md['exptime'] = seconds
     uid = (yield from bp.count([sw_det], num=num_images, md=md))
     hdr = db[uid]
     quick_view(hdr)

@@ -11,16 +11,17 @@ class Slits(PseudoPositioner):
         super().__init__(*args, **kwargs)
 
     def where(self):
-        #print("%s:" % self.name.upper())
-        text = "      vertical   size   = %7.3f mm            Top      = %7.3f mm\n" % \
-               (self.vsize.position,   self.top.user_readback.value)
-        text += "      vertical   center = %7.3f mm            Bottom   = %7.3f mm\n" % \
-                (self.vcenter.position, self.bottom.user_readback.value)
-        text += "      horizontal size   = %7.3f mm            Outboard = %7.3f mm\n" % \
-                (self.hsize.position,   self.outboard.user_readback.value)
-        text += "      horizontal center = %7.3f mm            Inboard  = %7.3f mm" % \
-                (self.hcenter.position, self.inboard.user_readback.value)
-        return text
+        print("%s:" % self.name)
+        text1 = "      vertical   size   = %7.3f mm" % \
+               (self.vsize.position)
+        text1 += "      vertical   center = %7.3f mm" % \
+                (self.vcenter.position)
+        text2 = "      horizontal size   = %7.3f mm" % \
+                (self.hsize.position)
+        text2 += "      horizontal center = %7.3f mm" % \
+                (self.hcenter.position)
+        print(text1)
+        print(text2)
   #  def wh(self):
   #      boxedtext(self.name, self.where(), 'cyan') #bruce's
 
