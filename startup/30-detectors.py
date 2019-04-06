@@ -82,4 +82,35 @@ for det in [saxs_det, waxs_det,sw_det.waxs,sw_det.saxs]:
 sw_det.kind = 'hinted'
 waxs_det.cam.temperature_actual.kind = 'hinted'
 saxs_det.cam.temperature_actual.kind = 'hinted'
-sd.baseline.extend([waxs_det.cam.temperature_actual, saxs_det.cam.temperature_actual, waxs_det.cam.hot_side_temp, saxs_det.cam.hot_side_temp ])
+waxs_det.cam.hot_side_temp.kind = 'hinted'
+saxs_det.cam.hot_side_temp.kind.kind = 'hinted'
+waxs_det.cam.bin_y.kind = 'hinted'
+saxs_det.cam.bin_y.kind = 'hinted'
+waxs_det.cam.bin_x.kind = 'hinted'
+saxs_det.cam.bin_x.kind = 'hinted'
+waxs_det.cam.adc_speed.kind = 'hinted'
+saxs_det.cam.adc_speed.kind = 'hinted'
+waxs_det.cam.acquire_time.kind = 'hinted'
+saxs_det.cam.acquire_time.kind = 'hinted'
+waxs_det.cam.model.kind = 'hinted'
+saxs_det.cam.model.kind = 'hinted'
+waxs_det.cam.trigger_mode.kind = 'hinted'
+saxs_det.cam.trigger_mode.kind = 'hinted'
+waxs_det.cam.shutter_mode.kind = 'hinted'
+saxs_det.cam.shutter_mode.kind = 'hinted'
+waxs_det.cam.shutter_open_delay.kind = 'hinted'
+saxs_det.cam.shutter_open_delay.kind = 'hinted'
+waxs_det.cam.shutter_close_delay.kind = 'hinted'
+saxs_det.cam.shutter_close_delay.kind = 'hinted'
+waxs_det.cam.min_x.kind = 'hinted'
+saxs_det.cam.min_x.kind = 'hinted'
+waxs_det.cam.temperature.kind = 'hinted'
+saxs_det.cam.temperature.kind = 'hinted'
+waxs_det.cam.min_y.kind = 'hinted'
+saxs_det.cam.min_y.kind = 'hinted'
+
+sd.baseline.extend([waxs_det.cam.temperature_actual, saxs_det.cam.temperature_actual, waxs_det.cam.hot_side_temp, saxs_det.cam.hot_side_temp , waxs_det.cam.bin_y , saxs_det.cam.bin_y ])
+sd.baseline.extend([waxs_det.cam.bin_x, saxs_det.cam.bin_x, waxs_det.cam.adc_speed, saxs_det.cam.adc_speed , waxs_det.cam.acquire_time , saxs_det.cam.acquire_time ])
+sd.baseline.extend([waxs_det.cam.model, saxs_det.cam.model, waxs_det.cam.trigger_mode, saxs_det.cam.trigger_mode , waxs_det.cam.shutter_mode , saxs_det.cam.shutter_mode ])
+sd.baseline.extend([waxs_det.cam.shutter_open_delay, saxs_det.cam.shutter_open_delay, waxs_det.cam.shutter_close_delay, saxs_det.cam.shutter_close_delay , waxs_det.cam.min_x , saxs_det.cam.min_x ])
+sd.baseline.extend([waxs_det.cam.temperature, saxs_det.cam.temperature, waxs_det.cam.min_y, saxs_det.cam.min_y  ])
