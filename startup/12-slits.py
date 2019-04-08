@@ -27,15 +27,15 @@ class Slits(PseudoPositioner):
 
     # The pseudo positioner axes:
     vsize   = Cpt(PseudoSingle, limits=(-1, 20),kind='hinted')
-    vcenter = Cpt(PseudoSingle, limits=(-10, 10),kind='hinted')
+    vcenter = Cpt(PseudoSingle, limits=(-10, 10),kind='normal')
     hsize   = Cpt(PseudoSingle, limits=(-1, 20),kind='hinted')
-    hcenter = Cpt(PseudoSingle, limits=(-10, 10),kind='hinted')
+    hcenter = Cpt(PseudoSingle, limits=(-10, 10),kind='normal')
 
     # The real (or physical) positioners:
-    top      = Cpt(EpicsMotor, 'T}Mtr',kind='hinted')
-    bottom   = Cpt(EpicsMotor, 'B}Mtr',kind='hinted')
-    inboard  = Cpt(EpicsMotor, 'I}Mtr',kind='hinted')
-    outboard = Cpt(EpicsMotor, 'O}Mtr',kind='hinted')
+    top      = Cpt(EpicsMotor, 'T}Mtr',kind='normal')
+    bottom   = Cpt(EpicsMotor, 'B}Mtr',kind='normal')
+    inboard  = Cpt(EpicsMotor, 'I}Mtr',kind='normal')
+    outboard = Cpt(EpicsMotor, 'O}Mtr',kind='normal')
 
     @pseudo_position_argument
     def forward(self, pseudo_pos):
