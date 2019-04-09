@@ -6,7 +6,6 @@ import bluesky.plans as bp
 import bluesky.plan_stubs as bps
 from suitcase import tiff_series, csv
 
-from matplotlib.colors import LogNorm
 
 def newuser(user='nochange',userid='nochange',proposal_id='nochange',institution='nochange',project='nochange'):
     if(user is not 'nochange'):
@@ -37,35 +36,6 @@ def newsample(sample,sampleid='',sample_desc='',sampleset='',creator='',institut
     RE.md['dim3']=dim3
     RE.md['notes']=notes
 
-def quick_view(hdr):
-    waxs = next(hdr.data('Small and Wide Angle Synced CCD Detectors_waxs_image'))
-    saxs = next(hdr.data('Small and Wide Angle Synced CCD Detectors_saxs_image'))
-    fig = plt.figure('SAXS / WAXS RSoXS snap')
-    fig.set_tight_layout(1)
-
-    if not fig.axes:
-        saxs_ax, waxs_ax = fig.subplots(1, 2)
-        waxs_ax.set_title('Wide Angle')
-        saxs_ax.set_title('Small Angle')
-        waxsim = waxs_ax.imshow(waxs,norm=LogNorm())
-        waxsbar = plt.colorbar(waxsim, ax=waxs_ax)
-        saxsim =  saxs_ax.imshow(saxs,norm=LogNorm())
-        saxsbar = plt.colorbar(saxsim, ax=saxs_ax)
-        mngr = plt.get_current_fig_manager()
-        mngr.window.setGeometry(-1920, 30, 1850, 1050)
-    else:
-        saxs_ax, waxs_ax,w2,s2 = fig.axes
-        waxs_ax.images[0].set_data(waxs)
-        saxs_ax.images[0].set_data(saxs)
-        waxs_ax.images[0].set_norm(LogNorm())
-        saxs_ax.images[0].set_norm(LogNorm())
-        waxsbar = waxs_ax.images[0].colorbar
-        saxsbar = saxs_ax.images[0].colorbar
-    num_ticks = 2
-    waxsbar.set_ticks(np.linspace(np.ceil(waxs.min())+10, np.floor(waxs.max()-10), num_ticks),update_ticks=True)
-    waxsbar.update_ticks()
-    saxsbar.set_ticks(np.linspace(np.ceil(saxs.min())+10, np.floor(saxs.max()-10), num_ticks),update_ticks=True)
-    saxsbar.update_ticks()
 
 
 def snapsw(seconds,samplename='',sampleid='', num_images=1,dark=0):
