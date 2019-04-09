@@ -42,6 +42,7 @@ def quick_view(hdr):
     saxsbar.update_ticks()
 
 class ZoomPan:
+
     def __init__(self):
         self.press = None
         self.cur_xlim = None
@@ -60,8 +61,10 @@ class ZoomPan:
         self.cidKeyP = None
         self.cidKeyR = None
         self.cidScroll = None
+        self.plotted_text = []
 
     def zoom_factory(self, ax, base_scale = 2.):
+
         def zoom(event):
             if event.inaxes != ax: return
             cur_xlim = ax.get_xlim()
@@ -74,10 +77,10 @@ class ZoomPan:
             if(ydata is None):
                 return()
 
-            if event.button == 'down':
+            if event.button == 'up':
                 # deal with zoom in
                 scale_factor = 1 / base_scale
-            elif event.button == 'up':
+            elif event.button == 'down':
                 # deal with zoom out
                 scale_factor = base_scale
             else:
@@ -95,6 +98,38 @@ class ZoomPan:
                 ax.set_xlim([xdata - new_width * (1-relx), xdata + new_width * (relx)])
             if(self.yzoom):
                 ax.set_ylim([ydata - new_height * (1-rely), ydata + new_height * (rely)])
+
+            # Limits for the extent
+            x_start = xdata - new_width * (1-relx)
+            x_end = xdata + new_width * (relx)
+            y_start = ydata - new_height * (1-rely)
+            y_end = ydata + new_height * (rely)
+            sizex = np.int(abs(x_end - x_start))
+            sizey = np.int(abs(y_end - y_start))
+            for child in self.plotted_text:
+                child.remove()
+                del(child)
+            self.plotted_text.clear()
+            if sizex < 30 and sizey < 30:
+                # Add the text
+                jump_x = 0.5
+                jump_y = 0.5
+                x_positions = np.linspace(start=x_start + 1, stop=x_end + 1, num=sizex, endpoint=False)
+                y_positions = np.linspace(start=y_start, stop=y_end, num=sizey, endpoint=False)
+
+                for y_index, y in enumerate(y_positions):
+                    for x_index, x in enumerate(x_positions):
+                        label = ax.images[0].get_array()[np.int(y), np.int(x)]
+                        text_x = x - jump_x
+                        text_y = y - jump_y
+                        self.plotted_text.append(ax.text(text_x,
+                                                         text_y,
+                                                         label,
+                                                         color='black',
+                                                         ha='center',
+                                                         va='center',
+                                                         fontsize=10,
+                                                         rotation=30))
             ax.figure.canvas.draw()
             ax.figure.canvas.flush_events()
 
@@ -141,6 +176,34 @@ class ZoomPan:
             ax.set_xlim(self.cur_xlim)
             ax.set_ylim(self.cur_ylim)
 
+
+
+            sizex = np.int(abs(self.cur_xlim[1] - self.cur_xlim[0]))
+            sizey = np.int(abs(self.cur_ylim[1] - self.cur_ylim[0]))
+            for child in self.plotted_text:
+                child.remove()
+                del(child)
+            self.plotted_text.clear()
+            if sizex < 30 and sizey < 30:
+                # Add the text
+                jump_x = 0.5
+                jump_y = 0.5
+                x_positions = np.linspace(start=self.cur_xlim[0]+1, stop=self.cur_xlim[1]+1, num=sizex, endpoint=False)
+                y_positions = np.linspace(start=self.cur_ylim[0], stop=self.cur_ylim[1], num=sizey, endpoint=False)
+
+                for y_index, y in enumerate(y_positions):
+                    for x_index, x in enumerate(x_positions):
+                        label = ax.images[0].get_array()[np.int(y), np.int(x)]
+                        text_x = x - jump_x
+                        text_y = y - jump_y
+                        self.plotted_text.append(ax.text(text_x,
+                                                         text_y,
+                                                         label,
+                                                         color='black',
+                                                         ha='center',
+                                                         va='center',
+                                                         fontsize=10,
+                                                         rotation=30))
             ax.figure.canvas.draw()
             ax.figure.canvas.flush_events()
 
@@ -153,3 +216,12 @@ class ZoomPan:
 
         #return the function
         return onMotion
+
+def spawn_quick_view(name, doc):
+    if name == 'stop':
+        # A run just completed. Look it up in databroker.
+        uid = doc['run_start']  # the 'Run Start UID' used to identify a run.
+        hdr = db[uid]
+        quick_view(hdr)
+
+RE.subscribe(spawn_quick_view)
