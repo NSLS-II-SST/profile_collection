@@ -4,8 +4,7 @@ import numpy as np
 import datetime
 import bluesky.plans as bp
 import bluesky.plan_stubs as bps
-import bluesky.preprocessors as bpp
-from suitcase import tiff_series, json_metadata, csv
+from suitcase import tiff_series, csv
 
 from matplotlib.colors import LogNorm
 

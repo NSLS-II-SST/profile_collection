@@ -43,7 +43,19 @@ def factory(name, start_doc):
                                                 directory=USERDIR)
             serializer('start', start_doc)
             serializer('descriptor', descriptor_doc)
-            return [serializer]
+            serializerjson = json_metadata.Serializer(file_prefix=('{institution}/'
+                                                                   '{user}/'
+                                                                   '{project}/'
+                                                                   f'{formatted_date}/'
+                                                                   '{scan_id}-'
+                                                                   '{sample}-'
+                                                                   # '{event[data][en]}'
+                                                                   ),
+                                                       directory=USERDIR,
+                                                       sort_keys=True, indent=2)
+            serializerjson('start', start_doc)
+            serializerjson('descriptor', descriptor_doc)
+            return [serializer,serializerjson]
         elif descriptor_doc['name'] == 'baseline' or descriptor_doc['name'] == 'Izero Mesh Drain Current_monitor':
             dt = datetime.datetime.now()
             formatted_date = dt.strftime('%Y-%m-%d')
@@ -69,5 +81,3 @@ def factory(name, start_doc):
 rr = RunRouter([factory])
 
 RE.subscribe(rr)  # This should be subscribed *after* db so filling happens after db.insert.
-# TODO: figure out how to properly use it as a callback.
-
