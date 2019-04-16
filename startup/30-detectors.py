@@ -101,3 +101,23 @@ sd.baseline.extend([waxs_det.cam.bin_x, saxs_det.cam.bin_x, waxs_det.cam.adc_spe
 sd.baseline.extend([waxs_det.cam.model, saxs_det.cam.model, waxs_det.cam.trigger_mode, saxs_det.cam.trigger_mode , waxs_det.cam.shutter_mode , saxs_det.cam.shutter_mode ])
 sd.baseline.extend([waxs_det.cam.shutter_open_delay, saxs_det.cam.shutter_open_delay, waxs_det.cam.shutter_close_delay, saxs_det.cam.shutter_close_delay , waxs_det.cam.min_x , saxs_det.cam.min_x ])
 sd.baseline.extend([waxs_det.cam.temperature, saxs_det.cam.temperature, waxs_det.cam.min_y, saxs_det.cam.min_y  ])
+
+
+def openandclose(dt):
+    while True:
+        saxs_det.cam.shutter_control.set(1)
+        curtime = dt
+        saxs_det.cam.shutter_status.read()
+        while saxs_det.cam.shutter_status.value is not 1:
+            time.sleep(.001)
+            saxs_det.cam.shutter_status.read()
+            curtime = curtime - .001
+        if curtime>0.001:time.sleep(curtime)
+        saxs_det.cam.shutter_control.set(0)
+        curtime = dt
+        saxs_det.cam.shutter_status.read()
+        while saxs_det.cam.shutter_status.value is not 0:
+            time.sleep(.001)
+            saxs_det.cam.shutter_status.read()
+            curtime = curtime - .001
+        if curtime>0.001:time.sleep(curtime)
