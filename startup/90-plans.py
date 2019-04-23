@@ -5,6 +5,7 @@ import datetime
 import bluesky.plans as bp
 import bluesky.plan_stubs as bps
 from suitcase import tiff_series, csv
+import pandas as pd
 
 
 def newuser(user='nochange',userid='nochange',proposal_id='nochange',institution='nochange',project='nochange'):
@@ -209,14 +210,21 @@ def myplan(dets, motor, start, stop, num):
 
 
 def buildeputable():
-    ens = [250,260,270,280,285,290,300,310,320,340,350,370,390,400,410,420,450,470,490,500,520,550,575,600,625,650,675,700,725,750,800,850,900,950,1000]
+    ens = np.arange(140,2200,5)
     gaps = []
+    ensout = []
     IzeroMesh.kind= 'hinted'
-    startinggap = epugap_from_energy(250)
+    startinggap = epugap_from_energy(ens[0]) #get starting position from existing table
+    data = {'energy': ensout, 'EPU gaps': gaps}
+
     for energy in ens:
         yield from bps.mv(mono_en,energy)
-        yield from bps.mv(epu_gap,startinggap-500)
-        yield from bp.scan([IzeroMesh],epu_gap,startinggap-500,startinggap+1500,21)
+        yield from bps.mv(epu_gap,max(20000,startinggap-500))
+        yield from bp.scan([IzeroMesh],epu_gap,min(99500,max(20000,startinggap-500)),min(100000,max(21500,startinggap+1500)),51)
         gaps.append(bec.peaks.max["Izero Mesh Drain Current"][0])
+        ensout.append(mono_en.position)
         startinggap = bec.peaks.max["Izero Mesh Drain Current"][0]
-    print(ens,gaps)
+        dataframe = pd.DataFrame(data=data)
+        dataframe.to_csv('EPUdata.csv')
+    #print(ens,gaps)
+

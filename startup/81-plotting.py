@@ -1,3 +1,4 @@
+print(f'Loading {__file__}...')
 
 from matplotlib.colors import LogNorm
 import numpy as np
@@ -347,10 +348,10 @@ def spawn_quick_view(name, doc):
         # A run just completed. Look it up in databroker.
         uid = doc['run_start']  # the 'Run Start UID' used to identify a run.
         hdr = db[uid]
-        quick_view(hdr)
+        if 'Small and Wide' in hdr['start']['detectors'][0]:
+            swviewer(hdr)
 
 RE.subscribe(spawn_quick_view) # will change this to SW viewer, but eventually need to load during scan, not just after
-
 
 """
 Interactive tool to draw mask on an image or image-like array.
@@ -534,3 +535,8 @@ def default_vertices(ax):
     y1, y2 = ylims + h // 4 * np.array([1, -1])
     return ((x1, y1), (x1, y2), (x2, y2), (x2, y1))
 
+"""
+add in some archiver plotting rouines, for vacuum, any old motor etc etc
+
+
+"""
