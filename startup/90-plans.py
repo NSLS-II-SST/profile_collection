@@ -1,7 +1,7 @@
 print(f'Loading {__file__}...')
 
 import numpy as np
-import datetime
+from datetime import datetime
 import bluesky.plans as bp
 import bluesky.plan_stubs as bps
 from suitcase import tiff_series, csv
@@ -63,7 +63,7 @@ def snapsw(seconds,samplename='',sampleid='', num_images=1,dark=0):
     uid = (yield from bp.count([sw_det], num=num_images, md=md))
     hdr = db[uid]
     quick_view(hdr)
-    dt = datetime.datetime.fromtimestamp(hdr.start['time'])
+    dt = datetime.fromtimestamp(hdr.start['time'])
     formatted_date = dt.strftime('%Y-%m-%d')
     energy = hdr.table(stream_name='baseline')['Beamline Energy_energy'][1]
     tiff_series.export(hdr.documents(fill=True),
@@ -103,7 +103,7 @@ def enscansw(seconds, enstart, enstop, steps,samplename='enscan',sampleid=''):
     md['sample'] = samplename
     md['sampleid'] = sampleid
     first_scan_id = None
-    dt = datetime.datetime.now()
+    dt = datetime.now()
     formatted_date = dt.strftime('%Y-%m-%d')
     for i, pos in enumerate(np.linspace(enstart, enstop, steps)):
         yield from bps.mv(en, pos)
@@ -112,7 +112,7 @@ def enscansw(seconds, enstart, enstop, steps,samplename='enscan',sampleid=''):
         quick_view(hdr)
         if i == 0:
             first_scan_id = hdr.start['scan_id']
-            dt = datetime.datetime.fromtimestamp(hdr.start['time'])
+            dt = datetime.fromtimestamp(hdr.start['time'])
             formatted_date = dt.strftime('%Y-%m-%d')
         tiff_series.export(hdr.documents(fill=True),
             file_prefix=('{start[institution]}/'
@@ -165,7 +165,7 @@ def motscansw(seconds,motor, start, stop, steps,samplename='motscan',sampleid=''
     md['sample'] = samplename
     md['sampleid'] = sampleid
     first_scan_id = None
-    dt = datetime.datetime.now()
+    dt = datetime.now()
     formatted_date = dt.strftime('%Y-%m-%d')
     for i, pos in enumerate(np.linspace(start, stop, steps)):
         yield from bps.mv(motor, pos)
@@ -174,7 +174,7 @@ def motscansw(seconds,motor, start, stop, steps,samplename='motscan',sampleid=''
         quick_view(hdr)
         if i == 0:
             first_scan_id = hdr.start['scan_id']
-            dt = datetime.datetime.fromtimestamp(hdr.start['time'])
+            dt = datetime.fromtimestamp(hdr.start['time'])
             formatted_date = dt.strftime('%Y-%m-%d')
         tiff_series.export(hdr.documents(fill=True),
             file_prefix=('{start[institution]}/'
