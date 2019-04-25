@@ -36,14 +36,15 @@ energy_dict = {'Monochromator Energy':'XF:07ID1-OP{Mono:PGM1-Ax::ENERGY_MON'}
 energy_dict['EPU Gap'] = 'SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr.RBV'
 
 slit_dict = {'Slit 1 Top'       : 'XF:07ID2-ES1{Slt1-Ax:T}Mtr.RBV',
-             'Slit 1 Bot'       : 'XF:07ID2-ES1{Slt1-Ax:B}Mtr.RBV',
+             'Slit 1 Bottom'    : 'XF:07ID2-ES1{Slt1-Ax:B}Mtr.RBV',
              'Slit 1 Inboard'   : 'XF:07ID2-ES1{Slt1-Ax:I}Mtr.RBV',
              'Slit 1 Outboard'  : 'XF:07ID2-ES1{Slt1-Ax:O}Mtr.RBV',
              'Slit 2 Top'       : 'XF:07ID2-ES1{Slt2-Ax:T}Mtr.RBV',
-             'Slit 2 Bot'       : 'XF:07ID2-ES1{Slt2-Ax:B}Mtr.RBV',
+             'Slit 2 Bottom'    : 'XF:07ID2-ES1{Slt2-Ax:B}Mtr.RBV',
              'Slit 2 Inboard'   : 'XF:07ID2-ES1{Slt2-Ax:I}Mtr.RBV',
              'Slit 2 Outboard'  : 'XF:07ID2-ES1{Slt2-Ax:O}Mtr.RBV',
              'Slit 3 Top'       : 'XF:07ID2-ES1{Slt3-Ax:T}Mtr.RBV',
-             'Slit 3 Bot'       : 'XF:07ID2-ES1{Slt3-Ax:B}Mtr.RBV',
+             'Slit 3 Bottom'    : 'XF:07ID2-ES1{Slt3-Ax:B}Mtr.RBV',
              'Slit 3 Inboard'   : 'XF:07ID2-ES1{Slt3-Ax:I}Mtr.RBV',
-             'Slit 3 Outboard'  : 'XF:07ID2-ES1{Slt3-Ax:O}Mtr.RBV'}
+             'Slit 3 Outboard'  : 'XF:07ID2-ES1{Slt3-Ax:O}Mtr.RBV'
+             }

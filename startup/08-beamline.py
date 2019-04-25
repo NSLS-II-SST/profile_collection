@@ -1,6 +1,6 @@
 print(f'Loading {__file__}...')
 
-from ophyd import (SingleTrigger, Component as Cpt, Device, DeviceStatus, EpicsSignal, EpicsSignalRO)
+from ophyd import (SingleTrigger, Component as Cpt, Device, PVPositioner, EpicsSignal, EpicsSignalRO)
 import time
 
 class EPS_Shutter(Device):
@@ -162,12 +162,39 @@ psh10.shutter_type = 'GV'
 psh10.openval  = 0
 psh10.closeval = 1
 
-ccg_izero = EpicsSignalRO('XF:07IDB-VA:2{RSoXS:DM-CCG:1}P:Raw-I'  ,name="IZero Chamber Cold Cathode Gauge",kind='hinted')
-pg_izero  = EpicsSignalRO('XF:07IDB-VA:2{RSoXS:DM-TCG:1}P:Raw-I'  ,name='IZero Chamber Pirani Gauge',kind='hinted')
-ccg_main  = EpicsSignalRO('XF:07IDB-VA:2{RSoXS:Main-CCG:1}P:Raw-I',name="Main Chamber Chamber Cold Cathode Gauge",kind='hinted')
-pg_main   = EpicsSignalRO('XF:07IDB-VA:2{RSoXS:Main-TCG:1}P:Raw-I',name='Main Chamber Pirani Gauge',kind='hinted')
-ccg_ll    = EpicsSignalRO('XF:07IDB-VA:2{RSoXS:LL-CCG:1}P:Raw-I'  ,name="Load Lock Chamber Cold Cathode Gauge",kind='hinted')
-pg_ll     = EpicsSignalRO('XF:07IDB-VA:2{RSoXS:LL-TCG:1}P:Raw-I'  ,name='Load Lock Pirani Gauge',kind='hinted')
-ll_gpwr   = EpicsSignal('XF:07IDB-VA:2{RSoXS:LL-CCG:1}Pwr-Cmd' ,name='Power to Load Lock Gauge',kind='hinted')
+ccg_izero = EpicsSignalRO('XF:07IDB-VA:2{RSoXS:DM-CCG:1}P:Raw-I',
+                          name="IZero Chamber Cold Cathode Gauge",
+                          kind='hinted')
+pg_izero  = EpicsSignalRO('XF:07IDB-VA:2{RSoXS:DM-TCG:1}P:Raw-I',
+                          name='IZero Chamber Pirani Gauge',
+                          kind='hinted')
+ccg_main  = EpicsSignalRO('XF:07IDB-VA:2{RSoXS:Main-CCG:1}P:Raw-I',
+                          name="Main Chamber Chamber Cold Cathode Gauge",
+                          kind='hinted')
+pg_main   = EpicsSignalRO('XF:07IDB-VA:2{RSoXS:Main-TCG:1}P:Raw-I',
+                          name='Main Chamber Pirani Gauge',
+                          kind='hinted')
+ccg_ll    = EpicsSignalRO('XF:07IDB-VA:2{RSoXS:LL-CCG:1}P:Raw-I',
+                          name="Load Lock Chamber Cold Cathode Gauge",
+                          kind='hinted')
+pg_ll     = EpicsSignalRO('XF:07IDB-VA:2{RSoXS:LL-TCG:1}P:Raw-I',
+                          name='Load Lock Pirani Gauge',
+                          kind='hinted')
+ll_gpwr   = EpicsSignal('XF:07IDB-VA:2{RSoXS:LL-CCG:1}Pwr-Cmd',
+                        name='Power to Load Lock Gauge',
+                        kind='hinted')
 
-sd.baseline.extend([ccg_izero,pg_izero,ccg_main,pg_main,ccg_ll,pg_ll,ll_gpwr,psh1,psh4,psh10,psh7,gv14,gv14a,gv15,gv26,gv27,gv27a,gv28,gvTEM,gvll,gvturbo])
+
+class PDU(EpicsSignal):
+
+    def on(self):
+        self.set(1,timeout=2,settle_time=1)
+
+    def off(self):
+        self.set(2,timeout=2,settle_time=1)
+
+
+light = PDU('XF:07ID-CT{RG:C1-PDU:1}Sw:8-SP',write_pv='XF:07ID-CT{RG:C1-PDU:1}Sw:8-Sel')
+
+
+sd.baseline.extend([ccg_izero,pg_izero,ccg_main,pg_main,ccg_ll,pg_ll,ll_gpwr,psh1,psh4,psh10,psh7,gv14,gv14a,gv15,gv26,gv27,gv27a,gv28,gvTEM,gvll,gvturbo,light])
