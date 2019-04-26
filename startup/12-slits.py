@@ -1,13 +1,11 @@
 print(f'Loading {__file__}...')
 
-from ophyd import (EpicsMotor, PseudoPositioner, PseudoSingle, Component as Cpt, EpicsSignal, EpicsSignalRO)
+from ophyd import (EpicsMotor, PseudoPositioner, PseudoSingle, Component as Cpt)
 from ophyd.pseudopos import (pseudo_position_argument,
                              real_position_argument)
 
 class Slits(PseudoPositioner):
     def __init__(self, *args, **kwargs):
-        #self.width = mirror_length
-        #self.senter  = mirror_width
         super().__init__(*args, **kwargs)
 
     def where(self):
@@ -57,7 +55,6 @@ class Slits(PseudoPositioner):
         )
 
 
-
 slits1 = Slits('XF:07ID2-ES1{Slt1-Ax:',  name='Upstream Scatter Slits', kind='hinted')
 slits2 = Slits('XF:07ID2-ES1{Slt2-Ax:',  name='Middle Scatter Slits', kind='hinted')
 slits3 = Slits('XF:07ID2-ES1{Slt3-Ax:',  name='Final Scatter Slits', kind='hinted')
@@ -74,6 +71,4 @@ slits1.outboard.user_offset.set(-2.0550)
 slits1.top.user_offset.set(-1.39)
 slits1.bottom.user_offset.set(-.71)
 
-#slits2.top.user_offset.put(-0.038)
-#slits2.bottom.user_offset.put(0.264)
 sd.baseline.extend([slits1, slits2, slits3 ])

@@ -41,6 +41,21 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
     roi3 = C(ROIPlugin, 'ROI3:')
     roi4 = C(ROIPlugin, 'ROI4:')
     proc1 = C(ProcessPlugin, 'Proc1:')
+    def set_temp(self,degc):
+        self.cam.temperature.set(degc)
+        self.cam.enable_cooling.set(1)
+    def cooling_off(self):
+        self.cam.enable_cooling.set(0)
+#    def setROI(self,):
+#        self.cam.
+    def setbinning(self,binx,biny):
+        self.cam.bin_x.set(binx)
+        self.cam.bin_y.set(biny)
+    def stage(self):
+        if self.cam.temperature_actual.value - self.cam.temperature.value > 1.0:
+            print("Warning! temperature of {} ({:.2f} °C) is not at setpoint ({:.2f} °C)".format(
+                    self.name, self.cam.temperature_actual.value, self.cam.temperature.value))
+        return [self]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -73,6 +88,39 @@ class SyncedDetectors(Device):
         self.waxs.cam.acquire_time.set(seconds)
         self.saxs.cam.acquire_time.set(seconds)
 
+    def setbinning(self,pixels):
+        self.saxs.setbinning(pixels,pixels)
+        self.waxs.setbinning(pixels,pixels)
+
+    def cooling_on(self):
+        self.saxs.set_temp(-40)  #temporary until the power supply is fixed
+        self.waxs.set_temp(-80)
+
+    def open_shutter(self):
+        self.saxs.cam.shutter_control.set(1)
+
+    def close_shutter(self):
+        self.saxs.cam.shutter_control.set(0)
+
+    def shutter(self):
+        return self.saxs.cam.shutter_control.get()
+    def stage(self):
+        listout = self.saxs.stage()
+        listout.append(self.waxs.stage())
+        if light.setpoint:
+            light.off()
+            self.lightwason=True
+            sleep(1)
+        else:
+            self.lightwason=False
+        return listout.append(self)
+    def unstage(self):
+        listout = self.saxs.unstage()
+        listout.append(self.waxs.unstage())
+        if self.lightwason:
+            light.on()
+        return listout.append(self)
+
 sw_det = SyncedDetectors('', name='Small and Wide Angle Synced CCD Detectors')
 
 for det in [saxs_det, waxs_det,sw_det.waxs,sw_det.saxs]:
@@ -101,23 +149,3 @@ sd.baseline.extend([waxs_det.cam.bin_x, saxs_det.cam.bin_x, waxs_det.cam.adc_spe
 sd.baseline.extend([waxs_det.cam.model, saxs_det.cam.model, waxs_det.cam.trigger_mode, saxs_det.cam.trigger_mode , waxs_det.cam.shutter_mode , saxs_det.cam.shutter_mode ])
 sd.baseline.extend([waxs_det.cam.shutter_open_delay, saxs_det.cam.shutter_open_delay, waxs_det.cam.shutter_close_delay, saxs_det.cam.shutter_close_delay , waxs_det.cam.min_x , saxs_det.cam.min_x ])
 sd.baseline.extend([waxs_det.cam.temperature, saxs_det.cam.temperature, waxs_det.cam.min_y, saxs_det.cam.min_y  ])
-
-
-def openandclose(dt):
-    while True:
-        saxs_det.cam.shutter_control.set(1)
-        curtime = dt
-        saxs_det.cam.shutter_status.read()
-        while saxs_det.cam.shutter_status.value is not 1:
-            time.sleep(.001)
-            saxs_det.cam.shutter_status.read()
-            curtime = curtime - .001
-        if curtime>0.001:time.sleep(curtime)
-        saxs_det.cam.shutter_control.set(0)
-        curtime = dt
-        saxs_det.cam.shutter_status.read()
-        while saxs_det.cam.shutter_status.value is not 0:
-            time.sleep(.001)
-            saxs_det.cam.shutter_status.read()
-            curtime = curtime - .001
-        if curtime>0.001:time.sleep(curtime)

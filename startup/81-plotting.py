@@ -67,6 +67,7 @@ def swviewer(hdr, SorW = 's',panel='right',shift=True,name=''):
     else:
         data = next(hdr.data('Small and Wide Angle Synced CCD Detectors_waxs_image'))
     fig = plt.figure('RSoXS Viewer')
+    fig.set_tight_layout(1)
     if not fig.axes:
         #plot doesn't exist
         left_ax, right_ax = fig.subplots(1, 2)
@@ -77,7 +78,7 @@ def swviewer(hdr, SorW = 's',panel='right',shift=True,name=''):
         rightim = right_ax.imshow(data, norm=LogNorm())
         rightbar = plt.colorbar(rightim, ax=right_ax)
         mngr = plt.get_current_fig_manager()
-        mngr.window.setGeometry(-1920, 30, 1850, 1050)
+        mngr.window.setGeometry(0, 30, 1850, 1050)
         zpl = ZoomPan()
         #zpr = ZoomPan()
         scale = 1.5
@@ -349,7 +350,8 @@ def spawn_quick_view(name, doc):
         uid = doc['run_start']  # the 'Run Start UID' used to identify a run.
         hdr = db[uid]
         if 'Small and Wide' in hdr['start']['detectors'][0]:
-            swviewer(hdr)
+            swviewer(hdr,'w','left',False,'WAXS')
+            swviewer(hdr,'s','right',False,'SAXS')
 
 RE.subscribe(spawn_quick_view) # will change this to SW viewer, but eventually need to load during scan, not just after
 

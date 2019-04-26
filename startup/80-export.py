@@ -16,7 +16,7 @@ Out[20]:
 """
 from event_model import Filler, RunRouter
 from suitcase import tiff_series,csv, json_metadata
-import datetime
+from datetime import datetime
 
 USERDIR = 'Z:/images/users/'
 
@@ -29,7 +29,7 @@ def factory(name, start_doc):
     def subfactory(name, descriptor_doc):
 
         if descriptor_doc['name']  == 'primary':
-            dt = datetime.datetime.now()
+            dt = datetime.now()
             formatted_date = dt.strftime('%Y-%m-%d')
             #energy = hdr.table(stream_name='baseline')['Beamline Energy_energy'][1]
             serializer = tiff_series.Serializer(file_prefix=('{start[institution]}/'
@@ -57,7 +57,7 @@ def factory(name, start_doc):
             serializerjson('descriptor', descriptor_doc)
             return [serializer,serializerjson]
         elif descriptor_doc['name'] == 'baseline' or descriptor_doc['name'] == 'Izero Mesh Drain Current_monitor':
-            dt = datetime.datetime.now()
+            dt = datetime.now()
             formatted_date = dt.strftime('%Y-%m-%d')
             # energy = hdr.table(stream_name='baseline')['Beamline Energy_energy'][1]
             serializer = csv.Serializer(file_prefix=('{institution}/'

@@ -5,13 +5,6 @@ from ophyd import Component as Cpt
 from ophyd.pseudopos import (pseudo_position_argument,
                              real_position_argument)
 
-# class undulatorgap(PVPositioner):
-#     setpoint = Cpt(EpicsSignal,'-Ax:Gap}-Mtr-SP')
-#     readback = Cpt(EpicsSignalRO, '-Ax:Gap}-Mtr.RBV')
-#     done = Cpt(EpicsSignalRO, '-Ax:Gap}-Mtr.MOVN')
-#     done_value = 0
-#     stop_signal = Cpt(EpicsSignal, '-Ax:Gap}-Mtr.STOP')
-
 class UndulatorMotor(EpicsMotor):
     user_setpoint = Cpt(EpicsSignal, '-SP', limits=True)
 
@@ -57,10 +50,6 @@ class EnPos(PseudoPositioner):
     energy = Cpt(PseudoSingle, kind='hinted', limits=(150,500))
 
     # real motors
-    # epugap = Cpt(UndulatorMotor, 'SR:C07-ID:G1A{SST1:1', read_attrs=['readback'],
-    #                        configuration_attrs=[])
-    # monoen = Cpt(monochromator, 'XF:07ID1-OP{Mono:PGM1-Ax::', read_attrs=['readback'],
-    #                        configuration_attrs=[])
 
     monoen = Cpt(Monochromator, 'XF:07ID1-OP{Mono:PGM1-Ax::',kind='normal')
     epugap = Cpt(UndulatorMotor, 'SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr',kind='normal')
