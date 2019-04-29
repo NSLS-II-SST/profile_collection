@@ -44,18 +44,45 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
     def set_temp(self,degc):
         self.cam.temperature.set(degc)
         self.cam.enable_cooling.set(1)
+
     def cooling_off(self):
         self.cam.enable_cooling.set(0)
+
 #    def setROI(self,):
 #        self.cam.
-    def setbinning(self,binx,biny):
+
+    def cooling_state(self):
+        if self.cam.enable_cooling.value:
+            if self.cam.temperature_actual.value - self.cam.temperature.value > 1.0:
+                print("Temperature of {} ({:.2f} °C) is not at setpoint ({:.2f} °C) but cooling on".format(
+                     self.name, self.cam.temperature_actual.value, self.cam.temperature.value))
+            else:
+                print("Temperature of {} ({:.2f} °C) is at setpoint ({:.2f} °C) and cooling on".format(
+                    self.name, self.cam.temperature_actual.value, self.cam.temperature.value))
+        else:
+            if self.cam.temperature_actual.value - self.cam.temperature.value > 1.0:
+                print("Temperature of {} ({:.2f} °C) is not at setpoint ({:.2f} °C) and cooling is off".format(
+                     self.name, self.cam.temperature_actual.value, self.cam.temperature.value))
+            else:
+                print("Temperature of {} ({:.2f} °C) is at setpoint ({:.2f} °C), but cooling is off".format(
+                    self.name, self.cam.temperature_actual.value, self.cam.temperature.value))
+
+    def set_binning(self,binx,biny):
         self.cam.bin_x.set(binx)
         self.cam.bin_y.set(biny)
+
+    def binning(self):
+        print('Binning of {} is set to ({},{}) pixels'.format(self.name, self.cam.bin_x.value, self.cam.bin_y.value))
+
     def stage(self):
         if self.cam.temperature_actual.value - self.cam.temperature.value > 1.0:
-            print("Warning! temperature of {} ({:.2f} °C) is not at setpoint ({:.2f} °C)".format(
-                    self.name, self.cam.temperature_actual.value, self.cam.temperature.value))
-        return [self]
+            print("Warning!!!!")
+            self.cooling_state()
+            print("Please wait until temperature has stabalized before taking important data./n/n/n")
+        return [self].append(super().stage())
+
+    def unstage(self):
+        return [self].append(super().unstage())
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -70,8 +97,8 @@ waxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:2}', name='Wide Angle CCD De
 
 
 class SyncedDetectors(Device):
-    saxs = C(RSOXSGreatEyesDetector, 'XF:07ID1-ES:1{GE:1}',read_attrs=['tiff', 'stats1.total'])
-    waxs = C(RSOXSGreatEyesDetector, 'XF:07ID1-ES:1{GE:2}',read_attrs=['tiff', 'stats1.total'])
+    saxs = C(RSOXSGreatEyesDetector, 'XF:07ID1-ES:1{GE:1}',read_attrs=['tiff', 'stats1.total'],name="Small Angle CCD Detector")
+    waxs = C(RSOXSGreatEyesDetector, 'XF:07ID1-ES:1{GE:2}',read_attrs=['tiff', 'stats1.total'],name="Wide Angle CCD Detector")
 
     def trigger(self):
         self.waxs.cam.trigger_mode.put(0)
@@ -84,17 +111,31 @@ class SyncedDetectors(Device):
         yield from self.saxs.collect_asset_docs(*args, **kwargs)
         yield from self.waxs.collect_asset_docs(*args, **kwargs)
 
-    def setexp(self,seconds):
+    def set_exposure(self,seconds):
         self.waxs.cam.acquire_time.set(seconds)
         self.saxs.cam.acquire_time.set(seconds)
 
-    def setbinning(self,pixels):
-        self.saxs.setbinning(pixels,pixels)
-        self.waxs.setbinning(pixels,pixels)
+    def set_binning(self,pixels):
+        self.saxs.set_binning(pixels,pixels)
+        self.waxs.set_binning(pixels,pixels)
+
+    def binning(self):
+        self.saxs.binning()
+        self.waxs.binning()
 
     def cooling_on(self):
         self.saxs.set_temp(-40)  #temporary until the power supply is fixed
         self.waxs.set_temp(-80)
+        sleep(2)
+        self.cooling_state()
+
+    def cooling_state(self):
+        self.saxs.cooling_state()
+        self.waxs.cooling_state()
+
+    def cooling_off(self):
+        self.saxs.cooling_off()
+        self.waxs.cooling_off()
 
     def open_shutter(self):
         self.saxs.cam.shutter_control.set(1)
@@ -104,8 +145,10 @@ class SyncedDetectors(Device):
 
     def shutter(self):
         return self.saxs.cam.shutter_control.get()
+
     def stage(self):
-        listout = self.saxs.stage()
+        listout = []
+        listout.append(self.saxs.stage())
         listout.append(self.waxs.stage())
         if light.setpoint:
             light.off()
@@ -113,15 +156,19 @@ class SyncedDetectors(Device):
             sleep(1)
         else:
             self.lightwason=False
-        return listout.append(self)
+        listout.append(self)
+        return listout
+
     def unstage(self):
-        listout = self.saxs.unstage()
+        listout = []
+        listout.append(self.saxs.unstage())
         listout.append(self.waxs.unstage())
         if self.lightwason:
             light.on()
-        return listout.append(self)
+        listout.append(self)
+        return listout
 
-sw_det = SyncedDetectors('', name='Small and Wide Angle Synced CCD Detectors')
+sw_det = SyncedDetectors('', name='Synced')
 
 for det in [saxs_det, waxs_det,sw_det.waxs,sw_det.saxs]:
     det.kind = 'hinted'

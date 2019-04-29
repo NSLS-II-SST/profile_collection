@@ -353,7 +353,7 @@ def spawn_quick_view(name, doc):
             swviewer(hdr,'w','left',False,'WAXS')
             swviewer(hdr,'s','right',False,'SAXS')
 
-RE.subscribe(spawn_quick_view) # will change this to SW viewer, but eventually need to load during scan, not just after
+#RE.subscribe(spawn_quick_view) # will change this to SW viewer, but eventually need to load during scan, not just after
 
 """
 Interactive tool to draw mask on an image or image-like array.
