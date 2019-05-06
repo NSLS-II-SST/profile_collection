@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "$id": "RSoXS Acquisition",
+  "type": "object",
+  "properties": {
+    "plan_name": {
+      "type": "string"
+    },
+    "detectors": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "motors": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "positions": {
+      "type": "array",
+      "items": [
+        {
+          "type": "number"
+        }
+      ]
+    },
+    "display": {
+      "type": "string",
+      "enum": [
+        "private",
+        "public"
+      ]
+    },
+    "favorite": {
+      "type": "boolean"
+    },
+    "creator_ID": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "plan_name",
+    "motors",
+    "positions",
+    "display",
+    "favorite"
+  ]
+}

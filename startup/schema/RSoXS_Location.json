@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "$id": "RSoXS location",
+  "type": "object",
+  "properties": {
+    "location_list": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "motor_name": {
+              "type": "string"
+            },
+            "position": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "motor_name",
+            "position"
+          ]
+        }
+      ],
+      "minItems": 1
+    },
+    "display": {
+      "type": "string",
+      "enum": [
+        "private",
+        "public"
+      ]
+    },
+    "favorite": {
+      "type": "boolean"
+    },
+    "creator_ID": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "location_list",
+    "display",
+    "favorite"
+  ]
+}

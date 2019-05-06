@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "$id": "RSoXS Institution",
+  "type": "object",
+  "properties": {
+    "institution_id": {
+      "type": "number"
+    },
+    "full_name": {
+      "type": "string"
+    },
+    "short_name": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "institution_id",
+    "full_name",
+    "short_name"
+  ]
+}

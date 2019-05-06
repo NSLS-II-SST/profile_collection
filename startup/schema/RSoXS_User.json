@@ -1,0 +1,74 @@
+{ "$schema": "http://json-schema.org/schema#",
+  "$id": "RSoXS User",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "number"
+    },
+    "username": {
+      "type": "string"
+    },
+    "last_checkin": {
+      "type": "string",
+      "format": "date"
+    },
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "institution_id": {
+      "type": "number"
+    },
+    "proposal_id": {
+      "type": "number"
+    },
+    "date_checkin_list": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string",
+          "format": "date"
+        }
+      ]
+    },
+    "past_institutions": {
+      "type": "array",
+      "items": [
+        {
+          "type": "number"
+        }
+      ]
+    },
+    "past_proposals": {
+      "type": "array",
+      "items": [
+        {
+          "type": "number"
+        }
+      ]
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "user_id",
+    "username",
+    "email",
+    "first_name",
+    "last_name",
+    "last_checkin",
+    "institution_id",
+    "proposal_id",
+    "date_checkin_list",
+    "past_institutions"
+  ]
+}

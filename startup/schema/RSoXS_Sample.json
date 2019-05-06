@@ -1,0 +1,96 @@
+{ "$schema": "http://json-schema.org/schema#",
+  "$id": "RSoXS Sample",
+  "type": "object",
+  "properties": {
+    "sample_name": {
+      "type": "string"
+    },
+    "sample_desc": {
+      "type": "string"
+    },
+    "date_created": {
+      "type": "string",
+      "format": "date"
+    },
+    "user_id": {
+      "type": "number"
+    },
+    "project_name": {
+      "type": "string"
+    },
+    "institution_id": {
+      "type": "number"
+    },
+    "composition": {
+      "type": "array"
+    },
+    "density": {
+      "type": "number"
+    },
+    "thickness": {
+      "type": "number"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "loaded",
+        "fresh",
+        "broken",
+        "lost",
+        "unloaded"
+      ]
+    },
+    "current_bar_id": {
+      "type": "number"
+    },
+    "current_slot_name": {
+      "type": "string"
+    },
+    "past_bar_ids": {
+      "type": "array"
+    },
+    "location_id": {
+      "type": "number"
+    },
+    "collections": {
+      "type": "array",
+      "uniqueItems": True,
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "configuration_id": {
+              "type": "number"
+            },
+            "acquisition_id": {
+              "type": "number"
+            },
+            "location_id": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "configuration_id",
+            "acquisition_id"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "sample_name",
+    "date_created",
+    "user_id",
+    "project_name",
+    "institution_id",
+    "notes",
+    "state",
+    "location_id",
+    "current_bar_id",
+    "current_slot_name",
+    "collections"
+  ]
+}
