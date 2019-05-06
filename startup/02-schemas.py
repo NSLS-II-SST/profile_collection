@@ -1,5 +1,10 @@
 
+'''
+changing this to all be in directory "schemas" with separate json file for each definition
 
+also removing json references, and just putting ids - this will allow cross referencing to other database
+
+'''
 acquisition_schema = {
     '$schema': 'http://json-schema.org/schema#',
     '$id': 'RSoXS Acquisition',
