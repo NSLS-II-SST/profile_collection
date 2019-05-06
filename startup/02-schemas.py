@@ -1,3 +1,5 @@
+
+
 acquisition_schema = {
     '$schema': 'http://json-schema.org/schema#',
     '$id': 'RSoXS Acquisition',
@@ -61,33 +63,34 @@ sample_schema = {
     '$id': 'RSoXS Sample',
     'type': 'object',
 
-    'properties': {'sample_name': {'type': 'string'},
-                   'sample_desc': {'type': 'string'},
-                   'date_created': {'type': 'string', 'format': 'date'},
-                   'user_id': {'type': 'number'},
-                   'project_name': {'type': 'string'},
-                   'institution_id': {'type': 'number'},
-                   'composition': {'type': 'array'},
-                   'density': {'type': 'number'},
-                   'thickness': {'type': 'number'},
-                   'notes': {'type': 'string'},
-                   'state': {'type': 'string','enum': ["loaded", "fresh", "broken", "lost", "unloaded"]},
-                   'current_bar_id': {'type': 'number'},
-                   'current_slot_name': {'type': 'string'},
-                   'past_bar_ids':{'type': 'array'},
-                   'location': {'$ref': '#/definitions/location'},
-                   'collections': {'type': 'array',
-                                   'uniqueItems': True,
-                                   'items': [{'type': 'object',
-                                              'properties': {'configuration': {'$ref': 'RSoXS configuration'},
-                                                             'acquisition': {'$ref': 'RSoXS acquisition'},
-                                                             'location': {'$ref': 'RSoXS location'}
-                                                             },
-                                              'required': ['configuration', 'acquisition']
-                                              }
-                                             ]
+    'properties': {
+        'sample_name': {'type': 'string'},
+        'sample_desc': {'type': 'string'},
+        'date_created': {'type': 'string', 'format': 'date'},
+        'user_id': {'type': 'number'},
+        'project_name': {'type': 'string'},
+        'institution_id': {'type': 'number'},
+        'composition': {'type': 'array'},
+        'density': {'type': 'number'},
+        'thickness': {'type': 'number'},
+        'notes': {'type': 'string'},
+        'state': {'type': 'string','enum': ["loaded", "fresh", "broken", "lost", "unloaded"]},
+        'current_bar_id': {'type': 'number'},
+        'current_slot_name': {'type': 'string'},
+        'past_bar_ids':{'type': 'array'},
+        'location': {'$ref': '#/definitions/location'},
+        'collections': {'type': 'array',
+                        'uniqueItems': True,
+                        'items': [{'type': 'object',
+                                   'properties': {'configuration': {'$ref': 'RSoXS configuration'},
+                                                  'acquisition': {'$ref': 'RSoXS acquisition'},
+                                                  'location': {'$ref': 'RSoXS location'}
+                                                  },
+                                   'required': ['configuration', 'acquisition']
                                    }
-                   },
+                                  ]
+                        }
+        },
     'required': ['sample_name',
                  'date_created',
                  'user_id',
@@ -133,3 +136,51 @@ holder_schema = {
                  'location',
                  'slots']
     }
+
+user_schema = {
+    '$schema': 'http://json-schema.org/schema#',
+    '$id': 'RSoXS User',
+    'type': 'object',
+
+    'properties': {
+        'user_id': {'type': 'number'},
+        'username': {'type': 'string'},
+        'last_checkin': {'type': 'string','format': 'date'},
+        'first_name': {'type': 'string'},
+        'last_name': {'type': 'string'},
+        'email': {'type': 'string'},
+        'phone': {'type': 'string'},
+        'institution_id': {'type': 'number'},
+        'proposal_id': {'type': 'number'},
+        'date_checkin_list': {'type': 'array', 'items': [{'type': 'string', 'format': 'date'}]},
+        'past_institutions': {'type' : 'array', 'items': [{'type': 'number'}]},
+        'past_proposals': {'type': 'array', 'items': [{'type': 'number'}]},
+        'notes': {'type': 'string'},
+    },
+    'required': ['user_id',
+                 'username',
+                 'email',
+                 'first_name',
+                 'last_name',
+                 'last_checkin',
+                 'institution_id',
+                 'proposal_id',
+                 'date_checkin_list',
+                 'past_institutions']
+}
+
+Institution_schema = {
+    '$schema': 'http://json-schema.org/schema#',
+    '$id': 'RSoXS Institution',
+    'type': 'object',
+
+    'properties': {
+        'institution_id': {'type': 'number'},
+        'full_name': {'type': 'string'},
+        'short_name': {'type': 'string'},
+        'notes': {'type': 'string'},
+    },
+    'required': ['institution_id',
+                 'full_name',
+                 'short_name']
+}
