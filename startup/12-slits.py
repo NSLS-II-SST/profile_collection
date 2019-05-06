@@ -55,9 +55,9 @@ class Slits(PseudoPositioner):
         )
 
 
-slits1 = Slits('XF:07ID2-ES1{Slt1-Ax:',  name='Upstream Scatter Slits', kind='hinted')
-slits2 = Slits('XF:07ID2-ES1{Slt2-Ax:',  name='Middle Scatter Slits', kind='hinted')
-slits3 = Slits('XF:07ID2-ES1{Slt3-Ax:',  name='Final Scatter Slits', kind='hinted')
+slits1 = Slits('XF:07ID2-ES1{Slt1-Ax:',  name='Upstream Scatter Slits', kind='hinted',concurrent=1)
+slits2 = Slits('XF:07ID2-ES1{Slt2-Ax:',  name='Middle Scatter Slits', kind='hinted',concurrent=1)
+slits3 = Slits('XF:07ID2-ES1{Slt3-Ax:',  name='Final Scatter Slits', kind='hinted',concurrent=1)
 slits3.bottom.user_offset.set(-1.39)
 slits3.top.user_offset.set(-1.546)
 slits3.outboard.user_offset.set(-.651)

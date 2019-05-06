@@ -11,6 +11,11 @@ dm3_c1 = EpicsSignalRO('XF:07ID-BI{DM3:I400-1}:IC1_MON', name='Diagnostic Module
 
 ring_current = EpicsSignalRO('SR:OPS-BI{DCCT:1}I:Real-I', name='NSLS-II Ring Current', kind='normal')
 
+class I400(EpicsSignal):
+    def trigger(self):
+        ":GETCS"
+
+
 BeamstopW_I = EpicsSignal('XF:07ID-ES1{DMR:I400-1}:IC1_MON', name='WAXS Beamstop Current', kind='normal')
 BeamstopS_I = EpicsSignal('XF:07ID-ES1{DMR:I400-1}:IC2_MON', name='SAXS Beamstop Current', kind='normal')
 IzeroMesh   = EpicsSignal('XF:07ID-ES1{DMR:I400-1}:IC3_MON', name='Izero Mesh Drain Current', kind='normal')

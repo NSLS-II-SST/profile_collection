@@ -122,7 +122,7 @@ class EnPos(PseudoPositioner):
         '''Run an inverse (real -> pseudo) calculation'''
         return self.PseudoPosition( energy = real_pos.monoen )
 
-en = EnPos('', name='Beamline Energy')
+en = EnPos('', name='Beamline Energy',concurrent=1)
 en.energy.kind = 'hinted'
 en.monoen.kind = 'normal'
 en.monoen.readback.kind = 'normal'

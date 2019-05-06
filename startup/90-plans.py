@@ -8,35 +8,87 @@ from suitcase import tiff_series, csv
 import pandas as pd
 
 
-def newuser(user='nochange',userid='nochange',proposal_id='nochange',institution='nochange',project='nochange'):
-    if(user is not 'nochange'):
-        RE.md['user'] = user
-    if (project is not 'nochange'):
-        RE.md['project'] = project
-    if (proposal_id is not 'nochange'):
+def newuser():
+    print("This information will tag future data until this changes, please be as thorough as possible/n"
+          "current values in parentheses, leave blank for no change")
+    proposal_id = input('Your proposal id ({}): '.format(RE.md['proposal_id']))
+    if proposal_id is not '':
         RE.md['proposal_id'] = proposal_id
-    if (institution is not 'nochange'):
+    institution = input('Your institution ({}): '.format(RE.md['institution']))
+    if institution is not '':
         RE.md['institution'] = institution
-    if (userid is not 'nochange'):
+    user = input('Your name ({}): '.format(RE.md['user']))
+    if user is not '':
+        RE.md['user'] = user
+    project = input('Your project ({}): '.format(RE.md['project']))
+    if project is not '':
+        RE.md['project'] = project
+    userid = input('Your user ID ({}): '.format(RE.md['userid']))
+    if userid is not '':
         RE.md['userid'] = userid
-def newsample(sample,sampleid='',sample_desc='',sampleset='',creator='',institution='',project='',project_desc='',project_id='',chemical_formula='', density='',components='',dim1='',dim2='',dim3='',notes=''):
-    RE.md['sample']=sample
-    RE.md['sample_desc']=sample_desc
-    RE.md['sampleid']=sampleid
-    RE.md['sampleset']=sampleset
-    RE.md['creator']=creator
-    RE.md['institution']=institution
-    RE.md['project']=project
-    RE.md['project']=project_desc
-    RE.md['project']=project_id
-    RE.md['chemical_formula']=chemical_formula
-    RE.md['density']=density
-    RE.md['components']=components
-    RE.md['dim1']=dim1
-    RE.md['dim2']=dim2
-    RE.md['dim3']=dim3
-    RE.md['notes']=notes
 
+def newsample():
+    print("This information will tag future data until this changes, please be as thorough as possible\n"
+          "current values in parentheses, leave blank for no change")
+    sample = input('Your sample name  - be concise ({}): '.format(RE.md['sample']))
+    if sample is not '':
+        RE.md['sample'] = sample
+
+    sample_desc = input('Describe your sample - be thorough ({}): '.format(RE.md['sample_desc']))
+    if sample_desc is not '':
+        RE.md['sample_desc'] = sample_desc
+
+    sampleid = input('Your sampleid - if you have one ({}): '.format(RE.md['sampleid']))
+    if sampleid is not '':
+        RE.md['sampleid'] = sampleid
+
+    sampleset = input('What set does this sample belong to ({}): '.format(RE.md['sampleset']))
+    if sampleset is not '':
+        RE.md['sampleset'] = sampleset
+
+    creator = input('Sample creator ({}): '.format(RE.md['creator']))
+    if creator is not '':
+        RE.md['creator'] = creator
+
+    project = input('Is there an associated project name ({}): '.format(RE.md['project']))
+    if project is not '':
+        RE.md['project'] = project
+
+    project_desc = input('Describe the project ({}): '.format(RE.md['project_desc']))
+    if project_desc is not '':
+        RE.md['project_desc'] = project_desc
+
+    project_id = input('Project ID ({}): '.format(RE.md['project_id']))
+    if project_id is not '':
+        RE.md['project_id'] = project_id
+
+    chemical_formula = input('Sample chemical formula ({}): '.format(RE.md['chemical_formula']))
+    if chemical_formula is not '':
+        RE.md['chemical_formula'] = chemical_formula
+
+    density = input('Sample density ({}): '.format(RE.md['density']))
+    if density is not '':
+        RE.md['density'] = density
+
+    components = input('Sample components ({}): '.format(RE.md['components']))
+    if components is not '':
+        RE.md['components'] = components
+
+    dim1 = input('Sample extra dimension value 1 ({}): '.format(RE.md['dim1']))
+    if dim1 is not '':
+        RE.md['dim1'] = dim1
+
+    dim2 = input('Sample extra dimension value 2 ({}): '.format(RE.md['dim2']))
+    if dim2 is not '':
+        RE.md['dim2'] = dim2
+
+    dim3 = input('Sample extra dimension value 3 ({}): '.format(RE.md['dim3']))
+    if dim3 is not '':
+        RE.md['dim3'] = dim3
+
+    notes = input('Sample notes ({}): '.format(RE.md['notes']))
+    if notes is not '':
+        RE.md['notes'] = notes
 
 
 def snapsw(seconds,samplename='',sampleid='', num_images=1,dark=0):
@@ -214,26 +266,26 @@ def buildeputable(start, stop, step, widfract, startinggap,name):
     gaps = []
     ensout = []
     heights = []
-    DM4_PD.kind= 'hinted'
+    IzeroDiode.kind= 'hinted'
     #startinggap = epugap_from_energy(ens[0]) #get starting position from existing table
 
     count = 0
     for energy in ens:
         yield from bps.mv(mono_en,energy)
-        yield from bps.mv(epu_gap,max(20000,startinggap-1500*widfract))
+        yield from bps.mv(epu_gap,max(20000,startinggap-500*widfract))
         #yield from bp.scan([DM4_PD],epu_gap,
         #                   min(99500,max(20000,startinggap-1500*widfract)),
         #                   min(100000,max(21500,startinggap+1500*widfract)),
         #                   51)
-        yield from bp.tune_max([DM4_PD],"DM4 Current",epu_gap,
-                                    min(99500,max(20000,startinggap-1000*widfract)),
+        yield from tune_max([IzeroDiode],"Izero Diode Current",epu_gap,
+                                    min(99500,max(20000,startinggap-500*widfract)),
                                     min(100000,max(21500,startinggap+1000*widfract)),
-                                    10*widfract,10,3,True)
+                                    10*widfract,7,3,True)
 
-        gaps.append(bec.peaks.max["DM4 Current"][0])
-        heights.append(bec.peaks.max["DM4 Current"][1])
+        gaps.append(bec.peaks.max["Izero Diode Current"][0])
+        heights.append(bec.peaks.max["Izero Diode Current"][1])
         ensout.append(mono_en.position)
-        startinggap = bec.peaks.max["DM4 Current"][0]
+        startinggap = bec.peaks.max["Izero Diode Current"][0]
         #data = np.column_stack((ensout, gaps))
         data = {'Energies': ensout, 'EPUGaps': gaps, 'PeakCurrent': heights}
         dataframe = pd.DataFrame(data=data)
@@ -246,9 +298,12 @@ def buildeputable(start, stop, step, widfract, startinggap,name):
 
 
 def do_some_eputables():
-    yield from buildeputable(1050, 2000, 5, 3, 51333, '1050eVH1')
-    yield from buildeputable(370, 2000, 5, 1.5, 21000, 'H3')
-    yield from buildeputable(450, 2000, 5, 1.5, 21000, 'H4')
+    #yield from buildeputable(150, 1500, 10, 1, 21000, 'H1v1p1')
+    #yield from buildeputable(850, 2500, 10, 1.5, 27650, 'H3v2')
+    yield from buildeputable(750, 2500, 10, 2, 20500, 'H5v2')
+    yield from buildeputable(1050, 2500, 10, 2, 20500, 'H7v1')
+    yield from buildeputable(1350, 2500, 10, 2, 20500, 'H9v1')
+    yield from buildeputable(1650, 2500, 10, 2, 20500, 'H11v1')
 
 
 def tune_max(
@@ -351,7 +406,7 @@ def tune_max(
         step = (stop - start) / (num - 1)
         peak_position = None
         cur_I = None
-        max_I = 0  # for peak centroid calculation, I(x)
+        max_I = -1e50  # for peak maximum finding (allow for negative values)
         max_xI = 0
 
         while abs(step) >= min_step and low_limit <= next_pos <= high_limit:
@@ -369,7 +424,7 @@ def tune_max(
             in_range = min(start, stop) <= next_pos <= max(start, stop)
 
             if not in_range:
-                if max_I == 0:
+                if max_I == -1e50:
                     return
                 peak_position = max_xI  # centroid
                 max_xI, max_I = 0, 0  # reset for next pass
