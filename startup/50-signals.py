@@ -1,5 +1,6 @@
 print(f'Loading {__file__}...')
 
+import time
 from ophyd import EpicsSignal, EpicsSignalRO, Device, Component, DeviceStatus
 
 # These might need/make more sense to be split up into separate files later on.
@@ -52,6 +53,11 @@ class I400(Device):
         return [self].append(super().unstage())
 
     class I400Channel(Device):
+        readback = Component(EpicsSignalRO, '',kind='hinted')
+
+        def read(self):
+            value = self.get().readback
+            return{self.name: {'value': value,'timestamp': time.time()}}
 
         def trigger(self):
             """
@@ -64,38 +70,39 @@ class I400(Device):
 
         def stage(self):
             # print('staging channel')
-            self.kind = 'hinted'
-            return [self]
+            # self.kind = 'hinted'
+            return [self].append(super().stage())
 
         def unstage(self):
             # print('unstaging channel')
-            self.kind = 'normal'
-            return [self]
+            # self.kind = 'normal'
+            return [self].append(super().unstage())
 
-    Channel_1 = Component(I400Channel, ':IC1_MON')
-    Channel_2 = Component(I400Channel, ':IC2_MON')
-    Channel_3 = Component(I400Channel, ':IC3_MON')
-    Channel_4 = Component(I400Channel, ':IC4_MON')
+    Channel_1 = Component(I400Channel, ':IC1_MON', kind='hinted')
+    Channel_2 = Component(I400Channel, ':IC2_MON', kind='hinted')
+    Channel_3 = Component(I400Channel, ':IC3_MON', kind='hinted')
+    Channel_4 = Component(I400Channel, ':IC4_MON', kind='hinted')
 
 
 RSoXS_DM = I400('XF:07ID-ES1{DMR:I400-1}', name='RSoXS Diagnostic Picoammeter')
 RSoXS_Slits = I400('XF:07ID-ES1{Slt1:I400-1}', name='RSoXS Slits Picoammeter')
 BSW_I = RSoXS_DM.Channel_1
-BSW_I.name = 'RSoXS WAXS Beamstop Current'
+BSW_I.readback.name = 'RSoXS WAXS Beamstop Current'
 BSS_I = RSoXS_DM.Channel_2
-BSS_I.name = 'RSoXS SAXS Beamstop Current'
+BSS_I.readback.name = 'RSoXS SAXS Beamstop Current'
 IzeroMesh = RSoXS_DM.Channel_3
-IzeroMesh.name = 'Izero Mesh Drain Current'
+IzeroMesh.readback.name = 'Izero Mesh Drain Current'
 IzeroDiode = RSoXS_DM.Channel_4
-IzeroDiode.name = 'Izero Diode Current'
+IzeroDiode.readback.name = 'Izero Diode Current'
 SlitOut_I = RSoXS_Slits.Channel_1
-SlitOut_I.name = 'RSoXS Slit Outboard Current'
+SlitOut_I.readback.name = 'RSoXS Slit Outboard Current'
 SlitBottom_I = RSoXS_Slits.Channel_2
+SlitBottom_I.readback.name = 'RSoXS Slit Bottom Current'
 SlitBottom_I.name = 'RSoXS Slit Bottom Current'
 SlitTop_I = RSoXS_Slits.Channel_3
-SlitTop_I.name = 'RSoXS Slit Top Current'
+SlitTop_I.readback.name = 'RSoXS Slit Top Current'
 SlitInboard_I = RSoXS_Slits.Channel_4
-SlitInboard_I.name = 'RSoXS Slit Inboard Current'
+SlitInboard_I.readback.name = 'RSoXS Slit Inboard Current'
 
 
 

@@ -12,6 +12,8 @@ def Izero_screen():
     yield from bps.mv(Izero_Y, 2)
 def Izero_mesh():
     yield from bps.mv(Izero_Y, -29)
+def Izero_diode():
+    yield from bps.mv(Izero_Y, 35)
 def Izero_out():
     yield from bps.mv(Izero_Y, 145)
 

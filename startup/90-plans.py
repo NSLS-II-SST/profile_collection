@@ -21,11 +21,11 @@ def newuser():
     if user is not '':
         RE.md['user'] = user
     project = input('Your project ({}): '.format(RE.md['project']))
+
     if project is not '':
         RE.md['project'] = project
-    userid = input('Your user ID ({}): '.format(RE.md['userid']))
-    if userid is not '':
-        RE.md['userid'] = userid
+    # if new, add user to database get unique ID.
+    RE.md['user_id'] = user_id
 
 def newsample():
     print("This information will tag future data until this changes, please be as thorough as possible\n"
