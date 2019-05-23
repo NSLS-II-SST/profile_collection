@@ -1,7 +1,8 @@
 print(f'Loading {__file__}...')
 
 import time
-from ophyd import EpicsSignal, EpicsSignalRO, Device, Component, DeviceStatus
+from ophyd import (EpicsSignal, EpicsSignalRO, Device, Component, DeviceStatus,
+                   Staged)
 
 # These might need/make more sense to be split up into separate files later on.
 # But while we have so few, I'm just putting them in this single file.
@@ -28,6 +29,8 @@ class I400(Device):
         """
         Trigger the detector and return a Status object.
         """
+        if not self._staged == Staged.yes:
+            raise RuntimeError("Device must be staged before triggering.")
         status = DeviceStatus(self)
         self.acquire.put(1, callback= status._finished)
         return status
