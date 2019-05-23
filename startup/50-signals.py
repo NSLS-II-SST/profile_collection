@@ -8,7 +8,6 @@ from ophyd import (EpicsSignal, EpicsSignalRO, Device, Component, DeviceStatus,
 # But while we have so few, I'm just putting them in this single file.
 
 bpm13_sum = EpicsSignalRO('XF:07ID-BI{BPM:13}Stats5:Total_RBV', name='Downstream Izero Phosphor Intensity')
-dm3_c1 = EpicsSignalRO('XF:07ID-BI{DM3:I400-1}:IC1_MON', name='Diagnostic Module 3 Current')
 
 ring_current = EpicsSignalRO('SR:OPS-BI{DCCT:1}I:Real-I', name='NSLS-II Ring Current', kind='normal')
 
@@ -66,7 +65,10 @@ class I400(Device):
             """
             Trigger the detector and return a Status object.
             """
-            return self.parent.trigger()
+            self.kind = 'hinted'
+            st = self.parent.trigger()
+            self.kind = 'normal'
+            return st
 
         def set_exposure(self, exptime):
             self.parent.set_exposure(exptime)
@@ -88,7 +90,6 @@ class I400(Device):
 
 
 RSoXS_DM = I400('XF:07ID-ES1{DMR:I400-1}', name='RSoXS Diagnostic Picoammeter')
-RSoXS_Slits = I400('XF:07ID-ES1{Slt1:I400-1}', name='RSoXS Slits Picoammeter')
 BSW_I = RSoXS_DM.Channel_1
 BSW_I.name = 'RSoXS WAXS Beamstop Current'
 BSS_I = RSoXS_DM.Channel_2
@@ -97,10 +98,12 @@ IzeroMesh = RSoXS_DM.Channel_3
 IzeroMesh.name = 'Izero Mesh Drain Current'
 IzeroDiode = RSoXS_DM.Channel_4
 IzeroDiode.name = 'Izero Diode Current'
+
+
+RSoXS_Slits = I400('XF:07ID-ES1{Slt1:I400-1}', name='RSoXS Slits Picoammeter')
 SlitOut_I = RSoXS_Slits.Channel_1
 SlitOut_I.name = 'RSoXS Slit Outboard Current'
 SlitBottom_I = RSoXS_Slits.Channel_2
-SlitBottom_I.name = 'RSoXS Slit Bottom Current'
 SlitBottom_I.name = 'RSoXS Slit Bottom Current'
 SlitTop_I = RSoXS_Slits.Channel_3
 SlitTop_I.name = 'RSoXS Slit Top Current'
@@ -108,8 +111,14 @@ SlitInboard_I = RSoXS_Slits.Channel_4
 SlitInboard_I.name = 'RSoXS Slit Inboard Current'
 
 
+Downstream_I400 = I400('XF:07ID-BI{DM7:I400-1}', name='RSoXS Downstream Picoammeter')
+TransmissionDiode = Downstream_I400.Channel_4
+TransmissionDiode.name = 'RSoXS Transmission Photodiode'
 
 
+
+
+# dm3_c1 = EpicsSignalRO('XF:07ID-BI{DM3:I400-1}:IC1_MON', name='Diagnostic Module 3 Current')
 # BeamstopW_I = EpicsSignal('XF:07ID-ES1{DMR:I400-1}:IC1_MON', name='WAXS Beamstop Current', kind='normal')
 # BeamstopS_I = EpicsSignal('XF:07ID-ES1{DMR:I400-1}:IC2_MON', name='SAXS Beamstop Current', kind='normal')
 # IzeroMesh   = EpicsSignal('XF:07ID-ES1{DMR:I400-1}:IC3_MON', name='Izero Mesh Drain Current', kind='normal')
