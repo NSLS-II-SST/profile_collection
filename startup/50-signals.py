@@ -74,13 +74,20 @@ class I400(Device):
             self.parent.set_exposure(exptime)
 
         def stage(self):
+            self.parent.stage()
             print('staging channel')
+            self.parent.acquisition_mode.set(0)
+            self.parent.acquisition_mode1.set(0)
+            self.parent.exposure_time.set(self.exptime_save)
             self.kind = 'hinted'
             return [self].append(super().stage())
 
         def unstage(self):
-            # print('unstaging channel')
+            print('unstaging channel')
             self.kind = 'normal'
+            self.parent.acquisition_mode.set(7)
+            self.parent.acquisition_mode1.set(7)
+            self.parent.exposure_time.set(.4)
             return [self].append(super().unstage())
 
     Channel_1 = Component(I400Channel, ':IC1_MON', kind='normal')
