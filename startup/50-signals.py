@@ -44,7 +44,7 @@ class I400(Device):
         self.acquisition_mode.set(0)
         self.acquisition_mode1.set(0)
         self.exposure_time.set(self.exptime_save)
-        return [self]
+        return [self].append(super().stage())
 
     def unstage(self):
         # print('unstaging')
@@ -52,7 +52,7 @@ class I400(Device):
         self.acquisition_mode.set(7)
         self.acquisition_mode1.set(7)
         self.exposure_time.set(.4)
-        return [self]
+        return [self].append(super().unstage())
 
     class I400Channel(EpicsSignal):
         # readback = Component(EpicsSignalRO, '', kind='hinted')
@@ -78,9 +78,9 @@ class I400(Device):
             print('staging channel')
             self.parent.acquisition_mode.set(0)
             self.parent.acquisition_mode1.set(0)
-            self.parent.exposure_time.set(self.exptime_save)
+            self.parent.exposure_time.set(self.parent.exptime_save)
             self.kind = 'hinted'
-            return [self].append(super().stage())
+            return [self]#.append(super().stage())
 
         def unstage(self):
             print('unstaging channel')
@@ -88,7 +88,7 @@ class I400(Device):
             self.parent.acquisition_mode.set(7)
             self.parent.acquisition_mode1.set(7)
             self.parent.exposure_time.set(.4)
-            return [self].append(super().unstage())
+            return [self]#.append(super().unstage())
 
     Channel_1 = Component(I400Channel, ':IC1_MON', kind='normal')
     Channel_2 = Component(I400Channel, ':IC2_MON', kind='normal')
