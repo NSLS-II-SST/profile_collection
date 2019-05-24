@@ -67,7 +67,7 @@ class I400(Device):
             """
             self.kind = 'hinted'
             st = self.parent.trigger()
-            self.kind = 'normal'
+            #self.kind = 'normal'
             return st
 
         def set_exposure(self, exptime):
@@ -133,8 +133,8 @@ TransmissionDiode.name = 'RSoXS Transmission Photodiode'
 DM4_PD = EpicsSignal('XF:07ID-BI{DM5:F4}Cur:I1-I', name='DM4 Current', kind='hinted')
 
 
-sd.monitors.extend([IzeroMesh, ring_current])
-sd.baseline.extend([IzeroMesh, ring_current, IzeroDiode, BSW_I, BSS_I])
+sd.monitors.extend([ ring_current])
+sd.baseline.extend([ ring_current])
 # Not sure how best to do this image yet... 
 
 #BPM13 Image:
