@@ -1,4 +1,5 @@
 print(f'Loading {__file__}...')
+from pathlib import Path
 
 """
 Example:
@@ -20,11 +21,12 @@ from datetime import datetime
 
 USERDIR = 'Z:/images/users/'
 
+glob_start_doc = None
 
 def factory(name, start_doc):
     filler = Filler(db.reg.handler_reg)
 
-    filler(name, start_doc)  # modifies doc in place
+    # filler(name, start_doc)  # modifies doc in place
 
     def subfactory(name, descriptor_doc):
 
@@ -49,14 +51,25 @@ def factory(name, start_doc):
                                                                    f'{formatted_date}/'
                                                                    '{scan_id}-'
                                                                    '{sample}-'
-                                                                   # '{event[data][en]}'
+                                                                   #'{event[data][en]}'
                                                                    ),
                                                        directory=USERDIR,
                                                        sort_keys=True, indent=2)
             serializerjson('start', start_doc)
             serializerjson('descriptor', descriptor_doc)
-            return [serializer,serializerjson]
-        elif descriptor_doc['name'] == 'baseline' or descriptor_doc['name'] == 'Izero Mesh Drain Current_monitor':
+            serializercsv = csv.Serializer(file_prefix=('{institution}/'
+                                                     '{user}/'
+                                                     '{project}/'
+                                                     f'{formatted_date}/'
+                                                     '{scan_id}-'
+                                                     '{sample}-'
+                                                     # '{event[data][en]}'
+                                                     ),
+                                        directory=USERDIR)
+            serializercsv('start', start_doc)
+            serializercsv('descriptor', descriptor_doc)
+            return [serializer,serializerjson,serializercsv]
+        elif descriptor_doc['name'] == 'baseline':
             dt = datetime.now()
             formatted_date = dt.strftime('%Y-%m-%d')
             # energy = hdr.table(stream_name='baseline')['Beamline Energy_energy'][1]
@@ -75,7 +88,33 @@ def factory(name, start_doc):
 
         else:
             return []
-    return [filler], [subfactory]
+
+    def cb(name, doc):
+        filler(name, doc)  # Fill in place any externally-stored data written by area detector.
+        if name == 'event_page':
+            if 'Beamline Energy_energy' in doc['data'] and 'Izero Mesh Drain Current' in doc['data']:
+                dt = datetime.now()
+                formatted_date = dt.strftime('%Y-%m-%d')
+                filename = ('{start[institution]}/'
+                            '{start[user]}/'
+                            '{start[project]}/'
+                           f'{formatted_date}/'
+                            '{start[scan_id]}-'
+                            '{start[sample]}-'
+                            #'{energy:.2f}eV'
+                            '.txt'
+                            ).format(start=start_doc, energy=doc['data']['Beamline Energy_energy'][-1])
+
+                filename = Path(USERDIR) / Path(filename)
+                print(f'!!!! filename: {filename}')
+                with open(filename, 'a+') as fp:
+                    fp.write(f"{doc['data']['Beamline Energy_energy'][-1]}, {doc['data']['Izero Mesh Drain Current'][-1]}\n")
+            else:
+                pass
+        else:
+            pass
+
+    return [cb], [subfactory]
 
 
 rr = RunRouter([factory])

@@ -2,6 +2,9 @@ print(f'Loading {__file__}...')
 
 import os
 import nslsii
+
+# Very important, the databroker config lives in C:\Users\greateyes\AppData\Roaming\databroker\rsoxs.yml,
+# not in ~/.config/databroker/rsoxs.yml
 nslsii.configure_base(get_ipython().user_ns, 'rsoxs')
 
 # After the above call, you will now have the following in your namespace:

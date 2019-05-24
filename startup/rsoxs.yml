@@ -3,7 +3,7 @@ metadatastore:
     module: 'databroker.headersource.mongo'
     class: 'MDS'
     config:
-        host: 'localhost'
+        host: 'xf07id1-ws18'
         port: 27017
         database: 'rsoxs-metadata-store'
         timezone: 'US/Eastern'
@@ -11,6 +11,6 @@ assets:
     module: 'databroker.assets.mongo'
     class: 'Registry'
     config:
-        host: 'localhost'
+        host: 'xf07id1-ws18'
         port: 27017
         database: 'rsoxs-assets-store'
