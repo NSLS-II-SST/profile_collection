@@ -51,21 +51,23 @@ def factory(name, start_doc):
                                                                    f'{formatted_date}/'
                                                                    '{scan_id}-'
                                                                    '{sample}-'
-                                                                   #'{event[data][en]}'
+                                                                   #'{event[data][Beamline Energy_energy]:.2f}eV-'
                                                                    ),
-                                                       directory=USERDIR,
-                                                       sort_keys=True, indent=2)
+                                                      directory=USERDIR,
+                                                      sort_keys=True,
+                                                      indent=2)
             serializerjson('start', start_doc)
             serializerjson('descriptor', descriptor_doc)
-            serializercsv = csv.Serializer(file_prefix=('{institution}/'
-                                                     '{user}/'
-                                                     '{project}/'
-                                                     f'{formatted_date}/'
-                                                     '{scan_id}-'
-                                                     '{sample}-'
-                                                     # '{event[data][en]}'
-                                                     ),
-                                        directory=USERDIR)
+            serializercsv = csv.Serializer(file_prefix=('{start[institution]}/'
+                                                        '{start[user]}/'
+                                                        '{start[project]}/'
+                                                        f'{formatted_date}/'
+                                                        '{start[scan_id]}-'
+                                                        '{start[sample]}-'
+                                                        '{event[data][Beamline Energy_energy]:.2f}eV-'
+                                                        ),
+                                            directory=USERDIR,
+                                            flush=True)
             serializercsv('start', start_doc)
             serializercsv('descriptor', descriptor_doc)
             return [serializer,serializerjson,serializercsv]
@@ -73,13 +75,13 @@ def factory(name, start_doc):
             dt = datetime.now()
             formatted_date = dt.strftime('%Y-%m-%d')
             # energy = hdr.table(stream_name='baseline')['Beamline Energy_energy'][1]
-            serializer = csv.Serializer(file_prefix=('{institution}/'
-                                                     '{user}/'
-                                                     '{project}/'
+            serializer = csv.Serializer(file_prefix=('{start[institution]}/'
+                                                     '{start[user]}/'
+                                                     '{start[project]}/'
                                                      f'{formatted_date}/'
-                                                     '{scan_id}-'
-                                                     '{sample}-'
-                                                    # '{event[data][en]}'
+                                                     '{start[scan_id]}-'
+                                                     '{start[sample]}-'
+                                                     '{event[data][Beamline Energy_energy]:.2f}eV-'
                                                      ),
                                         directory=USERDIR)
             serializer('start', start_doc)
@@ -106,7 +108,7 @@ def factory(name, start_doc):
                             ).format(start=start_doc, energy=doc['data']['Beamline Energy_energy'][-1])
 
                 filename = Path(USERDIR) / Path(filename)
-                print(f'!!!! filename: {filename}')
+                #print(f'!!!! filename: {filename}')
                 with open(filename, 'a+') as fp:
                     fp.write(f"{doc['data']['Beamline Energy_energy'][-1]}, {doc['data']['Izero Mesh Drain Current'][-1]}\n")
             else:

@@ -78,7 +78,7 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
         if self.cam.temperature_actual.value - self.cam.temperature.value > 1.0:
             print("Warning!!!!")
             self.cooling_state()
-            print("Please wait until temperature has stabalized before taking important data./n/n/n")
+            print("Please wait until temperature has stabalized before taking important data.\n\n\n")
         return [self].append(super().stage())
 
     def unstage(self):

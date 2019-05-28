@@ -7,6 +7,11 @@ import bluesky.plan_stubs as bps
 from suitcase import tiff_series, csv
 import pandas as pd
 
+def set_exposure(exposure):
+    sw_det.set_exposure(exposure)
+    RSoXS_DM.set_exposure(exposure)
+
+
 
 def newuser():
     print("This information will tag future data until this changes, please be as thorough as possible/n"
