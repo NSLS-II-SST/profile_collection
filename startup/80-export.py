@@ -64,7 +64,7 @@ def factory(name, start_doc):
                                                         f'{formatted_date}/'
                                                         '{start[scan_id]}-'
                                                         '{start[sample]}-'
-                                                        '{event[data][Beamline Energy_energy]:.2f}eV-'
+                                                        #'{event[data][Beamline Energy_energy]:.2f}eV-'
                                                         ),
                                             directory=USERDIR,
                                             flush=True)
@@ -81,7 +81,7 @@ def factory(name, start_doc):
                                                      f'{formatted_date}/'
                                                      '{start[scan_id]}-'
                                                      '{start[sample]}-'
-                                                     '{event[data][Beamline Energy_energy]:.2f}eV-'
+                                                     #'{event[data][Beamline Energy_energy]:.2f}eV-'
                                                      ),
                                         directory=USERDIR)
             serializer('start', start_doc)
