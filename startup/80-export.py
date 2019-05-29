@@ -66,8 +66,9 @@ def factory(name, start_doc):
                                                         '{start[sample]}-'
                                                         #'{event[data][Beamline Energy_energy]:.2f}eV-'
                                                         ),
-                                            directory=USERDIR,
-                                            flush=True)
+                                           directory=USERDIR,
+                                           flush=True,
+                                           line_terminator='\n')
             serializercsv('start', start_doc)
             serializercsv('descriptor', descriptor_doc)
             return [serializer,serializerjson,serializercsv]
@@ -83,7 +84,9 @@ def factory(name, start_doc):
                                                      '{start[sample]}-'
                                                      #'{event[data][Beamline Energy_energy]:.2f}eV-'
                                                      ),
-                                        directory=USERDIR)
+                                        directory=USERDIR,
+                                        flush=True,
+                                        line_terminator='\n')
             serializer('start', start_doc)
             serializer('descriptor', descriptor_doc)
             return [serializer]
@@ -93,28 +96,28 @@ def factory(name, start_doc):
 
     def cb(name, doc):
         filler(name, doc)  # Fill in place any externally-stored data written by area detector.
-        if name == 'event_page':
-            if 'Beamline Energy_energy' in doc['data'] and 'Izero Mesh Drain Current' in doc['data']:
-                dt = datetime.now()
-                formatted_date = dt.strftime('%Y-%m-%d')
-                filename = ('{start[institution]}/'
-                            '{start[user]}/'
-                            '{start[project]}/'
-                           f'{formatted_date}/'
-                            '{start[scan_id]}-'
-                            '{start[sample]}-'
-                            #'{energy:.2f}eV'
-                            '.txt'
-                            ).format(start=start_doc, energy=doc['data']['Beamline Energy_energy'][-1])
-
-                filename = Path(USERDIR) / Path(filename)
-                #print(f'!!!! filename: {filename}')
-                with open(filename, 'a+') as fp:
-                    fp.write(f"{doc['data']['Beamline Energy_energy'][-1]}, {doc['data']['Izero Mesh Drain Current'][-1]}\n")
-            else:
-                pass
-        else:
-            pass
+        # if name == 'event_page':
+        #     if 'Beamline Energy_energy' in doc['data'] and 'Izero Mesh Drain Current' in doc['data']:
+        #         dt = datetime.now()
+        #         formatted_date = dt.strftime('%Y-%m-%d')
+        #         filename = ('{start[institution]}/'
+        #                     '{start[user]}/'
+        #                     '{start[project]}/'
+        #                    f'{formatted_date}/'
+        #                     '{start[scan_id]}-'
+        #                     '{start[sample]}-'
+        #                     #'{energy:.2f}eV'
+        #                     '.txt'
+        #                     ).format(start=start_doc, energy=doc['data']['Beamline Energy_energy'][-1])
+        #
+        #         filename = Path(USERDIR) / Path(filename)
+        #         #print(f'!!!! filename: {filename}')
+        #         with open(filename, 'a+') as fp:
+        #             fp.write(f"{doc['data']['Beamline Energy_energy'][-1]}, {doc['data']['Izero Mesh Drain Current'][-1]}\n")
+        #     else:
+        #         pass
+        # else:
+        #     pass
 
     return [cb], [subfactory]
 

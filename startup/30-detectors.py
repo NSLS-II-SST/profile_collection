@@ -88,6 +88,7 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
         super().__init__(*args, **kwargs)
     #sudo mount -t cifs //10.7.0.217/data/ /mnt/zdrive -o user=linuxuser,pass=greateyes
     #needs to be run on the server
+    # sudo mount -t cifs //10.7.0.217/data/ /mnt/zdrive -o user=linuxuser,pass=greateyes
 
 
 saxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:1}', name='Small Angle CCD Detector',
