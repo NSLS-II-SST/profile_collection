@@ -124,4 +124,4 @@ def factory(name, start_doc):
 
 rr = RunRouter([factory])
 
-RE.subscribe(rr)  # This should be subscribed *after* db so filling happens after db.insert.
+rr_token = RE.subscribe(rr)  # This should be subscribed *after* db so filling happens after db.insert.

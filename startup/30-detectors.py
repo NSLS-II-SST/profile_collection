@@ -41,6 +41,17 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
     roi3 = C(ROIPlugin, 'ROI3:')
     roi4 = C(ROIPlugin, 'ROI4:')
     proc1 = C(ProcessPlugin, 'Proc1:')
+
+    def stage(self, *args, **kwargs):
+        if self.cam.temperature_actual.value - self.cam.temperature.value > 1.0:
+            print("Warning!!!!")
+            self.cooling_state()
+            print("Please wait until temperature has stabalized before taking important data.\n\n\n")
+        return [self].append(super().stage(*args, **kwargs))
+
+    def unstage(self, *args, **kwargs):
+        return [self].append(super().unstage(*args, **kwargs))
+
     def set_temp(self,degc):
         self.cam.temperature.set(degc)
         self.cam.enable_cooling.set(1)
@@ -74,18 +85,6 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
     def binning(self):
         print('Binning of {} is set to ({},{}) pixels'.format(self.name, self.cam.bin_x.value, self.cam.bin_y.value))
 
-    def stage(self):
-        if self.cam.temperature_actual.value - self.cam.temperature.value > 1.0:
-            print("Warning!!!!")
-            self.cooling_state()
-            print("Please wait until temperature has stabalized before taking important data.\n\n\n")
-        return [self].append(super().stage())
-
-    def unstage(self):
-        return [self].append(super().unstage())
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
     #sudo mount -t cifs //10.7.0.217/data/ /mnt/zdrive -o user=linuxuser,pass=greateyes
     #needs to be run on the server
     # sudo mount -t cifs //10.7.0.217/data/ /mnt/zdrive -o user=linuxuser,pass=greateyes
@@ -100,6 +99,32 @@ waxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:2}', name='Wide Angle CCD De
 class SyncedDetectors(Device):
     saxs = C(RSOXSGreatEyesDetector, 'XF:07ID1-ES:1{GE:1}',read_attrs=['tiff', 'stats1.total'],name="Small Angle CCD Detector")
     waxs = C(RSOXSGreatEyesDetector, 'XF:07ID1-ES:1{GE:2}',read_attrs=['tiff', 'stats1.total'],name="Wide Angle CCD Detector")
+
+    def __init__(self, *args, **kwargs):
+        self.lightwason = None
+        super().__init__(*args, **kwargs)
+
+    def stage(self, *args, **kwargs):
+        listout = []
+        listout.append(self.saxs.stage())
+        listout.append(self.waxs.stage())
+        if light.setpoint:
+            light.off()
+            self.lightwason=True
+            sleep(1)
+        else:
+            self.lightwason=False
+        listout.append(self)
+        return listout
+
+    def unstage(self, *args, **kwargs):
+        listout = []
+        listout.append(self.saxs.unstage())
+        listout.append(self.waxs.unstage())
+        if self.lightwason:
+            light.on()
+        listout.append(self)
+        return listout
 
     def trigger(self):
         self.waxs.cam.trigger_mode.put(0)
@@ -147,27 +172,6 @@ class SyncedDetectors(Device):
     def shutter(self):
         return self.saxs.cam.shutter_control.get()
 
-    def stage(self):
-        listout = []
-        listout.append(self.saxs.stage())
-        listout.append(self.waxs.stage())
-        if light.setpoint:
-            light.off()
-            self.lightwason=True
-            sleep(1)
-        else:
-            self.lightwason=False
-        listout.append(self)
-        return listout
-
-    def unstage(self):
-        listout = []
-        listout.append(self.saxs.unstage())
-        listout.append(self.waxs.unstage())
-        if self.lightwason:
-            light.on()
-        listout.append(self)
-        return listout
 
 sw_det = SyncedDetectors('', name='Synced')
 
