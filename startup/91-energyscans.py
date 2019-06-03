@@ -24,6 +24,6 @@ def SWCarbon_acq(multiple,mesh,det,energy):
     yield from bp.scan_nd(
         [mesh,det],
         cycler(sw_det.saxs.cam.acquire_time, times) +
-        cycler(sw_det.waxs.cam.acquire_time, times3) +
+        cycler(sw_det.waxs.cam.acquire_time, times2) +
         cycler(mesh.parent.exposure_time, times3) +
         cycler(energy, energies))
