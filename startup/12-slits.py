@@ -58,17 +58,20 @@ class Slits(PseudoPositioner):
 slits1 = Slits('XF:07ID2-ES1{Slt1-Ax:',  name='Upstream Scatter Slits', kind='hinted',concurrent=1)
 slits2 = Slits('XF:07ID2-ES1{Slt2-Ax:',  name='Middle Scatter Slits', kind='hinted',concurrent=1)
 slits3 = Slits('XF:07ID2-ES1{Slt3-Ax:',  name='Final Scatter Slits', kind='hinted',concurrent=1)
-slits3.bottom.user_offset.set(-1.39)
-slits3.top.user_offset.set(-1.546)
-slits3.outboard.user_offset.set(-.651)
-slits3.inboard.user_offset.set(.615)
-slits2.inboard.user_offset.set(-0.59)
-slits2.outboard.user_offset.set(-1.705)
-slits2.bottom.user_offset.set(-1.199)
-slits2.top.user_offset.set(-1.71)
-slits1.inboard.user_offset.set(-.223)
-slits1.outboard.user_offset.set(-2.0550)
-slits1.top.user_offset.set(-1.39)
-slits1.bottom.user_offset.set(-.71)
+
+
+def set_slit_offsets():
+    yield from bps.mv(slits3.bottom.user_offset,-1.39,
+                      slits3.top.user_offset,-1.546,
+                      slits3.outboard.user_offset,-.651,
+                      slits3.inboard.user_offset,.615,
+                      slits2.inboard.user_offset,-0.59,
+                      slits2.outboard.user_offset,-1.705,
+                      slits2.bottom.user_offset,-1.199,
+                      slits2.top.user_offset,-1.71,
+                      slits1.inboard.user_offset,-.223,
+                      slits1.outboard.user_offset,-2.0550,
+                      slits1.top.user_offset,-1.39,
+                      slits1.bottom.user_offset,-.71)
 
 sd.baseline.extend([slits1, slits2, slits3 ])

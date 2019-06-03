@@ -43,10 +43,12 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
     proc1 = C(ProcessPlugin, 'Proc1:')
 
     def stage(self, *args, **kwargs):
-        if self.cam.temperature_actual.value - self.cam.temperature.value > 1.0:
+        self.cam.temperature_actual.read()
+        self.cam.temperature.read()
+        if abs(self.cam.temperature_actual.value - self.cam.temperature.value) > 2.0:
             print("Warning!!!!")
             self.cooling_state()
-            print("Please wait until temperature has stabalized before taking important data.\n\n\n")
+            print("Please wait until temperature has stabilized before taking important data.\n\n\n")
         return [self].append(super().stage(*args, **kwargs))
 
     def unstage(self, *args, **kwargs):
@@ -64,11 +66,12 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
 
     def cooling_state(self):
         if self.cam.enable_cooling.value:
+            self.cam.temperature_actual.read()
             if self.cam.temperature_actual.value - self.cam.temperature.value > 1.0:
-                print("Temperature of {} ({:.2f} °C) is not at setpoint ({:.2f} °C) but cooling on".format(
+                print("Temperature of {} ({:.2f} °C) is not at setpoint ({:.2f} °C) but cooling is on".format(
                      self.name, self.cam.temperature_actual.value, self.cam.temperature.value))
             else:
-                print("Temperature of {} ({:.2f} °C) is at setpoint ({:.2f} °C) and cooling on".format(
+                print("Temperature of {} ({:.2f} °C) is at setpoint ({:.2f} °C) and cooling is on".format(
                     self.name, self.cam.temperature_actual.value, self.cam.temperature.value))
         else:
             if self.cam.temperature_actual.value - self.cam.temperature.value > 1.0:
