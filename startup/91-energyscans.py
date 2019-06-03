@@ -8,7 +8,7 @@ from cycler import cycler
 
 
 
-def SWCarbon_acq(multiple,mesh,det,en):
+def SWCarbon_acq(multiple,mesh,det,energy):
     energies = np.arange(270,282,.5)
     energies = np.append(energies,np.arange(282,286,.1))
     energies = np.append(energies,np.arange(286,292,.2))
@@ -26,4 +26,4 @@ def SWCarbon_acq(multiple,mesh,det,en):
         [mesh,det],
         cycler(det.saxs.cam.acquire_time, times) +
         cycler(mesh.parent.exposure_time, times2) +
-        cycler(en, energies))
+        cycler(energy, energies))
