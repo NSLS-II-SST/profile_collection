@@ -6,8 +6,6 @@ import bluesky.plan_stubs as bps
 from cycler import cycler
 
 
-
-
 def SWCarbon_acq(multiple,mesh,det,energy):
     energies = np.arange(270,282,.5)
     energies = np.append(energies,np.arange(282,286,.1))
@@ -21,9 +19,11 @@ def SWCarbon_acq(multiple,mesh,det,energy):
     times[energies >= 286] = 2
     times *= multiple
     times2 = times.copy()
+    times3 = times.copy()
 
     yield from bp.scan_nd(
         [mesh,det],
-        cycler(det.saxs.cam.acquire_time, times) +
-        cycler(mesh.parent.exposure_time, times2) +
+        cycler(sw_det.saxs.cam.acquire_time, times) +
+        cycler(sw_det.waxs.cam.acquire_time, times3) +
+        cycler(mesh.parent.exposure_time, times3) +
         cycler(energy, energies))
