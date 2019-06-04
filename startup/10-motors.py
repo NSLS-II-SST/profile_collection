@@ -1,4 +1,4 @@
-print(f'Loading {__file__}...')
+run_report(__file__)
 
 from ophyd import EpicsMotor
 sam_X = EpicsMotor('XF:07ID2-ES1{Stg-Ax:X}Mtr', name='RSoXS Sample Outboard-Inboard',kind='hinted')

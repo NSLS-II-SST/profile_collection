@@ -1,4 +1,4 @@
-print(f'Loading {__file__}...')
+run_report(__file__)
 
 from ophyd import (EpicsMotor, PseudoPositioner, PseudoSingle, Component as Cpt)
 from ophyd.pseudopos import (pseudo_position_argument,
@@ -11,17 +11,16 @@ class Slits(PseudoPositioner):
     def where(self):
         print("%s:" % self.name)
         text1 = "      vertical   size   = %7.3f mm" % \
-               (self.vsize.position)
+               (self.vsize.position) + "\n"
         text1 += "      vertical   center = %7.3f mm" % \
-                (self.vcenter.position)
+                (self.vcenter.position) + "\n"
         text2 = "      horizontal size   = %7.3f mm" % \
-                (self.hsize.position)
+                (self.hsize.position) + "\n"
         text2 += "      horizontal center = %7.3f mm" % \
-                (self.hcenter.position)
-        print(text1)
-        print(text2)
-  #  def wh(self):
-  #      boxedtext(self.name, self.where(), 'cyan') #bruce's
+                (self.hcenter.position) + "\n"
+        return text1 + text2
+    def wh(self):
+        boxed_text(self.name, self.where(), 'cyan') #bruce's
 
     # The pseudo positioner axes:
     vsize   = Cpt(PseudoSingle, limits=(-1, 20),kind='hinted')

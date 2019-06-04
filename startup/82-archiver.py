@@ -1,4 +1,4 @@
-print(f'Loading {__file__}...')
+run_report(__file__)
 
 import pytz
 from datetime import datetime, timedelta

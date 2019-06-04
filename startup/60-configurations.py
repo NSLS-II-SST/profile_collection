@@ -1,4 +1,4 @@
-print(f'Loading {__file__}...')
+run_report(__file__)
 import bluesky.plans as bp
 import bluesky.plan_stubs as bps
 import time

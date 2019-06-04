@@ -1,4 +1,4 @@
-print(f'Loading {__file__}...')
+run_report(__file__)
 
 import numpy as np
 from datetime import datetime
@@ -6,11 +6,43 @@ import bluesky.plans as bp
 import bluesky.plan_stubs as bps
 from suitcase import tiff_series, csv
 import pandas as pd
+import textwrap
 
 def set_exposure(exposure):
     sw_det.set_exposure(exposure)
     RSoXS_DM.set_exposure(exposure)
 
+
+def user():
+    title = ("Current User info:")
+    text = '   proposal ID:         '+colored('{}'.format(RE.md["proposal_id"]).center(40,' '),'cyan')
+    text += '\n   User Name:           '+colored('{}'.format(RE.md["user"]).center(40,' '),'cyan')
+    text += '\n   User ID:             '+colored('{}'.format(RE.md["user_id"]).center(40,' '),'cyan')
+    text += '\n   Institution:         '+colored('{}'.format(RE.md["institution"]).center(40,' '),'cyan')
+    text += '\n   project:             '+colored('{}'.format(RE.md["project"]).center(40,' '),'cyan')
+    text += '\n   Project Description: '+colored('{}'.format(RE.md["project_desc"]).center(40,' '),'cyan')
+    boxed_text(title, text, 'red')
+
+
+def sample():
+    title = "Current sample info:"
+    text = '   proposal ID:           '+colored('{}'.format(RE.md["proposal_id"]).center(38,' '),'cyan')
+    text += '\n   User Name:             '+colored('{}'.format(RE.md["user"]).center(38,' '),'cyan')
+    text += '\n   User ID:               '+colored('{}'.format(RE.md["user_id"]).center(38,' '),'cyan')
+    text += '\n   Institution:           '+colored('{}'.format(RE.md["institution"]).center(38,' '),'cyan')
+    text += '\n   Sample Name:           '+colored('{}'.format(RE.md["sample"]).center(38,' '),'cyan')
+    text += '\n   Sample Description:    '+colored('{}'.format(RE.md["sample_desc"]).center(38,' '),'cyan')
+    text += '\n   Sample ID:             '+colored('{}'.format(RE.md["sampleid"]).center(38,' '),'cyan')
+    text += '\n   Sample Set:            '+colored('{}'.format(RE.md["sampleset"]).center(38,' '),'cyan')
+    text += '\n   project:               '+colored('{}'.format(RE.md["project"]).center(38,' '),'cyan')
+    text += '\n   Project Description:   '+colored('{}'.format(RE.md["project_desc"]).center(38,' '),'cyan')
+    text += '\n   Chemical Formula:      '+colored('{}'.format(RE.md["chemical_formula"]).center(38,' '),'cyan')
+    text += '\n   Density:               '+colored('{}'.format(RE.md["density"]).center(38,' '),'cyan')
+    text += '\n   Arbitrary Dimension 1: '+colored('{}'.format(RE.md["dim1"]).center(38,' '),'cyan')
+    text += '\n   Arbitrary Dimension 2: '+colored('{}'.format(RE.md["dim2"]).center(38,' '),'cyan')
+    text += '\n   Arbitrary Dimension 3: '+colored('{}'.format(RE.md["dim3"]).center(38,' '),'cyan')
+    text += '\n   Notes:                 '+colored('{}'.format(RE.md["notes"]).center(38,' '),'cyan')
+    boxed_text(title, text, 'red')
 
 
 def newuser():
@@ -31,6 +63,7 @@ def newuser():
         RE.md['project'] = project
     # if new, add user to database get unique ID.
     RE.md['user_id'] = user_id
+
 
 def newsample():
     print("This information will tag future data until this changes, please be as thorough as possible\n"

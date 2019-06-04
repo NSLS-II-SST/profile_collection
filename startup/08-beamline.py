@@ -1,4 +1,4 @@
-print(f'Loading {__file__}...')
+run_report(__file__)
 
 from ophyd import (SingleTrigger, Component as Cpt, Device, PVPositioner, EpicsSignal, EpicsSignalRO)
 import time

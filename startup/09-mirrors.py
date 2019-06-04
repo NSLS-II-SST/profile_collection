@@ -1,4 +1,4 @@
-print(f'Loading {__file__}...')
+run_report(__file__)
 from ophyd import (EpicsMotor, Device, Component as Cpt, EpicsSignal)
 
 mir2_type = EpicsSignal('XF:07ID1-OP{Mono:PGM1-Ax:MirX}Mtr_TYPE_MON',name='SST 2 Mirror 2 Stripe')

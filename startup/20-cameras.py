@@ -1,4 +1,4 @@
-print(f'Loading {__file__}...')
+run_report(__file__)
 
 import time as ttime  # tea time
 from types import SimpleNamespace
