@@ -40,18 +40,18 @@ def full_carbon_scan(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    en_scan_core(sigs, dets,energy,energies,times)
+    yield from en_scan_core(sigs, dets,energy,energies,times)
 
 
 def en_scan_core(I400sigs, dets, energy, energies, times):
     sw_det.saxs.cam.acquire_time.kind = 'hinted'
     sw_det.waxs.cam.acquire_time.kind = 'hinted'
-    sigcycler = None
+    sigcycler = cycler(energy, energies)
     for i400channel in I400sigs:
         i400channel.parent.exposure_time.kind = 'hinted'
         sigcycler += cycler(i400channel.parent.exposure_time,times.copy())
     sigcycler += cycler(sw_det.saxs.cam.acquire_time, times.copy())
     sigcycler += cycler(sw_det.waxs.cam.acquire_time, times.copy())
-    sigcycler += cycler(energy, energies)
-    yield from bp.scan_nd(I400sigs+ dets+ [energy],sigcycler)
+
+    yield from bp.scan_nd(I400sigs+ dets+ [en],sigcycler)
 
