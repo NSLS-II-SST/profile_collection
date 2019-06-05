@@ -6,7 +6,7 @@ import bluesky.plans as bp
 import bluesky.plan_stubs as bps
 from suitcase import tiff_series, csv
 import pandas as pd
-import textwrap
+from IPython.core.magic import register_line_magic
 
 def set_exposure(exposure):
     sw_det.set_exposure(exposure)
@@ -15,35 +15,66 @@ def set_exposure(exposure):
 
 def user():
     title = ("Current User info:")
-    text = '   proposal ID:         '+colored('{}'.format(RE.md["proposal_id"]).center(40,' '),'cyan')
-    text += '\n   User Name:           '+colored('{}'.format(RE.md["user"]).center(40,' '),'cyan')
-    text += '\n   User ID:             '+colored('{}'.format(RE.md["user_id"]).center(40,' '),'cyan')
-    text += '\n   Institution:         '+colored('{}'.format(RE.md["institution"]).center(40,' '),'cyan')
-    text += '\n   project:             '+colored('{}'.format(RE.md["project"]).center(40,' '),'cyan')
-    text += '\n   Project Description: '+colored('{}'.format(RE.md["project_desc"]).center(40,' '),'cyan')
+    if len(RE.md["proposal_id"]) > 0 :
+        text = '   proposal ID:         '+colored('{}'.format(RE.md["proposal_id"]).center(40,' '),'cyan')
+    if len(RE.md["user"]) > 0 :
+        text += '\n   User Name:           '+colored('{}'.format(RE.md["user"]).center(40,' '),'cyan')
+    if len(RE.md["user_id"]) > 0 :
+        text += '\n   User ID:             '+colored('{}'.format(RE.md["user_id"]).center(40,' '),'cyan')
+    if len(RE.md["institution"]) > 0 :
+        text += '\n   Institution:         '+colored('{}'.format(RE.md["institution"]).center(40,' '),'cyan')
+    if len(RE.md["project"]) > 0 :
+        text += '\n   project:             '+colored('{}'.format(RE.md["project"]).center(40,' '),'cyan')
+    if len(RE.md["project_desc"]) > 0 :
+        text += '\n   Project Description: '+colored('{}'.format(RE.md["project_desc"]).center(40,' '),'cyan')
     boxed_text(title, text, 'red')
 
 
 def sample():
     title = "Current metadata info - stored in every scan:"
-    text = '   proposal ID:           '+colored('{}'.format(RE.md["proposal_id"]).center(38,' '),'cyan')
-    text += '\n   User Name:             '+colored('{}'.format(RE.md["user"]).center(38,' '),'cyan')
-    text += '\n   User ID:               '+colored('{}'.format(RE.md["user_id"]).center(38,' '),'cyan')
-    text += '\n   Institution:           '+colored('{}'.format(RE.md["institution"]).center(38,' '),'cyan')
-    text += '\n   Sample Name:           '+colored('{}'.format(RE.md["sample"]).center(38,' '),'cyan')
-    text += '\n   Sample Description:    '+colored('{}'.format(RE.md["sample_desc"]).center(38,' '),'cyan')
-    text += '\n   Sample ID:             '+colored('{}'.format(RE.md["sampleid"]).center(38,' '),'cyan')
-    text += '\n   Sample Set:            '+colored('{}'.format(RE.md["sampleset"]).center(38,' '),'cyan')
-    text += '\n   project:               '+colored('{}'.format(RE.md["project"]).center(38,' '),'cyan')
-    text += '\n   Project Description:   '+colored('{}'.format(RE.md["project_desc"]).center(38,' '),'cyan')
-    text += '\n   Chemical Formula:      '+colored('{}'.format(RE.md["chemical_formula"]).center(38,' '),'cyan')
-    text += '\n   Density:               '+colored('{}'.format(RE.md["density"]).center(38,' '),'cyan')
-    text += '\n   Arbitrary Dimension 1: '+colored('{}'.format(RE.md["dim1"]).center(38,' '),'cyan')
-    text += '\n   Arbitrary Dimension 2: '+colored('{}'.format(RE.md["dim2"]).center(38,' '),'cyan')
-    text += '\n   Arbitrary Dimension 3: '+colored('{}'.format(RE.md["dim3"]).center(38,' '),'cyan')
-    text += '\n   Notes:                 '+colored('{}'.format(RE.md["notes"]).center(38,' '),'cyan')
+    if len(RE.md["proposal_id"]) > 0 :
+        text = '   proposal ID:           '+colored('{}'.format(RE.md["proposal_id"]).center(38,' '),'cyan')
+    if len(RE.md["user"]) > 0 :
+        text += '\n   User Name:             '+colored('{}'.format(RE.md["user"]).center(38,' '),'cyan')
+    if len(RE.md["user_id"]) > 0 :
+        text += '\n   User ID:               '+colored('{}'.format(RE.md["user_id"]).center(38,' '),'cyan')
+    if len(RE.md["institution"]) > 0 :
+        text += '\n   Institution:           '+colored('{}'.format(RE.md["institution"]).center(38,' '),'cyan')
+    if len(RE.md["sample"]) > 0 :
+        text += '\n   Sample Name:           '+colored('{}'.format(RE.md["sample"]).center(38,' '),'cyan')
+    if len(RE.md["sample_desc"]) > 0 :
+        text += '\n   Sample Description:    '+colored('{}'.format(RE.md["sample_desc"]).center(38,' '),'cyan')
+    if len(RE.md["sample_id"]) > 0 :
+        text += '\n   Sample ID:             '+colored('{}'.format(RE.md["sample_id"]).center(38,' '),'cyan')
+    if len(RE.md["sample_set"]) > 0 :
+        text += '\n   Sample Set:            '+colored('{}'.format(RE.md["sample_set"]).center(38,' '),'cyan')
+    if len(RE.md["project"]) > 0 :
+        text += '\n   project:               '+colored('{}'.format(RE.md["project"]).center(38,' '),'cyan')
+    if len(RE.md["project_desc"]) > 0 :
+        text += '\n   Project Description:   '+colored('{}'.format(RE.md["project_desc"]).center(38,' '),'cyan')
+    if len(RE.md["chemical_formula"]) > 0 :
+        text += '\n   Chemical Formula:      '+colored('{}'.format(RE.md["chemical_formula"]).center(38,' '),'cyan')
+    if len(RE.md["density"]) > 0 :
+        text += '\n   Density:               '+colored('{}'.format(RE.md["density"]).center(38,' '),'cyan')
+    if len(RE.md["dim1"]) > 0 :
+        text += '\n   Arbitrary Dimension 1: '+colored('{}'.format(RE.md["dim1"]).center(38,' '),'cyan')
+    if len(RE.md["dim2"]) > 0 :
+        text += '\n   Arbitrary Dimension 2: '+colored('{}'.format(RE.md["dim2"]).center(38,' '),'cyan')
+    if len(RE.md["dim3"]) > 0 :
+        text += '\n   Arbitrary Dimension 3: '+colored('{}'.format(RE.md["dim3"]).center(38,' '),'cyan')
+    if len(RE.md["notes"]) > 0 :
+        text += '\n   Notes:                 '+colored('{}'.format(RE.md["notes"]).center(38,' '),'cyan')
     boxed_text(title, text, 'red')
 
+@register_line_magic
+def md(line):
+    sample()
+
+@register_line_magic
+def u(line):
+    user()
+
+del md, u
 
 def newuser():
     print("This information will tag future data until this changes, please be as thorough as possible/n"
@@ -76,13 +107,13 @@ def newsample():
     if sample_desc is not '':
         RE.md['sample_desc'] = sample_desc
 
-    sampleid = input('Your sampleid - if you have one ({}): '.format(RE.md['sampleid']))
-    if sampleid is not '':
-        RE.md['sampleid'] = sampleid
+    sample_id = input('Your sample id - if you have one ({}): '.format(RE.md['sample_id']))
+    if sample_id is not '':
+        RE.md['sample_id'] = sample_id
 
-    sampleset = input('What set does this sample belong to ({}): '.format(RE.md['sampleset']))
-    if sampleset is not '':
-        RE.md['sampleset'] = sampleset
+    sample_set = input('What set does this sample belong to ({}): '.format(RE.md['sample_set']))
+    if sample_set is not '':
+        RE.md['sample_set'] = sample_set
 
     creator = input('Sample creator ({}): '.format(RE.md['creator']))
     if creator is not '':
