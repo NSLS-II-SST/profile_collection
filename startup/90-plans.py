@@ -25,7 +25,7 @@ def user():
 
 
 def sample():
-    title = "Current sample info:"
+    title = "Current metadata info - stored in every scan:"
     text = '   proposal ID:           '+colored('{}'.format(RE.md["proposal_id"]).center(38,' '),'cyan')
     text += '\n   User Name:             '+colored('{}'.format(RE.md["user"]).center(38,' '),'cyan')
     text += '\n   User ID:               '+colored('{}'.format(RE.md["user_id"]).center(38,' '),'cyan')

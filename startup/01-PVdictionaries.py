@@ -1,4 +1,4 @@
-print(f'Loading {__file__}...')
+run_report(__file__)
 
 pressure_dict = {'Main Chamber Pressure':'XF:07IDB-VA:2{RSoXS:Main-CCG:1}P:Raw-I'}
 pressure_dict['Load Lock Pressure'] = 'XF:07IDB-VA:2{RSoXS:LL-CCG:1}P:Raw-I'

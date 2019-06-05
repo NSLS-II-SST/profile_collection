@@ -1,7 +1,34 @@
-print(f'Loading {__file__}...')
-
+from IPython.utils.coloransi import TermColors as color
 import os
 import nslsii
+
+
+def colored(text, tint='white', attrs=[]):
+    '''
+    A simple wrapper around IPython's interface to TermColors
+    '''
+    tint = tint.lower()
+    if 'dark' in tint:
+        tint = 'Dark' + tint[4:].capitalize()
+    elif 'light' in tint:
+        tint = 'Light' + tint[5:].capitalize()
+    elif 'blink' in tint:
+        tint = 'Blink' + tint[5:].capitalize()
+    elif 'no' in tint:
+        tint = 'Normal'
+    else:
+        tint = tint.capitalize()
+    return '{0}{1}{2}'.format(getattr(color, tint), text, color.Normal)
+
+
+def run_report(thisfile):
+    '''
+    Noisily proclaim to be importing a file of python code.
+    '''
+    print(colored('Importing %s ...' % thisfile.split('/')[-1], 'lightcyan'))
+
+
+run_report(__file__)
 
 # Very important, the databroker config lives in C:\Users\greateyes\AppData\Roaming\databroker\rsoxs.yml,
 # not in ~/.config/databroker/rsoxs.yml
