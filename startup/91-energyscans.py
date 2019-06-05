@@ -49,7 +49,11 @@ def en_scan_core(I400sigs, dets, energy, energies, times):
     sigcycler = cycler(energy, energies)
     for i400channel in I400sigs:
         i400channel.parent.exposure_time.kind = 'hinted'
-        sigcycler += cycler(i400channel.parent.exposure_time,times.copy())
+        try:
+            sigcycler += cycler(i400channel.parent.exposure_time,times.copy())
+        except ValueError:
+            print('same i400 detected')
+            i400channel.kind = 'hinted'
     sigcycler += cycler(sw_det.saxs.cam.acquire_time, times.copy())
     sigcycler += cycler(sw_det.waxs.cam.acquire_time, times.copy())
 
