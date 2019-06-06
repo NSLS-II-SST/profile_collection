@@ -2,6 +2,7 @@ run_report(__file__)
 import bluesky.plans as bp
 import bluesky.plan_stubs as bps
 import time
+from IPython.core.magic import register_line_magic
 
 def Shutter_in():
     yield from bps.mv(Shutter_Y, 3)
@@ -30,14 +31,14 @@ def DetW_out():
     yield from bps.mv(Det_W,-94)
 
 def BSw_in():
-    yield from bps.mv(BSw,70.035)
+    yield from bps.mv(BeamStopW,70.035)
 def BSw_out():
-    yield from bps.mv(BSw,3)
+    yield from bps.mv(BeamStopW,3)
 
 def BSs_in():
-    yield from bps.mv(BSs,67.4)
+    yield from bps.mv(BeamStopS,67.4)
 def BSs_out():
-    yield from bps.mv(BSs,3)
+    yield from bps.mv(BeamStopS,3)
 
 def Detectors_out():
     yield from bps.mv(Det_S,-94,
@@ -145,34 +146,26 @@ def mirror1_NEXAFSpos():
     yield from bps.mv(mir1.Yaw, 0)
 
 def SAXSmode():
-    yield from mirror1_pos()
-    yield from mirror3_pos()
     yield from slits_in_SAXS()
     yield from bps.mv(Shutter_Y, 3,
                       Izero_Y, -29,
                       Det_W, -94,
-                      BSw, 3,
-                      BSs, 67.4,
+                      BeamStopW, 3,
+                      BeamStopS, 67.4,
                       sam_Y, -125)
 
 def WAXSmode():
-    yield from mirror1_pos()
-    yield from mirror3_pos()
     yield from slits_in_WAXS()
     yield from bps.mv(Shutter_Y, 3,
                       Izero_Y, -29,
                       Det_W, -36,
                       Det_S, -94,
-                      BSw, 70.7035,
-                      BSs, 3,
+                      BeamStopW, 70.7035,
+                      BeamStopS, 3,
                       sam_Y, -125)
 
 def all_out():
     yield from psh10.close()
-    print('Moving Mirror 1 to NEXAFS position')
-    yield from mirror1_NEXAFSpos()
-    print('Moving Mirror 3 to NEXAFS position')
-    yield from mirror3_NEXAFSpos()
     print('Retracting Slits to 1 cm gap')
     yield from slits_out()
     print('Moving the rest of RSoXS components')
@@ -180,10 +173,29 @@ def all_out():
                       Izero_Y, 144,
                       Det_W, -94,
                       Det_S, -94,
-                      BSw, 3,
-                      BSs, 3,
+                      BeamStopW, 3,
+                      BeamStopS, 3,
                       sam_Y, 345,
                       sam_X, 0,
                       sam_Z, 0,
                       sam_Th, 0)
     print('All done - Happy NEXAFSing')
+
+
+@register_line_magic
+def nmode(line):
+    RE(all_out())
+del nmode
+
+
+@register_line_magic
+def wmode(line):
+    RE(WAXSmode())
+del wmode
+
+
+@register_line_magic
+def smode(line):
+    RE(SAXSmode())
+del smode
+
