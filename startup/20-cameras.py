@@ -124,11 +124,24 @@ class StandardProsilicaWithTIFFV33(StandardProsilicaV33):
                reg=db.reg)
 
 
-Sample_cam = StandardProsilica('XF:07ID1-ES:1{Scr:1}', name='RSoXS Sample Area Camera')
-DetW_cam = StandardProsilica('XF:07ID1-ES:1{Scr:2}', name='WAXS Detector Area Camera')
-Izero_cam = StandardProsilica('XF:07ID1-ES:1{Scr:3}', name='Izero YAG Camera')
+Sample_cam = StandardProsilica('XF:07ID1-ES:1{Scr:2}', name='RSoXS Sample Area Camera')
+DetS_cam = StandardProsilica('XF:07ID1-ES:1{Scr:3}', name='WAXS Detector Area Camera')
+Izero_cam = StandardProsilica('XF:07ID1-ES:1{Scr:1}', name='Izero YAG Camera')
 
-all_standard_pros = [Sample_cam, DetW_cam, Izero_cam]
+crosshair = Sample_cam.over1.overlay_1
+Sample_cam.over1.overlay_1.position_y.kind='hinted'
+Sample_cam.over1.overlay_1.position_x.kind='hinted'
+crosshair.x = crosshair.position_x
+crosshair.y = crosshair.position_y
+
+
+def crosshair_on():crosshair.use.set(1)
+
+
+def crosshair_off():crosshair.use.set(0)
+
+
+all_standard_pros = [Sample_cam, DetS_cam, Izero_cam]
 for camera in all_standard_pros:
     camera.read_attrs = ['stats1', 'stats2', 'stats3', 'stats4', 'stats5']
     # camera.tiff.read_attrs = []  # leaving just the 'image'
