@@ -35,22 +35,22 @@ def factory(name, start_doc):
             formatted_date = dt.strftime('%Y-%m-%d')
             #energy = hdr.table(stream_name='baseline')['Beamline Energy_energy'][1]
             serializer = tiff_series.Serializer(file_prefix=('{start[institution]}/'
-                                                             '{start[user]}/'
-                                                             '{start[project]}/'
+                                                             '{start[user_name]}/'
+                                                             '{start[project_name]}/'
                                                              f'{formatted_date}/'
                                                              '{start[scan_id]}-'
-                                                             '{start[sample]}-'
+                                                             '{start[sample_name]}-'
                                                              '{event[data][Beamline Energy_energy]:.2f}eV-'
                                                              ),
                                                 directory=USERDIR)
             serializer('start', start_doc)
             serializer('descriptor', descriptor_doc)
             serializerjson = json_metadata.Serializer(file_prefix=('{institution}/'
-                                                                   '{user}/'
-                                                                   '{project}/'
+                                                                   '{user_name}/'
+                                                                   '{project_name}/'
                                                                    f'{formatted_date}/'
                                                                    '{scan_id}-'
-                                                                   '{sample}-'
+                                                                   '{sample_name}-'
                                                                    #'{event[data][Beamline Energy_energy]:.2f}eV-'
                                                                    ),
                                                       directory=USERDIR,
@@ -59,11 +59,11 @@ def factory(name, start_doc):
             serializerjson('start', start_doc)
             serializerjson('descriptor', descriptor_doc)
             serializercsv = csv.Serializer(file_prefix=('{start[institution]}/'
-                                                        '{start[user]}/'
-                                                        '{start[project]}/'
+                                                        '{start[user_name]}/'
+                                                        '{start[project_name]}/'
                                                         f'{formatted_date}/'
                                                         '{start[scan_id]}-'
-                                                        '{start[sample]}-'
+                                                        '{start[sample_name]}-'
                                                         #'{event[data][Beamline Energy_energy]:.2f}eV-'
                                                         ),
                                            directory=USERDIR,
@@ -77,11 +77,11 @@ def factory(name, start_doc):
             formatted_date = dt.strftime('%Y-%m-%d')
             # energy = hdr.table(stream_name='baseline')['Beamline Energy_energy'][1]
             serializer = csv.Serializer(file_prefix=('{start[institution]}/'
-                                                     '{start[user]}/'
-                                                     '{start[project]}/'
+                                                     '{start[user_name]}/'
+                                                     '{start[project_name]}/'
                                                      f'{formatted_date}/'
                                                      '{start[scan_id]}-'
-                                                     '{start[sample]}-'
+                                                     '{start[sample_name]}-'
                                                      #'{event[data][Beamline Energy_energy]:.2f}eV-'
                                                      ),
                                         directory=USERDIR,

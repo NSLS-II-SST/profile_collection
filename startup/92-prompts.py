@@ -8,10 +8,10 @@ class RSoXSPrompt(Prompts):
         dt = datetime.now()
         formatted_date = dt.strftime('%Y-%m-%d')
 
-        if len(RE.md['user']) > 0 and len(RE.md['project']) > 0 and len(RE.md['institution']) > 0:
+        if len(RE.md['user_name']) > 0 and len(RE.md['project_name']) > 0 and len(RE.md['institution']) > 0:
             RSoXStoken = (Token.Prompt, 'RSoXS {}/{}/{}/{} '.format(RE.md['institution'],
-                                                                    RE.md['user'],
-                                                                    RE.md['project'],
+                                                                    RE.md['user_name'],
+                                                                    RE.md['project_name'],
                                                                     formatted_date))
         else:
             RSoXStoken = (Token.OutPrompt, 'RSoXS (define metadata before scanning)')
@@ -23,4 +23,5 @@ class RSoXSPrompt(Prompts):
 ip = get_ipython()
 ip.prompts = RSoXSPrompt(ip)
 
+user()
 sample()
