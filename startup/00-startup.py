@@ -18,7 +18,7 @@ def colored(text, tint='white', attrs=[]):
         tint = 'Normal'
     else:
         tint = tint.capitalize()
-    return '{0}{1}{2}'.format(getattr(color, tint), text, color.Normal)
+    return '{0}{1}{2}'.format(getattr(color, tint), str(text), color.Normal)
 
 
 def run_report(thisfile):

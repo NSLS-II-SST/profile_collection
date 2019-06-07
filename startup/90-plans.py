@@ -16,22 +16,39 @@ def set_exposure(exposure):
     else:
         print('Invalid time, exposure time not set')
 
+def exposure():
+    return (sw_det.exposure()+'\n'+
+            RSoXS_DM.exposure()+'\n'+
+            RSoXS_Slits.exposure()+'\n')
+
 @register_line_magic
 def exp(line):
-    set_exposure(float(line))
+    try:
+        secs = float(line)
+    except:
+        boxed_text('Exposure times',exposure(),'lightgreen',shrink=True)
+    else:
+        if secs > 0.001 and secs < 1000:
+            set_exposure(secs)
 del exp
 
 
 @register_line_magic
 def binning(line):
-    sw_det.set_binning(float(line))
+    try:
+        bins = int(line)
+    except:
+        boxed_text('Pixel Binning',sw_det.binning(),'lightpurple',shrink=True)
+    else:
+        if bins > 0 and bins < 100:
+            sw_det.set_binning(bins)
 del binning
 
 
 @register_line_magic
-def cooling(line):
-    sw_det.cooling_state()
-del cooling
+def temp(line):
+    boxed_text('Detector cooling',sw_det.cooling_state(),'blue',shrink=True)
+del temp
 
 
 @register_line_magic
@@ -47,10 +64,10 @@ del warm
 
 
 def user():
-    title = ("Current User info:")
+    title = ("User metadata - stored in every scan:")
     text=''
     if len(RE.md["proposal_id"]) > 0 :
-        text += '   proposal ID:           '+colored('{}'.format(RE.md["proposal_id"]).center(40,' '),'yellow')
+        text += '   proposal ID:         '+colored('{}'.format(RE.md["proposal_id"]).center(40,' '),'yellow')
     if len(RE.md["user_name"]) > 0 :
         text += '\n   User Name:           '+colored('{}'.format(RE.md["user_name"]).center(40,' '),'yellow')
     if len(RE.md["user_start_date"]) > 0 :
@@ -63,18 +80,16 @@ def user():
         text += '\n   project:             '+colored('{}'.format(RE.md["project_name"]).center(40,' '),'yellow')
     if len(RE.md["project_desc"]) > 0 :
         text += '\n   Project Description: '+colored('{}'.format(RE.md["project_desc"]).center(40,' '),'yellow')
-    boxed_text(title, text, 'green')
+    boxed_text(title, text, 'green',80,shrink=True)
 
 
 def sample():
-    title = "Current metadata info - stored in every scan:"
+    title = "Sample metadata - stored in every scan:"
     text = ''
     if len(RE.md["proposal_id"]) > 0 :
         text += '   proposal ID:           '+colored('{}'.format(RE.md["proposal_id"]).center(38,' '),'cyan')
     if len(RE.md["user_name"]) > 0 :
         text += '\n   User Name:             '+colored('{}'.format(RE.md["user_name"]).center(38,' '),'cyan')
-    if len(RE.md["user_id"]) > 0 :
-        text += '\n   User ID:               '+colored('{}'.format(RE.md["user_id"]).center(38,' '),'cyan')
     if len(RE.md["institution"]) > 0 :
         text += '\n   Institution:           '+colored('{}'.format(RE.md["institution"]).center(38,' '),'cyan')
     if len(RE.md["sample_name"]) > 0 :
@@ -105,7 +120,7 @@ def sample():
         text += '\n   Sample state:          '+colored('{}'.format(RE.md["sample_state"]).center(38,' '),'cyan')
     if len(RE.md["notes"]) > 0 :
         text += '\n   Notes:                 '+colored('{}'.format(RE.md["notes"]).center(38,' '),'cyan')
-    boxed_text(title, text, 'red')
+    boxed_text(title, text, 'red',80,shrink=True)
 
 @register_line_magic
 def md(line):
@@ -117,6 +132,19 @@ def u(line):
 
 del md, u
 
+
+def beamline_status():
+    user()
+    sample()
+    boxed_text('Detector status',
+               exposure()+'\n'+sw_det.binning()+'\n'+sw_det.cooling_state(),
+               'lightblue',80,shrink=True)
+
+
+@register_line_magic
+def status(line):
+    beamline_status()
+del status
 
 def newuser():
     print("This information will tag future data until this changes, please be as thorough as possible/n"
@@ -146,7 +174,7 @@ def newuser():
     dt = datetime.now()
     user_start_date = dt.strftime('%Y-%m-%d')
     RE.md['user_start_date'] = user_start_date
-    user_id = 0
+    user_id = '0'
     RE.md['user_id'] = user_id
     user()
     return user_dict()
@@ -218,12 +246,12 @@ def load_sample_dict_to_md(sam_dict):
 
 
 def load_user_dict_to_md(user_dict):
-    RE.md['user_id'] = sam_dict['user_id']
-    RE.md['proposal_id'] = sam_dict['proposal_id']
-    RE.md['institution'] = sam_dict['institution']
-    RE.md['user_name'] = sam_dict['user_name']
-    RE.md['project_name'] = sam_dict['project_name']
-    RE.md['project_desc'] = sam_dict['project_desc']
+    RE.md['user_id'] = user_dict['user_id']
+    RE.md['proposal_id'] = user_dict['proposal_id']
+    RE.md['institution'] = user_dict['institution']
+    RE.md['user_name'] = user_dict['user_name']
+    RE.md['project_name'] = user_dict['project_name']
+    RE.md['project_desc'] = user_dict['project_desc']
 
 
 def newsample():
@@ -289,6 +317,16 @@ def newsample():
 
 
 def snapsw(seconds,samplename='',sampleid='', num_images=1,dark=0):
+
+    '''
+    this procedure is old and should not be used, suitcasing is fixed, and does this better
+    :param seconds:
+    :param samplename:
+    :param sampleid:
+    :param num_images:
+    :param dark:
+    :return:
+    '''
     # TODO: do it more generally
     # yield from bps.mv(sw_det.setexp, seconds)
     yield from bps.mv(sw_det.waxs.cam.acquire_time, seconds)
@@ -344,6 +382,16 @@ def snapsw(seconds,samplename='',sampleid='', num_images=1,dark=0):
         directory='Z:/images/users/')
 
 def enscansw(seconds, enstart, enstop, steps,samplename='enscan',sampleid=''):
+    '''
+    This is old and should not be used.  Suitcasing has made the normal scans work well
+    :param seconds:
+    :param enstart:
+    :param enstop:
+    :param steps:
+    :param samplename:
+    :param sampleid:
+    :return:
+    '''
     # TODO: do it more generally
     # yield from bps.mv(sw_det.setexp, seconds)
     yield from bps.mv(sw_det.waxs.cam.acquire_time, seconds)

@@ -46,13 +46,21 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
         self.cam.temperature_actual.read()
         self.cam.temperature.read()
         if abs(self.cam.temperature_actual.value - self.cam.temperature.value) > 2.0:
-            print("Warning!!!!")
-            self.cooling_state()
-            print("Please wait until temperature has stabilized before taking important data.\n\n\n")
+            boxed_text("Warning!!!!"+
+                      self.cooling_state()+
+                      "\nPlease wait until temperature has stabilized before taking important data.",'red')
         return [self].append(super().stage(*args, **kwargs))
 
     def unstage(self, *args, **kwargs):
         return [self].append(super().unstage(*args, **kwargs))
+
+    def set_exptime(self,secs):
+        self.cam.acquire_time.set(secs)
+
+    def exptime(self):
+        return ("{} has an exposure time of {} seconds".format(
+            colored(self.name,'lightblue'),
+            colored(str(self.cam.acquire_time.value),'lightgreen')))
 
     def set_temp(self,degc):
         self.cam.temperature.set(degc)
@@ -68,25 +76,36 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
         if self.cam.enable_cooling.value:
             self.cam.temperature_actual.read()
             if self.cam.temperature_actual.value - self.cam.temperature.value > 1.0:
-                print("Temperature of {} ({:.2f} °C) is not at setpoint ({:.2f} °C) but cooling is on".format(
-                     self.name, self.cam.temperature_actual.value, self.cam.temperature.value))
+                return ("\nTemperature of {} ({} °C) is not at setpoint ({} °C) but cooling is on".format(
+                    colored(self.name,'lightblue'),
+                    colored(self.cam.temperature_actual.value,'red'),
+                    colored(self.cam.temperature.value,'blue')))
             else:
-                print("Temperature of {} ({:.2f} °C) is at setpoint ({:.2f} °C) and cooling is on".format(
-                    self.name, self.cam.temperature_actual.value, self.cam.temperature.value))
+                return ("\nTemperature of {} ({} °C) is at setpoint ({} °C) and cooling is on".format(
+                    colored(self.name,'lightblue'),
+                    colored(self.cam.temperature_actual.value,'green'),
+                    colored(self.cam.temperature.value,'blue')))
         else:
             if self.cam.temperature_actual.value - self.cam.temperature.value > 1.0:
-                print("Temperature of {} ({:.2f} °C) is not at setpoint ({:.2f} °C) and cooling is off".format(
-                     self.name, self.cam.temperature_actual.value, self.cam.temperature.value))
+                return ("\nTemperature of {} ({} °C) is not at setpoint ({} °C) and cooling is off".format(
+                     colored(self.name,'lightblue'),
+                     colored(self.cam.temperature_actual.value,'red'),
+                     colored(self.cam.temperature.value,'lightgray')))
             else:
-                print("Temperature of {} ({:.2f} °C) is at setpoint ({:.2f} °C), but cooling is off".format(
-                    self.name, self.cam.temperature_actual.value, self.cam.temperature.value))
+                return ("\nTemperature of {} ({} °C) is at setpoint ({} °C), but cooling is off".format(
+                    colored(self.name,'lightblue'),
+                    colored(self.cam.temperature_actual.value,'green'),
+                    colored(self.cam.temperature.value,'lightgray')))
 
     def set_binning(self,binx,biny):
         self.cam.bin_x.set(binx)
         self.cam.bin_y.set(biny)
 
     def binning(self):
-        print('Binning of {} is set to ({},{}) pixels'.format(self.name, self.cam.bin_x.value, self.cam.bin_y.value))
+        return ('Binning of {} is set to ({},{}) pixels'.format(
+            colored(self.name,'lightblue'),
+            colored(self.cam.bin_x.value,'lightpurple'),
+            colored(self.cam.bin_y.value,'lightpurple')))
 
     #sudo mount -t cifs //10.7.0.217/data/ /mnt/zdrive -o user=linuxuser,pass=greateyes
     #needs to be run on the server
@@ -142,30 +161,33 @@ class SyncedDetectors(Device):
         yield from self.waxs.collect_asset_docs(*args, **kwargs)
 
     def set_exposure(self,seconds):
-        self.waxs.cam.acquire_time.set(seconds)
-        self.saxs.cam.acquire_time.set(seconds)
+        self.waxs.set_exptime(seconds)
+        self.saxs.set_exptime(seconds)
+
+    def exposure(self):
+        return (self.waxs.exptime() +'\n'+ self.saxs.exptime())
 
     def set_binning(self,pixels):
         self.saxs.set_binning(pixels,pixels)
         self.waxs.set_binning(pixels,pixels)
 
     def binning(self):
-        self.saxs.binning()
-        self.waxs.binning()
+        return (self.saxs.binning() +'\n'+ self.waxs.binning())
 
     def cooling_on(self):
-        self.saxs.set_temp(-40)  #temporary until the power supply is fixed
+        self.saxs.set_temp(-80)
         self.waxs.set_temp(-80)
         sleep(2)
-        self.cooling_state()
+        print(self.cooling_state())
 
     def cooling_state(self):
-        self.saxs.cooling_state()
-        self.waxs.cooling_state()
+        return (self.saxs.cooling_state()+ self.waxs.cooling_state())
 
     def cooling_off(self):
         self.saxs.cooling_off()
         self.waxs.cooling_off()
+        sleep(2)
+        self.cooling_state()
 
     def open_shutter(self):
         self.saxs.cam.shutter_control.set(1)
@@ -180,6 +202,8 @@ class SyncedDetectors(Device):
 sw_det = SyncedDetectors('', name='Synced')
 sw_det.saxs.name = "SAXS"
 sw_det.waxs.name = "WAXS"
+sw_det.saxs.stats1.name = "SAXS ROI1"
+sw_det.waxs.stats1.name = "WAXS ROI1"
 
 for det in [saxs_det, waxs_det,sw_det.waxs,sw_det.saxs]:
     det.kind = 'hinted'

@@ -106,12 +106,12 @@ class EnPos(PseudoPositioner):
 
     """
     # synthetic axis
-    energy = Cpt(PseudoSingle, kind='hinted', limits=(150,2500))
+    energy = Cpt(PseudoSingle, kind='hinted', limits=(150,2500),name="Beamline Energy")
 
     # real motors
 
-    monoen = Cpt(Monochromator, 'XF:07ID1-OP{Mono:PGM1-Ax::',kind='normal')
-    epugap = Cpt(UndulatorMotor, 'SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr',kind='normal')
+    monoen = Cpt(Monochromator, 'XF:07ID1-OP{Mono:PGM1-Ax::',kind='normal',name='Mono Energy')
+    epugap = Cpt(UndulatorMotor, 'SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr',kind='normal',name='EPU Gap')
 
     @pseudo_position_argument
     def forward(self, pseudo_pos):
@@ -124,7 +124,7 @@ class EnPos(PseudoPositioner):
         '''Run an inverse (real -> pseudo) calculation'''
         return self.PseudoPosition( energy = real_pos.monoen )
 
-en = EnPos('', name='Beamline Energy',concurrent=1)
+en = EnPos('', name='en',concurrent=1)
 en.energy.kind = 'hinted'
 en.monoen.kind = 'normal'
 en.monoen.readback.kind = 'normal'

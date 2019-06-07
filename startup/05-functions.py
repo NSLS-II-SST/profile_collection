@@ -3,12 +3,17 @@ run_report(__file__)
 import sys, time, msvcrt, ansiwrap
 
 
-def boxed_text(title, text, tint, width=75):
+def boxed_text(title, text, tint, width=75, shrink=False):
     '''
     Put text in a lovely unicode block element box.  The top
     of the box will contain a title.  The box elements will
     be coloreded.
     '''
+
+    if shrink:
+        width = min(width,max((ansiwrap.ansilen(line) for line in text.split('\n'))))
+
+
     remainder = width - 5 - len(title)
     ul        = u'\u250C' # u'\u2554'
     ur        = u'\u2510' # u'\u2557'

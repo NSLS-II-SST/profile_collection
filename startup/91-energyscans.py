@@ -21,7 +21,7 @@ def full_carbon_scan(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
 
     normal scan takes ~ 12 minutes to complete
     '''
-    sample()
+    beamline_status()
     if len(read_input("Starting a Carbon energy scan hit any key in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies

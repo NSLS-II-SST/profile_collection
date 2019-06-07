@@ -38,6 +38,12 @@ class I400(Device):
         print('setting exposure to ',exptime)
         self.exptime_save = exptime
 
+    def exposure(self):
+        return ('{} exposure time is set to {} seconds'.format(
+            colored(self.name,'lightblue'),
+            colored(self.exptime_save,'lightgreen')
+        ))
+
     def stage(self):
         # print('staging')
         self.kind = 'hinted'

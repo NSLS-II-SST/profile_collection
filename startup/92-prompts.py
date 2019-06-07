@@ -24,5 +24,4 @@ class RSoXSPrompt(Prompts):
 ip = get_ipython()
 ip.prompts = RSoXSPrompt(ip)
 
-user()
-sample()
+beamline_status()
