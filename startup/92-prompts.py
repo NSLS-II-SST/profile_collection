@@ -3,6 +3,7 @@ run_report(__file__)
 from IPython.terminal.prompts import Prompts, Token
 from datetime import datetime
 
+
 class RSoXSPrompt(Prompts):
     def in_prompt_tokens(self, cli=None):
         dt = datetime.now()

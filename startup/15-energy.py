@@ -4,6 +4,8 @@ from ophyd import PVPositioner, EpicsSignalRO, PseudoPositioner, PseudoSingle, E
 from ophyd import Component as Cpt
 from ophyd.pseudopos import (pseudo_position_argument,
                              real_position_argument)
+from IPython.core.magic import register_line_magic
+
 
 class UndulatorMotor(EpicsMotor):
     user_setpoint = Cpt(EpicsSignal, '-SP', limits=True)
@@ -129,3 +131,9 @@ en.monoen.readback.kind = 'normal'
 en.epugap.kind = 'normal'
 
 sd.baseline.extend([en])
+
+
+@register_line_magic
+def e(line):
+    RE(bps.mv(en,float(line)))
+del e

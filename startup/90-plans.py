@@ -9,8 +9,41 @@ import pandas as pd
 from IPython.core.magic import register_line_magic
 
 def set_exposure(exposure):
-    sw_det.set_exposure(exposure)
-    RSoXS_DM.set_exposure(exposure)
+    if exposure > 0.001 and exposure < 1000 :
+        sw_det.set_exposure(exposure)
+        RSoXS_DM.set_exposure(exposure)
+        RSoXS_Slits.set_exposure(exposure)
+    else:
+        print('Invalid time, exposure time not set')
+
+@register_line_magic
+def exp(line):
+    set_exposure(float(line))
+del exp
+
+
+@register_line_magic
+def binning(line):
+    sw_det.set_binning(float(line))
+del binning
+
+
+@register_line_magic
+def cooling(line):
+    sw_det.cooling_state()
+del cooling
+
+
+@register_line_magic
+def cool(line):
+    sw_det.cooling_on()
+del cool
+
+
+@register_line_magic
+def warm(line):
+    sw_det.cooling_off()
+del warm
 
 
 def user():
@@ -612,3 +645,10 @@ def tune_max(
             yield from bps.mv(motor, peak_position)
 
     return (yield from _tune_core(start, stop, num, signal))
+
+
+@register_line_magic
+def snap(line):
+    RE(bp.count([sw_det,en,IzeroMesh], num=1))
+
+del snap

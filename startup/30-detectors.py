@@ -99,6 +99,7 @@ waxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:2}', name='Wide Angle CCD De
                                   read_attrs=['tiff', 'stats1.total'])
 
 
+
 class SyncedDetectors(Device):
     saxs = C(RSOXSGreatEyesDetector, 'XF:07ID1-ES:1{GE:1}',read_attrs=['tiff', 'stats1.total'],name="Small Angle CCD Detector")
     waxs = C(RSOXSGreatEyesDetector, 'XF:07ID1-ES:1{GE:2}',read_attrs=['tiff', 'stats1.total'],name="Wide Angle CCD Detector")
@@ -177,6 +178,8 @@ class SyncedDetectors(Device):
 
 
 sw_det = SyncedDetectors('', name='Synced')
+sw_det.saxs.name = "SAXS"
+sw_det.waxs.name = "WAXS"
 
 for det in [saxs_det, waxs_det,sw_det.waxs,sw_det.saxs]:
     det.kind = 'hinted'
