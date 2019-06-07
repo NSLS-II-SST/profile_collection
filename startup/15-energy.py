@@ -124,6 +124,23 @@ class EnPos(PseudoPositioner):
         '''Run an inverse (real -> pseudo) calculation'''
         return self.PseudoPosition( energy = real_pos.monoen )
 
+    def where_sp(self):
+        return ('Beamline Energy Setpoint : {}'
+                '\nMonochromator Readback : {}'
+                '\nEPU Gap Setpoint : {}'
+                '\nEPU Gap Readback : {}').format(
+            colored(self.monoen.setpoint.value,'yellow'),
+            colored(self.monoen.readback.value,'yellow'),
+            colored(self.epugap.user_setpoint.value,'yellow'),
+            colored(self.epugap.user_readback.value,'yellow'))
+
+    def where(self):
+        return ('Beamline Energy : {}').format(
+            colored(self.monoen.readback.value, 'yellow'))
+
+    def wh(self):
+        boxed_text(self.name+" location", self.where_sp(), 'green',shrink=True)
+
 en = EnPos('', name='en',concurrent=1)
 en.energy.kind = 'hinted'
 en.monoen.kind = 'normal'
@@ -135,5 +152,11 @@ sd.baseline.extend([en])
 
 @register_line_magic
 def e(line):
-    RE(bps.mv(en,float(line)))
+    try:
+        loc = float(line)
+    except:
+        boxed_text('Beamline Energy',en.where(),'lightpurple',shrink=True)
+    else:
+        RE(bps.mv(en,loc))
+        boxed_text('Beamline Energy', en.where(), 'lightpurple', shrink=True)
 del e

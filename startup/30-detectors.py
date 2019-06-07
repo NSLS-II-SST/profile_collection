@@ -46,9 +46,9 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
         self.cam.temperature_actual.read()
         self.cam.temperature.read()
         if abs(self.cam.temperature_actual.value - self.cam.temperature.value) > 2.0:
-            boxed_text("Warning!!!!"+
+            boxed_text("Temperature Warning!!!!",
                       self.cooling_state()+
-                      "\nPlease wait until temperature has stabilized before taking important data.",'red')
+                      "\nPlease wait until temperature has stabilized before collecting important data.",'yellow',85)
         return [self].append(super().stage(*args, **kwargs))
 
     def unstage(self, *args, **kwargs):
@@ -131,7 +131,7 @@ class SyncedDetectors(Device):
         listout = []
         listout.append(self.saxs.stage())
         listout.append(self.waxs.stage())
-        if light.setpoint:
+        if light.get() is 1:
             light.off()
             self.lightwason=True
             sleep(1)

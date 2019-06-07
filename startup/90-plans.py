@@ -147,7 +147,7 @@ def status(line):
 del status
 
 def newuser():
-    print("This information will tag future data until this changes, please be as thorough as possible/n"
+    print("This information will tag future data until this changes, please be as thorough as possible\n"
           "current values in parentheses, leave blank for no change")
 
     proposal_id = input('Your proposal id ({}): '.format(RE.md['proposal_id']))
@@ -697,6 +697,14 @@ def tune_max(
 
 @register_line_magic
 def snap(line):
+    samsave = RE.md['sample_name']
+    samidsave = RE.md['sample_id']
+    RE.md['sample_name'] = 'snap'
+    RE.md['sample_id'] = '000'
+    beamline_status()
     RE(bp.count([sw_det,en,IzeroMesh], num=1))
+    RE.md['sample_name'] = samsave
+    RE.md['sample_id'] = samidsave
+
 
 del snap
