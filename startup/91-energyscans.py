@@ -24,6 +24,7 @@ def full_carbon_scan(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
     beamline_status()
     if len(read_input("Starting a Carbon energy scan hit any key in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
+
     # create a list of energies
     energies = np.arange(270,282,.5)
     energies = np.append(energies,np.arange(282,286,.1))
@@ -56,6 +57,15 @@ def en_scan_core(I400sigs, dets, energy, energies, times):
             i400channel.kind = 'hinted'
     sigcycler += cycler(sw_det.saxs.cam.acquire_time, times.copy())
     sigcycler += cycler(sw_det.waxs.cam.acquire_time, times.copy())
+    light_was_on = False
+    if light.value is 1:
+        light.off()
+        light_was_on = True
+        boxed_text('Warning', 'light was on, taking a quick snapshot to clear CCDs', 'yellow', shrink=True)
+        yield from quicksnap()
 
     yield from bp.scan_nd(I400sigs+ dets+ [en],sigcycler)
+
+    if light_was_on:
+        light.on()
 

@@ -134,7 +134,7 @@ class SyncedDetectors(Device):
         if light.get() is 1:
             light.off()
             self.lightwason=True
-            sleep(1)
+            time.sleep(3)
         else:
             self.lightwason=False
         listout.append(self)
@@ -145,6 +145,7 @@ class SyncedDetectors(Device):
         listout.append(self.saxs.unstage())
         listout.append(self.waxs.unstage())
         if self.lightwason:
+            time.sleep(3)
             light.on()
         listout.append(self)
         return listout
@@ -177,7 +178,7 @@ class SyncedDetectors(Device):
     def cooling_on(self):
         self.saxs.set_temp(-80)
         self.waxs.set_temp(-80)
-        sleep(2)
+        time.sleep(2)
         print(self.cooling_state())
 
     def cooling_state(self):
@@ -186,7 +187,7 @@ class SyncedDetectors(Device):
     def cooling_off(self):
         self.saxs.cooling_off()
         self.waxs.cooling_off()
-        sleep(2)
+        time.sleep(2)
         self.cooling_state()
 
     def open_shutter(self):

@@ -63,194 +63,6 @@ def warm(line):
 del warm
 
 
-def snapsw(seconds,samplename='',sampleid='', num_images=1,dark=0):
-
-    '''
-    this procedure is old and should not be used, suitcasing is fixed, and does this better
-    :param seconds:
-    :param samplename:
-    :param sampleid:
-    :param num_images:
-    :param dark:
-    :return:
-    '''
-    # TODO: do it more generally
-    # yield from bps.mv(sw_det.setexp, seconds)
-    yield from bps.mv(sw_det.waxs.cam.acquire_time, seconds)
-    yield from bps.mv(sw_det.saxs.cam.acquire_time, seconds)
-    yield from bps.mv(sw_det.waxs.cam.shutter_close_delay,200)
-    yield from bps.mv(sw_det.saxs.cam.shutter_close_delay,200)
-    yield from bps.mv(sw_det.waxs.cam.shutter_open_delay,200)
-    yield from bps.mv(sw_det.saxs.cam.shutter_open_delay,200)
-    if(dark):
-        yield from bps.mv(sw_det.saxs.cam.shutter_mode, 0)
-        if samplename is "":
-            samplename = "dark"
-    else:
-        yield from bps.mv(sw_det.saxs.cam.shutter_mode, 2)
-        if samplename is "":
-            samplename = "snap"
-    md=RE.md
-    md['sample'] = samplename
-    md['sampleid'] = sampleid
-    md['exptime'] = seconds
-    uid = (yield from bp.count([sw_det], num=num_images, md=md))
-    hdr = db[uid]
-    quick_view(hdr)
-    dt = datetime.fromtimestamp(hdr.start['time'])
-    formatted_date = dt.strftime('%Y-%m-%d')
-    energy = hdr.table(stream_name='baseline')['Beamline Energy_energy'][1]
-    tiff_series.export(hdr.documents(fill=True),
-        file_prefix=('{start[institution]}/'
-                    '{start[user]}/'
-                    '{start[project]}/'
-                    f'{formatted_date}/'
-                    '{start[scan_id]}-'
-                    '{start[sample]}-'
-                    f'{energy:.2f}eV-'),
-        directory='Z:/images/users/')
-    csv.export(hdr.documents(stream_name='baseline'),
-        file_prefix=('{institution}/'
-                     '{user}/'
-                     '{project}/'
-                     f'{formatted_date}/'
-                     '{scan_id}-'
-                     '{sample}-'
-                     f'{energy:.2f}eV-'),
-        directory='Z:/images/users/')
-    csv.export(hdr.documents(stream_name='Izero Mesh Drain Current_monitor'),
-        file_prefix=('{institution}/'
-                     '{user}/'
-                     '{project}/'
-                     f'{formatted_date}/'
-                     '{scan_id}-'
-                     '{sample}-'
-                     f'{energy:.2f}eV-'),
-        directory='Z:/images/users/')
-
-def enscansw(seconds, enstart, enstop, steps,samplename='enscan',sampleid=''):
-    '''
-    This is old and should not be used.  Suitcasing has made the normal scans work well
-    :param seconds:
-    :param enstart:
-    :param enstop:
-    :param steps:
-    :param samplename:
-    :param sampleid:
-    :return:
-    '''
-    # TODO: do it more generally
-    # yield from bps.mv(sw_det.setexp, seconds)
-    yield from bps.mv(sw_det.waxs.cam.acquire_time, seconds)
-    yield from bps.mv(sw_det.saxs.cam.acquire_time, seconds)
-    md = RE.md
-    md['sample'] = samplename
-    md['sampleid'] = sampleid
-    first_scan_id = None
-    dt = datetime.now()
-    formatted_date = dt.strftime('%Y-%m-%d')
-    for i, pos in enumerate(np.linspace(enstart, enstop, steps)):
-        yield from bps.mv(en, pos)
-        uid = (yield from bp.count([sw_det], md=md))
-        hdr = db[uid]
-        quick_view(hdr)
-        if i == 0:
-            first_scan_id = hdr.start['scan_id']
-            dt = datetime.fromtimestamp(hdr.start['time'])
-            formatted_date = dt.strftime('%Y-%m-%d')
-        tiff_series.export(hdr.documents(fill=True),
-            file_prefix=('{start[institution]}/'
-                         '{start[user]}/'
-                         '{start[project]}/'
-                         f'{formatted_date}/'
-                         f'{first_scan_id}-'
-                         '-{start[scan_id]}-'
-                         '-{start[sample]}-'
-                         f'{pos:.2f}eV-'),
-            directory='Z:/images/users/')
-        csv.export(hdr.documents(stream_name='baseline'),
-            file_prefix=('{institution}/'
-                         '{user}/'
-                         '{project}/'
-                         f'{formatted_date}/'
-                         f'{first_scan_id}-'
-                         '{scan_id}-'
-                         '{sample}-'
-                         f'{pos:.2f}eV-'),
-            directory='Z:/images/users/')
-        csv.export(hdr.documents(stream_name='Izero Mesh Drain Current_monitor'),
-            file_prefix=('{institution}/'
-                         '{user}/'
-                         '{project}/'
-                         f'{formatted_date}/'
-                         f'{first_scan_id}-'
-                         '{scan_id}-'
-                         '{sample}-'
-                         f'{pos:.2f}eV-'),
-            directory='Z:/images/users/')
-
-    # uid = (yield from bp.scan([sw_det], en, enstart, enstop,steps, md=md))
-    # hdr = db[uid]
-    # dt = datetime.datetime.fromtimestamp(hdr.start['time'])
-    # formatted_date = dt.strftime('%Y-%m-%d')
-    # tiff_series.export(hdr.documents(fill=True),
-    #     file_prefix=('{start[institution]}/'
-    #                 '{start[user]}/'
-    #                 '{start[project]}/'
-    #                 f'{formatted_date}/'
-    #                 '{start[scan_id]}-{start[sample]}-{event[data][en_energy]:.2f}eV-'), # not working, need energy in each filename
-    #     directory='Z:/images/users/')
-def motscansw(seconds,motor, start, stop, steps,samplename='motscan',sampleid=''):
-    # TODO: do it more generally
-    # yield from bps.mv(sw_det.setexp, seconds)
-    yield from bps.mv(sw_det.waxs.cam.acquire_time, seconds)
-    yield from bps.mv(sw_det.saxs.cam.acquire_time, seconds)
-    md = RE.md
-    md['sample'] = samplename
-    md['sampleid'] = sampleid
-    first_scan_id = None
-    dt = datetime.now()
-    formatted_date = dt.strftime('%Y-%m-%d')
-    for i, pos in enumerate(np.linspace(start, stop, steps)):
-        yield from bps.mv(motor, pos)
-        uid = (yield from bp.count([sw_det], md=md))
-        hdr = db[uid]
-        quick_view(hdr)
-        if i == 0:
-            first_scan_id = hdr.start['scan_id']
-            dt = datetime.fromtimestamp(hdr.start['time'])
-            formatted_date = dt.strftime('%Y-%m-%d')
-        tiff_series.export(hdr.documents(fill=True),
-            file_prefix=('{start[institution]}/'
-                         '{start[user]}/'
-                         '{start[project]}/'
-                         f'{formatted_date}/'
-                         f'{first_scan_id}-'
-                         '{start[scan_id]}'
-                         '-{start[sample]}-'
-                         f'{pos:.2f}-'),
-            directory='Z:/images/users/')
-        csv.export(hdr.documents(stream_name='baseline'),
-            file_prefix=('{institution}/'
-                         '{user}/'
-                         '{project}/'
-                         f'{formatted_date}/'
-                         f'{first_scan_id}-'
-                         '{scan_id}-{sample}-'
-                         f'{pos:.2f}-'),
-            directory='Z:/images/users/')
-        csv.export(hdr.documents(stream_name='Izero Mesh Drain Current_monitor'),
-            file_prefix=('{institution}/'
-                         '{user}/'
-                         '{project}/'
-                         f'{formatted_date}/'
-                         f'{first_scan_id}-'
-                         '{scan_id}-{sample}-'
-                         f'{pos:.2f}-'),
-            directory='Z:/images/users/')
-def myplan(dets, motor, start, stop, num):
-    yield from bp.scan(dets, motor, start, stop, num)
-
 
 
 def buildeputable(start, stop, step, widfract, startinggap,name):
@@ -442,16 +254,61 @@ def tune_max(
     return (yield from _tune_core(start, stop, num, signal))
 
 
-@register_line_magic
-def snap(line):
+def quicksnap():
+    '''
+    snap of detectors to clear any charge from light hitting them - needed before starting scans or snapping images
+    :return:
+    '''
+    set_exposure(1)
+    binsave = sw_det.saxs.cam.bin_x.value
+    sw_det.saxs.cam.bin_x.set(16)
+    sw_det.saxs.cam.bin_y.set(16)
+    sw_det.waxs.cam.bin_x.set(16)
+    sw_det.waxs.cam.bin_y.set(16)
     samsave = RE.md['sample_name']
     samidsave = RE.md['sample_id']
+    RE.md['sample_name'] = 'CCDClear'
+    RE.md['sample_id'] = '000'
+    yield from bp.count([sw_det, en, IzeroMesh], num=2)
+    RE.md['sample_name'] = samsave
+    RE.md['sample_id'] = samidsave
+    sw_det.set_binning(binsave)
+
+
+def snapshot(secs=.1):
+    '''
+    snap of detectors to clear any charge from light hitting them - needed before starting scans or snapping images
+    :return:
+    '''
+
+
+    samsave = RE.md['sample_name']
+    samidsave = RE.md['sample_id']
+    light_was_on = False
+    if light.value is 1:
+        light.off()
+        light_was_on = True
+        boxed_text('Warning','light was on, taking a quick snapshot to clear CCDs','yellow',shrink=True)
+        yield from quicksnap()
+
+    set_exposure(secs)
     RE.md['sample_name'] = 'snap'
     RE.md['sample_id'] = '000'
-    beamline_status()
-    RE(bp.count([sw_det,en,IzeroMesh], num=1))
+    yield from bp.count([sw_det, en, IzeroMesh], num=1)
+    if light_was_on:
+        light.on()
+
     RE.md['sample_name'] = samsave
     RE.md['sample_id'] = samidsave
 
 
+@register_line_magic
+def snap(line):
+    try:
+        secs = float(line)
+    except:
+        RE(snapshot())
+    else:
+        if secs > 0 and secs < 100:
+            RE(snapshot(secs))
 del snap

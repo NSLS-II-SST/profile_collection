@@ -158,7 +158,7 @@ def WAXSmode():
     yield from slits_in_WAXS()
     yield from bps.mv(Shutter_Y, 3,
                       Izero_Y, -29,
-                      Det_W, -36,
+                      Det_W, -10,
                       Det_S, -94,
                       BeamStopW, 70.7035,
                       BeamStopS, 3,
