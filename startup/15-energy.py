@@ -129,14 +129,14 @@ class EnPos(PseudoPositioner):
                 '\nMonochromator Readback : {}'
                 '\nEPU Gap Setpoint : {}'
                 '\nEPU Gap Readback : {}').format(
-            colored(self.monoen.setpoint.value,'yellow'),
-            colored(self.monoen.readback.value,'yellow'),
-            colored(self.epugap.user_setpoint.value,'yellow'),
-            colored(self.epugap.user_readback.value,'yellow'))
+            colored('{:.2f}'.format(self.monoen.setpoint.value).rstrip('0').rstrip('.'),'yellow'),
+            colored('{:.2f}'.format(self.monoen.readback.value).rstrip('0').rstrip('.'),'yellow'),
+            colored('{:.2f}'.format(self.epugap.user_setpoint.value).rstrip('0').rstrip('.'),'yellow'),
+            colored('{:.2f}'.format(self.epugap.user_readback.value).rstrip('0').rstrip('.'),'yellow'))
 
     def where(self):
         return ('Beamline Energy : {}').format(
-            colored(self.monoen.readback.value, 'yellow'))
+            colored('{:.2f}'.format(self.monoen.readback.value).rstrip('0').rstrip('.'), 'yellow'))
 
     def wh(self):
         boxed_text(self.name+" location", self.where_sp(), 'green',shrink=True)

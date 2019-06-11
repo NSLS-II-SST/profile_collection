@@ -24,4 +24,13 @@ class RSoXSPrompt(Prompts):
 ip = get_ipython()
 ip.prompts = RSoXSPrompt(ip)
 
+
+def beamline_status():
+    user()
+    sample()
+    boxed_text('Detector status',
+               exposure()+'\n'+sw_det.binning()+'\n'+sw_det.cooling_state(),
+               'lightblue',80,shrink=True)
+
+
 beamline_status()

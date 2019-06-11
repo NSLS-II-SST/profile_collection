@@ -9,14 +9,14 @@ class prettymotor(EpicsMotor):
     def where(self):
         return ('{} : {}').format(
             colored(self.name, 'lightblue'),
-            colored(self.user_readback.value, 'yellow'))
+            colored('{:.2f}'.format(self.user_readback.value).rstrip('0').rstrip('.'), 'yellow'))
 
     def where_sp(self):
         return ('{} Setpoint : {}\n{} Readback : {}').format(
             colored(self.name, 'lightblue'),
-            colored(self.user_readback.value, 'yellow'),
+            colored('{:.2f}'.format(self.user_readback.value).rstrip('0').rstrip('.'), 'yellow'),
             colored(self.name, 'lightblue'),
-            colored(self.user_setpoint.value, 'yellow'))
+            colored('{:.2f}'.format(self.user_setpoint.value).rstrip('0').rstrip('.'), 'yellow'))
 
     def wh(self):
         boxed_text(self.name+" location", self.where_sp(), 'green',shrink=True)
