@@ -118,10 +118,6 @@ def newuser():
     return user_dict()
 
 
-def do_acquisitions(acq_list):
-    for acq in acq_list:
-        yield from eval(acq['plan_name']+'('+acq['arguments']+')')
-
 
 def add_acq(sample_dict,plan_name='full_carbon_scan',arguments=''):
     sample_dict['acquisitions'].append({'plan_name':plan_name,'arguments':arguments})
@@ -156,6 +152,16 @@ def move_to_location(locs=get_sample_location()):
         outputlist = [[items['motor'], float(items['position'])] for items in locs if items['order'] == order]
         flat_list = [item for sublist in outputlist for item in sublist]
         yield from bps.mv(*flat_list)
+
+
+def get_location_from_config(config):
+    return eval(config+'()')
+
+
+def do_acquisitions(acq_list):
+    for acq in acq_list:
+        yield from move_to_location(get_configuration_location(acq['configuration']))
+        yield from eval(acq['plan_name']+'('+acq['arguments']+')')
 
 
 def sample_dict(acq = [],locations = get_sample_location(),sample_name = RE.md['sample_name'],
@@ -311,9 +317,9 @@ def newsample():
         RE.md['notes'] = notes
 
     acquisitions = []
-    add_default_acq = input('add acquisition (full_carbon_scan)? : ')
+    add_default_acq = input('add acquisition (full_carbon_scan - WAXS)? : ')
     if add_default_acq is '':
-        acquisitions.append({'plan_name': 'full_carbon_scan','arguments': ''})
+        acquisitions.append({'plan_name': 'full_carbon_scan','arguments': '','configuration':'WAXS'})
 
     loc = input('New Location? (if blank use current location x={:.2f},y={:.2f},z={:.2f},th={:.2f}): '.format(
         sam_X.user_readback.value,
@@ -367,5 +373,5 @@ def list_samples(bar):
         text += '\n  {}        {}'.format(index, sample)
         acqs = bar[index]['acquisitions']
         for acq in acqs:
-            text +='\n            {}({})'.format(acq['plan_name'],acq['arguments'])
+            text +='\n            {}({}) in {} configuration'.format(acq['plan_name'],acq['arguments'],acq['configuration'])
     boxed_text('Samples on bar',text,'lightblue',shrink=True)

@@ -153,6 +153,80 @@ def SAXSmode():
                       BeamStopW, 3,
                       BeamStopS, 67.4,
                       sam_Y, -125)
+def SAXS():
+    return [{
+        'motor':    slits1.vsize,
+        'position': .2,
+        'order': 0},
+        {
+        'motor':    slits1.hsize,
+        'position': .2,
+        'order': 0},
+        {
+        'motor':    slits2.vsize,
+        'position': .6,
+        'order': 0},
+        {
+        'motor':    slits2.hsize,
+        'position': .4,
+        'order': 0},
+        {
+        'motor':    slits3.vsize,
+        'position': 1.2,
+        'order': 0},
+        {
+        'motor':    slits3.hsize,
+        'position': 1,
+        'order': 0},
+        {
+        'motor':    slits1.vcenter,
+        'position': 0.15,
+        'order': 0},
+        {
+        'motor':    slits1.hcenter,
+        'position': 0.1,
+        'order': 0},
+        {
+        'motor':    slits2.vcenter,
+        'position': .15,
+        'order': 0},
+        {
+        'motor':    slits2.hcenter,
+        'position': .1,
+        'order': 0},
+        {
+        'motor':    slits3.vcenter,
+        'position': 0,
+        'order': 0},
+        {
+        'motor':    slits3.hcenter,
+        'position': 0,
+        'order': 0},
+        {
+        'motor':    Shutter_Y,
+        'position': 3,
+        'order': 0},
+        {
+        'motor':    Izero_Y,
+        'position': -29,
+        'order': 0},
+        {
+        'motor':    Det_W,
+        'position': -94,
+        'order': 0},
+        {
+        'motor':    Det_S,
+        'position':-30,
+        'order': 0},
+        {
+        'motor':    BeamStopS,
+        'position': 67.4,
+        'order': 0},
+        {
+        'motor':    BeamStopW,
+        'position': 3,
+        'order': 0},
+    ]
 
 def WAXSmode():
     yield from slits_in_WAXS()
@@ -163,6 +237,81 @@ def WAXSmode():
                       BeamStopW, 70.7035,
                       BeamStopS, 3,
                       sam_Y, -125)
+
+def WAXS():
+    return [{
+        'motor':    slits1.vsize,
+        'position': .3,
+        'order': 0},
+        {
+        'motor':    slits1.hsize,
+        'position': .5,
+        'order': 0},
+        {
+        'motor':    slits2.vsize,
+        'position': .5,
+        'order': 0},
+        {
+        'motor':    slits2.hsize,
+        'position': .8,
+        'order': 0},
+        {
+        'motor':    slits3.vsize,
+        'position': 1,
+        'order': 0},
+        {
+        'motor':    slits3.hsize,
+        'position': 1.2,
+        'order': 0},
+        {
+        'motor':    slits1.vcenter,
+        'position': 0.08,
+        'order': 0},
+        {
+        'motor':    slits1.hcenter,
+        'position': 0.04,
+        'order': 0},
+        {
+        'motor':    slits2.vcenter,
+        'position': .151,
+        'order': 0},
+        {
+        'motor':    slits2.hcenter,
+        'position': .111,
+        'order': 0},
+        {
+        'motor':    slits3.vcenter,
+        'position': 0.203,
+        'order': 0},
+        {
+        'motor':    slits3.hcenter,
+        'position': 0.2,
+        'order': 0},
+        {
+        'motor':    Shutter_Y,
+        'position': 3,
+        'order': 0},
+        {
+        'motor':    Izero_Y,
+        'position': -29,
+        'order': 0},
+        {
+        'motor':    Det_W,
+        'position': -10,
+        'order': 0},
+        {
+        'motor':    Det_S,
+        'position':-94,
+        'order': 0},
+        {
+        'motor':    BeamStopW,
+        'position': 70.7035,
+        'order': 0},
+        {
+        'motor':    BeamStopS,
+        'position': 3,
+        'order': 0},
+    ]
 
 def all_out():
     yield from psh10.close()
