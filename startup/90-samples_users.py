@@ -1,7 +1,7 @@
 
 from IPython.core.magic import register_line_magic
 from operator import itemgetter
-import collections
+import collections, json
 
 
 
@@ -119,8 +119,8 @@ def newuser():
 
 
 
-def add_acq(sample_dict,plan_name='full_carbon_scan',arguments=''):
-    sample_dict['acquisitions'].append({'plan_name':plan_name,'arguments':arguments})
+def add_acq(sample_dict,plan_name='full_carbon_scan',arguments='',config='WAXS'):
+    sample_dict['acquisitions'].append({'plan_name':plan_name,'arguments':arguments,'configuration':config})
     return sample_dict
 
 
@@ -134,7 +134,7 @@ def get_location(sample_dict,motorlist):
 
 def sample_set_location(sample_dict):
     sample_dict['location'] = get_sample_location()
-    return sample_set_location
+    return sample_dict
 
 
 def get_sample_location():
@@ -160,7 +160,7 @@ def get_location_from_config(config):
 
 def do_acquisitions(acq_list):
     for acq in acq_list:
-        yield from move_to_location(get_configuration_location(acq['configuration']))
+        yield from move_to_location(get_location_from_config(acq['configuration']))
         yield from eval(acq['plan_name']+'('+acq['arguments']+')')
 
 
@@ -236,7 +236,7 @@ def load_sample(sam_dict):
     RE.md['sample_state'] = sam_dict['sample_state']
     RE.md['notes'] = sam_dict['notes']
     yield from move_to_location(locs=sam_dict['location'])
-    sample()
+    # sample()
 
 def run_sample(sam_dict):
     yield from load_sample(sam_dict)
@@ -356,14 +356,45 @@ def newsample():
         return sample_dict(acq = acquisitions) #uses current location by default
 
 
-def run_bar(bar):
+def run_bar(bar,sortby=['p','c','a','s'],dryrun=0):
     '''
     run all sample dictionaries stored in the list bar
     :param bar: simply a list of sample dictionaries
+    :param sortby: list of strings determining the sorting of scans
+        string starting with c means configuration
+                             p means project
+                             s means sample
+                             a means acquisition
+        ['p','c','a','s'] means to all of one project first, within which all of one configurations,
+            within which all of one acquisition, etc
     :return: none
+
+
+    I guess the order should default to alphabetical - more options to be added??
     '''
-    for sample in bar:
-        yield from run_sample(sample)
+    listout = []
+    for s in bar:
+        sample = s
+        sample_id = s['sample_id']
+        sample_project = s['project_name']
+        for a in s['acquisitions']:
+            listout.append([sample_id, sample_project, a['configuration'],a['plan_name'],sample,a])
+    switcher = {'p':1,'s':0,'c':2,'a':3}
+    sortby.reverse()
+    for k in sortby:
+        listout = sorted(listout, key=itemgetter(switcher[k]))
+
+    if dryrun:
+        text = ''
+        for step in listout:
+            text += 'move to {} from {}, load configuration {}, scan {}\n'.format(
+                step[4]['sample_name'],step[1],step[2],step[3])
+        boxed_text('Dry Run',text,'lightblue',width=120,shrink=True)
+    else:
+        for step in listout:
+            yield from load_sample(step[4]) # move to sample / load sample metadata
+            yield from move_to_location(get_location_from_config(step[2])) # move to configuration
+            yield from do_acquisitions([step[5]]) # run scan
 
 
 def list_samples(bar):
@@ -375,3 +406,37 @@ def list_samples(bar):
         for acq in acqs:
             text +='\n            {}({}) in {} configuration'.format(acq['plan_name'],acq['arguments'],acq['configuration'])
     boxed_text('Samples on bar',text,'lightblue',shrink=True)
+
+
+def save_samples(sample,filename):
+    switch= {sam_X:'x',
+             sam_Y:'y',
+             sam_Z:'z',
+             sam_Th:'th'}
+    samplenew = sample.copy()
+    if isinstance(samplenew,list):
+        for i,sam in enumerate(samplenew):
+            for j,loc in enumerate(sam['location']):
+                 samplenew[i]['location'][j]['motor']= switch[loc['motor']]
+    else:
+        for j,loc in enumerate(samplenew['location']):
+            samplenew['location'][j]['motor'] = switch[loc['motor']]
+    with open(filename,'w') as f:
+        json.dump(samplenew,f,indent=2)
+
+
+def load_samples(filename):
+    switch= {'x':sam_X,
+             'y':sam_Y,
+             'z':sam_Z,
+             'th':sam_Th}
+    with open(filename,'r') as f:
+        samplenew = json.loads(f.read())
+    if isinstance(samplenew,list):
+        for i,sam in enumerate(samplenew):
+            for j,loc in enumerate(sam['location']):
+                 samplenew[i]['location'][j]['motor']= switch[loc['motor']]
+    else:
+        for j,loc in enumerate(samplenew['location']):
+            samplenew['location'][j]['motor'] = switch[loc['motor']]
+    return samplenew

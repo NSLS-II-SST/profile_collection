@@ -60,3 +60,25 @@ def read_input( caption, default, timeoutval, timeout = 5):
         return input
     else:
         return default
+
+
+
+
+def error_msg(text):
+    return colored(text, 'lightred')
+def warning_msg(text):
+    return colored(text, 'yellow')
+def url_msg(text):
+    return text
+def bold_msg(text):
+    return colored(text, 'white')
+def verbosebold_msg(text):
+    return colored(text, 'lightcyan')
+def list_msg(text):
+    return colored(text, 'cyan')
+def disconnected_msg(text):
+    return colored(text, 'purple')
+def info_msg(text):
+    return colored(text, 'brown')
+def whisper(text):
+    return colored(text, 'darkgray')

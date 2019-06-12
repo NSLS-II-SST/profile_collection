@@ -63,9 +63,9 @@ def swviewer(hdr, SorW = 's',panel='right',shift=True,name=''):
     :return:
     """
     if SorW[0] is 's' or SorW[0] is 'S':
-        data = next(hdr.data('Small and Wide Angle Synced CCD Detectors_saxs_image'))
+        data = next(hdr.data('Synced_saxs_image'))
     else:
-        data = next(hdr.data('Small and Wide Angle Synced CCD Detectors_waxs_image'))
+        data = next(hdr.data('Synced_waxs_image'))
     fig = plt.figure('RSoXS Viewer')
     fig.set_tight_layout(1)
     if not fig.axes:

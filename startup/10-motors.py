@@ -4,7 +4,100 @@ from ophyd import EpicsMotor
 
 run_report(__file__)
 
-class prettymotor(EpicsMotor):
+class FMBOEpicsMotor(EpicsMotor):
+    resolution = Cpt(EpicsSignal, '.MRES')
+    encoder = Cpt(EpicsSignal, '.REP')
+
+    status_list = ('MTACT', 'MLIM', 'PLIM', 'AMPEN', 'LOOPM', 'TIACT', 'INTMO',
+                   'DWPRO', 'DAERR', 'DVZER', 'ABDEC', 'UWPEN', 'UWSEN', 'ERRTAG',
+                   'SWPOC', 'ASSCS', 'FRPOS', 'HSRCH', 'SODPL', 'SOPL', 'HOCPL',
+                   'PHSRA', 'PREFE', 'TRMOV', 'IFFE', 'AMFAE', 'AMFE', 'FAFOE',
+                   'WFOER', 'INPOS')
+
+    ###################################################################
+    # this is the complete list of status signals defined in the FMBO #
+    # IOC for thier MCS8 motor controllers                            #
+    ###################################################################
+    mtact      = Cpt(EpicsSignal, '_MTACT_STS')
+    mtact_desc = Cpt(EpicsSignal, '_MTACT_STS.DESC')
+    mlim       = Cpt(EpicsSignal, '_MLIM_STS')
+    mlim_desc  = Cpt(EpicsSignal, '_MLIM_STS.DESC')
+    plim       = Cpt(EpicsSignal, '_PLIM_STS')
+    plim_desc  = Cpt(EpicsSignal, '_PLIM_STS.DESC')
+    ampen      = Cpt(EpicsSignal, '_AMPEN_STS')
+    ampen_desc = Cpt(EpicsSignal, '_AMPEN_STS.DESC')
+    loopm      = Cpt(EpicsSignal, '_LOOPM_STS')
+    loopm_desc = Cpt(EpicsSignal, '_LOOPM_STS.DESC')
+    tiact      = Cpt(EpicsSignal, '_TIACT_STS')
+    tiact_desc = Cpt(EpicsSignal, '_TIACT_STS.DESC')
+    intmo      = Cpt(EpicsSignal, '_INTMO_STS')
+    intmo_desc = Cpt(EpicsSignal, '_INTMO_STS.DESC')
+    dwpro      = Cpt(EpicsSignal, '_DWPRO_STS')
+    dwpro_desc = Cpt(EpicsSignal, '_DWPRO_STS.DESC')
+    daerr      = Cpt(EpicsSignal, '_DAERR_STS')
+    daerr_desc = Cpt(EpicsSignal, '_DAERR_STS.DESC')
+    dvzer      = Cpt(EpicsSignal, '_DVZER_STS')
+    dvzer_desc = Cpt(EpicsSignal, '_DVZER_STS.DESC')
+    abdec      = Cpt(EpicsSignal, '_ABDEC_STS')
+    abdec_desc = Cpt(EpicsSignal, '_ABDEC_STS.DESC')
+    uwpen      = Cpt(EpicsSignal, '_UWPEN_STS')
+    uwpen_desc = Cpt(EpicsSignal, '_UWPEN_STS.DESC')
+    uwsen      = Cpt(EpicsSignal, '_UWSEN_STS')
+    uwsen_desc = Cpt(EpicsSignal, '_UWSEN_STS.DESC')
+    errtg      = Cpt(EpicsSignal, '_ERRTG_STS')
+    errtg_desc = Cpt(EpicsSignal, '_ERRTG_STS.DESC')
+    swpoc      = Cpt(EpicsSignal, '_SWPOC_STS')
+    swpoc_desc = Cpt(EpicsSignal, '_SWPOC_STS.DESC')
+    asscs      = Cpt(EpicsSignal, '_ASSCS_STS')
+    asscs_desc = Cpt(EpicsSignal, '_ASSCS_STS.DESC')
+    frpos      = Cpt(EpicsSignal, '_FRPOS_STS')
+    frpos_desc = Cpt(EpicsSignal, '_FRPOS_STS.DESC')
+    hsrch      = Cpt(EpicsSignal, '_HSRCH_STS')
+    hsrch_desc = Cpt(EpicsSignal, '_HSRCH_STS.DESC')
+    sodpl      = Cpt(EpicsSignal, '_SODPL_STS')
+    sodpl_desc = Cpt(EpicsSignal, '_SODPL_STS.DESC')
+    sopl       = Cpt(EpicsSignal, '_SOPL_STS')
+    sopl_desc  = Cpt(EpicsSignal, '_SOPL_STS.DESC')
+    hocpl      = Cpt(EpicsSignal, '_HOCPL_STS')
+    hocpl_desc = Cpt(EpicsSignal, '_HOCPL_STS.DESC')
+    phsra      = Cpt(EpicsSignal, '_PHSRA_STS')
+    phsra_desc = Cpt(EpicsSignal, '_PHSRA_STS.DESC')
+    prefe      = Cpt(EpicsSignal, '_PREFE_STS')
+    prefe_desc = Cpt(EpicsSignal, '_PREFE_STS.DESC')
+    trmov      = Cpt(EpicsSignal, '_TRMOV_STS')
+    trmov_desc = Cpt(EpicsSignal, '_TRMOV_STS.DESC')
+    iffe       = Cpt(EpicsSignal, '_IFFE_STS')
+    iffe_desc  = Cpt(EpicsSignal, '_IFFE_STS.DESC')
+    amfae      = Cpt(EpicsSignal, '_AMFAE_STS')
+    amfae_desc = Cpt(EpicsSignal, '_AMFAE_STS.DESC')
+    amfe       = Cpt(EpicsSignal, '_AMFE_STS')
+    amfe_desc  = Cpt(EpicsSignal, '_AMFE_STS.DESC')
+    fafoe      = Cpt(EpicsSignal, '_FAFOE_STS')
+    fafoe_desc = Cpt(EpicsSignal, '_FAFOE_STS.DESC')
+    wfoer      = Cpt(EpicsSignal, '_WFOER_STS')
+    wfoer_desc = Cpt(EpicsSignal, '_WFOER_STS.DESC')
+    inpos      = Cpt(EpicsSignal, '_INPOS_STS')
+    inpos_desc = Cpt(EpicsSignal, '_INPOS_STS.DESC')
+
+    def status(self):
+        text = '\n  EPICS PV base : %s\n\n' % (self.prefix)
+        for signal in self.read_attrs:
+            if signal.upper() not in self.status_list:
+                continue
+            suffix = getattr(self, signal).pvname.replace(self.prefix, '')
+            if getattr(self, signal).value:
+                value_color = 'lightgreen'
+            else:
+                value_color = 'lightred'
+
+            text += '  %-26s : %-35s  %s   %s \n' % (
+                getattr(self, signal+'_desc').value,
+                colored(getattr(self, signal).enum_strs[getattr(self, signal).value],value_color),
+                colored(getattr(self, signal).value,value_color),
+                whisper(suffix))
+        boxed_text('%s status signals' % self.name, text, 'green',shrink=True)
+
+class prettymotor(FMBOEpicsMotor):
 
     def where(self):
         return ('{} : {}').format(
@@ -25,7 +118,10 @@ class prettymotor(EpicsMotor):
         try:
             loc = float(line)
         except:
-            boxed_text(self.name, self.where_sp(), 'lightgray', shrink=True)
+            if line is 's':
+                self.status()
+            else:
+                boxed_text(self.name, self.where_sp(), 'lightgray', shrink=True)
         else:
             RE(bps.mvr(self, loc))
             boxed_text(self.name, self.where(), 'lightgray', shrink=True)
@@ -84,14 +180,14 @@ def ds(line):
 @register_line_magic
 def motors(line):
     boxed_text('RSoXS Motor Locations',
-                        (sam_X.where()+"\n"+
-                         sam_Y.where()+"\n"+
-                         sam_Z.where()+"\n"+
-                         sam_Th.where()+"\n"+
-                         BeamStopW.where()+"\n"+
-                         BeamStopS.where()+"\n"+
-                         Det_W.where()+"\n"+
-                         Det_S.where()+"\n"+
+                        (sam_X.where()+'  x'+"\n"+
+                         sam_Y.where()+'  y' + "\n"+
+                         sam_Z.where()+'  z' + "\n"+
+                         sam_Th.where()+'  th'+"\n"+
+                         BeamStopW.where()+'  bsw'+"\n"+
+                         BeamStopS.where()+'  bss'+"\n"+
+                         Det_W.where()+'  dw'+"\n"+
+                         Det_S.where()+'  ds'+"\n"+
                          Shutter_Y.where()+"\n"+
                          Izero_Y.where()+"\n"+
                          Izero_ds.where()+"\n"+
