@@ -2,6 +2,7 @@
 from IPython.core.magic import register_line_magic
 from operator import itemgetter
 import collections, json
+import pandas as pd
 
 
 
@@ -9,13 +10,13 @@ def user():
     title = ("User metadata - stored in every scan:")
     text=''
     if len(RE.md["proposal_id"]) > 0 :
-        text += '   proposal ID:         '+colored('{}'.format(RE.md["proposal_id"]).center(40,' '),'yellow')
+        text += '   proposal ID:         '+colored('{}'.format(str(RE.md["proposal_id"])).center(40,' '),'yellow')
     if len(RE.md["user_name"]) > 0 :
         text += '\n   User Name:           '+colored('{}'.format(RE.md["user_name"]).center(40,' '),'yellow')
     if len(RE.md["user_start_date"]) > 0 :
         text += '\n   User Start Date:     '+colored('{}'.format(RE.md["user_start_date"]).center(40,' '),'yellow')
     if len(RE.md["user_id"]) > 0 :
-        text += '\n   User ID:             '+colored('{}'.format(RE.md["user_id"]).center(40,' '),'yellow')
+        text += '\n   User ID:             '+colored('{}'.format(str(RE.md["user_id"])).center(40,' '),'yellow')
     if len(RE.md["institution"]) > 0 :
         text += '\n   Institution:         '+colored('{}'.format(RE.md["institution"]).center(40,' '),'yellow')
     if len(RE.md["project_name"]) > 0 :
@@ -28,39 +29,39 @@ def user():
 def sample():
     title = "Sample metadata - stored in every scan:"
     text = ''
-    if len(RE.md["proposal_id"]) > 0 :
-        text += '   proposal ID:           '+colored('{}'.format(RE.md["proposal_id"]).center(38,' '),'cyan')
-    if len(RE.md["user_name"]) > 0 :
+    if len(str(RE.md["proposal_id"])) > 0 :
+        text += '   proposal ID:           '+colored('{}'.format(str(RE.md["proposal_id"])).center(38,' '),'cyan')
+    if len(str(RE.md["user_name"])) > 0 :
         text += '\n   User Name:             '+colored('{}'.format(RE.md["user_name"]).center(38,' '),'cyan')
-    if len(RE.md["institution"]) > 0 :
+    if len(str(RE.md["institution"])) > 0 :
         text += '\n   Institution:           '+colored('{}'.format(RE.md["institution"]).center(38,' '),'cyan')
-    if len(RE.md["sample_name"]) > 0 :
+    if len(str(RE.md["sample_name"])) > 0 :
         text += '\n   Sample Name:           '+colored('{}'.format(RE.md["sample_name"]).center(38,' '),'cyan')
-    if len(RE.md["sample_desc"]) > 0 :
+    if len(str(RE.md["sample_desc"])) > 0 :
         text += '\n   Sample Description:    '+colored('{}'.format(RE.md["sample_desc"]).center(38,' '),'cyan')
-    if len(RE.md["sample_id"]) > 0 :
-        text += '\n   Sample ID:             '+colored('{}'.format(RE.md["sample_id"]).center(38,' '),'cyan')
-    if len(RE.md["sample_set"]) > 0 :
+    if len(str(RE.md["sample_id"])) > 0 :
+        text += '\n   Sample ID:             '+colored('{}'.format(str(RE.md["sample_id"])).center(38,' '),'cyan')
+    if len(str(RE.md["sample_set"])) > 0 :
         text += '\n   Sample Set:            '+colored('{}'.format(RE.md["sample_set"]).center(38,' '),'cyan')
-    if len(RE.md["sample_date"]) > 0 :
+    if len(str(RE.md["sample_date"])) > 0 :
         text += '\n   Sample Creation Date:  '+colored('{}'.format(RE.md["sample_date"]).center(38,' '),'cyan')
-    if len(RE.md["project_name"]) > 0 :
+    if len(str(RE.md["project_name"])) > 0 :
         text += '\n   Project name:          '+colored('{}'.format(RE.md["project_name"]).center(38,' '),'cyan')
-    if len(RE.md["project_desc"]) > 0 :
+    if len(str(RE.md["project_desc"])) > 0 :
         text += '\n   Project Description:   '+colored('{}'.format(RE.md["project_desc"]).center(38,' '),'cyan')
-    if len(RE.md["samp_user_id"]) > 0 :
-        text += '\n   Creator User ID:       '+colored('{}'.format(RE.md["samp_user_id"]).center(38,' '),'cyan')
-    if len(RE.md["composition"]) > 0 :
+    if len(str(RE.md["samp_user_id"])) > 0 :
+        text += '\n   Creator User ID:       '+colored('{}'.format(str(RE.md["samp_user_id"])).center(38,' '),'cyan')
+    if len(str(RE.md["composition"])) > 0 :
         text += '\n   Composition(formula):  '+colored('{}'.format(RE.md["composition"]).center(38,' '),'cyan')
-    if len(RE.md["density"]) > 0 :
-        text += '\n   Density:               '+colored('{}'.format(RE.md["density"]).center(38,' '),'cyan')
-    if len(RE.md["components"]) > 0 :
+    if len(str(RE.md["density"])) > 0 :
+        text += '\n   Density:               '+colored('{}'.format(str(RE.md["density"])).center(38,' '),'cyan')
+    if len(str(RE.md["components"])) > 0 :
         text += '\n   List of Components:    '+colored('{}'.format(RE.md["components"]).center(38,' '),'cyan')
-    if len(RE.md["thickness"]) > 0 :
-        text += '\n   Thickness:             '+colored('{}'.format(RE.md["thickness"]).center(38,' '),'cyan')
-    if len(RE.md["sample_state"]) > 0 :
+    if len(str(RE.md["thickness"])) > 0 :
+        text += '\n   Thickness:             '+colored('{}'.format(str(RE.md["thickness"])).center(38,' '),'cyan')
+    if len(str(RE.md["sample_state"])) > 0 :
         text += '\n   Sample state:          '+colored('{}'.format(RE.md["sample_state"]).center(38,' '),'cyan')
-    if len(RE.md["notes"]) > 0 :
+    if len(str(RE.md["notes"])) > 0 :
         text += '\n   Notes:                 '+colored('{}'.format(RE.md["notes"]).center(38,' '),'cyan')
     boxed_text(title, text, 'red',80,shrink=True)
 
@@ -424,6 +425,21 @@ def save_samples(sample,filename):
     with open(filename,'w') as f:
         json.dump(samplenew,f,indent=2)
 
+def save_samplesxls(sample,filename):
+    switch= {sam_X:'x',
+             sam_Y:'y',
+             sam_Z:'z',
+             sam_Th:'th'}
+    samplenew = sample.copy()
+    if isinstance(samplenew,list):
+        for i,sam in enumerate(samplenew):
+            for j,loc in enumerate(sam['location']):
+                 samplenew[i]['location'][j]['motor']= switch[loc['motor']]
+    else:
+        for j,loc in enumerate(samplenew['location']):
+            samplenew['location'][j]['motor'] = switch[loc['motor']]
+    sampledf = pd.DataFrame.from_dict(samplenew,orient='columns')
+    sampledf.to_excel(filename)
 
 def load_samples(filename):
     switch= {'x':sam_X,
@@ -440,3 +456,37 @@ def load_samples(filename):
         for j,loc in enumerate(samplenew['location']):
             samplenew['location'][j]['motor'] = switch[loc['motor']]
     return samplenew
+
+
+def load_samplesxls(filename):
+    switch= {'x':sam_X,
+             'y':sam_Y,
+             'z':sam_Z,
+             'th':sam_Th}
+
+    df = pd.read_excel(filename,na_values='')
+    df.replace(np.nan, '', regex=True,inplace=True)
+    samplenew = df.to_dict(orient='records')
+    if isinstance(samplenew,list):
+        for i,sam in enumerate(samplenew):
+            samplenew[i]['location'] = eval(sam['location'])
+            samplenew[i]['acquisitions'] = eval(sam['acquisitions'])
+            for j,loc in enumerate(sam['location']):
+                 samplenew[i]['location'][j]['motor']= switch[loc['motor']]
+    else:
+        samplenew['location'] = eval(samplenew['location'])
+        samplenew['acquisitions'] = eval(samplenew['acquisitions'])
+        for j,loc in enumerate(samplenew['location']):
+            samplenew['location'][j]['motor'] = switch[loc['motor']]
+    return samplenew
+
+def sample_by_name(bar,name):
+    result = [index for (index, d) in enumerate(bar) if d["sample_name"].find(name) >= 0]
+    if len(result) == 1 :
+        return bar[result[0]]
+    elif len(result) < 1 :
+        print('No Match')
+        return None
+    elif len(result) > 1 :
+        print('more than one result found, returning first one')
+        return bar[result[0]]
