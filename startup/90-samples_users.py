@@ -152,7 +152,29 @@ def move_to_location(locs=get_sample_location()):
     switch= {'x':sam_X,
              'y':sam_Y,
              'z':sam_Z,
-             'th':sam_Th}
+             'th':sam_Th,
+             sam_X:sam_X,
+             sam_Y:sam_Y,
+             sam_Z:sam_Z,
+             sam_Th:sam_Th,
+             slits1.vsize: slits1.vsize,
+             slits1.hsize: slits1.hsize,
+             slits2.vsize: slits2.vsize,
+             slits2.hsize: slits2.hsize,
+             slits3.vsize: slits3.vsize,
+             slits3.hsize: slits3.hsize,
+             slits1.vcenter: slits1.vcenter,
+             slits1.hcenter: slits1.hcenter,
+             slits2.vcenter: slits2.vcenter,
+             slits2.hcenter: slits2.hcenter,
+             slits3.vcenter: slits3.vcenter,
+             slits3.hcenter: slits3.hcenter,
+             Shutter_Y: Shutter_Y,
+             Izero_Y: Izero_Y,
+             Det_W: Det_W,
+             Det_S: Det_S,
+             BeamStopS: BeamStopS,
+             BeamStopW: BeamStopW}
     for order in orderlist:
         outputlist = [[switch[items['motor']], float(items['position'])] for items in locs if items['order'] == order]
         flat_list = [item for sublist in outputlist for item in sublist]
@@ -473,7 +495,7 @@ def load_samples(filename):
 
 
 def load_samplesxls(filename):
-    df = pd.read_excel(filename,na_values='')
+    df = pd.read_excel(filename,na_values='',converters= {'sample_date': str})
     df.replace(np.nan, '', regex=True,inplace=True)
     samplenew = df.to_dict(orient='records')
     if isinstance(samplenew,list):

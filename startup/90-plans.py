@@ -281,7 +281,7 @@ def quicksnap():
     samidsave = RE.md['sample_id']
     RE.md['sample_name'] = 'CCDClear'
     RE.md['sample_id'] = '000'
-    yield from bp.count([sw_det, en, IzeroMesh], num=2)
+    yield from bp.count([sw_det, en, IzeroMesh,shutter_status], num=2)
     RE.md['sample_name'] = samsave
     RE.md['sample_id'] = samidsave
     sw_det.set_binning(binsave)
@@ -301,7 +301,9 @@ def snapshot(secs=.1):
         light.off()
         light_was_on = True
         boxed_text('Warning','light was on, taking a quick snapshot to clear CCDs','yellow',shrink=True)
+        sw_det.shutter_off()
         yield from quicksnap()
+        sw_det.shutter_on()
 
     set_exposure(secs)
     RE.md['sample_name'] = 'snap'

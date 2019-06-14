@@ -65,7 +65,7 @@ def en_scan_core(I400sigs, dets, energy, energies,shuttervalues, times):
             i400channel.kind = 'hinted'
     sigcycler += cycler(sw_det.saxs.cam.acquire_time, times.copy())
     sigcycler += cycler(sw_det.waxs.cam.acquire_time, times.copy())
-    sigcycler += cycler(sw_det.saxs.cam.shutter_mode, shuttervalues)
+    sigcycler += cycler(sw_det.saxs.cam.shutter_mode, shuttervalues.astype(int))
 
 
 
@@ -73,6 +73,7 @@ def en_scan_core(I400sigs, dets, energy, energies,shuttervalues, times):
     light_was_on = False
     if light.value is 1:
         light.off()
+        dark
         light_was_on = True
         boxed_text('Warning', 'light was on, taking a quick snapshot to clear CCDs', 'yellow', shrink=True)
         yield from quicksnap()
