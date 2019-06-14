@@ -32,6 +32,8 @@ def factory(name, start_doc):
 
         if descriptor_doc['name']  == 'primary':
             dt = datetime.now()
+            switch = {0:'-dark',
+                      2:''}
             formatted_date = dt.strftime('%Y-%m-%d')
             #energy = hdr.table(stream_name='baseline')['Beamline Energy_energy'][1]
             serializer = tiff_series.Serializer(file_prefix=('{start[institution]}/'

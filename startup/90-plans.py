@@ -306,7 +306,7 @@ def snapshot(secs=.1):
     set_exposure(secs)
     RE.md['sample_name'] = 'snap'
     RE.md['sample_id'] = '000'
-    yield from bp.count([sw_det, en, IzeroMesh], num=1)
+    yield from bp.count([sw_det, en, IzeroMesh,shutter_status], num=1)
     if light_was_on:
         light.on()
 

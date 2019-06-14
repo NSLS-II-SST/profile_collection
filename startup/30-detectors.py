@@ -195,7 +195,7 @@ class SyncedDetectors(Device):
         self.saxs.set_temp(-80)
         self.waxs.set_temp(-80)
 
-    def shutter(self):
+    def shutter_status(self):
         return self.saxs.shutter()
 
     def shutter_on(self):
@@ -228,6 +228,9 @@ sw_det.saxs.name = "SAXS"
 sw_det.waxs.name = "WAXS"
 sw_det.saxs.stats1.name = "SAXS ROI1"
 sw_det.waxs.stats1.name = "WAXS ROI1"
+shutter_status = sw_det.saxs.cam.shutter_mode
+shutter_status.name = 'Shutter_status'
+shutter_status.kind = 'hinted'
 
 for det in [saxs_det, waxs_det,sw_det.waxs,sw_det.saxs]:
     det.kind = 'hinted'
