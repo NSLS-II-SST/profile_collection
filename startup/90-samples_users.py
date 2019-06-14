@@ -407,10 +407,20 @@ def run_bar(bar,sortby=['p','c','a','s'],dryrun=0):
         for a in s['acquisitions']:
             listout.append([sample_id, sample_project, a['configuration'],a['plan_name'],sample,a])
     switcher = {'p':1,'s':0,'c':2,'a':3}
-    sortby.reverse()
-    for k in sortby:
-        listout = sorted(listout, key=itemgetter(switcher[k]))
-
+    try:
+        sortby.reverse()
+    except AttributeError:
+        if isinstance(sortby,str):
+            sortby = [sortby]
+        else:
+            print('sortby needs to be a list of strings\n p - project\n c - configuration\n s - sample \n a - scantype')
+            return
+    try:
+        for k in sortby:
+            listout = sorted(listout, key=itemgetter(switcher[k]))
+    except KeyError:
+        print('sortby needs to be a list of strings\n p - project\n c - configuration\n s - sample \n a - scantype')
+        return
     if dryrun:
         text = ''
         for step in listout:
@@ -511,13 +521,18 @@ def load_samplesxls(filename):
             del samplenew[key]
     return samplenew
 
-def sample_by_name(bar,name):
-    result = [index for (index, d) in enumerate(bar) if d["sample_name"].find(name) >= 0]
-    if len(result) == 1 :
-        return bar[result[0]]
-    elif len(result) < 1 :
+
+def sample_by_value_match(bar,key,string):
+    results = [d for (index, d) in enumerate(bar) if d[key].find(string) >= 0]
+    if len(results) == 1 :
+        return results[0]
+    elif len(results) < 1 :
         print('No Match')
         return None
-    elif len(result) > 1 :
-        print('more than one result found, returning first one')
-        return bar[result[0]]
+    elif len(results) > 1 :
+        print('more than one result found, returning them all')
+        return results
+
+
+def sample_by_name(bar,name):
+    return sample_by_value_match(bar,'sample_name',name)
