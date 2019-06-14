@@ -31,19 +31,28 @@ def full_carbon_scan(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
     energies = np.append(energies,np.arange(292,305,1))
     energies = np.append(energies,np.arange(305,320,1))
     energies = np.append(energies,np.arange(320,350,5))
+    energies = np.insert(energies,0,270)
+    energies = np.insert(energies,0,270)
+    energies = np.insert(energies,0,270)
     times = energies.copy()
 
     # Define exposures times for different energy ranges
     times[energies<282] = 1
     times[(energies < 286) & (energies >= 282)] = 5
     times[energies >= 286] = 2
+    times[0] = 1 #darks
+    times[1] = 5
+    times[2] = 2
     times *= multiple
 
+    shuttervalue = energies.copy()
+    shuttervalue[:3] = 0  # first 3 values are 0 (dark)
+    shuttervalue[3:] = 2  # the rest of the values are shutter enabled (2)
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets,energy,energies,times)
+    yield from en_scan_core(sigs, dets, energy, energies, shuttervalue, times)
 
 
-def en_scan_core(I400sigs, dets, energy, energies, times):
+def en_scan_core(I400sigs, dets, energy, energies,shuttervalues, times):
     sw_det.saxs.cam.acquire_time.kind = 'hinted'
     sw_det.waxs.cam.acquire_time.kind = 'hinted'
     sigcycler = cycler(energy, energies)
@@ -56,6 +65,11 @@ def en_scan_core(I400sigs, dets, energy, energies, times):
             i400channel.kind = 'hinted'
     sigcycler += cycler(sw_det.saxs.cam.acquire_time, times.copy())
     sigcycler += cycler(sw_det.waxs.cam.acquire_time, times.copy())
+    sigcycler += cycler(sw_det.saxs.cam.shutter_mode, shuttervalues)
+
+
+
+
     light_was_on = False
     if light.value is 1:
         light.off()
@@ -63,7 +77,7 @@ def en_scan_core(I400sigs, dets, energy, energies, times):
         boxed_text('Warning', 'light was on, taking a quick snapshot to clear CCDs', 'yellow', shrink=True)
         yield from quicksnap()
 
-    yield from bp.scan_nd(I400sigs+ dets+ [en],sigcycler)
+    yield from bp.scan_nd(I400sigs+ dets+ [en,sw_det.saxs.cam.shutter_mode],sigcycler)
 
     if light_was_on:
         light.on()
@@ -94,16 +108,25 @@ def short_carbon_scan(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
     energies = np.append(energies,np.arange(292,306,1))
     energies = np.append(energies,np.arange(306,320,4))
     energies = np.append(energies,np.arange(320,350,10))
+    energies = np.insert(energies,0,270)
+    energies = np.insert(energies,0,270)
+    energies = np.insert(energies,0,270)
     times = energies.copy()
 
     # Define exposures times for different energy ranges
     times[energies<282] = 1
     times[(energies < 286) & (energies >= 282)] = 5
     times[energies >= 286] = 2
+    times[0] = 1 #darks
+    times[1] = 5
+    times[2] = 2
     times *= multiple
 
+    shuttervalue = energies.copy()
+    shuttervalue[:3] = 0 # first 3 values are 0 (dark)
+    shuttervalue[3:] = 2 # the rest of the values are shutter enabled (2)
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets,energy,energies,times)
+    yield from en_scan_core(sigs, dets,energy,energies,shuttervalue,times)
 
 
 def very_short_carbon_scan(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
@@ -129,13 +152,23 @@ def very_short_carbon_scan(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
     energies = np.append(energies,np.arange(280,286,.5))
     energies = np.append(energies,np.arange(286,292,1))
     energies = np.append(energies,np.arange(292,321,4))
+    energies = np.insert(energies,0,270)
+    energies = np.insert(energies,0,270)
+    energies = np.insert(energies,0,270)
     times = energies.copy()
 
     # Define exposures times for different energy ranges
     times[energies<282] = 1
     times[(energies < 286) & (energies >= 282)] = 5
     times[energies >= 286] = 2
+    times[0] = 1 #darks
+    times[1] = 5
+    times[2] = 2
     times *= multiple
 
+
+    shuttervalue = energies.copy()
+    shuttervalue[:3] = 0  # first 3 values are 0 (dark)
+    shuttervalue[3:] = 2  # the rest of the values are shutter enabled (2)
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets,energy,energies,times)
+    yield from en_scan_core(sigs, dets, energy, energies, shuttervalue, times)

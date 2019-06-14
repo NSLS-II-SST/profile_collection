@@ -63,6 +63,18 @@ def warm(line):
 del warm
 
 
+@register_line_magic
+def dark(line):
+    sw_det.shutter_off()
+del dark
+
+
+@register_line_magic
+def darkoff(line):
+    sw_det.shutter_on()
+del darkoff
+
+
 
 
 def buildeputable(start, stop, step, widfract, startinggap,name):

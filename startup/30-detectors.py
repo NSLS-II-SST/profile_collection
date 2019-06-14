@@ -51,6 +51,22 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
                       "\nPlease wait until temperature has stabilized before collecting important data.",'yellow',85)
         return [self].append(super().stage(*args, **kwargs))
 
+    def shutter(self):
+        switch = {
+            0:'disabled',
+            1:'unknown',
+            3:'unknown',
+            4:'unknown',
+            2:'enabled'
+        }
+        return ('Shutter is {}'.format(switch[self.cam.shutter_mode.value]))
+
+    def shutter_on(self):
+        self.cam.shutter_mode.set(2)
+
+    def shutter_off(self):
+        self.cam.shutter_mode.set(0)
+
     def unstage(self, *args, **kwargs):
         return [self].append(super().unstage(*args, **kwargs))
 
@@ -178,8 +194,15 @@ class SyncedDetectors(Device):
     def cooling_on(self):
         self.saxs.set_temp(-80)
         self.waxs.set_temp(-80)
-        time.sleep(2)
-        print(self.cooling_state())
+
+    def shutter(self):
+        return self.saxs.shutter()
+
+    def shutter_on(self):
+        self.saxs.shutter_on()
+
+    def shutter_off(self):
+        self.saxs.shutter_off()
 
     def cooling_state(self):
         return (self.saxs.cooling_state()+ self.waxs.cooling_state())

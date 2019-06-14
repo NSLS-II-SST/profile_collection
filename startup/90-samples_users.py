@@ -3,7 +3,7 @@ from IPython.core.magic import register_line_magic
 from operator import itemgetter
 import collections, json
 import pandas as pd
-
+from copy import deepcopy
 
 
 def user():
@@ -140,17 +140,21 @@ def sample_set_location(sample_dict):
 
 def get_sample_location():
     locs = []
-    locs.append({'motor': sam_X, 'position': sam_X.user_readback.value, 'order': 0})
-    locs.append({'motor': sam_Y, 'position': sam_Y.user_readback.value, 'order': 0})
-    locs.append({'motor': sam_Z, 'position': sam_Z.user_readback.value, 'order': 0})
-    locs.append({'motor': sam_Th, 'position': sam_Th.user_readback.value, 'order': 0})
+    locs.append({'motor': 'x', 'position': sam_X.user_readback.value, 'order': 0})
+    locs.append({'motor': 'y', 'position': sam_Y.user_readback.value, 'order': 0})
+    locs.append({'motor': 'z', 'position': sam_Z.user_readback.value, 'order': 0})
+    locs.append({'motor': 'th', 'position': sam_Th.user_readback.value, 'order': 0})
     return locs
 
 def move_to_location(locs=get_sample_location()):
     locs = sorted(locs, key=itemgetter('order'))
     orderlist = [o for o in collections.Counter([d['order'] for d in locs]).keys()]
+    switch= {'x':sam_X,
+             'y':sam_Y,
+             'z':sam_Z,
+             'th':sam_Th}
     for order in orderlist:
-        outputlist = [[items['motor'], float(items['position'])] for items in locs if items['order'] == order]
+        outputlist = [[switch[items['motor']], float(items['position'])] for items in locs if items['order'] == order]
         flat_list = [item for sublist in outputlist for item in sublist]
         yield from bps.mv(*flat_list)
 
@@ -332,26 +336,26 @@ def newsample():
         locs = []
         xval = input('X ({:.2f}): '.format(sam_X.user_readback.value))
         if xval is not '':
-            locs.append({'motor': sam_X, 'position': xval, 'order': 0})
+            locs.append({'motor': 'x', 'position': xval, 'order': 0})
         else:
-            locs.append({'motor': sam_X, 'position': sam_X.user_readback.value, 'order': 0})
+            locs.append({'motor': 'x', 'position': sam_X.user_readback.value, 'order': 0})
         yval = input('X ({:.2f}): '.format(sam_Y.user_readback.value))
         if yval is not '':
-            locs.append({'motor': sam_Y, 'position': yval, 'order': 0})
+            locs.append({'motor': 'y', 'position': yval, 'order': 0})
         else:
-            locs.append({'motor': sam_Y, 'position': sam_Y.user_readback.value, 'order': 0})
+            locs.append({'motor': 'y', 'position': sam_Y.user_readback.value, 'order': 0})
 
         zval = input('X ({:.2f}): '.format(sam_Z.user_readback.value))
         if zval is not '':
-            locs.append({'motor': sam_Z, 'position': zval, 'order': 0})
+            locs.append({'motor': 'z', 'position': zval, 'order': 0})
         else:
-            locs.append({'motor': sam_Z, 'position': sam_Z.user_readback.value, 'order': 0})
+            locs.append({'motor': 'z', 'position': sam_Z.user_readback.value, 'order': 0})
 
         thval = input('X ({:.2f}): '.format(sam_Th.user_readback.value))
         if thval is not '':
-            locs.append({'motor': sam_Th, 'position': thval, 'order': 0})
+            locs.append({'motor': 'th', 'position': thval, 'order': 0})
         else:
-            locs.append({'motor': sam_Th, 'position': sam_Th.user_readback.value, 'order': 0})
+            locs.append({'motor': 'th', 'position': sam_Th.user_readback.value, 'order': 0})
         return sample_dict(locs, acq = acquisitions)
     else:
         return sample_dict(acq = acquisitions) #uses current location by default
@@ -413,8 +417,12 @@ def save_samples(sample,filename):
     switch= {sam_X:'x',
              sam_Y:'y',
              sam_Z:'z',
-             sam_Th:'th'}
-    samplenew = sample.copy()
+             sam_Th:'th',
+             'x':  'x',
+             'y':  'y',
+             'z':  'z',
+             'th': 'th'}
+    samplenew = deepcopy(sample)
     if isinstance(samplenew,list):
         for i,sam in enumerate(samplenew):
             for j,loc in enumerate(sam['location']):
@@ -429,41 +437,42 @@ def save_samplesxls(sample,filename):
     switch= {sam_X:'x',
              sam_Y:'y',
              sam_Z:'z',
-             sam_Th:'th'}
-    samplenew = sample.copy()
-    if isinstance(samplenew,list):
-        for i,sam in enumerate(samplenew):
-            for j,loc in enumerate(sam['location']):
-                 samplenew[i]['location'][j]['motor']= switch[loc['motor']]
+             sam_Th:'th',
+             'x':  'x',
+             'y':  'y',
+             'z':  'z',
+             'th': 'th'}
+    sampledf = pd.DataFrame.from_dict(sample, orient='columns')
+    sampledf.to_excel('temp.xls')
+
+    df = pd.read_excel('temp.xls',na_values='')
+    df.replace(np.nan, '', regex=True,inplace=True)
+    testdict = df.to_dict(orient='records')
+    if isinstance(testdict,list):
+        for i,sam in enumerate(testdict):
+            testdict[i]['location'] = eval(sam['location'])
+            testdict[i]['acquisitions'] = eval(sam['acquisitions'])
     else:
-        for j,loc in enumerate(samplenew['location']):
-            samplenew['location'][j]['motor'] = switch[loc['motor']]
-    sampledf = pd.DataFrame.from_dict(samplenew,orient='columns')
+        testdict['location'] = eval(testdict['location'])
+        testdict['acquisitions'] = eval(testdict['acquisitions'])
+
+    if isinstance(testdict,list):
+        for i,sam in enumerate(testdict):
+            for j,loc in enumerate(sam['location']):
+                 testdict[i]['location'][j]['motor']= switch[loc['motor']]
+    else:
+        for j,loc in enumerate(testdict['location']):
+            testdict['location'][j]['motor'] = switch[loc['motor']]
+    sampledf = pd.DataFrame.from_dict(testdict,orient='columns')
     sampledf.to_excel(filename)
 
 def load_samples(filename):
-    switch= {'x':sam_X,
-             'y':sam_Y,
-             'z':sam_Z,
-             'th':sam_Th}
     with open(filename,'r') as f:
         samplenew = json.loads(f.read())
-    if isinstance(samplenew,list):
-        for i,sam in enumerate(samplenew):
-            for j,loc in enumerate(sam['location']):
-                 samplenew[i]['location'][j]['motor']= switch[loc['motor']]
-    else:
-        for j,loc in enumerate(samplenew['location']):
-            samplenew['location'][j]['motor'] = switch[loc['motor']]
     return samplenew
 
 
 def load_samplesxls(filename):
-    switch= {'x':sam_X,
-             'y':sam_Y,
-             'z':sam_Z,
-             'th':sam_Th}
-
     df = pd.read_excel(filename,na_values='')
     df.replace(np.nan, '', regex=True,inplace=True)
     samplenew = df.to_dict(orient='records')
@@ -471,13 +480,13 @@ def load_samplesxls(filename):
         for i,sam in enumerate(samplenew):
             samplenew[i]['location'] = eval(sam['location'])
             samplenew[i]['acquisitions'] = eval(sam['acquisitions'])
-            for j,loc in enumerate(sam['location']):
-                 samplenew[i]['location'][j]['motor']= switch[loc['motor']]
+            for key in [key for key, value in sam.items() if 'named' in key.lower()]:
+                del samplenew[i][key]
     else:
         samplenew['location'] = eval(samplenew['location'])
         samplenew['acquisitions'] = eval(samplenew['acquisitions'])
-        for j,loc in enumerate(samplenew['location']):
-            samplenew['location'][j]['motor'] = switch[loc['motor']]
+        for key in [key for key, value in samplenew.items() if 'named' in key.lower()]:
+            del samplenew[key]
     return samplenew
 
 def sample_by_name(bar,name):

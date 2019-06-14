@@ -89,7 +89,7 @@ def slits_in_WAXS():
                       slits3.hcenter, 0.2)
 
 def mirror3_pos():
-    yield from bps.mv(mir3.Pitch, 8.031)
+    yield from bps.mv(mir3.Pitch, 8)
     time.sleep(3)
     yield from bps.mv(mir3.X, 26.15)
     time.sleep(3)
@@ -117,19 +117,19 @@ def mirror3_NEXAFSpos():
     time.sleep(3)
 
 def mirror1_pos():
-    yield from bps.mv(mir1.Pitch, 0.6702)
+    yield from bps.mv(mir1.Pitch, 0.7)
     time.sleep(3)
     yield from bps.mv(mir1.X, 0)
     time.sleep(3)
     yield from bps.mv(mir1.Y, -17.86)
     time.sleep(3)
-    yield from bps.mv(mir1.Z, -0.01)
+    yield from bps.mv(mir1.Z, 0)
     time.sleep(3)
-    yield from bps.mv(mir1.Roll, .2)
+    yield from bps.mv(mir1.Roll, 0)
     time.sleep(3)
-    yield from bps.mv(mir1.Pitch, 0.6702)
+    yield from bps.mv(mir1.Pitch, 0.7)
     time.sleep(3)
-    yield from bps.mv(mir1.Yaw, .3)
+    yield from bps.mv(mir1.Yaw, 0)
 
 
 def mirror1_NEXAFSpos():
@@ -149,6 +149,7 @@ def SAXSmode():
     yield from slits_in_SAXS()
     yield from bps.mv(Shutter_Y, 3,
                       Izero_Y, -29,
+                      Det_S, -94,
                       Det_W, -94,
                       BeamStopW, 3,
                       BeamStopS, 67.4,
