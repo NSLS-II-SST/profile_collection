@@ -16,7 +16,8 @@ Out[20]:
   WindowsPath('//XF07ID1-WS17/RSoXS Documents/images/users/Eliot/NIST-Eph=460.0084854-40-primary-sw_det_waxs_image-2.tiff')]}
 """
 from event_model import Filler, RunRouter
-from suitcase import tiff_series,csv, json_metadata
+from suitcase import tiff_series,csv
+import suitcase.jsonl
 from datetime import datetime
 
 USERDIR = 'Z:/images/users/'
@@ -47,19 +48,6 @@ def factory(name, start_doc):
                                                 directory=USERDIR)
             serializer('start', start_doc)
             serializer('descriptor', descriptor_doc)
-            serializerjson = json_metadata.Serializer(file_prefix=('{institution}/'
-                                                                   '{user_name}/'
-                                                                   '{project_name}/'
-                                                                   f'{formatted_date}/'
-                                                                   '{scan_id}-'
-                                                                   '{sample_name}-'
-                                                                   #'{event[data][Beamline Energy_energy]:.2f}eV-'
-                                                                   ),
-                                                      directory=USERDIR,
-                                                      sort_keys=True,
-                                                      indent=2)
-            serializerjson('start', start_doc)
-            serializerjson('descriptor', descriptor_doc)
             serializercsv = csv.Serializer(file_prefix=('{start[institution]}/'
                                                         '{start[user_name]}/'
                                                         '{start[project_name]}/'
@@ -73,7 +61,7 @@ def factory(name, start_doc):
                                            line_terminator='\n')
             serializercsv('start', start_doc)
             serializercsv('descriptor', descriptor_doc)
-            return [serializer,serializerjson,serializercsv]
+            return [serializer,serializercsv]
         elif descriptor_doc['name'] == 'baseline':
             dt = datetime.now()
             formatted_date = dt.strftime('%Y-%m-%d')
@@ -98,28 +86,7 @@ def factory(name, start_doc):
 
     def cb(name, doc):
         filler(name, doc)  # Fill in place any externally-stored data written by area detector.
-        # if name == 'event_page':
-        #     if 'Beamline Energy_energy' in doc['data'] and 'Izero Mesh Drain Current' in doc['data']:
-        #         dt = datetime.now()
-        #         formatted_date = dt.strftime('%Y-%m-%d')
-        #         filename = ('{start[institution]}/'
-        #                     '{start[user]}/'
-        #                     '{start[project]}/'
-        #                    f'{formatted_date}/'
-        #                     '{start[scan_id]}-'
-        #                     '{start[sample]}-'
-        #                     #'{energy:.2f}eV'
-        #                     '.txt'
-        #                     ).format(start=start_doc, energy=doc['data']['Beamline Energy_energy'][-1])
-        #
-        #         filename = Path(USERDIR) / Path(filename)
-        #         #print(f'!!!! filename: {filename}')
-        #         with open(filename, 'a+') as fp:
-        #             fp.write(f"{doc['data']['Beamline Energy_energy'][-1]}, {doc['data']['Izero Mesh Drain Current'][-1]}\n")
-        #     else:
-        #         pass
-        # else:
-        #     pass
+
 
     return [cb], [subfactory]
 
@@ -127,3 +94,29 @@ def factory(name, start_doc):
 rr = RunRouter([factory])
 
 rr_token = RE.subscribe(rr)  # This should be subscribed *after* db so filling happens after db.insert.
+
+
+import event_model
+import suitcase.jsonl
+
+
+def factory2(name, start_doc):
+    dt = datetime.now()
+    formatted_date = dt.strftime('%Y-%m-%d')
+    with suitcase.jsonl.Serializer(file_prefix=('{institution}/'
+                                                '{user_name}/'
+                                                '{project_name}/'
+                                                f'{formatted_date}/'
+                                                '{scan_id}-'
+                                                '{sample_name}-'
+                                                ),
+                                   directory=USERDIR,
+                                   sort_keys=True,
+                                   indent=2) as serializer:
+        serializer(name, start_doc)
+    # We do not need any further documents from the RunRouter.
+    return [], []
+
+
+rr2 = event_model.RunRouter([factory2])
+rr2_token = RE.subscribe(rr2)

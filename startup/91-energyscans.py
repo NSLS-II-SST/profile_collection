@@ -73,7 +73,7 @@ def en_scan_core(I400sigs, dets, energy, energies,shuttervalues, times):
     light_was_on = False
     if light.value is 1:
         light.off()
-        dark
+        sw_det.shutter_off()
         light_was_on = True
         boxed_text('Warning', 'light was on, taking a quick snapshot to clear CCDs', 'yellow', shrink=True)
         yield from quicksnap()
@@ -130,6 +130,48 @@ def short_carbon_scan(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
     yield from en_scan_core(sigs, dets,energy,energies,shuttervalue,times)
 
 
+def full_ca_scan(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
+    '''
+    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
+    this results in 128 exposures
+
+
+    :param multiple: adjustment for exposure times
+    :param mesh: which Izero channel to use
+    :param det: which detector to use
+    :param energy: what energy motor to scan
+    :return: perform scan
+
+    normal scan takes ~ 12 minutes to complete
+    '''
+    beamline_status()
+    if len(read_input("Starting a short Calcium energy scan hit any key in the next 3 seconds to abort", "abort", "", 3)) > 0:
+        return
+
+    # create a list of energies
+    energies = np.arange(345,355,1)
+    energies = np.insert(energies,0,345)
+    energies = np.insert(energies,0,345)
+    energies = np.insert(energies,0,345)
+    times = energies.copy()
+
+    # Define exposures times for different energy ranges
+    times[energies<400] = 20
+
+    times[0] = 20 #darks
+    times[1] = 20
+    times[2] = 20
+
+    times *= multiple
+
+
+    shuttervalue = energies.copy()
+    shuttervalue[:3] = 0  # first 3 values are 0 (dark)
+    shuttervalue[3:] = 2  # the rest of the values are shutter enabled (2)
+    # use these energies and exposure times to scan energy and record detectors and signals
+    yield from en_scan_core(sigs, dets, energy, energies, shuttervalue, times)
+
+
 def very_short_carbon_scan(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
@@ -149,10 +191,12 @@ def very_short_carbon_scan(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
         return
 
     # create a list of energies
-    energies = np.arange(270,280,5)
-    energies = np.append(energies,np.arange(280,286,.5))
-    energies = np.append(energies,np.arange(286,292,1))
-    energies = np.append(energies,np.arange(292,321,4))
+    energies = np.arange(270,282,1)
+    energies = np.append(energies,np.arange(282,286,.25))
+    energies = np.append(energies,np.arange(286,292,.5))
+    energies = np.append(energies,np.arange(292,306,1))
+    energies = np.append(energies,np.arange(306,320,4))
+    energies = np.append(energies,np.arange(320,350,10))
     energies = np.insert(energies,0,270)
     energies = np.insert(energies,0,270)
     energies = np.insert(energies,0,270)
@@ -167,9 +211,8 @@ def very_short_carbon_scan(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
     times[2] = 2
     times *= multiple
 
-
     shuttervalue = energies.copy()
-    shuttervalue[:3] = 0  # first 3 values are 0 (dark)
-    shuttervalue[3:] = 2  # the rest of the values are shutter enabled (2)
+    shuttervalue[:3] = 0 # first 3 values are 0 (dark)
+    shuttervalue[3:] = 2 # the rest of the values are shutter enabled (2)
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, shuttervalue, times)
+    yield from en_scan_core(sigs, dets,energy,energies,shuttervalue,times)
