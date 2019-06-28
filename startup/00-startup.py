@@ -71,3 +71,7 @@ control_layer = os.getenv('OPHYD_CONTROL_LAYER')
 import logging
 logging.getLogger('caproto').setLevel('ERROR')
 bec.disable_baseline()
+
+from bluesky.callbacks.zmq import Publisher
+publisher = Publisher('localhost:5577')
+RE.subscribe(publisher)

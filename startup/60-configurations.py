@@ -56,17 +56,17 @@ def BS_out():
 
 def slits_in_SAXS():
     yield from bps.mv(slits1.vsize, .2,
-                      slits1.hsize, .2,
-                      slits2.vsize, .6,
-                      slits2.hsize, .4,
-                      slits3.vsize, 1.2,
-                      slits3.hsize, 1,
                       slits1.vcenter, .15,
+                      slits1.hsize, .2,
                       slits1.hcenter, .1,
+                      slits2.vsize, .6,
                       slits2.vcenter, .15,
-                      slits2.hcenter, .1,
-                      slits3.vcenter, 0,
-                      slits3.hcenter, 0)
+                      slits2.hsize, .2,
+                      slits2.hcenter, .2,
+                      slits3.vsize, .8,
+                      slits3.vcenter, .3,
+                      slits3.hsize, .6,
+                      slits3.hcenter, .1)
 def slits_out():
     yield from bps.mv(slits1.vsize, 10,
                       slits1.hsize, 10,
@@ -75,18 +75,18 @@ def slits_out():
                       slits3.vsize, 10,
                       slits3.hsize, 10)
 def slits_in_WAXS():
-    yield from bps.mv(slits1.vsize, .3,
-                      slits1.hsize, .5,
-                      slits2.vsize, .5,
-                      slits2.hsize, .8,
-                      slits3.vsize, 1,
-                      slits3.hsize, 1.2,
-                      slits1.vcenter, 0.08,
-                      slits1.hcenter, 0.04,
-                      slits2.vcenter, .151,
-                      slits2.hcenter, .111,
-                      slits3.vcenter, 0.203,
-                      slits3.hcenter, 0.2)
+    yield from bps.mv(slits1.vsize, .5,
+                      slits1.vcenter, -0.02,
+                      slits1.hsize, .6,
+                      slits1.hcenter, 0.14,
+                      slits2.vsize, .65,
+                      slits2.vcenter, .4,
+                      slits2.hsize, 1.35,
+                      slits2.hcenter, .2,
+                      slits3.vsize, 1.1,
+                      slits3.vcenter, 0.303,
+                      slits3.hsize, 1.5,
+                      slits3.hcenter, 0.35)
 
 def mirror3_pos():
     yield from bps.mv(mir3.Pitch, 8)
@@ -152,56 +152,55 @@ def SAXSmode():
                       Det_S, -94,
                       Det_W, -94,
                       BeamStopW, 3,
-                      BeamStopS, 67.4,
-                      sam_Y, -125)
+                      BeamStopS, 67.4)
 def SAXS():
     return [{
         'motor':    slits1.vsize,
         'position': .2,
         'order': 0},
         {
-        'motor':    slits1.hsize,
-        'position': .2,
-        'order': 0},
-        {
-        'motor':    slits2.vsize,
-        'position': .6,
-        'order': 0},
-        {
-        'motor':    slits2.hsize,
-        'position': .4,
-        'order': 0},
-        {
-        'motor':    slits3.vsize,
-        'position': 1.2,
-        'order': 0},
-        {
-        'motor':    slits3.hsize,
-        'position': 1,
-        'order': 0},
-        {
         'motor':    slits1.vcenter,
         'position': 0.15,
+        'order': 0},
+        {
+        'motor':    slits1.hsize,
+        'position': .2,
         'order': 0},
         {
         'motor':    slits1.hcenter,
         'position': 0.1,
         'order': 0},
         {
+        'motor':    slits2.vsize,
+        'position': .6,
+        'order': 0},
+        {
         'motor':    slits2.vcenter,
         'position': .15,
         'order': 0},
         {
+        'motor':    slits2.hsize,
+        'position': .2,
+        'order': 0},
+        {
         'motor':    slits2.hcenter,
-        'position': .1,
+        'position': .2,
+        'order': 0},
+        {
+        'motor':    slits3.vsize,
+        'position': .8,
         'order': 0},
         {
         'motor':    slits3.vcenter,
-        'position': 0,
+        'position': 0.3,
+        'order': 0},
+        {
+        'motor':    slits3.hsize,
+        'position': .6,
         'order': 0},
         {
         'motor':    slits3.hcenter,
-        'position': 0,
+        'position': 0.1,
         'order': 0},
         {
         'motor':    Shutter_Y,
@@ -235,58 +234,58 @@ def WAXSmode():
                       Izero_Y, -29,
                       Det_W, -10,
                       Det_S, -94,
-                      BeamStopW, 70.7035,
+                      BeamStopW, 70.5035,
                       BeamStopS, 3,
                       sam_Y, -125)
 
 def WAXS():
     return [{
         'motor':    slits1.vsize,
-        'position': .3,
-        'order': 0},
-        {
-        'motor':    slits1.hsize,
         'position': .5,
-        'order': 0},
-        {
-        'motor':    slits2.vsize,
-        'position': .5,
-        'order': 0},
-        {
-        'motor':    slits2.hsize,
-        'position': .8,
-        'order': 0},
-        {
-        'motor':    slits3.vsize,
-        'position': 1,
-        'order': 0},
-        {
-        'motor':    slits3.hsize,
-        'position': 1.2,
         'order': 0},
         {
         'motor':    slits1.vcenter,
-        'position': 0.08,
+        'position': -0.02,
+        'order': 0},
+        {
+        'motor':    slits1.hsize,
+        'position': .6,
         'order': 0},
         {
         'motor':    slits1.hcenter,
-        'position': 0.04,
+        'position': 0.14,
+        'order': 0},
+        {
+        'motor':    slits2.vsize,
+        'position': .65,
         'order': 0},
         {
         'motor':    slits2.vcenter,
-        'position': .151,
+        'position': .4,
+        'order': 0},
+        {
+        'motor':    slits2.hsize,
+        'position': 1.35,
         'order': 0},
         {
         'motor':    slits2.hcenter,
-        'position': .111,
+        'position': .2,
+        'order': 0},
+        {
+        'motor':    slits3.vsize,
+        'position': 1.1,
         'order': 0},
         {
         'motor':    slits3.vcenter,
-        'position': 0.203,
+        'position': 0.3,
+        'order': 0},
+        {
+        'motor':    slits3.hsize,
+        'position': 1.5,
         'order': 0},
         {
         'motor':    slits3.hcenter,
-        'position': 0.2,
+        'position': 0.35,
         'order': 0},
         {
         'motor':    Shutter_Y,
@@ -306,7 +305,7 @@ def WAXS():
         'order': 0},
         {
         'motor':    BeamStopW,
-        'position': 70.7035,
+        'position': 70.7,
         'order': 0},
         {
         'motor':    BeamStopS,
