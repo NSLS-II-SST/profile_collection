@@ -43,7 +43,7 @@ def factory(name, start_doc):
                                                              f'{formatted_date}/'
                                                              '{start[scan_id]}-'
                                                              '{start[sample_name]}-'
-                                                             '{event[data][en_energy]:.2f}eV-'
+                                                             #'{event[data][en_energy]:.2f}eV-'
                                                              ),
                                                 directory=USERDIR)
             serializer('start', start_doc)
