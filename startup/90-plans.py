@@ -1,5 +1,3 @@
-run_report(__file__)
-
 import numpy as np
 from datetime import datetime
 import bluesky.plans as bp
@@ -7,6 +5,11 @@ import bluesky.plan_stubs as bps
 from suitcase import tiff_series, csv
 import pandas as pd
 from IPython.core.magic import register_line_magic
+import bluesky_darkframes
+
+
+run_report(__file__)
+
 
 def set_exposure(exposure):
     if exposure > 0.001 and exposure < 1000 :
@@ -16,10 +19,12 @@ def set_exposure(exposure):
     else:
         print('Invalid time, exposure time not set')
 
+
 def exposure():
     return (sw_det.exposure()+'\n'+
             RSoXS_DM.exposure()+'\n'+
             RSoXS_Slits.exposure()+'\n')
+
 
 @register_line_magic
 def exp(line):
@@ -75,6 +80,23 @@ def darkoff(line):
 del darkoff
 
 
+def dark_plan():
+    yield from bps.mv(sw_det.saxs.cam.shutter_mode,0) # disable shutter
+    yield from bps.unstage(sw_det)
+    yield from bps.stage(sw_det)
+    yield from bps.trigger(sw_det, group='darkframe-trigger')
+    yield from bps.wait('darkframe-trigger')
+    snapshot = bluesky_darkframes.SnapshotDevice(sw_det)
+    yield from bps.unstage(sw_det)
+    yield from bps.stage(sw_det)
+    yield from bps.mv(sw_det.saxs.cam.shutter_mode,2) # enable shutter
+    return snapshot
+
+
+dark_frame_preprocessor = bluesky_darkframes.DarkFramePreprocessor(
+    dark_plan=dark_plan, max_age=300, locked_signals=[sw_det.saxs.cam.acquire_time,Det_S, Det_W],
+    limit=100)
+RE.preprocessors.append(dark_frame_preprocessor)
 
 
 def buildeputable(start, stop, step, widfract, startinggap,name):
