@@ -1,6 +1,28 @@
 run_report(__file__)
 
 import sys, time, msvcrt, ansiwrap
+import time, sys
+import sys
+
+if sys.platform[:3] == 'win':
+    import msvcrt
+
+    def getkey():
+        key = msvcrt.getche()
+        return key
+
+    def kbhit():
+        return msvcrt.kbhit()
+
+elif sys.platform[:3] == 'lin':
+    import getch
+    from select import select
+    def getkey():
+        key = getch.getche()
+        return key
+    def kbhit():
+        dr, dw, de = select([sys.stdin], [], [], 0)
+        return dr != []
 
 
 def boxed_text(title, text, tint, width=75, shrink=False):
@@ -41,8 +63,8 @@ def read_input( caption, default, timeoutval, timeout = 5):
     input = ''
     timedout=False
     while True:
-        if msvcrt.kbhit():
-            byte_arr = msvcrt.getche()
+        if kbhit():
+            byte_arr = getkey()
             if ord(byte_arr) == 13: # enter_key
                 break
             elif ord(byte_arr) >= 32: #space_char
