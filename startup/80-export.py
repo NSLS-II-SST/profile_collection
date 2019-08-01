@@ -31,7 +31,7 @@ def factory(name, start_doc):
 
     def subfactory(name, descriptor_doc):
 
-        if descriptor_doc['name']  == 'primary':
+        if descriptor_doc['name'] in ['primary', 'dark']:
             dt = datetime.now()
             formatted_date = dt.strftime('%Y-%m-%d')
             # #energy = hdr.table(stream_name='baseline')['Beamline Energy_energy'][1]
@@ -65,10 +65,14 @@ def factory(name, start_doc):
                                                     directory=USERDIR)
 
             # Here we push the run 'start' doc through.
-            SAXSsubtractor(name, descriptor_doc)
-            SAXSserializer(name, descriptor_doc)
-            WAXSsubtractor(name, descriptor_doc)
-            WAXSserializer(name, descriptor_doc)
+            SAXSsubtractor('start', start_doc)
+            SAXSsubtractor('descriptor', descriptor_doc)
+            SAXSserializer('start', start_doc)
+            SAXSserializer('descriptor', descriptor_doc)
+            WAXSsubtractor('start', start_doc)
+            WAXSsubtractor('descriptor', descriptor_doc)
+            WAXSserializer('start', start_doc)
+            WAXSserializer('descriptor', descriptor_doc)
 
             # And by returning this function below, we are routing all other
             # documents *for this run* through here.
@@ -78,7 +82,7 @@ def factory(name, start_doc):
                 SAXSserializer(sname, sdoc)
                 wname, wdoc = WAXSsubtractor(name, doc)
                 WAXSserializer(wname, wdoc)
-
+            if()
             serializercsv = csv.Serializer(file_prefix=('{start[institution]}/'
                                                         '{start[user_name]}/'
                                                         '{start[project_name]}/'
@@ -92,7 +96,7 @@ def factory(name, start_doc):
                                            line_terminator='\n')
             serializercsv('start', start_doc)
             serializercsv('descriptor', descriptor_doc)
-            return [fill_subtract_and_serialize,serializercsv]
+            return [fill_subtract_and_serialize,serializercsv]  # fill_subtract_and_serialize
         elif descriptor_doc['name'] == 'baseline':
             dt = datetime.now()
             formatted_date = dt.strftime('%Y-%m-%d')
