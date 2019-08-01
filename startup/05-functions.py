@@ -1,6 +1,6 @@
 run_report(__file__)
 
-import sys, time, msvcrt, ansiwrap
+import sys, time, ansiwrap
 import time, sys
 import sys
 
