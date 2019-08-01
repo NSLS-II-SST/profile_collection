@@ -31,22 +31,15 @@ def factory(name, start_doc):
     # filler(name, start_doc)  # modifies doc in place
     SAXSsubtractor = DarkSubtraction('Synced_saxs_image')
     WAXSsubtractor = DarkSubtraction('Synced_waxs_image')
-    SAXSserializer = tiff_series.Serializer(file_prefix=('{start[institution]}/'
+    SWserializer = tiff_series.Serializer(file_prefix=('{start[institution]}/'
                                                          '{start[user_name]}/'
                                                          '{start[project_name]}/'
-                                                         f'{formatted_date}/sd'
+                                                         f'{formatted_date}/'
                                                          '{start[scan_id]}-'
                                                          '{start[sample_name]}-'
                                                          ),
                                             directory=USERDIR)
 
-    WAXSserializer = tiff_series.Serializer(file_prefix=('{start[institution]}/'
-                                                         '{start[user_name]}/'
-                                                         '{start[project_name]}/'
-                                                         f'{formatted_date}/wd'
-                                                         '{start[scan_id]}-'
-                                                         '{start[sample_name]}-'),
-                                            directory=USERDIR)
 
     serializercsv = csv.Serializer(file_prefix=('{start[institution]}/'
                                                 '{start[user_name]}/'
@@ -60,16 +53,14 @@ def factory(name, start_doc):
                                    flush=True,
                                    line_terminator='\n')
     SAXSsubtractor('start', start_doc)
-    SAXSserializer('start', start_doc)
     WAXSsubtractor('start', start_doc)
-    WAXSserializer('start', start_doc)
+    SWserializer('start', start_doc)
 
     def fill_subtract_and_serialize(name, doc):
         name, doc = filler(name, doc)
-        sname, sdoc = SAXSsubtractor(name, doc)
-        SAXSserializer(sname, sdoc)
-        wname, wdoc = WAXSsubtractor(name, doc)
-        WAXSserializer(wname, wdoc)
+        name, doc = SAXSsubtractor(name, doc)
+        name, doc = WAXSsubtractor(name, doc)
+        SWserializer(name, doc)
 
     def subfactory(name, descriptor_doc):
 
@@ -77,9 +68,8 @@ def factory(name, start_doc):
             # Here we push the run 'start' doc through.
 
             SAXSsubtractor('descriptor', descriptor_doc)
-            SAXSserializer('descriptor', descriptor_doc)
             WAXSsubtractor('descriptor', descriptor_doc)
-            WAXSserializer('descriptor', descriptor_doc)
+            SWserializer('descriptor', descriptor_doc)
 
             if descriptor_doc['name'] == 'primary':
                 serializercsv('start', start_doc)
