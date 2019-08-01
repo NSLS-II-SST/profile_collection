@@ -363,8 +363,8 @@ no working completely yet on plots with two images - need to split it out better
 """
 
 import matplotlib.pyplot as plt
-from matplotlib.patches import Polygon
-from matplotlib.mlab import dist_point_to_segment
+# from matplotlib.patches import Polygon
+# from matplotlib.mlab import dist_point_to_segment
 
 
 

@@ -1,19 +1,14 @@
 run_report(__file__)
 
 import sys, time, ansiwrap
-import time, sys
-import sys
 
 if sys.platform[:3] == 'win':
     import msvcrt
-
     def getkey():
         key = msvcrt.getche()
         return key
-
     def kbhit():
         return msvcrt.kbhit()
-
 elif sys.platform[:3] == 'lin':
     import getch
     from select import select
