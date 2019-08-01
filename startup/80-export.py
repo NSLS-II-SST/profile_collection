@@ -82,21 +82,22 @@ def factory(name, start_doc):
                 SAXSserializer(sname, sdoc)
                 wname, wdoc = WAXSsubtractor(name, doc)
                 WAXSserializer(wname, wdoc)
-            if()
-            serializercsv = csv.Serializer(file_prefix=('{start[institution]}/'
-                                                        '{start[user_name]}/'
-                                                        '{start[project_name]}/'
-                                                        f'{formatted_date}/'
-                                                        '{start[scan_id]}-'
-                                                        '{start[sample_name]}-'
-                                                        #'{event[data][Beamline Energy_energy]:.2f}eV-'
-                                                        ),
-                                           directory=USERDIR,
-                                           flush=True,
-                                           line_terminator='\n')
-            serializercsv('start', start_doc)
-            serializercsv('descriptor', descriptor_doc)
-            return [fill_subtract_and_serialize,serializercsv]  # fill_subtract_and_serialize
+            if descriptor_doc['name'] == 'primary':
+                serializercsv = csv.Serializer(file_prefix=('{start[institution]}/'
+                                                            '{start[user_name]}/'
+                                                             '{start[project_name]}/'
+                                                            f'{formatted_date}/'
+                                                            '{start[scan_id]}-'
+                                                            '{start[sample_name]}-'
+                                                            #'{event[data][Beamline Energy_energy]:.2f}eV-'
+                                                            ),
+                                               directory=USERDIR,
+                                               flush=True,
+                                               line_terminator='\n')
+                serializercsv('start', start_doc)
+                serializercsv('descriptor', descriptor_doc)
+                return [fill_subtract_and_serialize,serializercsv]  # fill_subtract_and_serialize
+            return [fill_subtract_and_serialize]
         elif descriptor_doc['name'] == 'baseline':
             dt = datetime.now()
             formatted_date = dt.strftime('%Y-%m-%d')
