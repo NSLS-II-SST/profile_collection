@@ -21,7 +21,7 @@ import suitcase.jsonl
 from datetime import datetime
 from bluesky_darkframes import DarkSubtraction
 
-USERDIR = 'Z:/images/users/'
+USERDIR = '/DATA/users/'
 
 
 def factory(name, start_doc):

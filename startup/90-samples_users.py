@@ -190,7 +190,8 @@ def do_acquisitions(acq_list):
         yield from move_to_location(get_location_from_config(acq['configuration']))
         yield from eval(acq['plan_name']+'('+acq['arguments']+')')
 
-
+if RE.md.get('sample_name') is None:
+    RE.md['sample_name'] = 'sample'
 def sample_dict(acq = [],locations = get_sample_location(),sample_name = RE.md['sample_name'],
                 sample_desc = RE.md['sample_desc'],
                 sample_id = RE.md['sample_id'],
