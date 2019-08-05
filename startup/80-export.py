@@ -21,7 +21,7 @@ import suitcase.jsonl
 from datetime import datetime
 from bluesky_darkframes import DarkSubtraction
 
-USERDIR = '/mnt/zdrive/users/'
+USERDIR = '/DATA/users/'
 
 
 def factory(name, start_doc):
@@ -38,7 +38,7 @@ def factory(name, start_doc):
                                                          '{start[scan_id]}-'
                                                          '{start[sample_name]}-'
                                                          ),
-                                            directory=USERDIR)
+                                          directory=USERDIR)
 
 
     serializercsv = csv.Serializer(file_prefix=('{start[institution]}/'
