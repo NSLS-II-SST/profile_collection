@@ -24,4 +24,4 @@ mir4 = HexapodMirror('XF:07ID2-OP{Mir:M4CD-Ax:',name='SST 1 Mirror 4',kind='hint
 mir3 = HexapodMirror('XF:07ID1-OP{Mir:M3ABC-Ax:',name='SST 1 Mirror 3',kind='hinted')
 mir1 = HexapodMirror('XF:07IDA-OP{Mir:M1-Ax:',name='SST 1 Mirror 1',kind='hinted')
 
-sd.baseline.extend([mir3,mir4,mir2_type])
+# sd.baseline.extend([mir3,mir4,mir2_type])
