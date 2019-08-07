@@ -32,12 +32,13 @@ def factory(name, start_doc):
     SAXSsubtractor = DarkSubtraction('Synced_saxs_image')
     WAXSsubtractor = DarkSubtraction('Synced_waxs_image')
     SWserializer = tiff_series.Serializer(file_prefix=('{start[institution]}/'
-                                                         '{start[user_name]}/'
-                                                         '{start[project_name]}/'
-                                                         f'{formatted_date}/'
-                                                         '{start[scan_id]}-'
-                                                         '{start[sample_name]}-'
-                                                         ),
+                                                       '{start[user_name]}/'
+                                                       '{start[project_name]}/'
+                                                       f'{formatted_date}/'
+                                                       '{start[scan_id]}-'
+                                                       '{start[sample_name]}-'
+                                                       '{event[data][Beamline Energy_energy]:.2f}eV-'
+                                                       ),
                                           directory=USERDIR)
 
 
@@ -47,7 +48,6 @@ def factory(name, start_doc):
                                                 f'{formatted_date}/'
                                                 '{start[scan_id]}-'
                                                 '{start[sample_name]}-'
-                                                # '{event[data][Beamline Energy_energy]:.2f}eV-'
                                                 ),
                                    directory=USERDIR,
                                    flush=True,
