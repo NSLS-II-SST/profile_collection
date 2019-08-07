@@ -54,7 +54,7 @@ def factory(name, start_doc):
                                    line_terminator='\n')
     SAXSsubtractor('start', start_doc)
     WAXSsubtractor('start', start_doc)
-    SWserializer('start', start_doc)
+    # SWserializer('start', start_doc)
 
     def fill_subtract_and_serialize(name, doc):
         name, doc = filler(name, doc)
