@@ -66,7 +66,7 @@ def factory(name, start_doc):
             # Here we push the run 'start' doc through.
             returnlist = []
             if 'Synced_saxs_image' in descriptor_doc:
-
+                print('synced saxs image was here')
                 SAXSsubtractor('start', start_doc)
                 WAXSsubtractor('start', start_doc)
                 SAXSsubtractor('descriptor', descriptor_doc)
