@@ -96,8 +96,8 @@ def dark_plan():
 dark_frame_preprocessor = bluesky_darkframes.DarkFramePreprocessor(
     dark_plan=dark_plan, max_age=100, locked_signals=[sw_det.saxs.cam.acquire_time,Det_S, Det_W],
     limit=10)
-RE.preprocessors.append(dark_frame_preprocessor)
-
+# RE.preprocessors.append(dark_frame_preprocessor)
+# not doing this because EVERYTHING that goes through RE will get a dark image - this is excessive
 
 def buildeputable(start, stop, step, widfract, startinggap,name):
     ens = np.arange(start,stop,step)
@@ -309,6 +309,7 @@ def quicksnap():
     sw_det.set_binning(binsave)
 
 
+@dark_frame_preprocessor
 def snapshot(secs=.1):
     '''
     snap of detectors to clear any charge from light hitting them - needed before starting scans or snapping images
