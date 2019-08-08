@@ -95,8 +95,8 @@ def dark_plan():
 
 
 dark_frame_preprocessor = bluesky_darkframes.DarkFramePreprocessor(
-    dark_plan=dark_plan, max_age=100, locked_signals=[sw_det.saxs.cam.acquire_time,Det_S, Det_W],
-    limit=10)
+    dark_plan=dark_plan, max_age=1000, locked_signals=[sw_det.saxs.cam.acquire_time,Det_S, Det_W],
+    limit=50)
 RE.preprocessors.append(dark_frame_preprocessor)
 # not doing this because EVERYTHING that goes through RE will get a dark image - this is excessive
 
