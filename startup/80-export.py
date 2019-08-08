@@ -28,7 +28,7 @@ def factory(name, start_doc):
     filler = Filler(db.reg.handler_reg)
     dt = datetime.now()
     formatted_date = dt.strftime('%Y-%m-%d')
-    # filler(name, start_doc)  # modifies doc in place
+    filler(name, start_doc)  # modifies doc in place
     SAXSsubtractor = DarkSubtraction('Synced_saxs_image')
     WAXSsubtractor = DarkSubtraction('Synced_waxs_image')
     SWserializer = tiff_series.Serializer(file_prefix=('{start[institution]}/'
@@ -61,12 +61,12 @@ def factory(name, start_doc):
         SWserializer(name, doc)
 
     def subfactory(name, descriptor_doc):
-
+        filler(name, descriptor_doc)
         if descriptor_doc['name'] in ['primary', 'dark']:
             # Here we push the run 'start' doc through.
             returnlist = []
             if 'Synced_saxs_image' in descriptor_doc:
-                filler(name, descriptor_doc)
+
                 SAXSsubtractor('start', start_doc)
                 WAXSsubtractor('start', start_doc)
                 SAXSsubtractor('descriptor', descriptor_doc)
