@@ -64,7 +64,7 @@ def factory(name, start_doc):
         name, doc = filler(name, descriptor_doc)
         if doc['name'] in ['primary', 'dark']:
             # Here we push the run 'start' doc through.
-            # print(doc['data_keys'])
+            print(start_doc.keys())
             returnlist = []
             if 'Synced_saxs_image' in descriptor_doc['data_keys'].keys():
                 print('synced saxs image was here')
