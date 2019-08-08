@@ -64,17 +64,19 @@ def factory(name, start_doc):
 
         if descriptor_doc['name'] in ['primary', 'dark']:
             # Here we push the run 'start' doc through.
-            SAXSsubtractor('start', start_doc)
-            WAXSsubtractor('start', start_doc)
-            SAXSsubtractor('descriptor', descriptor_doc)
-            WAXSsubtractor('descriptor', descriptor_doc)
-            SWserializer('descriptor', descriptor_doc)
-
+            returnlist = []
+            if 'Synced_sax_image' in descriptor_doc:
+                SAXSsubtractor('start', start_doc)
+                WAXSsubtractor('start', start_doc)
+                SAXSsubtractor('descriptor', descriptor_doc)
+                WAXSsubtractor('descriptor', descriptor_doc)
+                SWserializer('descriptor', descriptor_doc)
+                returnlist.append(fill_subtract_and_serialize)
             if descriptor_doc['name'] == 'primary':
                 serializercsv('start', start_doc)
                 serializercsv('descriptor', descriptor_doc)
-                return [fill_subtract_and_serialize,serializercsv]  # fill_subtract_and_serialize
-            return [fill_subtract_and_serialize]
+                returnlist.append(serializercsv)
+            return returnlist
         elif descriptor_doc['name'] == 'baseline':
             dt = datetime.now()
             formatted_date = dt.strftime('%Y-%m-%d')
