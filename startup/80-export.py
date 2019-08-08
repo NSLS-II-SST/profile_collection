@@ -61,18 +61,18 @@ def factory(name, start_doc):
         SWserializer(name, doc)
 
     def subfactory(name, descriptor_doc):
-        filler(name, descriptor_doc)
-        if descriptor_doc['name'] in ['primary', 'dark']:
+        name, doc = filler(name, descriptor_doc)
+        if doc['name'] in ['primary', 'dark']:
             # Here we push the run 'start' doc through.
             returnlist = []
-            if 'Synced_saxs_image' in descriptor_doc:
-                print('synced saxs image was here')
-                SAXSsubtractor('start', start_doc)
-                WAXSsubtractor('start', start_doc)
-                SAXSsubtractor('descriptor', descriptor_doc)
-                WAXSsubtractor('descriptor', descriptor_doc)
-                SWserializer('descriptor', descriptor_doc)
-                returnlist.append(fill_subtract_and_serialize)
+            #if 'Synced_saxs_image' in descriptor_doc:
+            print('synced saxs image was here')
+            SAXSsubtractor('start', start_doc)
+            WAXSsubtractor('start', start_doc)
+            name, doc = SAXSsubtractor(name, doc)
+            name, doc = WAXSsubtractor(name, doc)
+            SWserializer(name, doc)
+            returnlist.append(fill_subtract_and_serialize)
             if descriptor_doc['name'] == 'primary':
                 serializercsv('start', start_doc)
                 serializercsv('descriptor', descriptor_doc)
