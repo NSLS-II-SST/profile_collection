@@ -309,7 +309,9 @@ def quicksnap():
     sw_det.set_binning(binsave)
 
 
-@dark_frame_preprocessor
+
+from bluesky.preprocessors import make_decorator
+@make_decorator(dark_frame_preprocessor)
 def snapshot(secs=.1):
     '''
     snap of detectors to clear any charge from light hitting them - needed before starting scans or snapping images
