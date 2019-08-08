@@ -35,8 +35,9 @@ class I400(Device):
         return status
 
     def set_exposure(self, exptime):
-        print('setting exposure to ',exptime)
-        self.exptime_save = exptime
+        exptimeset = min(exptime,20)
+        print('setting ',self.name,' exposure to ',exptimeset)
+        self.exptime_save = exptimeset
 
     def exposure(self):
         return ('{} exposure time is set to {} seconds'.format(
