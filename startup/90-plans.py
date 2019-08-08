@@ -1,11 +1,11 @@
 import numpy as np
-from datetime import datetime
 import bluesky.plans as bp
 import bluesky.plan_stubs as bps
-from suitcase import tiff_series, csv
 import pandas as pd
-from IPython.core.magic import register_line_magic
 import bluesky_darkframes
+from IPython.core.magic import register_line_magic
+from suitcase import tiff_series, csv
+from datetime import datetime
 from bluesky.preprocessors import make_decorator
 
 
@@ -97,7 +97,7 @@ def dark_plan():
 dark_frame_preprocessor = bluesky_darkframes.DarkFramePreprocessor(
     dark_plan=dark_plan, max_age=100, locked_signals=[sw_det.saxs.cam.acquire_time,Det_S, Det_W],
     limit=10)
-# RE.preprocessors.append(dark_frame_preprocessor)
+RE.preprocessors.append(dark_frame_preprocessor)
 # not doing this because EVERYTHING that goes through RE will get a dark image - this is excessive
 
 def buildeputable(start, stop, step, widfract, startinggap,name):
@@ -310,7 +310,7 @@ def quicksnap():
     sw_det.set_binning(binsave)
 
 
-@make_decorator(dark_frame_preprocessor)
+#@make_decorator(dark_frame_preprocessor)
 def snapshot(secs=.1):
     '''
     snap of detectors to clear any charge from light hitting them - needed before starting scans or snapping images
