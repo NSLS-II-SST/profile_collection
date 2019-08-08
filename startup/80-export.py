@@ -52,9 +52,6 @@ def factory(name, start_doc):
                                    directory=USERDIR,
                                    flush=True,
                                    line_terminator='\n')
-    SAXSsubtractor('start', start_doc)
-    WAXSsubtractor('start', start_doc)
-    SWserializer('start', start_doc)
 
     def fill_subtract_and_serialize(name, doc):
         name, doc = filler(name, doc)
@@ -66,7 +63,9 @@ def factory(name, start_doc):
 
         if descriptor_doc['name'] in ['primary', 'dark']:
             # Here we push the run 'start' doc through.
-
+            SAXSsubtractor('start', start_doc)
+            WAXSsubtractor('start', start_doc)
+            SWserializer('start', start_doc)
             SAXSsubtractor('descriptor', descriptor_doc)
             WAXSsubtractor('descriptor', descriptor_doc)
             SWserializer('descriptor', descriptor_doc)
