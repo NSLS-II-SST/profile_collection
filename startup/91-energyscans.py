@@ -5,8 +5,8 @@ import bluesky.plans as bp
 import bluesky.plan_stubs as bps
 from cycler import cycler
 
-
-@dark_frame_preprocessor # this will ensure all energy scans will have darkframes as necessary
+# this will ensure all energy scans will have darkframes as necessary
+@dark_frame_preprocessor
 def full_carbon_scan(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
