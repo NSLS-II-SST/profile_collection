@@ -68,6 +68,7 @@ def factory(name, start_doc):
             if 'Synced_sax_image' in descriptor_doc:
                 SAXSsubtractor('start', start_doc)
                 WAXSsubtractor('start', start_doc)
+                filler(name, descriptor_doc)
                 SAXSsubtractor('descriptor', descriptor_doc)
                 WAXSsubtractor('descriptor', descriptor_doc)
                 SWserializer('descriptor', descriptor_doc)
