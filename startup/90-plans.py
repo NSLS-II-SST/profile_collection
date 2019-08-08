@@ -6,6 +6,7 @@ from suitcase import tiff_series, csv
 import pandas as pd
 from IPython.core.magic import register_line_magic
 import bluesky_darkframes
+from bluesky.preprocessors import make_decorator
 
 
 run_report(__file__)
@@ -309,8 +310,6 @@ def quicksnap():
     sw_det.set_binning(binsave)
 
 
-
-from bluesky.preprocessors import make_decorator
 @make_decorator(dark_frame_preprocessor)
 def snapshot(secs=.1):
     '''

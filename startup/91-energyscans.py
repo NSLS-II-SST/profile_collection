@@ -4,6 +4,7 @@ import numpy as np
 import bluesky.plans as bp
 import bluesky.plan_stubs as bps
 from cycler import cycler
+from bluesky.preprocessors import make_decorator
 
 
 def full_carbon_scan(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
@@ -52,7 +53,6 @@ def full_carbon_scan(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
     yield from en_scan_core(sigs, dets, energy, energies, shuttervalue, times)
 
 
-from bluesky.preprocessors import make_decorator
 @make_decorator(dark_frame_preprocessor)
 def en_scan_core(I400sigs, dets, energy, energies, shuttervalues, times):
     sw_det.saxs.cam.acquire_time.kind = 'hinted'
