@@ -37,7 +37,7 @@ def factory(name, start_doc):
                                                        f'{formatted_date}/'
                                                        '{start[scan_id]}-'
                                                        '{start[sample_name]}-'
-                                                       #'{event[data][en_energy]:.2f}eV-'
+                                                       '{event[data][en_energy]:.2f}eV-'
                                                        ),
                                           directory=USERDIR)
 
@@ -63,7 +63,6 @@ def factory(name, start_doc):
     def subfactory(name, descriptor_doc):
         name, doc = filler(name, descriptor_doc)
         if doc['name'] in ['primary', 'dark']:
-            # Here we push the run 'start' doc through.
             returnlist = []
             if 'Synced' in start_doc['detectors']:
                 SAXSsubtractor('start', start_doc)
