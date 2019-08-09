@@ -4,7 +4,6 @@ import numpy as np
 import bluesky.plans as bp
 import bluesky.plan_stubs as bps
 from cycler import cycler
-from bluesky.preprocessors import make_decorator
 
 
 def full_carbon_scan(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
@@ -68,9 +67,6 @@ def en_scan_core(I400sigs, dets, energy, energies, shuttervalues, times):
     sigcycler += cycler(sw_det.saxs.cam.acquire_time, times.copy())
     sigcycler += cycler(sw_det.waxs.cam.acquire_time, times.copy())
     sigcycler += cycler(sw_det.saxs.cam.shutter_mode, shuttervalues.astype(int))
-
-
-
 
     light_was_on = False
     if light.value is 1:
