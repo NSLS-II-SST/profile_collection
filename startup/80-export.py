@@ -53,7 +53,7 @@ def factory(name, start_doc):
                                    flush=True,
                                    line_terminator='\n')
 
-    SWserializer('start', start_doc)
+
     def fill_subtract_and_serialize(name, doc):
         name, doc = filler(name, doc)
         name, doc = SAXSsubtractor(name, doc)
@@ -67,9 +67,10 @@ def factory(name, start_doc):
             if 'Synced' in start_doc['detectors']:
                 SAXSsubtractor('start', start_doc)
                 WAXSsubtractor('start', start_doc)
-                name, doc = SAXSsubtractor(name, doc)
-                name, doc = WAXSsubtractor(name, doc)
-                SWserializer(name, doc)
+                SWserializer('start', start_doc)
+                #name, doc = SAXSsubtractor(name, doc)
+                #name, doc = WAXSsubtractor(name, doc)
+                #SWserializer(name, doc)
                 returnlist.append(fill_subtract_and_serialize)
             if descriptor_doc['name'] == 'primary':
                 serializercsv('start', start_doc)
