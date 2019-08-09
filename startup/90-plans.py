@@ -100,7 +100,8 @@ dark_frame_preprocessor = bluesky_darkframes.DarkFramePreprocessor(
                                                        Det_W.user_setpoint],
     limit=50)
 
-RE.preprocessors.append(dark_frame_preprocessor)
+dark_frames_enable = make_decorator(dark_frame_preprocessor)()
+#RE.preprocessors.append(dark_frame_preprocessor)
 # not doing this because EVERYTHING that goes through RE will get a dark image - this is excessive
 
 def buildeputable(start, stop, step, widfract, startinggap,name):
@@ -313,7 +314,7 @@ def quicksnap():
     sw_det.set_binning(binsave)
 
 
-#@make_decorator(dark_frame_preprocessor)
+@dark_frames_enable
 def snapshot(secs=.1):
     '''
     snap of detectors to clear any charge from light hitting them - needed before starting scans or snapping images
