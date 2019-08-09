@@ -40,7 +40,7 @@ def factory(name, start_doc):
                                                        #'{event[data][en_energy]:.2f}eV-'
                                                        ),
                                           directory=USERDIR)
-    SWserializer(name,doc)
+    name, doc = SWserializer(name,doc)
     serializercsv = csv.Serializer(file_prefix=('{start[institution]}/'
                                                 '{start[user_name]}/'
                                                 '{start[project_name]}/'
@@ -58,13 +58,13 @@ def factory(name, start_doc):
         swname, swdoc = WAXSsubtractor(swname, swdoc)
         SWserializer(swname, swdoc)
 
-    def subfactory(name, descriptor_doc):
-        dname, ddoc = filler(name, descriptor_doc)
-        if doc['name'] in ['primary', 'dark']:
+    def subfactory(dname, descriptor_doc):
+        dname, ddoc = filler(dname, descriptor_doc)
+        if ddoc['name'] in ['primary', 'dark']:
             returnlist = []
-            if 'Synced' in start_doc['detectors']:
-                SAXSsubtractor('start', start_doc)
-                WAXSsubtractor('start', start_doc)
+            if 'Synced' in doc['detectors']:
+                name, doc = SAXSsubtractor(name, doc)
+                name, doc = WAXSsubtractor(name, doc)
                 dname, ddoc = SAXSsubtractor(dname, ddoc)
                 dname, ddoc = WAXSsubtractor(dname, ddoc)
                 SWserializer(dname, ddoc)
