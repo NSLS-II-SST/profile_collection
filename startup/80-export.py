@@ -68,9 +68,9 @@ def factory(name, start_doc):
                 SAXSsubtractor('start', start_doc)
                 WAXSsubtractor('start', start_doc)
                 SWserializer('start', start_doc)
-                #name, doc = SAXSsubtractor(name, doc)
-                #name, doc = WAXSsubtractor(name, doc)
-                #SWserializer(name, doc)
+                name, doc = SAXSsubtractor(name, doc)
+                name, doc = WAXSsubtractor(name, doc)
+                SWserializer(name, doc)
                 returnlist.append(fill_subtract_and_serialize)
             if descriptor_doc['name'] == 'primary':
                 serializercsv('start', start_doc)
