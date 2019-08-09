@@ -62,9 +62,9 @@ def factory(name, start_doc):
         dname, ddoc = filler(dname, descriptor_doc)
         if ddoc['name'] in ['primary', 'dark']:
             returnlist = []
-            if 'Synced' in doc['detectors']:
-                name, doc = SAXSsubtractor(name, doc)
-                name, doc = WAXSsubtractor(name, doc)
+            if 'Synced' in start_doc['detectors']:
+                name, doc = SAXSsubtractor('start', start_doc)
+                WAXSsubtractor(name, doc)
                 dname, ddoc = SAXSsubtractor(dname, ddoc)
                 dname, ddoc = WAXSsubtractor(dname, ddoc)
                 SWserializer(dname, ddoc)
