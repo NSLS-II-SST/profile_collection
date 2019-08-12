@@ -82,6 +82,7 @@ del darkoff
 
 
 def dark_plan():
+    shutterstate = sw_det.saxs.cam.shutter_mode.read()['shutter mode']['value']
     yield from bps.mv(sw_det.saxs.cam.shutter_mode,0) # disable shutter
     yield from bps.unstage(sw_det)
     yield from bps.stage(sw_det)
@@ -90,14 +91,16 @@ def dark_plan():
     snapshot = bluesky_darkframes.SnapshotDevice(sw_det)
     yield from bps.unstage(sw_det)
     yield from bps.stage(sw_det)
-    yield from bps.mv(sw_det.saxs.cam.shutter_mode,2) # enable shutter
+    yield from bps.mv(sw_det.saxs.cam.shutter_mode,shutterstate)  # put shutter back in previous state
     return snapshot
 
 
 dark_frame_preprocessor = bluesky_darkframes.DarkFramePreprocessor(
-    dark_plan=dark_plan, max_age=1000, locked_signals=[sw_det.saxs.cam.acquire_time,
-                                                       Det_S.user_setpoint,
-                                                       Det_W.user_setpoint],
+    dark_plan=dark_plan,
+    max_age=1000,
+    locked_signals=[sw_det.saxs.cam.acquire_time,
+                    Det_S.user_setpoint,
+                    Det_W.user_setpoint],
     limit=50)
 
 dark_frames_enable = make_decorator(dark_frame_preprocessor)()
