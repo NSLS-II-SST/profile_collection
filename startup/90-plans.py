@@ -82,7 +82,7 @@ del darkoff
 
 
 def dark_plan():
-    shutterstate = sw_det.saxs.cam.shutter_mode.setpoint['shutter mode']['value']
+    shutterstate = sw_det.saxs.cam.shutter_mode.setpoint
     yield from bps.mv(sw_det.saxs.cam.shutter_mode,0) # disable shutter
     yield from bps.unstage(sw_det)
     yield from bps.stage(sw_det)
