@@ -143,29 +143,6 @@ class SyncedDetectors(Device):
         self.lightwason = None
         super().__init__(*args, **kwargs)
 
-    def stage(self, *args, **kwargs):
-        listout = []
-        listout.append(self.saxs.stage())
-        listout.append(self.waxs.stage())
-        if light.get() is 1:
-            light.off()
-            self.lightwason=True
-            time.sleep(3)
-        else:
-            self.lightwason=False
-        listout.append(self)
-        return listout
-
-    def unstage(self, *args, **kwargs):
-        listout = []
-        listout.append(self.saxs.unstage())
-        listout.append(self.waxs.unstage())
-        if self.lightwason:
-            time.sleep(3)
-            light.on()
-        listout.append(self)
-        return listout
-
     def trigger(self):
         self.waxs.cam.trigger_mode.put(0)
         waxs_status = self.waxs.trigger()
