@@ -3,6 +3,10 @@ import os
 import nslsii
 
 
+# Use caproto not pyepics.
+os.environ['OPHYD_CONTROL_LAYER'] = 'caproto'
+
+
 def colored(text, tint='white', attrs=[]):
     '''
     A simple wrapper around IPython's interface to TermColors
