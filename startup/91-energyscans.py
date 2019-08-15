@@ -108,8 +108,8 @@ def en_scan_core(I400sigs, dets, energy, energies, shuttervalues, times):
     sigcycler += cycler(sw_det.saxs.cam.shutter_mode, shuttervalues.astype(int))
 
     light_was_on = False
-    if light.value is 1:
-        light.off()
+    if samplelight.value is 1:
+        samplelight.off()
         sw_det.shutter_off()
         light_was_on = True
         boxed_text('Warning', 'light was on, taking a quick snapshot to clear CCDs', 'yellow', shrink=True)
@@ -118,7 +118,7 @@ def en_scan_core(I400sigs, dets, energy, energies, shuttervalues, times):
     yield from bp.scan_nd(I400sigs+ dets+ [en,sw_det.saxs.cam.shutter_mode],sigcycler)
 
     if light_was_on:
-        light.on()
+        samplelight.on()
 
 
 def short_carbon_scan(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):

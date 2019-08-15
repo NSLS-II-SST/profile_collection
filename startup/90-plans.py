@@ -324,8 +324,8 @@ def snapshot(secs=.1):
     samsave = RE.md['sample_name']
     samidsave = RE.md['sample_id']
     light_was_on = False
-    if light.value is 1:
-        light.off()
+    if samplelight.value is 1:
+        samplelight.off()
         light_was_on = True
         boxed_text('Warning','light was on, taking a quick snapshot to clear CCDs','yellow',shrink=True)
         sw_det.shutter_off()
@@ -337,7 +337,7 @@ def snapshot(secs=.1):
     RE.md['sample_id'] = '000'
     yield from bp.count([sw_det, en, IzeroMesh,shutter_status], num=1)
     if light_was_on:
-        light.on()
+        samplelight.on()
 
     RE.md['sample_name'] = samsave
     RE.md['sample_id'] = samidsave
