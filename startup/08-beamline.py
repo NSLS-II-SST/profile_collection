@@ -186,13 +186,13 @@ ll_gpwr   = EpicsSignal('XF:07IDB-VA:2{RSoXS:LL-CCG:1}Pwr-Cmd',
 class PDU(EpicsSignal):
 
     def on(self):
-        self.set(1,timeout=2,settle_time=1)
+        yield from bps.mv(self,1)
 
     def off(self):
-        self.set(0,timeout=2,settle_time=1)
+        yield from bps.mv(self, 0)
+        
 
-
-light = PDU('XF:07ID-CT{RG:C1-PDU:1}Sw:8-SP',write_pv='XF:07ID-CT{RG:C1-PDU:1}Sw:8-Sel')
+# light = PDU('XF:07ID-CT{RG:C1-PDU:1}Sw:8-SP',write_pv='XF:07ID-CT{RG:C1-PDU:1}Sw:8-Sel')
 
 
 sd.baseline.extend([ccg_izero,pg_izero,ccg_main,pg_main,ccg_ll,pg_ll,ll_gpwr,psh1,psh4,psh10,psh7,gv14,gv14a,gv15,gv26,gv27,gv27a,gv28,gvTEM,gvll,gvturbo,light])
