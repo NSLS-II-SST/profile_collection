@@ -93,10 +93,16 @@ def dark_plan():
 
 dark_frame_preprocessor = bluesky_darkframes.DarkFramePreprocessor(
     dark_plan=dark_plan,
+    detector=sw_det,
     max_age=1000,
     locked_signals=[sw_det.saxs.cam.acquire_time,
                     Det_S.user_setpoint,
-                    Det_W.user_setpoint],
+                    Det_W.user_setpoint,
+                    sw_det.saxs.cam.bin_x,
+                    sw_det.saxs.cam.bin_y,
+                    sw_det.waxs.cam.bin_x,
+                    sw_det.waxs.cam.bin_y,
+                    ],
     limit=50)
 
 dark_frames_enable = make_decorator(dark_frame_preprocessor)()
