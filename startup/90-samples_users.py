@@ -7,8 +7,8 @@ from copy import deepcopy
 
 
 def user():
-    title = ("User metadata - stored in every scan:")
-    text=''
+    title = "User metadata - stored in every scan:"
+    text = ""
     if len(RE.md["proposal_id"]) > 0 :
         text += '   proposal ID:         '+colored('{}'.format(str(RE.md["proposal_id"])).center(40,' '),'yellow')
     if len(RE.md["user_name"]) > 0 :
@@ -119,18 +119,20 @@ def newuser():
     return user_dict()
 
 
-
 def add_acq(sample_dict,plan_name='full_carbon_scan',arguments='',config='WAXS'):
-    sample_dict['acquisitions'].append({'plan_name':plan_name,'arguments':arguments,'configuration':config})
+    sample_dict['acquisitions'].append({'plan_name': plan_name,
+                                        'arguments': arguments,
+                                        'configuration': config})
     return sample_dict
 
 
-def get_location(sample_dict,motorlist):
+def get_location(motor_list):
     locs = []
-    for motor in motorlist:
+    for motor in motor_list:
         locs.append({'motor' : motor,
                      'position': motor.user_readback.value,
                      'order':0})
+    return locs
 
 
 def sample_set_location(sample_dict):
@@ -139,42 +141,44 @@ def sample_set_location(sample_dict):
 
 
 def get_sample_location():
-    locs = []
-    locs.append({'motor': 'x', 'position': sam_X.user_readback.value, 'order': 0})
-    locs.append({'motor': 'y', 'position': sam_Y.user_readback.value, 'order': 0})
-    locs.append({'motor': 'z', 'position': sam_Z.user_readback.value, 'order': 0})
-    locs.append({'motor': 'th', 'position': sam_Th.user_readback.value, 'order': 0})
+    # locs = []
+    # locs.append({'motor': 'x', 'position': sam_X.user_readback.value, 'order': 0})
+    # locs.append({'motor': 'y', 'position': sam_Y.user_readback.value, 'order': 0})
+    # locs.append({'motor': 'z', 'position': sam_Z.user_readback.value, 'order': 0})
+    # locs.append({'motor': 'th', 'position': sam_Th.user_readback.value, 'order': 0})
+    locs = get_location([sam_X,sam_Y,sam_Z,sam_Th])
     return locs
+
 
 def move_to_location(locs=get_sample_location()):
     locs = sorted(locs, key=itemgetter('order'))
     orderlist = [o for o in collections.Counter([d['order'] for d in locs]).keys()]
-    switch= {'x':sam_X,
-             'y':sam_Y,
-             'z':sam_Z,
-             'th':sam_Th,
-             sam_X:sam_X,
-             sam_Y:sam_Y,
-             sam_Z:sam_Z,
-             sam_Th:sam_Th,
-             slits1.vsize: slits1.vsize,
-             slits1.hsize: slits1.hsize,
-             slits2.vsize: slits2.vsize,
-             slits2.hsize: slits2.hsize,
-             slits3.vsize: slits3.vsize,
-             slits3.hsize: slits3.hsize,
-             slits1.vcenter: slits1.vcenter,
-             slits1.hcenter: slits1.hcenter,
-             slits2.vcenter: slits2.vcenter,
-             slits2.hcenter: slits2.hcenter,
-             slits3.vcenter: slits3.vcenter,
-             slits3.hcenter: slits3.hcenter,
-             Shutter_Y: Shutter_Y,
-             Izero_Y: Izero_Y,
-             Det_W: Det_W,
-             Det_S: Det_S,
-             BeamStopS: BeamStopS,
-             BeamStopW: BeamStopW}
+    switch = {'x': sam_X,
+              'y': sam_Y,
+              'z': sam_Z,
+              'th': sam_Th,
+              sam_X: sam_X,
+              sam_Y: sam_Y,
+              sam_Z: sam_Z,
+              sam_Th: sam_Th,
+              slits1.vsize: slits1.vsize,
+              slits1.hsize: slits1.hsize,
+              slits2.vsize: slits2.vsize,
+              slits2.hsize: slits2.hsize,
+              slits3.vsize: slits3.vsize,
+              slits3.hsize: slits3.hsize,
+              slits1.vcenter: slits1.vcenter,
+              slits1.hcenter: slits1.hcenter,
+              slits2.vcenter: slits2.vcenter,
+              slits2.hcenter: slits2.hcenter,
+              slits3.vcenter: slits3.vcenter,
+              slits3.hcenter: slits3.hcenter,
+              Shutter_Y: Shutter_Y,
+              Izero_Y: Izero_Y,
+              Det_W: Det_W,
+              Det_S: Det_S,
+              BeamStopS: BeamStopS,
+              BeamStopW: BeamStopW}
     for order in orderlist:
         outputlist = [[switch[items['motor']], float(items['position'])] for items in locs if items['order'] == order]
         flat_list = [item for sublist in outputlist for item in sublist]
@@ -190,8 +194,7 @@ def do_acquisitions(acq_list):
         yield from move_to_location(get_location_from_config(acq['configuration']))
         yield from eval(acq['plan_name']+'('+acq['arguments']+')')
 
-if RE.md.get('sample_name') is None:
-    RE.md['sample_name'] = 'sample'
+
 def sample_dict(acq = [],locations = get_sample_location(),sample_name = RE.md['sample_name'],
                 sample_desc = RE.md['sample_desc'],
                 sample_id = RE.md['sample_id'],
@@ -265,6 +268,7 @@ def load_sample(sam_dict):
     RE.md['notes'] = sam_dict['notes']
     yield from move_to_location(locs=sam_dict['location'])
     # sample()
+
 
 def run_sample(sam_dict):
     yield from load_sample(sam_dict)
@@ -466,11 +470,12 @@ def save_samples(sample,filename):
     with open(filename,'w') as f:
         json.dump(samplenew,f,indent=2)
 
+
 def save_samplesxls(sample,filename):
-    switch= {sam_X:'x',
-             sam_Y:'y',
-             sam_Z:'z',
-             sam_Th:'th',
+    switch= {sam_X: 'x',
+             sam_Y: 'y',
+             sam_Z: 'z',
+             sam_Th: 'th',
              'x':  'x',
              'y':  'y',
              'z':  'z',
@@ -498,6 +503,7 @@ def save_samplesxls(sample,filename):
             testdict['location'][j]['motor'] = switch[loc['motor']]
     sampledf = pd.DataFrame.from_dict(testdict,orient='columns')
     sampledf.to_excel(filename)
+
 
 def load_samples(filename):
     with open(filename,'r') as f:
@@ -531,7 +537,7 @@ def sample_by_value_match(bar,key,string):
         print('No Match')
         return None
     elif len(results) > 1 :
-        print('more than one result found, returning them all')
+        print('More than one result found, returning them all')
         return results
 
 

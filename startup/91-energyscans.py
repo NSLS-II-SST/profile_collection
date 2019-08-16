@@ -53,7 +53,7 @@ def full_carbon_scan(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
 
 
 
-def full_carbon_scan_nd(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
+def full_carbon_scan_nd(multiple=1, sigs=[IzeroMesh], dets=[sw_det], energy=en, once_mot= None, once_rstep = 0):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 128 exposures
@@ -87,17 +87,23 @@ def full_carbon_scan_nd(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
     times *= multiple
 
     shutter_values = energies.copy()
-    shutter_values[:] = 2  # the rest of the values are shutter enabled (2)
+    shutter_values[:] = 2  # all the values are shutter enabled (2)
+    # this is because darks are now taken in the preprocessor automatically as needed
+
+    if isinstance(once_mot,EpicsMotor):
+        yield from bps.mvr(once_mot,once_rstep)
+
     # use these energies and exposure times to scan energy and record detectors and signals
     yield from en_scan_core(sigs, dets, energy, energies, shutter_values, times)
+
 
 @dark_frames_enable
 def en_scan_core(I400sigs, dets, energy, energies, shuttervalues, times):
     sw_det.saxs.cam.acquire_time.kind = 'hinted'
-    sw_det.waxs.cam.acquire_time.kind = 'hinted'
+    sw_det.waxs.cam.acquire_time.kind = 'normal'
     sigcycler = cycler(energy, energies)
     for i400channel in I400sigs:
-        i400channel.parent.exposure_time.kind = 'hinted'
+        i400channel.parent.exposure_time.kind = 'normal'
         try:
             sigcycler += cycler(i400channel.parent.exposure_time,times.copy())
         except ValueError:
@@ -117,8 +123,8 @@ def en_scan_core(I400sigs, dets, energy, energies, shuttervalues, times):
 
     yield from bp.scan_nd(I400sigs+ dets+ [en,sw_det.saxs.cam.shutter_mode],sigcycler)
 
-    if light_was_on:
-        samplelight.on()
+    # if light_was_on:
+    #     samplelight.on()    # leaving light off now - this just slows everything down if there are multiple scans
 
 
 def short_carbon_scan(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
