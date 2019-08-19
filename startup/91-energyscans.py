@@ -94,11 +94,11 @@ def full_carbon_scan_nd(multiple=1, sigs=[IzeroMesh], dets=[sw_det], energy=en, 
         yield from bps.mvr(once_mot,once_rstep)
 
 
-    print(times.size)
-    print(energies.size)
-    print(shutter_values.size)
-    print(sigs)
-    print(dets)
+    # print(times.size)
+    # print(energies.size)
+    # print(shutter_values.size)
+    # print(sigs)
+    # print(dets)
     # use these energies and exposure times to scan energy and record detectors and signals
     yield from en_scan_core(sigs, dets, energy, energies, shutter_values, times)
 
@@ -106,7 +106,7 @@ def full_carbon_scan_nd(multiple=1, sigs=[IzeroMesh], dets=[sw_det], energy=en, 
 # @dark_frames_enable
 def en_scan_core(I400sigs, dets, energy, energies, shuttervalues, times):
     sw_det.saxs.cam.acquire_time.kind = 'hinted'
-    sw_det.waxs.cam.acquire_time.kind = 'hinted'
+    sw_det.waxs.cam.acquire_time.kind = 'normal'
     sigcycler = cycler(energy, energies)
     for i400channel in I400sigs:
         i400channel.parent.exposure_time.kind = 'hinted'
