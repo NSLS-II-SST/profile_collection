@@ -103,7 +103,7 @@ def full_carbon_scan_nd(multiple=1, sigs=[IzeroMesh], dets=[sw_det], energy=en, 
     yield from en_scan_core(sigs, dets, energy, energies, shutter_values, times)
 
 
-@dark_frames_enable
+# @dark_frames_enable
 def en_scan_core(I400sigs, dets, energy, energies, shuttervalues, times):
     sw_det.saxs.cam.acquire_time.kind = 'hinted'
     sw_det.waxs.cam.acquire_time.kind = 'normal'
