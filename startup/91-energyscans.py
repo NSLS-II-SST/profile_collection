@@ -93,6 +93,10 @@ def full_carbon_scan_nd(multiple=1, sigs=[IzeroMesh], dets=[sw_det], energy=en, 
     if isinstance(once_mot,EpicsMotor):
         yield from bps.mvr(once_mot,once_rstep)
 
+
+    print(times.size)
+    print(energies.size)
+    print(shutter_values.size)
     # use these energies and exposure times to scan energy and record detectors and signals
     yield from en_scan_core(sigs, dets, energy, energies, shutter_values, times)
 
