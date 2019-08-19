@@ -106,10 +106,10 @@ def full_carbon_scan_nd(multiple=1, sigs=[IzeroMesh], dets=[sw_det], energy=en, 
 # @dark_frames_enable
 def en_scan_core(I400sigs, dets, energy, energies, shuttervalues, times):
     sw_det.saxs.cam.acquire_time.kind = 'hinted'
-    sw_det.waxs.cam.acquire_time.kind = 'normal'
+    sw_det.waxs.cam.acquire_time.kind = 'hinted'
     sigcycler = cycler(energy, energies)
     for i400channel in I400sigs:
-        i400channel.parent.exposure_time.kind = 'normal'
+        i400channel.parent.exposure_time.kind = 'hinted'
         try:
             sigcycler += cycler(i400channel.parent.exposure_time,times.copy())
         except ValueError:
