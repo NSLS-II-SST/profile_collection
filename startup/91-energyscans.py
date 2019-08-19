@@ -113,13 +113,13 @@ def en_scan_core(I400sigs, dets, energy, energies, shuttervalues, times):
     sigcycler += cycler(sw_det.waxs.cam.acquire_time, times.copy())
     sigcycler += cycler(sw_det.saxs.cam.shutter_mode, shuttervalues.astype(int))
 
-    light_was_on = False
-    if samplelight.value is 1:
-        samplelight.off()
-        sw_det.shutter_off()
-        light_was_on = True
-        boxed_text('Warning', 'light was on, taking a quick snapshot to clear CCDs', 'yellow', shrink=True)
-        yield from quicksnap()
+    # light_was_on = False
+    # if samplelight.value is 1:
+    #     samplelight.off()
+    #     sw_det.shutter_off()
+    #     light_was_on = True
+    #     boxed_text('Warning', 'light was on, taking a quick snapshot to clear CCDs', 'yellow', shrink=True)
+    #     yield from quicksnap()
 
     yield from bp.scan_nd(I400sigs+ dets+ [en,sw_det.saxs.cam.shutter_mode],sigcycler)
 
