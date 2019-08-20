@@ -320,13 +320,28 @@ def quicksnap():
 
 
 # @dark_frames_enable
-def snapshot(secs=.1):
+def snapshot(secs=0, count=1, name='snap'):
     '''
     snap of detectors to clear any charge from light hitting them - needed before starting scans or snapping images
     :return:
     '''
+    if count==1:
+        counts = ''
+    elif count <=0 :
+        count = 1
+        counts = ''
+    else:
+        count = round(count)
+        counts = 's'
+    if secs <= 0:
+        secs = sw_det.saxs.cam.acquire_time.value
 
+    if secs == 1:
+        secss = ''
+    else:
+        secss = 's'
 
+    boxed_text('Snapshot','Taking {} snapshot{} of {} second{} named {}'.format(count,counts,secs, secss, name),'red')
     samsave = RE.md['sample_name']
     samidsave = RE.md['sample_id']
     light_was_on = False
@@ -337,11 +352,11 @@ def snapshot(secs=.1):
         sw_det.shutter_off()
         yield from quicksnap()
         sw_det.shutter_on()
-
-    set_exposure(secs)
-    RE.md['sample_name'] = 'snap'
+    if secs:
+        set_exposure(secs)
+    RE.md['sample_name'] = name
     RE.md['sample_id'] = '000'
-    yield from bp.count([sw_det, en, IzeroMesh,shutter_status], num=1)
+    yield from bp.count([sw_det, en, IzeroMesh,shutter_status], num=count)
     if light_was_on:
         samplelight.on()
 
@@ -359,3 +374,14 @@ def snap(line):
         if secs > 0 and secs < 100:
             RE(snapshot(secs))
 del snap
+
+@register_line_magic
+def snaps(line):
+    try:
+        num = int(line)
+    except:
+        RE(snapshot())
+    else:
+        if num > 0 and num < 100:
+            RE(snapshot(count=num))
+del snaps
