@@ -52,6 +52,44 @@ def full_carbon_scan(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
     yield from en_scan_core(sigs, dets, energy, energies, shuttervalue, times)
 
 
+def short_carbon_scan(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
+    '''
+    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
+    this results in 128 exposures
+
+
+    :param multiple: adjustment for exposure times
+    :param mesh: which Izero channel to use
+    :param det: which detector to use
+    :param energy: what energy motor to scan
+    :return: perform scan
+
+    normal scan takes ~ 12 minutes to complete
+    '''
+    beamline_status()
+    if len(read_input("Starting a Carbon energy scan hit any key in the next 3 seconds to abort", "abort", "", 3)) > 0:
+        return
+
+    # create a list of energies
+    energies = np.arange(270,282,1)
+    energies = np.append(energies,np.arange(282,286,.25))
+    energies = np.append(energies,np.arange(286,292,.5))
+    energies = np.append(energies,np.arange(292,306,1))
+    energies = np.append(energies,np.arange(306,320,4))
+    energies = np.append(energies,np.arange(320,350,10))
+    times = energies.copy()
+
+    # Define exposures times for different energy ranges
+    times[energies<282] = 1
+    times[(energies < 286) & (energies >= 282)] = 5
+    times[energies >= 286] = 2
+    times *= multiple
+
+    shuttervalue = energies.copy()
+    shuttervalue[:] = 2 # the rest of the values are shutter enabled (2)
+    # use these energies and exposure times to scan energy and record detectors and signals
+    yield from en_scan_core(sigs, dets,energy,energies,shuttervalue,times)
+
 
 def full_carbon_scan_nd(multiple=1, sigs=[IzeroMesh], dets=[sw_det], energy=en, once_mot= None, once_rstep = 0):
     '''

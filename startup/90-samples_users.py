@@ -451,10 +451,10 @@ def list_samples(bar):
 
 
 def save_samples(sample,filename):
-    switch= {sam_X:'x',
-             sam_Y:'y',
-             sam_Z:'z',
-             sam_Th:'th',
+    switch= {sam_X.name:'x',
+             sam_Y.name:'y',
+             sam_Z.name:'z',
+             sam_Th.name:'th',
              'x':  'x',
              'y':  'y',
              'z':  'z',
@@ -463,23 +463,25 @@ def save_samples(sample,filename):
     if isinstance(samplenew,list):
         for i,sam in enumerate(samplenew):
             for j,loc in enumerate(sam['location']):
-                 samplenew[i]['location'][j]['motor']= switch[loc['motor']]
+                if isinstance(switch[loc['motor'],Device]) :
+                    samplenew[i]['location'][j]['motor']= switch[loc['motor'].name]
     else:
         for j,loc in enumerate(samplenew['location']):
-            samplenew['location'][j]['motor'] = switch[loc['motor']]
+            if isinstance(switch[loc['motor'], Device]):
+                samplenew['location'][j]['motor'] = switch[loc['motor'].name]
     with open(filename,'w') as f:
         json.dump(samplenew,f,indent=2)
 
 
 def save_samplesxls(sample,filename):
-    switch= {sam_X: 'x',
-             sam_Y: 'y',
-             sam_Z: 'z',
-             sam_Th: 'th',
-             'x':  'x',
-             'y':  'y',
-             'z':  'z',
-             'th': 'th'}
+    switch= {sam_X.name:'x',
+             sam_Y.name:'y',
+             sam_Z.name:'z',
+             sam_Th.name:'th',
+             'x':'x',
+             'y':'y',
+             'z':'z',
+             'th':'th'}
     sampledf = pd.DataFrame.from_dict(sample, orient='columns')
     sampledf.to_excel('temp.xls')
 
@@ -497,10 +499,12 @@ def save_samplesxls(sample,filename):
     if isinstance(testdict,list):
         for i,sam in enumerate(testdict):
             for j,loc in enumerate(sam['location']):
-                 testdict[i]['location'][j]['motor']= switch[loc['motor']]
+                if isinstance(loc['motor'],Device):
+                    testdict[i]['location'][j]['motor']= switch[loc['motor'].name]
     else:
         for j,loc in enumerate(testdict['location']):
-            testdict['location'][j]['motor'] = switch[loc['motor']]
+            if isinstance(loc['motor'], Device):
+                testdict['location'][j]['motor'] = switch[loc['motor'].name]
     sampledf = pd.DataFrame.from_dict(testdict,orient='columns')
     sampledf.to_excel(filename)
 
