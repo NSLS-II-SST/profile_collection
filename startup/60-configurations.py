@@ -63,10 +63,10 @@ def slits_in_SAXS():
                       slits2.vcenter, 0,
                       slits2.hsize, .6,
                       slits2.hcenter, 0,
-                      slits3.vsize, .8,
-                      slits3.vcenter, 0,
-                      slits3.hsize, .8,
-                      slits3.hcenter, 0)
+                      slits3.vsize, 1,
+                      slits3.vcenter, .3,
+                      slits3.hsize, .9,
+                      slits3.hcenter, .1)
 def slits_out():
     yield from bps.mv(slits1.vsize, 10,
                       slits1.hsize, 10,
@@ -160,7 +160,7 @@ def SAXS():
         'order': 0},
         {
         'motor':    slits1.vcenter,
-        'position': 0.15,
+        'position': 0,
         'order': 0},
         {
         'motor':    slits1.hsize,
@@ -168,27 +168,27 @@ def SAXS():
         'order': 0},
         {
         'motor':    slits1.hcenter,
-        'position': 0.1,
+        'position': 0,
         'order': 0},
         {
         'motor':    slits2.vsize,
-        'position': .6,
+        'position': .4,
         'order': 0},
         {
         'motor':    slits2.vcenter,
-        'position': .15,
+        'position': 0,
         'order': 0},
         {
         'motor':    slits2.hsize,
-        'position': .2,
+        'position': .4,
         'order': 0},
         {
         'motor':    slits2.hcenter,
-        'position': .2,
+        'position': 0,
         'order': 0},
         {
         'motor':    slits3.vsize,
-        'position': .8,
+        'position': 1,
         'order': 0},
         {
         'motor':    slits3.vcenter,
@@ -196,7 +196,7 @@ def SAXS():
         'order': 0},
         {
         'motor':    slits3.hsize,
-        'position': .6,
+        'position': .9,
         'order': 0},
         {
         'motor':    slits3.hcenter,
