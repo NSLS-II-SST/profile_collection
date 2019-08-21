@@ -56,17 +56,17 @@ def BS_out():
 
 def slits_in_SAXS():
     yield from bps.mv(slits1.vsize, .2,
-                      slits1.vcenter, .15,
+                      slits1.vcenter, 0,
                       slits1.hsize, .2,
-                      slits1.hcenter, .1,
+                      slits1.hcenter, 0,
                       slits2.vsize, .6,
-                      slits2.vcenter, .15,
-                      slits2.hsize, .2,
-                      slits2.hcenter, .2,
+                      slits2.vcenter, 0,
+                      slits2.hsize, .6,
+                      slits2.hcenter, 0,
                       slits3.vsize, .8,
-                      slits3.vcenter, .3,
-                      slits3.hsize, .6,
-                      slits3.hcenter, .1)
+                      slits3.vcenter, 0,
+                      slits3.hsize, .8,
+                      slits3.hcenter, 0)
 def slits_out():
     yield from bps.mv(slits1.vsize, 10,
                       slits1.hsize, 10,
@@ -149,7 +149,7 @@ def SAXSmode():
     yield from slits_in_SAXS()
     yield from bps.mv(Shutter_Y, 3,
                       Izero_Y, -29,
-                      Det_S, -94,
+                      Det_S, -30,
                       Det_W, -94,
                       BeamStopW, 3,
                       BeamStopS, 67.4)
