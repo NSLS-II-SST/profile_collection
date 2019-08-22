@@ -52,7 +52,7 @@ def full_carbon_scan(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
     yield from en_scan_core(sigs, dets, energy, energies, shuttervalue, times)
 
 
-def short_carbon_scan(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
+def short_carbon_scan_nd(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 128 exposures
