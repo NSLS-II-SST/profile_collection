@@ -103,18 +103,18 @@ class I400(Device):
     Channel_4 = Component(I400Channel, ':IC4_MON', kind='normal')
 
 
-RSoXS_DM = I400('XF:07ID-ES1{DMR:I400-1}', name='RSoXS Diagnostic Picoammeter')
+RSoXS_DM = I400('XF:07ID-ES1{DMR:I400-1}', name='Diagnostic')
 DM4_PD = RSoXS_DM.Channel_1
 DM4_PD.name = 'RSoXS Downstream Current'
-BSS_I = RSoXS_DM.Channel_2
-BSS_I.name = 'RSoXS SAXS Beamstop Current'
+Drain = RSoXS_DM.Channel_2
+Drain.name = 'RSoXS Sample Drain Current'
 IzeroMesh = RSoXS_DM.Channel_3
 IzeroMesh.name = 'Izero Mesh Drain Current'
 IzeroDiode = RSoXS_DM.Channel_4
 IzeroDiode.name = 'Izero Diode Current'
 
 
-RSoXS_Slits = I400('XF:07ID-ES1{Slt1:I400-1}', name='RSoXS Slits Picoammeter')
+RSoXS_Slits = I400('XF:07ID-ES1{Slt1:I400-1}', name='Slits Diagnostic')
 SlitOut_I = RSoXS_Slits.Channel_1
 SlitOut_I.name = 'RSoXS Slit Outboard Current'
 SlitBottom_I = RSoXS_Slits.Channel_2
@@ -125,7 +125,7 @@ SlitInboard_I = RSoXS_Slits.Channel_4
 SlitInboard_I.name = 'RSoXS Slit Inboard Current'
 
 
-Downstream_I400 = I400('XF:07ID-BI{DM7:I400-1}', name='RSoXS Downstream Picoammeter')
+Downstream_I400 = I400('XF:07ID-BI{DM7:I400-1}', name='Downstream Diagnostic')
 TransmissionDiode = Downstream_I400.Channel_4
 TransmissionDiode.name = 'RSoXS Transmission Photodiode'
 

@@ -13,8 +13,8 @@ class UndulatorMotor(EpicsMotor):
 epu_gap = UndulatorMotor('SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr', name='EPU 60 Gap',kind='normal')
 
 class Monochromator(PVPositioner):
-    setpoint = Cpt(EpicsSignal,':ENERGY_SP')
-    readback = Cpt(EpicsSignalRO, ':ENERGY_MON')
+    setpoint = Cpt(EpicsSignal,':ENERGY_SP', kind='normal')
+    readback = Cpt(EpicsSignalRO, ':ENERGY_MON',kind='hinted')
 
     grating = Cpt(prettymotor, 'GrtP}Mtr', name="Mono Grating", kind='normal')
     mirror2 = Cpt(prettymotor, 'MirP}Mtr', name="Mono Mirror", kind='normal')
@@ -25,7 +25,7 @@ class Monochromator(PVPositioner):
     done_value = 1
     stop_signal = Cpt(EpicsSignal, ':ENERGY_ST_CMD')
 
-mono_en= Monochromator('XF:07ID1-OP{Mono:PGM1-Ax::', name='Monochromator Energy',kind='normal')
+mono_en= Monochromator('XF:07ID1-OP{Mono:PGM1-Ax:', name='Monochromator Energy',kind='normal')
 
 def epugap_from_energy(energy, harmonic = 1, polarization = 0):
     ''' this calculation was from Cherno's notebook data'''
