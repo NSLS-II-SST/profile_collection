@@ -104,8 +104,8 @@ class I400(Device):
 
 
 RSoXS_DM = I400('XF:07ID-ES1{DMR:I400-1}', name='RSoXS Diagnostic Picoammeter')
-BSW_I = RSoXS_DM.Channel_1
-BSW_I.name = 'RSoXS WAXS Beamstop Current'
+DM4_PD = RSoXS_DM.Channel_1
+DM4_PD.name = 'RSoXS Downstream Current'
 BSS_I = RSoXS_DM.Channel_2
 BSS_I.name = 'RSoXS SAXS Beamstop Current'
 IzeroMesh = RSoXS_DM.Channel_3
@@ -137,7 +137,7 @@ TransmissionDiode.name = 'RSoXS Transmission Photodiode'
 # BeamstopS_I = EpicsSignal('XF:07ID-ES1{DMR:I400-1}:IC2_MON', name='SAXS Beamstop Current', kind='normal')
 # IzeroMesh   = EpicsSignal('XF:07ID-ES1{DMR:I400-1}:IC3_MON', name='Izero Mesh Drain Current', kind='normal')
 # IzeroDiode  = EpicsSignal('XF:07ID-ES1{DMR:I400-1}:IC4_MON', name='Izero Diode Current', kind='normal')
-DM4_PD = EpicsSignal('XF:07ID-BI{DM5:F4}Cur:I1-I', name='DM4 Current', kind='hinted')
+DM4_PD = EpicsSignal('XF:07ID-BI{DM5:F4}Cur:I3-I', name='DM4 Current', kind='hinted')
 
 
 sd.monitors.extend([ ring_current])
