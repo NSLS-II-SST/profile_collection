@@ -13,11 +13,17 @@ class UndulatorMotor(EpicsMotor):
 epu_gap = UndulatorMotor('SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr', name='EPU 60 Gap',kind='normal')
 
 class Monochromator(PVPositioner):
-    setpoint = Cpt(EpicsSignal,'ENERGY_SP')
-    readback = Cpt(EpicsSignalRO, 'ENERGY_MON')
-    done = Cpt(EpicsSignalRO, 'ERDY_STS')
+    setpoint = Cpt(EpicsSignal,':ENERGY_SP')
+    readback = Cpt(EpicsSignalRO, ':ENERGY_MON')
+
+    grating = Cpt(prettymotor, 'GrtP}Mtr', name="Mono Grating", kind='normal')
+    mirror2 = Cpt(prettymotor, 'MirP}Mtr', name="Mono Mirror", kind='normal')
+    cff = Cpt(EpicsSignal, ':CFF_SP', name="Mono CFF", kind='normal')
+    vls = Cpt(EpicsSignal, ':VLS_B2.A', name="Mono CFF", kind='normal')
+
+    done = Cpt(EpicsSignalRO, ':ERDY_STS')
     done_value = 1
-    stop_signal = Cpt(EpicsSignal, 'ENERGY_ST_CMD')
+    stop_signal = Cpt(EpicsSignal, ':ENERGY_ST_CMD')
 
 mono_en= Monochromator('XF:07ID1-OP{Mono:PGM1-Ax::', name='Monochromator Energy',kind='normal')
 
@@ -110,12 +116,8 @@ class EnPos(PseudoPositioner):
 
     # real motors
 
-    monoen = Cpt(Monochromator, 'XF:07ID1-OP{Mono:PGM1-Ax::',kind='hinted',name='Mono Energy')
+    monoen = Cpt(Monochromator, 'XF:07ID1-OP{Mono:PGM1-Ax:',kind='hinted',name='Mono Energy')
     epugap = Cpt(UndulatorMotor, 'SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr',kind='normal',name='EPU Gap')
-    grating = Cpt(prettymotor, 'XF:07ID1-OP{Mono:PGM1-Ax:GrtP}Mtr', name="Mono Grating", kind='normal')
-    mirror2 = Cpt(prettymotor, 'XF:07ID1-OP{Mono:PGM1-Ax:MirP}Mtr', name="Mono Mirror", kind='normal')
-    cff = Cpt(EpicsSignal, 'XF:07ID1-OP{Mono:PGM1-Ax::CFF_SP', name="Mono CFF", kind='normal')
-    vls = Cpt(EpicsSignal, 'XF:07ID1-OP{Mono:PGM1-Ax::VLS_B2.A', name="Mono CFF", kind='normal')
 
     @pseudo_position_argument
     def forward(self, pseudo_pos):
@@ -143,12 +145,12 @@ class EnPos(PseudoPositioner):
             colored('{:.2f}'.format(self.monoen.readback.value).rstrip('0').rstrip('.'),'yellow'),
             colored('{:.2f}'.format(self.epugap.user_setpoint.value).rstrip('0').rstrip('.'),'yellow'),
             colored('{:.2f}'.format(self.epugap.user_readback.value).rstrip('0').rstrip('.'),'yellow'),
-            colored('{:.2f}'.format(self.grating.user_setpoint.value).rstrip('0').rstrip('.'),'yellow'),
-            colored('{:.2f}'.format(self.grating.user_readback.value).rstrip('0').rstrip('.'),'yellow'),
-            colored('{:.2f}'.format(self.mirror2.user_setpoint.value).rstrip('0').rstrip('.'),'yellow'),
-            colored('{:.2f}'.format(self.mirror2.user_readback.value).rstrip('0').rstrip('.'),'yellow'),
-            colored('{:.2f}'.format(self.cff.value).rstrip('0').rstrip('.'),'yellow'),
-            colored('{:.2f}'.format(self.vls.value).rstrip('0').rstrip('.'),'yellow'))
+            colored('{:.2f}'.format(self.monoen.grating.user_setpoint.value).rstrip('0').rstrip('.'),'yellow'),
+            colored('{:.2f}'.format(self.monoen.grating.user_readback.value).rstrip('0').rstrip('.'),'yellow'),
+            colored('{:.2f}'.format(self.monoen.mirror2.user_setpoint.value).rstrip('0').rstrip('.'),'yellow'),
+            colored('{:.2f}'.format(self.monoen.mirror2.user_readback.value).rstrip('0').rstrip('.'),'yellow'),
+            colored('{:.2f}'.format(self.monoen.cff.value).rstrip('0').rstrip('.'),'yellow'),
+            colored('{:.2f}'.format(self.monoen.vls.value).rstrip('0').rstrip('.'),'yellow'))
 
     def where(self):
         return ('Beamline Energy : {}').format(
