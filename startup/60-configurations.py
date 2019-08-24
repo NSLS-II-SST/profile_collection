@@ -257,7 +257,7 @@ def WAXS():
         'order': 0},
         {
         'motor':    slits2.vsize,
-        'position': .65,
+        'position': .75,
         'order': 0},
         {
         'motor':    slits2.vcenter,
@@ -265,7 +265,7 @@ def WAXS():
         'order': 0},
         {
         'motor':    slits2.hsize,
-        'position': 1.35,
+        'position': 1.45,
         'order': 0},
         {
         'motor':    slits2.hcenter,
@@ -273,19 +273,19 @@ def WAXS():
         'order': 0},
         {
         'motor':    slits3.vsize,
-        'position': 1.1,
+        'position': 1.25,
         'order': 0},
         {
         'motor':    slits3.vcenter,
-        'position': 0.3,
+        'position': 0.50,
         'order': 0},
         {
         'motor':    slits3.hsize,
-        'position': 1.5,
+        'position': 1.45,
         'order': 0},
         {
         'motor':    slits3.hcenter,
-        'position': 0.35,
+        'position': 0.225,
         'order': 0},
         {
         'motor':    Shutter_Y,
@@ -305,7 +305,7 @@ def WAXS():
         'order': 0},
         {
         'motor':    BeamStopW,
-        'position': 70.5,
+        'position': 71.1,
         'order': 0},
         {
         'motor':    BeamStopS,
