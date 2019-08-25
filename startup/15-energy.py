@@ -178,3 +178,19 @@ def e(line):
         RE(bps.mv(en,loc))
         boxed_text('Beamline Energy', en.where(), 'lightpurple', shrink=True)
 del e
+
+
+def cff_to_13():
+    energy = en.monoen.setpoint.value
+    yield from bps.mv(en.monoen.grating.user_offset,-0.3511242679026303,
+                      en.monoen.mirror2.user_offset,-3.4610179934346594,
+                      en.monoen.cff,1.3)
+    yield from bps.mv(en,energy)
+
+
+def cff_to_199():
+    energy = en.monoen.setpoint.value
+    yield from bps.mv(en.monoen.grating.user_offset,-0.098373,
+                      en.monoen.mirror2.user_offset,-3.237992,
+                      en.monoen.cff,1.3)
+    yield from bps.mv(en,energy)
