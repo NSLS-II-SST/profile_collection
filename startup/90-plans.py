@@ -322,7 +322,7 @@ def quicksnap():
 
 
 # @dark_frames_enable
-def snapshot(secs=0, count=1, name='snap'):
+def snapshot(secs=0, count=1, name='snap', energy = en.user_setpoint):
     '''
     snap of detectors to clear any charge from light hitting them - needed before starting scans or snapping images
     :return:
@@ -343,7 +343,15 @@ def snapshot(secs=0, count=1, name='snap'):
     else:
         secss = 's'
 
-    boxed_text('Snapshot','Taking {} snapshot{} of {} second{} named {}'.format(count,counts,secs, secss, name),'red')
+    if abs(en.user_setpoint - energy) > .05 :
+        yield from bps.mv(en,energy)
+
+    boxed_text('Snapshot','Taking {} snapshot{} of {} second{} named {} at {} eV'.format(count,
+                                                                                         counts,
+                                                                                         secs,
+                                                                                         secss,
+                                                                                         name,
+                                                                                         energy),'red')
     samsave = RE.md['sample_name']
     samidsave = RE.md['sample_id']
     light_was_on = False
@@ -387,3 +395,20 @@ def snaps(line):
         if num > 0 and num < 100:
             RE(snapshot(count=num))
 del snaps
+
+
+
+def spiralsearch(radius=2, stepsize=.2):
+
+    x_center = sam_X.user_setpoint.value
+    y_center = sam_Y.user_setpoint.value
+    num = round(radius / stepsize)
+
+    yield from spiral_square([sw_det, en], sam_X, sam_Y, x_center=x_center, y_center=y_center,
+                     x_range=radius, y_range=radius, x_num=num, y_num=num)
+
+
+def spiralsearch_all(barin=[]):
+    for sample in barin:
+        yield from load_sample(sample)
+        yield from spiralsearch()
