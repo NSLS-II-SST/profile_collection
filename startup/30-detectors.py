@@ -160,8 +160,8 @@ class SyncedDetectors(Device):
 
     def trigger(self):
         self.waxs.cam.trigger_mode.put(0)
-        self.saxs.transform_type = 1
-        self.waxs.transform_type = 3
+        self.waxs.trans1.type.put(self.waxs.transform_type)
+        self.saxs.trans1.type.put(self.saxs.transform_type)
         waxs_status = self.waxs.trigger()
         #time.sleep(0.005)
         saxs_status = self.saxs.trigger()  # not sure this is needed?
