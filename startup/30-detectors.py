@@ -140,15 +140,19 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
 
 
 saxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:1}', name='Small Angle CCD Detector',
-                                  read_attrs=['tiff', 'stats1.total'],transform_type = 1)
+                                  read_attrs=['tiff', 'stats1.total'])
 waxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:2}', name='Wide Angle CCD Detector',
-                                  read_attrs=['tiff', 'stats1.total'],transform_type = 3)
-
+                                  read_attrs=['tiff', 'stats1.total'])
+saxs_det.transform_type=1
+waxs_det.transform_type=3
 
 
 class SyncedDetectors(Device):
     saxs = C(RSOXSGreatEyesDetector, 'XF:07ID1-ES:1{GE:1}',read_attrs=['tiff', 'stats1.total'],name="Small Angle CCD Detector")
     waxs = C(RSOXSGreatEyesDetector, 'XF:07ID1-ES:1{GE:2}',read_attrs=['tiff', 'stats1.total'],name="Wide Angle CCD Detector")
+    saxs.transform_type = 1
+    waxs.transform_type = 3
+
 
     def __init__(self, *args, **kwargs):
         self.lightwason = None
