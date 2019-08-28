@@ -146,7 +146,7 @@ def very_short_carbon_scan_nd(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=e
     sample()
     #beamline_status()
     #if len(read_input("Starting a Carbon energy scan hit any key in the next 3 seconds to abort", "abort", "", 3)) > 0:
-        return
+    #    return
 
     # create a list of energies
     energies = np.arange(270,282,2)
