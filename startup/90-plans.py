@@ -82,7 +82,7 @@ del darkoff
 
 
 def dark_plan():
-    sw_det.saxs.sync.read()
+
     shutterstate = sw_det.saxs.cam.sync.setpoint
     yield from bps.mv(sw_det.saxs.cam.sync,0) # disable shutter
     yield from bps.trigger(sw_det, group='darkframe-trigger')
