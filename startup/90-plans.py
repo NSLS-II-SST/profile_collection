@@ -399,7 +399,6 @@ del snaps
 
 
 def spiralsearch(radius=2, stepsize=.2):
-
     x_center = sam_X.user_setpoint.value
     y_center = sam_Y.user_setpoint.value
     num = round(radius / stepsize)

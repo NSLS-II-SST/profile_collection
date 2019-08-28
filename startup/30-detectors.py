@@ -146,7 +146,7 @@ class SyncedDetectors(Device):
     def trigger(self):
         self.waxs.cam.trigger_mode.put(0)
         waxs_status = self.waxs.trigger()
-        time.sleep(0.005)
+        #time.sleep(0.005)
         saxs_status = self.saxs.trigger()  # not sure this is needed?
         return saxs_status & waxs_status
 
