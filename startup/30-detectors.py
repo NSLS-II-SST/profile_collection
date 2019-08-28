@@ -55,12 +55,12 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
             boxed_text("Temperature Warning!!!!",
                       self.cooling_state()+
                       "\nPlease wait until temperature has stabilized before collecting important data.",'yellow',85)
-        return [self].append(super().stage(*args, **kwargs))
         self.trans1.enable.set(1)
-        self.trans1.type.set(transform_type)
+        self.trans1.type.set(self.transform_type)
         self.image.nd_array_port.set('TRANS1')
         self.cam.shutter_close_delay.set(0.001)
         self.cam.shutter_open_delay.set(0.150)
+        return [self].append(super().stage(*args, **kwargs))
 
     def shutter(self):
         switch = {
@@ -143,8 +143,8 @@ saxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:1}', name='Small Angle CCD D
                                   read_attrs=['tiff', 'stats1.total'])
 waxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:2}', name='Wide Angle CCD Detector',
                                   read_attrs=['tiff', 'stats1.total'])
-saxs_det.transform_type=1
-waxs_det.transform_type=3
+saxs_det.transform_type = 1
+waxs_det.transform_type = 3
 
 
 class SyncedDetectors(Device):
