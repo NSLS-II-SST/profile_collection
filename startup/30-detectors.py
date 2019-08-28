@@ -66,18 +66,18 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
     def shutter(self):
         switch = {
             0:'disabled',
-            1:'unknown',
+            1:'enabled',
             3:'unknown',
             4:'unknown',
-            2:'enabled'
+            2:'unknown'
         }
-        return ('Shutter is {}'.format(switch[self.cam.shutter_mode.value]))
+        return ('Shutter is {}'.format(switch[self.cam.sync.value]))
 
     def shutter_on(self):
-        self.cam.shutter_mode.set(2)
+        self.cam.sync.set(1)
 
     def shutter_off(self):
-        self.cam.shutter_mode.set(0)
+        self.cam.sync.set(0)
 
     def unstage(self, *args, **kwargs):
         return [self].append(super().unstage(*args, **kwargs))
@@ -223,7 +223,7 @@ sw_det.saxs.name = "SAXS"
 sw_det.waxs.name = "WAXS"
 sw_det.saxs.stats1.name = "SAXS ROI1"
 sw_det.waxs.stats1.name = "WAXS ROI1"
-shutter_status = sw_det.saxs.cam.shutter_mode
+shutter_status = sw_det.saxs.cam.sync
 shutter_status.name = 'shutter mode'
 sw_det.waxs.cam.acquire_time.name = 'WAXS Exposure'
 sw_det.saxs.cam.acquire_time.name = 'SAXS Exposure'
@@ -241,14 +241,14 @@ for det in [saxs_det, waxs_det,sw_det.waxs,sw_det.saxs]:
     det.cam.acquire_time.kind = 'hinted'
     det.cam.model.kind = 'normal'
     det.cam.trigger_mode.kind = 'normal'
-    det.cam.shutter_mode.kind = 'hinted'
+    det.cam.sync.kind = 'hinted'
     det.cam.shutter_open_delay.kind = 'normal'
     det.cam.shutter_close_delay.kind = 'normal'
     det.cam.min_x.kind = 'normal'
     det.cam.temperature.kind = 'normal'
     det.cam.min_y.kind = 'normal'
 sw_det.kind = 'hinted'
-sw_det.waxs.cam.shutter_mode.kind='normal'
+sw_det.waxs.cam.sync.kind='normal'
 
 sd.baseline.extend([waxs_det.cam.temperature_actual, saxs_det.cam.temperature_actual, waxs_det.cam.hot_side_temp, saxs_det.cam.hot_side_temp , waxs_det.cam.bin_y , saxs_det.cam.bin_y ])
 sd.baseline.extend([waxs_det.cam.bin_x, saxs_det.cam.bin_x, waxs_det.cam.adc_speed, saxs_det.cam.adc_speed , waxs_det.cam.acquire_time , saxs_det.cam.acquire_time ])

@@ -48,7 +48,7 @@ def full_carbon_scan(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
 
     shuttervalue = energies.copy()
     shuttervalue[:3] = 0  # first 3 values are 0 (dark)
-    shuttervalue[3:] = 2  # the rest of the values are shutter enabled (2)
+    shuttervalue[3:] = 1  # the rest of the values are shutter enabled (2)
     # use these energies and exposure times to scan energy and record detectors and signals
     yield from en_scan_core(sigs, dets, energy, energies, shuttervalue, times)
 
@@ -85,7 +85,7 @@ def full_oxygen_scan_nd(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
     times *= multiple
 
     shuttervalue = energies.copy()
-    shuttervalue[:] = 2  # the rest of the values are shutter enabled (2)
+    shuttervalue[:] = 1  # the rest of the values are shutter enabled (2)
     # use these energies and exposure times to scan energy and record detectors and signals
     yield from en_scan_core(sigs, dets, energy, energies, shuttervalue, times)
 
@@ -123,7 +123,7 @@ def full_nitrogen_scan_nd(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
     times *= multiple
 
     shuttervalue = energies.copy()
-    shuttervalue[:] = 2  # the rest of the values are shutter enabled (2)
+    shuttervalue[:] = 1  # the rest of the values are shutter enabled (2)
     # use these energies and exposure times to scan energy and record detectors and signals
     yield from en_scan_core(sigs, dets, energy, energies, shuttervalue, times)
 
@@ -164,7 +164,7 @@ def very_short_carbon_scan_nd(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=e
     times *= multiple
 
     shuttervalue = energies.copy()
-    shuttervalue[:] = 2 # the rest of the values are shutter enabled (2)
+    shuttervalue[:] = 1 # the rest of the values are shutter enabled (2)
     # use these energies and exposure times to scan energy and record detectors and signals
     yield from en_scan_core(sigs, dets,energy,energies,shuttervalue,times)
 
@@ -203,7 +203,7 @@ def short_carbon_scan_nd(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
     times *= multiple
 
     shuttervalue = energies.copy()
-    shuttervalue[:] = 2 # the rest of the values are shutter enabled (2)
+    shuttervalue[:] = 1 # the rest of the values are shutter enabled (2)
     # use these energies and exposure times to scan energy and record detectors and signals
     yield from en_scan_core(sigs, dets,energy,energies,shuttervalue,times)
 
@@ -242,7 +242,7 @@ def full_carbon_scan_nd(multiple=1, sigs=[IzeroMesh], dets=[sw_det], energy=en, 
     times *= multiple
 
     shutter_values = energies.copy()
-    shutter_values[:] = 2  # all the values are shutter enabled (2)
+    shutter_values[:] = 1  # all the values are shutter enabled (2)
     # this is because darks are now taken in the preprocessor automatically as needed
 
     if isinstance(once_mot,EpicsMotor):
@@ -272,7 +272,7 @@ def en_scan_core(I400sigs, dets, energy, energies, shuttervalues, times):
             i400channel.kind = 'hinted'
     sigcycler += cycler(sw_det.saxs.cam.acquire_time, times.copy())
     sigcycler += cycler(sw_det.waxs.cam.acquire_time, times.copy())
-    sigcycler += cycler(sw_det.saxs.cam.shutter_mode, shuttervalues.astype(int))
+    sigcycler += cycler(sw_det.saxs.cam.sync, shuttervalues.astype(int))
 
     # light_was_on = False
     # if samplelight.value is 1:
@@ -282,7 +282,7 @@ def en_scan_core(I400sigs, dets, energy, energies, shuttervalues, times):
     #     boxed_text('Warning', 'light was on, taking a quick snapshot to clear CCDs', 'yellow', shrink=True)
     #     yield from quicksnap()
 
-    yield from bp.scan_nd(I400sigs+ dets+ [en,sw_det.saxs.cam.shutter_mode],sigcycler)
+    yield from bp.scan_nd(I400sigs+ dets+ [en,sw_det.saxs.cam.sync],sigcycler)
 
     # if light_was_on:
     #     samplelight.on()    # leaving light off now - this just slows everything down if there are multiple scans
@@ -329,7 +329,7 @@ def short_carbon_scan(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
 
     shuttervalue = energies.copy()
     shuttervalue[:3] = 0 # first 3 values are 0 (dark)
-    shuttervalue[3:] = 2 # the rest of the values are shutter enabled (2)
+    shuttervalue[3:] = 1 # the rest of the values are shutter enabled (2)
     # use these energies and exposure times to scan energy and record detectors and signals
     yield from en_scan_core(sigs, dets,energy,energies,shuttervalue,times)
 
@@ -371,7 +371,7 @@ def full_ca_scan(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
 
     shuttervalue = energies.copy()
     shuttervalue[:3] = 0  # first 3 values are 0 (dark)
-    shuttervalue[3:] = 2  # the rest of the values are shutter enabled (2)
+    shuttervalue[3:] = 1  # the rest of the values are shutter enabled (2)
     # use these energies and exposure times to scan energy and record detectors and signals
     yield from en_scan_core(sigs, dets, energy, energies, shuttervalue, times)
 
@@ -417,6 +417,6 @@ def very_short_carbon_scan(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
 
     shuttervalue = energies.copy()
     shuttervalue[:3] = 0 # first 3 values are 0 (dark)
-    shuttervalue[3:] = 2 # the rest of the values are shutter enabled (2)
+    shuttervalue[3:] = 1 # the rest of the values are shutter enabled (2)
     # use these energies and exposure times to scan energy and record detectors and signals
     yield from en_scan_core(sigs, dets,energy,energies,shuttervalue,times)
