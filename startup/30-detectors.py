@@ -2,7 +2,7 @@ run_report(__file__)
 
 import time
 from ophyd import Component as C
-from ophyd import EpicsSignalRO, Device
+from ophyd import EpicsSignalRO, Device, EpicsSignal
 from ophyd.areadetector.trigger_mixins import SingleTrigger
 from ophyd.areadetector import (GreatEyesDetector, GreatEyesDetectorCam,
                                 ImagePlugin, TIFFPlugin, StatsPlugin,
@@ -21,6 +21,10 @@ class GreatEyesDetCamWithVersions(GreatEyesDetectorCam):
     driver_version = C(EpicsSignalRO, 'DriverVersion_RBV')
 
 
+class GreateyesTransform(TransformPlugin):
+    type = C(EpicsSignal,'Type')
+
+
 class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
     image = C(ImagePlugin, 'image1:')
     cam = C(GreatEyesDetCamWithVersions, 'cam1:')
@@ -35,7 +39,7 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
     stats3 = C(StatsPlugin, 'Stats3:')
     stats4 = C(StatsPlugin, 'Stats4:')
     stats5 = C(StatsPlugin, 'Stats5:')
-    trans1 = C(TransformPlugin, 'Trans1:')
+    trans1 = C(GreateyesTransform, 'Trans1:')
     roi1 = C(ROIPlugin, 'ROI1:')
     roi2 = C(ROIPlugin, 'ROI2:')
     roi3 = C(ROIPlugin, 'ROI3:')
