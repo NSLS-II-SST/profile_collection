@@ -22,10 +22,12 @@ class GreatEyesDetCamWithVersions(GreatEyesDetectorCam):
 
 
 class GreateyesTransform(TransformPlugin):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
     type = C(EpicsSignal,'Type')
 
 
-class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
+class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector, transform_type=0):
     image = C(ImagePlugin, 'image1:')
     cam = C(GreatEyesDetCamWithVersions, 'cam1:')
 
@@ -54,6 +56,11 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
                       self.cooling_state()+
                       "\nPlease wait until temperature has stabilized before collecting important data.",'yellow',85)
         return [self].append(super().stage(*args, **kwargs))
+        self.trans1.enable.set(1)
+        self.trans1.type.set(transform_type)
+        self.image.nd_array_port.set('TRANS1')
+        self.cam.shutter_close_delay.set(0.001)
+        self.cam.shutter_open_delay.set(0.150)
 
     def shutter(self):
         switch = {
@@ -133,9 +140,9 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
 
 
 saxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:1}', name='Small Angle CCD Detector',
-                                  read_attrs=['tiff', 'stats1.total'])
+                                  read_attrs=['tiff', 'stats1.total'],transform_type = 1)
 waxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:2}', name='Wide Angle CCD Detector',
-                                  read_attrs=['tiff', 'stats1.total'])
+                                  read_attrs=['tiff', 'stats1.total'],transform_type = 3)
 
 
 
