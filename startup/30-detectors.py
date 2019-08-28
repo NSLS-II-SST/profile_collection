@@ -30,7 +30,7 @@ class GreateyesTransform(TransformPlugin):
 class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
     image = C(ImagePlugin, 'image1:')
     cam = C(GreatEyesDetCamWithVersions, 'cam1:')
-    transform_type=0
+    transform_type = 0
     tiff = C(TIFFPluginWithFileStore, 'TIFF1:',
              write_path_template='/DATA/images/data/%Y/%m/%d/',
              read_path_template='/DATA/images/data/%Y/%m/%d/',
@@ -160,6 +160,8 @@ class SyncedDetectors(Device):
 
     def trigger(self):
         self.waxs.cam.trigger_mode.put(0)
+        self.saxs.transform_type = 1
+        self.waxs.transform_type = 3
         waxs_status = self.waxs.trigger()
         #time.sleep(0.005)
         saxs_status = self.saxs.trigger()  # not sure this is needed?
