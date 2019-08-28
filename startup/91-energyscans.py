@@ -18,7 +18,7 @@ def full_carbon_scan(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
     :param energy: what energy motor to scan
     :return: perform scan
 
-    normal scan takes ~ 12 minutes to complete
+    normal scan takes ~ 18 minutes to complete
     '''
     sample()
     #beamline_status()
@@ -56,7 +56,7 @@ def full_carbon_scan(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
 def full_oxygen_scan_nd(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
-    this results in 128 exposures
+    this results in 110 exposures
 
 
     :param multiple: adjustment for exposure times
@@ -65,7 +65,7 @@ def full_oxygen_scan_nd(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
     :param energy: what energy motor to scan
     :return: perform scan
 
-    normal scan takes ~ 12 minutes to complete
+    normal scan takes ~ 16 minutes to complete
     '''
     sample()
     #beamline_status()
@@ -94,7 +94,7 @@ def full_oxygen_scan_nd(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
 def full_nitrogen_scan_nd(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
-    this results in 128 exposures
+    this results in 95 exposures
 
 
     :param multiple: adjustment for exposure times
@@ -103,7 +103,7 @@ def full_nitrogen_scan_nd(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
     :param energy: what energy motor to scan
     :return: perform scan
 
-    normal scan takes ~ 12 minutes to complete
+    normal scan takes ~ 15 minutes to complete
     '''
     sample()
     #beamline_status()
@@ -132,7 +132,7 @@ def full_nitrogen_scan_nd(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
 def very_short_carbon_scan_nd(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
-    this results in 128 exposures
+    this results in 40 exposures
 
 
     :param multiple: adjustment for exposure times
@@ -141,7 +141,7 @@ def very_short_carbon_scan_nd(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=e
     :param energy: what energy motor to scan
     :return: perform scan
 
-    normal scan takes ~ 12 minutes to complete
+    normal scan takes ~ 6 minutes to complete
     '''
     sample()
     #beamline_status()
@@ -172,7 +172,7 @@ def very_short_carbon_scan_nd(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=e
 def short_carbon_scan_nd(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
-    this results in 128 exposures
+    this results in 61 exposures
 
 
     :param multiple: adjustment for exposure times
@@ -181,7 +181,7 @@ def short_carbon_scan_nd(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
     :param energy: what energy motor to scan
     :return: perform scan
 
-    normal scan takes ~ 12 minutes to complete
+    normal scan takes ~ 10 minutes to complete
     '''
     sample()
     #if len(read_input("Starting a Carbon energy scan hit any key in the next 3 seconds to abort", "abort", "", 3)) > 0:
@@ -220,7 +220,7 @@ def full_carbon_scan_nd(multiple=1, sigs=[IzeroMesh], dets=[sw_det], energy=en, 
     :param energy: what energy motor to scan
     :return: perform scan
 
-    normal scan takes ~ 12 minutes to complete
+    normal scan takes ~ 18 minutes to complete
     '''
     sample()
     #if len(read_input("Starting a Carbon energy scan hit any key in the next 3 seconds to abort", "abort", "", 3)) > 0:
@@ -290,7 +290,7 @@ def en_scan_core(I400sigs, dets, energy, energies, shuttervalues, times):
 
 def short_carbon_scan(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
     '''
-    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
+    Short Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 128 exposures
 
 
