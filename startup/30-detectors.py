@@ -27,10 +27,10 @@ class GreateyesTransform(TransformPlugin):
     type = C(EpicsSignal,'Type')
 
 
-class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector, transform_type=0):
+class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
     image = C(ImagePlugin, 'image1:')
     cam = C(GreatEyesDetCamWithVersions, 'cam1:')
-
+    transform_type=0
     tiff = C(TIFFPluginWithFileStore, 'TIFF1:',
              write_path_template='/DATA/images/data/%Y/%m/%d/',
              read_path_template='/DATA/images/data/%Y/%m/%d/',
