@@ -322,7 +322,7 @@ def quicksnap():
 
 
 # @dark_frames_enable
-def snapshot(secs=0, count=1, name='snap', energy = en.user_setpoint):
+def snapshot(secs=0, count=1, name='snap', energy = en.energy.setpoint.read()['en_energy_setpoint']['value']):
     '''
     snap of detectors to clear any charge from light hitting them - needed before starting scans or snapping images
     :return:
@@ -343,7 +343,7 @@ def snapshot(secs=0, count=1, name='snap', energy = en.user_setpoint):
     else:
         secss = 's'
 
-    if abs(en.user_setpoint - energy) > .05 :
+    if abs(en.energy.setpoint.read()['en_energy_setpoint']['value'] - energy) > .05 :
         yield from bps.mv(en,energy)
 
     boxed_text('Snapshot','Taking {} snapshot{} of {} second{} named {} at {} eV'.format(count,
