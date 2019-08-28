@@ -60,7 +60,7 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
         self.image.nd_array_port.set('TRANS1')
         self.tiff.nd_array_port.set('TRANS1')
         self.cam.shutter_close_delay.set(0.001)
-        self.cam.shutter_open_delay.set(0.001)
+        self.cam.shutter_open_delay.set(0.150)
         return [self].append(super().stage(*args, **kwargs))
 
     def shutter(self):
