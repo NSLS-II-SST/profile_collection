@@ -160,11 +160,11 @@ class SyncedDetectors(Device):
         super().__init__(*args, **kwargs)
 
     def trigger(self):
-        self.waxs.cam.trigger_mode.put(1)
+        self.waxs.cam.trigger_mode.put(0)
         self.waxs.trans1.type.put(1)
         self.saxs.trans1.type.put(3)
         waxs_status = self.waxs.trigger()
-        time.sleep(1.5)
+        # time.sleep(.1)
         saxs_status = self.saxs.trigger()  # not sure this is needed?
         return saxs_status & waxs_status
 
