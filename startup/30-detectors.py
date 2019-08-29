@@ -164,7 +164,7 @@ class SyncedDetectors(Device):
         self.waxs.trans1.type.put(1)
         self.saxs.trans1.type.put(3)
         waxs_status = self.waxs.trigger()
-        time.sleep(1)
+        time.sleep(1.5)
         saxs_status = self.saxs.trigger()  # not sure this is needed?
         return saxs_status & waxs_status
 
