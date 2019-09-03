@@ -59,8 +59,6 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
         self.trans1.type.set(self.transform_type)
         self.image.nd_array_port.set('TRANS1')
         self.tiff.nd_array_port.set('TRANS1')
-
-
         return [self].append(super().stage(*args, **kwargs))
 
     def shutter(self):
@@ -160,12 +158,8 @@ class SyncedDetectors(Device):
         super().__init__(*args, **kwargs)
 
     def trigger(self):
-        self.waxs.cam.trigger_mode.put(0)
-        self.waxs.trans1.type.put(1)
-        self.saxs.trans1.type.put(3)
+        saxs_status = self.saxs.trigger()
         waxs_status = self.waxs.trigger()
-        # time.sleep(.1)
-        saxs_status = self.saxs.trigger()  # not sure this is needed?
         return saxs_status & waxs_status
 
     def collect_asset_docs(self, *args, **kwargs):
@@ -173,8 +167,11 @@ class SyncedDetectors(Device):
         yield from self.waxs.collect_asset_docs(*args, **kwargs)
 
     def set_exposure(self,seconds):
-        self.waxs.set_exptime(seconds)
+        self.waxs.set_exptime(seconds+.1)
         self.saxs.set_exptime(seconds)
+        self.waxs.cam.trigger_mode.put(0)
+        self.waxs.trans1.type.put(1)
+        self.saxs.trans1.type.put(3)
 
     def exposure(self):
         return (self.waxs.exptime() +'\n'+ self.saxs.exptime())

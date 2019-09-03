@@ -51,6 +51,7 @@ class I400(Device):
         self.acquisition_mode.set(0)
         self.acquisition_mode1.set(0)
         self.exposure_time.set(self.exptime_save)
+        self.gain.set(4)
         return [self].append(super().stage())
 
     def unstage(self):
