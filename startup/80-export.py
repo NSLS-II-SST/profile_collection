@@ -35,6 +35,7 @@ def factory(name, start_doc):
                                                        '{start[user_name]}/'
                                                        '{start[project_name]}/'
                                                        f'{formatted_date}/'
+                                                       '{start[scan_id]}/'
                                                        '{start[scan_id]}-'
                                                        '{start[sample_name]}-'
                                                        #'{event[data][en_energy]:.2f}eV-'
