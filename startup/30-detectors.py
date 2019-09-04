@@ -158,8 +158,8 @@ class SyncedDetectors(Device):
         super().__init__(*args, **kwargs)
 
     def trigger(self):
-        saxs_status = self.saxs.trigger()
         waxs_status = self.waxs.trigger()
+        saxs_status = self.saxs.trigger()
         return saxs_status & waxs_status
 
     def collect_asset_docs(self, *args, **kwargs):
