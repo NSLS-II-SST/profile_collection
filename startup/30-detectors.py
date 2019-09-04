@@ -167,7 +167,7 @@ class SyncedDetectors(Device):
         yield from self.waxs.collect_asset_docs(*args, **kwargs)
 
     def set_exposure(self,seconds):
-        self.waxs.set_exptime(seconds+.1)
+        self.waxs.set_exptime(seconds+.4)
         self.saxs.set_exptime(seconds)
         self.waxs.cam.trigger_mode.put(0)
         self.waxs.trans1.type.put(1)
