@@ -17,7 +17,7 @@ ring_current = EpicsSignalRO('SR:OPS-BI{DCCT:1}I:Real-I', name='NSLS-II Ring Cur
 
 class I400(Device):
     gain = Component(EpicsSignal, ':RANGE_BP')
-    exposure_time = Component(EpicsSignal, ':PERIOD_SP')
+    exposure_time = Component(EpicsSignal, ':PERIOD_SP',readback=':PERIOD_MON')
     acquisition_mode = Component(EpicsSignal, ':GETCS.SCAN')
     acquisition_mode1 = Component(EpicsSignal, ':GETCS2.SCAN')
     acquire = Component(EpicsSignal, ':GETCS', put_complete=True)  # Rely on the IOC to signal done-ness.
@@ -86,7 +86,7 @@ class I400(Device):
             print('staging channel')
             self.parent.acquisition_mode.set(0)
             self.parent.acquisition_mode1.set(0)
-            self.parent.exposure_time.set(self.parent.exptime_save)
+            #self.parent.exposure_time.set(self.parent.exptime_save)
             self.kind = 'hinted'
             return [self]#.append(super().stage())
 
