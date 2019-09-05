@@ -48,11 +48,12 @@ class I400(Device):
     def stage(self):
         # print('staging')
         self.kind = 'hinted'
+        output = [super().stage()]
         self.acquisition_mode.set(0)
         self.acquisition_mode1.set(0)
-        self.exposure_time.set(self.exptime_save)
         self.gain.set(4)
-        return [self].append(super().stage())
+        self.exposure_time.set(self.exptime_save)
+        return output.append(self)
 
     def unstage(self):
         # print('unstaging')
