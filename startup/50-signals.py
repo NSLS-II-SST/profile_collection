@@ -1,7 +1,7 @@
 run_report(__file__)
 
 import time
-from ophyd import (EpicsSignal, EpicsSignalRO, Device, Component, DeviceStatus,
+from ophyd import (EpicsSignal, EpicsSignalRO, EpicsSignalWithRBV, Device, Component, DeviceStatus,
                    Staged)
 
 # These might need/make more sense to be split up into separate files later on.
@@ -17,7 +17,7 @@ ring_current = EpicsSignalRO('SR:OPS-BI{DCCT:1}I:Real-I', name='NSLS-II Ring Cur
 
 class I400(Device):
     gain = Component(EpicsSignal, ':RANGE_BP')
-    exposure_time = Component(EpicsSignal, ':PERIOD_SP',readback=':PERIOD_MON')
+    exposure_time = Component(EpicsSignalWithRBV, write_pv=':PERIOD_SP',read_pv=':PERIOD_MON',put_complete=True)
     acquisition_mode = Component(EpicsSignal, ':GETCS.SCAN')
     acquisition_mode1 = Component(EpicsSignal, ':GETCS2.SCAN')
     acquire = Component(EpicsSignal, ':GETCS', put_complete=True)  # Rely on the IOC to signal done-ness.
