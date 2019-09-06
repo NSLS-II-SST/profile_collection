@@ -53,7 +53,7 @@ class I400(Device):
         output = [super().stage()]
         self.acquisition_mode.set(0)
         self.acquisition_mode1.set(0)
-        self.gain.set(4)
+        self.gain.set(5)
         self.exposure_time.set(self.exptime_save)
         print(self.exptime_save)
         return output.append(self)
@@ -88,8 +88,8 @@ class I400(Device):
         def stage(self):
             self.parent.stage()
             print('staging channel')
-            self.parent.acquisition_mode.set(0)
-            self.parent.acquisition_mode1.set(0)
+            # self.parent.acquisition_mode.set(0)
+            # self.parent.acquisition_mode1.set(0)
             #self.parent.exposure_time.set(self.parent.exptime_save)
             self.kind = 'hinted'
             return [self]#.append(super().stage())
