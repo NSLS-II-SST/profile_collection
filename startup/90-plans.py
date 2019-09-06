@@ -92,24 +92,24 @@ def dark_plan():
     return snapshot
 
 
-dark_frame_preprocessor = bluesky_darkframes.DarkFramePreprocessor(
-    dark_plan=dark_plan,
-    detector=sw_det,
-    max_age=300,
-    locked_signals=[sw_det.saxs.cam.acquire_time,
-                    Det_S.user_setpoint,
-                    Det_W.user_setpoint,
-                    sw_det.saxs.cam.bin_x,
-                    sw_det.saxs.cam.bin_y,
-                    sw_det.waxs.cam.bin_x,
-                    sw_det.waxs.cam.bin_y,
-                    sam_X.user_setpoint,
-                    sam_Y.user_setpoint,
-                    ],
-    limit=50)
-
-dark_frames_enable = make_decorator(dark_frame_preprocessor)()
-RE.preprocessors.append(dark_frame_preprocessor)
+# dark_frame_preprocessor = bluesky_darkframes.DarkFramePreprocessor(
+#     dark_plan=dark_plan,
+#     detector=sw_det,
+#     max_age=300,
+#     locked_signals=[sw_det.saxs.cam.acquire_time,
+#                     Det_S.user_setpoint,
+#                     Det_W.user_setpoint,
+#                     sw_det.saxs.cam.bin_x,
+#                     sw_det.saxs.cam.bin_y,
+#                     sw_det.waxs.cam.bin_x,
+#                     sw_det.waxs.cam.bin_y,
+#                     sam_X.user_setpoint,
+#                     sam_Y.user_setpoint,
+#                     ],
+#     limit=50)
+#
+# dark_frames_enable = make_decorator(dark_frame_preprocessor)()
+# RE.preprocessors.append(dark_frame_preprocessor)
 # not doing this because EVERYTHING that goes through RE will get a dark image - this is excessive
 
 def buildeputable(start, stop, step, widfract, startinggap,name):
@@ -419,4 +419,4 @@ def spiralsearch_all(barin=[]):
 def stability_scans():
     scans = np.arange(50)
     for scan in scans:
-        yield from bps.scan([IzeroMesh],en,200,2000,1801)
+        yield from bps.scan([IzeroMesh],en,200,2000,18001)
