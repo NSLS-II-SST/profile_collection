@@ -128,19 +128,19 @@ def buildeputable(start, stop, step, widfract, startinggap,name):
         #                   min(99500,max(20000,startinggap-1500*widfract)),
         #                   min(100000,max(21500,startinggap+1500*widfract)),
         #                   51)
-        yield from tune_max([IzeroDiode],"Izero Diode Current",epu_gap,
+        yield from tune_max([IzeroMesh],"Izero Mesh Current",epu_gap,
                                     min(99500,max(20000,startinggap-500*widfract)),
                                     min(100000,max(21500,startinggap+1000*widfract)),
                                     10*widfract,7,3,True)
 
-        gaps.append(bec.peaks.max["Izero Diode Current"][0])
-        heights.append(bec.peaks.max["Izero Diode Current"][1])
+        gaps.append(bec.peaks.max["Izero Mesh Current"][0])
+        heights.append(bec.peaks.max["Izero Mesh Current"][1])
         ensout.append(mono_en.position)
-        startinggap = bec.peaks.max["Izero Diode Current"][0]
+        startinggap = bec.peaks.max["Izero Mesh Current"][0]
         #data = np.column_stack((ensout, gaps))
         data = {'Energies': ensout, 'EPUGaps': gaps, 'PeakCurrent': heights}
         dataframe = pd.DataFrame(data=data)
-        dataframe.to_csv('EPUdata' + name + '.csv')
+        dataframe.to_csv('/mnt/zdrive/EPUdata' + name + '.csv')
         count+=1
         if count > 50:
             count=0
@@ -149,12 +149,14 @@ def buildeputable(start, stop, step, widfract, startinggap,name):
 
 
 def do_some_eputables():
-    #yield from buildeputable(150, 1500, 10, 1, 21000, 'H1v1p1')
+    yield from buildeputable(150, 1500, 10, 1, 21000, 'Harmonic1Phase')
     #yield from buildeputable(850, 2500, 10, 1.5, 27650, 'H3v2')
     yield from buildeputable(750, 2500, 10, 2, 20500, 'H5v2')
     yield from buildeputable(1050, 2500, 10, 2, 20500, 'H7v1')
     yield from buildeputable(1350, 2500, 10, 2, 20500, 'H9v1')
     yield from buildeputable(1650, 2500, 10, 2, 20500, 'H11v1')
+
+
 
 
 def tune_max(
@@ -412,3 +414,9 @@ def spiralsearch_all(barin=[]):
     for sample in barin:
         yield from load_sample(sample)
         yield from spiralsearch()
+
+
+def stability_scans():
+    scans = np.arange(50)
+    for scan in scans:
+        yield from bps.scan([IzeroMesh],en,200,2000,1801)
