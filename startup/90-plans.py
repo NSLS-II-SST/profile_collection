@@ -416,7 +416,9 @@ def spiralsearch_all(barin=[]):
         yield from spiralsearch()
 
 
-def stability_scans():
-    scans = np.arange(50)
+def stability_scans(num):
+    scans = np.arange(num)
     for scan in scans:
-        yield from bps.scan([IzeroMesh],en,200,2000,18001)
+        yield from bps.mv(en, 200)
+        yield from bp.scan([IzeroMesh],en,200,2000,1801)
+
