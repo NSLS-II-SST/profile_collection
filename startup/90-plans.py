@@ -420,5 +420,5 @@ def stability_scans(num):
     scans = np.arange(num)
     for scan in scans:
         yield from bps.mv(en, 200)
-        yield from bp.scan([IzeroMesh],en,200,2000,1801)
+        yield from bp.scan([IzeroMesh],en,200,1400,1201)
 
