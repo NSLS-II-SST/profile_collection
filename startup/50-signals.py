@@ -48,7 +48,6 @@ class I400(Device):
         ))
 
     def stage(self):
-        # print('staging')
         self.kind = 'hinted'
         output = [super().stage()]
         self.acquisition_mode.set(0)
@@ -59,7 +58,6 @@ class I400(Device):
         return output.append(self)
 
     def unstage(self):
-        # print('unstaging')
         self.kind = 'normal'
         self.acquisition_mode.set(7)
         self.acquisition_mode1.set(7)
@@ -79,7 +77,6 @@ class I400(Device):
             """
             self.kind = 'hinted'
             st = self.parent.trigger()
-            #self.kind = 'normal'
             return st
 
         def set_exposure(self, exptime):
@@ -88,9 +85,6 @@ class I400(Device):
         def stage(self):
             self.parent.stage()
             print('staging channel')
-            # self.parent.acquisition_mode.set(0)
-            # self.parent.acquisition_mode1.set(0)
-            #self.parent.exposure_time.set(self.parent.exptime_save)
             self.kind = 'hinted'
             return [self]#.append(super().stage())
 
@@ -137,11 +131,6 @@ TransmissionDiode.name = 'RSoXS Transmission Photodiode'
 
 
 
-# dm3_c1 = EpicsSignalRO('XF:07ID-BI{DM3:I400-1}:IC1_MON', name='Diagnostic Module 3 Current')
-# BeamstopW_I = EpicsSignal('XF:07ID-ES1{DMR:I400-1}:IC1_MON', name='WAXS Beamstop Current', kind='normal')
-# BeamstopS_I = EpicsSignal('XF:07ID-ES1{DMR:I400-1}:IC2_MON', name='SAXS Beamstop Current', kind='normal')
-# IzeroMesh   = EpicsSignal('XF:07ID-ES1{DMR:I400-1}:IC3_MON', name='Izero Mesh Drain Current', kind='normal')
-# IzeroDiode  = EpicsSignal('XF:07ID-ES1{DMR:I400-1}:IC4_MON', name='Izero Diode Current', kind='normal')
 DM4_PD = EpicsSignal('XF:07ID-BI{DM5:F4}Cur:I3-I', name='DM4 Current', kind='hinted')
 
 

@@ -1,23 +1,7 @@
 run_report(__file__)
 
-import sys, time, ansiwrap
-
-if sys.platform[:3] == 'win':
-    import msvcrt
-    def getkey():
-        key = msvcrt.getche()
-        return key
-    def kbhit():
-        return msvcrt.kbhit()
-elif sys.platform[:3] == 'lin':
-    import getch
-    from select import select
-    def getkey():
-        key = getch.getche()
-        return key
-    def kbhit():
-        dr, dw, de = select([sys.stdin], [], [], 0)
-        return dr != []
+import sys, ansiwrap
+from select import select
 
 
 def boxed_text(title, text, tint, width=75, shrink=False):
@@ -50,34 +34,17 @@ def boxed_text(title, text, tint, width=75, shrink=False):
     print(colored(''.join([ll, bar*width, lr]), tint))
 
 
-def read_input( caption, default, timeoutval, timeout = 5):
-
-    start_time = time.time()
-    sys.stdout.write('%s(%s):'%(caption, default))
-    sys.stdout.flush()
-    input = ''
-    timedout=False
-    while True:
-        if kbhit():
-            byte_arr = getkey()
-            if ord(byte_arr) == 13: # enter_key
-                break
-            elif ord(byte_arr) >= 32: #space_char
-                input += "".join(map(chr,byte_arr))
-        if len(input) == 0 and (time.time() - start_time) > timeout:
-            print("timed out, continuing.")
-            input = timeoutval
-            timedout=True
-            break
-
-    print('')  # needed to move to next line
-    if timedout:
-        return timeoutval
-    elif len(input) > 0:
-        return input
+def read_input(message,default,timeout,secs):
+    print(message)
+    rlist, _, _ = select([sys.stdin], [], [], secs)
+    if rlist:
+        s = sys.stdin.readline()
+        if ord(s[0]) == 13 or ord(s[0]) == 10:
+            return default
+        else:
+            return s.rstrip([chr(10),chr(13)])
     else:
-        return default
-
+        return timeout
 
 
 

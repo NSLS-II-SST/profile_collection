@@ -82,7 +82,6 @@ del darkoff
 
 
 def dark_plan():
-
     shutterstate = sw_det.saxs.cam.sync.setpoint
     yield from bps.mv(sw_det.saxs.cam.sync,0) # disable shutter
     yield from bps.trigger(sw_det, group='darkframe-trigger')
@@ -92,25 +91,25 @@ def dark_plan():
     return snapshot
 
 
-# dark_frame_preprocessor = bluesky_darkframes.DarkFramePreprocessor(
-#     dark_plan=dark_plan,
-#     detector=sw_det,
-#     max_age=300,
-#     locked_signals=[sw_det.saxs.cam.acquire_time,
-#                     Det_S.user_setpoint,
-#                     Det_W.user_setpoint,
-#                     sw_det.saxs.cam.bin_x,
-#                     sw_det.saxs.cam.bin_y,
-#                     sw_det.waxs.cam.bin_x,
-#                     sw_det.waxs.cam.bin_y,
-#                     sam_X.user_setpoint,
-#                     sam_Y.user_setpoint,
-#                     ],
-#     limit=50)
-#
-# dark_frames_enable = make_decorator(dark_frame_preprocessor)()
-# RE.preprocessors.append(dark_frame_preprocessor)
-# not doing this because EVERYTHING that goes through RE will get a dark image - this is excessive
+dark_frame_preprocessor = bluesky_darkframes.DarkFramePreprocessor(
+    dark_plan=dark_plan,
+    detector=sw_det,
+    max_age=300,
+    locked_signals=[sw_det.saxs.cam.acquire_time,
+                    Det_S.user_setpoint,
+                    Det_W.user_setpoint,
+                    sw_det.saxs.cam.bin_x,
+                    sw_det.saxs.cam.bin_y,
+                    sw_det.waxs.cam.bin_x,
+                    sw_det.waxs.cam.bin_y,
+                    sam_X.user_setpoint,
+                    sam_Y.user_setpoint,
+                    ],
+    limit=50)
+
+dark_frames_enable = make_decorator(dark_frame_preprocessor)()
+RE.preprocessors.append(dark_frame_preprocessor)
+# not doing this because EVERYTHING that goes through RE will get a dark image - this is excessive - fixed now!
 
 def buildeputable(start, stop, step, widfract, startinggap,name):
     ens = np.arange(start,stop,step)

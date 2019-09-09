@@ -137,6 +137,18 @@ Sample_cam.over1.overlay_1.position_x.kind='hinted'
 crosshair.x = crosshair.position_x
 crosshair.y = crosshair.position_y
 
+crosshair_side = Side_cam.over1.overlay_1
+crosshair_side.x = crosshair_side.position_x
+crosshair_side.y = crosshair_side.position_y
+crosshair_side.x.kind='hinted'
+crosshair_side.y.kind='hinted'
+
+crosshair_saxs = DetS_cam.over1.overlay_1
+crosshair_saxs.x = crosshair_saxs.position_x
+crosshair_saxs.y = crosshair_saxs.position_y
+crosshair_saxs.x.kind='hinted'
+crosshair_saxs.y.kind='hinted'
+
 
 def crosshair_on():crosshair.use.set(1)
 

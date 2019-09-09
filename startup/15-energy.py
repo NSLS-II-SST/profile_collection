@@ -75,7 +75,7 @@ def epugap_from_energy(energy, harmonic = 1, polarization = 0):
     valid from 150eV through 1500eV for First Harmonic
     
     '''
-    if harmonic is 3:
+    if harmonic is 3 or energy >= 1100:
         enoff = energy - 370.01
         gap = (enoff ** 0) * 22833.87619739154 + \
               (enoff ** 1) * 29.68655012463454 + \
