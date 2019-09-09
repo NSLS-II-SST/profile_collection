@@ -22,7 +22,7 @@ def full_oxygen_scan_nd(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
     '''
     sample()
     #beamline_status()
-    if len(read_input("Starting a Oxygen energy scan hit any key in the next 3 seconds to abort", "abort", "", 3)) > 0:
+    if len(read_input("Starting a Oxygen energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
 
     # create a list of energies
@@ -60,7 +60,7 @@ def full_nitrogen_scan_nd(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
     '''
     sample()
     #beamline_status()
-    if len(read_input("Starting a Nitrogen energy scan hit any key in the next 3 seconds to abort", "abort", "", 3)) > 0:
+    if len(read_input("Starting a Nitrogen energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
 
     # create a list of energies
@@ -98,7 +98,7 @@ def very_short_carbon_scan_nd(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=e
     '''
     sample()
     #beamline_status()
-    if len(read_input("Starting a very short Carbon energy scan hit any key in the next 3 seconds to abort", "abort", "", 3)) > 0:
+    if len(read_input("Starting a very short Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
 
     # create a list of energies
@@ -137,7 +137,7 @@ def short_carbon_scan_nd(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
     normal scan takes ~ 10 minutes to complete
     '''
     sample()
-    if len(read_input("Starting a short Carbon energy scan hit any key in the next 3 seconds to abort", "abort", "", 3)) > 0:
+    if len(read_input("Starting a short Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
 
     # create a list of energies
@@ -176,7 +176,7 @@ def full_carbon_scan_nd(multiple=1, sigs=[IzeroMesh], dets=[sw_det], energy=en, 
     normal scan takes ~ 18 minutes to complete
     '''
     sample()
-    if len(read_input("Starting a Carbon energy scan hit any key in the next 3 seconds to abort", "abort", "", 3)) > 0:
+    if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
 
     # create a list of energies
@@ -257,7 +257,7 @@ def full_ca_scan_nd(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
     normal scan takes ~ 12 minutes to complete
     '''
     beamline_status()
-    if len(read_input("Starting a short Calcium energy scan hit any key in the next 3 seconds to abort", "abort", "", 3)) > 0:
+    if len(read_input("Starting a short Calcium energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
 
     # create a list of energies
