@@ -42,7 +42,7 @@ def read_input(message,default,timeout,secs):
         if ord(s[0]) == 13 or ord(s[0]) == 10:
             return default
         else:
-            return s.rstrip([chr(10)+chr(13)])
+            return s.rstrip(chr(10)+chr(13))
     else:
         return timeout
 
