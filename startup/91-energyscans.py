@@ -6,7 +6,7 @@ import bluesky.plan_stubs as bps
 from cycler import cycler
 
 
-def full_oxygen_scan_nd(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
+def full_oxygen_scan_nd(multiple=1,sigs=[Beamstop_SAXS, BeamstopSAXS, IzeroMesh],dets=[sw_det],energy=en):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 110 exposures
@@ -44,7 +44,7 @@ def full_oxygen_scan_nd(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
 
 
 
-def full_nitrogen_scan_nd(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
+def full_nitrogen_scan_nd(multiple=1,sigs=[Beamstop_SAXS, BeamstopSAXS, IzeroMesh],dets=[sw_det],energy=en):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 95 exposures
@@ -82,7 +82,7 @@ def full_nitrogen_scan_nd(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
 
 
 
-def very_short_carbon_scan_nd(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
+def very_short_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS, BeamstopSAXS, IzeroMesh],dets=[sw_det],energy=en):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 40 exposures
@@ -122,7 +122,7 @@ def very_short_carbon_scan_nd(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=e
     yield from en_scan_core(sigs, dets,energy,energies,shuttervalue,times)
 
 
-def short_carbon_scan_nd(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
+def short_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS, BeamstopSAXS, IzeroMesh],dets=[sw_det],energy=en):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 61 exposures
@@ -161,7 +161,7 @@ def short_carbon_scan_nd(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
     yield from en_scan_core(sigs, dets,energy,energies,shuttervalue,times)
 
 
-def full_carbon_scan_nd(multiple=1, sigs=[IzeroMesh], dets=[sw_det], energy=en, once_mot= None, once_rstep = 0):
+def full_carbon_scan_nd(multiple=1, sigs=[Beamstop_SAXS, BeamstopSAXS, IzeroMesh], dets=[sw_det], energy=en, once_mot= None, once_rstep = 0):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 128 exposures
@@ -224,7 +224,7 @@ def en_scan_core(I400sigs, dets, energy, energies, shuttervalues, times):
             print('same i400 detected')
             i400channel.kind = 'hinted'
     sigcycler += cycler(sw_det.saxs.cam.acquire_time, times.copy())
-    sigcycler += cycler(sw_det.waxs.cam.acquire_time, times.copy())
+    sigcycler += cycler(sw_det.waxs.cam.acquire_time, times.copy()+.3) #add extra exposure time for WAXS
     sigcycler += cycler(sw_det.saxs.cam.sync, shuttervalues.astype(int))
 
     # light_was_on = False
@@ -242,7 +242,7 @@ def en_scan_core(I400sigs, dets, energy, energies, shuttervalues, times):
 
 
 
-def full_ca_scan_nd(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
+def full_ca_scan_nd(multiple=1,sigs=[Beamstop_SAXS, BeamstopSAXS, IzeroMesh],dets=[sw_det],energy=en):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 128 exposures
@@ -261,7 +261,7 @@ def full_ca_scan_nd(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
         return
 
     # create a list of energies
-    energies = np.arange(345,355,1)
+    energies = np.arange(345,355,.2)
     times = energies.copy()
 
     # Define exposures times for different energy ranges
@@ -270,7 +270,7 @@ def full_ca_scan_nd(multiple=1,sigs=[IzeroMesh],dets=[sw_det],energy=en):
 
     times *= multiple
 
-
+    set_exposure(times[0])
     shuttervalue = energies.copy()
     shuttervalue[:] = 1  # the rest of the values are shutter enabled (2)
     # use these energies and exposure times to scan energy and record detectors and signals
