@@ -149,8 +149,7 @@ waxs_det.transform_type = 1
 class SyncedDetectors(Device):
     saxs = C(RSOXSGreatEyesDetector, 'XF:07ID1-ES:1{GE:1}',read_attrs=['tiff', 'stats1.total'],name="Small Angle CCD Detector")
     waxs = C(RSOXSGreatEyesDetector, 'XF:07ID1-ES:1{GE:2}',read_attrs=['tiff', 'stats1.total'],name="Wide Angle CCD Detector")
-    saxs.transform_type = 3
-    waxs.transform_type = 1
+
 
 
     def __init__(self, *args, **kwargs):
@@ -224,6 +223,9 @@ shutter_status = sw_det.saxs.cam.sync
 shutter_status.name = 'shutter mode'
 sw_det.waxs.cam.acquire_time.name = 'WAXS Exposure'
 sw_det.saxs.cam.acquire_time.name = 'SAXS Exposure'
+sw_det.saxs.transform_type = 3
+sw_det.waxs.transform_type = 1
+
 
 for det in [saxs_det, waxs_det,sw_det.waxs,sw_det.saxs]:
     det.kind = 'normal'

@@ -194,3 +194,10 @@ def cff_to_199():
                       en.monoen.mirror2.user_offset,-3.237992,
                       en.monoen.cff,1.99)
     yield from bps.mv(en,energy)
+
+def cff_to_19():
+    energy = en.monoen.setpoint.value
+    yield from bps.mv(en.monoen.grating.user_offset, -0.3511,
+                      en.monoen.mirror2.user_offset, -3.461,
+                      en.monoen.cff, 1.9)
+    yield from bps.mv(en, energy)
