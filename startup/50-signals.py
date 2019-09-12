@@ -49,6 +49,8 @@ class I400(Device):
         ))
 
     def stage(self):
+        if self._staged == Staged.yes:
+            return []
         self.kind = 'hinted'
         output = [super().stage()]
         self.acquisition_mode.set(0)
