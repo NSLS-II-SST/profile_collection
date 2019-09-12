@@ -317,7 +317,7 @@ def quicksnap():
     samidsave = RE.md['sample_id']
     RE.md['sample_name'] = 'CCDClear'
     RE.md['sample_id'] = '000'
-    yield from bp.count([sw_det, en, Beamstop_SAXS, BeamstopSAXS, IzeroMesh], num=2)
+    yield from bp.count([sw_det, en, Beamstop_SAXS, Beamstop_SAXS, IzeroMesh], num=2)
     RE.md['sample_name'] = samsave
     RE.md['sample_id'] = samidsave
     sw_det.set_binning(binsave)
@@ -368,7 +368,7 @@ def snapshot(secs=0, count=1, name='snap', energy = None):
         set_exposure(secs)
     RE.md['sample_name'] = name
     RE.md['sample_id'] = '000'
-    yield from bp.count([sw_det, en, Beamstop_SAXS, BeamstopSAXS, IzeroMesh], num=count)
+    yield from bp.count([sw_det, en, Beamstop_SAXS, Beamstop_SAXS, IzeroMesh], num=count)
     if light_was_on:
         samplelight.on()
 
@@ -405,7 +405,7 @@ def spiralsearch(radius=2, stepsize=.2):
     y_center = sam_Y.user_setpoint.value
     num = round(radius / stepsize)
 
-    yield from spiral_square([sw_det, en, Beamstop_SAXS, BeamstopSAXS, IzeroMesh], sam_X, sam_Y, x_center=x_center, y_center=y_center,
+    yield from spiral_square([sw_det, en, Beamstop_SAXS, Beamstop_SAXS, IzeroMesh], sam_X, sam_Y, x_center=x_center, y_center=y_center,
                      x_range=radius, y_range=radius, x_num=num, y_num=num)
 
 
