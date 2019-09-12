@@ -15,16 +15,16 @@ run_report(__file__)
 def set_exposure(exposure):
     if exposure > 0.001 and exposure < 1000 :
         sw_det.set_exposure(exposure)
-        RSoXS_DM.set_exposure(exposure)
-        RSoXS_Slits.set_exposure(exposure)
+        RSoXS_Diodes.set_exposure(exposure)
+        RSoXS_DrainCurrent.set_exposure(exposure)
     else:
         print('Invalid time, exposure time not set')
 
 
 def exposure():
     return (sw_det.exposure()+'\n'+
-            RSoXS_DM.exposure()+'\n'+
-            RSoXS_Slits.exposure()+'\n')
+            RSoXS_Diodes.exposure()+'\n'+
+            RSoXS_DrainCurrent.exposure()+'\n')
 
 
 @register_line_magic
