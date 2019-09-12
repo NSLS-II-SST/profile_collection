@@ -234,7 +234,7 @@ def WAXSmode():
                       Izero_Y, -29,
                       Det_W, -10,
                       Det_S, -94,
-                      BeamStopW, 70.5,
+                      BeamStopW, 68.4,
                       BeamStopS, 3,
                       sam_Y, -125)
 
@@ -305,7 +305,7 @@ def WAXS():
         'order': 0},
         {
         'motor':    BeamStopW,
-        'position': 71.1,
+        'position': 68.4,
         'order': 0},
         {
         'motor':    BeamStopS,

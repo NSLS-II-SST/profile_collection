@@ -102,26 +102,28 @@ class I400(Device):
     Channel_4 = Component(I400Channel, ':IC4_MON', kind='normal')
 
 
-RSoXS_DM = I400('XF:07ID-ES1{DMR:I400-1}', name='Diagnostic')
-DM4_PD = RSoXS_DM.Channel_1
-DM4_PD.name = 'RSoXS Downstream Current'
-Drain = RSoXS_DM.Channel_2
-Drain.name = 'RSoXS Sample Drain Current'
-IzeroMesh = RSoXS_DM.Channel_3
-IzeroMesh.name = 'Izero Mesh Drain Current'
-IzeroDiode = RSoXS_DM.Channel_4
-IzeroDiode.name = 'Izero Diode Current'
+RSoXS_Diodes = I400('XF:07ID-ES1{DMR:I400-1}', name='I400 diode')
+RSoXS_DrainCurrent = I400('XF:07ID-ES1{Slt1:I400-1}', name='I400 drain')
+
+Beamstop_WAXS = RSoXS_Diodes.Channel_1
+Beamstop_WAXS.name = 'WAXS Beamstop'
+Beamstop_SAXS = RSoXS_Diodes.Channel_2
+Beamstop_SAXS.name = 'SAXS Beamstop'
+IzeroMesh = RSoXS_DrainCurrent.Channel_4 # previously DM channel 3
+IzeroMesh.name = 'Izero Mesh'
+IzeroDiode = RSoXS_Diodes.Channel_4
+IzeroDiode.name = 'Izero Photodiode'
 
 
-RSoXS_Slits = I400('XF:07ID-ES1{Slt1:I400-1}', name='Slits Diagnostic')
-SlitOut_I = RSoXS_Slits.Channel_1
-SlitOut_I.name = 'RSoXS Slit Outboard Current'
-SlitBottom_I = RSoXS_Slits.Channel_2
-SlitBottom_I.name = 'RSoXS Slit Bottom Current'
-SlitTop_I = RSoXS_Slits.Channel_3
-SlitTop_I.name = 'RSoXS Slit Top Current'
-SlitInboard_I = RSoXS_Slits.Channel_4
-SlitInboard_I.name = 'RSoXS Slit Inboard Current'
+
+SlitOut_I = RSoXS_DrainCurrent.Channel_1
+SlitOut_I.name = 'Slit Outboard'
+SlitBottom_I = RSoXS_DrainCurrent.Channel_2
+SlitBottom_I.name = 'Slit Bottom'
+SlitTop_I = RSoXS_DrainCurrent.Channel_3
+SlitTop_I.name = 'Slit Top'
+#SlitInboard_I = RSoXS_Slits.Channel_4
+#SlitInboard_I.name = 'RSoXS Slit Inboard Current'
 
 
 Downstream_I400 = I400('XF:07ID-BI{DM7:I400-1}', name='Downstream Diagnostic')
@@ -134,8 +136,8 @@ TransmissionDiode.name = 'RSoXS Transmission Photodiode'
 DM4_PD = EpicsSignal('XF:07ID-BI{DM5:F4}Cur:I3-I', name='DM4 Current', kind='hinted')
 
 
-sd.monitors.extend([ ring_current])
-sd.baseline.extend([ ring_current])
+sd.monitors.extend([ring_current])
+sd.baseline.extend([ring_current])
 # Not sure how best to do this image yet... 
 
 #BPM13 Image:

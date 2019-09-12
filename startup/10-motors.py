@@ -69,7 +69,7 @@ class FMBOEpicsMotor(EpicsMotor):
     iffe       = Cpt(EpicsSignal, '_IFFE_STS')
     iffe_desc  = Cpt(EpicsSignal, '_IFFE_STS.DESC')
     amfae      = Cpt(EpicsSignal, '_AMFAE_STS')
-    amfae_desc = Cpt(EpicsSignal, '_AMFAE_STS.DESC')
+    amfae_desc = Cpt(EpicsSignal, '_AMFAE_STS.2ESC')
     amfe       = Cpt(EpicsSignal, '_AMFE_STS')
     amfe_desc  = Cpt(EpicsSignal, '_AMFE_STS.DESC')
     fafoe      = Cpt(EpicsSignal, '_FAFOE_STS')
