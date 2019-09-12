@@ -25,6 +25,7 @@ class I400(Device):
     acquire = Component(EpicsSignal, ':GETCS', put_complete=True)  # Rely on the IOC to signal done-ness.
     enabled = Component(EpicsSignal, ':ENABLE_IC_UPDATES')
     exptime_save = .5
+    gain_save = 7
 
     def trigger(self):
         """
@@ -52,7 +53,7 @@ class I400(Device):
         output = [super().stage()]
         self.acquisition_mode.set(0)
         self.acquisition_mode1.set(0)
-        self.gain.set(5)
+        self.gain.set(self.gain_save)
         self.exposure_time.set(self.exptime_save)
         print(self.exptime_save)
         return output.append(self)
@@ -103,7 +104,9 @@ class I400(Device):
 
 
 RSoXS_Diodes = I400('XF:07ID-ES1{DMR:I400-1}', name='I400 diode')
+RSoXS_Diodes.gain_save = 7
 RSoXS_DrainCurrent = I400('XF:07ID-ES1{Slt1:I400-1}', name='I400 drain')
+RSoXS_DrainCurrent.gain_save = 4
 
 Beamstop_WAXS = RSoXS_Diodes.Channel_1
 Beamstop_WAXS.name = 'WAXS Beamstop'
