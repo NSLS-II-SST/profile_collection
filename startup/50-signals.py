@@ -26,10 +26,6 @@ class I400(Device):
     ignore_triggers = 0
     trigger_count = 0
 
-    def __init__(self, *args, **kwargs):
-        super.__init__(*args, **kwargs)
-        self.status = DeviceStatus(self)
-
     def trigger(self):
         """
         Trigger the detector and return a Status object.
