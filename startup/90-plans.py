@@ -368,7 +368,15 @@ def snapshot(secs=0, count=1, name='snap', energy = None):
         set_exposure(secs)
     RE.md['sample_name'] = name
     RE.md['sample_id'] = '000'
-    yield from bp.count([sw_det, en, Beamstop_SAXS, Beamstop_SAXS, IzeroMesh], num=count)
+    yield from bp.count([sw_det,
+                         en,
+                         Beamstop_SAXS,
+                         Beamstop_WAXS,
+                         IzeroMesh,
+                         SlitTop_I,
+                         SlitBottom_I,
+                         SlitOut_I],
+                        num=count)
     if light_was_on:
         samplelight.on()
 

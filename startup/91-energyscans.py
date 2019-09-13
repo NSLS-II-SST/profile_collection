@@ -6,7 +6,13 @@ import bluesky.plan_stubs as bps
 from cycler import cycler
 
 
-def full_oxygen_scan_nd(multiple=1,sigs=[Beamstop_SAXS, Beamstop_SAXS, IzeroMesh],dets=[sw_det],energy=en):
+def full_oxygen_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
+                                         Beamstop_WAXS,
+                                         IzeroMesh,
+                                         SlitTop_I,
+                                         SlitBottom_I,
+                                         SlitOut_I],
+                        dets=[sw_det],energy=en):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 110 exposures
@@ -44,7 +50,13 @@ def full_oxygen_scan_nd(multiple=1,sigs=[Beamstop_SAXS, Beamstop_SAXS, IzeroMesh
 
 
 
-def full_nitrogen_scan_nd(multiple=1,sigs=[Beamstop_SAXS, Beamstop_SAXS, IzeroMesh],dets=[sw_det],energy=en):
+def full_nitrogen_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
+                                           Beamstop_WAXS,
+                                           IzeroMesh,
+                                           SlitTop_I,
+                                           SlitBottom_I,
+                                           SlitOut_I],
+                          dets=[sw_det],energy=en):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 95 exposures
@@ -82,7 +94,13 @@ def full_nitrogen_scan_nd(multiple=1,sigs=[Beamstop_SAXS, Beamstop_SAXS, IzeroMe
 
 
 
-def very_short_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS, Beamstop_SAXS, IzeroMesh],dets=[sw_det],energy=en):
+def very_short_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
+                                               Beamstop_WAXS,
+                                               IzeroMesh,
+                                               SlitTop_I,
+                                               SlitBottom_I,
+                                               SlitOut_I],
+                              dets=[sw_det],energy=en):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 40 exposures
@@ -122,7 +140,13 @@ def very_short_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS, Beamstop_SAXS, Ize
     yield from en_scan_core(sigs, dets,energy,energies,shuttervalue,times)
 
 
-def short_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS, Beamstop_SAXS, IzeroMesh],dets=[sw_det],energy=en):
+def short_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
+                                          Beamstop_WAXS,
+                                          IzeroMesh,
+                                          SlitTop_I,
+                                          SlitBottom_I,
+                                          SlitOut_I],
+                         dets=[sw_det],energy=en):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 61 exposures
@@ -161,7 +185,13 @@ def short_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS, Beamstop_SAXS, IzeroMes
     yield from en_scan_core(sigs, dets,energy,energies,shuttervalue,times)
 
 
-def full_carbon_scan_nd(multiple=1, sigs=[Beamstop_SAXS, Beamstop_SAXS, IzeroMesh], dets=[sw_det], energy=en, once_mot= None, once_rstep = 0):
+def full_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
+                                         Beamstop_WAXS,
+                                         IzeroMesh,
+                                         SlitTop_I,
+                                         SlitBottom_I,
+                                         SlitOut_I],
+                        dets=[sw_det], energy=en, once_mot= None, once_rstep = 0):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 128 exposures
@@ -242,7 +272,13 @@ def en_scan_core(I400sigs, dets, energy, energies, shuttervalues, times):
 
 
 
-def full_ca_scan_nd(multiple=1,sigs=[Beamstop_SAXS, Beamstop_SAXS, IzeroMesh],dets=[sw_det],energy=en):
+def full_ca_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
+                                     Beamstop_WAXS,
+                                     IzeroMesh,
+                                     SlitTop_I,
+                                     SlitBottom_I,
+                                     SlitOut_I],
+                    dets=[sw_det],energy=en):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 128 exposures
