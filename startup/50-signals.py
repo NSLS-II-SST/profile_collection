@@ -39,7 +39,7 @@ class I400(Device):
 
         status = DeviceStatus(self)
         if self.trigger_count < self.ignore_triggers :
-            self.trigger_count +=1
+            self.trigger_count += 1
         else:
             self.trigger_count = 0
             self.acquire.put(1, callback= status._finished)
@@ -104,10 +104,10 @@ class I400(Device):
         def unstage(self):
             print('unstaging channel')
             self.kind = 'normal'
-            self.parent.acquisition_mode.set(7)
-            self.parent.acquisition_mode1.set(7)
-            self.parent.exposure_time.set(.4)
-            return [self]#.append(super().unstage())
+            #self.parent.acquisition_mode.set(7)
+            #self.parent.acquisition_mode1.set(7)
+            #self.parent.exposure_time.set(.4)
+            return [self].append(self.parent.unstage())
 
     Channel_1 = Component(I400Channel, ':IC1_MON', kind='normal')
     Channel_2 = Component(I400Channel, ':IC2_MON', kind='normal')
