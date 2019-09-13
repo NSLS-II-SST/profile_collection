@@ -271,7 +271,7 @@ def en_scan_core(I400sigs, dets, energy, energies, shuttervalues, times):
     #     boxed_text('Warning', 'light was on, taking a quick snapshot to clear CCDs', 'yellow', shrink=True)
     #     yield from quicksnap()
 
-    yield from bp.scan_nd([I400sigs,
+    yield from bp.scan_nd(I400sigs+[
                            en.energy]+ dets,
                           sigcycler)
 
@@ -305,7 +305,9 @@ def full_ca_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
         return
 
     # create a list of energies
-    energies = np.arange(320,355,.5)
+    energies = np.arange(320,340,5)
+    energies = np.append(energies,np.arange(340,345,1))
+    energies = np.append(energies,np.arange(345,355,.5))
     times = energies.copy()
 
     # Define exposures times for different energy ranges
