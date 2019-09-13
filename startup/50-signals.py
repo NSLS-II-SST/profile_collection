@@ -12,9 +12,6 @@ bpm13_sum = EpicsSignalRO('XF:07ID-BI{BPM:13}Stats5:Total_RBV', name='Downstream
 ring_current = EpicsSignalRO('SR:OPS-BI{DCCT:1}I:Real-I', name='NSLS-II Ring Current', kind='normal')
 
 
-
-
-
 class I400(Device):
     gain = Component(EpicsSignal, ':RANGE_BP')
     gain2 = Component(EpicsSignal, ':RANGE_BP2')
@@ -28,6 +25,11 @@ class I400(Device):
     gain_save = 7
     ignore_triggers = 0
     trigger_count = 0
+
+    def __init__(self, *args, **kwargs):
+        Device.__init__(*args, **kwargs)
+        self.status = DeviceStatus(self)
+
     def trigger(self):
         """
         Trigger the detector and return a Status object.
@@ -35,15 +37,16 @@ class I400(Device):
         if not self._staged == Staged.yes:
             raise RuntimeError("Device must be staged before triggering.")
 
-
-
-        status = DeviceStatus(self)
-        if self.trigger_count < self.ignore_triggers :
+        if self.trigger_count > 0:
+            if self.trigger_count >= self.ignore_triggers:
+                self.trigger_count = 0
+            else:
+                self.trigger_count += 1
+        if self.trigger_count == 0:
             self.trigger_count += 1
-        else:
-            self.trigger_count = 0
-            self.acquire.put(1, callback= status._finished)
-        return status
+            self.status = DeviceStatus(self)
+            self.acquire.put(1, callback= self.status._finished)
+        return self.status
 
     def set_exposure(self, exptime):
         exptimeset = min(exptime,20)
