@@ -376,8 +376,12 @@ def snapshot(secs=0, count=1, name='snap', energy = None):
     SlitOut_I.kind = "hinted"
     yield from bp.count([sw_det,
                          en.energy,
-                         RSoXS_DrainCurrent,
-                         RSoXS_Diodes],
+                         Beamstop_SAXS,
+                         Beamstop_WAXS,
+                         IzeroMesh,
+                         SlitTop_I,
+                         SlitBottom_I,
+                         SlitOut_I],
                         num=count)
     # if light_was_on:
     #     samplelight.on()
