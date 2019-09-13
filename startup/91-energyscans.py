@@ -265,7 +265,7 @@ def en_scan_core(I400sigs, dets, energy, energies, shuttervalues, times):
     #     boxed_text('Warning', 'light was on, taking a quick snapshot to clear CCDs', 'yellow', shrink=True)
     #     yield from quicksnap()
 
-    yield from bp.scan_nd(I400sigs+ dets+ [en,sw_det.saxs.cam.sync],sigcycler)
+    yield from bp.scan_nd(I400sigs+ dets+ [en.energy],sigcycler)
 
     # if light_was_on:
     #     samplelight.on()    # leaving light off now - this just slows everything down if there are multiple scans

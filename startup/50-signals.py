@@ -26,13 +26,18 @@ class I400(Device):
     enabled = Component(EpicsSignal, ':ENABLE_IC_UPDATES')
     exptime_save = .5
     gain_save = 7
-
+    ignoretriggers = 0
+    triggercount = 0
     def trigger(self):
         """
         Trigger the detector and return a Status object.
         """
         if not self._staged == Staged.yes:
             raise RuntimeError("Device must be staged before triggering.")
+        if self.triggercount < self.ignoretriggers > 0 :
+            self.riggercount += 1
+            return None
+        self.triggercount = 0
         status = DeviceStatus(self)
         self.acquire.put(1, callback= status._finished)
         return status
@@ -50,6 +55,7 @@ class I400(Device):
 
     def stage(self):
         if self._staged == Staged.yes:
+            self.ignoretriggers += 1
             return []
         self.kind = 'hinted'
         output = [super().stage()]
@@ -65,6 +71,7 @@ class I400(Device):
         self.acquisition_mode.set(7)
         self.acquisition_mode1.set(7)
         self.exposure_time.set(.4)
+        self.ignoretriggers=0
         return [self].append(super().unstage())
 
     class I400Channel(EpicsSignal):
