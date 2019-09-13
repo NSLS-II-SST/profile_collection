@@ -410,12 +410,12 @@ del snaps
 
 
 
-def spiralsearch(radius=2, stepsize=.2):
+def spiralsearch(radius=1, stepsize=.2):
     x_center = sam_X.user_setpoint.value
     y_center = sam_Y.user_setpoint.value
     num = round(radius / stepsize)
 
-    yield from spiral_square([sw_det, en, Beamstop_SAXS, Beamstop_SAXS, IzeroMesh], sam_X, sam_Y, x_center=x_center, y_center=y_center,
+    yield from spiral_square([sw_det, en.energy, Beamstop_SAXS, IzeroMesh], sam_X, sam_Y, x_center=x_center, y_center=y_center,
                      x_range=radius, y_range=radius, x_num=num, y_num=num)
 
 
