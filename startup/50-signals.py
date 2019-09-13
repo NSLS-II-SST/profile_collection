@@ -27,7 +27,7 @@ class I400(Device):
     trigger_count = 0
 
     def __init__(self, *args, **kwargs):
-        Device.__init__(*args, **kwargs)
+        super.__init__(*args, **kwargs)
         self.status = DeviceStatus(self)
 
     def trigger(self):
