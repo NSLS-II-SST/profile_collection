@@ -351,9 +351,10 @@ def full_carbon_calcium_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     energies = np.append(energies,np.arange(282,286,.1))
     energies = np.append(energies,np.arange(286,292,.2))
     energies = np.append(energies,np.arange(292,305,1))
-    energies = np.append(energies,np.arange(305,320,1))
+    energies = np.append(energies,np.arange(305,320,5))
     energies = np.append(energies,np.arange(320,340,5))
-    energies = np.append(energies,np.arange(340,360,.5))
+    energies = np.append(energies,np.arange(340,345,1))
+    energies = np.append(energies,np.arange(345,360,.5))
     times = energies.copy()
 
     # Define exposures times for different energy ranges
