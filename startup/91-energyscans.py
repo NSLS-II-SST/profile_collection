@@ -306,7 +306,7 @@ def full_ca_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
         return
 
     # create a list of energies
-    energies = np.arange(345,355,.2)
+    energies = np.arange(320,355,.5)
     times = energies.copy()
 
     # Define exposures times for different energy ranges
@@ -321,3 +321,59 @@ def full_ca_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     # use these energies and exposure times to scan energy and record detectors and signals
     yield from en_scan_core(sigs, dets, energy, energies, shuttervalue, times)
 
+def full_carbon_calcium_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
+                                         Beamstop_WAXS,
+                                         IzeroMesh,
+                                         SlitTop_I,
+                                         SlitBottom_I,
+                                         SlitOut_I],
+                        dets=[sw_det], energy=en, once_mot= None, once_rstep = 0):
+    '''
+    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
+    this results in 128 exposures
+
+
+    :param multiple: adjustment for exposure times
+    :param mesh: which Izero channel to use
+    :param det: which detector to use
+    :param energy: what energy motor to scan
+    :return: perform scan
+
+    normal scan takes ~ 18 minutes to complete
+    '''
+    sample()
+    if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
+        return
+
+    # create a list of energies
+    energies = np.arange(270,282,.5)
+    energies = np.append(energies,np.arange(282,286,.1))
+    energies = np.append(energies,np.arange(286,292,.2))
+    energies = np.append(energies,np.arange(292,305,1))
+    energies = np.append(energies,np.arange(305,320,1))
+    energies = np.append(energies,np.arange(320,340,5))
+    energies = np.append(energies,np.arange(340,360,.5))
+    times = energies.copy()
+
+    # Define exposures times for different energy ranges
+    times[energies<282] = 1
+    times[(energies < 286) & (energies >= 282)] = 5
+    times[energies >= 286] = 2
+    times[energies >= 320] = 10
+    times *= multiple
+
+    shutter_values = energies.copy()
+    shutter_values[:] = 1  # all the values are shutter enabled (2)
+    # this is because darks are now taken in the preprocessor automatically as needed
+
+    if isinstance(once_mot,EpicsMotor):
+        yield from bps.mvr(once_mot,once_rstep)
+
+
+    # print(times.size)
+    # print(energies.size)
+    # print(shutter_values.size)
+    # print(sigs)
+    # print(dets)
+    # use these energies and exposure times to scan energy and record detectors and signals
+    yield from en_scan_core(sigs, dets, energy, energies, shutter_values, times)
