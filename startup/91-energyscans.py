@@ -257,6 +257,12 @@ def en_scan_core(I400sigs, dets, energy, energies, shuttervalues, times):
     sigcycler += cycler(sw_det.waxs.cam.acquire_time, times.copy()+.3) #add extra exposure time for WAXS
     sigcycler += cycler(sw_det.saxs.cam.sync, shuttervalues.astype(int))
 
+    Beamstop_SAXS.kind = "hinted"
+    Beamstop_WAXS.kind = "hinted"
+    IzeroMesh.kind = "hinted"
+    SlitTop_I.kind = "hinted"
+    SlitBottom_I.kind = "hinted"
+    SlitOut_I.kind = "hinted"
     # light_was_on = False
     # if samplelight.value is 1:
     #     samplelight.off()
@@ -265,7 +271,10 @@ def en_scan_core(I400sigs, dets, energy, energies, shuttervalues, times):
     #     boxed_text('Warning', 'light was on, taking a quick snapshot to clear CCDs', 'yellow', shrink=True)
     #     yield from quicksnap()
 
-    yield from bp.scan_nd(I400sigs+ dets+ [en.energy],sigcycler)
+    yield from bp.scan_nd([RSoXS_DrainCurrent,
+                           RSoXS_Diodes,
+                           en.energy]+ dets,
+                          sigcycler)
 
     # if light_was_on:
     #     samplelight.on()    # leaving light off now - this just slows everything down if there are multiple scans
