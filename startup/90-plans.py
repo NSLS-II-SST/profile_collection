@@ -357,13 +357,13 @@ def snapshot(secs=0, count=1, name='snap', energy = None):
     samsave = RE.md['sample_name']
     samidsave = RE.md['sample_id']
     light_was_on = False
-    if samplelight.value is 1:
-        samplelight.off()
-        light_was_on = True
-        boxed_text('Warning','light was on, taking a quick snapshot to clear CCDs','yellow',shrink=True)
-        sw_det.shutter_off()
-        yield from quicksnap()
-        sw_det.shutter_on()
+    # if samplelight.value is 1:
+    #     samplelight.off()
+    #     light_was_on = True
+    #     boxed_text('Warning','light was on, taking a quick snapshot to clear CCDs','yellow',shrink=True)
+    #     sw_det.shutter_off()
+    #     yield from quicksnap()
+    #     sw_det.shutter_on()
     if secs:
         set_exposure(secs)
     RE.md['sample_name'] = name
@@ -375,12 +375,12 @@ def snapshot(secs=0, count=1, name='snap', energy = None):
     SlitBottom_I.kind = "hinted"
     SlitOut_I.kind = "hinted"
     yield from bp.count([sw_det,
-                         en,
+                         en.energy,
                          RSoXS_DrainCurrent,
                          RSoXS_Diodes],
                         num=count)
-    if light_was_on:
-        samplelight.on()
+    # if light_was_on:
+    #     samplelight.on()
 
     RE.md['sample_name'] = samsave
     RE.md['sample_id'] = samidsave
