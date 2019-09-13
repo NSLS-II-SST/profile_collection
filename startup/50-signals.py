@@ -14,7 +14,6 @@ ring_current = EpicsSignalRO('SR:OPS-BI{DCCT:1}I:Real-I', name='NSLS-II Ring Cur
 
 class I400(Device):
     gain = Component(EpicsSignal, ':RANGE_BP')
-    gain2 = Component(EpicsSignal, ':RANGE_BP2')
     exposure_time = Component(EpicsSignal, ':PERIOD_SP',put_complete=True)
     exposure_time2 = Component(EpicsSignal, ':PERIOD_SP2',put_complete=True)
     acquisition_mode = Component(EpicsSignal, ':GETCS.SCAN')
@@ -108,14 +107,14 @@ class I400(Device):
             #self.parent.exposure_time.set(.4)
             return [self].append(self.parent.unstage())
 
-    Channel_1 = Component(I400Channel, ':IC1_MON', kind='normal')
-    Channel_2 = Component(I400Channel, ':IC2_MON', kind='normal')
-    Channel_3 = Component(I400Channel, ':IC3_MON', kind='normal')
-    Channel_4 = Component(I400Channel, ':IC4_MON', kind='normal')
+    Channel_1 = Component(I400Channel, ':IC1_MON', kind='hinted')
+    Channel_2 = Component(I400Channel, ':IC2_MON', kind='hinted')
+    Channel_3 = Component(I400Channel, ':IC3_MON', kind='hinted')
+    Channel_4 = Component(I400Channel, ':IC4_MON', kind='hinted')
 
 
 RSoXS_Diodes = I400('XF:07ID-ES1{DMR:I400-1}', name='I400 diode')
-RSoXS_Diodes.gain_save = 7
+RSoXS_Diodes.gain_save = 6
 RSoXS_DrainCurrent = I400('XF:07ID-ES1{Slt1:I400-1}', name='I400 drain')
 RSoXS_DrainCurrent.gain_save = 4
 

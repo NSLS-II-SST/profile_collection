@@ -422,6 +422,7 @@ def spiralsearch(radius=1, stepsize=.2):
 def spiralsearch_all(barin=[]):
     for sample in barin:
         yield from load_sample(sample)
+        RE.md['project_name'] = 'spiral_searches'
         yield from spiralsearch()
 
 
