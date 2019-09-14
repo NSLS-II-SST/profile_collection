@@ -110,6 +110,11 @@ dark_frame_preprocessor = bluesky_darkframes.DarkFramePreprocessor(
 dark_frames_enable = make_decorator(dark_frame_preprocessor)()
 RE.preprocessors.append(dark_frame_preprocessor)
 # not doing this because EVERYTHING that goes through RE will get a dark image - this is excessive - fixed now!
+from bluesky.suspenders import SuspendBoolHigh
+
+suspend = SuspendBoolHigh(psh1.state,sleep = 10, tripped_message="Beam Shutter Closed, waiting for it to open")
+RE.install_suspender(suspend)
+
 
 def buildeputable(start, stop, step, widfract, startinggap,name):
     ens = np.arange(start,stop,step)
