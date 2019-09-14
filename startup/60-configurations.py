@@ -267,7 +267,7 @@ def WAXS():
         'order': 0},
         {
         'motor':    slits2.hsize,
-        'position': 0.7,
+        'position': 0.5,
         'order': 0},
         {
         'motor':    slits2.hcenter,
@@ -283,11 +283,11 @@ def WAXS():
         'order': 0},
         {
         'motor':    slits3.hsize,
-        'position': 1.1,
+        'position': 1.5,
         'order': 0},
         {
         'motor':    slits3.hcenter,
-        'position': 0.3,
+        'position': 0.1,
         'order': 0},
         {
         'motor':    Shutter_Y,
