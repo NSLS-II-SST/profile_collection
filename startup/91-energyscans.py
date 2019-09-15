@@ -38,7 +38,7 @@ def full_oxygen_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     times = energies.copy()
 
     # Define exposures times for different energy ranges
-    times[energies<282] = 1
+    times[energies<282] = 2
     times[(energies < 286) & (energies >= 282)] = 5
     times[energies >= 286] = 2
     times *= multiple
@@ -129,7 +129,7 @@ def very_short_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     times = energies.copy()
 
     # Define exposures times for different energy ranges
-    times[energies<282] = 1
+    times[energies<282] = 2
     times[(energies < 286) & (energies >= 282)] = 5
     times[energies >= 286] = 2
     times *= multiple
@@ -219,7 +219,7 @@ def full_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     times = energies.copy()
 
     # Define exposures times for different energy ranges
-    times[energies<282] = 1
+    times[energies<282] = 2
     times[(energies < 286) & (energies >= 282)] = 5
     times[energies >= 286] = 2
     times *= multiple
@@ -357,7 +357,7 @@ def full_carbon_calcium_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     times = energies.copy()
 
     # Define exposures times for different energy ranges
-    times[energies<282] = 1
+    times[energies<282] = 2
     times[(energies < 286) & (energies >= 282)] = 5
     times[energies >= 286] = 2
     times[energies >= 320] = 10

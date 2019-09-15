@@ -15,7 +15,6 @@ ring_current = EpicsSignalRO('SR:OPS-BI{DCCT:1}I:Real-I', name='NSLS-II Ring Cur
 class I400(Device):
     gain = Component(EpicsSignal, ':RANGE_BP')
     exposure_time = Component(EpicsSignal, ':PERIOD_SP',put_complete=True)
-    exposure_time2 = Component(EpicsSignal, ':PERIOD_SP2',put_complete=True)
     acquisition_mode = Component(EpicsSignal, ':GETCS.SCAN')
     acquisition_mode1 = Component(EpicsSignal, ':GETCS2.SCAN')
     acquire = Component(EpicsSignal, ':GETCS', put_complete=True)  # Rely on the IOC to signal done-ness.
