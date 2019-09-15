@@ -562,4 +562,4 @@ def NEXAFS_WAXS_bar(barin,start_en,stop_en,num_en):
 def run_bar_then_NEXAFS(barin):
     yield from run_bar(barin, sortby=['c', 'p', 'a'], dryrun=0)
     yield from NEXAFS_WAXS_bar(barin[0:26], 320, 360, 81)
-    yield from NEXAFS_WAXS_bar(barin[26:], 270, 320, 301)
+    yield from NEXAFS_WAXS_bar(barin[26:], 270, 340, 351)
