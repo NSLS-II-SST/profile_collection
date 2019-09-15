@@ -547,3 +547,19 @@ def sample_by_value_match(bar,key,string):
 
 def sample_by_name(bar,name):
     return sample_by_value_match(bar,'sample_name',name)
+
+
+def NEXAFS_WAXS_bar(barin,start_en,stop_en,num_en):
+    yield from bps.mv(Shutter_Y,30)
+    IzeroMesh.set_exposure(1)
+    Beamstop_WAXS.set_exposure(1)
+    for sample in barin:
+        yield from load_sample(sample)
+        RE.md['project_name'] = 'NEXAFS'
+        yield from bp.scan([IzeroMesh,Beamstop_WAXS],en,start_en,stop_en,num_en)
+
+
+def run_bar_then_NEXAFS(barin):
+    yield from run_bar(barin, sortby=['c', 'p', 'a'], dryrun=0)
+    yield from NEXAFS_WAXS_bar(barin[0:26], 320, 360, 81)
+    yield from NEXAFS_WAXS_bar(barin[26:], 270, 320, 301)
