@@ -127,6 +127,7 @@ class prettymotor(FMBOEpicsMotor):
             boxed_text(self.name, self.where(), 'lightgray', shrink=True)
 
 
+sam_viewer = prettymotor('XF:07ID2-ES1{ImgY-Ax:1}Mtr', name='RSoXS Sample Imager',kind='hinted')
 sam_X = prettymotor('XF:07ID2-ES1{Stg-Ax:X}Mtr', name='RSoXS Sample Outboard-Inboard',kind='hinted')
 sam_Y = prettymotor('XF:07ID2-ES1{Stg-Ax:Y}Mtr', name='RSoXS Sample Up-Down',kind='hinted')
 sam_Z = prettymotor('XF:07ID2-ES1{Stg-Ax:Z}Mtr', name='RSoXS Sample Downstream-Upstream',kind='hinted')
@@ -142,7 +143,7 @@ Exit_Slit = prettymotor('XF:07ID2-BI{Slt:11-Ax:YGap}Mtr', name='Exit Slit of Mon
 grating = prettymotor('XF:07ID1-OP{Mono:PGM1-Ax:GrtP}Mtr',name="Mono Grating",kind='hinted')
 mirror2 = prettymotor('XF:07ID1-OP{Mono:PGM1-Ax:MirP}Mtr',name="Mono Mirror",kind='hinted')
 
-sd.baseline.extend([sam_X, sam_Y, sam_Z, sam_Th, BeamStopS, BeamStopW, Det_S, Det_W,
+sd.baseline.extend([sam_viewer, sam_X, sam_Y, sam_Z, sam_Th, BeamStopS, BeamStopW, Det_S, Det_W,
                     Shutter_Y, Izero_Y, Izero_ds, grating, mirror2])
 
 
