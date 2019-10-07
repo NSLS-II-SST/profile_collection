@@ -112,8 +112,8 @@ class StandardProsilicaV33(SingleTriggerV33, ProsilicaDetector):
 class StandardProsilicaWithTIFF(StandardProsilica):
     tiff = Cpt(TIFFPluginWithFileStore,
                suffix='TIFF1:',
-               write_path_template='/nsls2/xf11id1/data/%Y/%m/%d/',
-               root='/nsls2/xf11id1/data',
+               write_path_template='/DATA/images/data/%Y/%m/%d/',
+               root='/DATA/images/data',
                reg=db.reg)
 
 
@@ -129,7 +129,7 @@ Side_cam = StandardProsilica('XF:07ID1-ES:1{Scr:2}', name='RSoXS Sample Area Cam
 DetS_cam = StandardProsilica('XF:07ID1-ES:1{Scr:3}', name='WAXS Detector Area Camera')
 Izero_cam = StandardProsilica('XF:07ID1-ES:1{Scr:1}', name='Izero YAG Camera')
 Sample_cam = StandardProsilica('XF:07ID1-ES:1{Scr:4}', name='RSoXS Sample Area Camera')
-# SampleViewer_cam = StandardProsilica('XF:07ID1-ES:1{Scr:5}', name='WAXS Detector Area Camera')
+SampleViewer_cam = StandardProsilicaWithTIFF('XF:07ID1-ES:1{Scr:5}', name='Sample Imager Detector Area Camera')
 
 crosshair = Sample_cam.over1.overlay_1
 Sample_cam.over1.overlay_1.position_y.kind='hinted'
@@ -156,7 +156,7 @@ def crosshair_on():crosshair.use.set(1)
 def crosshair_off():crosshair.use.set(0)
 
 
-all_standard_pros = [Sample_cam, DetS_cam, Izero_cam]
+all_standard_pros = [Sample_cam, DetS_cam, Izero_cam, SampleViewer_cam]
 for camera in all_standard_pros:
     camera.read_attrs = ['stats1', 'stats2', 'stats3', 'stats4', 'stats5']
     # camera.tiff.read_attrs = []  # leaving just the 'image'

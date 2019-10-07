@@ -378,3 +378,21 @@ def full_carbon_calcium_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     # print(dets)
     # use these energies and exposure times to scan energy and record detectors and signals
     yield from en_scan_core(sigs, dets, energy, energies, shutter_values, times)
+
+
+def carbon_NEXAFS(exp_time=2, gain_bs=5,s_or_w='w'):
+    IzeroMesh.set_exposure(exp_time-1)
+    Beamstop_WAXS.set_exposure(exp_time-1)
+    RSoXS_Diodes.gain_save = gain_bs
+    switch = {'s' : Beamstop_SAXS , 'w' : Beamstop_WAXS}
+    RE.md['project_name'] = 'NEXAFS'
+    yield from bp.scan([IzeroMesh,switch[s_or_w]],en,270,340,351)
+
+    
+def calcium_NEXAFS(exp_time=2, gain_bs=5,s_or_w='w'):
+    IzeroMesh.set_exposure(exp_time-1)
+    Beamstop_WAXS.set_exposure(exp_time-1)
+    RSoXS_Diodes.gain_save = gain_bs
+    switch = {'s' : Beamstop_SAXS , 'w' : Beamstop_WAXS}
+    RE.md['project_name'] = 'NEXAFS'
+    yield from bp.scan([IzeroMesh,switch[s_or_w]],en,320,360,201)
