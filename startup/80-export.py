@@ -73,6 +73,7 @@ def factory(name, start_doc):
             if descriptor_doc['name'] == 'primary':
                 serializercsv('start', start_doc)
                 serializercsv('descriptor', descriptor_doc)
+                returnlist.append(filler)
                 returnlist.append(serializercsv)
             return returnlist
         elif descriptor_doc['name'] == 'baseline':
