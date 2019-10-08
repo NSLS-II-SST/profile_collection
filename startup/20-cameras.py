@@ -61,19 +61,19 @@ process
 
 class StandardProsilica(SingleTrigger, ProsilicaDetector):
     image = Cpt(ImagePlugin, 'image1:')
-    stats1 = Cpt(StatsPlugin, 'Stats1:')
-    stats2 = Cpt(StatsPlugin, 'Stats2:')
-    stats3 = Cpt(StatsPlugin, 'Stats3:')
-    stats4 = Cpt(StatsPlugin, 'Stats4:')
-    stats5 = Cpt(StatsPlugin, 'Stats5:')
-    trans1 = Cpt(TransformPlugin, 'Trans1:')
-    roi1 = Cpt(ROIPlugin, 'ROI1:')
-    roi2 = Cpt(ROIPlugin, 'ROI2:')
-    roi3 = Cpt(ROIPlugin, 'ROI3:')
-    roi4 = Cpt(ROIPlugin, 'ROI4:')
-    proc1 = Cpt(ProcessPlugin, 'Proc1:')
-    over1 = Cpt(OverlayPlugin, 'Over1:')
-    cc1 = Cpt(ColorConvPlugin, 'CC1:')
+    #stats1 = Cpt(StatsPlugin, 'Stats1:')
+    #stats2 = Cpt(StatsPlugin, 'Stats2:')
+    #stats3 = Cpt(StatsPlugin, 'Stats3:')
+    #stats4 = Cpt(StatsPlugin, 'Stats4:')
+    #stats5 = Cpt(StatsPlugin, 'Stats5:')
+    #trans1 = Cpt(TransformPlugin, 'Trans1:')
+    #roi1 = Cpt(ROIPlugin, 'ROI1:')
+    #roi2 = Cpt(ROIPlugin, 'ROI2:')
+    #roi3 = Cpt(ROIPlugin, 'ROI3:')
+    #roi4 = Cpt(ROIPlugin, 'ROI4:')
+    #proc1 = Cpt(ProcessPlugin, 'Proc1:')
+    #over1 = Cpt(OverlayPlugin, 'Over1:')
+    #cc1 = Cpt(ColorConvPlugin, 'CC1:')
 
     # This class does not save TIFFs. We make it aware of the TIFF plugin
     # only so that it can ensure that the plugin is not auto-saving.

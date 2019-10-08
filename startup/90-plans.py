@@ -443,16 +443,54 @@ def imagesample():
     images = []
     for pos in ypos:
         yield from bps.mv(sam_viewer,pos)
-        yield from bp.count([SampleViewer_cam],1)
-        images.append(next(db[-1].data('Sample Imager Detector Area Camera_image')))
-    stich_sample(images, step_size)
+        imageuid = yield from bp.count([SampleViewer_cam],1)
+        print(imageuid)
+        images.append(next(db[imageuid].data('Sample Imager Detector Area Camera_image')))
+    stich_sample(images, 25,5)
 
 
-def stich_sample(images, step_size):
+def bar_add_from_click(event):
+    global bar
+    #print(event.xdata, event.ydata)
+    if(isinstance(bar,list)):
+        barnum = int(input('Bar location : '))
+
+        #print(event.xdata,event.ydata)
+        if barnum >=0 and barnum < len(bar) :
+            bar[barnum]['location'][0] = {'motor' : 'x','position': event.xdata}
+            bar[barnum]['location'][1] = {'motor' : 'y','position': event.ydata}
+            bar[barnum]['location'][2] = {'motor' : 'z','position': 0}
+            bar[barnum]['location'][3] = {'motor' : 'th','position': 0}
+            print('position added')
+        else:
+            print('Invalid bar location')
+    else:
+        print('invalid bar')
+
+def update_bar(bar):
+    for item in bar:
+        print(item['sample_name'])
+        print("Enter x and y location:")
+        # ipython input x,y or click in plt which outputs x, y location
+        item['location'][0] = {'motor': 'x', 'position': xdata}
+        item['location'][1] = {'motor': 'y', 'position': ydata}
+        item['location'][2] = {'motor': 'z', 'position': 0}
+        item['location'][3] = {'motor': 'th', 'position': 0}
+
+def stich_sample(images, step_size, y_off):
     pixel_step = int(step_size * (1760) / 25)
     pixel_overlap = 2464 - pixel_step
     result = images[0]
-
+    i = 0
     for image in images[1:]:
-        result = np.concatenate((result, image[:, pixel_overlap:]), axis=1)
-    plt.imshow(result, extent=[0, 235, 0, 29])
+        i += 1
+        result = np.concatenate((image[(y_off * i):, pixel_overlap:], result[:-(y_off), :]), axis=1)
+    fig, ax = plt.subplots()
+    ax.imshow(result, extent=[0, 235, 0, 29])
+    fig.canvas.mpl_connect('button_press_event', bar_add_from_click)
+    plt.show()
+    return result
+
+
+def print_click(event):
+    print(event.xdata, event.ydata)
