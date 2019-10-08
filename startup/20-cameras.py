@@ -120,8 +120,8 @@ class StandardProsilicaWithTIFF(StandardProsilica):
 class StandardProsilicaWithTIFFV33(StandardProsilicaV33):
     tiff = Cpt(TIFFPluginWithFileStore,
                suffix='TIFF1:',
-               write_path_template='/XF11ID/data/%Y/%m/%d/',
-               root='/XF11ID/data',
+               write_path_template='/DATA/images/data/%Y/%m/%d/',
+               root='/DATA/images/data',
                reg=db.reg)
 
 
@@ -175,3 +175,5 @@ for camera in all_standard_pros:
     # camera.cam.ensure_nonblocking()
 
     camera.stage_sigs[camera.cam.trigger_mode] = 'Fixed Rate'
+
+SampleViewer_cam.tiff.kind = 'hinted'

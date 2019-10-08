@@ -438,4 +438,21 @@ def stability_scans(num):
         yield from bp.scan([IzeroMesh],en,200,1400,1201)
 
 
+def imagesample():
+    ypos = np.arange(-100,110,25)
+    images = []
+    for pos in ypos:
+        yield from bps.mv(sam_viewer,pos)
+        yield from bp.count([SampleViewer_cam],1)
+        images.append(next(db[-1].data('Sample Imager Detector Area Camera_image')))
+    stich_sample(images, step_size)
 
+
+def stich_sample(images, step_size):
+    pixel_step = int(step_size * (1760) / 25)
+    pixel_overlap = 2464 - pixel_step
+    result = images[0]
+
+    for image in images[1:]:
+        result = np.concatenate((result, image[:, pixel_overlap:]), axis=1)
+    plt.imshow(result, extent=[0, 235, 0, 29])
