@@ -487,10 +487,45 @@ def stich_sample(images, step_size, y_off):
         result = np.concatenate((image[(y_off * i):, pixel_overlap:], result[:-(y_off), :]), axis=1)
     fig, ax = plt.subplots()
     ax.imshow(result, extent=[0, 235, 0, 29])
-    fig.canvas.mpl_connect('button_press_event', print_click)
+    fig.canvas.mpl_connect('button_press_event', plot_click)
+    fig.canvas.mpl_connect('key_press_event', plot_key_press)
     plt.show()
     return result
 
 
 def print_click(event):
-    print(event.xdata, event.ydata)
+    #print(event.xdata, event.ydata)
+    global bar, barloc
+    item = []
+    item.append({'motor': 'x', 'position': event.xdata})
+    item.append({'motor': 'y', 'position': event.ydata})
+    item.append({'motor': 'z', 'position': 0})
+    item.append({'motor': 'th', 'position': 0})
+    bar[loc]['location'] = item
+    print(f'Setting location {barloc} on bar to clicked position')
+
+
+def plot_click(event):
+    #print(event.xdata, event.ydata)
+    global loc_Q
+    item = []
+    item.append({'motor': 'x', 'position': event.xdata})
+    item.append({'motor': 'y', 'position': event.ydata})
+    item.append({'motor': 'z', 'position': 0})
+    item.append({'motor': 'th', 'position': 0})
+    #loc_Q.put(item)
+
+
+def plot_key_press(event):
+    #print(event.xdata, event.ydata)
+    #global loc_Q
+    #if(event.key==)
+    #loc_Q.put(None)
+    print(event.key)
+
+def set_loc(bar_name,locnum):
+    global bar, barloc
+    bar = bar_name
+    barloc = locnum
+
+
