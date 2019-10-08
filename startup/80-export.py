@@ -92,7 +92,7 @@ def factory(name, start_doc):
                                         line_terminator='\n')
             serializer('start', start_doc)
             serializer('descriptor', descriptor_doc)
-            return [serializer]
+            return [filler,serializer]
         else:
             return []
 
