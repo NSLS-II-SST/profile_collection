@@ -158,7 +158,7 @@ def crosshair_on():crosshair.use.set(1)
 def crosshair_off():crosshair.use.set(0)
 
 
-all_standard_pros = [Sample_cam, DetS_cam, Izero_cam, SampleViewer_cam]
+all_standard_pros = [Sample_cam, DetS_cam, Izero_cam]
 for camera in all_standard_pros:
     camera.read_attrs = ['stats1', 'stats2', 'stats3', 'stats4', 'stats5']
     # camera.tiff.read_attrs = []  # leaving just the 'image'
