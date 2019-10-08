@@ -131,7 +131,7 @@ Izero_cam = StandardProsilica('XF:07ID1-ES:1{Scr:1}', name='Izero YAG Camera')
 Sample_cam = StandardProsilica('XF:07ID1-ES:1{Scr:4}', name='RSoXS Sample Area Camera')
 SampleViewer_cam = StandardProsilicaWithTIFF('XF:07ID1-ES:1{Scr:5}',
                                              name='Sample Imager Detector Area Camera',
-                                             read_attrs=['tiff', 'stats1.total'])
+                                             read_attrs=['tiff'])
 
 crosshair = Sample_cam.over1.overlay_1
 Sample_cam.over1.overlay_1.position_y.kind='hinted'
