@@ -141,12 +141,12 @@ def sample_set_location(sample_dict):
 
 
 def get_sample_location():
-    # locs = []
-    # locs.append({'motor': 'x', 'position': sam_X.user_readback.value, 'order': 0})
-    # locs.append({'motor': 'y', 'position': sam_Y.user_readback.value, 'order': 0})
-    # locs.append({'motor': 'z', 'position': sam_Z.user_readback.value, 'order': 0})
-    # locs.append({'motor': 'th', 'position': sam_Th.user_readback.value, 'order': 0})
-    locs = get_location([sam_X,sam_Y,sam_Z,sam_Th])
+    locs = []
+    locs.append({'motor': 'x', 'position': sam_X.user_readback.value, 'order': 0})
+    locs.append({'motor': 'y', 'position': sam_Y.user_readback.value, 'order': 0})
+    locs.append({'motor': 'z', 'position': sam_Z.user_readback.value, 'order': 0})
+    locs.append({'motor': 'th', 'position': sam_Th.user_readback.value, 'order': 0})
+    #  locs = get_location([sam_X,sam_Y,sam_Z,sam_Th])
     return locs
 
 
@@ -563,3 +563,25 @@ def run_bar_then_NEXAFS(barin):
     yield from run_bar(barin, sortby=['c', 'p', 'a'], dryrun=0)
     yield from NEXAFS_WAXS_bar(barin[0:26], 320, 360, 81)
     yield from NEXAFS_WAXS_bar(barin[26:], 270, 340, 351)
+
+
+def offset_bar(bar, xoff, yoff, zoff, thoff):
+    for samp in bar:
+        for mot in samp['location']:
+            if mot['motor'] is 'x':
+                mot['position'] += xoff
+            if mot['motor'] is 'y':
+                mot['position'] += yoff
+            if mot['motor'] is 'z':
+                mot['position'] += zoff
+            if mot['motor'] is 'th':
+                mot['position'] += thoff
+
+
+def flip_bar(bar):
+    for samp in bar:
+        for mot in samp['location']:
+            if mot['motor'] is 'x':
+                mot['position'] = .5 - mot['position']
+            if mot['motor'] is 'th':
+                mot['position'] = 180

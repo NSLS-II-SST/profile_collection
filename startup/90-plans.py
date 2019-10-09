@@ -7,7 +7,7 @@ from IPython.core.magic import register_line_magic
 from suitcase import tiff_series, csv
 from datetime import datetime
 from bluesky.preprocessors import make_decorator
-
+import queue
 
 run_report(__file__)
 
@@ -467,15 +467,38 @@ def bar_add_from_click(event):
     else:
         print('invalid bar')
 
-def update_bar(bar):
-    for item in bar:
-        print(item['sample_name'])
-        print("Enter x and y location:")
-        # ipython input x,y or click in plt which outputs x, y location
-        item['location'][0] = {'motor': 'x', 'position': xdata}
-        item['location'][1] = {'motor': 'y', 'position': ydata}
-        item['location'][2] = {'motor': 'z', 'position': 0}
-        item['location'][3] = {'motor': 'th', 'position': 0}
+
+def update_bar(bar,loc_Q):
+    from threading import Thread
+    try:
+        loc_Q.get_nowait()
+    except Exception:
+        ...
+
+    def worker():
+        for sample in bar:
+            print(f'Click on {sample["sample_name"]} location or press enter on plot to skip, space to end')
+            # ipython input x,y or click in plt which outputs x, y location
+            while True:
+                try:
+                    #print('trying')
+                    item = loc_Q.get(timeout=1)
+                except Exception:
+                    #print('no item')
+                    ...
+                else:
+                    #print('got something')
+                    break
+            if item is not 'enter' or ' ' and isinstance(item,list):
+                sample['location'] = item
+            elif item is ' ':
+                print('aborting')
+                break
+            elif item is'enter':
+                print(f'leaving this {sample["sample_name"]} unchanged')
+        print("done")
+    t = Thread(target=worker)
+    t.start()
 
 def stich_sample(images, step_size, y_off):
     pixel_step = int(step_size * (1760) / 25)
@@ -484,7 +507,7 @@ def stich_sample(images, step_size, y_off):
     i = 0
     for image in images[1:]:
         i += 1
-        result = np.concatenate((image[(y_off * i):, pixel_overlap:], result[:-(y_off), :]), axis=1)
+        result = np.concatenate((image[(y_off * i):, :], result[:-(y_off), pixel_overlap:]), axis=1)
     fig, ax = plt.subplots()
     ax.imshow(result, extent=[0, 235, 0, 29])
     fig.canvas.mpl_connect('button_press_event', plot_click)
@@ -513,15 +536,15 @@ def plot_click(event):
     item.append({'motor': 'y', 'position': event.ydata})
     item.append({'motor': 'z', 'position': 0})
     item.append({'motor': 'th', 'position': 0})
-    #loc_Q.put(item)
+    if not loc_Q.full() and event.button == 3:
+        loc_Q.put(item,block=False)
 
 
 def plot_key_press(event):
-    #print(event.xdata, event.ydata)
-    #global loc_Q
-    #if(event.key==)
-    #loc_Q.put(None)
-    print(event.key)
+    global loc_Q
+    if not loc_Q.full() and event.key == 'enter':
+        loc_Q.put(event.key,block=False)
+
 
 def set_loc(bar_name,locnum):
     global bar, barloc
