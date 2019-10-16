@@ -57,7 +57,7 @@ def BS_out():
 
 
 def slits_in_SAXS():
-    yield from bps.mv(slits1.vsize, 0.2,
+    yield from bps.mv(slits1.vsize, 0.025,
                       slits1.vcenter, -0.55,
                       slits1.hsize, 0.2,
                       slits1.hcenter, 0.3,
@@ -77,18 +77,18 @@ def slits_out():
                       slits3.vsize, 10,
                       slits3.hsize, 10)
 def slits_in_WAXS():
-    yield from bps.mv(slits1.vsize, 0.5,
+    yield from bps.mv(slits1.vsize, 0.025,
                       slits1.vcenter, -0.55,
-                      slits1.hsize, 0.4,
-                      slits1.hcenter, 0.3,
-                      slits2.vsize, 0.8,
-                      slits2.vcenter, -0.9,
-                      slits2.hsize, 0.7,
-                      slits2.hcenter, 0.2,
+                      slits1.hsize, 0.5,
+                      slits1.hcenter, 0.5,
+                      slits2.vsize, 0.6,
+                      slits2.vcenter, -0.85,
+                      slits2.hsize, 0.9,
+                      slits2.hcenter, 0.31,
                       slits3.vsize, 1.15,
-                      slits3.vcenter, -0.55,
+                      slits3.vcenter, -0.525,
                       slits3.hsize, 1.1,
-                      slits3.hcenter, 0.3)
+                      slits3.hcenter, 0.35)
 
 def mirror3_pos():
     yield from bps.mv(mir3.Pitch, 7.91)
@@ -158,7 +158,7 @@ def SAXSmode():
 def SAXS():
     return [{
         'motor':    slits1.vsize,
-        'position': 0.2,
+        'position': 0.025,
         'order': 0},
         {
         'motor':    slits1.vcenter,
