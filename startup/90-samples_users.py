@@ -195,21 +195,24 @@ def do_acquisitions(acq_list):
         yield from eval(acq['plan_name']+'('+acq['arguments']+')')
 
 
-def sample_dict(acq = [],locations = get_sample_location(),sample_name = RE.md['sample_name'],
-                sample_desc = RE.md['sample_desc'],
-                sample_id = RE.md['sample_id'],
-                sample_set = RE.md['sample_set'],
-                sample_date = RE.md['sample_date'],
-                project_name = RE.md['project_name'],
-                project_desc = RE.md['project_desc'],
-                samp_user_id = RE.md['samp_user_id'],
-                composition = RE.md['composition'],
-                density = RE.md['density'],
-                components = RE.md['components'],
-                thickness = RE.md['thickness'],
-                sample_state = RE.md['sample_state'],
-                notes = RE.md['notes'],
-                ):
+def get_sample_dict(acq = [],locations = []):
+    if locations is []:
+        locations = get_sample_location()
+    sample_name = RE.md['sample_name']
+    sample_desc = RE.md['sample_desc']
+    sample_id = RE.md['sample_id']
+    sample_set = RE.md['sample_set']
+    sample_date = RE.md['sample_date']
+    project_name = RE.md['project_name']
+    project_desc = RE.md['project_desc']
+    samp_user_id = RE.md['samp_user_id']
+    composition = RE.md['composition']
+    density = RE.md['density']
+    components = RE.md['components']
+    thickness = RE.md['thickness']
+    sample_state = RE.md['sample_state']
+    notes = RE.md['notes']
+
     return {'sample_name': sample_name,
             'sample_desc': sample_desc,
             'sample_id': sample_id,
@@ -383,9 +386,9 @@ def newsample():
             locs.append({'motor': 'th', 'position': thval, 'order': 0})
         else:
             locs.append({'motor': 'th', 'position': sam_Th.user_readback.value, 'order': 0})
-        return sample_dict(locs, acq = acquisitions)
+        return get_sample_dict(locations = locs, acq = acquisitions)
     else:
-        return sample_dict(acq = acquisitions) #uses current location by default
+        return get_sample_dict(acq = acquisitions) #uses current location by default
 
 
 def run_bar(bar,sortby=['p','c','a','s'],dryrun=0):

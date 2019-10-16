@@ -113,9 +113,9 @@ class I400(Device):
 
 
 RSoXS_Diodes = I400('XF:07ID-ES1{DMR:I400-1}', name='I400 diode')
-RSoXS_Diodes.gain_save = 5
+RSoXS_Diodes.gain_save = 6
 RSoXS_DrainCurrent = I400('XF:07ID-ES1{Slt1:I400-1}', name='I400 drain')
-RSoXS_DrainCurrent.gain_save = 3
+RSoXS_DrainCurrent.gain_save = 5
 
 Beamstop_WAXS = RSoXS_Diodes.Channel_1
 Beamstop_WAXS.name = 'WAXS Beamstop'

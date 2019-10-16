@@ -159,6 +159,11 @@ class EnPos(PseudoPositioner):
     def wh(self):
         boxed_text(self.name+" location", self.where_sp(), 'green',shrink=True)
 
+
+    def set_mirror_grating_manually(self,eV,m,k,c):
+        [grating,mirror] = get_mirror_grating_angles(eV, c, m, k)
+        yield from bps.mv(self.monoen.mirror2,mirror,self.monoen.grating,grating)
+
 en = EnPos('', name='en',concurrent=1)
 en.energy.kind = 'hinted'
 en.monoen.kind = 'normal'
@@ -201,3 +206,21 @@ def cff_to_19():
                       en.monoen.mirror2.user_offset, -3.461,
                       en.monoen.cff, 1.9)
     yield from bps.mv(en, energy)
+
+
+cffs = [[1.8,7.94,-0.1667,-0.1295],
+        [1.75,7.915,-0.1847,-0.144],
+        [1.7,7.92,-0.1163,-0.0896],
+        [1.6,7.93,-0.2646,-0.2392],
+        [1.5,7.93,0.021,0.144],
+        [1.4,7.94,0.021,0.144],
+        [1.3,7.95,0.021,0.144]]
+
+def cffscan(cffs):
+    for [cff, m3p, goff, m2off] in cffs:
+        mir3.Pitch.put(m3p)
+        RE(bps.mv(en.monoen.cff, cff,
+                  en.monoen.grating.user_offset, goff,
+                  en.monoen.mirror2.user_offset, m2off))
+        RE(bp.scan([IzeroMesh, Beamstop_WAXS], en, 280, 300, 201))
+

@@ -438,7 +438,9 @@ def stability_scans(num):
         yield from bp.scan([IzeroMesh],en,200,1400,1201)
 
 
-def imagesample():
+def image_bar(bar):
+    global loc_Q
+    loc_Q = queue.Queue(1)
     ypos = np.arange(-100,110,25)
     images = []
     for pos in ypos:
@@ -447,6 +449,7 @@ def imagesample():
         print(imageuid)
         images.append(next(db[imageuid].data('Sample Imager Detector Area Camera_image')))
     stich_sample(images, 25,5)
+    update_bar(bar, loc_Q)
 
 
 def bar_add_from_click(event):

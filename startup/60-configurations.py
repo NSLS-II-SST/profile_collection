@@ -243,7 +243,7 @@ def WAXSmode():
 def WAXS():
     return [{
         'motor':    slits1.vsize,
-        'position': .5,
+        'position': .025,
         'order': 0},
         {
         'motor':    slits1.vcenter,
@@ -251,43 +251,43 @@ def WAXS():
         'order': 0},
         {
         'motor':    slits1.hsize,
-        'position': 0.4,
-        'order': 0},
-        {
-        'motor':    slits1.hcenter,
-        'position': 0.3,
-        'order': 0},
-        {
-        'motor':    slits2.vsize,
-        'position': 0.8,
-        'order': 0},
-        {
-        'motor':    slits2.vcenter,
-        'position': -0.9,
-        'order': 0},
-        {
-        'motor':    slits2.hsize,
         'position': 0.5,
         'order': 0},
         {
+        'motor':    slits1.hcenter,
+        'position': 0.5,
+        'order': 0},
+        {
+        'motor':    slits2.vsize,
+        'position': 0.6,
+        'order': 0},
+        {
+        'motor':    slits2.vcenter,
+        'position': -0.85,
+        'order': 0},
+        {
+        'motor':    slits2.hsize,
+        'position': 0.9,
+        'order': 0},
+        {
         'motor':    slits2.hcenter,
-        'position': 0.2,
+        'position': 0.31,
         'order': 0},
         {
         'motor':    slits3.vsize,
-        'position': 1.15,
+        'position': 1,
         'order': 0},
         {
         'motor':    slits3.vcenter,
-        'position': -0.55,
+        'position': -0.525,
         'order': 0},
         {
         'motor':    slits3.hsize,
-        'position': 1.5,
+        'position': 1.1,
         'order': 0},
         {
         'motor':    slits3.hcenter,
-        'position': 0.1,
+        'position': 0.35,
         'order': 0},
         {
         'motor':    Shutter_Y,

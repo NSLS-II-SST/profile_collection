@@ -1,3 +1,5 @@
+run_report(__file__)
+
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
@@ -299,9 +301,16 @@ def getAlphaDegH(eV, k_invmm, m):
     # beta will become 90 degrees - I call this the horizon angle for alpha
     # eV: energy
     # k_invmm: central line density
-    # m: diffraction order    
+    # m: diffraction order
     hc = 0.0012398  # in units of eV mm
     lambda_mm = hc / eV
     alpha = np.arcsin((m*k_invmm*lambda_mm+1))
     return np.degrees(alpha)    
-    
+
+
+
+#Eliot adding this for getting the mirror and grating angles for the monochromator based on energy, c, m, and k
+def get_mirror_grating_angles(eV,c,m,k):
+    grating_angle = -(180 - ruben2005eqn8m(eV, c, k, m) + getBetaDeg(eV, ruben2005eqn8m(eV, c, k, 1), k, m)) / 2
+    mirror_angle =  -90 - getBetaDeg(eV,ruben2005eqn8m(eV,ce 400,k,m),k,m)
+    return [mirror_angle,grating_angle]
