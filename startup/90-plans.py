@@ -479,6 +479,7 @@ def update_bar(bar,loc_Q):
         ...
 
     def worker():
+        global bar
         for sample in bar:
             print(f'Click on {sample["sample_name"]} location or press enter on plot to skip, space to end')
             # ipython input x,y or click in plt which outputs x, y location
