@@ -312,5 +312,5 @@ def getAlphaDegH(eV, k_invmm, m):
 #Eliot adding this for getting the mirror and grating angles for the monochromator based on energy, c, m, and k
 def get_mirror_grating_angles(eV,c,m,k):
     grating_angle = -(180 - ruben2005eqn8m(eV, c, k, m) + getBetaDeg(eV, ruben2005eqn8m(eV, c, k, 1), k, m)) / 2
-    mirror_angle =  -90 - getBetaDeg(eV,ruben2005eqn8m(eV,ce 400,k,m),k,m)
+    mirror_angle =  -90 - getBetaDeg(eV,ruben2005eqn8m(eV,c,k,m),k,m)
     return [mirror_angle,grating_angle]
