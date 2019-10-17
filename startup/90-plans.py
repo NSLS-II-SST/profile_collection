@@ -8,6 +8,7 @@ from suitcase import tiff_series, csv
 from datetime import datetime
 from bluesky.preprocessors import make_decorator
 import queue
+from PIL import Image
 
 run_report(__file__)
 
@@ -112,9 +113,18 @@ RE.preprocessors.append(dark_frame_preprocessor)
 # not doing this because EVERYTHING that goes through RE will get a dark image - this is excessive - fixed now!
 from bluesky.suspenders import SuspendBoolHigh
 
+
+def enc_clr_x():
+    xpos = sam_X.user_readback.value
+    yield from bps.mv(sam_X.clr_enc_lss,1)
+    yield from bps.mv(sam_X.home,1)
+    yield from bps.mv(sam_X,xpos)
+
+
 suspend = SuspendBoolHigh(psh1.state,sleep = 10, tripped_message="Beam Shutter Closed, waiting for it to open")
 RE.install_suspender(suspend)
-suspendx = SuspendBoolHigh(sam_X.enc_lss,sleep = 10, tripped_message="Sample X Encoder Loss has been tripped")
+suspendx = SuspendBoolHigh(sam_X.enc_lss,sleep = 10, tripped_message="Sample X Encoder Loss has been tripped",
+                           pre_plan=enc_clr_x)
 RE.install_suspender(suspendx)
 
 
@@ -417,7 +427,7 @@ del snaps
 
 
 
-def spiralsearch(radius=1, stepsize=.2):
+def spiralsearch(radius=2, stepsize=.4):
     x_center = sam_X.user_setpoint.value
     y_center = sam_Y.user_setpoint.value
     num = round(radius / stepsize)
@@ -426,11 +436,11 @@ def spiralsearch(radius=1, stepsize=.2):
                      x_range=radius, y_range=radius, x_num=num, y_num=num)
 
 
-def spiralsearch_all(barin=[]):
+def spiralsearch_all(barin=[],radius=2, stepsize=.4):
     for sample in barin:
         yield from load_sample(sample)
         RE.md['project_name'] = 'spiral_searches'
-        yield from spiralsearch()
+        yield from spiralsearch(radius, stepsize)
 
 
 def stability_scans(num):
@@ -440,7 +450,7 @@ def stability_scans(num):
         yield from bp.scan([IzeroMesh],en,200,1400,1201)
 
 
-def image_bar(bar):
+def image_bar(bar,path = None):
     global loc_Q
     loc_Q = queue.Queue(1)
     ypos = np.arange(-100,110,25)
@@ -450,8 +460,11 @@ def image_bar(bar):
         imageuid = yield from bp.count([SampleViewer_cam],1)
         print(imageuid)
         images.append(next(db[imageuid].data('Sample Imager Detector Area Camera_image')))
-    stich_sample(images, 25,5)
+    image = stich_sample(images, 25,5)
     update_bar(bar, loc_Q)
+    if isinstance(path,str):
+        im = Image.fromarray(image)
+        im.save(path)
 
 
 def bar_add_from_click(event):

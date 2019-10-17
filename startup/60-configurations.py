@@ -79,16 +79,16 @@ def slits_out():
 def slits_in_WAXS():
     yield from bps.mv(slits1.vsize, 0.025,
                       slits1.vcenter, -0.55,
-                      slits1.hsize, 0.5,
+                      slits1.hsize, 0.4,
                       slits1.hcenter, 0.5,
                       slits2.vsize, 0.6,
                       slits2.vcenter, -0.85,
-                      slits2.hsize, 0.9,
+                      slits2.hsize, 0.7,
                       slits2.hcenter, 0.31,
-                      slits3.vsize, 1.15,
-                      slits3.vcenter, -0.525,
-                      slits3.hsize, 1.1,
-                      slits3.hcenter, 0.35)
+                      slits3.vsize, 0.9,
+                      slits3.vcenter, -0.625,
+                      slits3.hsize, 1.3,
+                      slits3.hcenter, 0.25)
 
 def mirror3_pos():
     yield from bps.mv(mir3.Pitch, 7.91)
@@ -251,7 +251,7 @@ def WAXS():
         'order': 0},
         {
         'motor':    slits1.hsize,
-        'position': 0.5,
+        'position': 0.4,
         'order': 0},
         {
         'motor':    slits1.hcenter,
@@ -267,7 +267,7 @@ def WAXS():
         'order': 0},
         {
         'motor':    slits2.hsize,
-        'position': 0.9,
+        'position': 0.7,
         'order': 0},
         {
         'motor':    slits2.hcenter,
@@ -275,19 +275,19 @@ def WAXS():
         'order': 0},
         {
         'motor':    slits3.vsize,
-        'position': 1,
+        'position': 0.9,
         'order': 0},
         {
         'motor':    slits3.vcenter,
-        'position': -0.525,
+        'position': -0.625,
         'order': 0},
         {
         'motor':    slits3.hsize,
-        'position': 1.1,
+        'position': 1.3,
         'order': 0},
         {
         'motor':    slits3.hcenter,
-        'position': 0.35,
+        'position': 0.25,
         'order': 0},
         {
         'motor':    Shutter_Y,
