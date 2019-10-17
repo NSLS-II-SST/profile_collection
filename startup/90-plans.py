@@ -114,6 +114,8 @@ from bluesky.suspenders import SuspendBoolHigh
 
 suspend = SuspendBoolHigh(psh1.state,sleep = 10, tripped_message="Beam Shutter Closed, waiting for it to open")
 RE.install_suspender(suspend)
+suspendx = SuspendBoolHigh(sam_X.enc_lss,sleep = 10, tripped_message="Sample X Encoder Loss has been tripped")
+RE.install_suspender(suspendx)
 
 
 def buildeputable(start, stop, step, widfract, startinggap,name):
