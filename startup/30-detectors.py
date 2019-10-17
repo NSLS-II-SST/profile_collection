@@ -157,8 +157,8 @@ class SyncedDetectors(Device):
         super().__init__(*args, **kwargs)
 
     def trigger(self):
-        waxs_status = self.waxs.trigger()
         saxs_status = self.saxs.trigger()
+        waxs_status = self.waxs.trigger()
         return saxs_status & waxs_status
 
     def collect_asset_docs(self, *args, **kwargs):
@@ -166,9 +166,9 @@ class SyncedDetectors(Device):
         yield from self.waxs.collect_asset_docs(*args, **kwargs)
 
     def set_exposure(self,seconds):
-        self.waxs.set_exptime(seconds+.5)
+        self.waxs.set_exptime(seconds)
         self.saxs.set_exptime(seconds)
-        self.waxs.cam.trigger_mode.put(1)
+        self.waxs.cam.trigger_mode.put(0)
         self.waxs.trans1.type.put(1)
         self.saxs.trans1.type.put(3)
 
@@ -205,13 +205,13 @@ class SyncedDetectors(Device):
         self.cooling_state()
 
     def open_shutter(self):
-        self.saxs.cam.shutter_control.set(1)
+        self.waxs.cam.shutter_control.set(1)
 
     def close_shutter(self):
-        self.saxs.cam.shutter_control.set(0)
+        self.waxs.cam.shutter_control.set(0)
 
     def shutter(self):
-        return self.saxs.cam.shutter_control.get()
+        return self.waxs.cam.shutter_control.get()
 
 
 sw_det = SyncedDetectors('', name='Synced')
@@ -219,7 +219,7 @@ sw_det.saxs.name = "SAXS"
 sw_det.waxs.name = "WAXS"
 sw_det.saxs.stats1.name = "SAXS ROI1"
 sw_det.waxs.stats1.name = "WAXS ROI1"
-shutter_status = sw_det.saxs.cam.sync
+shutter_status = sw_det.waxs.cam.sync
 shutter_status.name = 'shutter mode'
 sw_det.waxs.cam.acquire_time.name = 'WAXS Exposure'
 sw_det.saxs.cam.acquire_time.name = 'SAXS Exposure'
