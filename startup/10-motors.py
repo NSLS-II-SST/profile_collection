@@ -12,7 +12,7 @@ class FMBOEpicsMotor(EpicsMotor):
                    'DWPRO', 'DAERR', 'DVZER', 'ABDEC', 'UWPEN', 'UWSEN', 'ERRTAG',
                    'SWPOC', 'ASSCS', 'FRPOS', 'HSRCH', 'SODPL', 'SOPL', 'HOCPL',
                    'PHSRA', 'PREFE', 'TRMOV', 'IFFE', 'AMFAE', 'AMFE', 'FAFOE',
-                   'WFOER', 'INPOS')
+                   'WFOER', 'INPOS', 'ENC_LSS')
 
     ###################################################################
     # this is the complete list of status signals defined in the FMBO #
@@ -78,6 +78,8 @@ class FMBOEpicsMotor(EpicsMotor):
     wfoer_desc = Cpt(EpicsSignal, '_WFOER_STS.DESC')
     inpos      = Cpt(EpicsSignal, '_INPOS_STS')
     inpos_desc = Cpt(EpicsSignal, '_INPOS_STS.DESC')
+    enc_lss      = Cpt(EpicsSignal, '_ENC_LSS_STS')
+    enc_lss_desc = Cpt(EpicsSignal, '_ENC_LSS_STS.DESC')
 
     def status(self):
         text = '\n  EPICS PV base : %s\n\n' % (self.prefix)
@@ -125,6 +127,8 @@ class prettymotor(FMBOEpicsMotor):
         else:
             RE(bps.mvr(self, loc))
             boxed_text(self.name, self.where(), 'lightgray', shrink=True)
+
+
 
 
 sam_viewer = prettymotor('XF:07ID2-ES1{ImgY-Ax:1}Mtr', name='RSoXS Sample Imager',kind='hinted')
