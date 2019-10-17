@@ -470,13 +470,47 @@ def full_carbon_calcium_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     yield from en_scan_core(sigs, dets, energy, energies, shutter_values, times)
 
 
-def carbon_NEXAFS(exp_time=2, gain_bs=5,s_or_w='w'):
+def carbon_NEXAFS(exp_time=2, gain_bs=6,s_or_w='w'):
+    #Oct 2019, this pitch value seems to be optimal for carbon
+    mir3.Pitch.put(7.93)
     IzeroMesh.set_exposure(exp_time-1)
     Beamstop_WAXS.set_exposure(exp_time-1)
     RSoXS_Diodes.gain_save = gain_bs
     switch = {'s' : Beamstop_SAXS , 'w' : Beamstop_WAXS}
     RE.md['project_name'] = 'NEXAFS'
+
+    yield from bps.mv(Shutter_Y,32.2)
     yield from bp.scan([IzeroMesh,switch[s_or_w]],en,270,340,351)
+    yield from bps.mv(Shutter_Y,2.2)
+
+
+def oxygen_NEXAFS(exp_time=2, gain_bs=6,s_or_w='w'):
+    #Oct 2019, this pitch value seems to be optimal for carbon
+    mir3.Pitch.put(7.89)
+    IzeroMesh.set_exposure(exp_time-1)
+    Beamstop_WAXS.set_exposure(exp_time-1)
+    RSoXS_Diodes.gain_save = gain_bs
+    switch = {'s' : Beamstop_SAXS , 'w' : Beamstop_WAXS}
+    RE.md['project_name'] = 'NEXAFS'
+
+    yield from bps.mv(Shutter_Y,32.2)
+    yield from bp.scan([IzeroMesh,switch[s_or_w]],en,510,560,201)
+    yield from bps.mv(Shutter_Y,2.2)
+
+
+
+def fluorine_NEXAFS(exp_time=2, gain_bs=6,s_or_w='w'):
+    #Oct 2019, this pitch value seems to be optimal for carbon
+    mir3.Pitch.put(7.89)
+    IzeroMesh.set_exposure(exp_time-1)
+    Beamstop_WAXS.set_exposure(exp_time-1)
+    RSoXS_Diodes.gain_save = gain_bs
+    switch = {'s' : Beamstop_SAXS , 'w' : Beamstop_WAXS}
+    RE.md['project_name'] = 'NEXAFS'
+
+    yield from bps.mv(Shutter_Y,32.2)
+    yield from bp.scan([IzeroMesh,switch[s_or_w]],en,670,720,201)
+    yield from bps.mv(Shutter_Y,2.2)
 
 
 def calcium_NEXAFS(exp_time=2, gain_bs=5,s_or_w='w'):
@@ -486,3 +520,4 @@ def calcium_NEXAFS(exp_time=2, gain_bs=5,s_or_w='w'):
     switch = {'s' : Beamstop_SAXS , 'w' : Beamstop_WAXS}
     RE.md['project_name'] = 'NEXAFS'
     yield from bp.scan([IzeroMesh,switch[s_or_w]],en,320,360,201)
+

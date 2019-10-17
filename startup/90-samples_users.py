@@ -393,7 +393,7 @@ def newsample():
         return get_sample_dict(acq = acquisitions) #uses current location by default
 
 
-def run_bar(bar,sortby=['p','c','a','s'],dryrun=0):
+def run_bar(bar,sortby=['p','c','a','s'],dryrun=0,rev=[False,False,False,False]):
     '''
     run all sample dictionaries stored in the list bar
     :param bar: simply a list of sample dictionaries
@@ -427,7 +427,7 @@ def run_bar(bar,sortby=['p','c','a','s'],dryrun=0):
             return
     try:
         for k in sortby:
-            listout = sorted(listout, key=itemgetter(switcher[k]))
+            listout = sorted(listout, key=itemgetter(switcher[k]),reverse = rev[k])
     except KeyError:
         print('sortby needs to be a list of strings\n p - project\n c - configuration\n s - sample \n a - scantype')
         return
