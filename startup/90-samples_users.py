@@ -426,7 +426,7 @@ def run_bar(bar,sortby=['p','c','a','s'],dryrun=0,rev=[False,False,False,False])
             print('sortby needs to be a list of strings\n p - project\n c - configuration\n s - sample \n a - scantype')
             return
     try:
-        for k,r in map(sortby,rev):
+        for k,r in zip(sortby,rev):
             listout = sorted(listout, key=itemgetter(switcher[k]),reverse = r)
     except KeyError:
         print('sortby needs to be a list of strings\n p - project\n c - configuration\n s - sample \n a - scantype')
