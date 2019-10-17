@@ -149,10 +149,12 @@ def get_sample_location():
     #  locs = get_location([sam_X,sam_Y,sam_Z,sam_Th])
     return locs
 
-
 def move_to_location(locs=get_sample_location()):
+    for item in locs:
+        item.setdefault('order',0)
     locs = sorted(locs, key=itemgetter('order'))
     orderlist = [o for o in collections.Counter([d['order'] for d in locs]).keys()]
+
     switch = {'x': sam_X,
               'y': sam_Y,
               'z': sam_Z,

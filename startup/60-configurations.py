@@ -59,16 +59,16 @@ def BS_out():
 def slits_in_SAXS():
     yield from bps.mv(slits1.vsize, 0.025,
                       slits1.vcenter, -0.55,
-                      slits1.hsize, 0.2,
-                      slits1.hcenter, 0.3,
-                      slits2.vsize, 0.4,
-                      slits2.vcenter, -0.85,
-                      slits2.hsize, 0.35,
-                      slits2.hcenter, 0.2,
-                      slits3.vsize, 0.85,
-                      slits3.vcenter, -0.5,
-                      slits3.hsize, 0.7,
-                      slits3.hcenter, 0.3)
+                      slits1.hsize, 0.152,
+                      slits1.hcenter, 0.6,
+                      slits2.vsize, 0.35,
+                      slits2.vcenter, -0.83,
+                      slits2.hsize, 0.6,
+                      slits2.hcenter, 0.47,
+                      slits3.vsize, 1.2,
+                      slits3.vcenter, -0.27,
+                      slits3.hsize, 1.1,
+                      slits3.hcenter, 0.55)
 def slits_out():
     yield from bps.mv(slits1.vsize, 10,
                       slits1.hsize, 10,
@@ -166,7 +166,7 @@ def SAXS():
         'order': 0},
         {
         'motor':    slits1.hsize,
-        'position': 0.2,
+        'position': 0.152,
         'order': 0},
         {
         'motor':    slits1.hcenter,
@@ -174,7 +174,7 @@ def SAXS():
         'order': 0},
         {
         'motor':    slits2.vsize,
-        'position': 0.4,
+        'position': 0.35,
         'order': 0},
         {
         'motor':    slits2.vcenter,
@@ -182,7 +182,7 @@ def SAXS():
         'order': 0},
         {
         'motor':    slits2.hsize,
-        'position': 0.5,
+        'position': 0.6,
         'order': 0},
         {
         'motor':    slits2.hcenter,
@@ -190,15 +190,15 @@ def SAXS():
         'order': 0},
         {
         'motor':    slits3.vsize,
-        'position': 0.7,
+        'position': 1.2,
         'order': 0},
         {
         'motor':    slits3.vcenter,
-        'position': -0.47,
+        'position': -0.27,
         'order': 0},
         {
         'motor':    slits3.hsize,
-        'position': 1,
+        'position': 1.1,
         'order': 0},
         {
         'motor':    slits3.hcenter,

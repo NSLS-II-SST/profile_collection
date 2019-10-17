@@ -536,10 +536,10 @@ def plot_click(event):
     #print(event.xdata, event.ydata)
     global loc_Q
     item = []
-    item.append({'motor': 'x', 'position': event.xdata})
-    item.append({'motor': 'y', 'position': event.ydata})
-    item.append({'motor': 'z', 'position': 0})
-    item.append({'motor': 'th', 'position': 0})
+    item.append({'motor': 'x', 'position': event.xdata, 'order': 0})
+    item.append({'motor': 'y', 'position': event.ydata, 'order': 0})
+    item.append({'motor': 'z', 'position': 0, 'order': 0})
+    item.append({'motor': 'th', 'position': 0, 'order': 0})
     if not loc_Q.full() and event.button == 3:
         loc_Q.put(item,block=False)
 
