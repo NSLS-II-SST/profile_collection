@@ -13,6 +13,8 @@ def user():
         text += '   proposal ID:         '+colored('{}'.format(str(RE.md["proposal_id"])).center(40,' '),'yellow')
     if len(RE.md["user_name"]) > 0 :
         text += '\n   User Name:           '+colored('{}'.format(RE.md["user_name"]).center(40,' '),'yellow')
+    if len(RE.md["user_email"]) > 0 :
+        text += '\n   User Email:           '+colored('{}'.format(RE.md["user_name"]).center(40,' '),'yellow')
     if len(RE.md["user_start_date"]) > 0 :
         text += '\n   User Start Date:     '+colored('{}'.format(RE.md["user_start_date"]).center(40,' '),'yellow')
     if len(RE.md["user_id"]) > 0 :
@@ -101,6 +103,9 @@ def newuser():
     if user_name is not '':
         RE.md['user_name'] = user_name
 
+    user_email = input('Your email for beamline status notifications ({}): '.format(RE.md['user_email']))
+    if user_email is not '':
+        RE.md['user_email'] = user_email
     project_name = input('Your project ({}): '.format(RE.md['project_name']))
     if project_name is not '':
         RE.md['project_name'] = project_name
