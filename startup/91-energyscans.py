@@ -525,10 +525,8 @@ def carbon_NEXAFS(exp_time=.2, gain_bs=6,s_or_w='w'):
     RSoXS_Diodes.gain_save = gain_bs
     switch = {'s' : Beamstop_SAXS , 'w' : Beamstop_WAXS}
     RE.md['project_name'] = 'NEXAFS'
-
-    yield from bps.mv(Shutter_Y,32.2)
     yield from bp.scan([IzeroMesh,switch[s_or_w]],en,270,340,351)
-    yield from bps.mv(Shutter_Y,2.2)
+
 
 
 def oxygen_NEXAFS(exp_time=.2, gain_bs=6,s_or_w='w'):
@@ -539,10 +537,8 @@ def oxygen_NEXAFS(exp_time=.2, gain_bs=6,s_or_w='w'):
     RSoXS_Diodes.gain_save = gain_bs
     switch = {'s' : Beamstop_SAXS , 'w' : Beamstop_WAXS}
     RE.md['project_name'] = 'NEXAFS'
-
-    yield from bps.mv(Shutter_Y,32.2)
     yield from bp.scan([IzeroMesh,switch[s_or_w]],en,510,560,201)
-    yield from bps.mv(Shutter_Y,2.2)
+
 
 
 
@@ -554,10 +550,8 @@ def fluorine_NEXAFS(exp_time=.2, gain_bs=6,s_or_w='w'):
     RSoXS_Diodes.gain_save = gain_bs
     switch = {'s' : Beamstop_SAXS , 'w' : Beamstop_WAXS}
     RE.md['project_name'] = 'NEXAFS'
-
-    yield from bps.mv(Shutter_Y,32.2)
     yield from bp.scan([IzeroMesh,switch[s_or_w]],en,670,720,201)
-    yield from bps.mv(Shutter_Y,2.2)
+
 
 
 def calcium_NEXAFS(exp_time=2, gain_bs=5,s_or_w='w'):
