@@ -470,7 +470,7 @@ def full_carbon_calcium_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     yield from en_scan_core(sigs, dets, energy, energies, shutter_values, times)
 
 
-def carbon_NEXAFS(exp_time=2, gain_bs=6,s_or_w='w'):
+def carbon_NEXAFS(exp_time=.2, gain_bs=5,s_or_w='w'):
     #Oct 2019, this pitch value seems to be optimal for carbon
     mir3.Pitch.put(7.93)
     IzeroMesh.set_exposure(exp_time-1)
@@ -484,7 +484,7 @@ def carbon_NEXAFS(exp_time=2, gain_bs=6,s_or_w='w'):
     yield from bps.mv(Shutter_Y,2.2)
 
 
-def oxygen_NEXAFS(exp_time=2, gain_bs=6,s_or_w='w'):
+def oxygen_NEXAFS(exp_time=.2, gain_bs=5,s_or_w='w'):
     #Oct 2019, this pitch value seems to be optimal for carbon
     mir3.Pitch.put(7.89)
     IzeroMesh.set_exposure(exp_time-1)
@@ -499,7 +499,7 @@ def oxygen_NEXAFS(exp_time=2, gain_bs=6,s_or_w='w'):
 
 
 
-def fluorine_NEXAFS(exp_time=2, gain_bs=6,s_or_w='w'):
+def fluorine_NEXAFS(exp_time=.2, gain_bs=5,s_or_w='w'):
     #Oct 2019, this pitch value seems to be optimal for carbon
     mir3.Pitch.put(7.89)
     IzeroMesh.set_exposure(exp_time-1)
