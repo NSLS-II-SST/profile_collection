@@ -315,6 +315,83 @@ def WAXS():
         'order': 0},
     ]
 
+
+
+def NEXAFS():
+    return [{
+        'motor':    slits1.vsize,
+        'position': .025,
+        'order': 0},
+        {
+        'motor':    slits1.vcenter,
+        'position': -0.55,
+        'order': 0},
+        {
+        'motor':    slits1.hsize,
+        'position': 0.4,
+        'order': 0},
+        {
+        'motor':    slits1.hcenter,
+        'position': 0.5,
+        'order': 0},
+        {
+        'motor':    slits2.vsize,
+        'position': 0.6,
+        'order': 0},
+        {
+        'motor':    slits2.vcenter,
+        'position': -0.85,
+        'order': 0},
+        {
+        'motor':    slits2.hsize,
+        'position': 0.7,
+        'order': 0},
+        {
+        'motor':    slits2.hcenter,
+        'position': 0.31,
+        'order': 0},
+        {
+        'motor':    slits3.vsize,
+        'position': 0.9,
+        'order': 0},
+        {
+        'motor':    slits3.vcenter,
+        'position': -0.625,
+        'order': 0},
+        {
+        'motor':    slits3.hsize,
+        'position': 1.3,
+        'order': 0},
+        {
+        'motor':    slits3.hcenter,
+        'position': 0.25,
+        'order': 0},
+        {
+        'motor':    Shutter_Y,
+        'position': 32.2,
+        'order': 0},
+        {
+        'motor':    Izero_Y,
+        'position': -29,
+        'order': 0},
+        {
+        'motor':    Det_W,
+        'position': -10,
+        'order': 0},
+        {
+        'motor':    Det_S,
+        'position':-94,
+        'order': 0},
+        {
+        'motor':    BeamStopW,
+        'position': 66.1,
+        'order': 0},
+        {
+        'motor':    BeamStopS,
+        'position': 3,
+        'order': 0},
+    ]
+
 def all_out():
     yield from psh10.close()
     print('Retracting Slits to 1 cm gap')

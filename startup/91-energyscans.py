@@ -131,6 +131,12 @@ def short_fluorine_scan_nd2(multiple=1,sigs=[Beamstop_SAXS,
     shuttervalue = energies.copy()
     shuttervalue[:] = 1  # the rest of the values are shutter enabled (2)
     # use these energies and exposure times to scan energy and record detectors and signals
+    # print(energies)
+    # print(energy)
+    # print(dets)
+    # print(sigs)
+    # print(shuttervalue)
+    # print(times)
     yield from en_scan_core(sigs, dets, energy, energies, shuttervalue, times)
 
 
@@ -386,7 +392,7 @@ def en_scan_core(I400sigs, dets, energy, energies, shuttervalues, times):
             print('same i400 detected')
             i400channel.kind = 'hinted'
     sigcycler += cycler(sw_det.saxs.cam.acquire_time, times.copy())
-    sigcycler += cycler(sw_det.waxs.cam.acquire_time, times.copy()+.3) #add extra exposure time for WAXS
+    sigcycler += cycler(sw_det.waxs.cam.acquire_time, times.copy()) #add extra exposure time for WAXS
     sigcycler += cycler(sw_det.saxs.cam.sync, shuttervalues.astype(int))
 
     Beamstop_SAXS.kind = "hinted"
@@ -403,8 +409,7 @@ def en_scan_core(I400sigs, dets, energy, energies, shuttervalues, times):
     #     boxed_text('Warning', 'light was on, taking a quick snapshot to clear CCDs', 'yellow', shrink=True)
     #     yield from quicksnap()
 
-    yield from bp.scan_nd(I400sigs+[en.energy]+ dets,
-                          sigcycler)
+    yield from bp.scan_nd(I400sigs+[en.energy]+ dets,sigcycler)
 
     # if light_was_on:
     #     samplelight.on()    # leaving light off now - this just slows everything down if there are multiple scans

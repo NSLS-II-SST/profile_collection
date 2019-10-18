@@ -7,7 +7,7 @@ run_report(__file__)
 class FMBOEpicsMotor(EpicsMotor):
     resolution = Cpt(EpicsSignal, '.MRES')
     encoder = Cpt(EpicsSignal, '.REP')
-    clr_enc_lss = Cpt(EpicsSignal, '_ENC_LSS_CLR_CMD')
+    clr_enc_lss = Cpt(EpicsSignal, '_ENC_LSS_CLR_CMD.PROC')
 
     status_list = ('MTACT', 'MLIM', 'PLIM', 'AMPEN', 'LOOPM', 'TIACT', 'INTMO',
                    'DWPRO', 'DAERR', 'DVZER', 'ABDEC', 'UWPEN', 'UWSEN', 'ERRTAG',
