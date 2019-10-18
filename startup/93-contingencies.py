@@ -1,5 +1,5 @@
 import bluesky.plan_stubs as bps
-from bluesky.suspenders import SuspendBoolHigh
+from bluesky.suspenders import SuspendBoolHigh, SuspendFloor
 import logging
 
 run_report(__file__)
@@ -9,7 +9,7 @@ bls_email = 'egann@bnl.gov'
 user_email = RE.md['user_email']
 
 def send_notice(email,subject,msg):
-    os.system(msg+' | mail -s "'+subject+'" '+email)
+    os.system('echo '+msg+' | mail -s "'+subject+'" '+email)
 
 def enc_clr_x():
     send_notice('egann@bnl.gov','SST HAS FALLEN','the encoder loss has happened on the RSoXS beamline')
@@ -21,7 +21,7 @@ def enc_clr_x():
 
 
 def beamdown_notice():
-    send_notice(bls_email+','+user_email,'SST HAS FALLEN','Shutter 1 has been closed on the RSoXS beamline')
+    send_notice(bls_email+','+user_email,'SST HAS FALLEN','Beam to RSoXS has been lost')
 
 
 def beamup_notice():
@@ -29,9 +29,14 @@ def beamup_notice():
 
 
 
-suspend = SuspendBoolHigh(psh1.state,sleep = 10, tripped_message="Beam Shutter Closed, waiting for it to open",
-                          pre_plan=beamdown_notice, post_plan=beamup_notice)
-RE.install_suspender(suspend)
+suspend_shutter = SuspendBoolHigh(psh1.state,sleep = 10,
+                                  tripped_message="Beam Shutter Closed, waiting for it to open",
+                                  pre_plan=beamdown_notice, post_plan=beamup_notice)
+suspend_current = SuspendFloor(ring_current, resume_thresh=350, suspend_thresh=250,sleep = 10,
+                               tripped_message="Beam Current is below threshold, will resume when above 350 eV",
+                               pre_plan=beamdown_notice, post_plan=beamup_notice)
+RE.install_suspender(suspend_shutter)
+RE.install_suspender(suspend_current)
 suspendx = SuspendBoolHigh(sam_X.enc_lss,sleep = 10, tripped_message="Sample X Encoder Loss has been tripped",
                            pre_plan=enc_clr_x)
 RE.install_suspender(suspendx)
