@@ -16,6 +16,7 @@ def enc_clr_x():
     xpos = sam_X.user_readback.value
     yield from sam_X.clear_encoder_loss()
     yield from sam_X.home()
+    yield from bps.sleep(30)
     yield from bps.mv(sam_X,xpos)
 
 
