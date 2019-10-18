@@ -8,6 +8,7 @@ class FMBOEpicsMotor(EpicsMotor):
     resolution = Cpt(EpicsSignal, '.MRES')
     encoder = Cpt(EpicsSignal, '.REP')
     clr_enc_lss = Cpt(EpicsSignal, '_ENC_LSS_CLR_CMD.PROC')
+    home_cmd = Cpt(EpicsSignal, '_HOME_CMD.PROC')
 
     status_list = ('MTACT', 'MLIM', 'PLIM', 'AMPEN', 'LOOPM', 'TIACT', 'INTMO',
                    'DWPRO', 'DAERR', 'DVZER', 'ABDEC', 'UWPEN', 'UWSEN', 'ERRTAG',
@@ -81,6 +82,13 @@ class FMBOEpicsMotor(EpicsMotor):
     inpos_desc = Cpt(EpicsSignal, '_INPOS_STS.DESC')
     enc_lss      = Cpt(EpicsSignal, '_ENC_LSS_STS')
     enc_lss_desc = Cpt(EpicsSignal, '_ENC_LSS_STS.DESC')
+
+
+    def home(self):
+        yield from bps.mv(self.home_cmd,1)
+
+    def clear_encoder_loss(self):
+        yield from bps.mv(self.clr_enc_lss,1)
 
     def status(self):
         text = '\n  EPICS PV base : %s\n\n' % (self.prefix)

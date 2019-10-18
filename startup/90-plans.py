@@ -116,8 +116,8 @@ from bluesky.suspenders import SuspendBoolHigh
 
 def enc_clr_x():
     xpos = sam_X.user_readback.value
-    yield from bps.mv(sam_X.clr_enc_lss,1)
-    yield from bps.mv(sam_X.home,1)
+    yield from sam_X.clear_encoder_loss()
+    yield from sam_X.home()
     yield from bps.mv(sam_X,xpos)
 
 
