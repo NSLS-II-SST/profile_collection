@@ -115,13 +115,33 @@ from bluesky.suspenders import SuspendBoolHigh
 
 
 def enc_clr_x():
+    os.system(
+        'echo the encoder loss has happened on the RSoXS beamline | mail -s '
+        '"SST HAS FALLEN" '
+        'egann@bnl.gov')
     xpos = sam_X.user_readback.value
     yield from sam_X.clear_encoder_loss()
     yield from sam_X.home()
     yield from bps.mv(sam_X,xpos)
 
 
-suspend = SuspendBoolHigh(psh1.state,sleep = 10, tripped_message="Beam Shutter Closed, waiting for it to open")
+def beamdown_notice():
+    os.system(
+        'Shutter 1 has been closed on the RSoXS beamline | mail -s '
+        '"SST HAS FALLEN" '
+        'egann@bnl.gov')
+
+
+def beamup_notice():
+    os.system(
+        'Shutter 1 has been opened RSoXS is commencing | mail -s '
+        '"SST HAS RISEN" '
+        'egann@bnl.gov')
+
+
+
+suspend = SuspendBoolHigh(psh1.state,sleep = 10, tripped_message="Beam Shutter Closed, waiting for it to open",
+                          pre_plan=beamdown_notice, post_plan=beamup_notice)
 RE.install_suspender(suspend)
 suspendx = SuspendBoolHigh(sam_X.enc_lss,sleep = 10, tripped_message="Sample X Encoder Loss has been tripped",
                            pre_plan=enc_clr_x)
