@@ -9,7 +9,7 @@ bls_email = 'egann@bnl.gov'
 user_email = RE.md['user_email']
 
 def send_notice(email,subject,msg):
-    os.system(msg+' | mail -s "'+subject+'" "+email)
+    os.system(msg+' | mail -s "'+subject+'" '+email)
 
 def enc_clr_x():
     send_notice('egann@bnl.gov','SST HAS FALLEN','the encoder loss has happened on the RSoXS beamline')

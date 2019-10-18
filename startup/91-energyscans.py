@@ -479,6 +479,7 @@ def full_carbon_calcium_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     normal scan takes ~ 18 minutes to complete
     '''
     sample()
+
     if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
 
