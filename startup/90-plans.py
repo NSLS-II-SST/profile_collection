@@ -582,3 +582,18 @@ def set_loc(bar_name,locnum):
     barloc = locnum
 
 
+def vent()
+    yield from psh10.close()
+    yield from gv28.close()
+    yield from gv27a.close()
+    yield from bps.mv(sam_Y,349)
+
+    print('waiting for you to close the TEM load lock')
+    print('Please also close the small manual black valve on the back of the load lock now')
+    while gvTEM.state.value is 1:
+        bps.sleep(1)
+    print('TEM load lock closed - turning off loadlock gauge')
+    yield from bps.mv(ll_gpwr,0)
+    print('Should be safe to begin vent by pressing right most button of BOTTOM turbo controller once')
+    print('')
+

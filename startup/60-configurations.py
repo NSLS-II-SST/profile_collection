@@ -263,11 +263,11 @@ def WAXS():
         'order': 0},
         {
         'motor':    slits2.vcenter,
-        'position': -0.85,
+        'position': -1.05,
         'order': 0},
         {
         'motor':    slits2.hsize,
-        'position': 0.7,
+        'position': 0.6,
         'order': 0},
         {
         'motor':    slits2.hcenter,
@@ -340,11 +340,11 @@ def NEXAFS():
         'order': 0},
         {
         'motor':    slits2.vcenter,
-        'position': -0.85,
+        'position': -1.05,
         'order': 0},
         {
         'motor':    slits2.hsize,
-        'position': 0.7,
+        'position': 0.6,
         'order': 0},
         {
         'motor':    slits2.hcenter,
@@ -380,7 +380,7 @@ def NEXAFS():
         'order': 0},
         {
         'motor':    Det_S,
-        'position':-94,
+        'position': -94,
         'order': 0},
         {
         'motor':    BeamStopW,
