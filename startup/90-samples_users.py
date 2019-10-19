@@ -595,3 +595,34 @@ def flip_bar(bar):
                 mot['position'] = .5 - mot['position']
             if mot['motor'] is 'th':
                 mot['position'] = 180
+
+def straighten_bar(bar,d_y, d_x, y_center):
+ for samp in bar:
+     xpos = samp['location'][0]['position']
+     ypos = samp['location'][1]['position']
+     samp['location'][0]['position'] = straighten_x(xpos,ypos,d_x,d_y,y_center)
+
+def straighten_x(x, y, dx, dy, y_center ):
+    return x - (y+y_center)*dx/dy
+
+def correct_bar(bar,af1x,af1y,af2x,af2y):
+    x_offset = af1x - bar[0]['location'][0]['position']
+    y_offset = af1y - bar[0]['location'][1]['position']
+    x_image_offset = bar[0]['location'][0]['position'] - bar[-1]['location'][1]['position']
+
+    dx = (af2x-af1x) - x_image_offset
+    dy = af2y-af1y
+
+
+    for samp in bar:
+        xpos = samp['location'][0]['position']
+        ypos = samp['location'][1]['position']
+
+        xpos = xpos + x_offset
+        ypos = ypos + y_offset
+
+        newx = xpos + (ypos - af1y) * dx/dy
+
+        samp['location'][0]['position'] = newx
+        samp['location'][1]['position'] = ypos
+

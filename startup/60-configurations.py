@@ -376,7 +376,7 @@ def NEXAFS():
         'order': 0},
         {
         'motor':    Det_W,
-        'position': -10,
+        'position': -94,
         'order': 0},
         {
         'motor':    Det_S,
