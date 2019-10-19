@@ -511,8 +511,8 @@ def update_bar(bar,loc_Q):
     t = Thread(target=worker)
     t.start()
 def annotateImage(axes,item,name):
-    xcoord = item[0]['position']
-    ycoord = item[1]['position']
+    ycoord = item[0]['position']
+    xcoord = item[1]['position']
 
     a = axes.annotate(name,
             xy=(xcoord,ycoord), xycoords='data',
