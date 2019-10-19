@@ -452,6 +452,11 @@ def image_bar(bar,path = None):
         im = Image.fromarray(image)
         im.save(path)
 
+def locate_samples_from_image(bar,impath):
+    global loc_Q
+    loc_Q = queue.Queue(1)
+    image = stich_sample(False,False,False,from_image=impath)
+    update_bar(bar, loc_Q)
 
 def bar_add_from_click(event):
     global bar
@@ -511,21 +516,27 @@ def annotateImage(axes,item,name):
 
     axes.annotate(name,
             xy=(xcoord,ycoord), xycoords='data',
-            xytext=(0,10), textcoords='offset points',
-            arrowprops=dict(facecolor='orange', shrink=0.05,arrowstyle='->'),
-            horizontalalignment='right', verticalalignment='bottom')
+            xytext=(xcoord-3,ycoord+10), textcoords='data',
+            arrowprops=dict(color='red',arrowstyle='->'),
+            horizontalalignment='center', verticalalignment='bottom',color='red')
 
+    #a.draggable()
+    plt.show()
 
-def stich_sample(images, step_size, y_off):
+def stich_sample(images, step_size, y_off, from_image=None):
     global sample_image_axes
 
-    pixel_step = int(step_size * (1760) / 25)
-    pixel_overlap = 2464 - pixel_step
-    result = images[0]
-    i = 0
-    for image in images[1:]:
-        i += 1
-        result = np.concatenate((image[(y_off * i):, :], result[:-(y_off), pixel_overlap:]), axis=1)
+    if isinstance(from_image,str):
+        im_frame = Image.open(from_image)
+        result = np.array(im_frame)
+    else:
+        pixel_step = int(step_size * (1760) / 25)
+        pixel_overlap = 2464 - pixel_step
+        result = images[0]
+        i = 0
+        for image in images[1:]:
+            i += 1
+            result = np.concatenate((image[(y_off * i):, :], result[:-(y_off), pixel_overlap:]), axis=1)
     fig, ax = plt.subplots()
     ax.imshow(result, extent=[0, 235, 0, 29])
     sample_image_axes = ax
