@@ -528,8 +528,8 @@ def full_carbon_calcium_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
 def carbon_NEXAFS(exp_time=.2, gain_bs=6,s_or_w='w'):
     #Oct 2019, this pitch value seems to be optimal for carbon
     mir3.Pitch.put(7.93)
-    IzeroMesh.set_exposure(exp_time-1)
-    Beamstop_WAXS.set_exposure(exp_time-1)
+    IzeroMesh.set_exposure(exp_time)
+    Beamstop_WAXS.set_exposure(exp_time)
     RSoXS_Diodes.gain_save = gain_bs
     switch = {'s' : Beamstop_SAXS , 'w' : Beamstop_WAXS}
     RE.md['project_name'] = 'NEXAFS'
@@ -540,8 +540,8 @@ def carbon_NEXAFS(exp_time=.2, gain_bs=6,s_or_w='w'):
 def oxygen_NEXAFS(exp_time=.2, gain_bs=6,s_or_w='w'):
     #Oct 2019, this pitch value seems to be optimal for carbon
     mir3.Pitch.put(7.89)
-    IzeroMesh.set_exposure(exp_time-1)
-    Beamstop_WAXS.set_exposure(exp_time-1)
+    IzeroMesh.set_exposure(exp_time)
+    Beamstop_WAXS.set_exposure(exp_time)
     RSoXS_Diodes.gain_save = gain_bs
     switch = {'s' : Beamstop_SAXS , 'w' : Beamstop_WAXS}
     RE.md['project_name'] = 'NEXAFS'
@@ -553,8 +553,8 @@ def oxygen_NEXAFS(exp_time=.2, gain_bs=6,s_or_w='w'):
 def fluorine_NEXAFS(exp_time=.2, gain_bs=6,s_or_w='w'):
     #Oct 2019, this pitch value seems to be optimal for carbon
     mir3.Pitch.put(7.89)
-    IzeroMesh.set_exposure(exp_time-1)
-    Beamstop_WAXS.set_exposure(exp_time-1)
+    IzeroMesh.set_exposure(exp_time)
+    Beamstop_WAXS.set_exposure(exp_time)
     RSoXS_Diodes.gain_save = gain_bs
     switch = {'s' : Beamstop_SAXS , 'w' : Beamstop_WAXS}
     RE.md['project_name'] = 'NEXAFS'
@@ -576,8 +576,8 @@ def fluorine_WAXS(exp_time=2):
 
 
 def calcium_NEXAFS(exp_time=2, gain_bs=5,s_or_w='w'):
-    IzeroMesh.set_exposure(exp_time-1)
-    Beamstop_WAXS.set_exposure(exp_time-1)
+    IzeroMesh.set_exposure(exp_time)
+    Beamstop_WAXS.set_exposure(exp_time)
     RSoXS_Diodes.gain_save = gain_bs
     switch = {'s' : Beamstop_SAXS , 'w' : Beamstop_WAXS}
     RE.md['project_name'] = 'NEXAFS'
