@@ -499,10 +499,10 @@ def update_bar(bar,loc_Q):
                 else:
                     #print('got something')
                     break
-            if item is not ('enter' or 'esc') and isinstance(item,list):
+            if item is not ('enter' or 'escape') and isinstance(item,list):
                 sample['location'] = item
                 annotateImage(sample_image_axes,item,sample['sample_name'])
-            elif item is 'esc':
+            elif item is 'escape':
                 print('aborting')
                 break
             elif item is'enter':
@@ -572,7 +572,7 @@ def plot_click(event):
 
 def plot_key_press(event):
     global loc_Q
-    if not loc_Q.full() and (event.key == 'enter' or event.key == 'esc'):
+    if not loc_Q.full() and (event.key == 'enter' or event.key == 'escape'):
         loc_Q.put(event.key,block=False)
 
 
