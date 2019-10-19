@@ -561,6 +561,19 @@ def fluorine_NEXAFS(exp_time=.2, gain_bs=6,s_or_w='w'):
     yield from bp.scan([IzeroMesh,switch[s_or_w]],en,670,720,201)
 
 
+def fluorine_SAXS(exp_time=2):
+    #Oct 2019, this pitch value seems to be optimal for carbon
+    mir3.Pitch.put(7.89)
+    set_exposure(exp_time)
+    yield from bp.scan([sw_det, en.energy, Beamstop_SAXS, IzeroMesh],en,680,700,41)
+
+def fluorine_WAXS(exp_time=2):
+    #Oct 2019, this pitch value seems to be optimal for carbon
+    mir3.Pitch.put(7.89)
+    set_exposure(exp_time)
+    yield from bp.scan([sw_det, en.energy, Beamstop_WAXS, IzeroMesh],en,680,700,41)
+
+
 
 def calcium_NEXAFS(exp_time=2, gain_bs=5,s_or_w='w'):
     IzeroMesh.set_exposure(exp_time-1)
