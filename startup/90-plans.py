@@ -499,7 +499,7 @@ def update_bar(bar,loc_Q):
                 else:
                     #print('got something')
                     break
-            if item is not 'enter' or ' ' and isinstance(item,list):
+            if item is not ('enter' or ' ') and isinstance(item,list):
                 sample['location'] = item
                 annotateImage(sample_image_axes,item,sample['sample_name'])
             elif item is ' ':
@@ -514,14 +514,14 @@ def annotateImage(axes,item,name):
     xcoord = item[0]['position']
     ycoord = item[1]['position']
 
-    axes.annotate(name,
+    a = axes.annotate(name,
             xy=(xcoord,ycoord), xycoords='data',
             xytext=(xcoord-3,ycoord+10), textcoords='data',
             arrowprops=dict(color='red',arrowstyle='->'),
             horizontalalignment='center', verticalalignment='bottom',color='red')
 
-    #a.draggable()
-    plt.show()
+    a.draggable()
+    plt.draw()
 
 def stich_sample(images, step_size, y_off, from_image=None):
     global sample_image_axes
@@ -572,7 +572,7 @@ def plot_click(event):
 
 def plot_key_press(event):
     global loc_Q
-    if not loc_Q.full() and event.key == 'enter':
+    if not loc_Q.full() and (event.key == 'enter' or event.key == ' '):
         loc_Q.put(event.key,block=False)
 
 
