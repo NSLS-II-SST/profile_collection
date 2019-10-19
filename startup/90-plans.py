@@ -487,7 +487,7 @@ def update_bar(bar,loc_Q):
     def worker():
         global bar,sample_image_axes
         for sample in bar:
-            print(f'Click on {sample["sample_name"]} location or press enter on plot to skip, space to end')
+            print(f'Right-click on {sample["sample_name"]} location or press enter on plot to skip, esc to end')
             # ipython input x,y or click in plt which outputs x, y location
             while True:
                 try:
@@ -499,10 +499,10 @@ def update_bar(bar,loc_Q):
                 else:
                     #print('got something')
                     break
-            if item is not ('enter' or ' ') and isinstance(item,list):
+            if item is not ('enter' or 'esc') and isinstance(item,list):
                 sample['location'] = item
                 annotateImage(sample_image_axes,item,sample['sample_name'])
-            elif item is ' ':
+            elif item is 'esc':
                 print('aborting')
                 break
             elif item is'enter':
@@ -572,7 +572,7 @@ def plot_click(event):
 
 def plot_key_press(event):
     global loc_Q
-    if not loc_Q.full() and (event.key == 'enter' or event.key == ' '):
+    if not loc_Q.full() and (event.key == 'enter' or event.key == 'esc'):
         loc_Q.put(event.key,block=False)
 
 
