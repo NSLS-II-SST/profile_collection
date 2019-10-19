@@ -582,7 +582,7 @@ def set_loc(bar_name,locnum):
     barloc = locnum
 
 
-def vent()
+def vent():
     yield from psh10.close()
     yield from gv28.close()
     yield from gv27a.close()
