@@ -480,7 +480,7 @@ def update_bar(bar,loc_Q):
         ...
 
     def worker():
-        global bar
+        global bar,sample_image_axes
         for sample in bar:
             print(f'Click on {sample["sample_name"]} location or press enter on plot to skip, space to end')
             # ipython input x,y or click in plt which outputs x, y location
@@ -496,6 +496,7 @@ def update_bar(bar,loc_Q):
                     break
             if item is not 'enter' or ' ' and isinstance(item,list):
                 sample['location'] = item
+                annotateImage(sample_image_axes,item,sample['sample_name'])
             elif item is ' ':
                 print('aborting')
                 break
@@ -504,8 +505,20 @@ def update_bar(bar,loc_Q):
         print("done")
     t = Thread(target=worker)
     t.start()
+def annotateImage(axes,item,name):
+    xcoord = item[0]['position']
+    ycoord = item[1]['position']
+
+    axes.annotate(name,
+            xy=(xcoord,ycoord), xycoords='data',
+            xytext=(0,10), textcoords='offset points',
+            arrowprops=dict(facecolor='orange', shrink=0.05,arrowstyle='->'),
+            horizontalalignment='right', verticalalignment='bottom')
+
 
 def stich_sample(images, step_size, y_off):
+    global sample_image_axes
+
     pixel_step = int(step_size * (1760) / 25)
     pixel_overlap = 2464 - pixel_step
     result = images[0]
@@ -515,6 +528,7 @@ def stich_sample(images, step_size, y_off):
         result = np.concatenate((image[(y_off * i):, :], result[:-(y_off), pixel_overlap:]), axis=1)
     fig, ax = plt.subplots()
     ax.imshow(result, extent=[0, 235, 0, 29])
+    sample_image_axes = ax
     fig.canvas.mpl_connect('button_press_event', plot_click)
     fig.canvas.mpl_connect('key_press_event', plot_key_press)
     plt.show()

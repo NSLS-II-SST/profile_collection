@@ -164,7 +164,7 @@ def short_fluorine_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     #beamline_status()
     if len(read_input("Starting a fluorine energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
-    mir3.Pitch.put(7.89)
+    # mir3.Pitch.put(7.89)
     # create a list of energies
     energies = np.arange(670,710,1)
     #energies = np.append(energies,np.arange(525,540,0.5))
@@ -181,6 +181,12 @@ def short_fluorine_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     shuttervalue = energies.copy()
     shuttervalue[:] = 1  # the rest of the values are shutter enabled (2)
     # use these energies and exposure times to scan energy and record detectors and signals
+    print(times)
+    print(energies)
+    print(shuttervalue)
+    print(sigs)
+    print(dets)
+
     yield from en_scan_core(sigs, dets, energy, energies, shuttervalue, times)
 
 
@@ -408,6 +414,7 @@ def en_scan_core(I400sigs, dets, energy, energies, shuttervalues, times):
     #     light_was_on = True
     #     boxed_text('Warning', 'light was on, taking a quick snapshot to clear CCDs', 'yellow', shrink=True)
     #     yield from quicksnap()
+    print(sigcycler)
 
     yield from bp.scan_nd(I400sigs+[en.energy]+ dets,sigcycler)
 
