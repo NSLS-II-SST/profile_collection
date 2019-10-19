@@ -608,9 +608,9 @@ def straighten_x(x, y, dx, dy, y_center ):
 def correct_bar(bar,af1x,af1y,af2x,af2y):
     x_offset = af1x - bar[0]['location'][0]['position']
     y_offset = af1y - bar[0]['location'][1]['position']
-    x_image_offset = bar[0]['location'][0]['position'] - bar[-1]['location'][1]['position']
+    x_image_offset = bar[0]['location'][0]['position'] - bar[-1]['location'][0]['position']
 
-    dx = (af2x-af1x) - x_image_offset
+    dx = (af2x-af1x) + x_image_offset
     dy = af2y-af1y
 
 

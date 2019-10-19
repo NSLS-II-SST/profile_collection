@@ -538,7 +538,7 @@ def stich_sample(images, step_size, y_off, from_image=None):
             i += 1
             result = np.concatenate((image[(y_off * i):, :], result[:-(y_off), pixel_overlap:]), axis=1)
     fig, ax = plt.subplots()
-    ax.imshow(result, extent=[0, 235, 0, 29])
+    ax.imshow(result, extent=[0, 235, -14.5, 14.5])
     sample_image_axes = ax
     fig.canvas.mpl_connect('button_press_event', plot_click)
     fig.canvas.mpl_connect('key_press_event', plot_key_press)
