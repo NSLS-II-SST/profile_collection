@@ -6,7 +6,7 @@ run_report(__file__)
 
 
 bls_email = 'egann@bnl.gov'
-user_email = RE.md['user_email']
+
 
 def send_notice(email,subject,msg):
     os.system('echo '+msg+' | mail -s "'+subject+'" '+email)
@@ -26,10 +26,12 @@ def enc_clr_x():
 
 
 def beamdown_notice():
+    user_email = RE.md['user_email']
     send_notice(bls_email+','+user_email,'SST HAS FALLEN','Beam to RSoXS has been lost')
 
 
 def beamup_notice():
+    user_email = RE.md['user_email']
     send_notice(bls_email+','+user_email,'SST HAS RISEN','Nevermind all good here')
 
 
@@ -50,6 +52,7 @@ RE.install_suspender(suspendx)
 
 class OSEmailHandler(logging.Handler):
     def emit(self, record):
+        user_email = RE.md['user_email']
         send_notice(bls_email+','+user_email, 'SST IS SO SORRY', record.getMessage())
        # Send email or whatever.
 

@@ -1,16 +1,10 @@
 import numpy as np
 import bluesky.plans as bp
 import bluesky.plan_stubs as bps
-import pandas as pd
-import bluesky_darkframes
-from IPython.core.magic import register_line_magic
-from suitcase import tiff_series, csv
-from datetime import datetime
-from bluesky.preprocessors import make_decorator
 import queue
 from PIL import Image
 
-
+run_report(__file__)
 # Spiral searches
 
 def spiralsearch(radius=2, stepsize=.4):
