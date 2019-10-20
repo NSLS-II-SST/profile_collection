@@ -607,7 +607,7 @@ def oxygen_NEXAFS(exp_time=.2, gain_bs=6,s_or_w='w'):
 
 def fluorine_NEXAFS(exp_time=.2, gain_bs=6,s_or_w='w'):
 
-    scan_name = 'fluorine_NEXAFS'
+    enscan_type = 'fluorine_NEXAFS'
     #Oct 2019, this pitch value seems to be optimal for carbon
     mir3.Pitch.put(7.89)
     IzeroMesh.set_exposure(exp_time)
@@ -632,7 +632,7 @@ def fluorine_WAXS(exp_time=2):
     #Oct 2019, this pitch value seems to be optimal for carbon
     mir3.Pitch.put(7.89)
     set_exposure(exp_time)
-    yield from bp.scan([sw_det, en.energy, Beamstop_WAXS, IzeroMesh],en,680,700,41,md={'plan_name'':enscan_type})
+    yield from bp.scan([sw_det, en.energy, Beamstop_WAXS, IzeroMesh],en,680,700,41,md={'plan_name':enscan_type})
 
 
 
