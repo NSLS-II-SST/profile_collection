@@ -258,6 +258,7 @@ def short_nitrogen_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
 
     normal scan takes ~ 15 minutes to complete
     '''
+    enscan_type='short_nitrogen_scan_nd'
     sample()
     #beamline_status()
     if len(read_input("Starting a Nitrogen energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
@@ -279,7 +280,7 @@ def short_nitrogen_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     shuttervalue = energies.copy()
     shuttervalue[:] = 1  # the rest of the values are shutter enabled (2)
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, shuttervalue, times)
+    yield from en_scan_core(sigs, dets, energy, energies, shuttervalue, times,enscan_type=enscan_type)
 
 
 
