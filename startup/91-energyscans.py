@@ -27,6 +27,7 @@ def full_oxygen_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     normal scan takes ~ 16 minutes to complete
     '''
     sample()
+    enscan_type = 'full_oxygen_scan_nd'
     #beamline_status()
     if len(read_input("Starting a Oxygen energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
@@ -46,7 +47,7 @@ def full_oxygen_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     shuttervalue = energies.copy()
     shuttervalue[:] = 1  # the rest of the values are shutter enabled (2)
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, shuttervalue, times)
+    yield from en_scan_core(sigs, dets, energy, energies, shuttervalue, times,enscan_type=enscan_type)
 
 def short_oxygen_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
                                          Beamstop_WAXS,
@@ -69,6 +70,7 @@ def short_oxygen_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     normal scan takes ~ 16 minutes to complete
     '''
     sample()
+    enscan_type = 'short_oxygen_scan_nd'
     #beamline_status()
     if len(read_input("Starting a Oxygen energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
@@ -89,7 +91,7 @@ def short_oxygen_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     shuttervalue = energies.copy()
     shuttervalue[:] = 1  # the rest of the values are shutter enabled (2)
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, shuttervalue, times)
+    yield from en_scan_core(sigs, dets, energy, energies, shuttervalue, times,enscan_type=enscan_type)
 
 
 def short_fluorine_scan_nd2(multiple=1,sigs=[Beamstop_SAXS,
@@ -113,6 +115,7 @@ def short_fluorine_scan_nd2(multiple=1,sigs=[Beamstop_SAXS,
     normal scan takes ~ 16 minutes to complete
     '''
     sample()
+    enscan_type = 'short_fluorine_scan_nd2'
     #beamline_status()
     if len(read_input("Starting a Oxygen energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
@@ -137,7 +140,7 @@ def short_fluorine_scan_nd2(multiple=1,sigs=[Beamstop_SAXS,
     # print(sigs)
     # print(shuttervalue)
     # print(times)
-    yield from en_scan_core(sigs, dets, energy, energies, shuttervalue, times)
+    yield from en_scan_core(sigs, dets, energy, energies, shuttervalue, times,enscan_type=enscan_type)
 
 
 def short_fluorine_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
@@ -161,6 +164,7 @@ def short_fluorine_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     normal scan takes ~ 16 minutes to complete
     '''
     sample()
+    enscan_type = 'short_fluorine_scan_nd'
     #beamline_status()
     if len(read_input("Starting a fluorine energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
@@ -187,7 +191,7 @@ def short_fluorine_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     print(sigs)
     print(dets)
 
-    yield from en_scan_core(sigs, dets, energy, energies, shuttervalue, times)
+    yield from en_scan_core(sigs, dets, energy, energies, shuttervalue, times,enscan_type=enscan_type)
 
 
 
@@ -211,6 +215,7 @@ def full_nitrogen_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
 
     normal scan takes ~ 15 minutes to complete
     '''
+    enscan_type = 'full_nitrogen_scan_nd'
     sample()
     #beamline_status()
     if len(read_input("Starting a Nitrogen energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
@@ -231,7 +236,7 @@ def full_nitrogen_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     shuttervalue = energies.copy()
     shuttervalue[:] = 1  # the rest of the values are shutter enabled (2)
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, shuttervalue, times)
+    yield from en_scan_core(sigs, dets, energy, energies, shuttervalue, times,enscan_type=enscan_type)
 
 
 
@@ -255,6 +260,7 @@ def very_short_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
 
     normal scan takes ~ 6 minutes to complete
     '''
+    enscan_type = 'very_short_carbon_scan_nd'
     sample()
     #beamline_status()
     if len(read_input("Starting a very short Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
@@ -278,7 +284,7 @@ def very_short_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     shuttervalue = energies.copy()
     shuttervalue[:] = 1 # the rest of the values are shutter enabled (2)
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets,energy,energies,shuttervalue,times)
+    yield from en_scan_core(sigs, dets,energy,energies,shuttervalue,times,enscan_type=enscan_type)
 
 
 def short_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
@@ -298,6 +304,7 @@ def short_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     normal scan takes ~ 10 minutes to complete
     '''
     sample()
+    enscan_type = 'short_carbon_scan_nd'
     if len(read_input("Starting a short Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
 
@@ -322,7 +329,7 @@ def short_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     shuttervalue = energies.copy()
     shuttervalue[:] = 1 # the rest of the values are shutter enabled (2)
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets,energy,energies,shuttervalue,times)
+    yield from en_scan_core(sigs, dets,energy,energies,shuttervalue,times,enscan_type=enscan_type)
 
 
 def full_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
@@ -345,6 +352,7 @@ def full_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
 
     normal scan takes ~ 18 minutes to complete
     '''
+    enscan_type = 'full_carbon_scan_nd'
     sample()
     if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
@@ -378,13 +386,14 @@ def full_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     # print(sigs)
     # print(dets)
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, shutter_values, times)
+    yield from en_scan_core(sigs, dets, energy, energies, shutter_values, times,enscan_type=enscan_type)
 
 
 # @dark_frames_enable
-def en_scan_core(I400sigs, dets, energy, energies, shuttervalues, times):
+def en_scan_core(I400sigs, dets, energy, energies, shuttervalues, times,enscan_type=None):
     sw_det.saxs.cam.acquire_time.kind = 'hinted'
     sw_det.waxs.cam.acquire_time.kind = 'hinted'
+
     sigcycler = cycler(energy, energies)
     for i400channel in I400sigs:
         i400channel.parent.exposure_time.kind = 'hinted'
@@ -412,7 +421,7 @@ def en_scan_core(I400sigs, dets, energy, energies, shuttervalues, times):
     #     yield from quicksnap()
     # print(sigcycler)
 
-    yield from bp.scan_nd(I400sigs+[en.energy]+ dets,sigcycler)
+    yield from bp.scan_nd(I400sigs+[en.energy]+ dets,sigcycler,plan_name=enscan_type)
 
     # if light_was_on:
     #     samplelight.on()    # leaving light off now - this just slows everything down if there are multiple scans
@@ -522,6 +531,8 @@ def full_carbon_calcium_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
 
 
 def carbon_NEXAFS(exp_time=.2, gain_bs=6,s_or_w='w'):
+
+    enscan_type = 'carbon_NEXAFS'
     #Oct 2019, this pitch value seems to be optimal for carbon
     mir3.Pitch.put(7.93)
     IzeroMesh.set_exposure(exp_time)
@@ -529,11 +540,13 @@ def carbon_NEXAFS(exp_time=.2, gain_bs=6,s_or_w='w'):
     RSoXS_Diodes.gain_save = gain_bs
     switch = {'s' : Beamstop_SAXS , 'w' : Beamstop_WAXS}
     RE.md['project_name'] = 'NEXAFS'
-    yield from bp.scan([IzeroMesh,switch[s_or_w]],en,270,340,351)
+    yield from bp.scan([IzeroMesh,switch[s_or_w]],en,270,340,351,plan_name=enscan_type)
 
 
 
 def oxygen_NEXAFS(exp_time=.2, gain_bs=6,s_or_w='w'):
+
+    enscan_type = 'oxygen_NEXAFS'
     #Oct 2019, this pitch value seems to be optimal for carbon
     mir3.Pitch.put(7.89)
     IzeroMesh.set_exposure(exp_time)
@@ -541,12 +554,14 @@ def oxygen_NEXAFS(exp_time=.2, gain_bs=6,s_or_w='w'):
     RSoXS_Diodes.gain_save = gain_bs
     switch = {'s' : Beamstop_SAXS , 'w' : Beamstop_WAXS}
     RE.md['project_name'] = 'NEXAFS'
-    yield from bp.scan([IzeroMesh,switch[s_or_w]],en,510,560,201)
+    yield from bp.scan([IzeroMesh,switch[s_or_w]],en,510,560,201,plan_name=enscan_type)
 
 
 
 
 def fluorine_NEXAFS(exp_time=.2, gain_bs=6,s_or_w='w'):
+
+    scan_name = 'fluorine_NEXAFS'
     #Oct 2019, this pitch value seems to be optimal for carbon
     mir3.Pitch.put(7.89)
     IzeroMesh.set_exposure(exp_time)
@@ -554,28 +569,34 @@ def fluorine_NEXAFS(exp_time=.2, gain_bs=6,s_or_w='w'):
     RSoXS_Diodes.gain_save = gain_bs
     switch = {'s' : Beamstop_SAXS , 'w' : Beamstop_WAXS}
     RE.md['project_name'] = 'NEXAFS'
-    yield from bp.scan([IzeroMesh,switch[s_or_w]],en,670,720,201)
+    yield from bp.scan([IzeroMesh,switch[s_or_w]],en,670,720,201,plan_name=enscan_type)
 
 
 def fluorine_SAXS(exp_time=.1):
+  
+    enscan_type = 'fluorine_SAXS'
     #Oct 2019, this pitch value seems to be optimal for carbon
     mir3.Pitch.put(7.89)
     set_exposure(exp_time)
-    yield from bp.scan([sw_det, en.energy, Beamstop_SAXS, IzeroMesh],en,680,700,41)
+    yield from bp.scan([sw_det, en.energy, Beamstop_SAXS, IzeroMesh],en,680,700,41,plan_name=enscan_type)
 
 def fluorine_WAXS(exp_time=2):
+
+    enscan_type = 'fluorine_WAXS'
     #Oct 2019, this pitch value seems to be optimal for carbon
     mir3.Pitch.put(7.89)
     set_exposure(exp_time)
-    yield from bp.scan([sw_det, en.energy, Beamstop_WAXS, IzeroMesh],en,680,700,41)
+    yield from bp.scan([sw_det, en.energy, Beamstop_WAXS, IzeroMesh],en,680,700,41,plan_name=enscan_type)
 
 
 
 def calcium_NEXAFS(exp_time=2, gain_bs=5,s_or_w='w'):
+
+    enscan_type = 'calcium_NEXAFS'
     IzeroMesh.set_exposure(exp_time)
     Beamstop_WAXS.set_exposure(exp_time)
     RSoXS_Diodes.gain_save = gain_bs
     switch = {'s' : Beamstop_SAXS , 'w' : Beamstop_WAXS}
     RE.md['project_name'] = 'NEXAFS'
-    yield from bp.scan([IzeroMesh,switch[s_or_w]],en,320,360,201)
+    yield from bp.scan([IzeroMesh,switch[s_or_w]],en,320,360,201,plan_name=enscan_type)
 
