@@ -397,6 +397,19 @@ def newsample():
     else:
         return get_sample_dict(acq = acquisitions) #uses current location by default
 
+def avg_scan_time(plan_name,nscans=50,new_scan_duration=600):
+    scans = db(plan_name=plan_name
+    durations = np.array([])
+    for i,sc in enumerate(relscans):
+        if(sc.stop.exit_status=='success'):
+            durations = np.append(durations,sc.stop['time'] - sc.start['time'])
+        if i > 50:
+            break
+    if len(durations) > 0:
+        return np.mean(durations)
+    else:  
+        #we have never run a scan of this type before (?!?) - assume it takes some default value (10 min)
+        return new_scan_duration
 
 def run_bar(bar,sortby=['p','c','a','s'],dryrun=0,rev=[False,False,False,False]):
     '''
@@ -420,7 +433,7 @@ def run_bar(bar,sortby=['p','c','a','s'],dryrun=0,rev=[False,False,False,False])
         sample_id = s['sample_id']
         sample_project = s['project_name']
         for a in s['acquisitions']:
-            listout.append([sample_id, sample_project, a['configuration'],a['plan_name'],sample,a])
+            listout.append([sample_id, sample_project, a['configuration'],a['plan_name'],avg_scan_time(a['plan_name']),sample,a])
     switcher = {'p':1,'s':0,'c':2,'a':3}
     try:
         sortby.reverse()
@@ -438,16 +451,19 @@ def run_bar(bar,sortby=['p','c','a','s'],dryrun=0,rev=[False,False,False,False])
         return
     if dryrun:
         text = ''
+        total_time = 0
         for step in listout:
-            text += 'move to {} from {}, load configuration {}, scan {}\n'.format(
-                step[4]['sample_name'],step[1],step[2],step[3])
+            text += 'move to {} from {}, load configuration {}, scan {}, starts {} min duration {} min\n'.format(
+                step[5]['sample_name'],step[1],step[2],step[3],floor(total_time/60),floor(step[4]/60)
+            total_time += step[4]
+        text += f'Total estimated time {floor(total_time/60)} h, {floor(total_time%60)} m... have fun!' 
         boxed_text('Dry Run',text,'lightblue',width=120,shrink=True)
     else:
         for i,step in enumerate(listout):
             boxed_text('Scan Status',f'\n\nStarting scan #{i+1} out of {len(listout)}\n\n','red',width=120,shrink=True)
-            yield from load_sample(step[4]) # move to sample / load sample metadata
+            yield from load_sample(step[5]) # move to sample / load sample metadata
             yield from move_to_location(get_location_from_config(step[2])) # move to configuration
-            yield from do_acquisitions([step[5]]) # run scan
+            yield from do_acquisitions([step[6]]) # run scan
 
 
 def list_samples(bar):
