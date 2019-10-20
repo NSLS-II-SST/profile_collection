@@ -4,7 +4,7 @@ from operator import itemgetter
 import collections, json
 import pandas as pd
 from copy import deepcopy
-
+import numpy as np
 
 def user():
     title = "User metadata - stored in every scan:"
@@ -400,7 +400,7 @@ def newsample():
 def avg_scan_time(plan_name,nscans=50,new_scan_duration=600):
     scans = db(plan_name=plan_name)
     durations = np.array([])
-    for i,sc in enumerate(relscans):
+    for i,sc in enumerate(scans):
         if(sc.stop.exit_status=='success'):
             durations = np.append(durations,sc.stop['time'] - sc.start['time'])
         if i > 50:
