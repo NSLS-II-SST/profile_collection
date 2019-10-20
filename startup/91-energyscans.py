@@ -572,7 +572,7 @@ def fluorine_NEXAFS(exp_time=.2, gain_bs=6,s_or_w='w'):
     yield from bp.scan([IzeroMesh,switch[s_or_w]],en,670,720,201,plan_name=enscan_type)
 
 
-def fluorine_SAXS(exp_time=2):
+def fluorine_SAXS(exp_time=.1):
 
     enscan_type = 'fluorine_SAXS'
     #Oct 2019, this pitch value seems to be optimal for carbon
