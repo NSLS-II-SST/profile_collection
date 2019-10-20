@@ -573,7 +573,7 @@ def fluorine_NEXAFS(exp_time=.2, gain_bs=6,s_or_w='w'):
 
 
 def fluorine_SAXS(exp_time=.1):
-
+  
     enscan_type = 'fluorine_SAXS'
     #Oct 2019, this pitch value seems to be optimal for carbon
     mir3.Pitch.put(7.89)
