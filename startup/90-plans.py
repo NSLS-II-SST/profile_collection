@@ -452,10 +452,10 @@ def image_bar(bar,path = None):
         im = Image.fromarray(image)
         im.save(path)
 
-def locate_samples_from_image(bar,impath):
+def locate_samples_from_image(bar,impath,flip=False):
     global loc_Q
     loc_Q = queue.Queue(1)
-    image = stich_sample(False,False,False,from_image=impath)
+    image = stich_sample(False,False,False,from_image=impath,flip_file=flip)
     update_bar(bar, loc_Q)
 
 def bar_add_from_click(event):
