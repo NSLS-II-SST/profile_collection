@@ -166,11 +166,11 @@ def SAXS():
         'order': 0},
         {
         'motor':    slits1.hsize,
-        'position': 0.152,
+        'position': 0.153,
         'order': 0},
         {
         'motor':    slits1.hcenter,
-        'position': 0.6,
+        'position': 0.5,
         'order': 0},
         {
         'motor':    slits2.vsize,
@@ -178,31 +178,31 @@ def SAXS():
         'order': 0},
         {
         'motor':    slits2.vcenter,
-        'position': -0.83,
+        'position': -0.73,
         'order': 0},
         {
         'motor':    slits2.hsize,
-        'position': 0.6,
+        'position': 0.4,
         'order': 0},
         {
         'motor':    slits2.hcenter,
-        'position': 0.47,
+        'position': 0.423,
         'order': 0},
         {
         'motor':    slits3.vsize,
-        'position': 1.2,
+        'position': 1.6,
         'order': 0},
         {
         'motor':    slits3.vcenter,
-        'position': -0.27,
+        'position': -0.17,
         'order': 0},
         {
         'motor':    slits3.hsize,
-        'position': 1.1,
+        'position': 1,
         'order': 0},
         {
         'motor':    slits3.hcenter,
-        'position': 0.55,
+        'position': 0.45,
         'order': 0},
         {
         'motor':    Shutter_Y,
@@ -222,7 +222,7 @@ def SAXS():
         'order': 0},
         {
         'motor':    BeamStopS,
-        'position': 68.7,
+        'position': 68.9,
         'order': 0},
         {
         'motor':    BeamStopW,
