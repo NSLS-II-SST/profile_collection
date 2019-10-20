@@ -523,12 +523,14 @@ def annotateImage(axes,item,name):
     a.draggable()
     plt.draw()
 
-def stich_sample(images, step_size, y_off, from_image=None):
+def stich_sample(images, step_size, y_off, from_image=None,flip_file=False):
     global sample_image_axes
 
     if isinstance(from_image,str):
         im_frame = Image.open(from_image)
         result = np.array(im_frame)
+        if(flip_file):
+            result = np.flipud(result)
     else:
         pixel_step = int(step_size * (1760) / 25)
         pixel_overlap = 2464 - pixel_step
@@ -537,6 +539,9 @@ def stich_sample(images, step_size, y_off, from_image=None):
         for image in images[1:]:
             i += 1
             result = np.concatenate((image[(y_off * i):, :], result[:-(y_off), pixel_overlap:]), axis=1)
+        result = np.flipud(result)
+
+
     fig, ax = plt.subplots()
     ax.imshow(result, extent=[0, 235, -14.5, 14.5])
     sample_image_axes = ax

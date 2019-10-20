@@ -148,6 +148,7 @@ def mirror1_NEXAFSpos():
     yield from bps.mv(mir1.Yaw, 0)
 
 def SAXSmode():
+    yield from psh10.close()
     yield from slits_in_SAXS()
     yield from bps.mv(Shutter_Y, 2.2,
                       Izero_Y, -29,
@@ -227,10 +228,11 @@ def SAXS():
         {
         'motor':    BeamStopW,
         'position': 3,
-        'order': 0},
+        'order': 1},
     ]
 
 def WAXSmode():
+    yield from psh10.close()
     yield from slits_in_WAXS()
     yield from bps.mv(Shutter_Y, 2.2,
                       Izero_Y, -29,
@@ -244,51 +246,51 @@ def WAXS():
     return [{
         'motor':    slits1.vsize,
         'position': .025,
-        'order': 0},
+        'order': 1},
         {
         'motor':    slits1.vcenter,
         'position': -0.55,
-        'order': 0},
+        'order': 1},
         {
         'motor':    slits1.hsize,
         'position': 0.4,
-        'order': 0},
+        'order': 1},
         {
         'motor':    slits1.hcenter,
         'position': 0.5,
-        'order': 0},
+        'order': 1},
         {
         'motor':    slits2.vsize,
         'position': 0.6,
-        'order': 0},
+        'order': 1},
         {
         'motor':    slits2.vcenter,
         'position': -1.05,
-        'order': 0},
+        'order': 1},
         {
         'motor':    slits2.hsize,
         'position': 0.6,
-        'order': 0},
+        'order': 1},
         {
         'motor':    slits2.hcenter,
         'position': 0.31,
-        'order': 0},
+        'order': 1},
         {
         'motor':    slits3.vsize,
         'position': 0.9,
-        'order': 0},
+        'order': 1},
         {
         'motor':    slits3.vcenter,
         'position': -0.625,
-        'order': 0},
+        'order': 1},
         {
         'motor':    slits3.hsize,
         'position': 1.3,
-        'order': 0},
+        'order': 1},
         {
         'motor':    slits3.hcenter,
         'position': 0.25,
-        'order': 0},
+        'order': 1},
         {
         'motor':    Shutter_Y,
         'position': 2.2,
@@ -296,23 +298,23 @@ def WAXS():
         {
         'motor':    Izero_Y,
         'position': -29,
-        'order': 0},
+        'order': 1},
         {
         'motor':    Det_W,
         'position': -10,
-        'order': 0},
+        'order': 1},
         {
         'motor':    Det_S,
         'position':-94,
-        'order': 0},
+        'order': 1},
         {
         'motor':    BeamStopW,
         'position': 66.1,
-        'order': 0},
+        'order': 1},
         {
         'motor':    BeamStopS,
         'position': 3,
-        'order': 0},
+        'order': 1},
     ]
 
 
@@ -369,7 +371,7 @@ def NEXAFS():
         {
         'motor':    Shutter_Y,
         'position': 32.2,
-        'order': 0},
+        'order': 1},
         {
         'motor':    Izero_Y,
         'position': -29,
