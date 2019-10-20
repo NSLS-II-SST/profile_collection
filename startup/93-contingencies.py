@@ -11,6 +11,11 @@ user_email = RE.md['user_email']
 def send_notice(email,subject,msg):
     os.system('echo '+msg+' | mail -s "'+subject+'" '+email)
 
+
+def send_notice_plan(email,subject,msg):
+    yield from bps.sleep(.1)
+    send_notice(email,subject,msg)
+
 def enc_clr_x():
     send_notice('egann@bnl.gov','SST HAS FALLEN','the encoder loss has happened on the RSoXS beamline')
     xpos = sam_X.user_readback.value
@@ -52,3 +57,5 @@ logger = logging.getLogger('bluesky.RE')
 handler = OSEmailHandler()
 handler.setLevel('ERROR')  # Only email for if the level is ERROR or higher (CRITICAL).
 logger.addHandler(handler)
+
+
