@@ -454,8 +454,8 @@ def run_bar(bar,sortby=['p','c','a','s'],dryrun=0,rev=[False,False,False,False])
         total_time = 0
         for step in listout:
             text += 'move to {} from {}, load configuration {}, scan {}, starts {} min duration {} min\n'.format(
-                step[5]['sample_name'],step[1],step[2],step[3],floor(total_time/60),floor(step[4]/60),
-            total_time += step[4])
+                step[5]['sample_name'],step[1],step[2],step[3],floor(total_time/60),floor(step[4]/60))
+            total_time += step[4]
         text += f'Total estimated time {floor(total_time/60)} h, {floor(total_time%60)} m... have fun!' 
         boxed_text('Dry Run',text,'lightblue',width=120,shrink=True)
     else:
