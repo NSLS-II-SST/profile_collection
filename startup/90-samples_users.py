@@ -5,6 +5,7 @@ import collections, json
 import pandas as pd
 from copy import deepcopy
 import numpy as np
+from math import floor
 
 def user():
     title = "User metadata - stored in every scan:"
