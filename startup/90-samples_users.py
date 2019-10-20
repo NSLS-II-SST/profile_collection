@@ -398,7 +398,7 @@ def newsample():
         return get_sample_dict(acq = acquisitions) #uses current location by default
 
 def avg_scan_time(scan_type,nscans=50):
-    scans = db(plan_name=scan_type)
+    scans = db(enscan_type=scan_type)
     durations = np.array([])
     for i,sc in enumerate(relscans):
         if(sc.stop.exit_status=='success'):
