@@ -540,7 +540,7 @@ def carbon_NEXAFS(exp_time=.2, gain_bs=6,s_or_w='w'):
     RSoXS_Diodes.gain_save = gain_bs
     switch = {'s' : Beamstop_SAXS , 'w' : Beamstop_WAXS}
     RE.md['project_name'] = 'NEXAFS'
-    yield from bp.scan([IzeroMesh,switch[s_or_w]],en,270,340,351,enscan_type=enscan_type)
+    yield from bp.scan([IzeroMesh,switch[s_or_w]],en,270,340,351,plan_name=enscan_type)
 
 
 
@@ -554,7 +554,7 @@ def oxygen_NEXAFS(exp_time=.2, gain_bs=6,s_or_w='w'):
     RSoXS_Diodes.gain_save = gain_bs
     switch = {'s' : Beamstop_SAXS , 'w' : Beamstop_WAXS}
     RE.md['project_name'] = 'NEXAFS'
-    yield from bp.scan([IzeroMesh,switch[s_or_w]],en,510,560,201,enscan_type=enscan_type)
+    yield from bp.scan([IzeroMesh,switch[s_or_w]],en,510,560,201,plan_name=enscan_type)
 
 
 
@@ -569,7 +569,7 @@ def fluorine_NEXAFS(exp_time=.2, gain_bs=6,s_or_w='w'):
     RSoXS_Diodes.gain_save = gain_bs
     switch = {'s' : Beamstop_SAXS , 'w' : Beamstop_WAXS}
     RE.md['project_name'] = 'NEXAFS'
-    yield from bp.scan([IzeroMesh,switch[s_or_w]],en,670,720,201,enscan_type=enscan_type)
+    yield from bp.scan([IzeroMesh,switch[s_or_w]],en,670,720,201,plan_name=enscan_type)
 
 
 def fluorine_SAXS(exp_time=2):
@@ -578,7 +578,7 @@ def fluorine_SAXS(exp_time=2):
     #Oct 2019, this pitch value seems to be optimal for carbon
     mir3.Pitch.put(7.89)
     set_exposure(exp_time)
-    yield from bp.scan([sw_det, en.energy, Beamstop_SAXS, IzeroMesh],en,680,700,41,enscan_type=enscan_type)
+    yield from bp.scan([sw_det, en.energy, Beamstop_SAXS, IzeroMesh],en,680,700,41,plan_name=enscan_type)
 
 def fluorine_WAXS(exp_time=2):
 
@@ -586,7 +586,7 @@ def fluorine_WAXS(exp_time=2):
     #Oct 2019, this pitch value seems to be optimal for carbon
     mir3.Pitch.put(7.89)
     set_exposure(exp_time)
-    yield from bp.scan([sw_det, en.energy, Beamstop_WAXS, IzeroMesh],en,680,700,41,enscan_type=enscan_type)
+    yield from bp.scan([sw_det, en.energy, Beamstop_WAXS, IzeroMesh],en,680,700,41,plan_name=enscan_type)
 
 
 
@@ -598,5 +598,5 @@ def calcium_NEXAFS(exp_time=2, gain_bs=5,s_or_w='w'):
     RSoXS_Diodes.gain_save = gain_bs
     switch = {'s' : Beamstop_SAXS , 'w' : Beamstop_WAXS}
     RE.md['project_name'] = 'NEXAFS'
-    yield from bp.scan([IzeroMesh,switch[s_or_w]],en,320,360,201,enscan_type=enscan_type)
+    yield from bp.scan([IzeroMesh,switch[s_or_w]],en,320,360,201,plan_name=enscan_type)
 
