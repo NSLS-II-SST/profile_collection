@@ -421,7 +421,7 @@ def en_scan_core(I400sigs, dets, energy, energies, shuttervalues, times,enscan_t
     #     yield from quicksnap()
     # print(sigcycler)
 
-    yield from bp.scan_nd(I400sigs+[en.energy]+ dets,sigcycler,enscan_type=enscan_type)
+    yield from bp.scan_nd(I400sigs+[en.energy]+ dets,sigcycler,plan_name=enscan_type)
 
     # if light_was_on:
     #     samplelight.on()    # leaving light off now - this just slows everything down if there are multiple scans

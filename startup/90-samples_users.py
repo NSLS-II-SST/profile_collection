@@ -397,16 +397,19 @@ def newsample():
     else:
         return get_sample_dict(acq = acquisitions) #uses current location by default
 
-def avg_scan_time(scan_type,nscans=50):
-    scans = db(enscan_type=scan_type)
+def avg_scan_time(plan_name,nscans=50,new_scan_duration=600):
+    scans = db(plan_name=plan_name
     durations = np.array([])
     for i,sc in enumerate(relscans):
         if(sc.stop.exit_status=='success'):
             durations = np.append(durations,sc.stop['time'] - sc.start['time'])
         if i > 50:
             break
-    return np.mean(durations)
-    
+    if len(durations) > 0:
+        return np.mean(durations)
+    else:  
+        #we have never run a scan of this type before (?!?) - assume it takes some default value (10 min)
+        return new_scan_duration
 
 def run_bar(bar,sortby=['p','c','a','s'],dryrun=0,rev=[False,False,False,False]):
     '''
@@ -430,7 +433,7 @@ def run_bar(bar,sortby=['p','c','a','s'],dryrun=0,rev=[False,False,False,False])
         sample_id = s['sample_id']
         sample_project = s['project_name']
         for a in s['acquisitions']:
-            listout.append([sample_id, sample_project, a['configuration'],a['plan_name'],avg_scan_time(a['plan_name'],50),sample,a])
+            listout.append([sample_id, sample_project, a['configuration'],a['plan_name'],avg_scan_time(a['plan_name']),sample,a])
     switcher = {'p':1,'s':0,'c':2,'a':3}
     try:
         sortby.reverse()
