@@ -402,7 +402,7 @@ def avg_scan_time(plan_name,nscans=50,new_scan_duration=600):
     scans = db(plan_name=plan_name)
     durations = np.array([])
     for i,sc in enumerate(scans):
-        if(sc.stop.exit_status=='success'):
+        if(sc.stop['exit_status']=='success'):
             durations = np.append(durations,sc.stop['time'] - sc.start['time'])
         if i > nscans:
             break
@@ -461,10 +461,10 @@ def run_bar(bar,sortby=['p','c','a','s'],dryrun=0,rev=[False,False,False,False])
         boxed_text('Dry Run',text,'lightblue',width=120,shrink=True)
     else:
         for i,step in enumerate(listout):
+            time_remaining = sum([row[4] for row in listout[i:]])
             boxed_text('Scan Status',f'\n\nStarting scan #{i+1} out of {len(listout)}, '
-                                     f'time remaining approx @TODO\n\n',
+                                     f'time remaining approx {floor(time_remaining/3600)} h {floor((time_remaining % 3600) / 60)} m \n\n',
                        'red',width=120,shrink=True)
-            print((listout[i:][4]))
             yield from load_sample(step[5]) # move to sample / load sample metadata
             yield from move_to_location(get_location_from_config(step[2])) # move to configuration
             yield from do_acquisitions([step[6]]) # run scan
