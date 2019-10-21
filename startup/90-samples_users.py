@@ -404,7 +404,7 @@ def avg_scan_time(plan_name,nscans=50,new_scan_duration=600):
     for i,sc in enumerate(scans):
         if(sc.stop.exit_status=='success'):
             durations = np.append(durations,sc.stop['time'] - sc.start['time'])
-        if i > 50:
+        if i > nscans:
             break
     if len(durations) > 0:
         return np.mean(durations)
@@ -457,11 +457,13 @@ def run_bar(bar,sortby=['p','c','a','s'],dryrun=0,rev=[False,False,False,False])
             text += 'move to {} from {}, load configuration {}, scan {}, starts {} min duration {} min\n'.format(
                 step[5]['sample_name'],step[1],step[2],step[3],floor(total_time/60),floor(step[4]/60))
             total_time += step[4]
-        text += f'Total estimated time {floor(total_time/3600)} h, {floor(total_time%60)} m... have fun!'
+        text += f'Total estimated time {floor(total_time/3600)} h, {floor((total_time%3600)/60)} m... have fun!'
         boxed_text('Dry Run',text,'lightblue',width=120,shrink=True)
     else:
         for i,step in enumerate(listout):
-            boxed_text('Scan Status',f'\n\nStarting scan #{i+1} out of {len(listout)}, time remaining approx {sum(listout[4][i:])}\n\n','red',width=120,shrink=True)
+            boxed_text('Scan Status',f'\n\nStarting scan #{i+1} out of {len(listout)}, '
+                                     f'time remaining approx {sum(listout[4][i:])}\n\n',
+                       'red',width=120,shrink=True)
             yield from load_sample(step[5]) # move to sample / load sample metadata
             yield from move_to_location(get_location_from_config(step[2])) # move to configuration
             yield from do_acquisitions([step[6]]) # run scan

@@ -53,7 +53,7 @@ RE.install_suspender(suspendx)
 class OSEmailHandler(logging.Handler):
     def emit(self, record):
         user_email = RE.md['user_email']
-        send_notice(bls_email+','+user_email, 'SST IS SO SORRY', record.getMessage())
+        send_notice(bls_email+','+user_email, 'SST IS SO SORRY', record.getMessage()) # record.stack_info
        # Send email or whatever.
 
 logger = logging.getLogger('bluesky.RE')
