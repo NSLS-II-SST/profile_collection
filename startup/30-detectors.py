@@ -157,8 +157,8 @@ class SyncedDetectors(Device):
         super().__init__(*args, **kwargs)
 
     def trigger(self):
-        saxs_status = self.saxs.trigger()
         waxs_status = self.waxs.trigger()
+        saxs_status = self.saxs.trigger()
         return saxs_status & waxs_status
 
     def collect_asset_docs(self, *args, **kwargs):
@@ -168,7 +168,7 @@ class SyncedDetectors(Device):
     def set_exposure(self,seconds):
         self.waxs.set_exptime(seconds)
         self.saxs.set_exptime(seconds)
-        self.waxs.cam.trigger_mode.put(0)
+        self.saxs.cam.trigger_mode.put(0)
         self.waxs.trans1.type.put(1)
         self.saxs.trans1.type.put(3)
 
@@ -187,13 +187,13 @@ class SyncedDetectors(Device):
         self.waxs.set_temp(-80)
 
     def shutter_status(self):
-        return self.waxs.shutter()
+        return self.saxs.shutter()
 
     def shutter_on(self):
-        self.waxs.shutter_on()
+        self.saxs.shutter_on()
 
     def shutter_off(self):
-        self.waxs.shutter_off()
+        self.saxs.shutter_off()
 
     def cooling_state(self):
         return (self.saxs.cooling_state()+ self.waxs.cooling_state())
@@ -205,13 +205,13 @@ class SyncedDetectors(Device):
         self.cooling_state()
 
     def open_shutter(self):
-        self.waxs.cam.shutter_control.set(1)
+        self.saxs.cam.shutter_control.set(1)
 
     def close_shutter(self):
-        self.waxs.cam.shutter_control.set(0)
+        self.saxs.cam.shutter_control.set(0)
 
     def shutter(self):
-        return self.waxs.cam.shutter_control.get()
+        return self.saxs.cam.shutter_control.get()
 
 
 sw_det = SyncedDetectors('', name='Synced')
@@ -219,7 +219,7 @@ sw_det.saxs.name = "SAXS"
 sw_det.waxs.name = "WAXS"
 sw_det.saxs.stats1.name = "SAXS ROI1"
 sw_det.waxs.stats1.name = "WAXS ROI1"
-shutter_status = sw_det.waxs.cam.sync
+shutter_status = sw_det.saxs.cam.sync
 shutter_status.name = 'shutter mode'
 sw_det.waxs.cam.acquire_time.name = 'WAXS Exposure'
 sw_det.saxs.cam.acquire_time.name = 'SAXS Exposure'
@@ -247,7 +247,7 @@ for det in [saxs_det, waxs_det,sw_det.waxs,sw_det.saxs]:
     det.cam.temperature.kind = 'normal'
     det.cam.min_y.kind = 'normal'
 sw_det.kind = 'hinted'
-sw_det.waxs.cam.sync.kind='normal'
+sw_det.saxs.cam.sync.kind='normal'
 
 sd.baseline.extend([waxs_det.cam.temperature_actual, saxs_det.cam.temperature_actual, waxs_det.cam.hot_side_temp, saxs_det.cam.hot_side_temp , waxs_det.cam.bin_y , saxs_det.cam.bin_y ])
 sd.baseline.extend([waxs_det.cam.bin_x, saxs_det.cam.bin_x, waxs_det.cam.adc_speed, saxs_det.cam.adc_speed , waxs_det.cam.acquire_time , saxs_det.cam.acquire_time ])

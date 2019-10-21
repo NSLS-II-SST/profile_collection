@@ -127,23 +127,23 @@ gv15.closeval = 1
 
 gv26 = EPS_Shutter('XF:07IDB-VA:2{Mir:M3C-GV:1}', name = 'Post Shutter Gate Valve',kind='hinted')
 gv26.shutter_type = 'GV'
-gv26.openval  = 0
-gv26.closeval = 1
+gv26.openval  = 1
+gv26.closeval = 0
 
 gv27 = EPS_Shutter('XF:07IDB-VA:3{Slt:C-GV:1}', name = 'Upstream Gate Valve',kind='hinted')
 gv27.shutter_type = 'GV'
-gv27.openval  = 0
-gv27.closeval = 1
+gv27.openval  = 1
+gv27.closeval = 0
 
 gv27a = EPS_Shutter('XF:07IDB-VA:2{RSoXS:Main-GV:1}', name = 'Izero-Main Gate Valve',kind='hinted')
 gv27a.shutter_type = 'GV'
-gv27a.openval  = 0
-gv27a.closeval = 1
+gv27a.openval  = 1
+gv27a.closeval = 0
 
 gv28 = EPS_Shutter('XF:07IDB-VA:2{BT:1-GV:1}', name = 'Downstream Gate Valve',kind='hinted')
 gv28.shutter_type = 'GV'
-gv28.openval  = 0
-gv28.closeval = 1
+gv28.openval  = 1
+gv28.closeval = 0
 
 gvTEM = EPS_Shutter('XF:07IDB-VA:2{RSoXS:Main-GV:2}', name = 'TEM Load Lock Gate Valve',kind='hinted')
 gvTEM.shutter_type = 'GV'

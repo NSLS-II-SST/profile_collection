@@ -83,12 +83,12 @@ del darkoff
 
 
 def dark_plan():
-    shutterstate = sw_det.waxs.cam.sync.setpoint
-    yield from bps.mv(sw_det.waxs.cam.sync,0) # disable shutter
+    shutterstate = sw_det.saxs.cam.sync.setpoint
+    yield from bps.mv(sw_det.saxs.cam.sync,0) # disable shutter
     yield from bps.trigger(sw_det, group='darkframe-trigger')
     yield from bps.wait('darkframe-trigger')
     snapshot = bluesky_darkframes.SnapshotDevice(sw_det)
-    yield from bps.mv(sw_det.waxs.cam.sync,shutterstate)  # put shutter back in previous state
+    yield from bps.mv(sw_det.saxs.cam.sync,shutterstate)  # put shutter back in previous state
     return snapshot
 
 
@@ -426,7 +426,7 @@ def vent():
 
     print('waiting for you to close the TEM load lock')
     print('Please also close the small manual black valve on the back of the load lock now')
-    while gvTEM.state.value is 1:
+    while gvll.state.value is 1:
         bps.sleep(1)
     print('TEM load lock closed - turning off loadlock gauge')
     yield from bps.mv(ll_gpwr,0)
