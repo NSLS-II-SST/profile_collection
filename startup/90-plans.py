@@ -424,9 +424,10 @@ def vent():
     yield from gv27a.close()
     yield from bps.mv(sam_Y,349)
 
-    print('waiting for you to close the TEM load lock')
+    print('waiting for you to close the load lock gate valve')
     print('Please also close the small manual black valve on the back of the load lock now')
     while gvll.state.value is 1:
+        gvll.read() # attempt at a fix for problem where macro hangs here.
         bps.sleep(1)
     print('TEM load lock closed - turning off loadlock gauge')
     yield from bps.mv(ll_gpwr,0)

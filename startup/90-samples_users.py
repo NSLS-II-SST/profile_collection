@@ -454,7 +454,7 @@ def run_bar(bar,sortby=['p','c','a','s'],dryrun=0,rev=[False,False,False,False])
         text = ''
         total_time = 0
         for step in listout:
-            text += 'move to {} from {}, load configuration {}, scan {}, starts {} min duration {} min\n'.format(
+            text += 'move to {} from {}, load configuration {}, scan {}, starts @ {} min and takes {} min\n'.format(
                 step[5]['sample_name'],step[1],step[2],step[3],floor(total_time/60),floor(step[4]/60))
             total_time += step[4]
         text += f'Total estimated time {floor(total_time/3600)} h, {floor((total_time%3600)/60)} m... have fun!'
@@ -463,7 +463,8 @@ def run_bar(bar,sortby=['p','c','a','s'],dryrun=0,rev=[False,False,False,False])
         for i,step in enumerate(listout):
             boxed_text('Scan Status',f'\n\nStarting scan #{i+1} out of {len(listout)}, '
                                      f'time remaining approx @TODO\n\n',
-                       'red',width=120,shrink=True) #str(sum(listout[4][i:]))
+                       'red',width=120,shrink=True)
+            print((listout[i:][4]))
             yield from load_sample(step[5]) # move to sample / load sample metadata
             yield from move_to_location(get_location_from_config(step[2])) # move to configuration
             yield from do_acquisitions([step[6]]) # run scan
