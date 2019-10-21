@@ -462,8 +462,8 @@ def run_bar(bar,sortby=['p','c','a','s'],dryrun=0,rev=[False,False,False,False])
     else:
         for i,step in enumerate(listout):
             boxed_text('Scan Status',f'\n\nStarting scan #{i+1} out of {len(listout)}, '
-                                     f'time remaining approx {sum(listout[4][i:])}\n\n',
-                       'red',width=120,shrink=True)
+                                     f'time remaining approx @TODO\n\n',
+                       'red',width=120,shrink=True) #str(sum(listout[4][i:]))
             yield from load_sample(step[5]) # move to sample / load sample metadata
             yield from move_to_location(get_location_from_config(step[2])) # move to configuration
             yield from do_acquisitions([step[6]]) # run scan
