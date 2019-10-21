@@ -460,7 +460,7 @@ def run_bar(bar,sortby=['p','c','a','s'],dryrun=0,rev=[False,False,False,False])
             total_time += step[4]
             if(step[2] != listout[i-1][2]):
                 total_time += config_change_time
-        text += f'Total estimated time {floor(total_time/3600)} h, {floor((total_time%3600)/60)} m... have fun!'
+        text += f'\n\nTotal estimated time {floor(total_time/3600)} h, {floor((total_time%3600)/60)} m... have fun!'
         boxed_text('Dry Run',text,'lightblue',width=120,shrink=True)
     else:
         for i,step in enumerate(listout):
