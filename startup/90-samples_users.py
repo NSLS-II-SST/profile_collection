@@ -428,6 +428,7 @@ def run_bar(bar,sortby=['p','c','a','s'],dryrun=0,rev=[False,False,False,False])
 
     I guess the order should default to alphabetical - more options to be added??
     '''
+    config_change_time = 360  # time to change between configurations, in seconds.
     listout = []
     for s in bar:
         sample = s
@@ -453,22 +454,24 @@ def run_bar(bar,sortby=['p','c','a','s'],dryrun=0,rev=[False,False,False,False])
     if dryrun:
         text = ''
         total_time = 0
-        for step in listout:
+        for i,step in enumerate(listout):
             text += 'move to {} from {}, load configuration {}, scan {}, starts @ {} min and takes {} min\n'.format(
                 step[5]['sample_name'],step[1],step[2],step[3],floor(total_time/60),floor(step[4]/60))
             total_time += step[4]
+            if(step[2] != listout[i-1][2]):
+                total_time += config_change_time
         text += f'Total estimated time {floor(total_time/3600)} h, {floor((total_time%3600)/60)} m... have fun!'
         boxed_text('Dry Run',text,'lightblue',width=120,shrink=True)
     else:
         for i,step in enumerate(listout):
             time_remaining = sum([row[4] for row in listout[i:]])
             boxed_text('Scan Status',f'\n\nStarting scan #{i+1} out of {len(listout)}, '
-                                     f'time remaining approx {floor(time_remaining/3600)} h {floor((time_remaining % 3600) / 60)} m \n\n',
+                                     f'time remaining approx {floor(time_remaining/3600)} h '
+                                     f'{floor((time_remaining % 3600) / 60)} m \n\n',
                        'red',width=120,shrink=True)
             yield from load_sample(step[5]) # move to sample / load sample metadata
             yield from move_to_location(get_location_from_config(step[2])) # move to configuration
             yield from do_acquisitions([step[6]]) # run scan
-
 
 def list_samples(bar):
     samples = [s['sample_name'] for s in bar]

@@ -464,7 +464,7 @@ def en_scan_core(I400sigs, dets, energy, energies, shuttervalues, times,enscan_t
     #     light_was_on = True
     #     boxed_text('Warning', 'light was on, taking a quick snapshot to clear CCDs', 'yellow', shrink=True)
     #     yield from quicksnap()
-    # print(sigcycler)
+     print(sigcycler)
 
     yield from bp.scan_nd(I400sigs+[en.energy]+ dets,sigcycler,md={'plan_name':enscan_type})
 
