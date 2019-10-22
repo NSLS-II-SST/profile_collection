@@ -379,10 +379,7 @@ def short_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
 
 def full_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
                                          Beamstop_WAXS,
-                                         IzeroMesh,
-                                         SlitTop_I,
-                                         SlitBottom_I,
-                                         SlitOut_I],
+                                         IzeroMesh],
                         dets=[sw_det], energy=en, once_mot= None, once_rstep = 0):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
@@ -464,7 +461,7 @@ def en_scan_core(I400sigs, dets, energy, energies, shuttervalues, times,enscan_t
     #     light_was_on = True
     #     boxed_text('Warning', 'light was on, taking a quick snapshot to clear CCDs', 'yellow', shrink=True)
     #     yield from quicksnap()
-     print(sigcycler)
+    # print(sigcycler)
 
     yield from bp.scan_nd(I400sigs+[en.energy]+ dets,sigcycler,md={'plan_name':enscan_type})
 
