@@ -431,8 +431,9 @@ def full_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     yield from en_scan_core(sigs, dets, energy, energies, shutter_values, times,enscan_type=enscan_type)
 
 
-from bluesky.plan_stubs import checkpoint, abs_set, sleep, trigger, read
+from bluesky.plan_stubs import checkpoint, abs_set, sleep, trigger, read, wait, create, save
 from bluesky.preprocessors import rewindable_wrapper
+from bluesky.utils import short_uid, separate_devices, all_safe_rewind
 
 SLEEP_FOR_SHUTTER = 1
 
@@ -469,7 +470,7 @@ def one_trigger_nd_step(detectors, step, pos_cache):
     detectors = separate_devices(detectors)  # remove redundant entries
     rewindable = all_safe_rewind(detectors)  # if devices can be re-triggered
     detector_with_shutter, *other_detectors = detectors
-    grp = _short_uid('trigger')
+    grp = short_uid('trigger')
 
     def inner_trigger_and_read():
         """
@@ -484,7 +485,7 @@ def one_trigger_nd_step(detectors, step, pos_cache):
         # Skip 'wait' if none of the devices implemented a trigger method.
         if not no_wait:
             yield from wait(group=grp)
-        yield from create(name)
+        yield from create('primary')
         ret = {}  # collect and return readings to give plan access to them
         for obj in detectors:
             reading = (yield from read(obj))
