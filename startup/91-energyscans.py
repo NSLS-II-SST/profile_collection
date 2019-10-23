@@ -431,6 +431,74 @@ def full_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     yield from en_scan_core(sigs, dets, energy, energies, shutter_values, times,enscan_type=enscan_type)
 
 
+from bluesky.plan_stubs import checkpoint, abs_set, sleep, trigger, read
+from bluesky.preprocessors import rewindable_wrapper
+
+SLEEP_FOR_SHUTTER = 1
+
+
+def one_trigger_nd_step(detectors, step, pos_cache):
+    """
+    Inner loop of an N-dimensional step scan
+
+    This is the default function for ``per_step`` param in ND plans.
+
+    Parameters
+    ----------
+    detectors : iterable
+        devices to read
+    step : dict
+        mapping motors to positions in this step
+    pos_cache : dict
+        mapping motors to their last-set positions
+    """
+
+    def move():
+        yield from checkpoint()
+        grp = short_uid('set')
+        for motor, pos in step.items():
+            if pos == pos_cache[motor]:
+                # This step does not move this motor.
+                continue
+            yield from abs_set(motor, pos, group=grp)
+            pos_cache[motor] = pos
+        yield from wait(group=grp)
+
+    motors = step.keys()
+    yield from move()
+    detectors = separate_devices(detectors)  # remove redundant entries
+    rewindable = all_safe_rewind(detectors)  # if devices can be re-triggered
+    detector_with_shutter, *other_detectors = detectors
+    grp = _short_uid('trigger')
+
+    def inner_trigger_and_read():
+        """
+        This was copied with local changes from the body of
+        bluesky.plan_stubs.trigger_and_read.
+        """
+        no_wait = True
+        for obj in other_detectors:
+            if hasattr(obj, 'trigger'):
+                no_wait = False
+                yield from trigger(obj, group=grp)
+        # Skip 'wait' if none of the devices implemented a trigger method.
+        if not no_wait:
+            yield from wait(group=grp)
+        yield from create(name)
+        ret = {}  # collect and return readings to give plan access to them
+        for obj in detectors:
+            reading = (yield from read(obj))
+            if reading is not None:
+                ret.update(reading)
+        yield from save()
+        return ret
+
+    yield from trigger(detector_with_shutter, group=grp)
+    yield from sleep(SLEEP_FOR_SHUTTER)
+    return (yield from rewindable_wrapper(inner_trigger_and_read(),
+                                          rewindable))
+
+
 # @dark_frames_enable
 def en_scan_core(I400sigs, dets, energy, energies, shuttervalues, times,enscan_type=None):
     sw_det.saxs.cam.acquire_time.kind = 'hinted'
@@ -463,7 +531,7 @@ def en_scan_core(I400sigs, dets, energy, energies, shuttervalues, times,enscan_t
     #     yield from quicksnap()
     print(sigcycler)
 
-    yield from bp.scan_nd(I400sigs+[en.energy]+ dets,sigcycler,md={'plan_name':enscan_type})
+    yield from bp.scan_nd(dets + I400sigs+[en.energy],sigcycler,md={'plan_name':enscan_type},per_step=one_trigger_nd_step)
 
     # if light_was_on:
     #     samplelight.on()    # leaving light off now - this just slows everything down if there are multiple scans
