@@ -20,7 +20,13 @@ def spiralsearch_all(barin=[],radius=2, stepsize=.4):
     for sample in barin:
         yield from load_sample(sample)
         RE.md['project_name'] = 'spiral_searches'
-        yield from spiralsearch(radius, stepsize)
+        try:
+            yield from spiralsearch(radius, stepsize)
+        except bluesky.utils.RequestAbort: #need to catch only a RE.stop() exception, NOT a RE.abort() to give the user a chance to bail on a scan and continue searching
+            print("Requested an abort, breaking")
+            break
+        except bluesky.utils.RunEngineInterrupted:
+            print("Stopped scan.  Waiting for your input.")
 
 
 def map_bar_from_spirals(bar,spiralnums,barpos):
@@ -91,10 +97,10 @@ def bar_add_from_click(event):
 
         #print(event.xdata,event.ydata)
         if barnum >=0 and barnum < len(bar) :
-            bar[barnum]['location'][0] = {'motor' : 'x','position': event.xdata}
-            bar[barnum]['location'][1] = {'motor' : 'y','position': event.ydata}
+            bar[barnum]['location'][0] = {'motor' : 'x','position': event.ydata}
+            bar[barnum]['location'][1] = {'motor' : 'y','position': event.xdata}
             bar[barnum]['location'][2] = {'motor' : 'z','position': 0}
-            bar[barnum]['location'][3] = {'motor' : 'th','position': 0}
+            bar[barnum]['location'][3] = {'motor' : 'th','position': 180}
             print('position added')
         else:
             print('Invalid bar location')
@@ -111,8 +117,11 @@ def update_bar(bar,loc_Q):
 
     def worker():
         global bar,sample_image_axes
-        for sample in bar:
-            print(f'Right-click on {sample["sample_name"]} location or press enter on plot to skip, esc to end')
+        samplenum = 0
+        while True:
+#        for sample in bar:
+            sample = bar[samplenum]
+            print(f'Right-click on {sample["sample_name"]} location.  Press n on plot or enter to skip to next sample, p for previous sample, esc to end')
             # ipython input x,y or click in plt which outputs x, y location
             while True:
                 try:
@@ -124,15 +133,24 @@ def update_bar(bar,loc_Q):
                 else:
                     #print('got something')
                     break
-            if item is not ('enter' or 'escape') and isinstance(item,list):
+            if item is not ('enter' or 'escape' or 'n' or 'p') and isinstance(item,list):
                 sample['location'] = item
                 annotateImage(sample_image_axes,item,sample['sample_name'])
+                # advance sample and loop
+                sample += 1
             elif item is 'escape':
                 print('aborting')
                 break
-            elif item is'enter':
+            elif item is'enter' or item is 'n':
                 print(f'leaving this {sample["sample_name"]} unchanged')
-        print("done")
+                sample += 1
+            elif item is 'p':
+                print('Previous sample')
+                sample -= 1
+            if(sample > len(bar)):
+                print("done")
+                break
+
     t = Thread(target=worker)
     t.start()
 def annotateImage(axes,item,name):
@@ -183,7 +201,7 @@ def print_click(event):
     item.append({'motor': 'x', 'position': event.ydata})
     item.append({'motor': 'y', 'position': event.xdata})
     item.append({'motor': 'z', 'position': 0})
-    item.append({'motor': 'th', 'position': 0})
+    item.append({'motor': 'th', 'position': 180})
     bar[loc]['location'] = item
     print(f'Setting location {barloc} on bar to clicked position')
 
@@ -195,14 +213,14 @@ def plot_click(event):
     item.append({'motor': 'x', 'position': event.ydata, 'order': 0})
     item.append({'motor': 'y', 'position': event.xdata, 'order': 0})
     item.append({'motor': 'z', 'position': 0, 'order': 0})
-    item.append({'motor': 'th', 'position': 0, 'order': 0})
+    item.append({'motor': 'th', 'position': 180, 'order': 0})
     if not loc_Q.full() and event.button == 3:
         loc_Q.put(item,block=False)
 
 
 def plot_key_press(event):
     global loc_Q
-    if not loc_Q.full() and (event.key == 'enter' or event.key == 'escape'):
+    if not loc_Q.full() and (event.key == 'enter' or event.key == 'escape' or event.key == 'n' or event.key == 'p'):
         loc_Q.put(event.key,block=False)
 
 
@@ -235,3 +253,58 @@ def find_af1y():
     yield from bps.mvr(sam_X,4)
     yield from bp.rel_scan([IzeroMesh,Beamstop_SAXS,Beamstop_WAXS],sam_Y,-3,3,61)
     yield from bps.mvr(sam_X,-4)
+
+
+def offset_bar(bar, xoff, yoff, zoff, thoff):
+    for samp in bar:
+        for mot in samp['location']:
+            if mot['motor'] is 'x':
+                mot['position'] += xoff
+            if mot['motor'] is 'y':
+                mot['position'] += yoff
+            if mot['motor'] is 'z':
+                mot['position'] += zoff
+            if mot['motor'] is 'th':
+                mot['position'] += thoff
+
+
+def flip_bar(bar):
+    for samp in bar:
+        for mot in samp['location']:
+            if mot['motor'] is 'x':
+                mot['position'] = .5 - mot['position']
+            if mot['motor'] is 'th':
+                mot['position'] = 180
+
+def straighten_bar(bar,d_y, d_x, y_center):
+ for samp in bar:
+     xpos = samp['location'][0]['position']
+     ypos = samp['location'][1]['position']
+     samp['location'][0]['position'] = straighten_x(xpos,ypos,d_x,d_y,y_center)
+
+def straighten_x(x, y, dx, dy, y_center ):
+    return x - (y+y_center)*dx/dy
+
+def correct_bar(bar,af1x,af1y,af2x,af2y,training_wheels=True):
+    x_offset = af1x - bar[0]['location'][0]['position']
+    y_offset = af1y - bar[0]['location'][1]['position']
+    x_image_offset = bar[0]['location'][0]['position'] - bar[-1]['location'][0]['position']
+    y_image_offset = bar[0]['location'][1]['position'] - bar[-1]['location'][0]['position']
+    if(training_wheels):
+        assert abs((af2y-af1y)-y_image_offset) < 5, "Hmm... it seems like the length of the bar has changed by more than 5 mm between the imager and the chamber.  \n \n Are you sure your alignment fiducials are correctly located?  \n\n If you're really sure, rerun with training_wheels=false."
+    dx = (af2x-af1x) + x_image_offset
+    dy = af2y-af1y
+
+
+    for samp in bar:
+        xpos = samp['location'][0]['position']
+        ypos = samp['location'][1]['position']
+
+        xpos = xpos + x_offset
+        ypos = ypos + y_offset
+
+        newx = xpos + (ypos - af1y) * dx/dy
+
+        samp['location'][0]['position'] = newx
+        samp['location'][1]['position'] = ypos
+
