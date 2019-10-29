@@ -108,6 +108,12 @@ dark_frame_preprocessor = bluesky_darkframes.DarkFramePreprocessor(
                     ],
     limit=50)
 
+
+# possibly add a exposure time preprocessor to check beam exposure on CCD over exposure
+
+# if some number of pixels are over exposured, repeat acquisition at .3 exposure time
+
+# if there is no scatter, pause
 dark_frames_enable = make_decorator(dark_frame_preprocessor)()
 RE.preprocessors.append(dark_frame_preprocessor)
 # not doing this because EVERYTHING that goes through RE will get a dark image - this is excessive - fixed now!

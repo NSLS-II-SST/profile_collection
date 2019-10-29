@@ -39,6 +39,11 @@ def beamup_notice():
 suspend_shutter = SuspendBoolHigh(psh1.state,sleep = 10,
                                   tripped_message="Beam Shutter Closed, waiting for it to open",
                                   pre_plan=beamdown_notice, post_plan=beamup_notice)
+
+
+
+
+
 suspend_current = SuspendFloor(ring_current, resume_thresh=350, suspend_thresh=250,sleep = 10,
                                tripped_message="Beam Current is below threshold, will resume when above 350 eV",
                                pre_plan=beamdown_notice, post_plan=beamup_notice)
@@ -47,6 +52,8 @@ RE.install_suspender(suspend_current)
 suspendx = SuspendBoolHigh(sam_X.enc_lss,sleep = 10, tripped_message="Sample X Encoder Loss has been tripped",
                            pre_plan=enc_clr_x)
 RE.install_suspender(suspendx)
+
+# if there is no scatter, pause
 
 
 
