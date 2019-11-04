@@ -593,12 +593,6 @@ def NEXAFS_WAXS_bar(barin,start_en,stop_en,num_en):
         yield from bp.scan([IzeroMesh,Beamstop_WAXS],en,start_en,stop_en,num_en)
 
 
-def run_bar_then_NEXAFS(barin):
-    yield from run_bar(barin, sortby=['c', 'p', 'a'], dryrun=0)
-    yield from NEXAFS_WAXS_bar(barin[0:26], 320, 360, 81)
-    yield from NEXAFS_WAXS_bar(barin[26:], 270, 340, 351)
-
-
 def offset_bar(bar, xoff, yoff, zoff, thoff):
     for samp in bar:
         for mot in samp['location']:
