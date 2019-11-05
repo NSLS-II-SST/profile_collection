@@ -83,6 +83,7 @@ class OSEmailHandler(logging.Handler):
         user_email = RE.md['user_email']
         send_notice(bls_email+','+user_email, 'SST has thrown an exception', record.getMessage()) # record.stack_info
 
+
 logger = logging.getLogger('bluesky.RE')
 handler = OSEmailHandler()
 handler.setLevel('ERROR')  # Only email for if the level is ERROR or higher (CRITICAL).
