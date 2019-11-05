@@ -54,6 +54,7 @@ class I400(SingleTrigger, DetectorBase):
         self.acquisition_mode.set(7)
         self.acquisition_mode1.set(7)
         self.exposure_time.set(.4)
+        self.gain.set(self.gain_save)
         return [self].append(super().unstage())
 
     def __init__(self, *args, **kwargs):
