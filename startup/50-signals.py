@@ -23,7 +23,7 @@ class I400(SingleTrigger, DetectorBase):
     exposure_time = Component(EpicsSignal, ':PERIOD_SP',put_complete=True)
     acquisition_mode = Component(EpicsSignal, ':GETCS.SCAN')
     acquisition_mode1 = Component(EpicsSignal, ':GETCS2.SCAN')
-    acquire = Component(EpicsSignal, ':GETCS',put_complete=True)  # Rely on the IOC to signal done-ness.
+    acquire = Component(EpicsSignal, ':GETCS')  # Rely on the IOC to signal done-ness.
     enabled = Component(EpicsSignal, ':ENABLE_IC_UPDATES')
     exptime_save = .5
     gain_save = 7
@@ -60,12 +60,12 @@ class I400(SingleTrigger, DetectorBase):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-#        self.stage_sigs.update([('acquire', 0),  # if acquiring, stop
-#                                ('acquisition_mode', 0),  # single mode
-#                                ('acquisition_mode1', 0),  # single mode
+        self.stage_sigs.update([('acquire', 0),  # if acquiring, stop
+                                ('acquisition_mode', 0),  # single mode
+                                ('acquisition_mode1', 0),  # single mode
 #                               ('exposure_time', self.exptime_save),
-#                                ('self.gain.set', self.gain_save),
-#                                ])
+#                               ('self.gain.set', self.gain_save),
+                                ])
         self._acquisition_signal = self.acquire
 
 
