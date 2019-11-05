@@ -67,10 +67,10 @@ class I400(SingleTrigger, DetectorBase):
         self._acquisition_signal = self.acquire
 
 
-    Channel_1 = Component(StatsPlugin, ':IC1_MON', kind='hinted')
-    Channel_2 = Component(StatsPlugin, ':IC2_MON', kind='hinted')
-    Channel_3 = Component(StatsPlugin, ':IC3_MON', kind='hinted')
-    Channel_4 = Component(StatsPlugin, ':IC4_MON', kind='hinted')
+    Channel_1 = Component(EpicsSignalRO, ':IC1_MON', kind='hinted')
+    Channel_2 = Component(EpicsSignalRO, ':IC2_MON', kind='hinted')
+    Channel_3 = Component(EpicsSignalRO, ':IC3_MON', kind='hinted')
+    Channel_4 = Component(EpicsSignalRO, ':IC4_MON', kind='hinted')
 
 
 RSoXS_Diodes = I400('XF:07ID-ES1{DMR:I400-1}', name='I400 diode')
