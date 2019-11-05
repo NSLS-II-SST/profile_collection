@@ -18,7 +18,6 @@ ring_current = EpicsSignalRO('SR:OPS-BI{DCCT:1}I:Real-I', name='NSLS-II Ring Cur
 class I400(SingleTrigger, DetectorBase):
     _default_read_attrs = None
     _default_configuration_attrs = None
-
     _status_type = DeviceStatus
     gain = Component(EpicsSignal, ':RANGE_BP')
     exposure_time = Component(EpicsSignal, ':PERIOD_SP',put_complete=True)
@@ -28,26 +27,6 @@ class I400(SingleTrigger, DetectorBase):
     enabled = Component(EpicsSignal, ':ENABLE_IC_UPDATES')
     exptime_save = .5
     gain_save = 7
-    ignore_triggers = 0
-    trigger_count = 0
-
-    def trigger(self):
-        """
-        Trigger the detector and return a Status object.
-        """
-        if not self._staged == Staged.yes:
-            raise RuntimeError("Device must be staged before triggering.")
-
-        if self.trigger_count > 0:
-            if self.trigger_count >= self.ignore_triggers:
-                self.trigger_count = 0
-            else:
-                self.trigger_count += 1
-        if self.trigger_count == 0:
-            self.trigger_count += 1
-            self.status = DeviceStatus(self)
-            self.acquire.put(1, callback= self.status._finished)
-        return self.status
 
     def set_exposure(self, exptime):
         exptimeset = min(exptime,20)
@@ -76,6 +55,16 @@ class I400(SingleTrigger, DetectorBase):
         self.exposure_time.set(.4)
         return [self].append(super().unstage())
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+#        self.stage_sigs.update([('acquire', 0),  # if acquiring, stop
+#                                ('acquisition_mode', 0),  # single mode
+#                                ('acquisition_mode1', 0),  # single mode
+#                               ('exposure_time', self.exptime_save),
+#                                ('self.gain.set', self.gain_save),
+#                                ])
+        self._acquisition_signal = self.acquire
 
 
     Channel_1 = Component(StatsPlugin, ':IC1_MON', kind='hinted')
