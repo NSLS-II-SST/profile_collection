@@ -20,12 +20,12 @@ class I400(SingleTrigger, DetectorBase):
     _default_configuration_attrs = None
 
     _status_type = DeviceStatus
-    gain = Component(Signal, ':RANGE_BP')
-    exposure_time = Component(Signal, ':PERIOD_SP',put_complete=True)
-    acquisition_mode = Component(Signal, ':GETCS.SCAN')
-    acquisition_mode1 = Component(Signal, ':GETCS2.SCAN')
-    acquire = Component(Signal, ':GETCS',put_complete=True)  # Rely on the IOC to signal done-ness.
-    enabled = Component(Signal, ':ENABLE_IC_UPDATES')
+    gain = Component(EpicsSignal, ':RANGE_BP')
+    exposure_time = Component(EpicsSignal, ':PERIOD_SP',put_complete=True)
+    acquisition_mode = Component(EpicsSignal, ':GETCS.SCAN')
+    acquisition_mode1 = Component(EpicsSignal, ':GETCS2.SCAN')
+    acquire = Component(EpicsSignal, ':GETCS',put_complete=True)  # Rely on the IOC to signal done-ness.
+    enabled = Component(EpicsSignal, ':ENABLE_IC_UPDATES')
     exptime_save = .5
     gain_save = 7
     ignore_triggers = 0
