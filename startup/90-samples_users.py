@@ -6,6 +6,7 @@ import pandas as pd
 from copy import deepcopy
 import numpy as np
 from math import floor
+import datetime
 
 def user():
     title = "User metadata - stored in every scan:"
@@ -96,6 +97,10 @@ def newuser():
     if proposal_id is not '':
         RE.md['proposal_id'] = proposal_id
 
+    proposal_id = input('Your SAF id ({}): '.format(RE.md['proposal_id']))
+    if proposal_id is not '':
+        RE.md['SAF_id'] = proposal_id
+
     institution = input('Your institution ({}): '.format(RE.md['institution']))
     if institution is not '':
         RE.md['institution'] = institution
@@ -107,6 +112,7 @@ def newuser():
     user_email = input('Your email for beamline status notifications ({}): '.format(RE.md['user_email']))
     if user_email is not '':
         RE.md['user_email'] = user_email
+
     project_name = input('Your project ({}): '.format(RE.md['project_name']))
     if project_name is not '':
         RE.md['project_name'] = project_name
@@ -116,7 +122,7 @@ def newuser():
         RE.md['project_desc'] = project_desc
     # if new, add user to database get unique ID.
 
-    dt = datetime.now()
+    dt = datetime.datetime.now()
     user_start_date = dt.strftime('%Y-%m-%d')
     RE.md['user_start_date'] = user_start_date
     user_id = '0'

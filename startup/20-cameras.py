@@ -2,7 +2,6 @@ run_report(__file__)
 
 import time as ttime  # tea time
 from types import SimpleNamespace
-from datetime import datetime
 from ophyd import (ProsilicaDetector, SingleTrigger, TIFFPlugin,
                    ImagePlugin, StatsPlugin, DetectorBase, HDF5Plugin,
                    AreaDetector, EpicsSignal, EpicsSignalRO, ROIPlugin,

@@ -18,7 +18,7 @@ Out[20]:
 from event_model import Filler, RunRouter
 from suitcase import tiff_series,csv
 import suitcase.jsonl
-from datetime import datetime
+import datetime
 from bluesky_darkframes import DarkSubtraction
 
 USERDIR = '/DATA/users/'
@@ -26,7 +26,7 @@ USERDIR = '/DATA/users/'
 
 def factory(name, start_doc):
     filler = Filler(db.reg.handler_reg)
-    dt = datetime.now()
+    dt = datetime.datetime.now()
     formatted_date = dt.strftime('%Y-%m-%d')
     name, doc = filler(name, start_doc)  # modifies doc in place
     SAXSsubtractor = DarkSubtraction('Synced_saxs_image')
@@ -77,7 +77,7 @@ def factory(name, start_doc):
                 returnlist.append(serializercsv)
             return returnlist
         elif descriptor_doc['name'] == 'baseline':
-            dt = datetime.now()
+            dt = datetime.datetime.now()
             formatted_date = dt.strftime('%Y-%m-%d')
             # energy = hdr.table(stream_name='baseline')['Beamline Energy_energy'][1]
             serializer = csv.Serializer(file_prefix=('{start[institution]}/'
@@ -110,7 +110,7 @@ import suitcase.jsonl
 
 
 def factory2(name, start_doc):
-    dt = datetime.now()
+    dt = datetime.datetime.now()
     formatted_date = dt.strftime('%Y-%m-%d')
     with suitcase.jsonl.Serializer(file_prefix=('{institution}/'
                                                 '{user_name}/'

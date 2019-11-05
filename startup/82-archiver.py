@@ -1,7 +1,7 @@
 run_report(__file__)
 
 import pytz
-from datetime import datetime, timedelta
+from datetime import datetime as datet, timedelta
 import numpy as np
 import pandas as pd
 import requests
@@ -16,7 +16,7 @@ class plotpvs(list):
 
     def __init__(self, pvdict = {}, hours = 0, minutes = 0, seconds = 0, days = 0, weeks = 0):
         list.__init__(self)
-        until = datetime.today()
+        until = datet.today()
         since = until - timedelta(days=days, seconds=seconds,  minutes=minutes, hours=hours, weeks=weeks)
 
         since = pytz.timezone(self.timezone).localize(since).replace(microsecond=0).isoformat()

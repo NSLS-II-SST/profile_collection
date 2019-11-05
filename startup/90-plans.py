@@ -5,7 +5,7 @@ import pandas as pd
 import bluesky_darkframes
 from IPython.core.magic import register_line_magic
 from suitcase import tiff_series, csv
-from datetime import datetime
+import datetime
 from bluesky.preprocessors import make_decorator
 import queue
 from PIL import Image

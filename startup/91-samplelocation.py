@@ -63,7 +63,6 @@ def map_bar_from_spirals(bar,spiralnums,barpos):
 # Helpful functions goto_af1() goto_af2() and find_af1x(),find_af1y(),find_af2x(),find_af2y()
 #
 # and then remap the bar using
-
 # correct_bar(bar,af1x,af1y,af2x,af2y)
 
 
@@ -83,11 +82,13 @@ def image_bar(bar,path = None):
         im = Image.fromarray(image)
         im.save(path)
 
+
 def locate_samples_from_image(bar,impath):
     global loc_Q
     loc_Q = queue.Queue(1)
     image = stich_sample(False,False,False,from_image=impath)
     update_bar(bar, loc_Q)
+
 
 def bar_add_from_click(event):
     global bar
@@ -153,6 +154,8 @@ def update_bar(bar,loc_Q):
 
     t = Thread(target=worker)
     t.start()
+
+
 def annotateImage(axes,item,name):
     ycoord = item[0]['position']
     xcoord = item[1]['position']
@@ -165,6 +168,7 @@ def annotateImage(axes,item,name):
 
     a.draggable()
     plt.draw()
+
 
 def stich_sample(images, step_size, y_off, from_image=None,flip_file=False):
     global sample_image_axes
@@ -291,7 +295,11 @@ def correct_bar(bar,af1x,af1y,af2x,af2y,training_wheels=True):
     x_image_offset = bar[0]['location'][0]['position'] - bar[-1]['location'][0]['position']
     y_image_offset = bar[0]['location'][1]['position'] - bar[-1]['location'][0]['position']
     if(training_wheels):
-        assert abs((af2y-af1y)-y_image_offset) < 5, "Hmm... it seems like the length of the bar has changed by more than 5 mm between the imager and the chamber.  \n \n Are you sure your alignment fiducials are correctly located?  \n\n If you're really sure, rerun with training_wheels=false."
+        assert abs((af2y-af1y)-y_image_offset) < 5, "Hmm... " \
+                                                    "it seems like the length of the bar has changed by more than" \
+                                                    " 5 mm between the imager and the chamber.  \n \n Are you sure" \
+                                                    " your alignment fiducials are correctly located?  \n\n If you're" \
+                                                    " really sure, rerun with training_wheels=false."
     dx = (af2x-af1x) + x_image_offset
     dy = af2y-af1y
 
