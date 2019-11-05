@@ -3,7 +3,6 @@ run_report(__file__)
 import numpy as np
 import bluesky.plans as bp
 import bluesky.plan_stubs as bps
-from cycler import cycler
 
 
 def full_oxygen_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
@@ -14,7 +13,7 @@ def full_oxygen_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
                                          SlitOut_I],
                         dets=[sw_det],energy=en):
     '''
-    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
+    Full Oxygen Scan runs an RSoXS sample set through the O edge, with particular emphasis in he pre edge region
     this results in 110 exposures
 
 
@@ -44,10 +43,8 @@ def full_oxygen_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     times[energies >= 286] = 2
     times *= multiple
 
-    shuttervalue = energies.copy()
-    shuttervalue[:] = 1  # the rest of the values are shutter enabled (2)
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, shuttervalue, times,enscan_type=enscan_type)
+    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type)
 
 def short_oxygen_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
                                          Beamstop_WAXS,
@@ -57,9 +54,7 @@ def short_oxygen_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
                                          SlitOut_I],
                         dets=[sw_det],energy=en):
     '''
-    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
-    this results in 110 exposures
-
+    Short Oxygen Scan runs an RSoXS sample set through the O edge, with particular emphasis in he pre edge region
 
     :param multiple: adjustment for exposure times
     :param mesh: which Izero channel to use
@@ -88,59 +83,9 @@ def short_oxygen_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     times[:] = 2
     times *= multiple
 
-    shuttervalue = energies.copy()
-    shuttervalue[:] = 1  # the rest of the values are shutter enabled (2)
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, shuttervalue, times,enscan_type=enscan_type)
+    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type)
 
-
-def short_fluorine_scan_nd2(multiple=1,sigs=[Beamstop_SAXS,
-                                         Beamstop_WAXS,
-                                         IzeroMesh,
-                                         SlitTop_I,
-                                         SlitBottom_I,
-                                         SlitOut_I],
-                        dets=[sw_det],energy=en):
-    '''
-    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
-    this results in 110 exposures
-
-
-    :param multiple: adjustment for exposure times
-    :param mesh: which Izero channel to use
-    :param det: which detector to use
-    :param energy: what energy motor to scan
-    :return: perform scan
-
-    normal scan takes ~ 16 minutes to complete
-    '''
-    sample()
-    enscan_type = 'short_fluorine_scan_nd2'
-    #beamline_status()
-    if len(read_input("Starting a Oxygen energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
-        return
-    mir3.Pitch.put(7.89)
-    # create a list of energies
-    energies = np.arange(670,710,1)
-    times = energies.copy()
-
-    # Define exposures times for different energy ranges
-    #times[energies<525] = 2
-    #times[(energies < 540) & (energies >= 525)] = 5
-    #times[energies >= 540] = 2
-    times[:] = 2
-    times *= multiple
-
-    shuttervalue = energies.copy()
-    shuttervalue[:] = 1  # the rest of the values are shutter enabled (2)
-    # use these energies and exposure times to scan energy and record detectors and signals
-    # print(energies)
-    # print(energy)
-    # print(dets)
-    # print(sigs)
-    # print(shuttervalue)
-    # print(times)
-    yield from en_scan_core(sigs, dets, energy, energies, shuttervalue, times,enscan_type=enscan_type)
 
 
 def short_fluorine_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
@@ -151,8 +96,7 @@ def short_fluorine_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
                                          SlitOut_I],
                         dets=[sw_det],energy=en):
     '''
-    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
-    this results in 110 exposures
+    Short Fluorine Scan runs an RSoXS sample set through the F edge, with particular emphasis in he pre edge region
 
 
     :param multiple: adjustment for exposure times
@@ -181,17 +125,9 @@ def short_fluorine_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     #times[energies >= 540] = 2
     times[:] = 2
     times *= multiple
-
-    shuttervalue = energies.copy()
-    shuttervalue[:] = 1  # the rest of the values are shutter enabled (2)
     # use these energies and exposure times to scan energy and record detectors and signals
-    print(times)
-    print(energies)
-    print(shuttervalue)
-    print(sigs)
-    print(dets)
 
-    yield from en_scan_core(sigs, dets, energy, energies, shuttervalue, times,enscan_type=enscan_type)
+    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type)
 
 
 
@@ -203,7 +139,7 @@ def full_nitrogen_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
                                            SlitOut_I],
                           dets=[sw_det],energy=en):
     '''
-    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
+    Full Nitrogen Scan runs an RSoXS sample set through the N edge, with particular emphasis in he pre edge region
     this results in 95 exposures
 
 
@@ -233,10 +169,9 @@ def full_nitrogen_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     times[energies >= 400] = 2
     times *= multiple
 
-    shuttervalue = energies.copy()
-    shuttervalue[:] = 1  # the rest of the values are shutter enabled (2)
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, shuttervalue, times,enscan_type=enscan_type)
+    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type)
+
 
 def short_nitrogen_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
                                            Beamstop_WAXS,
@@ -246,8 +181,7 @@ def short_nitrogen_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
                                            SlitOut_I],
                           dets=[sw_det],energy=en):
     '''
-    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
-    this results in 95 exposures
+    Short Nitrogen Scan runs an RSoXS sample set through the N edge, with particular emphasis in he pre edge region
 
 
     :param multiple: adjustment for exposure times
@@ -261,7 +195,8 @@ def short_nitrogen_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     enscan_type='short_nitrogen_scan_nd'
     sample()
     #beamline_status()
-    if len(read_input("Starting a Nitrogen energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
+    if len(read_input("Starting a Short Nitrogen energy scan "
+                      "hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
 
     # create a list of energies
@@ -277,12 +212,8 @@ def short_nitrogen_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     times[energies >= 400] = 2
     times *= multiple
 
-    shuttervalue = energies.copy()
-    shuttervalue[:] = 1  # the rest of the values are shutter enabled (2)
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, shuttervalue, times,enscan_type=enscan_type)
-
-
+    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type)
 
 
 def very_short_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
@@ -308,7 +239,8 @@ def very_short_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     enscan_type = 'very_short_carbon_scan_nd'
     sample()
     #beamline_status()
-    if len(read_input("Starting a very short Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
+    if len(read_input("Starting a very short Carbon energy scan hit "
+                      "enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
 
     # create a list of energies
@@ -326,10 +258,8 @@ def very_short_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     times[energies >= 286] = 2
     times *= multiple
 
-    shuttervalue = energies.copy()
-    shuttervalue[:] = 1 # the rest of the values are shutter enabled (2)
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets,energy,energies,shuttervalue,times,enscan_type=enscan_type)
+    yield from en_scan_core(sigs, dets,energy,energies,times,enscan_type=enscan_type)
 
 
 def short_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
@@ -350,7 +280,8 @@ def short_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     '''
     sample()
     enscan_type = 'short_carbon_scan_nd'
-    if len(read_input("Starting a short Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
+    if len(read_input("Starting a short Carbon energy scan hit enter in "
+                      "the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
 
     #Oct 2019, this pitch value seems to be optimal for carbon
@@ -371,16 +302,14 @@ def short_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     times[energies >= 286] = 2
     times *= multiple
 
-    shuttervalue = energies.copy()
-    shuttervalue[:] = 1 # the rest of the values are shutter enabled (2)
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets,energy,energies,shuttervalue,times,enscan_type=enscan_type)
+    yield from en_scan_core(sigs, dets,energy,energies,times,enscan_type=enscan_type)
 
 
 def full_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
                                          Beamstop_WAXS,
                                          IzeroMesh],
-                        dets=[sw_det], energy=en, once_mot= None, once_rstep = 0):
+                        dets=[sw_det], energy=en):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 128 exposures
@@ -414,128 +343,9 @@ def full_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     times[energies >= 286] = 2
     times *= multiple
 
-    shutter_values = energies.copy()
-    shutter_values[:] = 1  # all the values are shutter enabled (2)
-    # this is because darks are now taken in the preprocessor automatically as needed
-
-    if isinstance(once_mot,EpicsMotor):
-        yield from bps.mvr(once_mot,once_rstep)
-
-
-    # print(times.size)
-    # print(energies.size)
-    # print(shutter_values.size)
-    # print(sigs)
-    # print(dets)
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, shutter_values, times,enscan_type=enscan_type)
+    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type)
 
-
-from bluesky.plan_stubs import checkpoint, abs_set, sleep, trigger, read, wait, create, save
-from bluesky.preprocessors import rewindable_wrapper
-from bluesky.utils import short_uid, separate_devices, all_safe_rewind
-
-SLEEP_FOR_SHUTTER = 1
-
-
-def one_trigger_nd_step(detectors, step, pos_cache):
-    """
-    Inner loop of an N-dimensional step scan
-
-    This is the default function for ``per_step`` param in ND plans.
-
-    Parameters
-    ----------
-    detectors : iterable
-        devices to read
-    step : dict
-        mapping motors to positions in this step
-    pos_cache : dict
-        mapping motors to their last-set positions
-    """
-
-    def move():
-        yield from checkpoint()
-        grp = short_uid('set')
-        for motor, pos in step.items():
-            if pos == pos_cache[motor]:
-                # This step does not move this motor.
-                continue
-            yield from abs_set(motor, pos, group=grp)
-            pos_cache[motor] = pos
-        yield from wait(group=grp)
-
-    motors = step.keys()
-    yield from move()
-    detectors = separate_devices(detectors)  # remove redundant entries
-    rewindable = all_safe_rewind(detectors)  # if devices can be re-triggered
-    detector_with_shutter, *other_detectors = detectors
-    grp = short_uid('trigger')
-
-    def inner_trigger_and_read():
-        """
-        This was copied with local changes from the body of
-        bluesky.plan_stubs.trigger_and_read.
-        """
-        no_wait = True
-        for obj in other_detectors:
-            if hasattr(obj, 'trigger'):
-                no_wait = False
-                yield from trigger(obj, group=grp)
-        # Skip 'wait' if none of the devices implemented a trigger method.
-        if not no_wait:
-            yield from wait(group=grp)
-        yield from create('primary')
-        ret = {}  # collect and return readings to give plan access to them
-        for obj in detectors:
-            reading = (yield from read(obj))
-            if reading is not None:
-                ret.update(reading)
-        yield from save()
-        return ret
-
-    yield from trigger(detector_with_shutter, group=grp)
-    yield from sleep(SLEEP_FOR_SHUTTER)
-    return (yield from rewindable_wrapper(inner_trigger_and_read(),
-                                          rewindable))
-
-
-# @dark_frames_enable
-def en_scan_core(I400sigs, dets, energy, energies, shuttervalues, times,enscan_type=None):
-    sw_det.saxs.cam.acquire_time.kind = 'hinted'
-    sw_det.waxs.cam.acquire_time.kind = 'hinted'
-
-    sigcycler = cycler(energy, energies)
-    for i400channel in I400sigs:
-        i400channel.parent.exposure_time.kind = 'hinted'
-        try:
-            sigcycler += cycler(i400channel.parent.exposure_time,times.copy())
-        except ValueError:
-            print('same i400 detected')
-            i400channel.kind = 'hinted'
-    sigcycler += cycler(sw_det.saxs.cam.acquire_time, times.copy())
-    sigcycler += cycler(sw_det.waxs.cam.acquire_time, times.copy()) #add extra exposure time for WAXS
-    #sigcycler += cycler(sw_det.saxs.cam.sync, shuttervalues.astype(int))
-
-    Beamstop_SAXS.kind = "hinted"
-    #Beamstop_WAXS.kind = "hinted"
-    IzeroMesh.kind = "hinted"
-    #SlitTop_I.kind = "hinted"
-    #SlitBottom_I.kind = "hinted"
-    #SlitOut_I.kind = "hinted"
-    # light_was_on = False
-    # if samplelight.value is 1:
-    #     samplelight.off()
-    #     sw_det.shutter_off()
-    #     light_was_on = True
-    #     boxed_text('Warning', 'light was on, taking a quick snapshot to clear CCDs', 'yellow', shrink=True)
-    #     yield from quicksnap()
-    print(sigcycler)
-
-    yield from bp.scan_nd(dets + I400sigs+[en.energy],sigcycler,md={'plan_name':enscan_type},per_step=one_trigger_nd_step)
-
-    # if light_was_on:
-    #     samplelight.on()    # leaving light off now - this just slows everything down if there are multiple scans
 
 
 
@@ -547,8 +357,7 @@ def full_ca_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
                                      SlitOut_I],
                     dets=[sw_det],energy=en):
     '''
-    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
-    this results in 128 exposures
+    Calcium Scan runs an RSoXS sample set through the Ca edge, with particular emphasis in he pre edge region
 
 
     :param multiple: adjustment for exposure times
@@ -560,9 +369,9 @@ def full_ca_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     normal scan takes ~ 12 minutes to complete
     '''
     beamline_status()
-    if len(read_input("Starting a short Calcium energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
+    if len(read_input("Starting a Calcium energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
-
+    enscan_type = 'full_ca_scan_nd'
     # create a list of energies
     energies = np.arange(320,340,5)
     energies = np.append(energies,np.arange(340,345,1))
@@ -571,15 +380,11 @@ def full_ca_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
 
     # Define exposures times for different energy ranges
     times[energies<400] = 20
-
-
     times *= multiple
 
-    set_exposure(times[0])
-    shuttervalue = energies.copy()
-    shuttervalue[:] = 1  # the rest of the values are shutter enabled (2)
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, shuttervalue, times)
+    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type)
+
 
 def full_carbon_calcium_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
                                          Beamstop_WAXS,
@@ -587,11 +392,10 @@ def full_carbon_calcium_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
                                          SlitTop_I,
                                          SlitBottom_I,
                                          SlitOut_I],
-                        dets=[sw_det], energy=en, once_mot= None, once_rstep = 0):
+                        dets=[sw_det], energy=en):
     '''
-    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
-    this results in 128 exposures
-
+    Full Carbon and Calcium Scan runs an RSoXS sample set through the carbon and calcium edges,
+    with particular emphasis in he pre edge region
 
     :param multiple: adjustment for exposure times
     :param mesh: which Izero channel to use
@@ -602,8 +406,9 @@ def full_carbon_calcium_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     normal scan takes ~ 18 minutes to complete
     '''
     sample()
-
-    if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
+    enscan_type = 'full_carbon_calcium_scan_nd'
+    if len(read_input("Starting a full carbon and calcium energy scan hit "
+                      "enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
 
     # create a list of energies
@@ -624,21 +429,8 @@ def full_carbon_calcium_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     times[energies >= 320] = 10
     times *= multiple
 
-    shutter_values = energies.copy()
-    shutter_values[:] = 1  # all the values are shutter enabled (2)
-    # this is because darks are now taken in the preprocessor automatically as needed
-
-    if isinstance(once_mot,EpicsMotor):
-        yield from bps.mvr(once_mot,once_rstep)
-
-
-    # print(times.size)
-    # print(energies.size)
-    # print(shutter_values.size)
-    # print(sigs)
-    # print(dets)
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, shutter_values, times)
+    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type)
 
 
 def carbon_NEXAFS(exp_time=.2, gain_bs=6,s_or_w='w'):
