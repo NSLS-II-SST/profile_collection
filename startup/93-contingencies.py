@@ -80,12 +80,8 @@ RE.install_suspender(suspendx)
 
 class OSEmailHandler(logging.Handler):
     def emit(self, record):
-        global no_notifications_until
         user_email = RE.md['user_email']
-
-        if((no_notifications_until is None) or (datetime.datetime.now() > no_notifications_until)):
-            send_notice(bls_email+','+user_email, 'SST has thrown an exception', record.getMessage()) # record.stack_info
-       # Send email or whatever.
+        send_notice(bls_email+','+user_email, 'SST has thrown an exception', record.getMessage()) # record.stack_info
 
 logger = logging.getLogger('bluesky.RE')
 handler = OSEmailHandler()
