@@ -373,12 +373,12 @@ def snapshot(secs=0, count=1, name='snap', energy = None):
         set_exposure(secs)
     RE.md['sample_name'] = name
     RE.md['sample_id'] = '000'
-    Beamstop_SAXS.kind = "hinted"
-    Beamstop_WAXS.kind = "hinted"
-    IzeroMesh.kind = "hinted"
-    SlitTop_I.kind = "hinted"
-    SlitBottom_I.kind = "hinted"
-    SlitOut_I.kind = "hinted"
+    Beamstop_SAXS.kind = "normal"
+    Beamstop_WAXS.kind = "normal"
+    IzeroMesh.kind = "normal"
+    SlitTop_I.kind = "normal"
+    SlitBottom_I.kind = "normal"
+    SlitOut_I.kind = "normal"
     yield from bp.count([sw_det,
                          en.energy],
                         num=count)
