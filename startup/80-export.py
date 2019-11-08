@@ -84,6 +84,7 @@ def factory(name, start_doc):
                                                      '{start[user_name]}/'
                                                      '{start[project_name]}/'
                                                      f'{formatted_date}/'
+                                                     '{start[scan_id]}/'
                                                      '{start[scan_id]}-'
                                                      '{start[sample_name]}-'
                                                      #'{event[data][Beamline Energy_energy]:.2f}eV-'
@@ -116,6 +117,7 @@ def factory2(name, start_doc):
                                                 '{user_name}/'
                                                 '{project_name}/'
                                                 f'{formatted_date}/'
+                                                '{scan_id}/'
                                                 '{scan_id}-'
                                                 '{sample_name}-'
                                                 ),

@@ -376,10 +376,10 @@ def snapshot(secs=0, count=1, name='snap', energy = None):
     Beamstop_SAXS.kind = "normal"
     Beamstop_WAXS.kind = "normal"
     IzeroMesh.kind = "normal"
-    IzeroDiode.kind = "normal"
-    SlitTop_I.kind = "normal"
-    SlitBottom_I.kind = "normal"
-    SlitOut_I.kind = "normal"
+    IzeroDiode.kind = "config"
+    SlitTop_I.kind = "config"
+    SlitBottom_I.kind = "config"
+    SlitOut_I.kind = "config"
     yield from bp.count([sw_det,
                          en.energy],
                         num=count)
