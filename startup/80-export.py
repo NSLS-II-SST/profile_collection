@@ -76,7 +76,7 @@ def factory(name, start_doc):
                 returnlist.append(filler)
                 returnlist.append(serializercsv)
             return returnlist
-        elif descriptor_doc['name'] == 'baseline':
+        elif 'baseline' or 'monitor' in descriptor_doc['name']:
             dt = datetime.datetime.now()
             formatted_date = dt.strftime('%Y-%m-%d')
             # energy = hdr.table(stream_name='baseline')['Beamline Energy_energy'][1]
