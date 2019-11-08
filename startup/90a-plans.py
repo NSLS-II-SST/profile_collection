@@ -16,16 +16,12 @@ run_report(__file__)
 def set_exposure(exposure):
     if exposure > 0.001 and exposure < 1000 :
         sw_det.set_exposure(exposure)
-        RSoXS_Diodes.set_exposure(exposure)
-        RSoXS_DrainCurrent.set_exposure(exposure)
     else:
         print('Invalid time, exposure time not set')
 
 
 def exposure():
-    return (sw_det.exposure()+'\n'+
-            RSoXS_Diodes.exposure()+'\n'+
-            RSoXS_DrainCurrent.exposure()+'\n')
+    return (sw_det.exposure())
 
 
 @register_line_magic
@@ -326,7 +322,7 @@ def quicksnap():
     samidsave = RE.md['sample_id']
     RE.md['sample_name'] = 'CCDClear'
     RE.md['sample_id'] = '000'
-    yield from bp.count([sw_det, en, Beamstop_SAXS, Beamstop_SAXS, IzeroMesh], num=2)
+    yield from bp.count([sw_det, en.energy], num=2)
     RE.md['sample_name'] = samsave
     RE.md['sample_id'] = samidsave
     sw_det.set_binning(binsave)
@@ -384,9 +380,7 @@ def snapshot(secs=0, count=1, name='snap', energy = None):
     SlitBottom_I.kind = "hinted"
     SlitOut_I.kind = "hinted"
     yield from bp.count([sw_det,
-                         en.energy,
-                         Beamstop_WAXS,
-                         IzeroMesh],
+                         en.energy],
                         num=count)
     # if light_was_on:
     #     samplelight.on()

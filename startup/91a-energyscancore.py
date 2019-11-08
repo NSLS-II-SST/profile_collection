@@ -72,41 +72,18 @@ def one_trigger_nd_step(detectors, step, pos_cache):
 
 
 # @dark_frames_enable
-def en_scan_core(I400sigs, dets, energy, energies,times,enscan_type=None):
+def en_scan_core(signals,dets, energy, energies,times,enscan_type=None):
     sw_det.saxs.cam.acquire_time.kind = 'hinted'
     sw_det.waxs.cam.acquire_time.kind = 'hinted'
 
     sigcycler = cycler(energy, energies)
-    for i400channel in I400sigs:
-        i400channel.parent.exposure_time.kind = 'hinted'
-        try:
-            sigcycler += cycler(i400channel.parent.exposure_time,times.copy())
-        except ValueError:
-            print('same i400 detected')
-            i400channel.kind = 'hinted'
     sigcycler += cycler(sw_det.saxs.cam.acquire_time, times.copy())
     sigcycler += cycler(sw_det.waxs.cam.acquire_time, times.copy()) #add extra exposure time for WAXS
-    #sigcycler += cycler(sw_det.saxs.cam.sync, shuttervalues.astype(int))
 
-    Beamstop_SAXS.kind = "hinted"
-    #Beamstop_WAXS.kind = "hinted"
-    IzeroMesh.kind = "hinted"
-    #SlitTop_I.kind = "hinted"
-    #SlitBottom_I.kind = "hinted"
-    #SlitOut_I.kind = "hinted"
-    # light_was_on = False
-    # if samplelight.value is 1:
-    #     samplelight.off()
-    #     sw_det.shutter_off()
-    #     light_was_on = True
-    #     boxed_text('Warning', 'light was on, taking a quick snapshot to clear CCDs', 'yellow', shrink=True)
-    #     yield from quicksnap()
-    print(sigcycler)
+    for signal in signals:
+        signal.kind = 'hinted'
 
-    yield from bp.scan_nd(dets + I400sigs+[en.energy],
+    yield from bp.scan_nd(dets + signals + [en.energy],
                           sigcycler,
-                          md={'plan_name':enscan_type},
-                          per_step=one_trigger_nd_step)
+                          md={'plan_name':enscan_type})
 
-    # if light_was_on:
-    #     samplelight.on()    # leaving light off now - this just slows everything down if there are multiple scans

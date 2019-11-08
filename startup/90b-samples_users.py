@@ -591,12 +591,10 @@ def sample_by_name(bar,name):
 
 def NEXAFS_WAXS_bar(barin,start_en,stop_en,num_en):
     yield from bps.mv(Shutter_Y,30)
-    IzeroMesh.set_exposure(1)
-    Beamstop_WAXS.set_exposure(1)
     for sample in barin:
         yield from load_sample(sample)
         RE.md['project_name'] = 'NEXAFS'
-        yield from bp.scan([IzeroMesh,Beamstop_WAXS],en,start_en,stop_en,num_en)
+        yield from bp.scan([en.energy],en,start_en,stop_en,num_en)
 
 
 def offset_bar(bar, xoff, yoff, zoff, thoff):
