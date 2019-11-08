@@ -81,7 +81,7 @@ def en_scan_core(signals,dets, energy, energies,times,enscan_type=None):
     sigcycler += cycler(sw_det.waxs.cam.acquire_time, times.copy()) #add extra exposure time for WAXS
 
     for signal in signals:
-        signal.kind = 'hinted'
+        signal.kind = 'normal'
 
     yield from bp.scan_nd(dets + signals + [en.energy],
                           sigcycler,
