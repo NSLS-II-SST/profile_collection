@@ -76,7 +76,7 @@ def image_bar(bar,path = None):
         imageuid = yield from bp.count([SampleViewer_cam],1)
         print(imageuid)
         images.append(next(db[imageuid].data('Sample Imager Detector Area Camera_image')))
-    image = stich_sample(images, 25,5)
+    image = stitch_sample(images, 25,5)
     update_bar(bar, loc_Q)
     if isinstance(path,str):
         im = Image.fromarray(image)
@@ -86,7 +86,7 @@ def image_bar(bar,path = None):
 def locate_samples_from_image(bar,impath):
     global loc_Q
     loc_Q = queue.Queue(1)
-    image = stich_sample(False,False,False,from_image=impath)
+    image = stitch_sample(False,False,False,from_image=impath)
     update_bar(bar, loc_Q)
 
 
@@ -138,16 +138,16 @@ def update_bar(bar,loc_Q):
                 sample['location'] = item
                 annotateImage(sample_image_axes,item,sample['sample_name'])
                 # advance sample and loop
-                sample += 1
+                samplenum += 1
             elif item is 'escape':
                 print('aborting')
                 break
             elif item is'enter' or item is 'n':
                 print(f'leaving this {sample["sample_name"]} unchanged')
-                sample += 1
+                samplenum += 1
             elif item is 'p':
                 print('Previous sample')
-                sample -= 1
+                samplenum -= 1
             if(sample > len(bar)):
                 print("done")
                 break
@@ -170,7 +170,7 @@ def annotateImage(axes,item,name):
     plt.draw()
 
 
-def stich_sample(images, step_size, y_off, from_image=None,flip_file=False):
+def stitch_sample(images, step_size, y_off, from_image=None,flip_file=False):
     global sample_image_axes
 
     if isinstance(from_image,str):
