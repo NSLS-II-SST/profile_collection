@@ -148,7 +148,7 @@ def update_bar(bar,loc_Q):
             elif item is 'p':
                 print('Previous sample')
                 samplenum -= 1
-            if(samplenum > len(bar)):
+            if(samplenum >= len(bar)):
                 print("done")
                 break
 
