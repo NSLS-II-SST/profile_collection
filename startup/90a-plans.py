@@ -79,19 +79,22 @@ del darkoff
 
 
 def dark_plan():
-    shutterstate = sw_det.saxs.cam.sync.setpoint
+    shutterstates = sw_det.saxs.cam.sync.setpoint
+    shutterstatew = sw_det.waxs.cam.sync.setpoint
     yield from bps.mv(sw_det.saxs.cam.sync,0) # disable shutter
+    yield from bps.mv(sw_det.waxs.cam.sync,0) # disable shutter
     yield from bps.trigger(sw_det, group='darkframe-trigger')
     yield from bps.wait('darkframe-trigger')
     snapshot = bluesky_darkframes.SnapshotDevice(sw_det)
-    yield from bps.mv(sw_det.saxs.cam.sync,shutterstate)  # put shutter back in previous state
+    yield from bps.mv(sw_det.saxs.cam.sync,shutterstates)  # put shutter back in previous state
+    yield from bps.mv(sw_det.waxs.cam.sync,shutterstatew)  # put shutter back in previous state
     return snapshot
 
 
 dark_frame_preprocessor = bluesky_darkframes.DarkFramePreprocessor(
     dark_plan=dark_plan,
     detector=sw_det,
-    max_age=300,
+    max_age=100,
     locked_signals=[sw_det.saxs.cam.acquire_time,
                     Det_S.user_setpoint,
                     Det_W.user_setpoint,
@@ -102,7 +105,7 @@ dark_frame_preprocessor = bluesky_darkframes.DarkFramePreprocessor(
                     sam_X.user_setpoint,
                     sam_Y.user_setpoint,
                     ],
-    limit=50)
+    limit=10)
 
 
 # possibly add a exposure time preprocessor to check beam exposure on CCD over exposure

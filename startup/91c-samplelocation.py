@@ -234,29 +234,30 @@ def set_loc(bar_name,locnum):
     barloc = locnum
 
 def go_to_af2():
-    yield from bps.mv(sam_X,7.3,sam_Y,9.75)
+    yield from bps.mv(sam_X,7.6,sam_Y,-9.8)
 
 def find_af2x():
-    yield from bps.mvr(sam_Y,-4)
+    yield from bps.mvr(sam_Y,-2)
     yield from bp.rel_scan([IzeroMesh,Beamstop_SAXS,Beamstop_WAXS],sam_X,-3,3,61)
-    yield from bps.mvr(sam_Y,4)
+    yield from bps.mvr(sam_Y,2)
 
 def find_af2y():
-    yield from bps.mvr(sam_X,-4)
+    yield from bps.mvr(sam_X,-2)
     yield from bp.rel_scan([IzeroMesh,Beamstop_SAXS,Beamstop_WAXS],sam_Y,-3,3,61)
-    yield from bps.mvr(sam_X,4)
+    yield from bps.mvr(sam_X,2)
+
 def go_to_af1():
-    yield from bps.mv(sam_X,-8.75,sam_Y,-110.2)
+    yield from bps.mv(sam_X,-8,sam_Y,-185)
 
 def find_af1x():
-    yield from bps.mvr(sam_Y,-4)
+    yield from bps.mvr(sam_Y,-2)
     yield from bp.rel_scan([IzeroMesh,Beamstop_SAXS,Beamstop_WAXS],sam_X,-3,3,61)
-    yield from bps.mvr(sam_Y,4)
+    yield from bps.mvr(sam_Y,2)
 
 def find_af1y():
-    yield from bps.mvr(sam_X,4)
+    yield from bps.mvr(sam_X,2)
     yield from bp.rel_scan([IzeroMesh,Beamstop_SAXS,Beamstop_WAXS],sam_Y,-3,3,61)
-    yield from bps.mvr(sam_X,-4)
+    yield from bps.mvr(sam_X,-2)
 
 
 def offset_bar(bar, xoff, yoff, zoff, thoff):
