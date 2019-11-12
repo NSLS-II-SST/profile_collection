@@ -203,7 +203,7 @@ def SAXS():
         'order': 0},
         {
         'motor':    slits3.hcenter,
-        'position': 0.45,
+        'position': 0.49,
         'order': 0},
         {
         'motor':    Shutter_Y,
