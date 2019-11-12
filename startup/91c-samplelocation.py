@@ -7,26 +7,19 @@ from PIL import Image
 run_report(__file__)
 # Spiral searches
 
-def spiralsearch(radius=2, stepsize=.4):
+def spiralsearch(diameter=.6, stepsize=.2):
     x_center = sam_X.user_setpoint.value
     y_center = sam_Y.user_setpoint.value
-    num = round(radius / stepsize)
-
+    num = 2* round(diameter / stepsize)
     yield from spiral_square([sw_det, en.energy, Beamstop_SAXS, IzeroMesh], sam_X, sam_Y, x_center=x_center, y_center=y_center,
-                     x_range=radius, y_range=radius, x_num=num, y_num=num)
+                     x_range=diameter, y_range=diameter, x_num=num, y_num=num)
 
 
-def spiralsearch_all(barin=[],radius=2, stepsize=.4):
+def spiralsearch_all(barin=[],diameter=.5, stepsize=.2):
     for sample in barin:
         yield from load_sample(sample)
         RE.md['project_name'] = 'spiral_searches'
-        try:
-            yield from spiralsearch(radius, stepsize)
-        except bluesky.utils.RequestAbort: #need to catch only a RE.stop() exception, NOT a RE.abort() to give the user a chance to bail on a scan and continue searching
-            print("Requested an abort, breaking")
-            break
-        except bluesky.utils.RunEngineInterrupted:
-            print("Stopped scan.  Waiting for your input.")
+        yield from spiralsearch(diameter, stepsize)
 
 
 def map_bar_from_spirals(bar,spiralnums,barpos):
@@ -234,7 +227,7 @@ def set_loc(bar_name,locnum):
     barloc = locnum
 
 def go_to_af2():
-    yield from bps.mv(sam_X,7.6,sam_Y,-9.8)
+    yield from bps.mv(sam_X,7.6,sam_Y,9.8)
 
 def find_af2x():
     yield from bps.mvr(sam_Y,-2)
@@ -247,7 +240,7 @@ def find_af2y():
     yield from bps.mvr(sam_X,2)
 
 def go_to_af1():
-    yield from bps.mv(sam_X,-8,sam_Y,-185)
+    yield from bps.mv(sam_X,-8,sam_Y,-155)
 
 def find_af1x():
     yield from bps.mvr(sam_Y,-2)
