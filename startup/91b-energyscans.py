@@ -46,12 +46,7 @@ def full_oxygen_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     # use these energies and exposure times to scan energy and record detectors and signals
     yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type)
 
-def short_oxygen_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
-                                         Beamstop_WAXS,
-                                         IzeroMesh,
-                                         SlitTop_I,
-                                         SlitBottom_I,
-                                         SlitOut_I],
+def short_oxygen_scan_nd(multiple=1,sigs=[],
                         dets=[sw_det],energy=en):
     '''
     Short Oxygen Scan runs an RSoXS sample set through the O edge, with particular emphasis in he pre edge region
@@ -375,7 +370,7 @@ def sufficient_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     sample()
     if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
-
+    mir3.Pitch.put(7.93)
     # create a list of energies
     energies = np.arange(270,282,1)
     energies = np.append(energies,np.arange(282,286,.1))

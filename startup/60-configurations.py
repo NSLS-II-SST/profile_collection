@@ -223,7 +223,7 @@ def SAXS():
         'order': 0},
         {
         'motor':    BeamStopS,
-        'position': 68.9,
+        'position': 69,
         'order': 0},
         {
         'motor':    BeamStopW,
