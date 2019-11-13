@@ -316,7 +316,7 @@ def focused_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     :param energy: what energy motor to scan
     :return: perform scan
 
-    normal scan takes ~ 10 minutes to complete
+    normal scan takes ~ 11 minutes to complete
     '''
     sample()
     enscan_type = 'focused_carbon_scan_nd'
@@ -486,6 +486,7 @@ def full_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     times[energies >= 286] = 2
     times *= multiple
 
+    yield from bps.mv(en,270)
     # use these energies and exposure times to scan energy and record detectors and signals
     yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type)
 
@@ -625,12 +626,15 @@ def fluorine_SAXS(exp_time=.1):
     #Oct 2019, this pitch value seems to be optimal for carbon
     mir3.Pitch.put(7.89)
     set_exposure(exp_time)
+    yield from bps.mv(en,680)
     yield from bp.scan([sw_det, en.energy, Beamstop_SAXS, IzeroMesh],en,680,700,41,md={'plan_name':enscan_type})
 
 def fluorine_WAXS(exp_time=2):
 
     enscan_type = 'fluorine_WAXS'
     #Oct 2019, this pitch value seems to be optimal for carbon
+
+    yield from bps.mv(en,680)
     mir3.Pitch.put(7.89)
     set_exposure(exp_time)
     yield from bp.scan([sw_det, en.energy, Beamstop_WAXS, IzeroMesh],en,680,700,41,md={'plan_name':enscan_type})

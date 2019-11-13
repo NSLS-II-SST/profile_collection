@@ -1,6 +1,7 @@
 run_report(__file__)
 
 import bluesky.plans as bp
+import bluesky.plan_stubs as bps
 from cycler import cycler
 from bluesky.plan_stubs import checkpoint, abs_set, sleep, trigger, read, wait, create, save
 from bluesky.preprocessors import rewindable_wrapper
@@ -80,6 +81,7 @@ def en_scan_core(signals,dets, energy, energies,times,enscan_type=None):
     sigcycler += cycler(sw_det.saxs.cam.acquire_time, times.copy())
     sigcycler += cycler(sw_det.waxs.cam.acquire_time, times.copy()) #add extra exposure time for WAXS
 
+    yield from bps.mv(en,energies[0])
     for signal in signals:
         signal.kind = 'normal'
 
