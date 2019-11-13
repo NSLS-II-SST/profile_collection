@@ -362,8 +362,8 @@ def snapshot(secs=0, count=1, name='snap', energy = None):
                                                                                          secss,
                                                                                          name,
                                                                                          energy),'red')
-    samsave = RE.md['sample_name']
-    samidsave = RE.md['sample_id']
+    #samsave = RE.md['sample_name']
+    #samidsave = RE.md['sample_id']
     light_was_on = False
     # if samplelight.value is 1:
     #     samplelight.off()
@@ -374,8 +374,8 @@ def snapshot(secs=0, count=1, name='snap', energy = None):
     #     sw_det.shutter_on()
     if secs:
         set_exposure(secs)
-    RE.md['sample_name'] = name
-    RE.md['sample_id'] = '000'
+    #RE.md['sample_name'] = name
+    #RE.md['sample_id'] = '000'
     Beamstop_SAXS.kind = "normal"
     Beamstop_WAXS.kind = "normal"
     IzeroMesh.kind = "normal"
@@ -389,8 +389,8 @@ def snapshot(secs=0, count=1, name='snap', energy = None):
     # if light_was_on:
     #     samplelight.on()
 
-    RE.md['sample_name'] = samsave
-    RE.md['sample_id'] = samidsave
+    #RE.md['sample_name'] = samsave
+    #RE.md['sample_id'] = samidsave
 
 
 @register_line_magic
