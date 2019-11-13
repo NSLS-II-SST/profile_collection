@@ -346,7 +346,66 @@ def focused_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     yield from en_scan_core(sigs, dets,energy,energies,times,enscan_type=enscan_type)
 
 
+def g_carbon_scan_nd(multiple=1,sigs=[],
+                        dets=[sw_det], energy=en):
+    '''
+    G Carbon Scan runs an RSoXS sample set through the carbon edge, with a targeted 5 exposures
 
+
+    :param multiple: adjustment for exposure times
+    :param mesh: which Izero channel to use
+    :param det: which detector to use
+    :param energy: what energy motor to scan
+    :return: perform scan
+
+    normal scan takes ~ 18 minutes to complete
+    '''
+    enscan_type = 'g_carbon_scan_nd'
+    sample()
+    if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
+        return
+    mir3.Pitch.put(7.93)
+    # create a list of energies
+    energies = [270,283.5,284.75,285.2,286.5]
+    times = energies.copy()
+
+    # Define exposures times for different energy ranges
+    times[energies<2820] = 5
+    times *= multiple
+
+    # use these energies and exposure times to scan energy and record detectors and signals
+    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type)
+
+
+def t_carbon_scan_nd(multiple=1,sigs=[],
+                        dets=[sw_det], energy=en):
+    '''
+    T Carbon Scan runs an RSoXS sample set through the carbon edge, with a targeted 6 exposures
+
+
+    :param multiple: adjustment for exposure times
+    :param mesh: which Izero channel to use
+    :param det: which detector to use
+    :param energy: what energy motor to scan
+    :return: perform scan
+
+    normal scan takes ~ 2 minutes to complete
+    '''
+    enscan_type = 't_carbon_scan_nd'
+    sample()
+    if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
+        return
+    mir3.Pitch.put(7.93)
+    # create a list of energies
+    energies = [270,283,284.3,284.9,285.5,286,286.5,287]
+    times = energies.copy()
+
+    # Define exposures times for different energy ranges
+    times[energies<2820] = 5
+    times *= multiple
+
+    # use these energies and exposure times to scan energy and record detectors and signals
+    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type)
 
 
 def sufficient_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
@@ -388,8 +447,6 @@ def sufficient_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
 
     # use these energies and exposure times to scan energy and record detectors and signals
     yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type)
-
-
 
 
 def full_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
