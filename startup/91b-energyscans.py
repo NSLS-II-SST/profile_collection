@@ -366,7 +366,7 @@ def g_carbon_scan_nd(multiple=1,sigs=[],
         return
     mir3.Pitch.put(7.93)
     # create a list of energies
-    energies = [270,283.5,284.75,285.2,286.5]
+    energies = np.array([270,283.5,284.75,285.2,286.5])
     times = energies.copy()
 
     # Define exposures times for different energy ranges
@@ -397,7 +397,7 @@ def t_carbon_scan_nd(multiple=1,sigs=[],
         return
     mir3.Pitch.put(7.93)
     # create a list of energies
-    energies = [270,283,284.3,284.9,285.5,286,286.5,287]
+    energies = np.array([270,283,284.3,284.9,285.5,286,286.5,287])
     times = energies.copy()
 
     # Define exposures times for different energy ranges
