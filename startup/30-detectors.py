@@ -81,7 +81,7 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
         return [self].append(super().unstage(*args, **kwargs))
 
     def set_exptime(self,secs):
-        self.cam.acquire_time.set(secs,wait=True)
+        yield from bps.abs_set(self.cam.acquire_time,secs,wait=True)
 
     def exptime(self):
         return ("{} has an exposure time of {} seconds".format(

@@ -623,7 +623,7 @@ def fluorine_NEXAFS(exp_time=.2, gain_bs=6,s_or_w='w'):
 def fluorine_SAXS(exp_time=1):
     enscan_type = 'fluorine_SAXS'
     #Oct 2019, this pitch value seems to be optimal for carbon
-    mir3.Pitch.put(7.89)
+    yield from bps.abs_set(mir3.Pitch,7.89)
     set_exposure(exp_time)
     yield from bps.abs_set(en, 680, timeout=180, wait=True)
     yield from bp.scan([sw_det, en.energy, Beamstop_SAXS, IzeroMesh],en,680,700,41,md={'plan_name':enscan_type})
@@ -632,7 +632,7 @@ def fluorine_SAXS(exp_time=1):
 def Si_SAXS(exp_time=1):
     enscan_type = 'Si_SAXS'
     # Oct 2019, this pitch value seems to be optimal for carbon
-    mir3.Pitch.put(7.87)
+    yield from bps.abs_set(mir3.Pitch,7.87)
     set_exposure(exp_time)
     yield from bps.abs_set(en, 1830, timeout=180, wait=True)
     yield from bp.scan([sw_det, en.energy], en, 1830, 1870, 41, md={'plan_name': enscan_type})
@@ -644,7 +644,7 @@ def fluorine_WAXS(exp_time=2):
     #Oct 2019, this pitch value seems to be optimal for carbon
 
     yield from bps.mv(en,680)
-    mir3.Pitch.put(7.89)
+    yield from bps.abs_set(mir3.Pitch,7.89)
     yield from bps.abs_set(en, 680, timeout=180, wait=True)
     yield from bp.scan([sw_det, en.energy, Beamstop_WAXS, IzeroMesh],en,680,700,41,md={'plan_name':enscan_type})
 
