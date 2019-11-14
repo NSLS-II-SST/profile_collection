@@ -470,7 +470,7 @@ def full_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     sample()
     if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
-    mir3.Pitch.put(7.93)
+    yield from bps.abs_set(mir3.Pitch,7.93,wait=True)
     # create a list of energies
     energies = np.arange(270,282,.5)
     energies = np.append(energies,np.arange(282,286,.1))
