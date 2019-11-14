@@ -470,7 +470,7 @@ def full_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     sample()
     if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
-
+    mir3.Pitch.put(7.93)
     # create a list of energies
     energies = np.arange(270,282,.5)
     energies = np.append(energies,np.arange(282,286,.1))
@@ -635,7 +635,7 @@ def Si_SAXS(exp_time=1):
     mir3.Pitch.put(7.87)
     set_exposure(exp_time)
     yield from bps.abs_set(en, 1830, timeout=180, wait=True)
-    yield from bp.scan([sw_det, en.energy, Beamstop_SAXS, IzeroMesh], en, 1830, 1870, 41, md={'plan_name': enscan_type})
+    yield from bp.scan([sw_det, en.energy], en, 1830, 1870, 41, md={'plan_name': enscan_type})
 
 
 def fluorine_WAXS(exp_time=2):
