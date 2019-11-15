@@ -7,6 +7,7 @@ from copy import deepcopy
 import numpy as np
 from math import floor
 import datetime
+from ophyd import Device
 
 def user():
     title = "User metadata - stored in every scan:"
@@ -418,7 +419,7 @@ def avg_scan_time(plan_name,nscans=50,new_scan_duration=600):
         #we have never run a scan of this type before (?!?) - assume it takes some default value (10 min)
         return new_scan_duration
 
-def run_bar(bar,sortby=['p','c','a','s'],dryrun=0,rev=[False,False,False,False]):
+def run_bar(bar,sortby=['p','c','a','s'],dryrun=0,rev=[False,False,False,False],delete_as_complete=True):
     '''
     run all sample dictionaries stored in the list bar
     :param bar: simply a list of sample dictionaries
@@ -436,12 +437,20 @@ def run_bar(bar,sortby=['p','c','a','s'],dryrun=0,rev=[False,False,False,False])
     '''
     config_change_time = 360  # time to change between configurations, in seconds.
     listout = []
-    for s in bar:
+    for samp_num,s in enumerate(bar):
         sample = s
         sample_id = s['sample_id']
         sample_project = s['project_name']
-        for a in s['acquisitions']:
-            listout.append([sample_id, sample_project, a['configuration'],a['plan_name'],avg_scan_time(a['plan_name']),sample,a])
+        for acq_num,a in enumerate(s['acquisitions']):
+            listout.append([sample_id,
+                            sample_project,
+                            a['configuration'],
+                            a['plan_name'],
+                            avg_scan_time(a['plan_name']),
+                            sample,
+                            a,
+                            samp_num,
+                            acq_num])
     switcher = {'p':1,'s':0,'c':2,'a':3}
     try:
         sortby.reverse()
@@ -470,14 +479,19 @@ def run_bar(bar,sortby=['p','c','a','s'],dryrun=0,rev=[False,False,False,False])
         boxed_text('Dry Run',text,'lightblue',width=120,shrink=True)
     else:
         for i,step in enumerate(listout):
-            time_remaining = sum([row[4] for row in listout[i:]])
-            boxed_text('Scan Status',f'\n\nStarting scan #{i+1} out of {len(listout)}, '
+            time_remaining = sum([avg_scan_time(row[3]) for row in listout[i:]])
+            this_step_time = avg_scan_time(step[3])
+            boxed_text('Scan Status','\n\nStarting scan {} out of {}'.format(colored(f'#{i+1}','blue'),len(listout))+
+                                     '{} which should take {} minutes\n'.format(colored(step[3],'blue'),
+                                                                                floor(this_step_time/60)) +
                                      f'time remaining approx {floor(time_remaining/3600)} h '
                                      f'{floor((time_remaining % 3600) / 60)} m \n\n',
                        'red',width=120,shrink=True)
             yield from load_sample(step[5]) # move to sample / load sample metadata
             yield from move_to_location(get_location_from_config(step[2])) # move to configuration
             yield from do_acquisitions([step[6]]) # run scan
+            if delete_as_complete:
+                del bar[step[7]]['acquisitions'][step[8]]
 
 def list_samples(bar):
     samples = [s['sample_name'] for s in bar]
