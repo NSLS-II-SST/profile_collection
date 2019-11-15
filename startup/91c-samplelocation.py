@@ -243,9 +243,9 @@ def go_to_af1():
     yield from bps.mv(sam_X,-8,sam_Y,-155)
 
 def find_af1x():
-    yield from bps.mvr(sam_Y,-2)
-    yield from bp.rel_scan([IzeroMesh,Beamstop_SAXS,Beamstop_WAXS],sam_X,-3,3,61)
     yield from bps.mvr(sam_Y,2)
+    yield from bp.rel_scan([IzeroMesh,Beamstop_SAXS,Beamstop_WAXS],sam_X,-3,3,61)
+    yield from bps.mvr(sam_Y,-2)
 
 def find_af1y():
     yield from bps.mvr(sam_X,2)
@@ -289,7 +289,7 @@ def correct_bar(bar,af1x,af1y,af2x,af2y,training_wheels=True):
     x_image_offset = bar[0]['location'][0]['position'] - bar[-1]['location'][0]['position']
     y_image_offset = bar[0]['location'][1]['position'] - bar[-1]['location'][0]['position']
     if(training_wheels):
-        assert abs((af2y-af1y)-y_image_offset) < 5, "Hmm... " \
+        assert abs(abs(af2y-af1y)-abs(y_image_offset)) < 5, "Hmm... " \
                                                     "it seems like the length of the bar has changed by more than" \
                                                     " 5 mm between the imager and the chamber.  \n \n Are you sure" \
                                                     " your alignment fiducials are correctly located?  \n\n If you're" \
