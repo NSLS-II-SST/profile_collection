@@ -482,7 +482,7 @@ def run_bar(bar,sortby=['p','c','a','s'],dryrun=0,rev=[False,False,False,False],
             time_remaining = sum([avg_scan_time(row[3]) for row in listout[i:]])
             this_step_time = avg_scan_time(step[3])
             boxed_text('Scan Status','\n\nStarting scan {} out of {}'.format(colored(f'#{i+1}','blue'),len(listout))+
-                                     '{} which should take {} minutes\n'.format(colored(step[3],'blue'),
+                                     '\n{} which should take {} minutes\n'.format(colored(step[3],'blue'),
                                                                                 floor(this_step_time/60)) +
                                      f'time remaining approx {floor(time_remaining/3600)} h '
                                      f'{floor((time_remaining % 3600) / 60)} m \n\n',

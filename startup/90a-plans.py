@@ -94,7 +94,7 @@ def dark_plan():
 dark_frame_preprocessor = bluesky_darkframes.DarkFramePreprocessor(
     dark_plan=dark_plan,
     detector=sw_det,
-    max_age=100,
+    max_age=30,
     locked_signals=[sw_det.saxs.cam.acquire_time,
                     Det_S.user_setpoint,
                     Det_W.user_setpoint,

@@ -7,7 +7,9 @@ from PIL import Image
 run_report(__file__)
 # Spiral searches
 
-def spiralsearch(diameter=.6, stepsize=.2):
+def spiralsearch(diameter=.6, stepsize=.2, energy = None):
+    if energy > 150 and energy < 2200:
+        yield from bps.mv(en, energy)
     x_center = sam_X.user_setpoint.value
     y_center = sam_Y.user_setpoint.value
     num = round(diameter / stepsize)
