@@ -94,7 +94,7 @@ def dark_plan():
 dark_frame_preprocessor = bluesky_darkframes.DarkFramePreprocessor(
     dark_plan=dark_plan,
     detector=sw_det,
-    max_age=5,
+    max_age=30,
     locked_signals=[sw_det.saxs.cam.acquire_time,
                     Det_S.user_setpoint,
                     Det_W.user_setpoint,
@@ -105,7 +105,7 @@ dark_frame_preprocessor = bluesky_darkframes.DarkFramePreprocessor(
                     sam_X.user_setpoint,
                     sam_Y.user_setpoint,
                     ],
-    limit=10)
+    limit=1)
 
 
 # possibly add a exposure time preprocessor to check beam exposure on CCD over exposure
