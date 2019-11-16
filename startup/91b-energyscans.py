@@ -644,7 +644,7 @@ def carbon_NEXAFS(exp_time=.2, gain_bs=6, s_or_w='w'):
 def NEXAFS_carbon(exp_time=.2):
     mysim = det_with_count_time
     enscan_type = 'carbon_NEXAFS'
-    mir3.Pitch.put(7.93)
+    yield from bps.mv(mir3.Pitch,7.93)
     mysim.count_time.set(exp_time)
     energies = np.arange(270, 282, .25)
     energies = np.append(energies, np.arange(282, 292, .1))

@@ -147,6 +147,7 @@ def mirror1_NEXAFSpos():
     time.sleep(3)
     yield from bps.mv(mir1.Yaw, 0)
 
+
 def SAXSmode():
     yield from psh10.close()
     yield from slits_in_SAXS()
@@ -156,6 +157,8 @@ def SAXSmode():
                       Det_W, -94,
                       BeamStopW, 3,
                       BeamStopS, 68.7)
+
+
 def SAXS():
     return [{
         'motor':    slits1.vsize,
@@ -294,7 +297,7 @@ def SAXSNEXAFS():
         'order': 0},
         {
         'motor':    Det_S,
-        'position': 0,
+        'position': -94,
         'order': 0},
         {
         'motor':    BeamStopS,
@@ -393,7 +396,7 @@ def WAXS():
     ]
 
 
-def WAXS():
+def WAXSNEXAFS():
     return [{
         'motor':    slits1.vsize,
         'position': .025,
@@ -444,7 +447,7 @@ def WAXS():
         'order': 1},
         {
         'motor':    Shutter_Y,
-        'position': 22.2,
+        'position': 32.2,
         'order': 2},
         {
         'motor':    Izero_Y,
@@ -461,7 +464,7 @@ def WAXS():
         {
         'motor':    BeamStopW,
         'position': 66.1,
-        'order': 1},
+        'order': 0},
         {
         'motor':    BeamStopS,
         'position': 3,
