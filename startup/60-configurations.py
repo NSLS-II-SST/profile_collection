@@ -393,6 +393,83 @@ def WAXS():
     ]
 
 
+def WAXS():
+    return [{
+        'motor':    slits1.vsize,
+        'position': .025,
+        'order': 1},
+        {
+        'motor':    slits1.vcenter,
+        'position': -0.55,
+        'order': 1},
+        {
+        'motor':    slits1.hsize,
+        'position': 0.4,
+        'order': 1},
+        {
+        'motor':    slits1.hcenter,
+        'position': 0.5,
+        'order': 1},
+        {
+        'motor':    slits2.vsize,
+        'position': 0.6,
+        'order': 1},
+        {
+        'motor':    slits2.vcenter,
+        'position': -1.05,
+        'order': 1},
+        {
+        'motor':    slits2.hsize,
+        'position': 0.6,
+        'order': 1},
+        {
+        'motor':    slits2.hcenter,
+        'position': 0.31,
+        'order': 1},
+        {
+        'motor':    slits3.vsize,
+        'position': 0.9,
+        'order': 1},
+        {
+        'motor':    slits3.vcenter,
+        'position': -0.625,
+        'order': 1},
+        {
+        'motor':    slits3.hsize,
+        'position': 1.3,
+        'order': 1},
+        {
+        'motor':    slits3.hcenter,
+        'position': 0.25,
+        'order': 1},
+        {
+        'motor':    Shutter_Y,
+        'position': 22.2,
+        'order': 2},
+        {
+        'motor':    Izero_Y,
+        'position': -29,
+        'order': 1},
+        {
+        'motor':    Det_W,
+        'position': -94,
+        'order': 1},
+        {
+        'motor':    Det_S,
+        'position': -94,
+        'order': 1},
+        {
+        'motor':    BeamStopW,
+        'position': 66.1,
+        'order': 1},
+        {
+        'motor':    BeamStopS,
+        'position': 3,
+        'order': 1},
+    ]
+
+
+
 
 def NEXAFS():
     return [{

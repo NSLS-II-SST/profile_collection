@@ -449,6 +449,43 @@ def sufficient_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type)
 
 
+
+
+def picky_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
+                                         Beamstop_WAXS,
+                                         IzeroMesh],
+                        dets=[sw_det], energy=en):
+    '''
+    Subh's picky Carbon Scan runs an RSoXS sample set through the useless energies before the carbon edge
+    this results in 15 exposures
+
+
+    :param multiple: adjustment for exposure times
+    :param mesh: which Izero channel to use
+    :param det: which detector to use
+    :param energy: what energy motor to scan
+    :return: perform scan
+
+    normal scan takes ~ 18 minutes to complete
+    '''
+    enscan_type = 'sufficient_carbon_scan_nd'
+    sample()
+    if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
+        return
+    yield from bps.abs_set(mir3.Pitch,7.93,wait=True)
+    # create a list of energies
+    energies = np.arange(270,285,1)
+    times = energies.copy()
+
+    # Define exposures times for different energy ranges
+    times[energies<282] = 20
+    times *= multiple
+
+    # use these energies and exposure times to scan energy and record detectors and signals
+    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type)
+
+
+
 def full_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
                                          Beamstop_WAXS,
                                          IzeroMesh],
@@ -590,6 +627,25 @@ def carbon_NEXAFS(exp_time=.2, gain_bs=6, s_or_w='w'):
      # switch = {'s' : Beamstop_SAXS , 'w' : Beamstop_WAXS}
     mysim.count_time.set(exp_time)
 
+    energies = np.arange(270, 282, .25)
+    energies = np.append(energies, np.arange(282, 292, .1))
+    energies = np.append(energies, np.arange(292, 305, .25))
+    energies = np.append(energies, np.arange(305, 360, .5))
+
+    encycler = cycler(en, energies)
+    RE.md['project_name'] = 'NEXAFS'
+    yield from bps.mv(en, energies[0])
+    yield from psh10.open()
+    yield from bp.scan_nd([mysim], encycler, md={'plan_name': enscan_type})
+    yield from psh10.close()
+
+
+
+def NEXAFS_carbon(exp_time=.2):
+    mysim = det_with_count_time
+    enscan_type = 'carbon_NEXAFS'
+    mir3.Pitch.put(7.93)
+    mysim.count_time.set(exp_time)
     energies = np.arange(270, 282, .25)
     energies = np.append(energies, np.arange(282, 292, .1))
     energies = np.append(energies, np.arange(292, 305, .25))
