@@ -478,7 +478,7 @@ def picky_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     times = energies.copy()
 
     # Define exposures times for different energy ranges
-    times[energies<282] = 1
+    times[energies<2820] = 1
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
