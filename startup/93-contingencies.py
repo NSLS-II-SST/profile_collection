@@ -38,7 +38,8 @@ def send_notice_plan(email,subject,msg):
     yield from bps.sleep(.1)
 
 def enc_clr_x():
-    send_notice('egann@bnl.gov','SST HAS FALLEN','the encoder loss has happened on the RSoXS beamline')
+    send_notice('egann@bnl.gov','SST had a small problem','the encoder loss has happened on the RSoXS beamline'
+                                                          '\n\nEverything is probably just fine')
     xpos = sam_X.user_readback.value
     yield from sam_X.clear_encoder_loss()
     yield from sam_X.home()
@@ -48,17 +49,26 @@ def enc_clr_x():
 
 def beamdown_notice():
     user_email = RE.md['user_email']
-    send_notice(bls_email+','+user_email,'SST has lost beam','Beam to RSoXS has been lost.\n\n Your scan has been paused automatically.\n\nNo intervention needed, but thought you might like to know.')
+    send_notice(bls_email+','+user_email,'SST-1 has lost beam','Beam to RSoXS has been lost.'
+                                                             '\n\nYour scan has been paused automatically.'
+                                                             '\nNo intervention needed, but thought you might like to know.')
 
 
 def beamup_notice():
     user_email = RE.md['user_email']
-    send_notice(bls_email+','+user_email,'SST beam restored','Beam to RSoXS has been restored.\n\nYour scan has resumed running.\n\nIf able, you may want to check the data and make sure intensity is still OK.')
+    send_notice(bls_email+','+user_email,'SST-1 beam restored','Beam to RSoXS has been restored.\n\nY'
+                                                               'our scan has resumed running.\n\n'
+                                                               'If able, you may want to check the data and make sure intensity is still OK.'
+                                                               '\n\nOne exposure may have been affected')
 
 
 
-suspend_shutter = SuspendBoolHigh(psh1.state,sleep = 10,
-                                  tripped_message="Beam Shutter Closed, waiting for it to open",
+suspend_shutter1 = SuspendBoolHigh(psh1.state,sleep = 10,
+                                  tripped_message="Front End Shutter Closed, waiting for it to open",
+                                  pre_plan=beamdown_notice, post_plan=beamup_notice)
+
+suspend_shutter4 = SuspendBoolHigh(psh4.state,sleep = 10,
+                                  tripped_message="Shutter 4 Closed, waiting for it to open",
                                   pre_plan=beamdown_notice, post_plan=beamup_notice)
 
 

@@ -48,6 +48,12 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
     roi4 = C(ROIPlugin, 'ROI4:')
     proc1 = C(ProcessPlugin, 'Proc1:')
 
+    def __init__(*args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.stage_sigs[self.trans1.enable] = 1
+        self.stage_sigs[self.image.nd_array_port] = 'TRANS1'
+        self.stage_sigs[self.tiff.nd_array_port.set] = 'TRANS1'
+
     def stage(self, *args, **kwargs):
         self.cam.temperature_actual.read()
         self.cam.temperature.read()
@@ -55,10 +61,10 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
             boxed_text("Temperature Warning!!!!",
                       self.cooling_state()+
                       "\nPlease wait until temperature has stabilized before collecting important data.",'yellow',85)
-        self.trans1.enable.set(1)
+        #self.trans1.enable.set(1)
         self.trans1.type.set(self.transform_type)
-        self.image.nd_array_port.set('TRANS1')
-        self.tiff.nd_array_port.set('TRANS1')
+        #self.image.nd_array_port.set('TRANS1')
+        #self.tiff.nd_array_port.set('TRANS1')
         return [self].append(super().stage(*args, **kwargs))
 
     def shutter(self):
