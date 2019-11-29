@@ -31,4 +31,4 @@ DM4_PD            = EpicsSignalRO('XF:07ID-BI{DM5:F4}Cur:I3-I', name='DM4 Curren
 
 sd.monitors.extend([ring_current,Beamstop_WAXS,Beamstop_SAXS,IzeroDiode,IzeroMesh, quadem1, quadem2, quadem3, quadem4])
 sd.baseline.extend([ring_current,Beamstop_WAXS,Beamstop_SAXS,IzeroDiode,IzeroMesh,
-                    SlitOut_I,SlitBottom_I,SlitTop_I,TransmissionDiode,DM4_PD])
+                    SlitBottom_I,SlitTop_I,TransmissionDiode,DM4_PD])
