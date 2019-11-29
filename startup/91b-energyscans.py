@@ -5,12 +5,7 @@ import bluesky.plans as bp
 import bluesky.plan_stubs as bps
 
 
-def full_oxygen_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
-                                         Beamstop_WAXS,
-                                         IzeroMesh,
-                                         SlitTop_I,
-                                         SlitBottom_I,
-                                         SlitOut_I],
+def full_oxygen_scan_nd(multiple=1,sigs=[],
                         dets=[sw_det],energy=en):
     '''
     Full Oxygen Scan runs an RSoXS sample set through the O edge, with particular emphasis in he pre edge region
@@ -83,12 +78,7 @@ def short_oxygen_scan_nd(multiple=1,sigs=[],
 
 
 
-def short_fluorine_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
-                                         Beamstop_WAXS,
-                                         IzeroMesh,
-                                         SlitTop_I,
-                                         SlitBottom_I,
-                                         SlitOut_I],
+def short_fluorine_scan_nd(multiple=1,sigs=[],
                         dets=[sw_det],energy=en):
     '''
     Short Fluorine Scan runs an RSoXS sample set through the F edge, with particular emphasis in he pre edge region
@@ -126,12 +116,7 @@ def short_fluorine_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
 
 
 
-def full_nitrogen_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
-                                           Beamstop_WAXS,
-                                           IzeroMesh,
-                                           SlitTop_I,
-                                           SlitBottom_I,
-                                           SlitOut_I],
+def full_nitrogen_scan_nd(multiple=1,sigs=[],
                           dets=[sw_det],energy=en):
     '''
     Full Nitrogen Scan runs an RSoXS sample set through the N edge, with particular emphasis in he pre edge region
@@ -168,12 +153,7 @@ def full_nitrogen_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type)
 
 
-def short_nitrogen_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
-                                           Beamstop_WAXS,
-                                           IzeroMesh,
-                                           SlitTop_I,
-                                           SlitBottom_I,
-                                           SlitOut_I],
+def short_nitrogen_scan_nd(multiple=1,sigs=[],
                           dets=[sw_det],energy=en):
     '''
     Short Nitrogen Scan runs an RSoXS sample set through the N edge, with particular emphasis in he pre edge region
@@ -211,12 +191,7 @@ def short_nitrogen_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type)
 
 
-def very_short_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
-                                               Beamstop_WAXS,
-                                               IzeroMesh,
-                                               SlitTop_I,
-                                               SlitBottom_I,
-                                               SlitOut_I],
+def very_short_carbon_scan_nd(multiple=1,sigs=[],
                               dets=[sw_det],energy=en):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
@@ -257,8 +232,7 @@ def very_short_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     yield from en_scan_core(sigs, dets,energy,energies,times,enscan_type=enscan_type)
 
 
-def short_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
-                                          IzeroMesh],
+def short_carbon_scan_nd(multiple=1,sigs=[],
                          dets=[sw_det],energy=en):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
@@ -302,8 +276,7 @@ def short_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
 
 
 
-def focused_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
-                                          IzeroMesh],
+def focused_carbon_scan_nd(multiple=1,sigs=[],
                          dets=[sw_det],energy=en):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
@@ -408,9 +381,7 @@ def t_carbon_scan_nd(multiple=1,sigs=[],
     yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type)
 
 
-def sufficient_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
-                                         Beamstop_WAXS,
-                                         IzeroMesh],
+def sufficient_carbon_scan_nd(multiple=1,sigs=[],
                         dets=[sw_det], energy=en):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
@@ -451,9 +422,7 @@ def sufficient_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
 
 
 
-def picky_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
-                                         Beamstop_WAXS,
-                                         IzeroMesh],
+def picky_carbon_scan_nd(multiple=1,sigs=[],
                         dets=[sw_det], energy=en):
     '''
     Subh's picky Carbon Scan runs an RSoXS sample set through the useless energies before the carbon edge
@@ -486,9 +455,7 @@ def picky_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
 
 
 
-def full_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
-                                         Beamstop_WAXS,
-                                         IzeroMesh],
+def full_carbon_scan_nd(multiple=1,sigs=[],
                         dets=[sw_det], energy=en):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
@@ -530,12 +497,7 @@ def full_carbon_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
 
 
 
-def full_ca_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
-                                     Beamstop_WAXS,
-                                     IzeroMesh,
-                                     SlitTop_I,
-                                     SlitBottom_I,
-                                     SlitOut_I],
+def full_ca_scan_nd(multiple=1,sigs=[],
                     dets=[sw_det],energy=en):
     '''
     Calcium Scan runs an RSoXS sample set through the Ca edge, with particular emphasis in he pre edge region
@@ -567,12 +529,7 @@ def full_ca_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
     yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type)
 
 
-def full_carbon_calcium_scan_nd(multiple=1,sigs=[Beamstop_SAXS,
-                                         Beamstop_WAXS,
-                                         IzeroMesh,
-                                         SlitTop_I,
-                                         SlitBottom_I,
-                                         SlitOut_I],
+def full_carbon_calcium_scan_nd(multiple=1,sigs=[],
                         dets=[sw_det], energy=en):
     '''
     Full Carbon and Calcium Scan runs an RSoXS sample set through the carbon and calcium edges,
