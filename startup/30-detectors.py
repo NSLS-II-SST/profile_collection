@@ -222,8 +222,10 @@ sw_det.saxs.cam.sync.set(1)
 sw_det.waxs.cam.sync.set(1)
 
 #change this to saxs or waxs to record what the shutter state is
-shutter_status = sw_det.waxs.cam.sync
-shutter_status.name = 'shutter mode'
+shutter_status_w = sw_det.waxs.cam.sync
+shutter_status_s = sw_det.saxs.cam.sync
+shutter_status_s.name = 'shutter mode saxs'
+shutter_status_w.name = 'shutter mode waxs'
 sw_det.waxs.cam.acquire_time.name = 'WAXS Exposure'
 sw_det.saxs.cam.acquire_time.name = 'SAXS Exposure'
 sw_det.saxs.transform_type = 3

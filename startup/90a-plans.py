@@ -91,7 +91,26 @@ def dark_plan():
     return snapshot
 
 
-dark_frame_preprocessor = bluesky_darkframes.DarkFramePreprocessor(
+def dark_plan_saxs():
+    shutterstates = saxs_det.cam.sync.setpoint
+    yield from bps.mv(saxs_det.cam.sync,0) # disable shutter
+    yield from bps.trigger(saxs_det, group='darkframe-trigger')
+    yield from bps.wait('darkframe-trigger')
+    snapshot = bluesky_darkframes.SnapshotDevice(saxs_det)
+    yield from bps.mv(saxs_det.cam.sync,shutterstates)  # put shutter back in previous state
+    return snapshot
+
+
+def dark_plan_waxs():
+    shutterstates = waxs_det.cam.sync.setpoint
+    yield from bps.mv(waxs_det.cam.sync,0) # disable shutter
+    yield from bps.trigger(waxs_det, group='darkframe-trigger')
+    yield from bps.wait('darkframe-trigger')
+    snapshot = bluesky_darkframes.SnapshotDevice(waxs_det)
+    yield from bps.mv(waxs_det.cam.sync,shutterstates)  # put shutter back in previous state
+    return snapshot
+
+dark_frame_preprocessor_synced = bluesky_darkframes.DarkFramePreprocessor(
     dark_plan=dark_plan,
     detector=sw_det,
     max_age=30,
@@ -107,14 +126,44 @@ dark_frame_preprocessor = bluesky_darkframes.DarkFramePreprocessor(
                     ],
     limit=1)
 
+dark_frame_preprocessor_saxs = bluesky_darkframes.DarkFramePreprocessor(
+    dark_plan=dark_plan_saxs,
+    detector=saxs_det,
+    max_age=30,
+    locked_signals=[saxs_det.cam.acquire_time,
+                    Det_S.user_setpoint,
+                    saxs_det.cam.bin_x,
+                    saxs_det.cam.bin_y,
+                    sam_X.user_setpoint,
+                    sam_Y.user_setpoint,
+                    ],
+    limit=1)
+
+dark_frame_preprocessor_waxs = bluesky_darkframes.DarkFramePreprocessor(
+    dark_plan=dark_plan_waxs,
+    detector=waxs_det,
+    max_age=30,
+    locked_signals=[waxs_det.saxs.cam.acquire_time,
+                    Det_W.user_setpoint,
+                    waxs_det.cam.bin_x,
+                    waxs_det.cam.bin_y,
+                    sam_X.user_setpoint,
+                    sam_Y.user_setpoint,
+                    ],
+    limit=1)
+
 
 # possibly add a exposure time preprocessor to check beam exposure on CCD over exposure
 
 # if some number of pixels are over exposured, repeat acquisition at .3 exposure time
 
 # if there is no scatter, pause
-dark_frames_enable = make_decorator(dark_frame_preprocessor)()
-RE.preprocessors.append(dark_frame_preprocessor)
+dark_frames_enable_synced = make_decorator(dark_frame_preprocessor_synced)()
+dark_frames_enable_waxs = make_decorator(dark_frame_preprocessor_synced)()
+dark_frames_enable_saxs = make_decorator(dark_frame_preprocessor_synced)()
+RE.preprocessors.append(dark_frame_preprocessor_synced)
+RE.preprocessors.append(dark_frame_preprocessor_waxs)
+RE.preprocessors.append(dark_frame_preprocessor_saxs)
 # not doing this because EVERYTHING that goes through RE will get a dark image - this is excessive - fixed now!
 
 
@@ -332,7 +381,7 @@ def quicksnap():
 
 
 # @dark_frames_enable
-def snapshot(secs=0, count=1, name='snap', energy = None):
+def snapshot(secs=0, count=1, name='snap', energy = None, det= None):
     '''
     snap of detectors to clear any charge from light hitting them - needed before starting scans or snapping images
     :return:
@@ -353,15 +402,19 @@ def snapshot(secs=0, count=1, name='snap', energy = None):
     else:
         secss = 's'
 
+
+    if det is None:
+        det = sw_det
+
     if isinstance(energy, float):
         yield from bps.mv(en,energy)
 
-    boxed_text('Snapshot','Taking {} snapshot{} of {} second{} named {} at {} eV'.format(count,
-                                                                                         counts,
-                                                                                         secs,
-                                                                                         secss,
-                                                                                         name,
-                                                                                         energy),'red')
+    boxed_text('Snapshot','Taking {} snapshot{} of {} second{} with {} named {} at {} eV'.format(count,
+                                                                                                 counts,
+                                                                                                 secs,
+                                                                                                 secss,det.name,
+                                                                                                 name,
+                                                                                                 energy),'red')
     #samsave = RE.md['sample_name']
     #samidsave = RE.md['sample_id']
     light_was_on = False
@@ -383,7 +436,7 @@ def snapshot(secs=0, count=1, name='snap', energy = None):
     SlitTop_I.kind = "config"
     SlitBottom_I.kind = "config"
     SlitOut_I.kind = "config"
-    yield from bp.count([sw_det,
+    yield from bp.count([det,
                          en.energy],
                         num=count)
     # if light_was_on:
@@ -403,6 +456,30 @@ def snap(line):
         if secs > 0 and secs < 100:
             RE(snapshot(secs))
 del snap
+
+
+@register_line_magic
+def snapsaxs(line):
+    try:
+        secs = float(line)
+    except:
+        RE(snapshot(det=saxs_det))
+    else:
+        if secs > 0 and secs < 100:
+            RE(snapshot(secs,det=saxs_det))
+del snapsaxs
+
+
+@register_line_magic
+def snapwaxs(line):
+    try:
+        secs = float(line)
+    except:
+        RE(snapshot(det=waxs_det))
+    else:
+        if secs > 0 and secs < 100:
+            RE(snapshot(secs,det=waxs_det))
+del snapwaxs
 
 @register_line_magic
 def snaps(line):

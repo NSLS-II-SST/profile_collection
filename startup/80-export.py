@@ -29,8 +29,10 @@ def factory(name, start_doc):
     dt = datetime.datetime.now()
     formatted_date = dt.strftime('%Y-%m-%d')
     name, doc = filler(name, start_doc)  # modifies doc in place
-    SAXSsubtractor = DarkSubtraction('Synced_saxs_image')
-    WAXSsubtractor = DarkSubtraction('Synced_waxs_image')
+    SAXS_sync_subtractor = DarkSubtraction('Synced_saxs_image')
+    WAXS_sync_subtractor = DarkSubtraction('Synced_waxs_image')
+    SAXS_subtractor = DarkSubtraction('saxs_image')
+    WAXS_subtractor = DarkSubtraction('waxs_image')
     SWserializer = tiff_series.Serializer(file_prefix=('{start[institution]}/'
                                                        '{start[user_name]}/'
                                                        '{start[project_name]}/'
@@ -55,8 +57,10 @@ def factory(name, start_doc):
 
     def fill_subtract_and_serialize(swname, swdoc):
         swname, swdoc = filler(swname, swdoc)
-        swname, swdoc = SAXSsubtractor(swname, swdoc)
-        swname, swdoc = WAXSsubtractor(swname, swdoc)
+        swname, swdoc = SAXS_sync_subtractor(swname, swdoc)
+        swname, swdoc = WAXS_sync_subtractor(swname, swdoc)
+        swname, swdoc = SAXS_subtractor(swname, swdoc)
+        swname, swdoc = WAXS_subtractor(swname, swdoc)
         SWserializer(swname, swdoc)
 
     def subfactory(dname, descriptor_doc):
@@ -64,12 +68,23 @@ def factory(name, start_doc):
         if ddoc['name'] in ['primary', 'dark']:
             returnlist = []
             if 'Synced' in start_doc['detectors']:
-                name, doc = SAXSsubtractor('start', start_doc)
-                WAXSsubtractor(name, doc)
-                dname, ddoc = SAXSsubtractor(dname, ddoc)
-                dname, ddoc = WAXSsubtractor(dname, ddoc)
+                name, doc = SAXS_sync_subtractor('start', start_doc)
+                WAXS_sync_subtractor(name, doc)
+                dname, ddoc = SAXS_sync_subtractor(dname, ddoc)
+                dname, ddoc = WAXS_sync_subtractor(dname, ddoc)
                 SWserializer(dname, ddoc)
                 returnlist.append(fill_subtract_and_serialize)
+            elif 'SAXS' in start_doc['detectors']:
+                name, doc = SAXS_subtractor('start', start_doc)
+                dname, ddoc = SAXS_subtractor(dname, ddoc)
+                SWserializer(dname, ddoc)
+                returnlist.append(fill_subtract_and_serialize)
+            elif 'WAXS' in start_doc['detectors']:
+                name, doc = WAXS_subtractor('start', start_doc)
+                dname, ddoc = WAXS_sync_subtractor(dname, ddoc)
+                SWserializer(dname, ddoc)
+                returnlist.append(fill_subtract_and_serialize)
+
             if descriptor_doc['name'] == 'primary':
                 serializercsv('start', start_doc)
                 serializercsv('descriptor', descriptor_doc)
