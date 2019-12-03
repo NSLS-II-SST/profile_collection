@@ -31,8 +31,8 @@ def factory(name, start_doc):
     name, doc = filler(name, start_doc)  # modifies doc in place
     SAXS_sync_subtractor = DarkSubtraction('Synced_saxs_image')
     WAXS_sync_subtractor = DarkSubtraction('Synced_waxs_image')
-    SAXS_subtractor = DarkSubtraction('saxs_image')
-    WAXS_subtractor = DarkSubtraction('waxs_image')
+    SAXS_subtractor = DarkSubtraction('Small Angle CCD Detector_image')
+    WAXS_subtractor = DarkSubtraction('Wide Angle CCD Detector_image')
     SWserializer = tiff_series.Serializer(file_prefix=('{start[institution]}/'
                                                        '{start[user_name]}/'
                                                        '{start[project_name]}/'
@@ -84,12 +84,12 @@ def factory(name, start_doc):
                 dname, ddoc = WAXS_sync_subtractor(dname, ddoc)
                 SWserializer(dname, ddoc)
                 returnlist.append(fill_subtract_and_serialize)
-            elif 'SAXS' in start_doc['detectors']:
+            elif 'Small Angle' in start_doc['detectors']:
                 name, doc = SAXS_subtractor('start', start_doc)
                 dname, ddoc = SAXS_subtractor(dname, ddoc)
                 SWserializer(dname, ddoc)
                 returnlist.append(fill_subtract_and_serialize_saxs)
-            elif 'WAXS' in start_doc['detectors']:
+            elif 'Wide Angle' in start_doc['detectors']:
                 name, doc = WAXS_subtractor('start', start_doc)
                 dname, ddoc = WAXS_sync_subtractor(dname, ddoc)
                 SWserializer(dname, ddoc)
