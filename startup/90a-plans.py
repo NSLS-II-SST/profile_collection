@@ -381,7 +381,7 @@ def quicksnap():
 
 
 # @dark_frames_enable
-def snapshot(secs=0, count=1, name='snap', energy = None, det= None):
+def snapshot(secs=0, count=1, name=None, energy = None, det= None):
     '''
     snap of detectors to clear any charge from light hitting them - needed before starting scans or snapping images
     :return:
@@ -415,35 +415,18 @@ def snapshot(secs=0, count=1, name='snap', energy = None, det= None):
                                                                                                  secss,det.name,
                                                                                                  name,
                                                                                                  energy),'red')
-    #samsave = RE.md['sample_name']
-    #samidsave = RE.md['sample_id']
-    light_was_on = False
-    # if samplelight.value is 1:
-    #     samplelight.off()
-    #     light_was_on = True
-    #     boxed_text('Warning','light was on, taking a quick snapshot to clear CCDs','yellow',shrink=True)
-    #     sw_det.shutter_off()
-    #     yield from quicksnap()
-    #     sw_det.shutter_on()
+    samsave = RE.md['sample_name']
     if secs:
         set_exposure(secs)
-    #RE.md['sample_name'] = name
-    #RE.md['sample_id'] = '000'
-    Beamstop_SAXS.kind = "normal"
-    Beamstop_WAXS.kind = "normal"
-    IzeroMesh.kind = "normal"
-    IzeroDiode.kind = "config"
-    SlitTop_I.kind = "config"
-    SlitBottom_I.kind = "config"
-    SlitOut_I.kind = "config"
+    if name is not None:
+        RE.md['sample_name'] = name
+
     yield from bp.count([det,
                          en.energy],
                         num=count)
-    # if light_was_on:
-    #     samplelight.on()
 
-    #RE.md['sample_name'] = samsave
-    #RE.md['sample_id'] = samidsave
+    if name is not None:
+        RE.md['sample_name'] = samsave
 
 
 @register_line_magic
