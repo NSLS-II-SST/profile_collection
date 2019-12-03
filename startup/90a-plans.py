@@ -113,7 +113,7 @@ def dark_plan_waxs():
 dark_frame_preprocessor_synced = bluesky_darkframes.DarkFramePreprocessor(
     dark_plan=dark_plan,
     detector=sw_det,
-    max_age=30,
+    max_age=120,
     locked_signals=[sw_det.saxs.cam.acquire_time,
                     Det_S.user_setpoint,
                     Det_W.user_setpoint,
@@ -124,12 +124,12 @@ dark_frame_preprocessor_synced = bluesky_darkframes.DarkFramePreprocessor(
                     sam_X.user_setpoint,
                     sam_Y.user_setpoint,
                     ],
-    limit=1)
+    limit=10)
 
 dark_frame_preprocessor_saxs = bluesky_darkframes.DarkFramePreprocessor(
     dark_plan=dark_plan_saxs,
     detector=saxs_det,
-    max_age=30,
+    max_age=120,
     locked_signals=[saxs_det.cam.acquire_time,
                     Det_S.user_setpoint,
                     saxs_det.cam.bin_x,
@@ -137,12 +137,12 @@ dark_frame_preprocessor_saxs = bluesky_darkframes.DarkFramePreprocessor(
                     sam_X.user_setpoint,
                     sam_Y.user_setpoint,
                     ],
-    limit=1)
+    limit=10)
 
 dark_frame_preprocessor_waxs = bluesky_darkframes.DarkFramePreprocessor(
     dark_plan=dark_plan_waxs,
     detector=waxs_det,
-    max_age=30,
+    max_age=120,
     locked_signals=[waxs_det.cam.acquire_time,
                     Det_W.user_setpoint,
                     waxs_det.cam.bin_x,
@@ -150,7 +150,7 @@ dark_frame_preprocessor_waxs = bluesky_darkframes.DarkFramePreprocessor(
                     sam_X.user_setpoint,
                     sam_Y.user_setpoint,
                     ],
-    limit=1)
+    limit=10)
 
 
 # possibly add a exposure time preprocessor to check beam exposure on CCD over exposure
