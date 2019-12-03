@@ -84,12 +84,12 @@ def factory(name, start_doc):
                 dname, ddoc = WAXS_sync_subtractor(dname, ddoc)
                 SWserializer(dname, ddoc)
                 returnlist.append(fill_subtract_and_serialize)
-            elif 'Small Angle' in start_doc['detectors']:
+            elif 'Small Angle CCD Detector' in start_doc['detectors']:
                 name, doc = SAXS_subtractor('start', start_doc)
                 dname, ddoc = SAXS_subtractor(dname, ddoc)
                 SWserializer(dname, ddoc)
                 returnlist.append(fill_subtract_and_serialize_saxs)
-            elif 'Wide Angle' in start_doc['detectors']:
+            elif 'Wide Angle CCD Detector' in start_doc['detectors']:
                 name, doc = WAXS_subtractor('start', start_doc)
                 dname, ddoc = WAXS_sync_subtractor(dname, ddoc)
                 SWserializer(dname, ddoc)
