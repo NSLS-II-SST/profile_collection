@@ -497,7 +497,7 @@ def full_carbon_scan_nd(multiple=1,sigs=[],
 
 
 def full_carbon_NEXAFS(sigs=[],
-                        dets=[Sample_TEY,IzeroMesh], energy=en):
+                        dets=[Sample_TEY,IzeroMesh,Beamstop_WAXS], energy=en):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
 
