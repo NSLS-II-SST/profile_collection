@@ -29,6 +29,6 @@ TransmissionDiode = EpicsSignalRO('XF:07ID-BI{DM7:I400-1}:IC4_MON',name = 'RSoXS
 DM4_PD            = EpicsSignalRO('XF:07ID-BI{DM5:F4}Cur:I3-I', name='DM4 Current', kind='normal')
 
 
-sd.monitors.extend([ring_current,Beamstop_WAXS,Beamstop_SAXS,IzeroDiode,IzeroMesh, quadem1, quadem2, quadem3, quadem4])
+sd.monitors.extend([ring_current,Beamstop_WAXS,Beamstop_SAXS,IzeroDiode,IzeroMesh, quadem3, quadem4])
 sd.baseline.extend([ring_current,Beamstop_WAXS,Beamstop_SAXS,IzeroDiode,IzeroMesh,
                     SlitBottom_I,SlitTop_I,TransmissionDiode,DM4_PD])
