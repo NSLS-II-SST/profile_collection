@@ -89,3 +89,15 @@ def en_scan_core(signals,dets, energy, energies,times,enscan_type=None):
                           sigcycler,
                           md={'plan_name':enscan_type})
 
+def NEXAFS_scan_core(signals,dets, energy, energies,enscan_type=None):
+
+    sigcycler = cycler(energy, energies)
+
+    yield from bps.abs_set(en, energies[0], timeout=180, wait=True)
+    for signal in signals:
+        signal.kind = 'normal'
+    yield from bps.mv(sw_det.saxs.cam.shutter_control,1)
+    yield from bp.scan_nd(dets + signals + [en.energy],
+                          sigcycler,
+                          md={'plan_name':enscan_type})
+    yield from bps.mv(sw_det.saxs.cam.shutter_control,0)
