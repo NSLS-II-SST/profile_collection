@@ -511,7 +511,8 @@ def full_carbon_NEXAFS(sigs=[],
     '''
     enscan_type = 'full_carbon_NEXAFS'
     sample()
-    if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
+    if len(read_input("Starting a Carbon NEXAFS scan hit enter in the next 3 seconds to abort"
+                      "\nYou remembered to hook up he shutter, right?", "abort", "", 3)) > 0:
         return
     yield from bps.abs_set(mir3.Pitch,7.93,wait=True)
     # create a list of energies
@@ -525,7 +526,9 @@ def full_carbon_NEXAFS(sigs=[],
 
     # Define exposures times for different energy ranges
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from NEXAFS_scan_core(sigs, dets, energy, energies,enscan_type=enscan_type)
+
+
+    yield from NEXAFS_scan_core(sigs, dets, energy, energies,enscan_type=enscan_type,openshutter=True)
 
 
 
