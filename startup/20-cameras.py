@@ -173,4 +173,4 @@ for camera in all_standard_pros:
 #
     camera.stage_sigs[camera.cam.trigger_mode] = 'Fixed Rate'
 
-SampleViewer_cam.tiff.kind = 'hinted'
+#SampleViewer_cam.tiff.kind = 'hinted'
