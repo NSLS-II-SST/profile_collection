@@ -184,7 +184,7 @@ def buildeputable(start, stop, step, widfract, startinggap,name):
         #                   min(99500,max(20000,startinggap-1500*widfract)),
         #                   min(100000,max(21500,startinggap+1500*widfract)),
         #                   51)
-        yield from tune_max([IzeroMesh],"Izero Mesh Current",epu_gap,
+        yield from tune_max([Izero_Mesh],"Izero Mesh Current",epu_gap,
                                     min(99500,max(20000,startinggap-500*widfract)),
                                     min(100000,max(21500,startinggap+1000*widfract)),
                                     10*widfract,7,3,True)
@@ -479,7 +479,7 @@ def stability_scans(num):
     scans = np.arange(num)
     for scan in scans:
         yield from bps.mv(en, 200)
-        yield from bp.scan([IzeroMesh],en,200,1400,1201)
+        yield from bp.scan([Izero_Mesh],en,200,1400,1201)
 
 
 def vent():

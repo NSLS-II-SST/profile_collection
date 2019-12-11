@@ -232,12 +232,12 @@ def go_to_af2():
 
 def find_af2x():
     yield from bps.mvr(sam_Y,-2)
-    yield from bp.rel_scan([IzeroMesh,Beamstop_SAXS,Beamstop_WAXS],sam_X,-3,3,61)
+    yield from bp.rel_scan([Izero_Mesh,Beamstop_SAXS,Beamstop_WAXS],sam_X,-3,3,61)
     yield from bps.mvr(sam_Y,2)
 
 def find_af2y():
     yield from bps.mvr(sam_X,-2)
-    yield from bp.rel_scan([IzeroMesh,Beamstop_SAXS,Beamstop_WAXS],sam_Y,-3,3,61)
+    yield from bp.rel_scan([Izero_Mesh,Beamstop_SAXS,Beamstop_WAXS],sam_Y,-3,3,61)
     yield from bps.mvr(sam_X,2)
 
 def go_to_af1():
@@ -245,12 +245,12 @@ def go_to_af1():
 
 def find_af1x():
     yield from bps.mvr(sam_Y,2)
-    yield from bp.rel_scan([IzeroMesh,Beamstop_SAXS,Beamstop_WAXS],sam_X,-3,3,61)
+    yield from bp.rel_scan([Izero_Mesh,Beamstop_SAXS,Beamstop_WAXS],sam_X,-3,3,61)
     yield from bps.mvr(sam_Y,-2)
 
 def find_af1y():
     yield from bps.mvr(sam_X,2)
-    yield from bp.rel_scan([IzeroMesh,Beamstop_SAXS,Beamstop_WAXS],sam_Y,-3,3,61)
+    yield from bp.rel_scan([Izero_Mesh,Beamstop_SAXS,Beamstop_WAXS],sam_Y,-3,3,61)
     yield from bps.mvr(sam_X,-2)
 
 

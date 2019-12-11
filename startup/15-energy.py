@@ -222,5 +222,5 @@ def cffscan(cffs):
         RE(bps.mv(en.monoen.cff, cff,
                   en.monoen.grating.user_offset, goff,
                   en.monoen.mirror2.user_offset, m2off))
-        RE(bp.scan([IzeroMesh, Beamstop_WAXS], en, 280, 300, 201))
+        RE(bp.scan([Izero_Mesh, Beamstop_WAXS], en, 280, 300, 201))
 

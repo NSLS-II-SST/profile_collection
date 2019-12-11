@@ -421,7 +421,6 @@ def sufficient_carbon_scan_nd(multiple=1,sigs=[],
 
 
 
-
 def picky_carbon_scan_nd(multiple=1,sigs=[],
                         dets=[sw_det], energy=en):
     '''
@@ -490,14 +489,13 @@ def full_carbon_scan_nd(multiple=1,sigs=[],
     times[energies >= 286] = 2
     times *= multiple
 
-    yield from bps.mv(en,270)
     # use these energies and exposure times to scan energy and record detectors and signals
     yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type)
 
 
 
 def full_carbon_NEXAFS(sigs=[],
-                        dets=[Sample_TEY,IzeroMesh,Beamstop_WAXS], energy=en):
+                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
 
@@ -507,12 +505,12 @@ def full_carbon_NEXAFS(sigs=[],
     :param energy: what energy motor to scan
     :return: perform scan
 
-    normal scan takes ~ 18 minutes to complete
+    normal scan takes ~ 7 minutes to complete
     '''
     enscan_type = 'full_carbon_NEXAFS'
     sample()
     if len(read_input("Starting a Carbon NEXAFS scan hit enter in the next 3 seconds to abort"
-                      "\nYou remembered to hook up he shutter, right?", "abort", "", 3)) > 0:
+                      "\nYou remembered to hook up the shutter, right?", "abort", "", 3)) > 0:
         return
     yield from bps.abs_set(mir3.Pitch,7.93,wait=True)
     # create a list of energies
@@ -609,77 +607,6 @@ def full_carbon_calcium_scan_nd(multiple=1,sigs=[],
 from ophyd.sim import det_with_count_time
 from cycler import cycler
 
-def carbon_NEXAFS(exp_time=.2, gain_bs=6, s_or_w='w'):
-    mysim = det_with_count_time
-    enscan_type = 'carbon_NEXAFS'
-     # Oct 2019, this pitch value seems to be optimal for carbon
-    mir3.Pitch.put(7.93)
-     # IzeroMesh.set_exposure(exp_time)
-     # Beamstop_WAXS.set_exposure(exp_time)
-     # RSoXS_Diodes.gain_save = gain_bs
-     # switch = {'s' : Beamstop_SAXS , 'w' : Beamstop_WAXS}
-    mysim.count_time.set(exp_time)
-
-    energies = np.arange(270, 282, .25)
-    energies = np.append(energies, np.arange(282, 292, .1))
-    energies = np.append(energies, np.arange(292, 305, .25))
-    energies = np.append(energies, np.arange(305, 360, .5))
-
-    encycler = cycler(en, energies)
-    RE.md['project_name'] = 'NEXAFS'
-    yield from bps.mv(en, energies[0])
-    yield from psh10.open()
-    yield from bp.scan_nd([mysim], encycler, md={'plan_name': enscan_type})
-    yield from psh10.close()
-
-
-
-def zNEXAFS_carbon(exp_time=.2):
-    mysim = det_with_count_time
-    enscan_type = 'carbon_NEXAFS'
-    yield from bps.mv(mir3.Pitch,7.93)
-    mysim.count_time.set(exp_time)
-    energies = np.arange(270, 282, .25)
-    energies = np.append(energies, np.arange(282, 292, .1))
-    energies = np.append(energies, np.arange(292, 305, .25))
-    energies = np.append(energies, np.arange(305, 360, .5))
-
-    encycler = cycler(en, energies)
-    RE.md['project_name'] = 'NEXAFS'
-    yield from bps.mv(en, energies[0])
-    yield from psh10.open()
-    yield from bp.scan_nd([mysim], encycler, md={'plan_name': enscan_type})
-    yield from psh10.close()
-
-
-def oxygen_NEXAFS(exp_time=.2, gain_bs=6,s_or_w='w'):
-
-    enscan_type = 'oxygen_NEXAFS'
-    #Oct 2019, this pitch value seems to be optimal for carbon
-    mir3.Pitch.put(7.89)
-    IzeroMesh.set_exposure(exp_time)
-    Beamstop_WAXS.set_exposure(exp_time)
-    RSoXS_Diodes.gain_save = gain_bs
-    switch = {'s' : Beamstop_SAXS , 'w' : Beamstop_WAXS}
-    RE.md['project_name'] = 'NEXAFS'
-    yield from bp.scan([IzeroMesh,switch[s_or_w]],en,510,560,201,md={'plan_name':enscan_type})
-
-
-
-
-def fluorine_NEXAFS(exp_time=.2, gain_bs=6,s_or_w='w'):
-
-    enscan_type = 'fluorine_NEXAFS'
-    #Oct 2019, this pitch value seems to be optimal for carbon
-    mir3.Pitch.put(7.89)
-    IzeroMesh.set_exposure(exp_time)
-    Beamstop_WAXS.set_exposure(exp_time)
-    RSoXS_Diodes.gain_save = gain_bs
-    switch = {'s' : Beamstop_SAXS , 'w' : Beamstop_WAXS}
-    RE.md['project_name'] = 'NEXAFS'
-    yield from bp.scan([IzeroMesh,switch[s_or_w]],en,670,720,201,md={'plan_name':enscan_type})
-
-
 def fluorine_SAXS(exp_time=1):
     enscan_type = 'fluorine_SAXS'
     #Oct 2019, this pitch value seems to be optimal for carbon
@@ -705,18 +632,5 @@ def fluorine_WAXS(exp_time=2):
 
     yield from bps.mv(en,680)
     yield from bps.abs_set(mir3.Pitch,7.89)
-    yield from bps.abs_set(en, 680, timeout=180, wait=True)
-    yield from bp.scan([sw_det, en.energy, Beamstop_WAXS, IzeroMesh],en,680,700,41,md={'plan_name':enscan_type})
-
-
-
-def calcium_NEXAFS(exp_time=2, gain_bs=5,s_or_w='w'):
-
-    enscan_type = 'calcium_NEXAFS'
-    IzeroMesh.set_exposure(exp_time)
-    Beamstop_WAXS.set_exposure(exp_time)
-    RSoXS_Diodes.gain_save = gain_bs
-    switch = {'s' : Beamstop_SAXS , 'w' : Beamstop_WAXS}
-    RE.md['project_name'] = 'NEXAFS'
-    yield from bp.scan([IzeroMesh,switch[s_or_w]],en,320,360,201,md={'plan_name':enscan_type})
+    yield from bp.scan([sw_det, en.energy],en,680,700,41,md={'plan_name':enscan_type})
 
