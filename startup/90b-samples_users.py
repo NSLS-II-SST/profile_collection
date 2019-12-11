@@ -208,11 +208,20 @@ def get_md_from_config(config):
     return eval(config+'()[1]')
 
 
+def load_configuration(config):
+    '''
+
+    :param config: string containing a name of a configuration
+    :return:
+    '''
+    yield from move_to_location(get_location_from_config(config))
+    RE.md.update(get_md_from_config(config))
+
+
+
 def do_acquisitions(acq_list):
     for acq in acq_list:
-        md = get_md_from_config(acq['configuration'])
-        RE.md.update(md)
-        yield from move_to_location(get_location_from_config(acq['configuration']))
+        yield from load_configuration(acq['configuration'])
         yield from eval(acq['plan_name']+'('+acq['arguments']+')')
 
 
@@ -493,8 +502,7 @@ def run_bar(bar,sortby=['p','c','a','s'],dryrun=0,rev=[False,False,False,False],
                                      f'time remaining approx {floor(time_remaining/3600)} h '
                                      f'{floor((time_remaining % 3600) / 60)} m \n\n',
                        'red',width=120,shrink=True)
-            yield from move_to_location(get_location_from_config(step[2])) # move to configuration
-            RE.md.update(get_md_from_config(step[2]))
+            yield from load_configuration(step[2]) # move to configuration
             yield from load_sample(step[5]) # move to sample / load sample metadata
             yield from do_acquisitions([step[6]]) # run scan
             if delete_as_complete:
