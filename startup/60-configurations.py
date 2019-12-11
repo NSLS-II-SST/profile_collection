@@ -233,14 +233,14 @@ def SAXS():
         'position': 3,
         'order': 1},
     ],
-    [{'RSoXS_Config': 'SAXS',
+    {'RSoXS_Config': 'SAXS',
       'RSoXS_Main_DET': 'SAXS',
       'RSoXS_WAXS_SDD': None,
       'RSoXS_WAXS_BCX': None,
       'RSoXS_WAXS_BCY': None,
       'RSoXS_SAXS_SDD': 459,
       'RSoXS_SAXS_BCX': 488,
-      'RSoXS_SAXS_BCY': 494,}]]
+      'RSoXS_SAXS_BCY': 494,}]
 
 def SAXSNEXAFS():
     return [[{
@@ -316,14 +316,14 @@ def SAXSNEXAFS():
         'position': 3,
         'order': 1},
     ],
-    [{'RSoXS_Config': 'SAXSNEXAFS',
+    {'RSoXS_Config': 'SAXSNEXAFS',
       'RSoXS_Main_DET': 'Beamstop_SAXS',
       'RSoXS_WAXS_SDD': None,
       'RSoXS_WAXS_BCX': None,
       'RSoXS_WAXS_BCY': None,
       'RSoXS_SAXS_SDD': 459,
       'RSoXS_SAXS_BCX': 488,
-      'RSoXS_SAXS_BCY': 494,}]]
+      'RSoXS_SAXS_BCY': 494,}]
 
 def WAXSmode():
     yield from psh10.close()
@@ -410,14 +410,14 @@ def WAXS():
         'position': 3,
         'order': 1},
     ],
-    [{'RSoXS_Config': 'WAXS',
+    {'RSoXS_Config': 'WAXS',
       'RSoXS_Main_DET': 'WAXS',
       'RSoXS_WAXS_SDD': 34,
       'RSoXS_WAXS_BCX': 460,
       'RSoXS_WAXS_BCY': 544,
       'RSoXS_SAXS_SDD': None,
       'RSoXS_SAXS_BCX': None,
-      'RSoXS_SAXS_BCY': None,}]]
+      'RSoXS_SAXS_BCY': None,}]
 
 
 def WAXSNEXAFS():
@@ -494,14 +494,14 @@ def WAXSNEXAFS():
         'position': 3,
         'order': 1},
     ],
-    [{'RSoXS_Config': 'WAXSNEXAFS',
+    {'RSoXS_Config': 'WAXSNEXAFS',
       'RSoXS_Main_DET': 'Beamstop_WAXS',
       'RSoXS_WAXS_SDD': None,
       'RSoXS_WAXS_BCX': None,
       'RSoXS_WAXS_BCY': None,
       'RSoXS_SAXS_SDD': None,
       'RSoXS_SAXS_BCX': None,
-      'RSoXS_SAXS_BCY': None,}]]
+      'RSoXS_SAXS_BCY': None,}]
 
 
 def TEYNEXAFS():
@@ -578,14 +578,14 @@ def TEYNEXAFS():
         'position': 3,
         'order': 1},
     ],
-    [{'RSoXS_Config': 'TEYWAXS',
+    {'RSoXS_Config': 'TEYWAXS',
       'RSoXS_Main_DET': 'RSoXS_Sample_TEY',
       'RSoXS_WAXS_SDD': None,
       'RSoXS_WAXS_BCX': None,
       'RSoXS_WAXS_BCY': None,
       'RSoXS_SAXS_SDD': None,
       'RSoXS_SAXS_BCX': None,
-      'RSoXS_SAXS_BCY': None,}]]
+      'RSoXS_SAXS_BCY': None,}]
 
 
 def all_out():

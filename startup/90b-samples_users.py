@@ -201,11 +201,11 @@ def move_to_location(locs=get_sample_location()):
 
 
 def get_location_from_config(config):
-    return eval(config+'()')[0]
+    return eval(config+'()[0]')
 
 
 def get_md_from_config(config):
-    return eval(config+'()')[1]
+    return eval(config+'()[1]')
 
 
 def do_acquisitions(acq_list):
