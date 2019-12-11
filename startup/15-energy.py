@@ -216,6 +216,7 @@ cffs = [[1.8,7.94,-0.1667,-0.1295],
         [1.4,7.94,0.021,0.144],
         [1.3,7.95,0.021,0.144]]
 
+
 def cffscan(cffs):
     for [cff, m3p, goff, m2off] in cffs:
         mir3.Pitch.put(m3p)
@@ -223,4 +224,44 @@ def cffscan(cffs):
                   en.monoen.grating.user_offset, goff,
                   en.monoen.mirror2.user_offset, m2off))
         RE(bp.scan([Izero_Mesh, Beamstop_WAXS], en, 280, 300, 201))
+
+
+def mono_scan(energy = None,width = 20, pnts = 51):
+    if energy is None:
+        energy = en.energy.setpoint.value
+    yield from bps.mv(en, energy)
+    yield from bp.rel_scan([Izero_Mesh,Beamstop_WAXS],mono_en,-width/2,width/2,pnts)
+
+
+def correct_mono(calibrated_eV,apply=False,current_eV=None, k=1200):
+    '''
+
+    :param calibrated_eV:  This is the "real" energy, what you want the readout to be
+    :param apply:          Whether to apply the correction or not
+    :param current_eV:     if None, the current value for energy will be set to the calibrated value
+                           if not None, the value entered here will be set to the calibrated value
+    :param k:              the grating line spacing
+
+    :return:
+    '''
+    if current_eV is None:
+        current_eV = en.energy.setpoint.value
+    cff = en.monoen.cff.value
+    [mirror_cur, grating_cur] = get_mirror_grating_angles(current_eV, cff, 1, k)
+    [mirror_cal, grating_cal] = get_mirror_grating_angles(calibrated_eV, cff, 1, k)
+    d_mir = mirror_cur-mirror_cal
+    d_grat = grating_cur-grating_cal
+
+
+    grat_off = mono_en.grating.user_offset.value
+    mir_off = mono_en.mirror2.user_offset.value
+
+
+    print(f'grating offset is {d_grat} from ideal, mirror offset is {d_mir} from ideal'
+          f'\nGrating offset will be changed from {grat_off} to {grat_off + d_grat} and '
+          f'\nMirror2 offset will be changed from {mir_off} to {mir_off + d_mir}')
+    if apply:
+        yield from bps.mv(mono_en.grating.user_offset, grat_off + d_grat)
+        yield from bps.mv(mono_en.mirror2.user_offset, mir_off + d_mir)
+
 
