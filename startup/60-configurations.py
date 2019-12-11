@@ -160,7 +160,7 @@ def SAXSmode():
 
 
 def SAXS():
-    return [{
+    return [[{
         'motor':    slits1.vsize,
         'position': 0.025,
         'order': 0},
@@ -232,10 +232,18 @@ def SAXS():
         'motor':    BeamStopW,
         'position': 3,
         'order': 1},
-    ]
+    ],
+    [{'RSoXS_Config': 'SAXS',
+      'RSoXS_Main_DET': 'SAXS',
+      'RSoXS_WAXS_SDD': None,
+      'RSoXS_WAXS_BCX': None,
+      'RSoXS_WAXS_BCY': None,
+      'RSoXS_SAXS_SDD': 459,
+      'RSoXS_SAXS_BCX': 488,
+      'RSoXS_SAXS_BCY': 494,}]]
 
 def SAXSNEXAFS():
-    return [{
+    return [[{
         'motor':    slits1.vsize,
         'position': 0.025,
         'order': 0},
@@ -307,7 +315,15 @@ def SAXSNEXAFS():
         'motor':    BeamStopW,
         'position': 3,
         'order': 1},
-    ]
+    ],
+    [{'RSoXS_Config': 'SAXSNEXAFS',
+      'RSoXS_Main_DET': 'Beamstop_SAXS',
+      'RSoXS_WAXS_SDD': None,
+      'RSoXS_WAXS_BCX': None,
+      'RSoXS_WAXS_BCY': None,
+      'RSoXS_SAXS_SDD': 459,
+      'RSoXS_SAXS_BCX': 488,
+      'RSoXS_SAXS_BCY': 494,}]]
 
 def WAXSmode():
     yield from psh10.close()
@@ -321,7 +337,7 @@ def WAXSmode():
                       sam_Y, -125)
 
 def WAXS():
-    return [{
+    return [[{
         'motor':    slits1.vsize,
         'position': .025,
         'order': 1},
@@ -393,11 +409,19 @@ def WAXS():
         'motor':    BeamStopS,
         'position': 3,
         'order': 1},
-    ]
+    ],
+    [{'RSoXS_Config': 'WAXS',
+      'RSoXS_Main_DET': 'WAXS',
+      'RSoXS_WAXS_SDD': 34,
+      'RSoXS_WAXS_BCX': 460,
+      'RSoXS_WAXS_BCY': 544,
+      'RSoXS_SAXS_SDD': None,
+      'RSoXS_SAXS_BCX': None,
+      'RSoXS_SAXS_BCY': None,}]]
 
 
 def WAXSNEXAFS():
-    return [{
+    return [[{
         'motor':    slits1.vsize,
         'position': .025,
         'order': 1},
@@ -469,11 +493,19 @@ def WAXSNEXAFS():
         'motor':    BeamStopS,
         'position': 3,
         'order': 1},
-    ]
+    ],
+    [{'RSoXS_Config': 'WAXSNEXAFS',
+      'RSoXS_Main_DET': 'Beamstop_WAXS',
+      'RSoXS_WAXS_SDD': None,
+      'RSoXS_WAXS_BCX': None,
+      'RSoXS_WAXS_BCY': None,
+      'RSoXS_SAXS_SDD': None,
+      'RSoXS_SAXS_BCX': None,
+      'RSoXS_SAXS_BCY': None,}]]
 
 
 def TEYNEXAFS():
-    return [{
+    return [[{
         'motor':    slits1.vsize,
         'position': .025,
         'order': 1},
@@ -545,84 +577,16 @@ def TEYNEXAFS():
         'motor':    BeamStopS,
         'position': 3,
         'order': 1},
-    ]
+    ],
+    [{'RSoXS_Config': 'TEYWAXS',
+      'RSoXS_Main_DET': 'RSoXS_Sample_TEY',
+      'RSoXS_WAXS_SDD': None,
+      'RSoXS_WAXS_BCX': None,
+      'RSoXS_WAXS_BCY': None,
+      'RSoXS_SAXS_SDD': None,
+      'RSoXS_SAXS_BCX': None,
+      'RSoXS_SAXS_BCY': None,}]]
 
-
-
-def NEXAFS():
-    return [{
-        'motor':    slits1.vsize,
-        'position': .025,
-        'order': 0},
-        {
-        'motor':    slits1.vcenter,
-        'position': -0.55,
-        'order': 0},
-        {
-        'motor':    slits1.hsize,
-        'position': 0.4,
-        'order': 0},
-        {
-        'motor':    slits1.hcenter,
-        'position': 0.5,
-        'order': 0},
-        {
-        'motor':    slits2.vsize,
-        'position': 0.6,
-        'order': 0},
-        {
-        'motor':    slits2.vcenter,
-        'position': -1.05,
-        'order': 0},
-        {
-        'motor':    slits2.hsize,
-        'position': 0.6,
-        'order': 0},
-        {
-        'motor':    slits2.hcenter,
-        'position': 0.31,
-        'order': 0},
-        {
-        'motor':    slits3.vsize,
-        'position': 0.9,
-        'order': 0},
-        {
-        'motor':    slits3.vcenter,
-        'position': -0.625,
-        'order': 0},
-        {
-        'motor':    slits3.hsize,
-        'position': 1.3,
-        'order': 0},
-        {
-        'motor':    slits3.hcenter,
-        'position': 0.25,
-        'order': 0},
-        {
-        'motor':    Shutter_Y,
-        'position': 32.2,
-        'order': 1},
-        {
-        'motor':    Izero_Y,
-        'position': -29,
-        'order': 0},
-        {
-        'motor':    Det_W,
-        'position': -94,
-        'order': 0},
-        {
-        'motor':    Det_S,
-        'position': -94,
-        'order': 0},
-        {
-        'motor':    BeamStopW,
-        'position': 66.1,
-        'order': 0},
-        {
-        'motor':    BeamStopS,
-        'position': 3,
-        'order': 0},
-    ]
 
 def all_out():
     yield from psh10.close()
