@@ -84,19 +84,19 @@ class StandardProsilica(SingleTrigger, ProsilicaDetector):
 
 class StandardProsilicaV33(SingleTriggerV33, ProsilicaDetector):
     cam = Cpt(ProsilicaDetectorCamV33, 'cam1:')
-    image = Cpt(ImagePlugin, 'image1:')
-    stats1 = Cpt(StatsPluginV33, 'Stats1:')
-    stats2 = Cpt(StatsPluginV33, 'Stats2:')
-    stats3 = Cpt(StatsPluginV33, 'Stats3:')
-    stats4 = Cpt(StatsPluginV33, 'Stats4:')
-    stats5 = Cpt(StatsPluginV33, 'Stats5:')
-    trans1 = Cpt(TransformPlugin, 'Trans1:')
+    image = Cpt(ImagePlugin, 'Image1:')
+    stats1 = Cpt(StatsPluginV33, 'STATS1:')
+    stats2 = Cpt(StatsPluginV33, 'STATS2:')
+    stats3 = Cpt(StatsPluginV33, 'STATS2:')
+    stats4 = Cpt(StatsPluginV33, 'STATS2:')
+    stats5 = Cpt(StatsPluginV33, 'STATS2:')
+    trans1 = Cpt(TransformPlugin, 'TRANS1:')
     roi1 = Cpt(ROIPlugin, 'ROI1:')
     roi2 = Cpt(ROIPlugin, 'ROI2:')
     roi3 = Cpt(ROIPlugin, 'ROI3:')
     roi4 = Cpt(ROIPlugin, 'ROI4:')
-    proc1 = Cpt(ProcessPlugin, 'Proc1:')
-    over1 = Cpt(OverlayPlugin, 'Over1:')
+    proc1 = Cpt(ProcessPlugin, 'PROC1:')
+    over1 = Cpt(OverlayPlugin, 'OVER1:')
 
     # This class does not save TIFFs. We make it aware of the TIFF plugin
     # only so that it can ensure that the plugin is not auto-saving.
@@ -127,9 +127,9 @@ Side_cam = StandardProsilica('XF:07ID1-ES:1{Scr:2}', name='RSoXS Sample Area Cam
 DetS_cam = StandardProsilica('XF:07ID1-ES:1{Scr:3}', name='WAXS Detector Area Camera')
 Izero_cam = StandardProsilica('XF:07ID1-ES:1{Scr:1}', name='Izero YAG Camera')
 Sample_cam = StandardProsilica('XF:07ID1-ES:1{Scr:4}', name='RSoXS Sample Area Camera')
-#SampleViewer_cam = StandardProsilicaWithTIFFV33('XF:07ID1-ES:1{Scr:5}',
-#                                                name='Sample Imager Detector Area Camera',
-#                                                read_attrs=['tiff'])
+SampleViewer_cam = StandardProsilicaWithTIFFV33('XF:07ID1-ES:1{Scr:5}',
+                                                name='Sample Imager Detector Area Camera',
+                                                read_attrs=['tiff'])
 
 crosshair = Sample_cam.over1.overlay_1
 Sample_cam.over1.overlay_1.position_y.kind='hinted'
@@ -156,7 +156,7 @@ def crosshair_on():crosshair.use.set(1)
 def crosshair_off():crosshair.use.set(0)
 #
 #
-all_standard_pros = [Sample_cam, DetS_cam, Izero_cam]
+all_standard_pros = [Sample_cam, DetS_cam, Izero_cam, SampleViewer_cam]
 for camera in all_standard_pros:
     camera.read_attrs = ['stats1', 'stats2', 'stats3', 'stats4', 'stats5']
     # camera.tiff.read_attrs = []  # leaving just the 'image'
