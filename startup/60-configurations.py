@@ -413,7 +413,7 @@ def WAXS():
     {'RSoXS_Config': 'WAXS',
       'RSoXS_Main_DET': 'WAXS',
       'RSoXS_WAXS_SDD': 34,
-      'RSoXS_WAXS_BCX': 460,
+      'RSoXS_WAXS_BCX': 465,
       'RSoXS_WAXS_BCY': 544,
       'RSoXS_SAXS_SDD': None,
       'RSoXS_SAXS_BCX': None,
