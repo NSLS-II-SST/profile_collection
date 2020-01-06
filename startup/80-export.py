@@ -126,9 +126,9 @@ def factory(name, start_doc):
     return [], [subfactory]
 
 
-rr = RunRouter([factory])
+#rr = RunRouter([factory])
 
-rr_token = RE.subscribe(rr)  # This should be subscribed *after* db so filling happens after db.insert.
+#rr_token = RE.subscribe(rr)  # This should be subscribed *after* db so filling happens after db.insert.
 
 
 import event_model
@@ -154,5 +154,7 @@ def factory2(name, start_doc):
     return [], []
 
 
-rr2 = event_model.RunRouter([factory2])
-rr2_token = RE.subscribe(rr2)
+#rr2 = event_model.RunRouter([factory2])
+#rr2_token = RE.subscribe(rr2)
+
+#changed to all be subscription based
