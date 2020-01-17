@@ -28,7 +28,19 @@ class Monochromator(PVPositioner):
 
 mono_en= Monochromator('XF:07ID1-OP{Mono:PGM1-Ax:', name='Monochromator Energy',kind='normal')
 
-def epugap_from_energy(energy, harmonic = 1, polarization = 0):
+from scipy import interpolate
+energies = {270,280,400}
+phases = {0,4000,20000}
+gaps = {20000,24000,50000}
+gapinterp = interpolate.interp2d(energies, phases, gaps, kind='cubic',bounds_error=True)
+
+
+
+
+
+
+
+def epugap_from_energy(energy, phase, mode, harmonic = 1, polarization = 0):
     ''' this calculation was from Cherno's notebook data'''
 #    gap = 6401.9 +\
 #          (energy ** 1) * 129.42        +\
@@ -76,6 +88,7 @@ def epugap_from_energy(energy, harmonic = 1, polarization = 0):
     valid from 150eV through 1500eV for First Harmonic
     
     '''
+    '''
     if harmonic is 3 or energy >= 1100:
         enoff = energy - 370.01
         gap = (enoff ** 0) * 22833.87619739154 + \
@@ -101,6 +114,15 @@ def epugap_from_energy(energy, harmonic = 1, polarization = 0):
               (enoff ** 7) * -9.027454042580941e-15 +\
               (enoff ** 8) * 4.135706733331245e-18 +\
               (enoff ** 9) * -7.796287724230847e-22
+    '''
+    # for mode 0, a lookup table of energy positions, phase positions, gap positions
+    if mode is 0:
+        return gapinterp(energy,phase)
+
+
+
+
+
 
     return gap
 
@@ -127,7 +149,7 @@ class EnPos(PseudoPositioner):
     @pseudo_position_argument
     def forward(self, pseudo_pos):
         '''Run a forward (pseudo -> real) calculation'''
-        return self.RealPosition(epugap=epugap_from_energy(pseudo_pos.energy),
+        return self.RealPosition(epugap=epugap_from_energy(pseudo_pos.energy, pseudo_pos.phase, pseudo_pos.mode),
                                  monoen=pseudo_pos.energy,
                                  epuphase=pseudo_pos.phase,
                                  epumode=pseudo_pos.mode)
