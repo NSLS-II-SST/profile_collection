@@ -216,7 +216,7 @@ def load_configuration(config):
     '''
     yield from move_to_location(get_location_from_config(config))
     RE.md.update(get_md_from_config(config))
-
+cool
 
 
 def do_acquisitions(acq_list):

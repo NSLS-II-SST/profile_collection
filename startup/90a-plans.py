@@ -168,7 +168,7 @@ RE.preprocessors.append(dark_frame_preprocessor_saxs)
 
 
 
-def buildeputable(start, stop, step, widfract, startinggap,name):
+def buildeputable(start, stop, step, widfract, startinggap, name, phase):
     ens = np.arange(start,stop,step)
     gaps = []
     ensout = []
@@ -204,6 +204,46 @@ def buildeputable(start, stop, step, widfract, startinggap,name):
     #print(ens,gaps)
 
 
+def buildeputablegaps(start, stop, step, widfract, startingen, name, phase, mode):
+    gaps = np.arange(start,stop,step)
+    ens = []
+    gapsout = []
+    heights = []
+    Beamstop_WAXS.kind= 'hinted'
+    Izero_Mesh.kind= 'hinted'
+    #startinggap = epugap_from_energy(ens[0]) #get starting position from existing table
+    yield from bps.mv(epu_phase,phase)
+    if mode in {0,2,3}:
+        yield from bps.mv(epu_mode,mode)
+    else:
+        print("invalid mode, leaving it as is")
+    count = 0
+
+    for gap in gaps:
+        yield from bps.mv(epu_gap,gap)
+        yield from bps.mv(mono_en,max(65,startingen-25*widfract))
+        #yield from bp.scan([DM4_PD],epu_gap,
+        #                   min(99500,max(20000,startinggap-1500*widfract)),
+        #                   min(100000,max(21500,startinggap+1500*widfract)),
+        #                   51)
+        yield from tune_max([Izero_Mesh,Beamstop_WAXS],"WAXS Beamstop",epu_gap,
+                                    min(2100,max(65,startingen-25*widfract)),
+                                    min(2200,max(75,startingen+50*widfract)),
+                                    10*widfract,7,3,True)
+
+        ens.append(bec.peaks.max["WAXS Beamstop"][0])
+        heights.append(bec.peaks.max["WAXS Beamstop"][1])
+        gapsout.append(epu_gap.position)
+        startingen = bec.peaks.max["WAXS Beamstop"][0]
+        #data = np.column_stack((ensout, gaps))
+        data = {'Energies': ens, 'EPUGaps': gapsout, 'PeakCurrent': heights}
+        dataframe = pd.DataFrame(data=data)
+        dataframe.to_csv('/mnt/zdrive/EPUdata_2020_' + name + '.csv')
+        count+=1
+        if count > 50:
+            count=0
+            plt.close()
+
 def do_some_eputables():
     yield from buildeputable(150, 1500, 10, 1, 21000, 'Harmonic1Phase')
     #yield from buildeputable(850, 2500, 10, 1.5, 27650, 'H3v2')
@@ -213,6 +253,17 @@ def do_some_eputables():
     yield from buildeputable(1650, 2500, 10, 2, 20500, 'H11v1')
 
 
+def do_2020_eputables():
+    yield from buildeputablegaps(14000, 100000, 500, 1, 75, 'phase0',0,2)
+    yield from buildeputablegaps(14000, 100000, 500, 1, 150, 'phase29500',29500,2)
+    yield from buildeputablegaps(14000, 100000, 500, 1, 175, 'phase25000',25000,2)
+    yield from buildeputablegaps(14000, 100000, 500, 1, 185, 'phase20000',21000,2)
+    yield from buildeputablegaps(14000, 100000, 500, 1, 200, 'phase20000',18000,2)
+    yield from buildeputablegaps(14000, 100000, 500, 1, 200, 'phase16000',15000,2)
+    yield from buildeputablegaps(14000, 100000, 500, 1, 175, 'phase12000',12000,2)
+    yield from buildeputablegaps(14000, 100000, 500, 1, 100, 'phase8000',8000,2)
+    yield from buildeputablegaps(14000, 100000, 500, 1, 100, 'phase4000',4000,2)
+    yield from buildeputablegaps(14000, 100000, 500, 1.5, 175, 'circular',15000,0)
 
 
 def tune_max(

@@ -11,6 +11,7 @@ class UndulatorMotor(EpicsMotor):
     user_setpoint = Cpt(EpicsSignal, '-SP', limits=True)
 
 epu_gap = UndulatorMotor('SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr', name='EPU 60 Gap',kind='normal')
+epu_phase = UndulatorMotor('SR:C07-ID:G1A{SST1:1-Ax:Phase}-Mtr', name='EPU 60 Phase',kind='normal')
 
 class Monochromator(PVPositioner):
     setpoint = Cpt(EpicsSignal,':ENERGY_SP', kind='normal')
@@ -113,28 +114,40 @@ class EnPos(PseudoPositioner):
     """
     # synthetic axis
     energy = Cpt(PseudoSingle, kind='hinted', limits=(150,2500),name="Beamline Energy")
+    phase = Cpt(PseudoSingle, kind='hinted', limits=(-29500,29500),name="X-ray Phase")
+    mode = Cpt(PseudoSingle, kind='hinted', limits=(0,4),name="X-ray Phase Energy")
 
     # real motors
 
     monoen = Cpt(Monochromator, 'XF:07ID1-OP{Mono:PGM1-Ax:',kind='hinted',name='Mono Energy')
     epugap = Cpt(UndulatorMotor, 'SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr',kind='normal',name='EPU Gap')
+    epuphase = Cpt(UndulatorMotor, 'SR:C07-ID:G1A{SST1:1-Ax:Phase}-Mtr',kind='normal',name='EPU Phase')
+    epumode = Cpt(UndulatorMotor, 'SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode',kind='normal',name='EPU Mode')
 
     @pseudo_position_argument
     def forward(self, pseudo_pos):
         '''Run a forward (pseudo -> real) calculation'''
         return self.RealPosition(epugap=epugap_from_energy(pseudo_pos.energy),
-                                 monoen=pseudo_pos.energy)
+                                 monoen=pseudo_pos.energy,
+                                 epuphase=pseudo_pos.phase,
+                                 epumode=pseudo_pos.mode)
 
     @real_position_argument
     def inverse(self, real_pos):
         '''Run an inverse (real -> pseudo) calculation'''
-        return self.PseudoPosition( energy = real_pos.monoen )
+        return self.PseudoPosition( energy=real_pos.monoen,
+                                    phase=real_pos.epuphase,
+                                    mode=real_pos.epumode)
 
     def where_sp(self):
         return ('Beamline Energy Setpoint : {}'
                 '\nMonochromator Readback : {}'
                 '\nEPU Gap Setpoint : {}'
                 '\nEPU Gap Readback : {}'
+                '\nEPU Phase Setpoint : {}'
+                '\nEPU Phase Readback : {}'
+                '\nEPU Mode Setpoint : {}'
+                '\nEPU Mode Readback : {}'
                 '\nGrating Setpoint : {}'
                 '\nGrating Readback : {}'
                 '\nMirror2 Setpoint : {}'
@@ -145,6 +158,10 @@ class EnPos(PseudoPositioner):
             colored('{:.2f}'.format(self.monoen.readback.value).rstrip('0').rstrip('.'),'yellow'),
             colored('{:.2f}'.format(self.epugap.user_setpoint.value).rstrip('0').rstrip('.'),'yellow'),
             colored('{:.2f}'.format(self.epugap.user_readback.value).rstrip('0').rstrip('.'),'yellow'),
+            colored('{:.2f}'.format(self.epuphase.user_setpoint.value).rstrip('0').rstrip('.'),'yellow'),
+            colored('{:.2f}'.format(self.epuphase.user_readback.value).rstrip('0').rstrip('.'),'yellow'),
+            colored('{:.2f}'.format(self.epumode.user_setpoint.value).rstrip('0').rstrip('.'),'yellow'),
+            colored('{:.2f}'.format(self.epumode.user_readback.value).rstrip('0').rstrip('.'),'yellow'),
             colored('{:.2f}'.format(self.monoen.grating.user_setpoint.value).rstrip('0').rstrip('.'),'yellow'),
             colored('{:.2f}'.format(self.monoen.grating.user_readback.value).rstrip('0').rstrip('.'),'yellow'),
             colored('{:.2f}'.format(self.monoen.mirror2.user_setpoint.value).rstrip('0').rstrip('.'),'yellow'),
