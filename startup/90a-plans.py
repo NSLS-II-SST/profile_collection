@@ -263,7 +263,17 @@ def do_2020_eputables():
     yield from buildeputablegaps(14000, 60000, 500, 1, 175, 'H1phase12000',12000,2)
     yield from buildeputablegaps(14000, 60000, 500, 1, 100, 'H1phase8000',8000,2)
     yield from buildeputablegaps(14000, 60000, 500, 1, 100, 'H1phase4000',4000,2)
-    yield from buildeputablegaps(14000, 60000, 500, 1.5, 175, 'H1circular',15000,0)
+    yield from buildeputablegaps(14000, 60000, 500, 2, 175, 'H1circular',15000,0)
+    yield from buildeputablegaps(14000, 60000, 500, 2, 3*75, 'H3phase0',0,2)
+    yield from buildeputablegaps(14000, 60000, 500, 2, 3*150, 'H3phase29500',29500,2)
+    yield from buildeputablegaps(14000, 60000, 500, 2, 3*175, 'H3phase25000',25000,2)
+    yield from buildeputablegaps(14000, 60000, 500, 2, 3*185, 'H3phase20000',21000,2)
+    yield from buildeputablegaps(14000, 60000, 500, 2, 3*200, 'H3phase20000',18000,2)
+    yield from buildeputablegaps(14000, 60000, 500, 2, 3*200, 'H3phase16000',15000,2)
+    yield from buildeputablegaps(14000, 60000, 500, 2, 3*175, 'H3phase12000',12000,2)
+    yield from buildeputablegaps(14000, 60000, 500, 2, 3*100, 'H3phase8000',8000,2)
+    yield from buildeputablegaps(14000, 60000, 500, 2, 3*100, 'H3phase4000',4000,2)
+    yield from buildeputablegaps(14000, 60000, 500, 2, 3*175, 'H3circular',15000,0)
 
 
 def tune_max(
