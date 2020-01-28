@@ -29,10 +29,10 @@ class Monochromator(PVPositioner):
 mono_en= Monochromator('XF:07ID1-OP{Mono:PGM1-Ax:', name='Monochromator Energy',kind='normal')
 
 from scipy import interpolate
-energies = {270,280,400}
-phases = {0,4000,20000}
-gaps = {20000,24000,50000}
-gapinterp = interpolate.interp2d(energies, phases, gaps, kind='cubic',bounds_error=True)
+#energies = {270,280,400}
+#phases = {0,4000,20000}
+#gaps = {20000,24000,50000}
+#gapinterp = interpolate.interp2d(energies, phases, gaps, kind='cubic',bounds_error=True)
 
 
 
