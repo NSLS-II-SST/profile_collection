@@ -100,7 +100,7 @@ class StandardProsilicaV33(SingleTriggerV33, ProsilicaDetector):
 
     # This class does not save TIFFs. We make it aware of the TIFF plugin
     # only so that it can ensure that the plugin is not auto-saving.
-    tiff = Cpt(TIFFPluginEnsuredOff, suffix='TIFF1:')
+    tiff = Cpt(TIFFPluginWithFileStore, suffix='TIFF1:')
 
     @property
     def hints(self):
