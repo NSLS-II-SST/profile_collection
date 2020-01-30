@@ -58,7 +58,7 @@ process
 
 
 class StandardProsilica(SingleTrigger, ProsilicaDetector):
-    image = Cpt(ImagePlugin, 'Image1:')
+    image = Cpt(ImagePlugin, 'image1:')
     stats1 = Cpt(StatsPlugin, 'Stats1:')
     stats2 = Cpt(StatsPlugin, 'Stats2:')
     stats3 = Cpt(StatsPlugin, 'Stats3:')
@@ -84,7 +84,7 @@ class StandardProsilica(SingleTrigger, ProsilicaDetector):
 
 class StandardProsilicaV33(SingleTriggerV33, ProsilicaDetector):
     cam = Cpt(ProsilicaDetectorCamV33, 'cam1:')
-    image = Cpt(ImagePlugin, 'Image1:')
+    image = Cpt(ImagePlugin, 'image1:')
     stats1 = Cpt(StatsPluginV33, 'Stats1:')
     stats2 = Cpt(StatsPluginV33, 'Stats2:')
     stats3 = Cpt(StatsPluginV33, 'Stats3:')
