@@ -86,7 +86,7 @@ class StandardProsilicaV33(SingleTriggerV33, ProsilicaDetector):
     cam = Cpt(ProsilicaDetectorCamV33, 'cam1:')
     image = Cpt(ImagePlugin, 'image1:')
     stats1 = Cpt(StatsPluginV33, 'Stats1:')
-#    stats2 = Cpt(StatsPluginV33, 'Stats2:')
+    stats2 = Cpt(StatsPluginV33, 'Stats2:')
     stats3 = Cpt(StatsPluginV33, 'Stats3:')
     stats4 = Cpt(StatsPluginV33, 'Stats4:')
     stats5 = Cpt(StatsPluginV33, 'Stats5:')
@@ -128,7 +128,7 @@ DetS_cam = StandardProsilica('XF:07ID1-ES:1{Scr:3}', name='WAXS Detector Area Ca
 Izero_cam = StandardProsilica('XF:07ID1-ES:1{Scr:1}', name='Izero YAG Camera')
 Sample_cam = StandardProsilica('XF:07ID1-ES:1{Scr:4}', name='RSoXS Sample Area Camera')
 SampleViewer_cam = StandardProsilicaWithTIFFV33('XF:07ID1-ES:1{Scr:5}',
-                                                name='Sample Imager Detector Area Camera',
+                                                name='Sample Imager Camera',
                                                 read_attrs=['tiff'])
 
 crosshair = Sample_cam.over1.overlay_1
