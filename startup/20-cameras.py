@@ -90,13 +90,13 @@ class StandardProsilicaV33(SingleTriggerV33, ProsilicaDetector):
     stats3 = Cpt(StatsPluginV33, 'Stats3:')
     stats4 = Cpt(StatsPluginV33, 'Stats4:')
     stats5 = Cpt(StatsPluginV33, 'Stats5:')
-    trans1 = Cpt(TransformPlugin, 'TRANS1:')
+    trans1 = Cpt(TransformPlugin, 'Trans1:')
     roi1 = Cpt(ROIPlugin, 'ROI1:')
     roi2 = Cpt(ROIPlugin, 'ROI2:')
     roi3 = Cpt(ROIPlugin, 'ROI3:')
     roi4 = Cpt(ROIPlugin, 'ROI4:')
-    proc1 = Cpt(ProcessPlugin, 'PROC1:')
-    over1 = Cpt(OverlayPlugin, 'OVER1:')
+    proc1 = Cpt(ProcessPlugin, 'Proc1:')
+    over1 = Cpt(OverlayPlugin, 'Over1:')
 
     # This class does not save TIFFs. We make it aware of the TIFF plugin
     # only so that it can ensure that the plugin is not auto-saving.
