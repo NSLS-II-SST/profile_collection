@@ -158,9 +158,9 @@ def crosshair_off():crosshair.use.set(0)
 #
 all_standard_pros = [Sample_cam, DetS_cam, Izero_cam, SampleViewer_cam]
 for camera in all_standard_pros:
-    camera.read_attrs = ['stats1', 'stats2', 'stats3', 'stats4', 'stats5']
+    camera.read_attrs = ['stats1', 'stats3', 'stats4', 'stats5']
     # camera.tiff.read_attrs = []  # leaving just the 'image'
-    for stats_name in ['stats1', 'stats2', 'stats3', 'stats4', 'stats5']:
+    for stats_name in ['stats1', 'stats3', 'stats4', 'stats5']:
         stats_plugin = getattr(camera, stats_name)
         stats_plugin.read_attrs = ['total']
         #camera.stage_sigs[stats_plugin.blocking_callbacks] = 1
