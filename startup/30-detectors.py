@@ -225,42 +225,32 @@ sw_det.waxs.cam.sync.set(1)
 shutter_status_w = sw_det.waxs.cam.sync
 shutter_status_s = sw_det.saxs.cam.sync
 shutter_status_s.name = 'shutter mode saxs'
-shutter_status_w.name = 'shutter mode waxs'
 sw_det.waxs.cam.acquire_time.name = 'WAXS Exposure'
 sw_det.saxs.cam.acquire_time.name = 'SAXS Exposure'
 sw_det.saxs.transform_type = 3
 sw_det.waxs.transform_type = 1
 
-saxs_det.read_attrs = ['cam',
-                       'cam.acquire_time',
-                       'cam.bin_x', 'cam.bin_y',
-                       'cam.min_x', 'cam.min_y',
-                       'cam.shutter_close_delay',
-                       'cam.shutter_open_delay',
-                       'cam.temperature',
-                       'cam.temperature_actual',
-                       'cam.trigger_mode',
-                       'cam.adc_speed',
-                       'cam.hot_side_temp',
-                       'cam.sync',
-                       'tiff',
-                       'stats1',
-                       'stats1.total']
-waxs_det.read_attrs = ['cam',
-                       'cam.acquire_time',
-                       'cam.bin_x', 'cam.bin_y',
-                       'cam.min_x', 'cam.min_y',
-                       'cam.shutter_close_delay',
-                       'cam.shutter_open_delay',
-                       'cam.temperature',
-                       'cam.temperature_actual',
-                       'cam.trigger_mode',
-                       'cam.adc_speed',
-                       'cam.hot_side_temp',
-                       'cam.sync',
-                       'tiff',
-                       'stats1',
-                       'stats1.total']
+for det in [saxs_det, waxs_det,sw_det.waxs,sw_det.saxs]:
+    det.kind = 'normal'
+    det.stats1.kind = 'hinted'
+    det.stats1.total.kind = 'hinted'
+    det.cam.kind = 'normal'
+    det.cam.temperature_actual.kind = 'normal'
+    det.cam.hot_side_temp.kind = 'normal'
+    det.cam.bin_y.kind = 'normal'
+    det.cam.bin_x.kind = 'normal'
+    det.cam.adc_speed.kind = 'normal'
+    det.cam.acquire_time.kind = 'hinted'
+    det.cam.model.kind = 'normal'
+    det.cam.trigger_mode.kind = 'normal'
+    det.cam.sync.kind = 'normal'
+    det.cam.shutter_open_delay.kind = 'normal'
+    det.cam.shutter_close_delay.kind = 'normal'
+    det.cam.min_x.kind = 'normal'
+    det.cam.temperature.kind = 'normal'
+    det.cam.min_y.kind = 'normal'
+sw_det.kind = 'hinted'
+
 sw_det.read_attrs = ['saxs','waxs']
 
 sd.baseline.extend([waxs_det, saxs_det])
