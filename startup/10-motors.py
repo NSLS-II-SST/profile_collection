@@ -208,7 +208,8 @@ def motors(line):
                          Shutter_Y.where()+"\n"+
                          Izero_Y.where()+"\n"+
                          Izero_ds.where()+"\n"+
-                         Exit_Slit.where()+"\n"),
+                         Exit_Slit.where()+"\n"+
+                         sam_viewer.where()+"\n"),
                'lightgray',shrink=True)
 
 
