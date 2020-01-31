@@ -253,4 +253,4 @@ sw_det.kind = 'hinted'
 
 sw_det.read_attrs = ['saxs','waxs']
 
-sd.baseline.extend([waxs_det, saxs_det])
+sd.baseline.extend([waxs_det.cam, saxs_det.cam])
