@@ -227,19 +227,19 @@ class EnPosold(PseudoPositioner):
         [grating,mirror] = get_mirror_grating_angles(eV, c, m, k)
         yield from bps.mv(self.monoen.mirror2,mirror,self.monoen.grating,grating)
 
-en = EnPos('', name='en',concurrent=1)
+en = EnPosold('', name='en',concurrent=1)
 en.energy.kind = 'hinted'
 en.monoen.kind = 'normal'
 en.monoen.readback.kind = 'normal'
 en.epugap.kind = 'normal'
 
-enold = EnPosold('', name='enold',concurrent=1)
-enold.energy.kind = 'hinted'
-enold.monoen.kind = 'normal'
-enold.monoen.readback.kind = 'normal'
-enold.epugap.kind = 'normal'
+#enold = EnPosold('', name='enold',concurrent=1)
+#enold.energy.kind = 'hinted'
+#enold.monoen.kind = 'normal'
+#enold.monoen.readback.kind = 'normal'
+#enold.epugap.kind = 'normal'
 
-#sd.baseline.extend([en])
+sd.baseline.extend([en])
 
 
 @register_line_magic
