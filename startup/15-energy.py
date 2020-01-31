@@ -9,6 +9,8 @@ from IPython.core.magic import register_line_magic
 
 class UndulatorMotor(EpicsMotor):
     user_setpoint = Cpt(EpicsSignal, '-SP', limits=True)
+class UndulatorMotorPhs(UndulatorMotor):
+    user_readback = Cpt(EpicsSignal, '-RB', limits=True)
 
 epu_gap = UndulatorMotor('SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr', name='EPU 60 Gap',kind='normal')
 epu_phase = UndulatorMotor('SR:C07-ID:G1A{SST1:1-Ax:Phase}-Mtr', name='EPU 60 Phase',kind='normal')
@@ -85,7 +87,7 @@ def epugap_from_energy(energy, phase, mode, harmonic = 1, polarization = 0):
               (enoff ** 7) * -9.027454042580941e-15 + \
               (enoff ** 8) * 4.135706733331245e-18 + \
               (enoff ** 9) * -7.796287724230847e-22
-        return gap
+        return gap / harmonic
     else:
         return None
 
@@ -106,7 +108,7 @@ class EnPos(PseudoPositioner):
     monoen = Cpt(Monochromator, 'XF:07ID1-OP{Mono:PGM1-Ax:',kind='hinted',name='Mono Energy')
     epugap = Cpt(UndulatorMotor, 'SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr',kind='normal',name='EPU Gap')
     epuphase = Cpt(UndulatorMotor, 'SR:C07-ID:G1A{SST1:1-Ax:Phase}-Mtr',kind='normal',name='EPU Phase')
-    epumode = Cpt(UndulatorMotor, 'SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode',kind='normal',name='EPU Mode')
+    epumode = Cpt(UndulatorMotorPhs, 'SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode',kind='normal',name='EPU Mode')
 
     @pseudo_position_argument
     def forward(self, pseudo_pos):

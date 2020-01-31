@@ -95,12 +95,12 @@ class StandardProsilicaV33(SingleTriggerV33, ProsilicaDetector):
     roi2 = Cpt(ROIPlugin, 'ROI2:')
     roi3 = Cpt(ROIPlugin, 'ROI3:')
     roi4 = Cpt(ROIPlugin, 'ROI4:')
-    proc1 = Cpt(ProcessPlugin, 'Proc1:')
-    over1 = Cpt(OverlayPlugin, 'Over1:')
+    proc1 = Cpt(ProcessPlugin, 'PROC1:')
+    over1 = Cpt(OverlayPlugin, 'OVER1:')
 
     # This class does not save TIFFs. We make it aware of the TIFF plugin
     # only so that it can ensure that the plugin is not auto-saving.
-    tiff = Cpt(TIFFPluginWithFileStore, suffix='TIFF1:')
+    tiff = Cpt(TIFFPluginEnsuredOff, suffix='TIFF1:')
 
     @property
     def hints(self):
@@ -127,8 +127,8 @@ Side_cam = StandardProsilica('XF:07ID1-ES:1{Scr:2}', name='RSoXS Sample Area Cam
 DetS_cam = StandardProsilica('XF:07ID1-ES:1{Scr:3}', name='WAXS Detector Area Camera')
 Izero_cam = StandardProsilica('XF:07ID1-ES:1{Scr:1}', name='Izero YAG Camera')
 Sample_cam = StandardProsilica('XF:07ID1-ES:1{Scr:4}', name='RSoXS Sample Area Camera')
-SampleViewer_cam = StandardProsilicaWithTIFFV33('XF:07ID1-ES:1{Scr:5}',
-                                                name='Sample Imager Camera',
+SampleViewer_cam = StandardProsilicaWithTIFF('XF:07ID1-ES:1{Scr:5}',
+                                                name='Sample Imager Detector Area Camera',
                                                 read_attrs=['tiff'])
 
 crosshair = Sample_cam.over1.overlay_1
@@ -158,9 +158,9 @@ def crosshair_off():crosshair.use.set(0)
 #
 all_standard_pros = [Sample_cam, DetS_cam, Izero_cam, SampleViewer_cam]
 for camera in all_standard_pros:
-    camera.read_attrs = ['stats1', 'stats3', 'stats4', 'stats5']
+    camera.read_attrs = ['stats1', 'stats2', 'stats3', 'stats4', 'stats5']
     # camera.tiff.read_attrs = []  # leaving just the 'image'
-    for stats_name in ['stats1', 'stats3', 'stats4', 'stats5']:
+    for stats_name in ['stats1', 'stats2', 'stats3', 'stats4', 'stats5']:
         stats_plugin = getattr(camera, stats_name)
         stats_plugin.read_attrs = ['total']
         #camera.stage_sigs[stats_plugin.blocking_callbacks] = 1
