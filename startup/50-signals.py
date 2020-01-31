@@ -33,6 +33,6 @@ DM7_Diode = EpicsSignalRO('XF:07ID-BI{DM7:I400-1}:IC4_MON',name = 'DM7 Photodiod
 DM4_PD            = EpicsSignalRO('XF:07ID-BI{DM5:F4}Cur:I3-I', name='DM4 Photodiode', kind='normal')
 
 
-sd.monitors.extend([ring_current,Beamstop_WAXS,Beamstop_SAXS,Izero_Mesh, Sample_TEY, Slit1_Top_I, Slit1_IB_I])
+sd.monitors.extend([ring_current,Beamstop_WAXS,Beamstop_SAXS,Izero_Mesh, Sample_TEY])
 sd.baseline.extend([ring_current,Beamstop_WAXS,Beamstop_SAXS,Izero_Diode,Izero_Mesh,
                     SlitBottom_I, Slit1_Top_I, Slit1_IB_I,DM7_Diode,DM4_PD])
