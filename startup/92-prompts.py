@@ -10,10 +10,14 @@ class RSoXSPrompt(Prompts):
         formatted_date = dt.strftime('%Y-%m-%d')
 
         if len(RE.md['user_name']) > 0 and len(RE.md['project_name']) > 0 and len(RE.md['institution']) > 0:
-            RSoXStoken = (Token.Prompt, 'RSoXS {}/{}/{}/{} '.format(RE.md['institution'],
-                                                                    RE.md['user_name'],
-                                                                    RE.md['project_name'],
-                                                                    formatted_date))
+            RSoXStoken = (Token.Prompt, 'RSoXS '+colored('{}/{}_{}_{}/{}/{} '.format(RE.md['cycle'],
+                                                                                     RE.md['cycle'],
+                                                                                     RE.md['institution'],
+                                                                                     RE.md['user_name'],
+                                                                                     RE.md['project_name'],
+                                                                                     formatted_date)
+                                                         ,'red')
+                          )
         else:
             RSoXStoken = (Token.OutPrompt, 'RSoXS (define metadata before scanning)')
         return [RSoXStoken,
