@@ -123,7 +123,7 @@ class StandardProsilicaWithTIFFV33(StandardProsilicaV33):
                reg=db.reg)
 
 
-Side_cam = StandardProsilica('XF:07ID1-ES:1{Scr:2}', name='RSoXS Sample Area Camera',timeout = 5)
+Side_cam = StandardProsilica('XF:07ID1-ES:1{Scr:2}', name='RSoXS Sample Area Camera')
 DetS_cam = StandardProsilica('XF:07ID1-ES:1{Scr:3}', name='WAXS Detector Area Camera')
 Izero_cam = StandardProsilica('XF:07ID1-ES:1{Scr:1}', name='Izero YAG Camera')
 Sample_cam = StandardProsilica('XF:07ID1-ES:1{Scr:4}', name='RSoXS Sample Area Camera')
