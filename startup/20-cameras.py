@@ -154,9 +154,11 @@ def crosshair_on():crosshair.use.set(1)
 def crosshair_off():crosshair.use.set(0)
 #
 #
-all_standard_pros = [Sample_cam, DetS_cam, Izero_cam]
+all_standard_pros = [SampleViewer_cam,Sample_cam, DetS_cam, Izero_cam]
 for camera in all_standard_pros:
-    camera.read_attrs = ['stats1', 'stats2', 'stats3', 'stats4', 'stats5']
+    # camera.read_attrs = ['stats1', 'stats2', 'stats3', 'stats4', 'stats5']
+    # getattr(camera, s).kind = 'normal'
+    [setattr(getattr(camera, s), 'kind', 'normal') for s in ['stats1', 'stats2', 'stats3', 'stats4', 'stats5']]
     # camera.tiff.read_attrs = []  # leaving just the 'image'
     for stats_name in ['stats1', 'stats2', 'stats3', 'stats4', 'stats5']:
         stats_plugin = getattr(camera, stats_name)
@@ -167,8 +169,7 @@ for camera in all_standard_pros:
 #     #camera.stage_sigs[camera.trans1.blocking_callbacks] = 1
 #
 #     #The following line should only be used when running AD V33
-#     # camera.cam.ensure_nonblocking()
-#
+#   camera.cam.ensure_nonblocking()
     camera.stage_sigs[camera.cam.trigger_mode] = 'Fixed Rate'
 
-#SampleViewer_cam.tiff.kind = 'hinted'
+SampleViewer_cam.tiff.kind = 'normal'
