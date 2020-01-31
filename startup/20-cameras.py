@@ -95,8 +95,8 @@ class StandardProsilicaV33(SingleTriggerV33, ProsilicaDetector):
     roi2 = Cpt(ROIPlugin, 'ROI2:')
     roi3 = Cpt(ROIPlugin, 'ROI3:')
     roi4 = Cpt(ROIPlugin, 'ROI4:')
-    proc1 = Cpt(ProcessPlugin, 'PROC1:')
-    over1 = Cpt(OverlayPlugin, 'OVER1:')
+    proc1 = Cpt(ProcessPlugin, 'Proc1:')
+    over1 = Cpt(OverlayPlugin, 'Over1:')
 
     # This class does not save TIFFs. We make it aware of the TIFF plugin
     # only so that it can ensure that the plugin is not auto-saving.
@@ -111,26 +111,24 @@ class StandardProsilicaWithTIFF(StandardProsilica):
     tiff = Cpt(TIFFPluginWithFileStore,
                suffix='TIFF1:',
                write_path_template='/DATA/images/data/%Y/%m/%d/',
-               root='/DATA/images/data',
-               reg=db.reg)
+               root='/DATA/images/data')
 
 
 class StandardProsilicaWithTIFFV33(StandardProsilicaV33):
     tiff = Cpt(TIFFPluginWithFileStore,
                suffix='TIFF1:',
                write_path_template='/DATA/images/data/%Y/%m/%d/',
-               root='/DATA/images/data',
-               reg=db.reg)
+               root='/DATA/images/data')
 
 
 Side_cam = StandardProsilica('XF:07ID1-ES:1{Scr:2}', name='RSoXS Sample Area Camera')
 DetS_cam = StandardProsilica('XF:07ID1-ES:1{Scr:3}', name='WAXS Detector Area Camera')
 Izero_cam = StandardProsilica('XF:07ID1-ES:1{Scr:1}', name='Izero YAG Camera')
 Sample_cam = StandardProsilica('XF:07ID1-ES:1{Scr:4}', name='RSoXS Sample Area Camera')
-SampleViewer_cam = StandardProsilicaWithTIFF('XF:07ID1-ES:1{Scr:5}',
+SampleViewer_cam = StandardProsilicaWithTIFFV33('XF:07ID1-ES:1{Scr:5}',
                                                 name='Sample Imager Detector Area Camera',
                                                 read_attrs=['tiff'])
-
+SampleViewer_cam.cam.ensure_nonblocking()
 crosshair = Sample_cam.over1.overlay_1
 Sample_cam.over1.overlay_1.position_y.kind='hinted'
 Sample_cam.over1.overlay_1.position_x.kind='hinted'
@@ -156,7 +154,7 @@ def crosshair_on():crosshair.use.set(1)
 def crosshair_off():crosshair.use.set(0)
 #
 #
-all_standard_pros = [Sample_cam, DetS_cam, Izero_cam, SampleViewer_cam]
+all_standard_pros = [Sample_cam, DetS_cam, Izero_cam]
 for camera in all_standard_pros:
     camera.read_attrs = ['stats1', 'stats2', 'stats3', 'stats4', 'stats5']
     # camera.tiff.read_attrs = []  # leaving just the 'image'

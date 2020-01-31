@@ -65,11 +65,10 @@ def image_bar(bar,path = None):
     loc_Q = queue.Queue(1)
     ypos = np.arange(-100,110,25)
     images = []
-    for pos in ypos:
-        yield from bps.mv(sam_viewer,pos)
-        imageuid = yield from bp.count([SampleViewer_cam],1)
-        print(imageuid)
-        images.append(next(db[imageuid].data('Sample Imager Detector Area Camera_image')))
+
+    imageuid = yield from bp.list_scan([SampleViewer_cam], sam_viewer, ypos)
+    print(imageuid)
+    images = list(db[imageuid].data('Sample Imager Detector Area Camera_image'))
     image = stitch_sample(images, 25,5)
     update_bar(bar, loc_Q)
     if isinstance(path,str):
