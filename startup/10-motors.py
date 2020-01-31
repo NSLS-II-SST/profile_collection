@@ -109,9 +109,9 @@ class FMBOEpicsMotor(EpicsMotor):
         boxed_text('%s status signals' % self.name, text, 'green',shrink=True)
 
 class prettymotor(FMBOEpicsMotor):
-    def __init__(self,*args,**kwargs):
-        super(prettymotor, self).__init__(*args,**kwargs)
-        self.read_attrs = ['user_readback', 'user_setpoint']
+    #def __init__(self,*args,**kwargs):
+    #    super(prettymotor, self).__init__(*args,**kwargs)
+    #    self.read_attrs = ['user_readback', 'user_setpoint']
     def where(self):
         return ('{} : {}').format(
             colored(self.name, 'lightblue'),
