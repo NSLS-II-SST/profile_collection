@@ -84,7 +84,7 @@ class FMBOEpicsMotor(EpicsMotor):
     enc_lss_desc = Cpt(EpicsSignal, '_ENC_LSS_STS.DESC')
 
 
-    def home(self):
+    def home(self,*args,**kwargs):
         yield from bps.mv(self.home_cmd,1)
 
     def clear_encoder_loss(self):
@@ -109,8 +109,8 @@ class FMBOEpicsMotor(EpicsMotor):
         boxed_text('%s status signals' % self.name, text, 'green',shrink=True)
 
 class prettymotor(FMBOEpicsMotor):
-    def __init__(self):
-        super(prettymotor, self).__init__()
+    def __init__(self,*args,**kwargs):
+        super(prettymotor, self).__init__(*args,**kwargs)
         self.read_attrs = ['user_readback', 'user_setpoint']
     def where(self):
         return ('{} : {}').format(
