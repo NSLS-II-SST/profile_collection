@@ -85,7 +85,7 @@ def en_scan_core(signals,dets, energy, energies,times,enscan_type=None):
     for signal in signals:
         signal.kind = 'normal'
 
-    yield from bp.scan_nd(dets + signals + [en.energy],
+    yield from bp.scan_nd(dets + signals,
                           sigcycler,
                           md={'plan_name':enscan_type})
 
