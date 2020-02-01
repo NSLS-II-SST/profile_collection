@@ -21,7 +21,7 @@ def full_carbon_NEXAFS(sigs=[],
     if len(read_input("Starting a Carbon NEXAFS scan hit enter in the next 3 seconds to abort"
                       "\nYou remembered to hook up the shutter, right?", "abort", "", 3)) > 0:
         return
-    yield from bps.abs_set(mir3.Pitch,7.958,wait=True)
+    yield from bps.abs_set(mir3.Pitch,7.94,wait=True)
     # create a list of energies
     energies = np.arange(270,282,.5)
     energies = np.append(energies,np.arange(282,286,.1))

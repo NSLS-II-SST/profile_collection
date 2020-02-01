@@ -18,9 +18,9 @@ SlitBottom_I = EpicsSignalRO('XF:07ID-ES1{Slt1:I400-1}:IC2_MON',name = 'RSoXS Sl
 #SlitTop_I    = EpicsSignalRO('XF:07ID-ES1{Slt1:I400-1}:IC3_MON',name = 'Slit Top', kind='normal')
 
 
-Izero_Mesh  = EpicsSignalRO('XF:07ID1-BI{EM:1}EM180:Current1:MeanValue_RBV',
+Izero_Mesh  = EpicsSignalRO('XF:07ID1-BI{EM:1}EM180:Current2:MeanValue_RBV',
                            name = 'RSoXS Au Mesh Current', kind='normal')
-Sample_TEY = EpicsSignalRO('XF:07ID1-BI{EM:1}EM180:Current2:MeanValue_RBV',
+Sample_TEY  = EpicsSignalRO('XF:07ID1-BI{EM:1}EM180:Current1:MeanValue_RBV',
                            name = 'RSoXS Sample Current', kind='normal')
 Slit1_Top_I  = EpicsSignalRO('XF:07ID1-BI{EM:1}EM180:Current3:MeanValue_RBV',
                            name = 'RSoXS Slit 1 Top Current', kind='normal')
