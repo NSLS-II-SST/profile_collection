@@ -89,7 +89,7 @@ def full_Oxygen_NEXAFS(sigs=[],
     if len(read_input("Starting a Oxygen NEXAFS scan hit enter in the next 3 seconds to abort"
                       "\nYou remembered to hook up the shutter, right?", "abort", "", 3)) > 0:
         return
-    yield from bps.abs_set(mir3.Pitch,7.915,wait=True)
+    yield from bps.mv(mir3.Pitch,7.92)
     yield from bps.mv(DiodeRange, 6)
     # create a list of energies
     energies = np.arange(510,525,1)

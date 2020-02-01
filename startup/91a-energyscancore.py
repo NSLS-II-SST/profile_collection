@@ -93,7 +93,7 @@ def NEXAFS_scan_core(signals,dets, energy, energies,enscan_type=None, openshutte
 
     sigcycler = cycler(energy, energies)
 
-    yield from bps.abs_set(en, energies[0], timeout=180, wait=True)
+    yield from bps.mv(en, energies[0])
     #for signal in signals:
     #    signal.kind = 'normal'
     if openshutter:
