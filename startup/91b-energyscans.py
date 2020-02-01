@@ -136,7 +136,7 @@ def full_nitrogen_scan_nd(multiple=1,sigs=[],
     #beamline_status()
     if len(read_input("Starting a Nitrogen energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
-    yield from bps.abs_set(mir3.Pitch, 7.93, wait=True)
+    yield from bps.abs_set(mir3.Pitch, 7.958, wait=True)
     # create a list of energies
     energies = np.arange(385,397,1)
     energies = np.append(energies,np.arange(397,407,.2))
@@ -173,7 +173,7 @@ def short_nitrogen_scan_nd(multiple=1,sigs=[],
     if len(read_input("Starting a Short Nitrogen energy scan "
                       "hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
-    yield from bps.abs_set(mir3.Pitch, 7.93, wait=True)
+    yield from bps.abs_set(mir3.Pitch, 7.958, wait=True)
     # create a list of energies
     energies = np.arange(385,397,1)
     energies = np.append(energies,np.arange(397,401,.2))
@@ -212,7 +212,7 @@ def very_short_carbon_scan_nd(multiple=1,sigs=[],
     if len(read_input("Starting a very short Carbon energy scan hit "
                       "enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
-    yield from bps.abs_set(mir3.Pitch, 7.93, wait=True)
+    yield from bps.abs_set(mir3.Pitch, 7.958, wait=True)
     # create a list of energies
     energies = np.arange(270,282,2)
     energies = np.append(energies,np.arange(282,286,.5))
@@ -254,7 +254,7 @@ def short_carbon_scan_nd(multiple=1,sigs=[],
         return
 
     #Oct 2019, this pitch value seems to be optimal for carbon
-    yield from bps.abs_set(mir3.Pitch,7.93,wait=True)
+    yield from bps.abs_set(mir3.Pitch,7.958,wait=True)
 
     # create a list of energies
     energies = np.arange(270,282,1)
@@ -298,7 +298,7 @@ def focused_carbon_scan_nd(multiple=1,sigs=[],
         return
 
     #Oct 2019, this pitch value seems to be optimal for carbon
-    yield from bps.abs_set(mir3.Pitch,7.93,wait=True)
+    yield from bps.abs_set(mir3.Pitch,7.958,wait=True)
 
     # create a list of energies
     energies = np.arange(270,282,5)
@@ -337,7 +337,7 @@ def g_carbon_scan_nd(multiple=1,sigs=[],
     sample()
     if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
-    yield from bps.abs_set(mir3.Pitch,7.93,wait=True)
+    yield from bps.abs_set(mir3.Pitch,7.958,wait=True)
     # create a list of energies
     energies = np.array([270,283.5,284.75,285.2,286.5])
     times = energies.copy()
@@ -368,7 +368,7 @@ def t_carbon_scan_nd(multiple=1,sigs=[],
     sample()
     if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
-    yield from bps.abs_set(mir3.Pitch,7.93,wait=True)
+    yield from bps.abs_set(mir3.Pitch,7.958,wait=True)
     # create a list of energies
     energies = np.array([270,283,284.3,284.9,285.5,286,286.5,287])
     times = energies.copy()
@@ -400,7 +400,7 @@ def sufficient_carbon_scan_nd(multiple=1,sigs=[],
     sample()
     if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
-    yield from bps.abs_set(mir3.Pitch,7.93,wait=True)
+    yield from bps.abs_set(mir3.Pitch,7.958,wait=True)
     # create a list of energies
     energies = np.arange(270,282,1)
     energies = np.append(energies,np.arange(282,286,.1))
@@ -440,7 +440,7 @@ def picky_carbon_scan_nd(multiple=1,sigs=[],
     sample()
     if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
-    yield from bps.abs_set(mir3.Pitch,7.93,wait=True)
+    yield from bps.abs_set(mir3.Pitch,7.958,wait=True)
     # create a list of energies
     energies = np.arange(270,285,1)
     times = energies.copy()
@@ -473,7 +473,7 @@ def full_carbon_scan_nd(multiple=1,sigs=[],
     sample()
     if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
-    yield from bps.abs_set(mir3.Pitch,7.93,wait=True)
+    yield from bps.abs_set(mir3.Pitch,7.958,wait=True)
     # create a list of energies
     energies = np.arange(270,282,.5)
     energies = np.append(energies,np.arange(282,286,.1))
@@ -512,7 +512,7 @@ def full_carbon_NEXAFS(sigs=[],
     if len(read_input("Starting a Carbon NEXAFS scan hit enter in the next 3 seconds to abort"
                       "\nYou remembered to hook up the shutter, right?", "abort", "", 3)) > 0:
         return
-    yield from bps.abs_set(mir3.Pitch,7.93,wait=True)
+    yield from bps.abs_set(mir3.Pitch,7.958,wait=True)
     # create a list of energies
     energies = np.arange(270,282,.5)
     energies = np.append(energies,np.arange(282,286,.1))
