@@ -56,7 +56,7 @@ def full_Nitrogen_NEXAFS(sigs=[],
     if len(read_input("Starting a Nitrogen NEXAFS scan hit enter in the next 3 seconds to abort"
                       "\nYou remembered to hook up the shutter, right?", "abort", "", 3)) > 0:
         return
-    yield from bps.abs_set(mir3.Pitch,7.92,wait=True)
+    yield from bps.mv(mir3.Pitch,7.92)
     yield from bps.mv(DiodeRange,7)
     # create a list of energies
     energies = np.arange(385,397,1)
@@ -90,7 +90,7 @@ def full_Oxygen_NEXAFS(sigs=[],
                       "\nYou remembered to hook up the shutter, right?", "abort", "", 3)) > 0:
         return
     yield from bps.mv(mir3.Pitch,7.92)
-    yield from bps.mv(DiodeRange, 6)
+    yield from bps.mv(DiodeRange, 7)
     # create a list of energies
     energies = np.arange(510,525,1)
     energies = np.append(energies,np.arange(525,540,.2))
@@ -123,7 +123,7 @@ def full_Al_NEXAFS(sigs=[],
     if len(read_input("Starting a Aluminum NEXAFS scan hit enter in the next 3 seconds to abort"
                       "\nYou remembered to hook up the shutter, right?", "abort", "", 3)) > 0:
         return
-    yield from bps.abs_set(mir3.Pitch,7.89,wait=True)
+    yield from bps.mv(mir3.Pitch,7.895)
     yield from bps.mv(DiodeRange, 7)
     # create a list of energies
     energies = np.arange(1550,1620,.5)
@@ -156,7 +156,7 @@ def full_Zn_NEXAFS(sigs=[],
     if len(read_input("Starting a Zinc NEXAFS scan hit enter in the next 3 seconds to abort"
                       "\nYou remembered to hook up the shutter, right?", "abort", "", 3)) > 0:
         return
-    yield from bps.abs_set(mir3.Pitch,7.9,wait=True)
+    yield from bps.mv(mir3.Pitch,7.895)
     yield from bps.mv(DiodeRange, 7)
     # create a list of energies
     energies = np.arange(1000,1070,.5)
