@@ -124,7 +124,7 @@ def full_Al_NEXAFS(sigs=[],
                       "\nYou remembered to hook up the shutter, right?", "abort", "", 3)) > 0:
         return
     yield from bps.abs_set(mir3.Pitch,7.89,wait=True)
-    yield from bps.mv(DiodeRange, 6)
+    yield from bps.mv(DiodeRange, 7)
     # create a list of energies
     energies = np.arange(1550,1620,.5)
 
@@ -157,7 +157,7 @@ def full_Zn_NEXAFS(sigs=[],
                       "\nYou remembered to hook up the shutter, right?", "abort", "", 3)) > 0:
         return
     yield from bps.abs_set(mir3.Pitch,7.9,wait=True)
-    yield from bps.mv(DiodeRange, 6)
+    yield from bps.mv(DiodeRange, 7)
     # create a list of energies
     energies = np.arange(1000,1070,.5)
     times = energies.copy()
