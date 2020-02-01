@@ -1,6 +1,6 @@
 run_report(__file__)
 
-from ophyd import EpicsSignalRO
+from ophyd import EpicsSignalRO, EpicsSignal
 
 # These might need/make more sense to be split up into separate files later on.
 # But while we have so few, I'm just putting them in this single file.
@@ -27,7 +27,7 @@ Slit1_Top_I  = EpicsSignalRO('XF:07ID1-BI{EM:1}EM180:Current3:MeanValue_RBV',
 Slit1_IB_I   = EpicsSignalRO('XF:07ID1-BI{EM:1}EM180:Current4:MeanValue_RBV',
                            name = 'RSoXS Slit 1 Inbound Current', kind='normal')
 
-
+DiodeRange = EpicsSignal('XF:07ID-ES1{DMR:I400-1}:RANGE_BP')
 
 DM7_Diode = EpicsSignalRO('XF:07ID-BI{DM7:I400-1}:IC4_MON',name = 'DM7 Photodiode', kind='normal')
 DM4_PD            = EpicsSignalRO('XF:07ID-BI{DM5:F4}Cur:I3-I', name='DM4 Photodiode', kind='normal')
