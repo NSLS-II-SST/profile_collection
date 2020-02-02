@@ -41,7 +41,7 @@ def full_carbon_NEXAFS(sigs=[],
 def full_Nitrogen_NEXAFS(sigs=[],
                         dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en):
     '''
-    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
+    Full Nitrogen Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
 
 
     :param sigs: which other signals to use
