@@ -20,7 +20,7 @@ def spiralsearch(diameter=.6, stepsize=.2, energy = None):
             yield from bps.mv(en, energy)
     x_center = sam_X.user_setpoint.value
     y_center = sam_Y.user_setpoint.value
-    num = round(diameter / stepsize)
+    num = round(diameter / stepsize) + 1
     yield from spiral_square([saxs_det], sam_X, sam_Y, x_center=x_center, y_center=y_center,
                      x_range=diameter, y_range=diameter, x_num=num, y_num=num)
 

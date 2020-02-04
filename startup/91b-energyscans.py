@@ -275,6 +275,46 @@ def short_carbon_scan_nd(multiple=1,sigs=[],
     yield from en_scan_core(sigs, dets,energy,energies,times,enscan_type=enscan_type)
 
 
+def short_sulfurl_scan_nd(multiple=1,sigs=[],
+                         dets=[sw_det],energy=en):
+    '''
+    Full Sulfur L Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
+    this results in 61 exposures
+
+
+    :param multiple: adjustment for exposure times
+    :param mesh: which Izero channel to use
+    :param det: which detector to use
+    :param energy: what energy motor to scan
+    :return: perform scan
+
+    normal scan takes ~ 10 minutes to complete
+    '''
+    sample()
+    enscan_type = 'short_sulfurl_scan_nd'
+    if len(read_input("Starting a short Sulfur L energy scan hit enter in "
+                      "the next 3 seconds to abort", "abort", "", 3)) > 0:
+        return
+
+    #Oct 2019, this pitch value seems to be optimal for carbon
+    yield from bps.abs_set(mir3.Pitch,7.94,wait=True)
+
+    # create a list of energies
+    energies = np.arange(150,160,1)
+    energies = np.append(energies,np.arange(160,170,.25))
+    energies = np.append(energies,np.arange(170,200,1))
+    times = energies.copy()
+
+    # Define exposures times for different energy ranges
+    times[energies<282] = 2
+    times[(energies < 286) & (energies >= 282)] = 5
+    times[energies >= 286] = 2
+    times *= multiple
+
+    # use these energies and exposure times to scan energy and record detectors and signals
+    yield from en_scan_core(sigs, dets,energy,energies,times,enscan_type=enscan_type)
+
+
 
 def focused_carbon_scan_nd(multiple=1,sigs=[],
                          dets=[sw_det],energy=en):

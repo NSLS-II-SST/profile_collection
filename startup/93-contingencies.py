@@ -2,6 +2,7 @@ import bluesky.plan_stubs as bps
 from bluesky.suspenders import SuspendBoolHigh, SuspendFloor, SuspendBoolLow
 import logging
 import datetime
+import os
 
 run_report(__file__)
 
@@ -92,6 +93,20 @@ RE.install_suspender(suspendx)
 
 # if there is no scatter, pause
 
+
+def turn_on_checks():
+    RE.install_suspender(suspend_shutter1)
+    RE.install_suspender(suspend_shutter4)
+    RE.install_suspender(suspend_gvll)
+    RE.install_suspender(suspend_current)
+    RE.install_suspender(suspendx)
+
+def turn_off_checks():
+    RE.remove_suspender(suspend_shutter1)
+    RE.remove_suspender(suspend_shutter4)
+    RE.remove_suspender(suspend_gvll)
+    RE.remove_suspender(suspend_current)
+    RE.remove_suspender(suspendx)
 
 
 class OSEmailHandler(logging.Handler):
