@@ -1,6 +1,6 @@
 from IPython.core.magic import register_line_magic
 from ophyd import EpicsMotor, EpicsSignal
-import ophyd.Component as Cpt
+from ophyd import Component as Cpt
 
 
 run_report(__file__)
