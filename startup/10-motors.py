@@ -1,5 +1,6 @@
 from IPython.core.magic import register_line_magic
-from ophyd import EpicsMotor
+from ophyd import EpicsMotor, EpicsSignal
+import ophyd.Component as Cpt
 
 
 run_report(__file__)
@@ -9,6 +10,8 @@ class FMBOEpicsMotor(EpicsMotor):
     encoder = Cpt(EpicsSignal, '.REP')
     clr_enc_lss = Cpt(EpicsSignal, '_ENC_LSS_CLR_CMD.PROC')
     home_cmd = Cpt(EpicsSignal, '_HOME_CMD.PROC')
+    enable = Cpt(EpicsSignal, '_ENA_CMD.PROC')
+    kill = Cpt(EpicsSignal, '_KILL_CMD.PROC')
 
     status_list = ('MTACT', 'MLIM', 'PLIM', 'AMPEN', 'LOOPM', 'TIACT', 'INTMO',
                    'DWPRO', 'DAERR', 'DVZER', 'ABDEC', 'UWPEN', 'UWSEN', 'ERRTAG',
@@ -132,10 +135,22 @@ class prettymotor(FMBOEpicsMotor):
             loc = float(line)
         except:
             if line is 's':
-                self.status()
+                self.status() # followed by an s, display status
+            elif line[0] is 'a':
+                try:
+                    loc = float(line[1:])
+                except:
+                    #followed by an a but not a number, just display location
+                    boxed_text(self.name, self.where_sp(), 'lightgray', shrink=True)
+                else:
+                    # followed by an a and a number, do absolute move
+                    RE(bps.mv(self, loc))
+                    boxed_text(self.name, self.where_sp(), 'lightgray', shrink=True)
             else:
+                # followed by something besides a number, a or s, just show location
                 boxed_text(self.name, self.where_sp(), 'lightgray', shrink=True)
         else:
+            # followed by a number - relative move
             RE(bps.mvr(self, loc))
             boxed_text(self.name, self.where(), 'lightgray', shrink=True)
 
