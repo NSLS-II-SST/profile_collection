@@ -204,7 +204,7 @@ def buildeputable(start, stop, step, widfract, startinggap, name, phase):
     #print(ens,gaps)
 
 
-def buildeputablegaps(start, stop, step, widfract, startingen, name, phase, mode):
+def buildeputablegaps(start, stop, step, widfract, startingen, name, phase):
     gaps = np.arange(start,stop,step)
     ens = []
     gapsout = []
@@ -213,10 +213,6 @@ def buildeputablegaps(start, stop, step, widfract, startingen, name, phase, mode
     Izero_Mesh.kind= 'hinted'
     #startinggap = epugap_from_energy(ens[0]) #get starting position from existing table
     yield from bps.mv(epu_phase,phase)
-    if mode in {0,2,3}:
-        yield from bps.mv(epu_mode,mode)
-    else:
-        print("invalid mode, leaving it as is")
     count = 0
 
     for gap in gaps:
@@ -226,15 +222,15 @@ def buildeputablegaps(start, stop, step, widfract, startingen, name, phase, mode
         #                   min(99500,max(20000,startinggap-1500*widfract)),
         #                   min(100000,max(21500,startinggap+1500*widfract)),
         #                   51)
-        yield from tune_max([Izero_Mesh,Beamstop_WAXS],"WAXS Beamstop",epu_gap,
+        yield from tune_max([Izero_Mesh,Beamstop_WAXS],"RSoXS Au Mesh Current",mono_en,
                                     min(2100,max(65,startingen-25*widfract)),
                                     min(2200,max(75,startingen+50*widfract)),
                                     1,25,3,True,md={'plan_name':'energy_tune'})
 
-        ens.append(bec.peaks.max["WAXS Beamstop"][0])
-        heights.append(bec.peaks.max["WAXS Beamstop"][1])
+        ens.append(bec.peaks.max["RSoXS Au Mesh Current"][0])
+        heights.append(bec.peaks.max["RSoXS Au Mesh Current"][1])
         gapsout.append(epu_gap.position)
-        startingen = bec.peaks.max["WAXS Beamstop"][0]
+        startingen = bec.peaks.max["RSoXS Au Mesh Current"][0]
         #data = np.column_stack((ensout, gaps))
         data = {'Energies': ens, 'EPUGaps': gapsout, 'PeakCurrent': heights}
         dataframe = pd.DataFrame(data=data)
