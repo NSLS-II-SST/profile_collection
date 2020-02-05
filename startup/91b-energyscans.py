@@ -155,7 +155,7 @@ def full_nitrogen_scan_nd(multiple=1,sigs=[],
 
 
 def short_nitrogen_scan_nd(multiple=1,sigs=[],
-                          dets=[sw_det],energy=en):
+                          dets=[sw_det],energy=en,pol=100):
     '''
     Short Nitrogen Scan runs an RSoXS sample set through the N edge, with particular emphasis in he pre edge region
 
@@ -175,6 +175,8 @@ def short_nitrogen_scan_nd(multiple=1,sigs=[],
                       "hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     yield from bps.abs_set(mir3.Pitch, 7.92,wait=False,timeout=2)
+
+    yield from bps.mv(en.polarization,pol)
     # create a list of energies
     energies = np.arange(385,397,1)
     energies = np.append(energies,np.arange(397,401,.2))
