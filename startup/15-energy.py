@@ -36,13 +36,11 @@ from scipy import interpolate
 #gaps = {20000,24000,50000}
 #gapinterp = interpolate.interp2d(energies, phases, gaps, kind='cubic',bounds_error=True)
 
-
-
-def epugap_from_energy_old(energy,harmonic=1):
+def epugap_from_energy_old(energy):
     '''
     this version is using values from April 27 valid from 150 eV through 1500 eV for First Harmonic
     '''
-    if harmonic is 3 or energy >= 1100:
+    if energy >= 1100:
         enoff = energy - 370.01
         gap = (enoff ** 0) * 22833.87619739154 + \
               (enoff ** 1) * 29.68655012463454 + \
@@ -70,12 +68,24 @@ def epugap_from_energy_old(energy,harmonic=1):
     return gap
 
 
-def epugap_from_energy(energy, phase, mode, harmonic = 1, polarization = 0):
+def epugap_from_en_pol(energy,polarization):
+    '''
+    this version is using values from April 27 valid from 150 eV through 1500 eV for First Harmonic
+    '''
+    if polarization is 100 and energy >= 1100:
+        enoff = energy - 370.01
+        gap = (enoff ** 0) * 22833.87619739154 + \
+              (enoff ** 1) * 29.68655012463454 + \
+              (enoff ** 2) * -0.03210984163384775 + \
+              (enoff ** 3) * 4.980917046937771e-05 + \
+              (enoff ** 4) * -6.396452510943625e-08 + \
+              (enoff ** 5) * 5.991083149692317e-11 + \
+              (enoff ** 6) * -3.812842880047685e-14 + \
+              (enoff ** 7) * 1.623556090541289e-17 + \
+              (enoff ** 8) * -4.365835230578085e-21 + \
+              (enoff ** 9) * 5.739408834109368e-25
 
-    # for mode 0, a lookup table of energy positions, phase positions, gap positions
-    if mode is 0:
-        return gapinterp(energy,phase)
-    elif mode is 2:
+    else:
         enoff = energy - 150
         gap = (enoff ** 0) * 20569.54179105347 + \
               (enoff ** 1) * 65.67661627149975 + \
@@ -87,9 +97,25 @@ def epugap_from_energy(energy, phase, mode, harmonic = 1, polarization = 0):
               (enoff ** 7) * -9.027454042580941e-15 + \
               (enoff ** 8) * 4.135706733331245e-18 + \
               (enoff ** 9) * -7.796287724230847e-22
-        return gap / harmonic
+    return gap
+
+def epuphase_from_en_pol(polarization):
+    if polarization is 190:
+        return 29500
     else:
-        return None
+        return 0
+
+
+def epumode_from_en_pol(polarization):
+    return 2
+
+
+def pol_from_mode_phase(phase, mode):
+    if phase is 29500:
+        return 190
+    else:
+        return 100
+
 
 class EnPos(PseudoPositioner):
     """Energy pseudopositioner class.
@@ -100,8 +126,7 @@ class EnPos(PseudoPositioner):
     """
     # synthetic axis
     energy = Cpt(PseudoSingle, kind='hinted', limits=(150,2500),name="Beamline Energy")
-    phase = Cpt(PseudoSingle, kind='hinted', limits=(-29500,29500),name="X-ray Phase")
-    mode = Cpt(PseudoSingle, kind='hinted', limits=(0,4),name="X-ray Phase Energy")
+    polarization = Cpt(PseudoSingle, kind='hinted', limits=(-29500,29500),name="X-ray Polarization")
 
     # real motors
 
@@ -113,17 +138,16 @@ class EnPos(PseudoPositioner):
     @pseudo_position_argument
     def forward(self, pseudo_pos):
         '''Run a forward (pseudo -> real) calculation'''
-        return self.RealPosition(epugap=epugap_from_energy(pseudo_pos.energy, pseudo_pos.phase, pseudo_pos.mode),
+        return self.RealPosition(epugap=epugap_from_en_pol(pseudo_pos.energy, pseudo_pos.polarization),
                                  monoen=pseudo_pos.energy,
-                                 epuphase=pseudo_pos.phase,
-                                 epumode=pseudo_pos.mode)
+                                 epuphase=epuphase_from_en_pol(pseudo_pos.polarization),
+                                 epumode=epumode_from_en_pol(pseudo_pos.polarization))
 
     @real_position_argument
     def inverse(self, real_pos):
         '''Run an inverse (real -> pseudo) calculation'''
         return self.PseudoPosition( energy=real_pos.monoen,
-                                    phase=real_pos.epuphase,
-                                    mode=real_pos.epumode)
+                                    polarization=pol_from_mode_phase(real_pos.epuphase,real_pos.epumode))
 
     def where_sp(self):
         return ('Beamline Energy Setpoint : {}'
@@ -162,10 +186,6 @@ class EnPos(PseudoPositioner):
     def wh(self):
         boxed_text(self.name+" location", self.where_sp(), 'green',shrink=True)
 
-
-    def set_mirror_grating_manually(self,eV,m,k,c):
-        [grating,mirror] = get_mirror_grating_angles(eV, c, m, k)
-        yield from bps.mv(self.monoen.mirror2,mirror,self.monoen.grating,grating)
 
 class EnPosold(PseudoPositioner):
     """Energy pseudopositioner class.
@@ -227,7 +247,7 @@ class EnPosold(PseudoPositioner):
         [grating,mirror] = get_mirror_grating_angles(eV, c, m, k)
         yield from bps.mv(self.monoen.mirror2,mirror,self.monoen.grating,grating)
 
-en = EnPosold('', name='en',concurrent=1)
+en = EnPos('', name='en',concurrent=1)
 en.energy.kind = 'hinted'
 en.monoen.kind = 'normal'
 en.monoen.readback.kind = 'normal'
