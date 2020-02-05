@@ -64,29 +64,31 @@ def beamup_notice():
 
 
 
-suspend_shutter1 = SuspendBoolLow(gvll.state,sleep = 10,
-                                  tripped_message="Front End Shutter Closed, waiting for it to open",)
+suspend_gvll = SuspendBoolLow(gvll.state,sleep = 10,
+                                  tripped_message="Gate valve to load lock is closed, waiting for it to open",)
 
 suspend_shutter4 = SuspendBoolHigh(psh4.state,sleep = 10,
                                   tripped_message="Shutter 4 Closed, waiting for it to open",
                                   pre_plan=beamdown_notice, post_plan=beamup_notice)
 
-suspend_gvll = SuspendBoolHigh(psh4.state,sleep = 10,
-                                  tripped_message="Gate valve to load lock is closed, waiting for it to open",
+suspend_shutter1 = SuspendBoolHigh(psh4.state,sleep = 10,
+                                  tripped_message="Front End Shutter Closed, waiting for it to open",
                                   pre_plan=beamdown_notice, post_plan=beamup_notice)
 
 
-
+RE.install_suspender(suspend_shutter1)
+RE.install_suspender(suspend_shutter4)
+RE.install_suspender(suspend_gvll)
 
 
 suspend_current = SuspendFloor(ring_current, resume_thresh=350, suspend_thresh=250,sleep = 10,
                                tripped_message="Beam Current is below threshold, will resume when above 350 mA",
                                pre_plan=beamdown_notice, post_plan=beamup_notice)
-RE.install_suspender(suspend_shutter1)
-RE.install_suspender(suspend_shutter4)
-RE.install_suspender(suspend_gvll)
+
+
 
 RE.install_suspender(suspend_current)
+
 suspendx = SuspendBoolHigh(sam_X.enc_lss,sleep = 40, tripped_message="Sample X has lost encoder position, resetting, please wait, scan will resume automatically.",
                            pre_plan=enc_clr_x)
 RE.install_suspender(suspendx)
