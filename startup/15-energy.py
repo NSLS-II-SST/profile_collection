@@ -84,7 +84,7 @@ def epugap_from_en_pol(energy,polarization):
               (enoff ** 7) * 1.623556090541289e-17 + \
               (enoff ** 8) * -4.365835230578085e-21 + \
               (enoff ** 9) * 5.739408834109368e-25
-    elif polarization == 190 and energy > 392 and energy < 930:
+    elif polarization == 190 and energy > 385 and energy < 930:
         gap = 13452 + 22.51 * energy
     else:
         enoff = energy - 150
