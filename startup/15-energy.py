@@ -110,7 +110,7 @@ def epumode_from_en_pol(polarization):
     return 2
 
 
-def pol_from_mode_phase(phase, mode):
+def pol_from_mode_phase(phase):
     if abs(phase - 29500) <100:
         return 190
     else:
@@ -145,7 +145,7 @@ class EnPos(PseudoPositioner):
     def inverse(self, real_pos):
         '''Run an inverse (real -> pseudo) calculation'''
         return self.PseudoPosition( energy=real_pos.monoen,
-                                    polarization=pol_from_mode_phase(real_pos.epuphase,real_pos.epumode))
+                                    polarization=pol_from_mode_phase(real_pos.epuphase))
 
     def where_sp(self):
         return ('Beamline Energy Setpoint : {}'
