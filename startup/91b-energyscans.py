@@ -59,7 +59,7 @@ def short_oxygen_scan_nd(multiple=1,sigs=[],
     #beamline_status()
     if len(read_input("Starting a Oxygen energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
-    yield from bps.abs_set(mir3.Pitch,7.89,wait=True)
+    yield from bps.abs_set(mir3.Pitch,7.92,wait=False,timeout=2)
     # create a list of energies
     energies = np.arange(510,525,2)
     energies = np.append(energies,np.arange(525,540,0.5))
@@ -173,7 +173,7 @@ def short_nitrogen_scan_nd(multiple=1,sigs=[],
     if len(read_input("Starting a Short Nitrogen energy scan "
                       "hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
-    yield from bps.abs_set(mir3.Pitch, 7.94, wait=True)
+    yield from bps.abs_set(mir3.Pitch, 7.92,wait=False,timeout=2)
     # create a list of energies
     energies = np.arange(385,397,1)
     energies = np.append(energies,np.arange(397,401,.2))
@@ -254,7 +254,7 @@ def short_carbon_scan_nd(multiple=1,sigs=[],
         return
 
     #Oct 2019, this pitch value seems to be optimal for carbon
-    yield from bps.abs_set(mir3.Pitch,7.94,wait=True)
+    yield from bps.abs_set(mir3.Pitch,7.94,wait=False,timeout=2)
 
     # create a list of energies
     energies = np.arange(270,282,1)
@@ -297,7 +297,7 @@ def short_sulfurl_scan_nd(multiple=1,sigs=[],
         return
 
     #Oct 2019, this pitch value seems to be optimal for carbon
-    yield from bps.abs_set(mir3.Pitch,7.94,wait=True)
+    yield from bps.abs_set(mir3.Pitch,7.97,wait=False,timeout=2)
 
     # create a list of energies
     energies = np.arange(150,160,1)
