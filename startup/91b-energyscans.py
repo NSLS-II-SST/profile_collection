@@ -306,9 +306,8 @@ def short_sulfurl_scan_nd(multiple=1,sigs=[],
     times = energies.copy()
 
     # Define exposures times for different energy ranges
-    times[energies<282] = 2
-    times[(energies < 286) & (energies >= 282)] = 5
-    times[energies >= 286] = 2
+    times[energies < 170] = 2
+    times[energies >= 170] = 2
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
