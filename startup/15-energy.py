@@ -133,15 +133,13 @@ class EnPos(PseudoPositioner):
     monoen = Cpt(Monochromator, 'XF:07ID1-OP{Mono:PGM1-Ax:',kind='hinted',name='Mono Energy')
     epugap = Cpt(UndulatorMotor, 'SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr',kind='normal',name='EPU Gap')
     epuphase = Cpt(UndulatorMotor, 'SR:C07-ID:G1A{SST1:1-Ax:Phase}-Mtr',kind='normal',name='EPU Phase')
-    epumode = Cpt(UndulatorMotorPhs, 'SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode',kind='normal',name='EPU Mode')
 
     @pseudo_position_argument
     def forward(self, pseudo_pos):
         '''Run a forward (pseudo -> real) calculation'''
         return self.RealPosition(epugap=epugap_from_en_pol(pseudo_pos.energy, pseudo_pos.polarization),
                                  monoen=pseudo_pos.energy,
-                                 epuphase=epuphase_from_en_pol(pseudo_pos.polarization),
-                                 epumode=epumode_from_en_pol(pseudo_pos.polarization))
+                                 epuphase=epuphase_from_en_pol(pseudo_pos.polarization))
 
     @real_position_argument
     def inverse(self, real_pos):
