@@ -74,12 +74,12 @@ def one_trigger_nd_step(detectors, step, pos_cache):
 
 # @dark_frames_enable
 def en_scan_core(signals,dets, energy, energies,times,enscan_type=None):
-   # sw_det.saxs.cam.acquire_time.kind = 'normal'
-    sw_det.waxs.cam.acquire_time.kind = 'normal'
+    sw_det.saxs.cam.acquire_time.kind = 'normal'
+   # sw_det.waxs.cam.acquire_time.kind = 'normal'
 
     sigcycler = cycler(energy, energies)
-   # sigcycler += cycler(saxs_det.cam.acquire_time, times.copy())
-    sigcycler += cycler(sw_det.waxs.cam.acquire_time, times.copy()) #add extra exposure time for WAXS
+    sigcycler += cycler(saxs_det.cam.acquire_time, times.copy())
+   # sigcycler += cycler(sw_det.waxs.cam.acquire_time, times.copy()) #add extra exposure time for WAXS
 
    # yield from bps.abs_set(en, energies[0], timeout=180, wait=True)
    # for signal in signals:
