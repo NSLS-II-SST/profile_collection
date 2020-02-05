@@ -111,7 +111,7 @@ def epumode_from_en_pol(polarization):
 
 
 def pol_from_mode_phase(phase, mode):
-    if phase is 29500:
+    if abs(phase - 29500) <100:
         return 190
     else:
         return 100
@@ -126,7 +126,7 @@ class EnPos(PseudoPositioner):
     """
     # synthetic axis
     energy = Cpt(PseudoSingle, kind='hinted', limits=(150,2500),name="Beamline Energy")
-    polarization = Cpt(PseudoSingle, kind='hinted', limits=(100,190),name="X-ray Polarization")
+    polarization = Cpt(PseudoSingle, kind='hinted', limits=(99,200),name="X-ray Polarization")
 
     # real motors
 
