@@ -442,7 +442,8 @@ def run_bar(bar,sortby=['p','c','a','s'],dryrun=0,rev=[False,False,False,False],
                              p means project
                              s means sample
                              a means acquisition
-        ['p','c','a','s'] means to all of one project first, within which all of one configurations,
+                             g means plan arguments
+        ['p','c','a','s','g'] means to all of one project first, within which all of one configurations,
             within which all of one acquisition, etc
     :return: none
 
@@ -464,8 +465,9 @@ def run_bar(bar,sortby=['p','c','a','s'],dryrun=0,rev=[False,False,False,False],
                             sample,
                             a,
                             samp_num,
-                            acq_num])
-    switcher = {'p':1,'s':0,'c':2,'a':3}
+                            acq_num,
+                            a['arguments']])
+    switcher = {'p':1,'s':0,'c':2,'a':3,'g':9}
     try:
         sortby.reverse()
     except AttributeError:
