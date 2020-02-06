@@ -4,7 +4,7 @@ import numpy as np
 
 
 def full_carbon_NEXAFS(sigs=[],
-                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en):
+                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en,pol=100):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
 
@@ -23,6 +23,7 @@ def full_carbon_NEXAFS(sigs=[],
         return
     yield from bps.abs_set(mir3.Pitch,7.94,wait=False,timeout=2)
     yield from bps.mv(DiodeRange, 6)
+    yield from bps.mv(en.polarization,pol)
     # create a list of energies
     energies = np.arange(270,282,.5)
     energies = np.append(energies,np.arange(282,286,.1))
