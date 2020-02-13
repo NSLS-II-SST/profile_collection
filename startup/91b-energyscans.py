@@ -6,7 +6,7 @@ import bluesky.plan_stubs as bps
 
 
 def full_oxygen_scan_nd(multiple=1,sigs=[],
-                        dets=[sw_det],energy=en):
+                        dets=[sw_det],energy=en,pol=100):
     '''
     Full Oxygen Scan runs an RSoXS sample set through the O edge, with particular emphasis in he pre edge region
     this results in 110 exposures
@@ -25,7 +25,8 @@ def full_oxygen_scan_nd(multiple=1,sigs=[],
     #beamline_status()
     if len(read_input("Starting a Oxygen energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
-    yield from bps.abs_set(mir3.Pitch, 7.89, wait=True)
+    yield from bps.abs_set(mir3.Pitch, 7.94, wait=True)
+    yield from bps.mv(en.polarization,pol)
     # create a list of energies
     energies = np.arange(510,525,1)
     energies = np.append(energies,np.arange(525,540,.2))
@@ -79,7 +80,7 @@ def short_oxygen_scan_nd(multiple=1,sigs=[],
 
 
 def short_fluorine_scan_nd(multiple=1,sigs=[],
-                        dets=[sw_det],energy=en):
+                        dets=[sw_det],energy=en,pol=100):
     '''
     Short Fluorine Scan runs an RSoXS sample set through the F edge, with particular emphasis in he pre edge region
 
@@ -97,6 +98,8 @@ def short_fluorine_scan_nd(multiple=1,sigs=[],
     #beamline_status()
     if len(read_input("Starting a fluorine energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
+    yield from bps.abs_set(mir3.Pitch, 7.94, wait=True)
+    yield from bps.mv(en.polarization,pol)
     # mir3.Pitch.put(7.89)
     # create a list of energies
     energies = np.arange(670,710,1)
@@ -515,7 +518,7 @@ def full_carbon_scan_nd(multiple=1,sigs=[],
     sample()
     if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
-    yield from bps.abs_set(mir3.Pitch,7.94,wait=True)
+    yield from bps.abs_set(mir3.Pitch,7.96,wait=True)
     yield from bps.mv(en.polarization,pol)
     # create a list of energies
     energies = np.arange(270,282,.5)
