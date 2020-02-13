@@ -618,16 +618,16 @@ from cycler import cycler
 def fluorine_SAXS(exp_time=1):
     enscan_type = 'fluorine_SAXS'
     #Oct 2019, this pitch value seems to be optimal for carbon
-    yield from bps.abs_set(mir3.Pitch,7.89)
+    yield from bps.abs_set(mir3.Pitch,7.94)
     set_exposure(exp_time)
     yield from bps.abs_set(en, 680, timeout=180, wait=True)
-    yield from bp.scan([sw_det, en.energy],en,680,700,41,md={'plan_name':enscan_type})
+    yield from bp.scan([sw_det, en.energy],en,680,720,81,md={'plan_name':enscan_type})
 
 
 def Si_SAXS(exp_time=1):
     enscan_type = 'Si_SAXS'
     # Oct 2019, this pitch value seems to be optimal for carbon
-    yield from bps.abs_set(mir3.Pitch,7.87)
+    yield from bps.abs_set(mir3.Pitch,7.94)
     set_exposure(exp_time)
     yield from bps.abs_set(en, 1830, timeout=180, wait=True)
     yield from bp.scan([sw_det, en.energy], en, 1830, 1870, 41, md={'plan_name': enscan_type})
