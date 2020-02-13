@@ -50,16 +50,16 @@ def enc_clr_x():
 
 def beamdown_notice():
     user_email = RE.md['user_email']
-    send_notice(bls_email+','+user_email,'SST-1 has lost beam','Beam to RSoXS has been lost.'
-                                                             '\n\nYour scan has been paused automatically.'
-                                                             '\nNo intervention needed, but thought you might like to know.')
+    send_notice(bls_email+','+user_email,'SST-1 has lost beam','Beam to RSoXS has been lost.'\
+                                                               '\n\nYour scan has been paused automatically.'\
+                                                               '\nNo intervention needed, but thought you might like to know.')
 
 
 def beamup_notice():
     user_email = RE.md['user_email']
-    send_notice(bls_email+','+user_email,'SST-1 beam restored','Beam to RSoXS has been restored.\n\nY'
-                                                               'our scan has resumed running.\n\n'
-                                                               'If able, you may want to check the data and make sure intensity is still OK.'
+    send_notice(bls_email+','+user_email,'SST-1 beam restored','Beam to RSoXS has been restored.\n\n'\
+                                                               'Your scan has resumed running.\n\n'\
+                                                               'If able, you may want to check the data and make sure intensity is still OK.'\
                                                                '\n\nOne exposure may have been affected')
 
 
