@@ -40,7 +40,7 @@ def send_notice_plan(email,subject,msg):
 
 def enc_clr_x():
     send_notice('egann@bnl.gov','SST had a small problem','the encoder loss has happened on the RSoXS beamline'\
-                                                          '\n\nEverything is probably just fine')
+                                                          '\rEverything is probably just fine')
     xpos = sam_X.user_readback.value
     yield from sam_X.clear_encoder_loss()
     yield from sam_X.home()
@@ -51,16 +51,16 @@ def enc_clr_x():
 def beamdown_notice():
     user_email = RE.md['user_email']
     send_notice(bls_email+','+user_email,'SST-1 has lost beam','Beam to RSoXS has been lost.'\
-                                                               '\n\nYour scan has been paused automatically.'\
-                                                               '\nNo intervention needed, but thought you might like to know.')
+                                                               '\rYour scan has been paused automatically.'\
+                                                               '\rNo intervention needed, but thought you might like to know.')
 
 
 def beamup_notice():
     user_email = RE.md['user_email']
-    send_notice(bls_email+','+user_email,'SST-1 beam restored','Beam to RSoXS has been restored.\n\n'\
-                                                               'Your scan has resumed running.\n\n'\
-                                                               'If able, you may want to check the data and make sure intensity is still OK.'\
-                                                               '\n\nOne exposure may have been affected')
+    send_notice(bls_email+','+user_email,'SST-1 beam restored','Beam to RSoXS has been restored.'\
+                                                               '\rYour scan has resumed running.'\
+                                                               '\rIf able, you may want to check the data and make sure intensity is still OK.'\
+                                                               '\rOne exposure may have been affected')
 
 
 
