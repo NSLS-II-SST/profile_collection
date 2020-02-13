@@ -39,7 +39,7 @@ def send_notice_plan(email,subject,msg):
     yield from bps.sleep(.1)
 
 def enc_clr_x():
-    send_notice('egann@bnl.gov','SST had a small problem','the encoder loss has happened on the RSoXS beamline'\
+    send_notice('egann@bnl.gov','SST had a small problem','the encoder loss has happened on the RSoXS beamline'
                                                           '\rEverything is probably just fine')
     xpos = sam_X.user_readback.value
     yield from sam_X.clear_encoder_loss()
@@ -50,16 +50,16 @@ def enc_clr_x():
 
 def beamdown_notice():
     user_email = RE.md['user_email']
-    send_notice(bls_email+','+user_email,'SST-1 has lost beam','Beam to RSoXS has been lost.'\
-                                                               '\rYour scan has been paused automatically.'\
+    send_notice(bls_email+','+user_email,'SST-1 has lost beam','Beam to RSoXS has been lost.'
+                                                               '\rYour scan has been paused automatically.'
                                                                '\rNo intervention needed, but thought you might like to know.')
 
 
 def beamup_notice():
     user_email = RE.md['user_email']
-    send_notice(bls_email+','+user_email,'SST-1 beam restored','Beam to RSoXS has been restored.'\
-                                                               '\rYour scan has resumed running.'\
-                                                               '\rIf able, you may want to check the data and make sure intensity is still OK.'\
+    send_notice(bls_email+','+user_email,'SST-1 beam restored','Beam to RSoXS has been restored.'
+                                                               '\rYour scan has resumed running.'
+                                                               '\rIf able, you may want to check the data and make sure intensity is still OK.'
                                                                '\rOne exposure may have been affected')
 
 
