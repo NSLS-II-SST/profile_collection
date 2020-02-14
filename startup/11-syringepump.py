@@ -118,19 +118,19 @@ class Syringe_Pump(Device):
 
     def run(self, pump=1):
         if pump == 1:
-            return sp.Run.p1.set(1)
+            return self.Run.p1.set(1)
         elif pump == 2:
-            return sp.Run.p2.set(1)
+            return self.Run.p2.set(1)
         else:
-            return sp.Run.pAll.set(1)
+            return self.Run.pAll.set(1)
 
     def stop(self, pump=1):
         if pump == 1:
-            return sp.Stop.p1.set(1)
+            return self.Stop.p1.set(1)
         elif pump == 2:
-            return sp.Stop.p2.set(1)
+            return self.Stop.p2.set(1)
         else:
-            return sp.Stop.pAll.set(1)
+            return self.Stop.pAll.set(1)
 
     def get_disvol(self, pump=1, Dir=None, ):
         '''dir: 0 for infusion, 1 for withdraw '''
