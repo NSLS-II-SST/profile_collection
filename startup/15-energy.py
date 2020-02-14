@@ -17,6 +17,7 @@ epu_phase = UndulatorMotor('SR:C07-ID:G1A{SST1:1-Ax:Phase}-Mtr', name='EPU 60 Ph
 
 class Monochromator(PVPositioner):
     setpoint = Cpt(EpicsSignal,':ENERGY_SP', kind='normal')
+    value = Cpt(EpicsSignalRO, ':ENERGY_MON',kind='hinted')
     readback = Cpt(EpicsSignalRO, ':ENERGY_MON',kind='hinted')
 
     grating = Cpt(prettymotor, 'GrtP}Mtr', name="Mono Grating", kind='normal')
@@ -250,6 +251,7 @@ en = EnPos('', name='en',concurrent=1)
 en.energy.kind = 'hinted'
 en.monoen.kind = 'normal'
 en.monoen.readback.kind = 'normal'
+mono_en.read_attrs = ['readback']
 en.epugap.kind = 'normal'
 # en.read_attrs = ['energy',
 #                  'energy.readback',
