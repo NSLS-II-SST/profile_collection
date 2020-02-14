@@ -225,7 +225,7 @@ def buildeputablegaps(start, stop, step, widfract, startingen, name, phase):
         yield from tune_max([Izero_Mesh,Beamstop_SAXS],"RSoXS Au Mesh Current",mono_en,
                                     min(2100,max(72,startingen-10*widfract)),
                                     min(2200,max(90,startingen+50*widfract)),
-                                    1,31,3,True,md={'plan_name':'energy_tune'})
+                                    1,25,3,True,md={'plan_name':'energy_tune'})
 
         ens.append(bec.peaks.max["RSoXS Au Mesh Current"][0])
         heights.append(bec.peaks.max["RSoXS Au Mesh Current"][1])

@@ -191,7 +191,7 @@ def stitch_sample(images, step_size, y_off, from_image=None,flip_file=False):
 
 
     fig, ax = plt.subplots()
-    ax.imshow(result, extent=[0, 235, -14.5, 14.5])
+    ax.imshow(result, extent=[-210, 25, -14.5, 14.5])
     sample_image_axes = ax
     fig.canvas.mpl_connect('button_press_event', plot_click)
     fig.canvas.mpl_connect('key_press_event', plot_key_press)
