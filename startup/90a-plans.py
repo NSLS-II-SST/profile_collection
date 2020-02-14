@@ -217,15 +217,15 @@ def buildeputablegaps(start, stop, step, widfract, startingen, name, phase):
 
     for gap in gaps:
         yield from bps.mv(epu_gap,gap)
-        yield from bps.mv(mono_en,max(72,startingen-25*widfract))
+        yield from bps.mv(mono_en,max(72,startingen-10*widfract))
         #yield from bp.scan([DM4_PD],epu_gap,
         #                   min(99500,max(20000,startinggap-1500*widfract)),
         #                   min(100000,max(21500,startinggap+1500*widfract)),
         #                   51)
         yield from tune_max([Izero_Mesh,Beamstop_SAXS],"RSoXS Au Mesh Current",mono_en,
-                                    min(2100,max(72,startingen-25*widfract)),
+                                    min(2100,max(72,startingen-10*widfract)),
                                     min(2200,max(90,startingen+50*widfract)),
-                                    1,25,3,True,md={'plan_name':'energy_tune'})
+                                    1,31,3,True,md={'plan_name':'energy_tune'})
 
         ens.append(bec.peaks.max["RSoXS Au Mesh Current"][0])
         heights.append(bec.peaks.max["RSoXS Au Mesh Current"][1])
@@ -250,24 +250,24 @@ def do_some_eputables():
 
 
 def do_2020_eputables():
-    yield from buildeputablegaps(15000, 60000, 500, .5, 75, 'H1phase0',0)
-    yield from buildeputablegaps(15000, 60000, 500, .5, 150, 'H1phase29500',29500)
-    yield from buildeputablegaps(15000, 60000, 500, .5, 175, 'H1phase25000',25000)
-    yield from buildeputablegaps(15000, 60000, 500, .5, 185, 'H1phase20000',21000)
-    yield from buildeputablegaps(15000, 60000, 500, .5, 200, 'H1phase20000',18000)
-    yield from buildeputablegaps(15000, 60000, 500, .5, 200, 'H1phase16000',15000)
-    yield from buildeputablegaps(15000, 60000, 500, .5, 175, 'H1phase12000',12000)
-    yield from buildeputablegaps(15000, 60000, 500, .5, 100, 'H1phase8000',8000)
-    yield from buildeputablegaps(15000, 60000, 500, .5, 100, 'H1phase4000',4000)
-    yield from buildeputablegaps(15000, 60000, 500, 1, 3*75, 'H3phase0',0)
-    yield from buildeputablegaps(15000, 60000, 500, 1, 3*150, 'H3phase29500',29500)
-    yield from buildeputablegaps(15000, 60000, 500, 1, 3*175, 'H3phase25000',25000)
-    yield from buildeputablegaps(15000, 60000, 500, 1, 3*185, 'H3phase20000',21000)
-    yield from buildeputablegaps(15000, 60000, 500, 1, 3*200, 'H3phase20000',18000)
-    yield from buildeputablegaps(15000, 60000, 500, 1, 3*200, 'H3phase16000',15000)
-    yield from buildeputablegaps(15000, 60000, 500, 1, 3*175, 'H3phase12000',12000)
-    yield from buildeputablegaps(15000, 60000, 500, 1, 3*100, 'H3phase8000',8000)
-    yield from buildeputablegaps(15000, 60000, 500, 1, 3*100, 'H3phase4000',4000)
+    yield from buildeputablegaps(15000, 40000, 500, .5, 75, 'H1phase0',0)
+    yield from buildeputablegaps(15000, 40000, 500, .5, 150, 'H1phase29500',29500)
+    yield from buildeputablegaps(15000, 40000, 500, .5, 175, 'H1phase25000',25000)
+    yield from buildeputablegaps(15000, 40000, 500, .5, 185, 'H1phase20000',21000)
+    yield from buildeputablegaps(15000, 40000, 500, .5, 200, 'H1phase20000',18000)
+    yield from buildeputablegaps(15000, 40000, 500, .5, 200, 'H1phase16000',15000)
+    yield from buildeputablegaps(15000, 40000, 500, .5, 175, 'H1phase12000',12000)
+    yield from buildeputablegaps(15000, 40000, 500, .5, 100, 'H1phase8000',8000)
+    yield from buildeputablegaps(15000, 40000, 500, .5, 100, 'H1phase4000',4000)
+    yield from buildeputablegaps(15000, 40000, 500, 1, 3*75, 'H3phase0',0)
+    yield from buildeputablegaps(15000, 40000, 500, 1, 3*150, 'H3phase29500',29500)
+    yield from buildeputablegaps(15000, 40000, 500, 1, 3*175, 'H3phase25000',25000)
+    yield from buildeputablegaps(15000, 40000, 500, 1, 3*185, 'H3phase20000',21000)
+    yield from buildeputablegaps(15000, 40000, 500, 1, 3*200, 'H3phase20000',18000)
+    yield from buildeputablegaps(15000, 40000, 500, 1, 3*200, 'H3phase16000',15000)
+    yield from buildeputablegaps(15000, 40000, 500, 1, 3*175, 'H3phase12000',12000)
+    yield from buildeputablegaps(15000, 40000, 500, 1, 3*100, 'H3phase8000',8000)
+    yield from buildeputablegaps(15000, 40000, 500, 1, 3*100, 'H3phase4000',4000)
 
 
 def tune_max(
