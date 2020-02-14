@@ -457,16 +457,16 @@ def run_bar(bar,sortby=['p','c','a','s'],dryrun=0,rev=[False,False,False,False],
         sample_id = s['sample_id']
         sample_project = s['project_name']
         for acq_num,a in enumerate(s['acquisitions']):
-            listout.append([sample_id,
-                            sample_project,
-                            a['configuration'],
-                            a['plan_name'],
-                            avg_scan_time(a['plan_name']),
-                            sample,
-                            a,
-                            samp_num,
-                            acq_num,
-                            a['arguments']])
+            listout.append([sample_id,                      #0
+                            sample_project,                 #1
+                            a['configuration'],             #2
+                            a['plan_name'],                 #3
+                            avg_scan_time(a['plan_name']),  #4
+                            sample,                         #5
+                            a,                              #6
+                            samp_num,                       #7
+                            acq_num,                        #8
+                            a['arguments']])                #9
     switcher = {'p':1,'s':0,'c':2,'a':3,'g':9}
     try:
         sortby.reverse()
@@ -507,7 +507,7 @@ def run_bar(bar,sortby=['p','c','a','s'],dryrun=0,rev=[False,False,False,False],
             yield from load_sample(step[5]) # move to sample / load sample metadata
             yield from do_acquisitions([step[6]]) # run scan
             if delete_as_complete:
-                del bar[step[7]]['acquisitions'][step[8]]
+                bar[step[7]]['acquisitions'].remove(step[6])
 
 def list_samples(bar):
     samples = [s['sample_name'] for s in bar]
