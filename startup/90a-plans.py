@@ -209,8 +209,8 @@ def buildeputablegaps(start, stop, step, widfract, startingen, name, phase):
     ens = []
     gapsout = []
     heights = []
-    Beamstop_SAXS.kind= 'hinted'
-    Izero_Mesh.kind= 'hinted'
+   # Beamstop_SAXS.kind= 'hinted'
+   # Izero_Mesh.kind= 'hinted'
     #startinggap = epugap_from_energy(ens[0]) #get starting position from existing table
     yield from bps.mv(epu_phase,phase)
     count = 0
@@ -250,21 +250,22 @@ def do_some_eputables():
 
 
 def do_2020_eputables():
-    yield from buildeputablegaps(15000, 55000, 500, 1.5, 75, 'H1phase0',0)
-    yield from bps.mv(mono_en,600)
-    yield from bps.mv(mono_en,400)
-    yield from buildeputablegaps(15000, 50000, 500, 1.5, 150, 'H1phase29500',29500)
-    yield from bps.mv(mono_en,600)
-    yield from bps.mv(mono_en,400)
-    yield from bps.mv(mono_en,200)
-    yield from buildeputablegaps(15000, 50000, 500, 2, 3*75, 'H3phase0',0)
+   # yield from buildeputablegaps(15000, 55000, 500, 1.5, 75, 'H1phase02',0)
+   # yield from bps.mv(mono_en,600)
+   # yield from bps.mv(mono_en,400)
+   # yield from bps.mv(mono_en,200)
+   # yield from buildeputablegaps(15000, 50000, 500, 1.5, 150, 'H1phase295002',29500)
+   # yield from bps.mv(mono_en,600)
+   # yield from bps.mv(mono_en,400)
+   # yield from bps.mv(mono_en,200)
+    yield from buildeputablegaps(15000, 50000, 500, 2, 3*75, 'H3phase02',0)
     yield from bps.mv(mono_en,900)
     yield from bps.mv(mono_en,600)
     yield from bps.mv(mono_en,400)
     yield from bps.mv(epu_mode,0)
-    yield from buildeputablegaps(15000, 40000, 500, 2, 200, 'H1Circphase15000',15000)
+    yield from buildeputablegaps(15000, 40000, 500, 2, 200, 'H1Circphase150002',15000)
     yield from bps.mv(mono_en,800)
-    yield from buildeputablegaps(15000, 30000, 500, 2, 600, 'H3Circphase15000',15000)
+    yield from buildeputablegaps(15000, 30000, 500, 2, 600, 'H3Circphase150002',15000)
     yield from bps.mv(epu_mode,2)
 
 

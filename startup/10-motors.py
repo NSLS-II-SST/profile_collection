@@ -134,7 +134,7 @@ class prettymotor(FMBOEpicsMotor):
         try:
             loc = float(line)
         except:
-            if line is 's':
+            if line[0] is 's':
                 self.status() # followed by an s, display status
             elif line[0] is 'a':
                 try:
