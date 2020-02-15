@@ -258,15 +258,15 @@ def do_2020_eputables():
    # yield from bps.mv(mono_en,600)
    # yield from bps.mv(mono_en,400)
    # yield from bps.mv(mono_en,200)
-    yield from buildeputablegaps(15000, 50000, 500, 2, 3*75, 'H3phase02',0)
-    yield from bps.mv(mono_en,900)
-    yield from bps.mv(mono_en,600)
-    yield from bps.mv(mono_en,400)
-    yield from bps.mv(epu_mode,0)
+   # yield from buildeputablegaps(15000, 50000, 500, 2, 3*75, 'H3phase02',0)
+   # yield from bps.mv(mono_en,900)
+   # yield from bps.mv(mono_en,600)
+   # yield from bps.mv(mono_en,400)
+   # yield from bps.mv(epu_mode,0)
     yield from buildeputablegaps(15000, 40000, 500, 2, 200, 'H1Circphase150002',15000)
     yield from bps.mv(mono_en,800)
     yield from buildeputablegaps(15000, 30000, 500, 2, 600, 'H3Circphase150002',15000)
-    yield from bps.mv(epu_mode,2)
+   # yield from bps.mv(epu_mode,2)
 
 
 def do_2020_eputables2():
