@@ -77,18 +77,18 @@ def darkoff(line):
     sw_det.shutter_on()
 del darkoff
 
-
-def dark_plan():
-    shutterstates = sw_det.saxs.cam.sync.setpoint
-    shutterstatew = sw_det.waxs.cam.sync.setpoint
-    yield from bps.mv(sw_det.saxs.cam.sync,0) # disable shutter
-    yield from bps.mv(sw_det.waxs.cam.sync,0) # disable shutter
-    yield from bps.trigger(sw_det, group='darkframe-trigger')
-    yield from bps.wait('darkframe-trigger')
-    snapshot = bluesky_darkframes.SnapshotDevice(sw_det)
-    yield from bps.mv(sw_det.saxs.cam.sync,shutterstates)  # put shutter back in previous state
-    yield from bps.mv(sw_det.waxs.cam.sync,shutterstatew)  # put shutter back in previous state
-    return snapshot
+#
+# def dark_plan():
+#     shutterstates = sw_det.saxs.cam.sync.setpoint
+#     shutterstatew = sw_det.waxs.cam.sync.setpoint
+#     yield from bps.mv(sw_det.saxs.cam.sync,0) # disable shutter
+#     yield from bps.mv(sw_det.waxs.cam.sync,0) # disable shutter
+#     yield from bps.trigger(sw_det, group='darkframe-trigger')
+#     yield from bps.wait('darkframe-trigger')
+#     snapshot = bluesky_darkframes.SnapshotDevice(sw_det)
+#     yield from bps.mv(sw_det.saxs.cam.sync,shutterstates)  # put shutter back in previous state
+#     yield from bps.mv(sw_det.waxs.cam.sync,shutterstatew)  # put shutter back in previous state
+#     return snapshot
 
 
 def dark_plan_saxs():
@@ -99,32 +99,32 @@ def dark_plan_saxs():
     snapshot = bluesky_darkframes.SnapshotDevice(saxs_det)
     yield from bps.mv(saxs_det.cam.sync,shutterstates)  # put shutter back in previous state
     return snapshot
+#
+#
+# def dark_plan_waxs():
+#     shutterstates = waxs_det.cam.sync.setpoint
+#     yield from bps.mv(waxs_det.cam.sync,0) # disable shutter
+#     yield from bps.trigger(waxs_det, group='darkframe-trigger')
+#     yield from bps.wait('darkframe-trigger')
+#     snapshot = bluesky_darkframes.SnapshotDevice(waxs_det)
+#     yield from bps.mv(waxs_det.cam.sync,shutterstates)  # put shutter back in previous state
+#     return snapshot
 
-
-def dark_plan_waxs():
-    shutterstates = waxs_det.cam.sync.setpoint
-    yield from bps.mv(waxs_det.cam.sync,0) # disable shutter
-    yield from bps.trigger(waxs_det, group='darkframe-trigger')
-    yield from bps.wait('darkframe-trigger')
-    snapshot = bluesky_darkframes.SnapshotDevice(waxs_det)
-    yield from bps.mv(waxs_det.cam.sync,shutterstates)  # put shutter back in previous state
-    return snapshot
-
-dark_frame_preprocessor_synced = bluesky_darkframes.DarkFramePreprocessor(
-    dark_plan=dark_plan,
-    detector=sw_det,
-    max_age=120,
-    locked_signals=[sw_det.saxs.cam.acquire_time,
-                    Det_S.user_setpoint,
-                    Det_W.user_setpoint,
-                    sw_det.saxs.cam.bin_x,
-                    sw_det.saxs.cam.bin_y,
-                    sw_det.waxs.cam.bin_x,
-                    sw_det.waxs.cam.bin_y,
-                    sam_X.user_setpoint,
-                    sam_Y.user_setpoint,
-                    ],
-    limit=10)
+# dark_frame_preprocessor_synced = bluesky_darkframes.DarkFramePreprocessor(
+#     dark_plan=dark_plan,
+#     detector=sw_det,
+#     max_age=120,
+#     locked_signals=[sw_det.saxs.cam.acquire_time,
+#                     Det_S.user_setpoint,
+#                     Det_W.user_setpoint,
+#                     sw_det.saxs.cam.bin_x,
+#                     sw_det.saxs.cam.bin_y,
+#                     sw_det.waxs.cam.bin_x,
+#                     sw_det.waxs.cam.bin_y,
+#                     sam_X.user_setpoint,
+#                     sam_Y.user_setpoint,
+#                     ],
+#     limit=10)
 
 dark_frame_preprocessor_saxs = bluesky_darkframes.DarkFramePreprocessor(
     dark_plan=dark_plan_saxs,
@@ -138,19 +138,19 @@ dark_frame_preprocessor_saxs = bluesky_darkframes.DarkFramePreprocessor(
                     sam_Y.user_setpoint,
                     ],
     limit=10)
-
-dark_frame_preprocessor_waxs = bluesky_darkframes.DarkFramePreprocessor(
-    dark_plan=dark_plan_waxs,
-    detector=waxs_det,
-    max_age=120,
-    locked_signals=[waxs_det.cam.acquire_time,
-                    Det_W.user_setpoint,
-                    waxs_det.cam.bin_x,
-                    waxs_det.cam.bin_y,
-                    sam_X.user_setpoint,
-                    sam_Y.user_setpoint,
-                    ],
-    limit=10)
+#
+# dark_frame_preprocessor_waxs = bluesky_darkframes.DarkFramePreprocessor(
+#     dark_plan=dark_plan_waxs,
+#     detector=waxs_det,
+#     max_age=120,
+#     locked_signals=[waxs_det.cam.acquire_time,
+#                     Det_W.user_setpoint,
+#                     waxs_det.cam.bin_x,
+#                     waxs_det.cam.bin_y,
+#                     sam_X.user_setpoint,
+#                     sam_Y.user_setpoint,
+#                     ],
+#     limit=10)
 
 
 # possibly add a exposure time preprocessor to check beam exposure on CCD over exposure
