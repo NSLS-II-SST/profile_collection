@@ -500,7 +500,7 @@ def picky_carbon_scan_nd(multiple=1,sigs=[],
 
 
 def full_carbon_scan_nd(multiple=1,sigs=[],
-                        dets=[sw_det], energy=en,pol=100):
+                        dets=[saxs_det], energy=en,pol=100):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 128 exposures
@@ -540,7 +540,7 @@ def full_carbon_scan_nd(multiple=1,sigs=[],
 
 
 def full_ca_scan_nd(multiple=1,sigs=[],
-                    dets=[sw_det],energy=en):
+                    dets=[saxs_det],energy=en):
     '''
     Calcium Scan runs an RSoXS sample set through the Ca edge, with particular emphasis in he pre edge region
 
@@ -572,7 +572,7 @@ def full_ca_scan_nd(multiple=1,sigs=[],
 
 
 def full_carbon_calcium_scan_nd(multiple=1,sigs=[],
-                        dets=[sw_det], energy=en):
+                        dets=[saxs_det], energy=en):
     '''
     Full Carbon and Calcium Scan runs an RSoXS sample set through the carbon and calcium edges,
     with particular emphasis in he pre edge region
@@ -621,7 +621,7 @@ def fluorine_SAXS(exp_time=1):
     yield from bps.abs_set(mir3.Pitch,7.94)
     set_exposure(exp_time)
     yield from bps.abs_set(en, 680, timeout=180, wait=True)
-    yield from bp.scan([sw_det, en.energy],en,680,720,81,md={'plan_name':enscan_type})
+    yield from bp.scan([saxs_det, en.energy],en,680,720,81,md={'plan_name':enscan_type})
 
 
 def Si_SAXS(exp_time=1):
@@ -630,15 +630,15 @@ def Si_SAXS(exp_time=1):
     yield from bps.abs_set(mir3.Pitch,7.94)
     set_exposure(exp_time)
     yield from bps.abs_set(en, 1830, timeout=180, wait=True)
-    yield from bp.scan([sw_det, en.energy], en, 1830, 1870, 41, md={'plan_name': enscan_type})
+    yield from bp.scan([saxs_det, en.energy], en, 1830, 1870, 41, md={'plan_name': enscan_type})
 
 
-def fluorine_WAXS(exp_time=2):
-
-    enscan_type = 'fluorine_WAXS'
-    #Oct 2019, this pitch value seems to be optimal for carbon
-
-    yield from bps.mv(en,680)
-    yield from bps.abs_set(mir3.Pitch,7.89)
-    yield from bp.scan([sw_det, en.energy],en,680,700,41,md={'plan_name':enscan_type})
-
+# def fluorine_WAXS(exp_time=2):
+#
+#     enscan_type = 'fluorine_WAXS'
+#     #Oct 2019, this pitch value seems to be optimal for carbon
+#
+#     yield from bps.mv(en,680)
+#     yield from bps.abs_set(mir3.Pitch,7.89)
+#     yield from bp.scan([sw_det, en.energy],en,680,700,41,md={'plan_name':enscan_type})
+#

@@ -97,9 +97,9 @@ def NEXAFS_scan_core(signals,dets, energy, energies,enscan_type=None, openshutte
     #for signal in signals:
     #    signal.kind = 'normal'
     if openshutter:
-        yield from bps.mv(sw_det.saxs.cam.shutter_control, 1)
+        yield from bps.mv(saxs_det.cam.shutter_control, 1)
     yield from bp.scan_nd(dets + signals + [en.energy],
                           sigcycler,
                           md={'plan_name':enscan_type})
     if openshutter:
-        yield from bps.mv(sw_det.saxs.cam.shutter_control, 0)
+        yield from bps.mv(saxs_det.cam.shutter_control, 0)

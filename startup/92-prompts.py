@@ -32,7 +32,7 @@ def beamline_status():
     # user()
     sample()
     boxed_text('Detector status',
-               exposure()+'\n'+sw_det.binning()+'\n'+sw_det.cooling_state(),
+               exposure()+'\n'+saxs_det.binning()+'\n'+saxs_det.cooling_state(),
                'lightblue',80,shrink=True)
 
 user()
