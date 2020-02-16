@@ -15,13 +15,13 @@ run_report(__file__)
 
 def set_exposure(exposure):
     if exposure > 0.001 and exposure < 1000 :
-        sw_det.set_exposure(exposure)
+        saxs_det.set_exposure(exposure)
     else:
         print('Invalid time, exposure time not set')
 
 
 def exposure():
-    return (sw_det.exposure())
+    return (saxs_det.exposure())
 
 
 @register_line_magic
@@ -41,40 +41,40 @@ def binning(line):
     try:
         bins = int(line)
     except:
-        boxed_text('Pixel Binning',sw_det.binning(),'lightpurple',shrink=True)
+        boxed_text('Pixel Binning',saxs_det.binning(),'lightpurple',shrink=True)
     else:
         if bins > 0 and bins < 100:
-            sw_det.set_binning(bins)
+            saxs_det.set_binning(bins)
 del binning
 
 
 @register_line_magic
 def temp(line):
-    boxed_text('Detector cooling',sw_det.cooling_state(),'blue',shrink=True,width=95)
+    boxed_text('Detector cooling',saxs_det.cooling_state(),'blue',shrink=True,width=95)
 del temp
 
 
 @register_line_magic
 def cool(line):
-    sw_det.cooling_on()
+    saxs_det.cooling_on()
 del cool
 
 
 @register_line_magic
 def warm(line):
-    sw_det.cooling_off()
+    saxs_det.cooling_off()
 del warm
 
 
 @register_line_magic
 def dark(line):
-    sw_det.shutter_off()
+    saxs_det.shutter_off()
 del dark
 
 
 @register_line_magic
 def darkoff(line):
-    sw_det.shutter_on()
+    saxs_det.shutter_on()
 del darkoff
 
 #
