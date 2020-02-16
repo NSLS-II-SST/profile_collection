@@ -140,10 +140,10 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
 
 saxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:1}', name='Small Angle CCD Detector',
                                   read_attrs=['tiff', 'stats1.total'])
-waxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:2}', name='Wide Angle CCD Detector',
-                                  read_attrs=['tiff', 'stats1.total'])
+#waxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:2}', name='Wide Angle CCD Detector',
+#                                  read_attrs=['tiff', 'stats1.total'])
 saxs_det.transform_type = 3
-waxs_det.transform_type = 1
+#waxs_det.transform_type = 1
 
 
 class SyncedDetectors(Device):
@@ -213,24 +213,24 @@ class SyncedDetectors(Device):
         return self.saxs.cam.shutter_control.get()
 
 
-sw_det = SyncedDetectors('', name='Synced')
-sw_det.saxs.name = "SAXS"
-sw_det.waxs.name = "WAXS"
-sw_det.saxs.stats1.name = "SAXS ROI1"
-sw_det.waxs.stats1.name = "WAXS ROI1"
-sw_det.saxs.cam.sync.set(1)
-sw_det.waxs.cam.sync.set(1)
+#sw_det = SyncedDetectors('', name='Synced')
+#sw_det.saxs.name = "SAXS"
+#sw_det.waxs.name = "WAXS"
+#sw_det.saxs.stats1.name = "SAXS ROI1"
+#sw_det.waxs.stats1.name = "WAXS ROI1"
+#sw_det.saxs.cam.sync.set(1)
+#sw_det.waxs.cam.sync.set(1)
 
 #change this to saxs or waxs to record what the shutter state is
-shutter_status_w = sw_det.waxs.cam.sync
-shutter_status_s = sw_det.saxs.cam.sync
+#shutter_status_w = sw_det.waxs.cam.sync
+shutter_status_s = saxs_det.cam.sync
 shutter_status_s.name = 'shutter mode saxs'
-sw_det.waxs.cam.acquire_time.name = 'WAXS Exposure'
-sw_det.saxs.cam.acquire_time.name = 'SAXS Exposure'
-sw_det.saxs.transform_type = 3
-sw_det.waxs.transform_type = 1
+#sw_det.waxs.cam.acquire_time.name = 'WAXS Exposure'
+#sw_det.saxs.cam.acquire_time.name = 'SAXS Exposure'
+#sw_det.saxs.transform_type = 3
+#sw_det.waxs.transform_type = 1
 
-for det in [saxs_det, waxs_det,sw_det.waxs,sw_det.saxs]:
+for det in [saxs_det]:#, waxs_det,sw_det.waxs,sw_det.saxs]:
     det.kind = 'normal'
     det.stats1.kind = 'hinted'
     det.stats1.total.kind = 'hinted'
@@ -240,7 +240,7 @@ for det in [saxs_det, waxs_det,sw_det.waxs,sw_det.saxs]:
     det.cam.bin_y.kind = 'normal'
     det.cam.bin_x.kind = 'normal'
     det.cam.adc_speed.kind = 'normal'
-    det.cam.acquire_time.kind = 'hinted'
+    det.cam.acquire_time.kind = 'normal'
     det.cam.model.kind = 'normal'
     det.cam.trigger_mode.kind = 'normal'
     det.cam.sync.kind = 'normal'
@@ -249,8 +249,8 @@ for det in [saxs_det, waxs_det,sw_det.waxs,sw_det.saxs]:
     det.cam.min_x.kind = 'normal'
     det.cam.temperature.kind = 'normal'
     det.cam.min_y.kind = 'normal'
-sw_det.kind = 'hinted'
+#sw_det.kind = 'hinted'
 
-sw_det.read_attrs = ['saxs','waxs']
+#sw_det.read_attrs = ['saxs','waxs']
 
-sd.baseline.extend([waxs_det.cam, saxs_det.cam])
+sd.baseline.extend([saxs_det.cam])#, waxs_det.cam])

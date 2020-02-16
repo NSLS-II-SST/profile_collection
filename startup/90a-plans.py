@@ -158,11 +158,11 @@ dark_frame_preprocessor_waxs = bluesky_darkframes.DarkFramePreprocessor(
 # if some number of pixels are over exposured, repeat acquisition at .3 exposure time
 
 # if there is no scatter, pause
-dark_frames_enable_synced = make_decorator(dark_frame_preprocessor_synced)()
-dark_frames_enable_waxs = make_decorator(dark_frame_preprocessor_synced)()
+#dark_frames_enable_synced = make_decorator(dark_frame_preprocessor_synced)()
+#dark_frames_enable_waxs = make_decorator(dark_frame_preprocessor_synced)()
 dark_frames_enable_saxs = make_decorator(dark_frame_preprocessor_synced)()
-RE.preprocessors.append(dark_frame_preprocessor_synced)
-RE.preprocessors.append(dark_frame_preprocessor_waxs)
+#RE.preprocessors.append(dark_frame_preprocessor_synced)
+#RE.preprocessors.append(dark_frame_preprocessor_waxs)
 RE.preprocessors.append(dark_frame_preprocessor_saxs)
 # not doing this because EVERYTHING that goes through RE will get a dark image - this is excessive - fixed now!
 
@@ -491,7 +491,7 @@ def snapshot(secs=0, count=1, name=None, energy = None, det= None):
         count = round(count)
         counts = 's'
     if secs <= 0:
-        secs = sw_det.saxs.cam.acquire_time.value
+        secs = saxs_det.cam.acquire_time.value
 
     if secs == 1:
         secss = ''
@@ -500,7 +500,7 @@ def snapshot(secs=0, count=1, name=None, energy = None, det= None):
 
 
     if det is None:
-        det = sw_det
+        det = saxs_det
 
     if isinstance(energy, float):
         yield from bps.mv(en,energy)
