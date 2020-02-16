@@ -133,6 +133,9 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
             colored(self.cam.bin_x.value,'lightpurple'),
             colored(self.cam.bin_y.value,'lightpurple')))
 
+    def exposure(self):
+        return self.exptime()
+
     #sudo mount -t cifs //10.7.0.217/data/ /mnt/zdrive -o user=linuxuser,pass=greateyes
     #needs to be run on the server
     # sudo mount -t cifs //10.7.0.217/data/ /mnt/zdrive -o user=linuxuser,pass=greateyes
