@@ -423,10 +423,11 @@ def avg_scan_time(plan_name,nscans=50,new_scan_duration=600):
     scans = db(plan_name=plan_name)
     durations = np.array([])
     for i,sc in enumerate(scans):
-        if(sc.stop['exit_status']=='success'):
-            durations = np.append(durations,sc.stop['time'] - sc.start['time'])
-        if i > nscans:
-            break
+        if('exit_status' in sc.stop.keys):
+            if(sc.stop['exit_status']=='success'):
+                durations = np.append(durations,sc.stop['time'] - sc.start['time'])
+            if i > nscans:
+                break
     if len(durations) > 0:
         return np.mean(durations)
     else:  

@@ -22,7 +22,7 @@ def full_Carbon_NEXAFS(sigs=[],
                       "\nYou remembered to hook up the shutter, right?", "abort", "", 3)) > 0:
         return
     yield from bps.abs_set(mir3.Pitch,7.96,wait=True)
-    yield from bps.mv(DiodeRange, 6)
+    yield from bps.mv(DiodeRange, 5)
     yield from bps.mv(en.polarization,pol)
     # create a list of energies
     energies = np.arange(270,282,.5)
@@ -40,7 +40,7 @@ def full_Carbon_NEXAFS(sigs=[],
     yield from NEXAFS_scan_core(sigs, dets, energy, energies,enscan_type=enscan_type,openshutter=True)
 
 def full_Nitrogen_NEXAFS(sigs=[],
-                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en):
+                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en,pol=100):
     '''
     Full Nitrogen Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
 
@@ -58,7 +58,8 @@ def full_Nitrogen_NEXAFS(sigs=[],
                       "\nYou remembered to hook up the shutter, right?", "abort", "", 3)) > 0:
         return
     yield from bps.abs_set(mir3.Pitch,7.94,wait=True)
-    yield from bps.mv(DiodeRange,7)
+    yield from bps.mv(DiodeRange,6)
+    yield from bps.mv(en.polarization,pol)
     # create a list of energies
     energies = np.arange(385,397,1)
     energies = np.append(energies,np.arange(397,407,.2))
