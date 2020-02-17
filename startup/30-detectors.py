@@ -67,15 +67,18 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
             1:'enabled',
             3:'unknown',
             4:'unknown',
-            2:'unknown'
+            2:'enabled'
         }
-        return ('Shutter is {}'.format(switch[self.cam.sync.value]))
+        #return ('Shutter is {}'.format(switch[self.cam.sync.value]))
+        return ('Shutter is {}'.format(switch[self.cam.shutter_mode.value]))
 
     def shutter_on(self):
-        self.cam.sync.set(1)
+        #self.cam.sync.set(1)
+        self.cam.shutter_mode.set(2)
 
     def shutter_off(self):
-        self.cam.sync.set(0)
+        #self.cam.sync.set(0)
+        self.cam.shutter_mode.set(0)
 
     def unstage(self, *args, **kwargs):
         return [self].append(super().unstage(*args, **kwargs))
@@ -229,7 +232,8 @@ class SyncedDetectors(Device):
 
 #change this to saxs or waxs to record what the shutter state is
 #shutter_status_w = sw_det.waxs.cam.sync
-shutter_status_s = saxs_det.cam.sync
+#shutter_status_s = saxs_det.cam.sync
+shutter_status_s = saxs_det.cam.shutter_mode
 shutter_status_s.name = 'shutter mode saxs'
 #sw_det.waxs.cam.acquire_time.name = 'WAXS Exposure'
 #sw_det.saxs.cam.acquire_time.name = 'SAXS Exposure'
@@ -250,6 +254,7 @@ for det in [saxs_det]:#, waxs_det,sw_det.waxs,sw_det.saxs]:
     det.cam.model.kind = 'normal'
     det.cam.trigger_mode.kind = 'normal'
     det.cam.sync.kind = 'normal'
+    det.cam.shutter_mode.kind = 'normal'
     det.cam.shutter_open_delay.kind = 'normal'
     det.cam.shutter_close_delay.kind = 'normal'
     det.cam.min_x.kind = 'normal'

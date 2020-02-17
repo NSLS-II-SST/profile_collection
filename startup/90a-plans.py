@@ -92,12 +92,15 @@ del darkoff
 
 
 def dark_plan_saxs():
-    shutterstates = saxs_det.cam.sync.setpoint
-    yield from bps.mv(saxs_det.cam.sync,0) # disable shutter
+    #shutterstates = saxs_det.cam.sync.setpoint
+    shutterstates = saxs_det.cam.shutter_mode.value
+    #yield from bps.mv(saxs_det.cam.sync,0) # disable shutter
+    yield from bps.mv(saxs_det.cam.shutter_mode,0)
     yield from bps.trigger(saxs_det, group='darkframe-trigger')
     yield from bps.wait('darkframe-trigger')
     snapshot = bluesky_darkframes.SnapshotDevice(saxs_det)
-    yield from bps.mv(saxs_det.cam.sync,shutterstates)  # put shutter back in previous state
+    #yield from bps.mv(saxs_det.cam.sync,shutterstates)  # put shutter back in previous state
+    yield from bps.mv(saxs_det.cam.shutter_mode,shutterstates)
     return snapshot
 #
 #
