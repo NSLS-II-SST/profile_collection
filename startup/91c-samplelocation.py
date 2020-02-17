@@ -87,7 +87,7 @@ def image_bar(bar,path = None):
 def locate_samples_from_image(bar,impath):
     global loc_Q
     loc_Q = queue.Queue(1)
-    image = stitch_sample(False,False,False,from_image=impath)
+    image = stitch_sample(False,False,False,from_image=impath,flip_file=False)
     update_bar(bar, loc_Q)
 
 
