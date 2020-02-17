@@ -467,8 +467,9 @@ def run_bar(bar,sortby=['p','c','a','s'],dryrun=0,rev=[False,False,False,False],
                             a,                              #6
                             samp_num,                       #7
                             acq_num,                        #8
-                            a['arguments']])                #9
-    switcher = {'p':1,'s':0,'c':2,'a':3,'g':9}
+                            a['arguments'],                #9
+                            s['density']])                    #10
+    switcher = {'p':1,'s':0,'c':2,'a':3,'g':9,'d':10}
     try:
         sortby.reverse()
     except AttributeError:
