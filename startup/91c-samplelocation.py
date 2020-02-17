@@ -243,9 +243,9 @@ def find_af2x():
     yield from bps.mvr(sam_Y,3)
 
 def find_af2y():
-    yield from bps.mvr(sam_X,-3)
-    yield from bp.rel_scan([Izero_Mesh,Beamstop_SAXS],sam_Y,-3,3,61)
     yield from bps.mvr(sam_X,3)
+    yield from bp.rel_scan([Izero_Mesh,Beamstop_SAXS],sam_Y,-3,3,61)
+    yield from bps.mvr(sam_X,-3)
 
 def go_to_af1():
     yield from bps.mv(sam_X,-5.85,sam_Y,-182.93)
