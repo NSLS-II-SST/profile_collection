@@ -22,7 +22,7 @@ def full_Carbon_NEXAFS(sigs=[],
                       "\nYou remembered to hook up the shutter, right?", "abort", "", 3)) > 0:
         return
     yield from bps.abs_set(mir3.Pitch,7.96,wait=True)
-    yield from bps.mv(DiodeRange, 5)
+    yield from bps.mv(DiodeRange, 6)
     yield from bps.mv(en.polarization,pol)
     # create a list of energies
     energies = np.arange(270,282,.5)
