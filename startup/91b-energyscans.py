@@ -6,7 +6,7 @@ import bluesky.plan_stubs as bps
 
 
 def full_oxygen_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det],energy=en,pol=100):
+                        dets=[saxs_det],energy=en,pol=100,diode_range=6,m3_pitch=7.94):
     '''
     Full Oxygen Scan runs an RSoXS sample set through the O edge, with particular emphasis in he pre edge region
     this results in 110 exposures
@@ -25,8 +25,6 @@ def full_oxygen_scan_nd(multiple=1,sigs=[],
     #beamline_status()
     if len(read_input("Starting a Oxygen energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
-    yield from bps.abs_set(mir3.Pitch, 7.94, wait=True)
-    yield from bps.mv(en.polarization,pol)
     # create a list of energies
     energies = np.arange(510,525,1)
     energies = np.append(energies,np.arange(525,540,.2))
@@ -40,10 +38,11 @@ def full_oxygen_scan_nd(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type)
+    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
 
 def short_oxygen_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det],energy=en):
+                        dets=[saxs_det],energy=en,pol=100,diode_range=6,m3_pitch=7.94):
     '''
     Short Oxygen Scan runs an RSoXS sample set through the O edge, with particular emphasis in he pre edge region
 
@@ -60,7 +59,6 @@ def short_oxygen_scan_nd(multiple=1,sigs=[],
     #beamline_status()
     if len(read_input("Starting a Oxygen energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
-    yield from bps.abs_set(mir3.Pitch,7.92,wait=False,timeout=2)
     # create a list of energies
     energies = np.arange(510,525,2)
     energies = np.append(energies,np.arange(525,540,0.5))
@@ -75,12 +73,13 @@ def short_oxygen_scan_nd(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type)
+    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
 
 
 
 def short_fluorine_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det],energy=en,pol=100):
+                        dets=[saxs_det],energy=en,pol=100,diode_range=6,m3_pitch=7.92):
     '''
     Short Fluorine Scan runs an RSoXS sample set through the F edge, with particular emphasis in he pre edge region
 
@@ -98,8 +97,7 @@ def short_fluorine_scan_nd(multiple=1,sigs=[],
     #beamline_status()
     if len(read_input("Starting a fluorine energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
-    yield from bps.abs_set(mir3.Pitch, 7.94, wait=True)
-    yield from bps.mv(en.polarization,pol)
+
     # mir3.Pitch.put(7.89)
     # create a list of energies
     energies = np.arange(670,710,1)
@@ -115,12 +113,13 @@ def short_fluorine_scan_nd(multiple=1,sigs=[],
     times *= multiple
     # use these energies and exposure times to scan energy and record detectors and signals
 
-    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type)
+    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
 
 
 
 def full_nitrogen_scan_nd(multiple=1,sigs=[],
-                          dets=[saxs_det],energy=en,pol=100):
+                          dets=[saxs_det],energy=en,pol=100,diode_range=6,m3_pitch=7.94):
     '''
     Full Nitrogen Scan runs an RSoXS sample set through the N edge, with particular emphasis in he pre edge region
     this results in 95 exposures
@@ -139,8 +138,6 @@ def full_nitrogen_scan_nd(multiple=1,sigs=[],
     #beamline_status()
     if len(read_input("Starting a Nitrogen energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
-    yield from bps.abs_set(mir3.Pitch, 7.94, wait=True)
-    yield from bps.mv(en.polarization,pol)
     # create a list of energies
     energies = np.arange(385,397,1)
     energies = np.append(energies,np.arange(397,407,.2))
@@ -154,11 +151,12 @@ def full_nitrogen_scan_nd(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type)
+    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
 
 
 def short_nitrogen_scan_nd(multiple=1,sigs=[],
-                          dets=[saxs_det],energy=en,pol=100):
+                          dets=[saxs_det],energy=en,pol=100,diode_range=6,m3_pitch=7.94):
     '''
     Short Nitrogen Scan runs an RSoXS sample set through the N edge, with particular emphasis in he pre edge region
 
@@ -177,9 +175,7 @@ def short_nitrogen_scan_nd(multiple=1,sigs=[],
     if len(read_input("Starting a Short Nitrogen energy scan "
                       "hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
-    yield from bps.abs_set(mir3.Pitch, 7.92,wait=False,timeout=2)
 
-    yield from bps.mv(en.polarization,pol)
     # create a list of energies
     energies = np.arange(385,397,1)
     energies = np.append(energies,np.arange(397,401,.2))
@@ -194,11 +190,12 @@ def short_nitrogen_scan_nd(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type)
+    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
 
 
 def very_short_carbon_scan_nd(multiple=1,sigs=[],
-                              dets=[saxs_det],energy=en):
+                              dets=[saxs_det],energy=en,pol=100,diode_range=7,m3_pitch=7.96):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 40 exposures
@@ -218,7 +215,7 @@ def very_short_carbon_scan_nd(multiple=1,sigs=[],
     if len(read_input("Starting a very short Carbon energy scan hit "
                       "enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
-    yield from bps.abs_set(mir3.Pitch, 7.94, wait=True)
+
     # create a list of energies
     energies = np.arange(270,282,2)
     energies = np.append(energies,np.arange(282,286,.5))
@@ -235,11 +232,12 @@ def very_short_carbon_scan_nd(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets,energy,energies,times,enscan_type=enscan_type)
+    yield from en_scan_core(sigs, dets,energy,energies,times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
 
 
 def short_carbon_scan_nd(multiple=1,sigs=[],
-                         dets=[saxs_det],energy=en):
+                         dets=[saxs_det],energy=en,pol=100,diode_range=6,m3_pitch=7.96):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 61 exposures
@@ -260,7 +258,7 @@ def short_carbon_scan_nd(multiple=1,sigs=[],
         return
 
     #Oct 2019, this pitch value seems to be optimal for carbon
-    yield from bps.abs_set(mir3.Pitch,7.94,wait=False,timeout=2)
+
 
     # create a list of energies
     energies = np.arange(270,282,1)
@@ -278,11 +276,12 @@ def short_carbon_scan_nd(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets,energy,energies,times,enscan_type=enscan_type)
+    yield from en_scan_core(sigs, dets,energy,energies,times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
 
 
 def short_sulfurl_scan_nd(multiple=1,sigs=[],
-                         dets=[saxs_det],energy=en):
+                         dets=[saxs_det],energy=en,pol=100,diode_range=6,m3_pitch=7.98):
     '''
     Full Sulfur L Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 61 exposures
@@ -303,7 +302,6 @@ def short_sulfurl_scan_nd(multiple=1,sigs=[],
         return
 
     #Oct 2019, this pitch value seems to be optimal for carbon
-    yield from bps.abs_set(mir3.Pitch,7.97,wait=False,timeout=2)
 
     # create a list of energies
     energies = np.arange(150,160,1)
@@ -317,12 +315,13 @@ def short_sulfurl_scan_nd(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets,energy,energies,times,enscan_type=enscan_type)
+    yield from en_scan_core(sigs, dets,energy,energies,times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
 
 
 
 def focused_carbon_scan_nd(multiple=1,sigs=[],
-                         dets=[saxs_det],energy=en):
+                         dets=[saxs_det],energy=en,pol=100,diode_range=6,m3_pitch=7.96):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 61 exposures
@@ -342,8 +341,6 @@ def focused_carbon_scan_nd(multiple=1,sigs=[],
                       "the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
 
-    #Oct 2019, this pitch value seems to be optimal for carbon
-    yield from bps.abs_set(mir3.Pitch,7.94,wait=True)
 
     # create a list of energies
     energies = np.arange(270,282,5)
@@ -361,11 +358,12 @@ def focused_carbon_scan_nd(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets,energy,energies,times,enscan_type=enscan_type)
+    yield from en_scan_core(sigs, dets,energy,energies,times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
 
 
 def g_carbon_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en):
+                        dets=[saxs_det], energy=en,pol=100,diode_range=6,m3_pitch=7.96):
     '''
     G Carbon Scan runs an RSoXS sample set through the carbon edge, with a targeted 5 exposures
 
@@ -382,7 +380,6 @@ def g_carbon_scan_nd(multiple=1,sigs=[],
     sample()
     if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
-    yield from bps.abs_set(mir3.Pitch,7.94,wait=True)
     # create a list of energies
     energies = np.array([270,283.5,284.75,285.2,286.5])
     times = energies.copy()
@@ -392,11 +389,12 @@ def g_carbon_scan_nd(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type)
+    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
 
 
 def t_carbon_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en):
+                        dets=[saxs_det], energy=en,pol=100,diode_range=6,m3_pitch=7.96):
     '''
     T Carbon Scan runs an RSoXS sample set through the carbon edge, with a targeted 6 exposures
 
@@ -413,7 +411,6 @@ def t_carbon_scan_nd(multiple=1,sigs=[],
     sample()
     if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
-    yield from bps.abs_set(mir3.Pitch,7.94,wait=True)
     # create a list of energies
     energies = np.array([270,283,284.3,284.9,285.5,286,286.5,287])
     times = energies.copy()
@@ -423,11 +420,12 @@ def t_carbon_scan_nd(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type)
+    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
 
 
 def sufficient_carbon_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en):
+                        dets=[saxs_det], energy=en,pol=100,diode_range=6,m3_pitch=7.96):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 128 exposures
@@ -445,7 +443,6 @@ def sufficient_carbon_scan_nd(multiple=1,sigs=[],
     sample()
     if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
-    yield from bps.abs_set(mir3.Pitch,7.94,wait=True)
     # create a list of energies
     energies = np.arange(270,282,1)
     energies = np.append(energies,np.arange(282,286,.1))
@@ -462,12 +459,13 @@ def sufficient_carbon_scan_nd(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type)
+    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
 
 
 
 def picky_carbon_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en):
+                        dets=[saxs_det], energy=en,pol=100,diode_range=6,m3_pitch=7.96):
     '''
     Subh's picky Carbon Scan runs an RSoXS sample set through the useless energies before the carbon edge
     this results in 15 exposures
@@ -485,7 +483,7 @@ def picky_carbon_scan_nd(multiple=1,sigs=[],
     sample()
     if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
-    yield from bps.abs_set(mir3.Pitch,7.94,wait=True)
+    yield from bps.abs_set(mir3.Pitch,7.96,wait=True)
     # create a list of energies
     energies = np.arange(270,285,1)
     times = energies.copy()
@@ -495,12 +493,13 @@ def picky_carbon_scan_nd(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type)
+    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
 
 
 
 def full_carbon_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en,pol=100):
+                        dets=[saxs_det], energy=en,pol=100,diode_range=6,m3_pitch=7.96):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 128 exposures
@@ -518,8 +517,6 @@ def full_carbon_scan_nd(multiple=1,sigs=[],
     sample()
     if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
-    yield from bps.abs_set(mir3.Pitch,7.96,wait=True)
-    yield from bps.mv(en.polarization,pol)
     # create a list of energies
     energies = np.arange(270,282,.5)
     energies = np.append(energies,np.arange(282,286,.1))
@@ -536,11 +533,12 @@ def full_carbon_scan_nd(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type)
+    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
 
 
 def full_ca_scan_nd(multiple=1,sigs=[],
-                    dets=[saxs_det],energy=en):
+                    dets=[saxs_det],energy=en,pol=100,diode_range=6,m3_pitch=7.96):
     '''
     Calcium Scan runs an RSoXS sample set through the Ca edge, with particular emphasis in he pre edge region
 
@@ -568,11 +566,12 @@ def full_ca_scan_nd(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type)
+    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
 
 
 def full_carbon_calcium_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en):
+                        dets=[saxs_det], energy=en,pol=100,diode_range=6,m3_pitch=7.96):
     '''
     Full Carbon and Calcium Scan runs an RSoXS sample set through the carbon and calcium edges,
     with particular emphasis in he pre edge region
@@ -610,7 +609,8 @@ def full_carbon_calcium_scan_nd(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type)
+    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
 
 from ophyd.sim import det_with_count_time
 from cycler import cycler

@@ -4,7 +4,7 @@ import numpy as np
 
 
 def full_Carbon_NEXAFS(sigs=[],
-                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en,pol=100):
+                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en,pol=100,diode_range=7,m3_pitch=7.96):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
 
@@ -21,9 +21,8 @@ def full_Carbon_NEXAFS(sigs=[],
     if len(read_input("Starting a Carbon NEXAFS scan hit enter in the next 3 seconds to abort"
                       "\nYou remembered to hook up the shutter, right?", "abort", "", 3)) > 0:
         return
-    yield from bps.abs_set(mir3.Pitch,7.96,wait=True)
-    yield from bps.mv(DiodeRange, 6)
-    yield from bps.mv(en.polarization,pol)
+
+
     # create a list of energies
     energies = np.arange(270,282,.5)
     energies = np.append(energies,np.arange(282,286,.1))
@@ -37,10 +36,11 @@ def full_Carbon_NEXAFS(sigs=[],
     # use these energies and exposure times to scan energy and record detectors and signals
 
 
-    yield from NEXAFS_scan_core(sigs, dets, energy, energies,enscan_type=enscan_type,openshutter=True)
+    yield from NEXAFS_scan_core(sigs, dets, energy, energies,enscan_type=enscan_type,
+                                openshutter=True,diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
 
 def full_Nitrogen_NEXAFS(sigs=[],
-                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en,pol=100):
+                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en,pol=100,m3_pitch=7.94,diode_range=6):
     '''
     Full Nitrogen Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
 
@@ -57,9 +57,7 @@ def full_Nitrogen_NEXAFS(sigs=[],
     if len(read_input("Starting a Nitrogen NEXAFS scan hit enter in the next 3 seconds to abort"
                       "\nYou remembered to hook up the shutter, right?", "abort", "", 3)) > 0:
         return
-    yield from bps.abs_set(mir3.Pitch,7.94,wait=True)
-    yield from bps.mv(DiodeRange,6)
-    yield from bps.mv(en.polarization,pol)
+
     # create a list of energies
     energies = np.arange(385,397,1)
     energies = np.append(energies,np.arange(397,407,.2))
@@ -70,10 +68,11 @@ def full_Nitrogen_NEXAFS(sigs=[],
     # use these energies and exposure times to scan energy and record detectors and signals
 
 
-    yield from NEXAFS_scan_core(sigs, dets, energy, energies,enscan_type=enscan_type,openshutter=True)
+    yield from NEXAFS_scan_core(sigs, dets, energy, energies,enscan_type=enscan_type,openshutter=True
+                                ,diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
 
 def full_Fluorine_NEXAFS(sigs=[],
-                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en):
+                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en,pol=100,m3_pitch=7.94,diode_range=7):
     '''
     Full Nitrogen Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
 
@@ -85,13 +84,11 @@ def full_Fluorine_NEXAFS(sigs=[],
 
     normal scan takes ~ 7 minutes to complete
     '''
-    enscan_type = 'full_Nitrogen_NEXAFS'
+    enscan_type = 'full_Fluorine_NEXAFS'
     sample()
     if len(read_input("Starting a Nitrogen NEXAFS scan hit enter in the next 3 seconds to abort"
                       "\nYou remembered to hook up the shutter, right?", "abort", "", 3)) > 0:
         return
-    yield from bps.abs_set(mir3.Pitch,7.94,wait=True)
-    yield from bps.mv(DiodeRange,7)
     # create a list of energies
     energies = np.arange(680,720,.25)
     times = energies.copy()
@@ -100,11 +97,12 @@ def full_Fluorine_NEXAFS(sigs=[],
     # use these energies and exposure times to scan energy and record detectors and signals
 
 
-    yield from NEXAFS_scan_core(sigs, dets, energy, energies,enscan_type=enscan_type,openshutter=True)
+    yield from NEXAFS_scan_core(sigs, dets, energy, energies,enscan_type=enscan_type,openshutter=True
+                                ,diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
 
 
 def full_Oxygen_NEXAFS(sigs=[],
-                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en):
+                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en,pol=100,m3_pitch=7.94,diode_range=6):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
 
@@ -121,8 +119,6 @@ def full_Oxygen_NEXAFS(sigs=[],
     if len(read_input("Starting a Oxygen NEXAFS scan hit enter in the next 3 seconds to abort"
                       "\nYou remembered to hook up the shutter, right?", "abort", "", 3)) > 0:
         return
-    yield from bps.abs_set(mir3.Pitch,7.94,wait=True)
-    yield from bps.mv(DiodeRange, 7)
     # create a list of energies
     energies = np.arange(510,525,1)
     energies = np.append(energies,np.arange(525,540,.2))
@@ -133,12 +129,13 @@ def full_Oxygen_NEXAFS(sigs=[],
     # use these energies and exposure times to scan energy and record detectors and signals
 
 
-    yield from NEXAFS_scan_core(sigs, dets, energy, energies,enscan_type=enscan_type,openshutter=True)
+    yield from NEXAFS_scan_core(sigs, dets, energy, energies,enscan_type=enscan_type,openshutter=True
+                                ,diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
 
 
 
 def full_Al_NEXAFS(sigs=[],
-                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en):
+                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en,pol=100,m3_pitch=7.90,diode_range=6):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
 
@@ -155,8 +152,7 @@ def full_Al_NEXAFS(sigs=[],
     if len(read_input("Starting a Aluminum NEXAFS scan hit enter in the next 3 seconds to abort"
                       "\nYou remembered to hook up the shutter, right?", "abort", "", 3)) > 0:
         return
-    yield from bps.abs_set(mir3.Pitch,7.895,wait=True)
-    yield from bps.mv(DiodeRange, 7)
+
     # create a list of energies
     energies = np.arange(1550,1620,.5)
 
@@ -166,12 +162,13 @@ def full_Al_NEXAFS(sigs=[],
     # use these energies and exposure times to scan energy and record detectors and signals
 
 
-    yield from NEXAFS_scan_core(sigs, dets, energy, energies,enscan_type=enscan_type,openshutter=True)
+    yield from NEXAFS_scan_core(sigs, dets, energy, energies,enscan_type=enscan_type,openshutter=True
+                                ,diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
 
 
 
 def full_Zn_NEXAFS(sigs=[],
-                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en):
+                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en,pol=100,m3_pitch=7.9,diode_range=7):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
 
@@ -188,8 +185,7 @@ def full_Zn_NEXAFS(sigs=[],
     if len(read_input("Starting a Zinc NEXAFS scan hit enter in the next 3 seconds to abort"
                       "\nYou remembered to hook up the shutter, right?", "abort", "", 3)) > 0:
         return
-    yield from bps.abs_set(mir3.Pitch,7.895,wait=True)
-    yield from bps.mv(DiodeRange, 7)
+
     # create a list of energies
     energies = np.arange(1000,1070,.5)
     times = energies.copy()
@@ -198,4 +194,5 @@ def full_Zn_NEXAFS(sigs=[],
     # use these energies and exposure times to scan energy and record detectors and signals
 
 
-    yield from NEXAFS_scan_core(sigs, dets, energy, energies,enscan_type=enscan_type,openshutter=True)
+    yield from NEXAFS_scan_core(sigs, dets, energy, energies,enscan_type=enscan_type,openshutter=True
+                                ,diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)

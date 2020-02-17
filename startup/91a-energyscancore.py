@@ -73,29 +73,36 @@ def one_trigger_nd_step(detectors, step, pos_cache):
 
 
 # @dark_frames_enable
-def en_scan_core(signals,dets, energy, energies,times,enscan_type=None):
-    sw_det.saxs.cam.acquire_time.kind = 'normal'
+def en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=7.94,diode_range=6,pol=100):
+    saxs_det.cam.acquire_time.kind = 'normal'
    # sw_det.waxs.cam.acquire_time.kind = 'normal'
-
+    yield from bps.abs_set(mir3.Pitch,m3_pitch,wait=True)
+    yield from bps.mv(diode_range,6)
+    yield from bps.mv(en.polarization,pol)
     sigcycler = cycler(energy, energies)
     sigcycler += cycler(saxs_det.cam.acquire_time, times.copy())
    # sigcycler += cycler(sw_det.waxs.cam.acquire_time, times.copy()) #add extra exposure time for WAXS
 
    # yield from bps.abs_set(en, energies[0], timeout=180, wait=True)
-   # for signal in signals:
-   #     signal.kind = 'normal'
+    for signal in signals:
+        signal.kind = 'normal'
 
     yield from bp.scan_nd(dets + signals,
                           sigcycler,
                           md={'plan_name':enscan_type})
 
-def NEXAFS_scan_core(signals,dets, energy, energies,enscan_type=None, openshutter = False):
+def NEXAFS_scan_core(signals,dets, energy, energies,enscan_type=None,
+                     openshutter = False,m3_pitch=7.94,diode_range=6,pol=100):
 
     sigcycler = cycler(energy, energies)
 
+    yield from bps.abs_set(mir3.Pitch,m3_pitch,wait=True)
+    yield from bps.mv(diode_range,6)
+    yield from bps.mv(en.polarization,pol)
+
     yield from bps.mv(en, energies[0])
-    #for signal in signals:
-    #    signal.kind = 'normal'
+    for signal in signals:
+        signal.kind = 'normal'
     if openshutter:
         yield from bps.mv(saxs_det.cam.shutter_control, 1)
     yield from bp.scan_nd(dets + signals + [en.energy],
