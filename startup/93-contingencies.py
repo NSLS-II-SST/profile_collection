@@ -53,6 +53,7 @@ def beamdown_notice():
     send_notice(bls_email+','+user_email,'SST-1 has lost beam','Beam to RSoXS has been lost.'
                                                                '\rYour scan has been paused automatically.'
                                                                '\rNo intervention needed, but thought you might like to know.')
+    yield from bps.null()
 
 
 def beamup_notice():
@@ -61,6 +62,7 @@ def beamup_notice():
                                                                '\rYour scan has resumed running.'
                                                                '\rIf able, you may want to check the data and make sure intensity is still OK.'
                                                                '\rOne exposure may have been affected')
+    yield from bps.null()
 
 
 
