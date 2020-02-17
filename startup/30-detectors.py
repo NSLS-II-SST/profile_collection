@@ -136,6 +136,9 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
     def exposure(self):
         return self.exptime()
 
+    def set_exposure(self,seconds):
+        self.set_exptime(seconds)
+
     #sudo mount -t cifs //10.7.0.217/data/ /mnt/zdrive -o user=linuxuser,pass=greateyes
     #needs to be run on the server
     # sudo mount -t cifs //10.7.0.217/data/ /mnt/zdrive -o user=linuxuser,pass=greateyes
