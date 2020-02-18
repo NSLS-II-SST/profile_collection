@@ -77,7 +77,7 @@ def en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=
     saxs_det.cam.acquire_time.kind = 'normal'
    # sw_det.waxs.cam.acquire_time.kind = 'normal'
     yield from bps.abs_set(mir3.Pitch,m3_pitch,wait=True)
-    yield from bps.mv(diode_range,6)
+    yield from bps.mv(DiodeRange,diode_range)
     yield from bps.mv(en.polarization,pol)
     sigcycler = cycler(energy, energies)
     sigcycler += cycler(saxs_det.cam.acquire_time, times.copy())
@@ -97,7 +97,7 @@ def NEXAFS_scan_core(signals,dets, energy, energies,enscan_type=None,
     sigcycler = cycler(energy, energies)
 
     yield from bps.abs_set(mir3.Pitch,m3_pitch,wait=True)
-    yield from bps.mv(diode_range,6)
+    yield from bps.mv(DiodeRange,diode_range)
     yield from bps.mv(en.polarization,pol)
 
     yield from bps.mv(en, energies[0])
