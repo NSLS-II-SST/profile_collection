@@ -278,7 +278,7 @@ def short_carbon_scan_nd(multiple=1,sigs=[],
     # use these energies and exposure times to scan energy and record detectors and signals
     yield from en_scan_core(sigs, dets,energy,energies,times,enscan_type=enscan_type,
                             diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
-
+#en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=7.94,diode_range=6,pol=100)
 
 def short_sulfurl_scan_nd(multiple=1,sigs=[],
                          dets=[saxs_det],energy=en,pol=100,diode_range=6,m3_pitch=7.98):
