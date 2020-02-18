@@ -197,8 +197,8 @@ class EnPos(PseudoPositioner):
 
     """
     # synthetic axis
-    energy = Cpt(PseudoSingle, kind='hinted', limits=(150,2500),name="Beamline Energy")
-    polarization = Cpt(PseudoSingle, kind='hinted', limits=(99,200),name="X-ray Polarization")
+    energy = Cpt(PseudoSingle, kind='hinted', limits=(91,2040),name="Beamline Energy")
+    polarization = Cpt(PseudoSingle, kind='hinted', limits=(1,190),name="X-ray Polarization")
 
     # real motors
 
@@ -436,7 +436,7 @@ def correct_mono(calibrated_eV,apply=False,current_eV=None, k=1200):
           f'\nGrating offset will be changed from {grat_off} to {grat_off + d_grat} and '
           f'\nMirror2 offset will be changed from {mir_off} to {mir_off + d_mir}')
     if apply:
-        yield from bps.mv(mono_en.grating.user_offset, grat_off + d_grat)
+        yield from bps.amv(mono_en.grating.user_offset, grat_off + d_grat)
         yield from bps.mv(mono_en.mirror2.user_offset, mir_off + d_mir)
 
 
