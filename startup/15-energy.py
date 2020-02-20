@@ -12,8 +12,8 @@ class UndulatorMotor(EpicsMotor):
 class UndulatorMotorPhs(UndulatorMotor):
     user_readback = Cpt(EpicsSignal, '-RB', limits=True)
 
-epu_gap = UndulatorMotor('SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr', name='EPU 60 Gap',kind='normal')
-epu_phase = UndulatorMotor('SR:C07-ID:G1A{SST1:1-Ax:Phase}-Mtr', name='EPU 60 Phase',kind='normal')
+#epu_gap = UndulatorMotor('SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr', name='EPU 60 Gap',kind='normal')
+#epu_phase = UndulatorMotor('SR:C07-ID:G1A{SST1:1-Ax:Phase}-Mtr', name='EPU 60 Phase',kind='normal')
 epu_mode = UndulatorMotor('SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode', name='EPU 60 Mode',kind='normal')
 
 class Monochromator(PVPositioner):
@@ -30,7 +30,7 @@ class Monochromator(PVPositioner):
     done_value = 1
     stop_signal = Cpt(EpicsSignal, ':ENERGY_ST_CMD')
 
-mono_en= Monochromator('XF:07ID1-OP{Mono:PGM1-Ax:', name='Monochromator Energy',kind='normal')
+# mono_en= Monochromator('XF:07ID1-OP{Mono:PGM1-Ax:', name='Monochromator Energy',kind='normal')
 
 from scipy import interpolate
 #energies = {270,280,400}
@@ -258,6 +258,9 @@ class EnPos(PseudoPositioner):
     def wh(self):
         boxed_text(self.name+" location", self.where_sp(), 'green',shrink=True)
 
+    def _sequential_move(self, real_pos, timeout=None, **kwargs):
+        raise Exception('nope')
+
 
 class EnPosold(PseudoPositioner):
     """Energy pseudopositioner class.
@@ -323,6 +326,9 @@ en = EnPos('', name='en')
 en.energy.kind = 'hinted'
 en.monoen.kind = 'normal'
 en.monoen.readback.kind = 'normal'
+mono_en = en.monoen
+epu_gap = en.epugap
+epu_phase = en.epuphase
 mono_en.read_attrs = ['readback']
 en.epugap.kind = 'normal'
 # en.read_attrs = ['energy',
