@@ -17,7 +17,7 @@ epu_phase = UndulatorMotor('SR:C07-ID:G1A{SST1:1-Ax:Phase}-Mtr', name='EPU 60 Ph
 epu_mode = UndulatorMotor('SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode', name='EPU 60 Mode',kind='normal')
 
 class Monochromator(PVPositioner):
-    setpoint = Cpt(EpicsSignal,':ENERGY_SP', kind='normal')
+    setpoint = Cpt(EpicsSignal,':ENERGY_SP', kind='normal', write_timeout=180.)
     value = Cpt(EpicsSignalRO, ':ENERGY_MON',kind='hinted')
     readback = Cpt(EpicsSignalRO, ':ENERGY_MON',kind='hinted')
 
@@ -102,7 +102,7 @@ def epugap_from_en_pol(energy,polarization):
     #           (enoff ** 9) * -7.796287724230847e-22
     # return gap
     gap = None
-    if polarization is 100:
+    if polarization is 100: # horizontal polarization
         if energy < 1100 and energy > 91:
             enoff = energy - 91.50362582
             gap = (enoff ** 0) * 15110.67779924645 + \
@@ -115,7 +115,7 @@ def epugap_from_en_pol(energy,polarization):
               (enoff ** 7) * -2.238555907963612e-15 + \
               (enoff ** 8) * 1.360827187327397e-18 + \
               (enoff ** 9) * -2.886187265342386e-22
-        elif energy >= 1100 and energy < 2043:
+        elif energy >= 1100 and energy < 2043: # third harmonic
             enoff = energy - 270.0339431
             gap = (enoff ** 0) * 14980.14097989457        + \
                   (enoff ** 1) * 39.30125265144509        + \
@@ -127,8 +127,9 @@ def epugap_from_en_pol(energy,polarization):
                   (enoff ** 7) * 7.140749578708601e-17    + \
                   (enoff ** 8) * -1.832598427725348e-20   + \
                   (enoff ** 9) * 2.037204560871964e-24
-    elif polarization is 190:
 
+
+    elif polarization is 190: # vertical polarization
         if energy > 167 and energy < 1100:
             enoff = energy - 166.8785717
             gap = (enoff ** 0) * 15006.85417669814         + \
@@ -142,7 +143,7 @@ def epugap_from_en_pol(energy,polarization):
                   (enoff ** 8) * -6.683697748383357e-19    + \
                   (enoff ** 9) * 1.479973705782391e-22
 
-        elif energy >= 1100 and energy < 2054:
+        elif energy >= 1100 and energy < 2054: # third harmonic
             enoff = energy - 503.3203871
             gap = (enoff ** 0) * 15008.30898562484           + \
                   (enoff ** 1) * 15.53586640720786           + \
@@ -154,8 +155,9 @@ def epugap_from_en_pol(energy,polarization):
                   (enoff ** 7) * 1.97676836943378e-16        + \
                   (enoff ** 8) * -6.141418522304618e-20      + \
                   (enoff ** 9) * 7.993082265756972e-24
-    elif polarization is 1:
 
+
+    elif polarization is 1: # circular polarization
         if energy > 235 and energy < 1535:
             enoff = energy - 234.98486924
             gap = (enoff ** 0) * 15016.25307380422          + \
@@ -317,7 +319,7 @@ class EnPosold(PseudoPositioner):
         [grating,mirror] = get_mirror_grating_angles(eV, c, m, k)
         yield from bps.mv(self.monoen.mirror2,mirror,self.monoen.grating,grating)
 
-en = EnPos('', name='en',concurrent=1)
+en = EnPos('', name='en')
 en.energy.kind = 'hinted'
 en.monoen.kind = 'normal'
 en.monoen.readback.kind = 'normal'
