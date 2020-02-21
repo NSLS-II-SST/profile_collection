@@ -155,6 +155,41 @@ def full_nitrogen_scan_nd(multiple=1,sigs=[],
                             diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
 
 
+def full_test_scan_nd(multiple=1,sigs=[],
+                          dets=[saxs_det],energy=en,pol=100,diode_range=6,m3_pitch=7.94):
+    '''
+    Full Nitrogen Scan runs an RSoXS sample set through the N edge, with particular emphasis in he pre edge region
+    this results in 95 exposures
+
+
+    :param multiple: adjustment for exposure times
+    :param mesh: which Izero channel to use
+    :param det: which detector to use
+    :param energy: what energy motor to scan
+    :return: perform scan
+
+    normal scan takes ~ 15 minutes to complete
+    '''
+    enscan_type = 'full_nitrogen_scan_nd'
+    sample()
+    #beamline_status()
+    if len(read_input("Starting a Nitrogen energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
+        return
+    # create a list of energies
+    energies = np.arange(1500,1540,1)
+    times = energies.copy()
+
+    # Define exposures times for different energy ranges
+    times[energies < 400] = 2
+    # times[(energies < 286) & (energies >= 282)] = 5
+    times[energies >= 400] = 2
+    times *= multiple
+
+    # use these energies and exposure times to scan energy and record detectors and signals
+    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
+
+
 def short_nitrogen_scan_nd(multiple=1,sigs=[],
                           dets=[saxs_det],energy=en,pol=100,diode_range=6,m3_pitch=7.94):
     '''
