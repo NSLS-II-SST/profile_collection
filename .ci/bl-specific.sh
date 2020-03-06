@@ -1,3 +1,3 @@
 #!/bin/bash
 
-conda install -y -c ${CONDA_CHANNEL_NAME} ansiwrap "caproto>=0.4"
+conda install -y -c ${CONDA_CHANNEL_NAME} ansiwrap "ophyd>=1.4.0rc5"
