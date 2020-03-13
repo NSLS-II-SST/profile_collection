@@ -274,7 +274,9 @@ def do_2020_eputables():
 
 def do_2020_eputables2():
     yield from bps.mv(epu_mode,2)
-    epu_gap
+    Izero_Mesh.kind = 'hinted'
+    Beamstop_SAXS.kind = 'hinted'
+    mono_en.readback.kind = 'hinted'
     yield from buildeputablegaps(15500, 70000, 200, 2, 90,  '_March_H1phase0',0)
     yield from buildeputablegaps(15000, 70000, 200, 2, 150, '_March_H1phase29500',29500)
     yield from buildeputablegaps(15000, 70000, 200, 2, 175, '_March_H1phase25000',26000)
