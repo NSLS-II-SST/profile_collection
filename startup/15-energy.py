@@ -14,7 +14,7 @@ class UndulatorMotorPhs(UndulatorMotor):
 
 #epu_gap = UndulatorMotor('SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr', name='EPU 60 Gap',kind='normal')
 #epu_phase = UndulatorMotor('SR:C07-ID:G1A{SST1:1-Ax:Phase}-Mtr', name='EPU 60 Phase',kind='normal')
-epu_mode = UndulatorMotor('SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode', name='EPU 60 Mode',kind='normal')
+epu_mode = UndulatorMotorPhs('SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode', name='EPU 60 Mode',kind='normal')
 
 class Monochromator(PVPositioner):
     setpoint = Cpt(EpicsSignal,':ENERGY_SP', kind='normal', write_timeout=180.)
