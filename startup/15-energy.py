@@ -9,12 +9,12 @@ from IPython.core.magic import register_line_magic
 
 class UndulatorMotor(EpicsMotor):
     user_setpoint = Cpt(EpicsSignal, '-SP', limits=True)
-class UndulatorMotorPhs(UndulatorMotor):
-    user_readback = Cpt(EpicsSignal, '-RB', limits=True)
 
 #epu_gap = UndulatorMotor('SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr', name='EPU 60 Gap',kind='normal')
 #epu_phase = UndulatorMotor('SR:C07-ID:G1A{SST1:1-Ax:Phase}-Mtr', name='EPU 60 Phase',kind='normal')
-epu_mode = UndulatorMotorPhs('SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode', name='EPU 60 Mode',kind='normal')
+epu_mode = EpicsSignal('SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-RB',
+                       write_pv='SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP',
+                       name='EPU 60 Mode',kind='normal')
 
 class Monochromator(PVPositioner):
     setpoint = Cpt(EpicsSignal,':ENERGY_SP', kind='normal', write_timeout=180.)
