@@ -411,8 +411,9 @@ class EnPosold(PseudoPositioner):
             colored('{:.2f}'.format(self.monoen.vls.value).rstrip('0').rstrip('.'),'yellow'))
 
     def where(self):
-        return ('Beamline Energy : {}').format(
-            colored('{:.2f}'.format(self.monoen.readback.value).rstrip('0').rstrip('.'), 'yellow'))
+        return ('Beamline Energy : {}\nPolarization : {}').format(
+            colored('{:.2f}'.format(self.monoen.readback.value).rstrip('0').rstrip('.'), 'yellow'),
+            colored('{:.2f}'.format(self.polarization.readback.value).rstrip('0').rstrip('.'), 'yellow'))
 
     def wh(self):
         boxed_text(self.name+" location", self.where_sp(), 'green',shrink=True)
@@ -467,6 +468,20 @@ def e(line):
         RE(bps.mv(en,loc))
         boxed_text('Beamline Energy', en.where(), 'lightpurple', shrink=True)
 del e
+
+
+
+@register_line_magic
+def pol(line):
+    try:
+        loc = float(line)
+    except:
+        boxed_text('Beamline Polarization',en.where(),'lightpurple',shrink=True)
+    else:
+        RE(bps.mv(en.polarization,loc))
+        boxed_text('Beamline Polarization', en.where(), 'lightpurple', shrink=True)
+del pol
+
 
 
 def cff_to_13():
