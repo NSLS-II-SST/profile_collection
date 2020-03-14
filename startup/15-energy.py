@@ -12,9 +12,11 @@ class UndulatorMotor(EpicsMotor):
 
 #epu_gap = UndulatorMotor('SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr', name='EPU 60 Gap',kind='normal')
 #epu_phase = UndulatorMotor('SR:C07-ID:G1A{SST1:1-Ax:Phase}-Mtr', name='EPU 60 Phase',kind='normal')
-# epu_mode = EpicsSignal('SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-RB',
-#                        write_pv='SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP',
-#                        name='EPU 60 Mode',kind='normal')
+
+
+epu_mode = EpicsSignal('SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-RB',
+                       write_pv='SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP',
+                       name='EPU 60 Mode',kind='normal')
 
 class Monochromator(PVPositioner):
     setpoint = Cpt(EpicsSignal,':ENERGY_SP', kind='normal', write_timeout=180.)
@@ -303,23 +305,20 @@ class EnPos(PseudoPositioner):
     monoen = Cpt(Monochromator, 'XF:07ID1-OP{Mono:PGM1-Ax:',kind='hinted',name='Mono Energy')
     epugap = Cpt(UndulatorMotor, 'SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr',kind='normal',name='EPU Gap')
     epuphase = Cpt(UndulatorMotor, 'SR:C07-ID:G1A{SST1:1-Ax:Phase}-Mtr',kind='normal',name='EPU Phase')
-    epumode = Cpt(PVPositioner,'SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP',
-                  read_pv='SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-RB',
-                  name='EPU Mode', kind='normal')
+
 
     @pseudo_position_argument
     def forward(self, pseudo_pos):
         '''Run a forward (pseudo -> real) calculation'''
         return self.RealPosition(epugap=epugap_from_en_pol(pseudo_pos.energy, pseudo_pos.polarization),
                                  monoen=pseudo_pos.energy,
-                                 epuphase=epuphase_from_en_pol(pseudo_pos.polarization),
-                                 epumode=epumode_from_en_pol(pseudo_pos.polarization))
+                                 epuphase=epuphase_from_en_pol(pseudo_pos.polarization))
 
     @real_position_argument
     def inverse(self, real_pos):
         '''Run an inverse (real -> pseudo) calculation'''
         return self.PseudoPosition( energy=real_pos.monoen,
-                                    polarization=pol_from_mode_phase(real_pos.epuphase,real_pos.epumode))
+                                    polarization=pol_from_mode_phase(real_pos.epuphase,epu_mode.value))
 
     def where_sp(self):
         return ('Beamline Energy Setpoint : {}'
@@ -430,7 +429,7 @@ en.monoen.readback.kind = 'normal'
 mono_en = en.monoen
 epu_gap = en.epugap
 epu_phase = en.epuphase
-epu_mode = en.epumode
+#epu_mode = en.epumode
 mono_en.read_attrs = ['readback']
 en.epugap.kind = 'normal'
 # en.read_attrs = ['energy',
