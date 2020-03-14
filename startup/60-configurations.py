@@ -293,7 +293,7 @@ def SAXSNEXAFS():
         'order': 0},
         {
         'motor':    Shutter_Y,
-        'position': 32.2,
+        'position': 2.2,
         'order': 0},
         {
         'motor':    Izero_Y,
