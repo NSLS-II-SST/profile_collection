@@ -12,9 +12,9 @@ class UndulatorMotor(EpicsMotor):
 
 #epu_gap = UndulatorMotor('SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr', name='EPU 60 Gap',kind='normal')
 #epu_phase = UndulatorMotor('SR:C07-ID:G1A{SST1:1-Ax:Phase}-Mtr', name='EPU 60 Phase',kind='normal')
-epu_mode = EpicsSignal('SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-RB',
-                       write_pv='SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP',
-                       name='EPU 60 Mode',kind='normal')
+# epu_mode = EpicsSignal('SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-RB',
+#                        write_pv='SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP',
+#                        name='EPU 60 Mode',kind='normal')
 
 class Monochromator(PVPositioner):
     setpoint = Cpt(EpicsSignal,':ENERGY_SP', kind='normal', write_timeout=180.)
@@ -102,48 +102,22 @@ def epugap_from_en_pol(energy,polarization):
     #           (enoff ** 9) * -7.796287724230847e-22
     # return gap
     gap = None
-    if polarization is 100: # horizontal polarization
-        if energy < 1100 and energy > 91:
-            enoff = energy - 91.50362582
-            gap = (enoff ** 0) * 15110.67779924645 + \
-              (enoff ** 1) * 112.8098620805316 + \
-              (enoff ** 2) * -0.4237910864538921 + \
-              (enoff ** 3) * 0.001285687934133165 + \
-              (enoff ** 4) * -2.141062575658493e-06 + \
-              (enoff ** 5) * 1.366109973021348e-09 + \
-              (enoff ** 6) * 1.005374249050218e-12 + \
-              (enoff ** 7) * -2.238555907963612e-15 + \
-              (enoff ** 8) * 1.360827187327397e-18 + \
-              (enoff ** 9) * -2.886187265342386e-22
-        elif energy >= 1100 and energy < 2043: # third harmonic
-            enoff = energy - 270.0339431
-            gap = (enoff ** 0) * 14980.14097989457        + \
-                  (enoff ** 1) * 39.30125265144509        + \
-                  (enoff ** 2) * -0.0674108834353197      + \
-                  (enoff ** 3) * 0.000132989043933298     + \
-                  (enoff ** 4) * -2.047601585681656e-07   + \
-                  (enoff ** 5) * 2.208539436185439e-10    + \
-                  (enoff ** 6) * -1.582405111796854e-13   + \
-                  (enoff ** 7) * 7.140749578708601e-17    + \
-                  (enoff ** 8) * -1.832598427725348e-20   + \
-                  (enoff ** 9) * 2.037204560871964e-24
 
+    if polarization is 190: # vertical polarization
+        if 168 <= energy < 1100:
+            enoff = energy - 167.50006507
+            gap = (enoff ** 0) * 14622.35886091497          + \
+                  (enoff ** 1) * 79.45356871349468          + \
+                  (enoff ** 2) * -0.8727196924302836        + \
+                  (enoff ** 3) * 0.007153735346301802       + \
+                  (enoff ** 4) * -3.139219674602493e-05     + \
+                  (enoff ** 5) * 7.865183870383904e-08      + \
+                  (enoff ** 6) * -1.163807191257357e-10     + \
+                  (enoff ** 7) * 1.005851882527788e-13      + \
+                  (enoff ** 8) * -4.69241419016422e-17      + \
+                  (enoff ** 9) * 9.126543545094467e-21
 
-    elif polarization is 190: # vertical polarization
-        if energy > 167 and energy < 1100:
-            enoff = energy - 166.8785717
-            gap = (enoff ** 0) * 15006.85417669814         + \
-                  (enoff ** 1) * 43.10958918374415         + \
-                  (enoff ** 2) * -0.07798819514340152      + \
-                  (enoff ** 3) * 0.0002095157370960695     + \
-                  (enoff ** 4) * -5.11562008011809e-07     + \
-                  (enoff ** 5) * 1.027838516893415e-09     + \
-                  (enoff ** 6) * -1.453700462622024e-12    + \
-                  (enoff ** 7) * 1.310901102701863e-15     + \
-                  (enoff ** 8) * -6.683697748383357e-19    + \
-                  (enoff ** 9) * 1.479973705782391e-22
-
-        elif energy >= 1100 and energy < 2054: # third harmonic
+        elif 1100 <= energy < 2054: # third harmonic
             enoff = energy - 503.3203871
             gap = (enoff ** 0) * 15008.30898562484           + \
                   (enoff ** 1) * 15.53586640720786           + \
@@ -156,37 +130,159 @@ def epugap_from_en_pol(energy,polarization):
                   (enoff ** 8) * -6.141418522304618e-20      + \
                   (enoff ** 9) * 7.993082265756972e-24
 
+    elif polarization is 125: # vertical polarization
+        if 212 <= energy < 1100:
+            enoff = energy - 211.25467563
+            gap = (enoff ** 0) * 14584.35660394691       + \
+                  (enoff ** 1) * 81.46681437020771       + \
+                  (enoff ** 2) * -1.063712849739659      + \
+                  (enoff ** 3) * 0.009275638121170167    + \
+                  (enoff ** 4) * -4.234975106446957e-05  + \
+                  (enoff ** 5) * 1.098234371966891e-07   + \
+                  (enoff ** 6) * -1.679207518873966e-10  + \
+                  (enoff ** 7) * 1.498714839417041e-13   + \
+                  (enoff ** 8) * -7.218373220487733e-17  + \
+                  (enoff ** 9) * 1.449351930191205e-20
+
+    elif polarization is 120: # vertical polarization
+        if 235 <= energy < 1100:
+            enoff = energy - 234.98519652
+            gap = (enoff ** 0) * 14798.07731572243       + \
+                  (enoff ** 1) * 56.16228122162846       + \
+                  (enoff ** 2) * -0.4692082546739633     + \
+                  (enoff ** 3) * 0.004164088423443679    + \
+                  (enoff ** 4) * -1.999386443826096e-05  + \
+                  (enoff ** 5) * 5.462418311398194e-08   + \
+                  (enoff ** 6) * -8.785971602778833e-11  + \
+                  (enoff ** 7) * 8.239422829429386e-14   + \
+                  (enoff ** 8) * -4.166699208229707e-17  + \
+                  (enoff ** 9) * 8.781955126316585e-21
+
+    elif polarization is 116: # vertical polarization
+        if 206 <= energy < 1100:
+            enoff = energy - 205.00412715
+            gap = (enoff ** 0) * 14916.98034273721       + \
+                  (enoff ** 1) * 54.29503098264628       + \
+                  (enoff ** 2) * -0.2491173385663503     + \
+                  (enoff ** 3) * 0.001948412336737997    + \
+                  (enoff ** 4) * -9.171645432305396e-06  + \
+                  (enoff ** 5) * 2.487974365193833e-08   + \
+                  (enoff ** 6) * -3.971806672617338e-11  + \
+                  (enoff ** 7) * 3.692565191146745e-14   + \
+                  (enoff ** 8) * -1.850015483152694e-17  + \
+                  (enoff ** 9) * 3.863574657261709e-21
+
+    elif polarization is 104: # vertical polarization
+        if 100 <= energy < 1100:
+            enoff = energy - 99.18637273
+            gap = (enoff ** 0) * 15296.49505904854      + \
+                  (enoff ** 1) * 111.6935238502345      + \
+                  (enoff ** 2) * -0.5318452040149829    + \
+                  (enoff ** 3) * 0.002522472412655326   + \
+                  (enoff ** 4) * -8.139971173054056e-06 + \
+                  (enoff ** 5) * 1.691909898011538e-08  + \
+                  (enoff ** 6) * -2.21552389677964e-11  + \
+                  (enoff ** 7) * 1.761177450482788e-14  + \
+                  (enoff ** 8) * -7.745630380250356e-18 + \
+                  (enoff ** 9) * 1.444917025851466e-21
+
+    elif polarization is 112: # vertical polarization
+        if 162 <= energy < 1100:
+            enoff = energy - 161.66065884
+            gap = (enoff ** 0) * 14970.74161247973      + \
+                  (enoff ** 1) * 71.63595646171082      + \
+                  (enoff ** 2) * -0.3333372852527692    + \
+                  (enoff ** 3) * 0.002109066742806884   + \
+                  (enoff ** 4) * -8.572917697871371e-06 + \
+                  (enoff ** 5) * 2.095792129907114e-08  + \
+                  (enoff ** 6) * -3.084391159303237e-11 + \
+                  (enoff ** 7) * 2.678469462872999e-14  + \
+                  (enoff ** 8) * -1.264020972655732e-17 + \
+                  (enoff ** 9) * 2.501258335889735e-21
 
     elif polarization is 1: # circular polarization
-        if energy > 235 and energy < 1535:
-            enoff = energy - 234.98486924
-            gap = (enoff ** 0) * 15016.25307380422          + \
-                  (enoff ** 1) * 38.16488368986554          + \
-                  (enoff ** 2) * -0.03913887500755141       + \
-                  (enoff ** 3) * -6.568381852189566e-05     + \
-                  (enoff ** 4) * 5.753277275934987e-07      + \
-                  (enoff ** 5) * -1.55049964816456e-09      + \
-                  (enoff ** 6) * 2.236937151454582e-12      + \
-                  (enoff ** 7) * -1.827495354667843e-15     + \
-                  (enoff ** 8) * 7.95030658429693e-19       + \
-                  (enoff ** 9) * -1.429924266915595e-22
+        if 238 <= energy < 1800:
+            enoff = energy - 237.37682344
+            gap = (enoff ** 0) * 15013.34794532079           + \
+                  (enoff ** 1) * 39.8763637325271            + \
+                  (enoff ** 2) * -0.07794302832262227        + \
+                  (enoff ** 3) * 0.0002096214175929367       + \
+                  (enoff ** 4) * -4.460761960094444e-07      + \
+                  (enoff ** 5) * 6.348684432599568e-10       + \
+                  (enoff ** 6) * -5.617174609319205e-13      + \
+                  (enoff ** 7) * 2.920241694418002e-16       + \
+                  (enoff ** 8) * -8.037658719820455e-20      + \
+                  (enoff ** 9) * 8.847705328400634e-24
+    else:
+        # polarization is 100: # horizontal polarization - default
+        if 100 <= energy < 1100:
+            enoff = energy - 99.08496564000001
+            gap = (enoff ** 0) * 15879.88627763909       + \
+              (enoff ** 1) *     110.0836448991598       + \
+              (enoff ** 2) *     -0.5017899213674649     + \
+              (enoff ** 3) *     0.002244632997626055    + \
+              (enoff ** 4) *     -6.778863779803541e-06  + \
+              (enoff ** 5) *     1.318236985628506e-08   + \
+              (enoff ** 6) *     -1.622642480718214e-11  + \
+              (enoff ** 7) *     1.222342409851351e-14   + \
+              (enoff ** 8) *     -5.14422560200779e-18   + \
+              (enoff ** 9) *     9.280241963159906e-22
+        elif 1100 <= energy < 2043: # third harmonic
+            enoff = energy - 270.0339431
+            gap = (enoff ** 0) * 14980.14097989457        + \
+                  (enoff ** 1) * 39.30125265144509        + \
+                  (enoff ** 2) * -0.0674108834353197      + \
+                  (enoff ** 3) * 0.000132989043933298     + \
+                  (enoff ** 4) * -2.047601585681656e-07   + \
+                  (enoff ** 5) * 2.208539436185439e-10    + \
+                  (enoff ** 6) * -1.582405111796854e-13   + \
+                  (enoff ** 7) * 7.140749578708601e-17    + \
+                  (enoff ** 8) * -1.832598427725348e-20   + \
+                  (enoff ** 9) * 2.037204560871964e-24
     return gap
 
 
 def epuphase_from_en_pol(polarization):
     if polarization is 190:
         return 29500
+    elif polarization is 125:
+        return 25000
+    elif polarization is 120:
+        return 20000
+    elif polarization is 116:
+        return 16000
+    elif polarization is 112:
+        return 12000
+    elif polarization is 104:
+        return 4000
+    elif polarization is 1:
+        return 15000
     else:
         return 0
 
 
 def epumode_from_en_pol(polarization):
-    return 2
+    if polarization is 1:
+        return 0
+    else:
+        return 2
 
 
-def pol_from_mode_phase(phase):
-    if abs(phase - 29500) <100:
+def pol_from_mode_phase(phase, mode):
+    if abs(phase - 29500) < 100 and mode is 2:
         return 190
+    elif abs(phase - 25000) < 100 and mode is 2:
+        return 125
+    elif abs(phase - 20000) < 100 and mode is 2:
+        return 120
+    elif abs(phase - 16000) < 100 and mode is 2:
+        return 116
+    elif abs(phase - 12000) < 100 and mode is 2:
+        return 112
+    elif abs(phase - 4000) < 100 and mode is 2:
+        return 104
+    elif abs(phase - 15000) < 100 and mode is 0:
+        return 1
     else:
         return 100
 
@@ -207,19 +303,23 @@ class EnPos(PseudoPositioner):
     monoen = Cpt(Monochromator, 'XF:07ID1-OP{Mono:PGM1-Ax:',kind='hinted',name='Mono Energy')
     epugap = Cpt(UndulatorMotor, 'SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr',kind='normal',name='EPU Gap')
     epuphase = Cpt(UndulatorMotor, 'SR:C07-ID:G1A{SST1:1-Ax:Phase}-Mtr',kind='normal',name='EPU Phase')
+    epumode = Cpt(EpicsSignal,'SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-RB',
+                           write_pv='SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP',
+                           name='EPU 60 Mode', kind='normal')
 
     @pseudo_position_argument
     def forward(self, pseudo_pos):
         '''Run a forward (pseudo -> real) calculation'''
         return self.RealPosition(epugap=epugap_from_en_pol(pseudo_pos.energy, pseudo_pos.polarization),
                                  monoen=pseudo_pos.energy,
-                                 epuphase=epuphase_from_en_pol(pseudo_pos.polarization))
+                                 epuphase=epuphase_from_en_pol(pseudo_pos.polarization),
+                                 epumode=epumode_from_en_pol(pseudo_pos.polarization))
 
     @real_position_argument
     def inverse(self, real_pos):
         '''Run an inverse (real -> pseudo) calculation'''
         return self.PseudoPosition( energy=real_pos.monoen,
-                                    polarization=pol_from_mode_phase(real_pos.epuphase))
+                                    polarization=pol_from_mode_phase(real_pos.epuphase,real_pos.epumode))
 
     def where_sp(self):
         return ('Beamline Energy Setpoint : {}'
@@ -329,6 +429,7 @@ en.monoen.readback.kind = 'normal'
 mono_en = en.monoen
 epu_gap = en.epugap
 epu_phase = en.epuphase
+epu_mode = en.epumode
 mono_en.read_attrs = ['readback']
 en.epugap.kind = 'normal'
 # en.read_attrs = ['energy',
