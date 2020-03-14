@@ -305,7 +305,7 @@ class EnPos(PseudoPositioner):
     epuphase = Cpt(UndulatorMotor, 'SR:C07-ID:G1A{SST1:1-Ax:Phase}-Mtr',kind='normal',name='EPU Phase')
     epumode = Cpt(EpicsSignal,'SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-RB',
                            write_pv='SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP',
-                           name='EPU 60 Mode', kind='normal')
+                           name='EPU Mode', kind='normal')
 
     @pseudo_position_argument
     def forward(self, pseudo_pos):
@@ -319,7 +319,7 @@ class EnPos(PseudoPositioner):
     def inverse(self, real_pos):
         '''Run an inverse (real -> pseudo) calculation'''
         return self.PseudoPosition( energy=real_pos.monoen,
-                                    polarization=pol_from_mode_phase(real_pos.epuphase,real_pos.epumode))
+                                    polarization=pol_from_mode_phase(real_pos.epuphase,self.epumode))
 
     def where_sp(self):
         return ('Beamline Energy Setpoint : {}'
