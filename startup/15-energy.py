@@ -352,8 +352,9 @@ class EnPos(PseudoPositioner):
             colored('{:.2f}'.format(self.monoen.vls.value).rstrip('0').rstrip('.'),'yellow'))
 
     def where(self):
-        return ('Beamline Energy : {}').format(
-            colored('{:.2f}'.format(self.monoen.readback.value).rstrip('0').rstrip('.'), 'yellow'))
+        return ('Beamline Energy : {}\nPolarization : {}').format(
+            colored('{:.2f}'.format(self.monoen.readback.value).rstrip('0').rstrip('.'), 'yellow'),
+            colored('{:.2f}'.format(self.polarization.readback.value).rstrip('0').rstrip('.'), 'yellow'))
 
     def wh(self):
         boxed_text(self.name+" location", self.where_sp(), 'green',shrink=True)
@@ -411,9 +412,8 @@ class EnPosold(PseudoPositioner):
             colored('{:.2f}'.format(self.monoen.vls.value).rstrip('0').rstrip('.'),'yellow'))
 
     def where(self):
-        return ('Beamline Energy : {}\nPolarization : {}').format(
-            colored('{:.2f}'.format(self.monoen.readback.value).rstrip('0').rstrip('.'), 'yellow'),
-            colored('{:.2f}'.format(self.polarization.readback.value).rstrip('0').rstrip('.'), 'yellow'))
+        return ('Beamline Energy : {}').format(
+            colored('{:.2f}'.format(self.monoen.readback.value).rstrip('0').rstrip('.'), 'yellow'))
 
     def wh(self):
         boxed_text(self.name+" location", self.where_sp(), 'green',shrink=True)
