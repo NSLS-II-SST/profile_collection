@@ -97,8 +97,11 @@ def NEXAFS_scan_core(signals,dets, energy, energies,enscan_type=None,
 
    # yield from bps.abs_set(mir3.Pitch,m3_pitch,wait=True)
     yield from bps.mv(DiodeRange,diode_range)
+    if pol is 1:
+        yield from bps.mv(epu_mode,0)
+    else:
+        yield from bps.mv(epu_mode,2)
     yield from bps.mv(en.polarization,pol)
-
     yield from bps.mv(en, energies[0])
     for signal in signals:
         signal.kind = 'normal'
