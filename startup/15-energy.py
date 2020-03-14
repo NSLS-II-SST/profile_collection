@@ -310,10 +310,10 @@ class EnPos(PseudoPositioner):
     @pseudo_position_argument
     def forward(self, pseudo_pos):
         '''Run a forward (pseudo -> real) calculation'''
+        yield from bps.mv(self.epumode,epumode_from_en_pol(pseudo_pos.polarization))
         return self.RealPosition(epugap=epugap_from_en_pol(pseudo_pos.energy, pseudo_pos.polarization),
                                  monoen=pseudo_pos.energy,
-                                 epuphase=epuphase_from_en_pol(pseudo_pos.polarization),
-                                 epumode=epumode_from_en_pol(pseudo_pos.polarization))
+                                 epuphase=epuphase_from_en_pol(pseudo_pos.polarization))
 
     @real_position_argument
     def inverse(self, real_pos):
