@@ -78,7 +78,14 @@ def en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=
     # sw_det.waxs.cam.acquire_time.kind = 'normal'
     yield from bps.abs_set(mir3.Pitch,m3_pitch,wait=True)
     yield from bps.mv(DiodeRange,diode_range)
+
+    if pol is 1:
+        epu_mode.put(0)
+    else:
+        epu_mode.put(2)
+    yield from bps.sleep(1)
     yield from bps.mv(en.polarization,pol)
+
     sigcycler = cycler(energy, energies)
   #  yield from bps.mv(saxs_det.cam.acquire_time,times[0])
     sigcycler += cycler(saxs_det.cam.acquire_time, times.copy())
