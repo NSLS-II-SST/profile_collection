@@ -325,6 +325,89 @@ def SAXSNEXAFS():
       'RSoXS_SAXS_BCX': 488,
       'RSoXS_SAXS_BCY': 494,}]
 
+def TEYNEXAFS():
+    return [[{
+        'motor':    slits1.vsize,
+        'position': 0.025,
+        'order': 0},
+        {
+        'motor':    slits1.vcenter,
+        'position': -0.55,
+        'order': 0},
+        {
+        'motor':    slits1.hsize,
+        'position': 0.153,
+        'order': 0},
+        {
+        'motor':    slits1.hcenter,
+        'position': 0.5,
+        'order': 0},
+        {
+        'motor':    slits2.vsize,
+        'position': 0.35,
+        'order': 0},
+        {
+        'motor':    slits2.vcenter,
+        'position': -0.73,
+        'order': 0},
+        {
+        'motor':    slits2.hsize,
+        'position': 0.4,
+        'order': 0},
+        {
+        'motor':    slits2.hcenter,
+        'position': 0.423,
+        'order': 0},
+        {
+        'motor':    slits3.vsize,
+        'position': 1.6,
+        'order': 0},
+        {
+        'motor':    slits3.vcenter,
+        'position': -0.17,
+        'order': 0},
+        {
+        'motor':    slits3.hsize,
+        'position': 1,
+        'order': 0},
+        {
+        'motor':    slits3.hcenter,
+        'position': 0.49,
+        'order': 0},
+        {
+        'motor':    Shutter_Y,
+        'position': 2.2,
+        'order': 0},
+        {
+        'motor':    Izero_Y,
+        'position': -29,
+        'order': 0},
+        {
+        'motor':    Det_W,
+        'position': -94,
+        'order': 0},
+        {
+        'motor':    Det_S,
+        'position': -94,
+        'order': 0},
+        {
+        'motor':    BeamStopS,
+        'position': 3,
+        'order': 0},
+        {
+        'motor':    BeamStopW,
+        'position': 3,
+        'order': 1},
+    ],
+    {'RSoXS_Config': 'TEYNEXAFS',
+      'RSoXS_Main_DET': 'Beamstop_SAXS',
+      'RSoXS_WAXS_SDD': None,
+      'RSoXS_WAXS_BCX': None,
+      'RSoXS_WAXS_BCY': None,
+      'RSoXS_SAXS_SDD': 459,
+      'RSoXS_SAXS_BCX': 488,
+      'RSoXS_SAXS_BCY': 494,}]
+
 def WAXSmode():
     yield from psh10.close()
     yield from slits_in_WAXS()
@@ -504,7 +587,7 @@ def WAXSNEXAFS():
       'RSoXS_SAXS_BCY': None,}]
 
 
-def TEYNEXAFS():
+def oldTEYNEXAFS():
     return [[{
         'motor':    slits1.vsize,
         'position': .025,
