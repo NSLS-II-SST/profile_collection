@@ -11,6 +11,6 @@ def make_random_array():
 class SimGreatEyes(Device):
     image = Component(SynSignalWithRegistry, func=make_random_array, save_path='/tmp/sim_detector_stroage/')
     some_other_thing = Component(Signal, value=3)
-    a_dynamic_thing = Component(SynSignal, func=lambda: 3 + random.random())
+    a_dynamic_thing = Component(SynSignal, func=lambda: 3 + np.random.rand())
 
 saxs_det = SimGreatEyes(name="Simulated SAXS camera")
