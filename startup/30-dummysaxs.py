@@ -12,4 +12,4 @@ class SimGreatEyes(Device):
     some_other_thing = Component(Signal, value=3)
     a_dynamic_thing = Component(SynSignal, func=lambda: 3 + random.random())
 
-saxs_det = SimGreateyes()
+saxs_det = SimGreatEyes()
