@@ -10,6 +10,8 @@ def make_random_array():
 class SimGreatEyesCam(Device):
     shutter_mode = Component(Signal, value=3)
     acquire_time = Component(SynSignal, func=lambda: 3 + np.random.rand())
+    bin_x = Component(Signal, value=3)
+    bin_y = Component(Signal, value=3)
 
 
 class SimGreatEyes(Device):
