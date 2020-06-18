@@ -16,6 +16,9 @@ class SimGreatEyesCam(Device):
     temperature_actual = Component(Signal, value=-80)
     enable_cooling = Component(Signal, value=1)
 
+    def collect_asset_docs(self):
+        yield from []
+
 
 
 
@@ -25,6 +28,8 @@ class SimGreatEyes(Device):
     image = Component(SynSignalWithRegistry, func=make_random_array, save_path='/tmp/sim_detector_stroage/')
     cam= Component(SimGreatEyesCam)
 
+    def collect_asset_docs(self):
+        yield from []
     def shutter(self):
         switch = {
             0: 'disabled',
