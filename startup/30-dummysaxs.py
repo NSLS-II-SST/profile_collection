@@ -13,6 +13,7 @@ class SimGreatEyesCam(Device):
     bin_x = Component(Signal, value=3)
     bin_y = Component(Signal, value=3)
     temperature = Component(Signal, value=-80)
+    temperature_actual = Component(Signal, value=-80)
     enable_cooling = Component(Signal, value=1)
 
 
