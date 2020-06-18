@@ -6,7 +6,7 @@ import numpy as np
 
 def make_random_array():
     # return numpy array
-    return np.zeros(1000,1000)
+    return np.zeros([1000,1000])
 
 class SimGreatEyes(Device):
     image = Component(SynSignalWithRegistry, func=make_random_array, save_path='/tmp/sim_detector_stroage/')
