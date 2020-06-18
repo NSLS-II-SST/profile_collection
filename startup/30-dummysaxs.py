@@ -10,7 +10,9 @@ def make_random_array():
 
 class SimGreatEyes(Device):
     image = Component(SynSignalWithRegistry, func=make_random_array, save_path='/tmp/sim_detector_stroage/')
+    cam= Component(Device)
     cam.shutter_mode= Component(Signal, value=3)
+
     cam.acquire_time, = Component(SynSignal, func=lambda: 3 + np.random.rand())
 
 saxs_det = SimGreatEyes(name="Simulated SAXS camera")
