@@ -2,6 +2,7 @@ run_report(__file__)
 
 from ophyd.sim import SynSignalWithRegistry, SynSignal
 from ophyd import Device, Component, Signal
+import numpy as np
 
 def make_random_array():
     # return numpy array
