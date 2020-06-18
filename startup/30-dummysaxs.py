@@ -1,6 +1,6 @@
 run_report(__file__)
 
-from ophyd.sim import SynSignalWithRegistry
+from ophyd.sim import SynSignalWithRegistry, SynSignal
 from ophyd import Device, Component, Signal
 
 def make_random_array():
