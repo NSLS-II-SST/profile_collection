@@ -125,3 +125,18 @@ handler.setLevel('ERROR')  # Only email for if the level is ERROR or higher (CRI
 logger.addHandler(handler)
 
 
+def turn_on_checks():
+    RE.install_suspender(suspend_shutter1)
+    RE.install_suspender(suspend_shutter4)
+    RE.install_suspender(suspend_gvll)
+    RE.install_suspender(suspend_current)
+    RE.install_suspender(suspendx)
+    logger.addHandler(handler)
+
+def turn_off_checks():
+    RE.remove_suspender(suspend_shutter1)
+    RE.remove_suspender(suspend_shutter4)
+    RE.remove_suspender(suspend_gvll)
+    RE.remove_suspender(suspend_current)
+    RE.remove_suspender(suspendx)
+    logger.removeHandler(handler)
