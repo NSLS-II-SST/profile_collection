@@ -25,7 +25,10 @@ class SimGreatEyesCam(Device):
 
 
 class SimGreatEyes(Device):
-    image = Component(SynSignalWithRegistry, func=make_random_array, save_path='/tmp/sim_detector_storage/')
+    image = Component(SynSignalWithRegistry,
+                      func=make_random_array,
+                      save_path='/tmp/sim_detector_storage/',
+                      exposure_time=2)
     cam= Component(SimGreatEyesCam)
 
     def collect_asset_docs(self):
