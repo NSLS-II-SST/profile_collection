@@ -26,8 +26,12 @@ class SimGreatEyesCam(Device):
 # In [2]: h = db[-1]
 # In [3]: suitcase.nxsas.export(h.documents(), directory=".")
 
+
+class PatchedSynSignalWithRegistry(SynSignalWithRegistry, Device):
+    ...
+
 class SimGreatEyes(Device):
-    image = Component(SynSignalWithRegistry,
+    image = Component(PatchedSynSignalWithRegistry,
                       func=make_random_array,
                       save_path='/tmp/sim_detector_storage/',
                       exposure_time=2)
