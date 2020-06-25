@@ -27,8 +27,16 @@ class SimGreatEyesCam(Device):
 # In [3]: suitcase.nxsas.export(h.documents(), directory=".")
 
 
+
 class PatchedSynSignalWithRegistry(SynSignalWithRegistry, Device):
-    ...
+    def trigger(self):
+        "Promptly return  a status object that will be marked 'done' after self.exposure_time seconds."
+        super().trigger()  # returns NullStatus, which is "done" immediately -- let's do better
+        status = DeviceStatus(self)
+        # In the background, wait for `self.exposure_time` seconds and then mark the status as "done".
+        threading.Timer(self.exposure_time, status.set_finished).start()
+        return status
+
 
 class SimGreatEyes(Device):
     image = Component(PatchedSynSignalWithRegistry,
