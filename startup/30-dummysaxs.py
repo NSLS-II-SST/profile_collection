@@ -20,9 +20,11 @@ class SimGreatEyesCam(Device):
 
     def collect_asset_docs(self):
         yield from []
-
-
-
+#  test out the nxsas suitcase
+#  (/home/xf07id1/conda_envs/nxsas-analysis-2019-3.0) xf07id1@xf07id1-ws19:~$ ipython --profile=collection
+# In [1]: import suitcase.nxsas
+# In [2]: h = db[-1]
+# In [3]: suitcase.nxsas.export(h.documents(), directory=".")
 
 class SimGreatEyes(Device):
     image = Component(SynSignalWithRegistry,
@@ -41,7 +43,7 @@ class SimGreatEyes(Device):
 
     def trigger(self):
         print("trigger")
-        return super().trigger()
+        return self.image.trigger()
 
     def collect_asset_docs(self):
         print('collecting documents')
