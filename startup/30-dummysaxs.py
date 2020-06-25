@@ -31,6 +31,18 @@ class SimGreatEyes(Device):
                       exposure_time=2)
     cam= Component(SimGreatEyesCam)
 
+    def stage(self):
+        print("staging")
+        return super().stage()
+
+    def unstage(self):
+        print("unstaging")
+        return super().unstage()
+
+    def trigger(self):
+        print("trigger")
+        return super().trigger()
+
     def collect_asset_docs(self):
         print('collecting documents')
         yield from self.image.collect_asset_docs()
