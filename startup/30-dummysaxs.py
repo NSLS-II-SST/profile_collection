@@ -29,7 +29,7 @@ class SimGreatEyes(Device):
     cam= Component(SimGreatEyesCam)
 
     def collect_asset_docs(self):
-        yield from self.image.collect_asset_docs()
+        self.image.collect_asset_docs()
     def shutter(self):
         switch = {
             0: 'disabled',
