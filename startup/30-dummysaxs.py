@@ -41,7 +41,7 @@ class SimGreatEyes(Device):
 
     def trigger(self):
         print("trigger")
-        yield from self.image.trigger()
+        return super().trigger()
 
     def collect_asset_docs(self):
         print('collecting documents')
