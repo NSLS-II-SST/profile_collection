@@ -6,7 +6,9 @@ import numpy as np
 
 def make_random_array():
     # return numpy array
-    return np.zeros([1000,1000])
+    return np.zeros([100,100])
+
+
 class SimGreatEyesCam(Device):
     shutter_mode = Component(Signal, value=3)
     acquire_time = Component(SynSignal, func=lambda: 3 + np.random.rand())
@@ -18,8 +20,6 @@ class SimGreatEyesCam(Device):
 
     def collect_asset_docs(self):
         yield from []
-
-
 
 
 
