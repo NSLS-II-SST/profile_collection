@@ -35,7 +35,7 @@ class PatchedSynSignalWithRegistry(SynSignalWithRegistry, Device):
         super().trigger()  # returns NullStatus, which is "done" immediately -- let's do better
         status = DeviceStatus(self)
         # In the background, wait for `self.exposure_time` seconds and then mark the status as "done".
-        threading.Timer(self.exposure_time, status.set_finished).start()
+        threading.Timer(self.exposure_time, status._finished).start()
         return status
 
 
