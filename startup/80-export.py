@@ -219,7 +219,7 @@ mdtest = {'techniques':[
                      }
                  },
                  'detector':{
-                     data : {'_link':'#bluesky/event/sample_name'}
+                     "data" : {'_link':'#bluesky/event/sample_name'}
                  }
 
 
