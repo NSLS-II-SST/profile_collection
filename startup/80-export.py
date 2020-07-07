@@ -158,3 +158,73 @@ def factory2(name, start_doc):
 #rr2_token = RE.subscribe(rr2)
 
 #changed to all be subscription based
+
+
+
+###setup the metadata necessary for NXsas suitcase to write a valid file
+mdtest = {'techniques':[
+    {'technique':'RSoXS',
+     'version':0.1,
+     'nxsas':{
+         'version':0.1,
+         'entry':{
+             "_attributes": {"NX_Class": "NXEntry", "default": "data"},
+             "start_time": {
+                 "_attributes": {
+                     "NDAttrDescription": "scan start time",
+                     "NDAttrName": "StartTime",
+                     "NDAttrSource": "Bluesky",
+                     "NDAttrSourceType": "NDAttrSourceEPICSPV",
+                 },
+                 "_link": "#bluesky/start/time",
+             },
+             "end_time": {
+                 "_attributes": {
+                     "NDAttrDescription": "scan stop time",
+                     "NDAttrName": "EndTime",
+                     "NDAttrSource": "Bluesky",
+                     "NDAttrSourceType": "NDAttrSourceEPICSPV",
+                 },
+                 "_link": "#bluesky/stop/time",
+             },
+             "title": {
+                 "_attributes": {
+                     "NDAttrDescription": "sample name",
+                     "NDAttrName": "SampleTitle",
+                     "NDAttrSource": "Bluesky",
+                     "NDAttrSourceType": "NDAttrSourceEPICSPV",
+                 },
+                 "_link": "#bluesky/start/sample_name",
+             },
+             'definition':'NXsas',
+             'instrument':{
+                 'name':'RSoXS',
+                 'source':{
+                     'type':'Synchrotron',
+                     'name':'NSLS-II',
+                     'probe':'x-ray',
+                     'beamline':'SST-1',
+                     'station':'RSoXS'
+                 },
+                 'monochromator':{
+                     'wavelength':4,
+                     'wavelength_spread':.1
+                 },
+                 'collimator':{
+                     'geometry':{
+                         'shape':{
+                             'shape':'N/A',
+                             'size':'N/A'
+                         }
+                     }
+                 },
+                 'detector':{
+                     data : {'_link':'#bluesky/event/sample_name'}
+                 }
+
+
+
+             }
+         }
+     }
+     }]}

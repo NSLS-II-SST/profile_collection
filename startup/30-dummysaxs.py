@@ -81,12 +81,12 @@ class SimGreatEyes(Device):
         self.cam.shutter_mode.set(0)
 
     def set_exptime(self, secs):
-        self.cam.acquire_time.set(secs)
+        self.image.exposure_time = secs
 
     def exptime(self):
         return ("{} has an exposure time of {} seconds".format(
             colored(self.name, 'lightblue'),
-            colored(str(self.cam.acquire_time.value), 'lightgreen')))
+            colored(str(self.image.exposure_time), 'lightgreen')))
 
     def set_temp(self, degc):
         self.cam.temperature.set(degc)
