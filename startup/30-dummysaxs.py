@@ -42,7 +42,7 @@ class PatchedSynSignalWithRegistry(SynSignalWithRegistry, Device):
 class SimGreatEyes(Device):
     image = Component(PatchedSynSignalWithRegistry,
                       func=make_random_array,
-                      save_path='/tmp/sim_detector_storage/',
+                      save_path='/DATA/images/data/%Y/%m/%d/',
                       exposure_time=2)
     cam= Component(SimGreatEyesCam)
 
