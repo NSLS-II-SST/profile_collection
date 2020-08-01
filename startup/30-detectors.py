@@ -51,6 +51,8 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
     def stage(self, *args, **kwargs):
         self.cam.temperature_actual.read()
         self.cam.temperature.read()
+        Shutter_enable.set(1)
+        Shuter_delay.set(0)
         if abs(self.cam.temperature_actual.value - self.cam.temperature.value) > 2.0:
             boxed_text("Temperature Warning!!!!",
                       self.cooling_state()+
@@ -59,6 +61,7 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
         self.trans1.type.set(self.transform_type)
         self.image.nd_array_port.set('TRANS1')
         self.tiff.nd_array_port.set('TRANS1')
+
         return [self].append(super().stage(*args, **kwargs))
 
     def shutter(self):
@@ -81,10 +84,12 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
         self.cam.shutter_mode.set(0)
 
     def unstage(self, *args, **kwargs):
+        Shutter_enable.set(0)
         return [self].append(super().unstage(*args, **kwargs))
 
     def set_exptime(self,secs):
         self.cam.acquire_time.set(secs)
+        Shutter_open_time.set(secs*1000)
 
     def exptime(self):
         return ("{} has an exposure time of {} seconds".format(
@@ -147,8 +152,8 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
     # sudo mount -t cifs //10.7.0.217/data/ /mnt/zdrive -o user=linuxuser,pass=greateyes
 
 # turning detector to simulated start
-#saxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:1}', name='Small Angle CCD Detector',
-#                                  read_attrs=['tiff', 'stats1.total'])
+saxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:1}', name='Small Angle CCD Detector',
+                                  read_attrs=['tiff', 'stats1.total'])
 
 
 
@@ -272,4 +277,4 @@ class SyncedDetectors(Device):
 
 #sw_det.read_attrs = ['saxs','waxs']
 
-#sd.baseline.extend([saxs_det.cam])#, waxs_det.cam])
+sd.baseline.extend([saxs_det.cam])#, waxs_det.cam])

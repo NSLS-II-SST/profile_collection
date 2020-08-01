@@ -219,7 +219,7 @@ def epugap_from_en_pol(energy,polarization):
         # polarization is 100: # horizontal polarization - default
         if 100 <= energy < 1100:
             enoff = energy - 99.08496564000001
-            gap = (enoff ** 0) * 15879.88627763909       + \
+            gap = (enoff ** 0) * 15879.88627763909       + 700 + \
               (enoff ** 1) *     110.0836448991598       + \
               (enoff ** 2) *     -0.5017899213674649     + \
               (enoff ** 3) *     0.002244632997626055    + \
