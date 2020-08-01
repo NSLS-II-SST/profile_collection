@@ -44,7 +44,7 @@ def binning(line):
         boxed_text('Pixel Binning',saxs_det.binning(),'lightpurple',shrink=True)
     else:
         if bins > 0 and bins < 100:
-            saxs_det.set_binning(bins)
+            saxs_det.set_binning(bins,bins)
 del binning
 
 
