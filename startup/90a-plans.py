@@ -273,12 +273,12 @@ def do_2020_eputables():
 
 
 def do_2020_eputables2():
-    yield from bps.abs_set(epu_mode,2)
     Izero_Mesh.kind = 'hinted'
     Beamstop_SAXS.kind = 'hinted'
     mono_en.readback.kind = 'hinted'
-    yield from buildeputablegaps(15400, 70000, 200, 1.3, 90,  '_Aug_H1phase0',0)
-    yield from buildeputablegaps(14000, 70000, 200, 2, 150, '_Aug_H1phase29500',29500)
+    yield from bps.abs_set(epu_mode, 0)
+    yield from buildeputablegaps(14000, 80000, 200, 2, 200, '_Aug_H1Circ', 15000)
+    yield from bps.abs_set(epu_mode, 2)
     yield from buildeputablegaps(14000, 70000, 200, 2, 175, '_Aug_H1phase25000',26000)
     yield from buildeputablegaps(14000, 70000, 200, 2, 175, '_Aug_H1phase25000',23000)
     yield from buildeputablegaps(14000, 70000, 200, 2, 185, '_Aug_H1phase20000',21000)
@@ -287,17 +287,6 @@ def do_2020_eputables2():
     yield from buildeputablegaps(14000, 70000, 200, 2, 175, '_Aug_H1phase12000',12000)
     yield from buildeputablegaps(15400, 70000, 200, 1.3, 100, '_Aug_H1phase8000',8000)
     yield from buildeputablegaps(15400, 70000, 200, 1.3, 100, '_Aug_H1phase4000',4000)
-    yield from buildeputablegaps(14000, 50000, 200, 3, 3*75,  '_Aug_H3phase0',0)
-    yield from buildeputablegaps(14000, 50000, 200, 3, 3*150, '_Aug_H3phase29500',29500)
-    yield from buildeputablegaps(14000, 50000, 200, 3, 3*175, '_Aug_H3phase25000',26000)
-    yield from buildeputablegaps(14000, 50000, 200, 3, 3*175, '_Aug_H3phase25000',23000)
-    yield from buildeputablegaps(14000, 50000, 200, 3, 3*185, '_Aug_H3phase20000',21000)
-    yield from buildeputablegaps(14000, 50000, 200, 3, 3*200, '_Aug_H3phase20000',18000)
-    yield from buildeputablegaps(14000, 50000, 200, 3, 3*200, '_Aug_H3phase16000',15000)
-    yield from buildeputablegaps(14000, 50000, 200, 3, 3*175, '_Aug_H3phase12000',12000)
-    yield from buildeputablegaps(14000, 50000, 200, 3, 3*100, '_Aug_H3phase8000',8000)
-    yield from buildeputablegaps(14000, 50000, 200, 3, 3*100, '_Aug_H3phase4000',4000)
-    yield from buildeputablegaps(14000, 80000, 200, 2, 200, '_Aug_H1Circ', 15000)
 
 
 def tune_max(
@@ -583,3 +572,13 @@ def vent():
     print('Should be safe to begin vent by pressing right most button of BOTTOM turbo controller once')
     print('')
 
+# settings for 285.3 eV 1.6 C 1200l/mm gold Aug 1, 2020
+# e 285.3
+# en.monoen.grating.set_current_position(-7.494888000531973)
+# en.monoen.mirror2.set_current_position(-6.085536389355577)
+
+# {'en_monoen_grating_user_offset': {'value': -0.31108245265481216,
+#   'timestamp': 1596294657.763531}}
+
+# {'en_monoen_mirror2_user_offset': {'value': -1.158546028874075,
+#   'timestamp': 1596294681.080148}}
