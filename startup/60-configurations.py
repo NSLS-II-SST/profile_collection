@@ -38,7 +38,7 @@ def BSw_out():
     yield from bps.mv(BeamStopW,3)
 
 def BSs_in():
-    yield from bps.mv(BeamStopS,68.7)
+    yield from bps.mv(BeamStopS,67)
 def BSs_out():
     yield from bps.mv(BeamStopS,3)
 
@@ -156,7 +156,7 @@ def SAXSmode():
                       Det_S, 0,
                       Det_W, -94,
                       BeamStopW, 3,
-                      BeamStopS, 68.7)
+                      BeamStopS, 67)
 
 
 def SAXS():
@@ -226,7 +226,7 @@ def SAXS():
         'order': 0},
         {
         'motor':    BeamStopS,
-        'position': 69,
+        'position': 67,
         'order': 0},
         {
         'motor':    BeamStopW,
@@ -309,7 +309,7 @@ def SAXSNEXAFS():
         'order': 0},
         {
         'motor':    BeamStopS,
-        'position': 69,
+        'position': 67,
         'order': 0},
         {
         'motor':    BeamStopW,
