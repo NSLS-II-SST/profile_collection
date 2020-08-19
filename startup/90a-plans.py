@@ -239,7 +239,7 @@ def buildeputablegaps(start, stop, step, widfract, startingen, name, phase):
         dataframe = pd.DataFrame(data=data)
         dataframe.to_csv('/mnt/zdrive/EPUdata_2020_' + name + '.csv')
         count+=1
-        if count > 50:
+        if count > 20:
             count=0
             plt.close()
 

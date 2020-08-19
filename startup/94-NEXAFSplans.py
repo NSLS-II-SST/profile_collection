@@ -196,3 +196,26 @@ def full_Zn_NEXAFS(sigs=[],
 
     yield from NEXAFS_scan_core(sigs, dets, energy, energies,enscan_type=enscan_type,openshutter=True
                                 ,diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
+
+
+
+def do_HOPGscans_epu():
+    pols = [100,104,112,116,120,125,190,1]
+    yield from load_sample(hopggrazing)
+    for polarization in pols:
+        yield from full_Carbon_NEXAFS(dets=[Sample_TEY, IzeroMesh], pol=polarization)
+    yield from load_sample(hopgnormal)
+    for polarization in pols:
+        yield from full_Carbon_NEXAFS(dets=[Sample_TEY, IzeroMesh], pol=polarization)
+    yield from load_sample(hopggrazing)
+    for polarization in pols:
+        yield from full_Carbon_NEXAFS(dets=[Sample_TEY, IzeroMesh], pol=polarization)
+    yield from load_sample(hopgnormal)
+    for polarization in pols:
+        yield from full_Carbon_NEXAFS(dets=[Sample_TEY, IzeroMesh], pol=polarization)
+    yield from load_sample(hopggrazing)
+    for polarization in pols:
+        yield from full_Carbon_NEXAFS(dets=[Sample_TEY, IzeroMesh], pol=polarization)
+    yield from load_sample(hopgnormal)
+    for polarization in pols:
+        yield from full_Carbon_NEXAFS(dets=[Sample_TEY, IzeroMesh], pol=polarization)

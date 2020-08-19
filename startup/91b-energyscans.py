@@ -677,3 +677,4 @@ def Si_SAXS(exp_time=1):
 #     yield from bps.abs_set(mir3.Pitch,7.89)
 #     yield from bp.scan([sw_det, en.energy],en,680,700,41,md={'plan_name':enscan_type})
 #
+
