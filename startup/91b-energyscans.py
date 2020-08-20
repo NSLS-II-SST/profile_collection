@@ -6,7 +6,7 @@ import bluesky.plan_stubs as bps
 
 
 def full_oxygen_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det],energy=en,pol=100,diode_range=6,m3_pitch=7.94):
+                        dets=[saxs_det],energy=en,pol=100,diode_range=6,m3_pitch=7.91):
     '''
     Full Oxygen Scan runs an RSoXS sample set through the O edge, with particular emphasis in he pre edge region
     this results in 110 exposures
