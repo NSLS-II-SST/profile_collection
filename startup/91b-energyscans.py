@@ -534,7 +534,7 @@ def picky_carbon_scan_nd(multiple=1,sigs=[],
 
 
 def full_carbon_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en,pol=100,diode_range=7,m3_pitch=7.96):
+                        dets=[saxs_det], energy=en,pol=100,diode_range=7,m3_pitch=7.92):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 128 exposures
