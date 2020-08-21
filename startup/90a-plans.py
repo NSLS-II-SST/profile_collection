@@ -469,7 +469,7 @@ def snapshot(secs=0, count=1, name=None, energy = None, det= None):
         count = round(count)
         counts = 's'
     if secs <= 0:
-        secs = saxs_det.exposure
+        secs = saxs_det.exposure_time
 
     if secs == 1:
         secss = ''
