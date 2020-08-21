@@ -53,7 +53,7 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
         self.cam.temperature.read()
         Shutter_enable.set(1)
         Shutter_delay.set(0)
-        self.set_exptime(self.cam.acquire_time)
+        Shutter_open_time.set(self.cam.acquire_time.value*1000)
         if abs(self.cam.temperature_actual.value - self.cam.temperature.value) > 2.0:
             boxed_text("Temperature Warning!!!!",
                       self.cooling_state()+
