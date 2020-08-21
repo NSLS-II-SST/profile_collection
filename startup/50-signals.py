@@ -12,6 +12,9 @@ Beamstop_WAXS = EpicsSignalRO('XF:07ID-ES1{DMR:I400-1}:IC1_MON',name = 'WAXS Bea
 Beamstop_SAXS = EpicsSignalRO('XF:07ID-ES1{DMR:I400-1}:IC2_MON',name = 'SAXS Beamstop', kind='normal')
 Izero_Diode    = EpicsSignalRO('XF:07ID-ES1{DMR:I400-1}:IC3_MON',name = 'Izero Photodiode', kind='normal')
 
+mir1_pressure = EpicsSignalRO('XF:07IDA-VA:0{Mir:M1-CCG:1}P:Raw-I',name = 'Mirror 1 Vacuum Pressure', kind='normal')
+
+
 #IzeroMesh    = EpicsSignalRO('XF:07ID-ES1{Slt1:I400-1}:IC4_MON',name = 'Izero Mesh I400', kind='normal')
 #Sample_EY = EpicsSignalRO('XF:07ID-ES1{Slt1:I400-1}:IC1_MON',name = 'RSoXS Drain', kind='normal')
 #SlitBottom_I = EpicsSignalRO('XF:07ID-ES1{Slt1:I400-1}:IC2_MON',name = 'RSoXS Slit 1 Bottom Current', kind='normal')
@@ -37,4 +40,4 @@ DM4_PD            = EpicsSignalRO('XF:07ID-BI{DM5:F4}Cur:I3-I', name='DM4 Photod
 
 sd.monitors.extend([ring_current,Beamstop_WAXS,Beamstop_SAXS,Izero_Mesh, Sample_TEY])
 sd.baseline.extend([ring_current,Beamstop_WAXS,Beamstop_SAXS,Izero_Diode,Izero_Mesh,
-                    Slit1_Top_I, Slit1_IB_I,DM4_PD])  #DM7_Diode
+                    Slit1_Top_I, Slit1_IB_I,DM4_PD,mir1_pressure])  #DM7_Diode
