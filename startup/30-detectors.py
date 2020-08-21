@@ -28,7 +28,6 @@ class GreateyesTransform(TransformPlugin):
 
 
 class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
-    exposure_time=.1
     image = C(ImagePlugin, 'image1:')
     cam = C(GreatEyesDetCamWithVersions, 'cam1:')
     transform_type = 0
@@ -54,7 +53,7 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
         self.cam.temperature.read()
         Shutter_enable.set(1)
         Shutter_delay.set(0)
-        self.set_exptime(self.exposure_time)
+        self.set_exptime(self.cam.acquire_time)
         if abs(self.cam.temperature_actual.value - self.cam.temperature.value) > 2.0:
             boxed_text("Temperature Warning!!!!",
                       self.cooling_state()+
@@ -96,7 +95,7 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
     def exptime(self):
         return ("{} has an exposure time of {} seconds".format(
             colored(self.name,'lightblue'),
-            colored(str(self.exposure_time),'lightgreen')))
+            colored(str(self.cam.acquire_time.value),'lightgreen')))
 
     def set_temp(self,degc):
         self.cam.temperature.set(degc)
@@ -147,7 +146,7 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
         return self.exptime()
 
     def set_exposure(self,seconds):
-        self.exposure_time = seconds
+        self.set_exptime(seconds)
 
     #sudo mount -t cifs //10.7.0.217/data/ /mnt/zdrive -o user=linuxuser,pass=greateyes
     #needs to be run on the server
