@@ -276,14 +276,16 @@ def do_2020_eputables3():
     Izero_Mesh.kind = 'hinted'
     Beamstop_SAXS.kind = 'hinted'
     mono_en.readback.kind = 'hinted'
+    mono_en.kind = 'hinted'
+    mono_en.read_attrs = ['readback']
 
-    yield from bps.mv(BeamstopS, 67)
+    yield from bps.mv(BeamStopS, 67)
     yield from Izero_mesh()
     yield from Shutter_out()
 
     yield from grating_to_250()
 
-    yield from buildeputablegaps(14000, 30000, 200, 1.3, 70, '_Aug_H1phase0_250', 0)
+    yield from buildeputablegaps(14000, 35000, 200, 1, 80, '_Aug_H1phase0_250', 0)
     yield from buildeputablegaps(14000, 30000, 200, 2, 150, '_Aug_H1phase29500_250', 29500)
     yield from buildeputablegaps(14000, 30000, 200, 2, 150, '_Aug_H1phase26000_250', 26000)
     yield from buildeputablegaps(14000, 30000, 200, 2, 150, '_Aug_H1phase25000_250', 23000)
@@ -291,8 +293,8 @@ def do_2020_eputables3():
     yield from buildeputablegaps(14000, 30000, 200, 2, 150, '_Aug_H1phase20000_250', 18000)
     yield from buildeputablegaps(14000, 30000, 200, 2, 150, '_Aug_H1phase16000_250', 15000)
     yield from buildeputablegaps(14000, 30000, 200, 2, 150, '_Aug_H1phase12000_250', 12000)
-    yield from buildeputablegaps(14000, 30000, 200, 1.3, 80, '_Aug_H1phase8000_250', 8000)
-    yield from buildeputablegaps(14000, 30000, 200, 1.3, 80, '_Aug_H1phase4000_250', 4000)
+    yield from buildeputablegaps(14000, 35000, 200, 1, 80, '_Aug_H1phase8000_250', 8000)
+    yield from buildeputablegaps(14000, 35000, 200, 1, 80, '_Aug_H1phase4000_250', 4000)
 
 
     yield from grating_to_1200()
@@ -314,7 +316,7 @@ def do_2020_eputables3():
 def grating_to_250():
     yield from bps.abs_set(mono_en.gratingtype, 2,wait=False)
     yield from bps.abs_set(mono_en.gratingtype_proc, 1,wait=True)
-    yield from bps.wait(DeviceStatus(mono_en.gratingx))
+    yield from bps.sleep(60)
     yield from bps.mv(mirror2.user_offset, 8.0933)
     yield from bps.mv(grating.user_offset, 7.2455)
     yield from bps.mv(mono_en.cff, 1.385)
@@ -322,7 +324,7 @@ def grating_to_250():
 def grating_to_1200():
     yield from bps.abs_set(mono_en.gratingtype,9,wait=False)
     yield from bps.abs_set(mono_en.gratingtype_proc, 1,wait=True)
-    yield from bps.wait(DeviceStatus(mono_en.gratingx))
+    yield from bps.sleep(60)
     yield from bps.mv(mirror2.user_offset,8.0588)
     yield from bps.mv(grating.user_offset,7.2500)
     yield from bps.mv(mono_en.cff,1.7)
