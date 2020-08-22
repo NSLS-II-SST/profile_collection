@@ -285,31 +285,30 @@ def do_2020_eputables3():
 
     yield from grating_to_250()
 
-    yield from buildeputablegaps(14000, 35000, 200, 1, 80, '_Aug_H1phase0_250', 0)
-    yield from buildeputablegaps(14000, 30000, 200, 2, 150, '_Aug_H1phase29500_250', 29500)
-    yield from buildeputablegaps(14000, 30000, 200, 2, 150, '_Aug_H1phase26000_250', 26000)
-    yield from buildeputablegaps(14000, 30000, 200, 2, 150, '_Aug_H1phase25000_250', 23000)
-    yield from buildeputablegaps(14000, 30000, 200, 2, 150, '_Aug_H1phase20000_250', 21000)
-    yield from buildeputablegaps(14000, 30000, 200, 2, 150, '_Aug_H1phase20000_250', 18000)
-    yield from buildeputablegaps(14000, 30000, 200, 2, 150, '_Aug_H1phase16000_250', 15000)
-    yield from buildeputablegaps(14000, 30000, 200, 2, 150, '_Aug_H1phase12000_250', 12000)
-    yield from buildeputablegaps(14000, 35000, 200, 1, 80, '_Aug_H1phase8000_250', 8000)
-    yield from buildeputablegaps(14000, 35000, 200, 1, 80, '_Aug_H1phase4000_250', 4000)
+    yield from buildeputablegaps(14000, 30000, 500, 2, 150, '_Aug_H1phase29500_250', 29500)
+    yield from buildeputablegaps(14000, 30000, 500, 2, 150, '_Aug_H1phase26000_250', 26000)
+    yield from buildeputablegaps(14000, 30000, 500, 2, 150, '_Aug_H1phase25000_250', 23000)
+    yield from buildeputablegaps(14000, 30000, 500, 2, 150, '_Aug_H1phase20000_250', 21000)
+    yield from buildeputablegaps(14000, 30000, 500, 2, 150, '_Aug_H1phase20000_250', 18000)
+    yield from buildeputablegaps(14000, 30000, 500, 2, 150, '_Aug_H1phase16000_250', 15000)
+    yield from buildeputablegaps(14000, 30000, 500, 2, 150, '_Aug_H1phase12000_250', 12000)
+    yield from buildeputablegaps(14000, 35000, 500, 1, 80, '_Aug_H1phase8000_250', 8000)
+    yield from buildeputablegaps(14000, 35000, 500, 1, 80, '_Aug_H1phase4000_250', 4000)
 
 
     yield from grating_to_1200()
 
 
 
-    yield from buildeputablegaps(20000, 50000, 200, 2, 175, '_Aug_H1phase0',0)
-    yield from buildeputablegaps(14000, 50000, 200, 2, 175, '_Aug_H1phase25000',26000)
-    yield from buildeputablegaps(14000, 50000, 200, 2, 175, '_Aug_H1phase25000',23000)
-    yield from buildeputablegaps(14000, 50000, 200, 2, 185, '_Aug_H1phase20000',21000)
-    yield from buildeputablegaps(14000, 50000, 200, 2, 200, '_Aug_H1phase20000',18000)
-    yield from buildeputablegaps(14000, 50000, 200, 2, 200, '_Aug_H1phase16000',15000)
-    yield from buildeputablegaps(14000, 50000, 200, 2, 175, '_Aug_H1phase12000',12000)
-    yield from buildeputablegaps(15400, 50000, 200, 1.3, 100, '_Aug_H1phase8000',8000)
-    yield from buildeputablegaps(15400, 50000, 200, 1.3, 100, '_Aug_H1phase4000',4000)
+    yield from buildeputablegaps(20000, 50000, 500, 2, 175, '_Aug_H1phase0',0)
+    yield from buildeputablegaps(14000, 50000, 500, 2, 175, '_Aug_H1phase25000',26000)
+    yield from buildeputablegaps(14000, 50000, 500, 2, 175, '_Aug_H1phase25000',23000)
+    yield from buildeputablegaps(14000, 50000, 500, 2, 185, '_Aug_H1phase20000',21000)
+    yield from buildeputablegaps(14000, 50000, 500, 2, 200, '_Aug_H1phase20000',18000)
+    yield from buildeputablegaps(14000, 50000, 500, 2, 200, '_Aug_H1phase16000',15000)
+    yield from buildeputablegaps(14000, 50000, 500, 2, 175, '_Aug_H1phase12000',12000)
+    yield from buildeputablegaps(15400, 50000, 500, 1.3, 100, '_Aug_H1phase8000',8000)
+    yield from buildeputablegaps(15400, 50000, 500, 1.3, 100, '_Aug_H1phase4000',4000)
 
 
 
