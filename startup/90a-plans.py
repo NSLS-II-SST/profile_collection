@@ -281,10 +281,7 @@ def do_2020_eputables3():
     yield from Izero_mesh()
     yield from Shutter_out()
 
-    yield from bps.abs_set(mono_en.gratingtype, 2,wait=False)
-    yield from bps.mv(mirror2.user_offset, 8.0933)
-    yield from bps.mv(grating.user_offset, 7.2455)
-    yield from bps.mv(mono_en.cff, 1.385)
+    yield from grating_to_250()
 
     yield from buildeputablegaps(14000, 30000, 200, 1.3, 70, '_Aug_H1phase0_250', 0)
     yield from buildeputablegaps(14000, 30000, 200, 2, 150, '_Aug_H1phase29500_250', 29500)
@@ -298,11 +295,7 @@ def do_2020_eputables3():
     yield from buildeputablegaps(14000, 30000, 200, 1.3, 80, '_Aug_H1phase4000_250', 4000)
 
 
-    yield from bps.abs_set(mono_en.gratingtype,9,wait=False)
-    yield from bps.mv(mirror2.user_offset,8.0588)
-    yield from bps.mv(grating.user_offset,7.2500)
-    yield from bps.mv(mono_en.cff,1.7)
-    yield from bps.mv(slits1.vsize,1)
+    yield from grating_to_1200()
 
 
 
@@ -317,6 +310,22 @@ def do_2020_eputables3():
     yield from buildeputablegaps(15400, 50000, 200, 1.3, 100, '_Aug_H1phase4000',4000)
 
 
+
+def grating_to_250():
+    yield from bps.abs_set(mono_en.gratingtype, 2,wait=False)
+    yield from bps.abs_set(mono_en.gratingtype_proc, 1,wait=True)
+    yield from bps.wait(DeviceStatus(mono_en.gratingx))
+    yield from bps.mv(mirror2.user_offset, 8.0933)
+    yield from bps.mv(grating.user_offset, 7.2455)
+    yield from bps.mv(mono_en.cff, 1.385)
+
+def grating_to_1200():
+    yield from bps.abs_set(mono_en.gratingtype,9,wait=False)
+    yield from bps.abs_set(mono_en.gratingtype_proc, 1,wait=True)
+    yield from bps.wait(DeviceStatus(mono_en.gratingx))
+    yield from bps.mv(mirror2.user_offset,8.0588)
+    yield from bps.mv(grating.user_offset,7.2500)
+    yield from bps.mv(mono_en.cff,1.7)
 
 
 def tune_max(
