@@ -244,6 +244,9 @@ def buildeputablegaps(start, stop, step, widfract, startingen, name, phase):
             plt.close()
             plt.close()
             plt.close()
+    plt.close()
+    plt.close()
+    plt.close()
 
 def do_some_eputables():
     yield from buildeputable(150, 1500, 10, 1, 21000, 'Harmonic1Phase')
@@ -304,16 +307,19 @@ def do_2020_eputables3():
 
 
 
-    yield from buildeputablegaps(18000, 50000, 1000, 1, 120, '_Aug_H1phase0',0)
-    yield from buildeputablegaps(14000, 50000, 1000, 1, 175, '_Aug_H1phase29500',29500)
-    yield from buildeputablegaps(14000, 50000, 1000, 2, 175, '_Aug_H1phase26000',26000)
-    yield from buildeputablegaps(14000, 50000, 1000, 2, 175, '_Aug_H1phase23000',23000)
-    yield from buildeputablegaps(14000, 50000, 1000, 2, 185, '_Aug_H1phase21000',21000)
-    yield from buildeputablegaps(14000, 50000, 1000, 2, 150, '_Aug_H1phase18000',18000)
-    yield from buildeputablegaps(14000, 50000, 1000, 2, 150, '_Aug_H1phase15000',15000)
-    yield from buildeputablegaps(14000, 50000, 1000, 2, 155, '_Aug_H1phase12000',12000)
+    #yield from buildeputablegaps(19000, 50000, 1000, 1, 132, '_Aug_H1phase0',0)
+    #yield from buildeputablegaps(14000, 50000, 1000, 2, 140, '_Aug_H1phase29500',29500)
+    #yield from buildeputablegaps(14000, 50000, 1000, 2, 160, '_Aug_H1phase26000',26000)
+    #yield from buildeputablegaps(14000, 50000, 1000, 2, 160, '_Aug_H1phase23000',23000)
+    #yield from buildeputablegaps(14000, 50000, 1000, 2, 160, '_Aug_H1phase21000',21000)
+    #yield from buildeputablegaps(14000, 50000, 1000, 2, 150, '_Aug_H1phase18000',18000)
+    yield from buildeputablegaps(14000, 50000, 1000, 2, 140, '_Aug_H1phase15000',15000)
+    yield from buildeputablegaps(14000, 50000, 1000, 2, 130, '_Aug_H1phase12000',12000)
     yield from buildeputablegaps(16000, 50000, 1000, 1.3, 100, '_Aug_H1phase8000',8000)
     yield from buildeputablegaps(18000, 50000, 1000, 1.3, 100, '_Aug_H1phase4000',4000)
+
+    yield from bps.mv(epu_mode,0)
+    yield from buildeputablegaps(15000, 50000, 1000, 2, 190, '_Aug_C1_ph15000', 15000)
 
 
 
