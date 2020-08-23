@@ -242,6 +242,8 @@ def buildeputablegaps(start, stop, step, widfract, startingen, name, phase):
         if count > 20:
             count=0
             plt.close()
+            plt.close()
+            plt.close()
 
 def do_some_eputables():
     yield from buildeputable(150, 1500, 10, 1, 21000, 'Harmonic1Phase')
@@ -282,33 +284,36 @@ def do_2020_eputables3():
     yield from bps.mv(BeamStopS, 67)
     yield from Izero_mesh()
     yield from Shutter_out()
+    yield from bps.mv(slits1.hsize,1)
+    yield from bps.mv(slits2.hsize,1)
 
-    yield from grating_to_250()
+    #yield from grating_to_250()
 
     #yield from buildeputablegaps(14000, 30000, 500, 2, 150, '_Aug_H1phase29500_250', 29500)
     #yield from buildeputablegaps(14000, 30000, 500, 2, 150, '_Aug_H1phase26000_250', 26000)
     #yield from buildeputablegaps(14000, 30000, 500, 2, 150, '_Aug_H1phase25000_250', 23000)
-    yield from buildeputablegaps(14000, 30000, 500, 2, 150, '_Aug_H1phase21000_250', 21000)
-    yield from buildeputablegaps(14000, 30000, 500, 2, 150, '_Aug_H1phase18000_250', 18000)
-    yield from buildeputablegaps(14000, 30000, 500, 2, 150, '_Aug_H1phase15000_250', 15000)
-    yield from buildeputablegaps(14000, 30000, 500, 2, 150, '_Aug_H1phase12000_250', 12000)
-    yield from buildeputablegaps(14000, 35000, 500, 1, 80, '_Aug_H1phase8000_250', 8000)
-    yield from buildeputablegaps(14000, 35000, 500, 1, 80, '_Aug_H1phase4000_250', 4000)
+    #yield from buildeputablegaps(14000, 30000, 500, 2, 150, '_Aug_H1phase21000_250', 21000)
+    #yield from buildeputablegaps(14000, 30000, 500, 2, 150, '_Aug_H1phase18000_250', 18000)
+    #yield from buildeputablegaps(14000, 30000, 500, 2, 150, '_Aug_H1phase15000_250', 15000)
+    #yield from buildeputablegaps(14000, 30000, 500, 2, 150, '_Aug_H1phase12000_250', 12000)
+    #yield from buildeputablegaps(14000, 35000, 500, 1, 80, '_Aug_H1phase8000_250', 8000)
+    #yield from buildeputablegaps(14000, 35000, 500, 1, 80, '_Aug_H1phase4000_250', 4000)
 
 
-    yield from grating_to_1200()
+    #yield from grating_to_1200()
 
 
 
-    yield from buildeputablegaps(20000, 50000, 500, 2, 175, '_Aug_H1phase0',0)
-    yield from buildeputablegaps(14000, 50000, 500, 2, 175, '_Aug_H1phase26000',26000)
-    yield from buildeputablegaps(14000, 50000, 500, 2, 175, '_Aug_H1phase23000',23000)
-    yield from buildeputablegaps(14000, 50000, 500, 2, 185, '_Aug_H1phase21000',21000)
-    yield from buildeputablegaps(14000, 50000, 500, 2, 200, '_Aug_H1phase18000',18000)
-    yield from buildeputablegaps(14000, 50000, 500, 2, 200, '_Aug_H1phase15000',15000)
-    yield from buildeputablegaps(14000, 50000, 500, 2, 175, '_Aug_H1phase12000',12000)
-    yield from buildeputablegaps(15400, 50000, 500, 1.3, 100, '_Aug_H1phase8000',8000)
-    yield from buildeputablegaps(15400, 50000, 500, 1.3, 100, '_Aug_H1phase4000',4000)
+    yield from buildeputablegaps(18000, 50000, 1000, 1, 120, '_Aug_H1phase0',0)
+    yield from buildeputablegaps(14000, 50000, 1000, 1, 175, '_Aug_H1phase29500',29500)
+    yield from buildeputablegaps(14000, 50000, 1000, 2, 175, '_Aug_H1phase26000',26000)
+    yield from buildeputablegaps(14000, 50000, 1000, 2, 175, '_Aug_H1phase23000',23000)
+    yield from buildeputablegaps(14000, 50000, 1000, 2, 185, '_Aug_H1phase21000',21000)
+    yield from buildeputablegaps(14000, 50000, 1000, 2, 150, '_Aug_H1phase18000',18000)
+    yield from buildeputablegaps(14000, 50000, 1000, 2, 150, '_Aug_H1phase15000',15000)
+    yield from buildeputablegaps(14000, 50000, 1000, 2, 155, '_Aug_H1phase12000',12000)
+    yield from buildeputablegaps(16000, 50000, 1000, 1.3, 100, '_Aug_H1phase8000',8000)
+    yield from buildeputablegaps(18000, 50000, 1000, 1.3, 100, '_Aug_H1phase4000',4000)
 
 
 
@@ -316,16 +321,16 @@ def grating_to_250():
     yield from bps.abs_set(mono_en.gratingtype, 2,wait=False)
     yield from bps.abs_set(mono_en.gratingtype_proc, 1,wait=True)
     yield from bps.sleep(60)
-    yield from bps.mv(mirror2.user_offset, 8.0588)
-    yield from bps.mv(grating.user_offset, 7.2500-.031725)
+    yield from bps.mv(mirror2.user_offset, 8.1388)
+    yield from bps.mv(grating.user_offset, 7.308-.031725)
     yield from bps.mv(mono_en.cff, 1.385)
 
 def grating_to_1200():
     yield from bps.abs_set(mono_en.gratingtype,9,wait=False)
     yield from bps.abs_set(mono_en.gratingtype_proc, 1,wait=True)
     yield from bps.sleep(60)
-    yield from bps.mv(mirror2.user_offset,8.0588)
-    yield from bps.mv(grating.user_offset,7.2500)
+    yield from bps.mv(mirror2.user_offset,8.1388)
+    yield from bps.mv(grating.user_offset,7.308)
     yield from bps.mv(mono_en.cff,1.7)
 
 
