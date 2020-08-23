@@ -319,7 +319,7 @@ def do_2020_eputables3():
     yield from buildeputablegaps(18000, 50000, 1000, 1.3, 100, '_Aug_H1phase4000',4000)
 
     yield from bps.mv(epu_mode,0)
-    yield from buildeputablegaps(15000, 50000, 1000, 2, 190, '_Aug_C1_ph15000', 15000)
+    yield from buildeputablegaps(15000, 50000, 500, 2, 190, '_Aug_C1_ph15000', 15000)
 
 
 
