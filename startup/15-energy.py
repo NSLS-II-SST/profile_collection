@@ -13,8 +13,7 @@ class UndulatorMotor(EpicsMotor):
 #epu_gap = UndulatorMotor('SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr', name='EPU 60 Gap',kind='normal')
 #epu_phase = UndulatorMotor('SR:C07-ID:G1A{SST1:1-Ax:Phase}-Mtr', name='EPU 60 Phase',kind='normal')
 
-epu_mode = EpicsSignal('SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP',
-                       name='EPU 60 Mode',kind='normal')
+
 
 # epu_mode = EpicsSignal('SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-RB',
 #                        write_pv='SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP',
@@ -388,14 +387,20 @@ def epugap_from_en_pol(energy,polarization):
 def epuphase_from_en_pol(polarization):
     if polarization is 190:
         return 29500
-    elif polarization is 125:
-        return 25000
-    elif polarization is 120:
-        return 20000
+    elif polarization is 126:
+        return 26000
+    elif polarization is 123:
+        return 23000
+    elif polarization is 121:
+        return 21000
+    elif polarization is 118:
+        return 18000
     elif polarization is 116:
         return 16000
     elif polarization is 112:
         return 12000
+    elif polarization is 108:
+        return 8000
     elif polarization is 104:
         return 4000
     elif polarization is 1:
@@ -414,14 +419,20 @@ def epumode_from_en_pol(polarization):
 def pol_from_mode_phase(phase, mode):
     if abs(phase - 29500) < 100 and mode is 2:
         return 190
-    elif abs(phase - 25000) < 100 and mode is 2:
-        return 125
-    elif abs(phase - 20000) < 100 and mode is 2:
-        return 120
-    elif abs(phase - 16000) < 100 and mode is 2:
-        return 116
+    elif abs(phase - 26000) < 100 and mode is 2:
+        return 126
+    elif abs(phase - 23000) < 100 and mode is 2:
+        return 123
+    elif abs(phase - 22000) < 100 and mode is 2:
+        return 121
+    elif abs(phase - 18000) < 100 and mode is 2:
+        return 118
+    elif abs(phase - 15000) < 100 and mode is 2:
+        return 115
     elif abs(phase - 12000) < 100 and mode is 2:
         return 112
+    elif abs(phase - 8000) < 100 and mode is 2:
+        return 108
     elif abs(phase - 4000) < 100 and mode is 2:
         return 104
     elif abs(phase - 15000) < 100 and mode is 0:
@@ -446,20 +457,22 @@ class EnPos(PseudoPositioner):
     monoen = Cpt(Monochromator, 'XF:07ID1-OP{Mono:PGM1-Ax:',kind='hinted',name='Mono Energy')
     epugap = Cpt(UndulatorMotor, 'SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr',kind='normal',name='EPU Gap')
     epuphase = Cpt(UndulatorMotor, 'SR:C07-ID:G1A{SST1:1-Ax:Phase}-Mtr',kind='normal',name='EPU Phase')
-
+    epumode = Cpt(EpicsSignal,'SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP',
+                           name='EPU Mode', kind='normal')
 
     @pseudo_position_argument
     def forward(self, pseudo_pos):
         '''Run a forward (pseudo -> real) calculation'''
         return self.RealPosition(epugap=epugap_from_en_pol(pseudo_pos.energy, pseudo_pos.polarization),
                                  monoen=pseudo_pos.energy,
-                                 epuphase=epuphase_from_en_pol(pseudo_pos.polarization))
+                                 epuphase=epuphase_from_en_pol(pseudo_pos.polarization),
+                                 epumode=epumode_from_en_pol(pseudo_pos.polarization))
 
     @real_position_argument
     def inverse(self, real_pos):
         '''Run an inverse (real -> pseudo) calculation'''
         return self.PseudoPosition( energy=real_pos.monoen,
-                                    polarization=pol_from_mode_phase(real_pos.epuphase,epu_mode.value))
+                                    polarization=pol_from_mode_phase(real_pos.epuphase,real_pos.epumode))
 
     def where_sp(self):
         return ('Beamline Energy Setpoint : {}'
