@@ -620,11 +620,14 @@ def set_polarization(pol):
             yield from bps.mv(epu_mode,0)
     elif pol in [100,104,108,112,115,118,121,123,126,190]:
         yield from bps.mv(epu_mode, 2)
+    else:
+        print('need a valid polarization')
+        return 1
     yield from bps.mv(epu_phase, epuphase_from_en_pol(pol))
     en.read();
     enval = en.energy.readback.value
     yield from bps.mv(en,enval)
-
+    return 0
 
 @register_line_magic
 def e(line):
