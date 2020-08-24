@@ -626,9 +626,13 @@ def set_polarization(pol):
         return 1
     en.read();
     enval = en.energy.readback.value
+    phaseval = epuphase_from_en_pol(pol)
+    gapval = epugap_from_en_pol(enval,pol)
     print(enval)
     print(pol)
-    yield from bps.mv(epu_phase, epuphase_from_en_pol(pol),epu_gap,epugap_from_en_pol(enval,pol))
+    print(phaseval)
+    print(gapval)
+    yield from bps.mv(epu_phase, phaseval,epu_gap,gapval)
     en.read();
     return 0
 
