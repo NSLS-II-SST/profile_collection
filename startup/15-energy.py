@@ -352,7 +352,6 @@ def epugap_from_en_pol(energy,polarization):
                       (enoff ** 7) * 7.294270087002236e-16 + \
                       (enoff ** 8) * -2.546331275323855e-19 + \
                       (enoff ** 9) * 3.661307542366029e-23
-        gap= None
     else:
         # polarization is 100: # horizontal polarization - default
 
@@ -623,10 +622,9 @@ def set_polarization(pol):
     else:
         print('need a valid polarization')
         return 1
-    yield from bps.mv(epu_phase, epuphase_from_en_pol(pol))
-    en.read();
     enval = en.energy.readback.value
-    yield from bps.mv(en,enval)
+    yield from bps.mv(epu_phase, epuphase_from_en_pol(pol),epu_gap,epugap_from_en_pol(enval,pol))
+    en.read();
     return 0
 
 @register_line_magic
