@@ -101,7 +101,7 @@ def en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=
 def NEXAFS_scan_core(signals,dets, energy, energies,enscan_type=None,
                      openshutter = False,m3_pitch=7.94,diode_range=6,pol=100):
 
-    sigcycler = cycler(energy, energies)
+
 
    # yield from bps.abs_set(mir3.Pitch,m3_pitch,wait=True)
     yield from bps.mv(DiodeRange,diode_range)
@@ -113,8 +113,9 @@ def NEXAFS_scan_core(signals,dets, energy, energies,enscan_type=None,
     # yield from bps.mv(en.polarization,pol)
     yield from set_polarization(pol)
     print('setting pol')
+    en.read;
 
-
+    sigcycler = cycler(energy, energies)
 
 
     yield from bps.mv(en, energies[0])

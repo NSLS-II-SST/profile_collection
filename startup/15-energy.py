@@ -89,7 +89,7 @@ def epugap_from_energy_old(energy):
 
 def epugap_from_en_pol(energy,polarization):
     gap=None
-    if polarization is 190: # vertical polarization (29500 phase)
+    if polarization == 190: # vertical polarization (29500 phase)
         if 145.212 <= energy < 1100:
             enoff = energy - 145.212
             gap = (enoff ** 0) * 14012.9679723399 + \
@@ -117,7 +117,7 @@ def epugap_from_en_pol(energy,polarization):
         else:
             gap= None
 
-    elif polarization is 126: # 26000 phase
+    elif polarization == 126: # 26000 phase
 
         if 159.381 <= energy < 1100:
             enoff = energy - 159.381
@@ -145,7 +145,7 @@ def epugap_from_en_pol(energy,polarization):
                   (enoff ** 9) * 7.983637046811202e-22
         else:
             gap= None
-    elif polarization is 123: # 23000 phase
+    elif polarization == 123: # 23000 phase
 
         if 182.5 <= energy < 1100:
             enoff = energy - 182.5
@@ -173,7 +173,7 @@ def epugap_from_en_pol(energy,polarization):
                   (enoff ** 9) * 8.848652101678885e-22
         else:
             gap= None
-    elif polarization is 121: # 21000 phase
+    elif polarization == 121: # 21000 phase
 
         if 198.751 <= energy < 1100:
             enoff = energy - 198.751
@@ -201,7 +201,7 @@ def epugap_from_en_pol(energy,polarization):
                   (enoff ** 9) * 9.715673261754361e-22
         else:
             gap= None
-    elif polarization is 118: # 18000 phase
+    elif polarization == 118: # 18000 phase
         if 207.503 <= energy < 1100:
             enoff = energy - 207.503
             gap = (enoff ** 0) * 14026.99244058688 + \
@@ -228,7 +228,7 @@ def epugap_from_en_pol(energy,polarization):
                   (enoff ** 9) * -8.57226301371417e-23
         else:
             gap= None
-    elif polarization is 115: # 15000 phase
+    elif polarization == 115: # 15000 phase
         if 182.504 <= energy < 1100:
             enoff = energy - 182.504
             gap = (enoff ** 0) * 13992.18828384784 + \
@@ -255,7 +255,7 @@ def epugap_from_en_pol(energy,polarization):
                   (enoff ** 9) * 1.130384721733557e-21
         else:
             gap= None
-    elif polarization is 112: # 12000 phase
+    elif polarization == 112: # 12000 phase
         if 144.997 <= energy < 1100:
             enoff = energy - 144.997
             gap = (enoff ** 0) * 13989.91908871217 + \
@@ -282,7 +282,7 @@ def epugap_from_en_pol(energy,polarization):
                   (enoff ** 9) * 1.610241510211877e-21
         else:
             gap= None
-    elif polarization is 108: # 8000 phase
+    elif polarization == 108: # 8000 phase
 
         if 130.875 <= energy < 1040:
             enoff = energy - 130.875
@@ -310,7 +310,7 @@ def epugap_from_en_pol(energy,polarization):
                   (enoff ** 9) * 9.967428321189753e-21
         else:
             gap= None
-    elif polarization is 104: # 4000 phase
+    elif polarization == 104: # 4000 phase
 
         if 129.248 <= energy < 986:
             enoff = energy - 129.248
@@ -338,7 +338,7 @@ def epugap_from_en_pol(energy,polarization):
                   (enoff ** 9) * 1.000126057875859e-20
         else:
             gap= None
-    elif polarization is 1: # 4000 phase
+    elif polarization == 1: # 4000 phase
 
         if 233.736 <= energy < 1800:
             enoff = energy - 233.736
@@ -385,25 +385,25 @@ def epugap_from_en_pol(energy,polarization):
 
 
 def epuphase_from_en_pol(polarization):
-    if polarization is 190:
+    if polarization == 190:
         return 29500
-    elif polarization is 126:
+    elif polarization == 126:
         return 26000
-    elif polarization is 123:
+    elif polarization == 123:
         return 23000
-    elif polarization is 121:
+    elif polarization == 121:
         return 21000
-    elif polarization is 118:
+    elif polarization == 118:
         return 18000
-    elif polarization is 115:
+    elif polarization == 115:
         return 15000
-    elif polarization is 112:
+    elif polarization == 112:
         return 12000
-    elif polarization is 108:
+    elif polarization == 108:
         return 8000
-    elif polarization is 104:
+    elif polarization == 104:
         return 4000
-    elif polarization is 1:
+    elif polarization == 1:
         return 15000
     else:
         return 0
