@@ -615,14 +615,19 @@ sd.baseline.extend([en])
 def set_polarization(pol):
     if pol==1:
         if(epu_mode.value != 0):
-            yield from bps.mv(epu_phase,0)
             yield from bps.mv(epu_mode,0)
+            yield from bps.sleep(1)
     elif pol in [100,104,108,112,115,118,121,123,126,190]:
-        yield from bps.mv(epu_mode, 2)
+        if (epu_mode.value != 2):
+            yield from bps.mv(epu_mode, 2)
+            yield from bps.sleep(1)
     else:
         print('need a valid polarization')
         return 1
+    en.read();
     enval = en.energy.readback.value
+    print(enval)
+    print(pol)
     yield from bps.mv(epu_phase, epuphase_from_en_pol(pol),epu_gap,epugap_from_en_pol(enval,pol))
     en.read();
     return 0
