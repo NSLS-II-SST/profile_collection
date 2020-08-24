@@ -815,7 +815,7 @@ def joe_scan_highenergy(multiple=1,sigs=[],
 
 
 def joe_scan_veryhighenergy(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en,pol=100,diode_range=7,m3_pitch=7.9):
+                        dets=[saxs_det], energy=en,pol=100,diode_range=7,m3_pitch=7.88):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 128 exposures
