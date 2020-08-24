@@ -79,12 +79,13 @@ def en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=
     yield from bps.abs_set(mir3.Pitch,m3_pitch,wait=True)
     yield from bps.mv(DiodeRange,diode_range)
 
-    if pol is 1:
-        epu_mode.put(0)
-    else:
-        epu_mode.put(2)
-    yield from bps.sleep(1)
-    yield from bps.mv(en.polarization,pol)
+    # if pol is 1:
+    #     epu_mode.put(0)
+    # else:
+    #     epu_mode.put(2)
+    # yield from bps.sleep(1)
+    # yield from bps.mv(en.polarization,pol)
+    yield from set_polarization(pol)
 
     sigcycler = cycler(energy, energies)
   #  yield from bps.mv(saxs_det.cam.acquire_time,times[0])
@@ -104,12 +105,18 @@ def NEXAFS_scan_core(signals,dets, energy, energies,enscan_type=None,
 
    # yield from bps.abs_set(mir3.Pitch,m3_pitch,wait=True)
     yield from bps.mv(DiodeRange,diode_range)
-    if pol is 1:
-        epu_mode.put(0)
-    else:
-        epu_mode.put(2)
-    yield from bps.sleep(1)
-    yield from bps.mv(en.polarization,pol)
+    # if pol is 1:
+    #     epu_mode.put(0)
+    # else:
+    #     epu_mode.put(2)
+    # yield from bps.sleep(1)
+    # yield from bps.mv(en.polarization,pol)
+    yield from set_polarization(pol)
+
+
+
+
+
     yield from bps.mv(en, energies[0])
     for signal in signals:
         signal.kind = 'normal'

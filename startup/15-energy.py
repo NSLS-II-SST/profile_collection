@@ -613,6 +613,19 @@ en.epugap.kind = 'normal'
 sd.baseline.extend([en])
 
 
+def set_polarization(pol):
+    if pol==1:
+        if(epu_mode.value != 0):
+            yield from bps.mv(epu_phase,0)
+            yield from bps.mv(epu_mode,0)
+    elif pol in [100,104,108,112,115,118,121,123,126,190]:
+        yield from bps.mv(epu_mode, 2)
+    yield from bps.mv(epu_phase, epuphase_from_en_pol(pol))
+    en.read();
+    enval = en.energy.readback.value
+    yield from bps.mv(en,enval)
+
+
 @register_line_magic
 def e(line):
     try:
@@ -633,7 +646,7 @@ def pol(line):
     except:
         boxed_text('Beamline Polarization',en.where(),'lightpurple',shrink=True)
     else:
-        RE(bps.mv(en.polarization,loc))
+        RE(set_polarization(loc))
         boxed_text('Beamline Polarization', en.where(), 'lightpurple', shrink=True)
 del pol
 
