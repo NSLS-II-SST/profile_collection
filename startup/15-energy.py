@@ -457,7 +457,7 @@ class EnPos(PseudoPositioner):
     monoen = Cpt(Monochromator, 'XF:07ID1-OP{Mono:PGM1-Ax:',kind='hinted',name='Mono Energy')
     epugap = Cpt(UndulatorMotor, 'SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr',kind='normal',name='EPU Gap')
     epuphase = Cpt(UndulatorMotor, 'SR:C07-ID:G1A{SST1:1-Ax:Phase}-Mtr',kind='normal',name='EPU Phase')
-    epumode = Cpt(EpicsSignal,'SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP',
+    epumode = Cpt(EpicsMotor,'SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP',
                            name='EPU Mode', kind='normal')
 
     @pseudo_position_argument
