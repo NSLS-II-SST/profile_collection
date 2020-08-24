@@ -112,7 +112,7 @@ def NEXAFS_scan_core(signals,dets, energy, energies,enscan_type=None,
     # yield from bps.sleep(1)
     # yield from bps.mv(en.polarization,pol)
     yield from set_polarization(pol)
-
+    print('setting pol')
 
 
 

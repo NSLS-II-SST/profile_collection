@@ -711,8 +711,9 @@ def Si_SAXS(exp_time=1):
 #     yield from bp.scan([sw_det, en.energy],en,680,700,41,md={'plan_name':enscan_type})
 #
 
-def full_carbon_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en,pol=100,diode_range=7,m3_pitch=7.92):
+
+def joe_scan_verylowenergy(multiple=1,sigs=[],
+                        dets=[saxs_det], energy=en,pol=100,diode_range=7,m3_pitch=7.93):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 128 exposures
@@ -726,31 +727,26 @@ def full_carbon_scan_nd(multiple=1,sigs=[],
 
     normal scan takes ~ 18 minutes to complete
     '''
-    enscan_type = 'full_carbon_scan_nd'
+    enscan_type = 'joe_scan_verylowenergy'
     sample()
-    if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
+    if len(read_input("Starting a low energy survey scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
-    energies = np.arange(270,282,.5)
-    energies = np.append(energies,np.arange(282,286,.1))
-    energies = np.append(energies,np.arange(286,292,.2))
-    energies = np.append(energies,np.arange(292,305,1))
-    energies = np.append(energies,np.arange(305,320,1))
-    energies = np.append(energies,np.arange(320,350,5))
+    energies = np.arange(170,260,1)
     times = energies.copy()
 
     # Define exposures times for different energy ranges
-    times[energies<282] = 2
-    times[(energies < 286) & (energies >= 282)] = 2
-    times[energies >= 286] = 2
+    times[:] = 2.0
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
     yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
                             diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
 
+
+
 def joe_scan_lowenergy(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en,pol=100,diode_range=7,m3_pitch=7.92):
+                        dets=[saxs_det], energy=en,pol=100,diode_range=7,m3_pitch=7.91):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 128 exposures
@@ -766,10 +762,10 @@ def joe_scan_lowenergy(multiple=1,sigs=[],
     '''
     enscan_type = 'joe_scan_lowenergy'
     sample()
-    if len(read_input("Starting a low energy survey scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
+    if len(read_input("Starting a Low energy survey scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
-    energies = np.arange(170,500,2)
+    energies = np.arange(240,500,2)
     times = energies.copy()
 
     # Define exposures times for different energy ranges
@@ -802,7 +798,7 @@ def joe_scan_highenergy(multiple=1,sigs=[],
     if len(read_input("Starting a High energy survey scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
-    energies = np.arange(500.0,1750,5.0)
+    energies = np.arange(400.0,1200,5.0)
     times = energies.copy()
 
     # Define exposures times for different energy ranges
@@ -815,7 +811,7 @@ def joe_scan_highenergy(multiple=1,sigs=[],
 
 
 def joe_scan_veryhighenergy(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en,pol=100,diode_range=7,m3_pitch=7.88):
+                        dets=[saxs_det], energy=en,pol=100,diode_range=7,m3_pitch=7.89):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 128 exposures
@@ -829,12 +825,12 @@ def joe_scan_veryhighenergy(multiple=1,sigs=[],
 
     normal scan takes ~ 18 minutes to complete
     '''
-    enscan_type = 'joe_scan_highenergy'
+    enscan_type = 'joe_scan_veryhighenergy'
     sample()
-    if len(read_input("Starting a High energy survey scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
+    if len(read_input("Starting a Very High energy survey scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
-    energies = np.arange(1200.0,2200,5.0)
+    energies = np.arange(1200.0,2200,10.0)
     times = energies.copy()
 
     # Define exposures times for different energy ranges
