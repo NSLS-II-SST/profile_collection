@@ -395,8 +395,8 @@ def epuphase_from_en_pol(polarization):
         return 21000
     elif polarization is 118:
         return 18000
-    elif polarization is 116:
-        return 16000
+    elif polarization is 115:
+        return 15000
     elif polarization is 112:
         return 12000
     elif polarization is 108:
