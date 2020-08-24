@@ -19,7 +19,8 @@ class UndulatorMotor(EpicsMotor):
 #                        write_pv='SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP',
 #                        name='EPU 60 Mode',kind='normal')
 
-
+epu_mode = EpicsSignal('SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP',
+                        name='EPU 60 Mode',kind='normal')
 
 
 class Monochromator(PVPositioner):
@@ -457,8 +458,8 @@ class EnPos(PseudoPositioner):
     monoen = Cpt(Monochromator, 'XF:07ID1-OP{Mono:PGM1-Ax:',kind='hinted',name='Mono Energy')
     epugap = Cpt(UndulatorMotor, 'SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr',kind='normal',name='EPU Gap')
     epuphase = Cpt(UndulatorMotor, 'SR:C07-ID:G1A{SST1:1-Ax:Phase}-Mtr',kind='normal',name='EPU Phase')
-    epumode = Cpt(EpicsMotor,'SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP',
-                           name='EPU Mode', kind='normal')
+   # epumode = Cpt(EpicsSignal,'SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP',
+   #                        name='EPU Mode', kind='normal')
 
     @pseudo_position_argument
     def forward(self, pseudo_pos):
@@ -466,13 +467,14 @@ class EnPos(PseudoPositioner):
         return self.RealPosition(epugap=epugap_from_en_pol(pseudo_pos.energy, pseudo_pos.polarization),
                                  monoen=pseudo_pos.energy,
                                  epuphase=epuphase_from_en_pol(pseudo_pos.polarization),
-                                 epumode=epumode_from_en_pol(pseudo_pos.polarization))
+                                 #epumode=epumode_from_en_pol(pseudo_pos.polarization)
+                                 )
 
     @real_position_argument
     def inverse(self, real_pos):
         '''Run an inverse (real -> pseudo) calculation'''
         return self.PseudoPosition( energy=real_pos.monoen,
-                                    polarization=pol_from_mode_phase(real_pos.epuphase,real_pos.epumode))
+                                    polarization=pol_from_mode_phase(real_pos.epuphase,epu_mode.value))
 
     def where_sp(self):
         return ('Beamline Energy Setpoint : {}'
