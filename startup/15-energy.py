@@ -423,7 +423,7 @@ def pol_from_mode_phase(phase, mode):
         return 126
     elif abs(phase - 23000) < 100 and mode is 2:
         return 123
-    elif abs(phase - 22000) < 100 and mode is 2:
+    elif abs(phase - 21000) < 100 and mode is 2:
         return 121
     elif abs(phase - 18000) < 100 and mode is 2:
         return 118
@@ -628,11 +628,12 @@ def set_polarization(pol):
     enval = en.energy.readback.value
     phaseval = epuphase_from_en_pol(pol)
     gapval = epugap_from_en_pol(enval,pol)
-    print(enval)
-    print(pol)
-    print(phaseval)
-    print(gapval)
+    #print(enval)
+    #print(pol)
+    #print(phaseval)
+    #print(gapval)
     yield from bps.mv(epu_phase, phaseval,epu_gap,gapval)
+    yield from bps.mv(en.polarization, pol)
     en.read();
     return 0
 
@@ -740,5 +741,4 @@ def correct_mono(calibrated_eV,apply=False,current_eV=None, k=1200):
     if apply:
         yield from bps.amv(mono_en.grating.user_offset, grat_off + d_grat)
         yield from bps.mv(mono_en.mirror2.user_offset, mir_off + d_mir)
-
 
