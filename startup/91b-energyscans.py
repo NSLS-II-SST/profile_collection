@@ -732,7 +732,7 @@ def joe_scan_verylowenergy(multiple=1,sigs=[],
     if len(read_input("Starting a low energy survey scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
-    energies = np.arange(170,260,1)
+    energies = np.arange(170.0,260.0,1.0)
     times = energies.copy()
 
     # Define exposures times for different energy ranges
@@ -765,7 +765,7 @@ def joe_scan_lowenergy(multiple=1,sigs=[],
     if len(read_input("Starting a Low energy survey scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
-    energies = np.arange(240,500,2)
+    energies = np.arange(240.0,500,2.0)
     times = energies.copy()
 
     # Define exposures times for different energy ranges
