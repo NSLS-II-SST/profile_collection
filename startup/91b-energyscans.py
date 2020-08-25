@@ -810,3 +810,33 @@ def joe_scan_highenergy(multiple=1,sigs=[],
                             diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
 
 
+def joe_scan_veryhighenergy(multiple=1,sigs=[],
+                        dets=[saxs_det], energy=en,pol=100,diode_range=7,m3_pitch=7.89):
+    '''
+    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
+    this results in 128 exposures
+
+
+    :param multiple: adjustment for exposure times
+    :param mesh: which Izero channel to use
+    :param det: which detector to use
+    :param energy: what energy motor to scan
+    :return: perform scan
+
+    normal scan takes ~ 18 minutes to complete
+    '''
+    enscan_type = 'joe_scan_veryhighenergy'
+    sample()
+    if len(read_input("Starting a Very High energy survey scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
+        return
+    # create a list of energies
+    energies = np.arange(1200.0,2030,10.0)
+    times = energies.copy()
+
+    # Define exposures times for different energy ranges
+    times[:] = 2.0
+    times *= multiple
+
+    # use these energies and exposure times to scan energy and record detectors and signals
+    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
