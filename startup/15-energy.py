@@ -338,7 +338,7 @@ def epugap_from_en_pol(energy,polarization):
                   (enoff ** 9) * 1.000126057875859e-20
         else:
             gap= None
-    elif polarization == 1: # 4000 phase
+    elif polarization == 1: # circular polarization
 
         if 233.736 <= energy < 1800:
             enoff = energy - 233.736
