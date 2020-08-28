@@ -84,7 +84,7 @@ class Syringe_Pump(Device):
         if pump == 1:
             return self.rate_rb.p1.get()
         else:
-            return self.rate_rb.p2.valget()ue
+            return self.rate_rb.p2.valget()
 
     def set_rate(self, val, pump=1):
         if pump == 1:
