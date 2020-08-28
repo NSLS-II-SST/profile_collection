@@ -1,5 +1,7 @@
 from IPython.utils.coloransi import TermColors as color
+
 import os
+
 import nslsii
 
 
@@ -36,7 +38,11 @@ run_report(__file__)
 
 # Very important, the databroker config lives in C:\Users\greateyes\AppData\Roaming\databroker\rsoxs.yml,
 # not in ~/.config/databroker/rsoxs.yml
-nslsii.configure_base(get_ipython().user_ns, 'rsoxs')
+nslsii.configure_base(
+    get_ipython().user_ns,
+    'rsoxs',
+    publish_documents_to_kafka=True
+)
 
 # After the above call, you will now have the following in your namespace:
 # 
