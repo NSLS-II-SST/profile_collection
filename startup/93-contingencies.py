@@ -41,7 +41,7 @@ def send_notice_plan(email,subject,msg):
 def enc_clr_x():
     send_notice('egann@bnl.gov','SST had a small problem','the encoder loss has happened on the RSoXS beamline'
                                                           '\rEverything is probably just fine')
-    xpos = sam_X.user_readback.value
+    xpos = sam_X.user_readback.get()
     yield from sam_X.clear_encoder_loss()
     yield from sam_X.home()
     yield from bps.sleep(30)

@@ -46,33 +46,33 @@ class Syringe_Pump(Device):
 
     def get_vol(self, pump=1):
         if pump == 1:
-            return self.vol_rb.p1.value
+            return self.vol_rb.p1.get()
         else:
-            return self.vol_rb.p2.value
+            return self.vol_rb.p2.get()
 
     def get_vol_unit(self, pump=1):
         if pump == 1:
-            return self.vol_unit_rb.p1.value
+            return self.vol_unit_rb.p1.get()
         else:
-            return self.vol_unit_rb.p2.value
+            return self.vol_unit_rb.p2.get()
 
     def set_vol_unit(self, pump=1):
         if pump == 1:
-            return self.vol_unit_sp.p1.value
+            return self.vol_unit_sp.p1.get()
         else:
-            return self.vol_unit_sp.p2.value
+            return self.vol_unit_sp.p2.get()
 
     def get_rate_unit(self, pump=1):
         if pump == 1:
-            return self.rate_unit_rb.p1.value
+            return self.rate_unit_rb.p1.get()
         else:
-            return self.rate_unit_rb.p2.value
+            return self.rate_unit_rb.p2.get()
 
     def set_rate_unit(self, pump=1):
         if pump == 1:
-            return self.rate_unit_sp.p1.value
+            return self.rate_unit_sp.p1.get()
         else:
-            return self.rate_unit_sp.p2.value
+            return self.rate_unit_sp.p2.get()
 
     def set_vol(self, val, pump=1):
         if pump == 1:
@@ -82,9 +82,9 @@ class Syringe_Pump(Device):
 
     def get_rate(self, pump=1):
         if pump == 1:
-            return self.rate_rb.p1.value
+            return self.rate_rb.p1.get()
         else:
-            return self.rate_rb.p2.value
+            return self.rate_rb.p2.valget()
 
     def set_rate(self, val, pump=1):
         if pump == 1:
@@ -94,9 +94,9 @@ class Syringe_Pump(Device):
 
     def get_dia(self, pump=1):
         if pump == 1:
-            return self.dia_rb.p1.value
+            return self.dia_rb.p1.get()
         else:
-            return self.dia_rb.p2.value
+            return self.dia_rb.p2.get()
 
     def set_dia(self, val, pump=1):
         if pump == 1:
@@ -106,9 +106,9 @@ class Syringe_Pump(Device):
 
     def get_dir(self, pump=1):
         if pump == 1:
-            return self.dir_rb.p1.value
+            return self.dir_rb.p1.get()
         else:
-            return self.dir_rb.p2.value
+            return self.dir_rb.p2.get()
 
     def set_dir(self, val, pump=1):
         if pump == 1:
@@ -138,14 +138,14 @@ class Syringe_Pump(Device):
             Dir = self.get_dir(pump)
         if Dir == 0:
             if pump == 1:
-                return self.disI_vol_rb.p1.value
+                return self.disI_vol_rb.p1.get()
             else:
-                return self.disI_vol_rb.p2.value
+                return self.disI_vol_rb.p2.get()
         else:
             if pump == 1:
-                return self.disW_vol_rb.p1.value
+                return self.disW_vol_rb.p1.get()
             else:
-                return self.disW_vol_rb.p2.value
+                return self.disW_vol_rb.p2.get()
 
     def clr(self, pump=1, Dir=None, ):
         '''dir: 0 for infusion, 1 for withdraw '''

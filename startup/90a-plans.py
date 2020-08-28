@@ -93,7 +93,7 @@ del darkoff
 
 def dark_plan_saxs():
     #shutterstates = saxs_det.cam.sync.setpoint
-    shutterstates = saxs_det.cam.shutter_mode.value
+    shutterstates = saxs_det.cam.shutter_mode.get()
     #yield from bps.mv(saxs_det.cam.sync,0) # disable shutter
     yield from bps.mv(saxs_det.cam.shutter_mode,0)
     yield from bps.trigger(saxs_det, group='darkframe-trigger')
@@ -490,7 +490,7 @@ def quicksnap():
     :return:
     '''
     set_exposure(1)
-    binsave = sw_det.saxs.cam.bin_x.value
+    binsave = sw_det.saxs.cam.bin_x.get()
     sw_det.saxs.cam.bin_x.set(16)
     sw_det.saxs.cam.bin_y.set(16)
     sw_det.waxs.cam.bin_x.set(16)
@@ -520,7 +520,7 @@ def snapshot(secs=0, count=1, name=None, energy = None, det= None):
         count = round(count)
         counts = 's'
     if secs <= 0:
-        secs = saxs_det.cam.acquire_time.value
+        secs = saxs_det.cam.acquire_time.get()
 
     if secs == 1:
         secss = ''
@@ -615,7 +615,7 @@ def vent():
 
     print('waiting for you to close the load lock gate valve')
     print('Please also close the small manual black valve on the back of the load lock now')
-    while gvll.state.value is 1:
+    while gvll.state.get() is 1:
         gvll.read() # attempt at a fix for problem where macro hangs here.
         bps.sleep(1)
     print('TEM load lock closed - turning off loadlock gauge')
