@@ -130,7 +130,7 @@ def NEXAFS_scan_core(signals,dets, energy, energies,enscan_type=None,
                               md={'plan_name':enscan_type})
         yield from bps.mv(Shutter_control, 0)
     elif open_each_step:
-        yield from bps.mv(Shutter_enable, 0)
+        yield from bps.mv(Shutter_enable, 1)
         yield from bp.scan_nd(dets + signals + [en.energy],
                               sigcycler,
                               md={'plan_name':enscan_type},
@@ -158,6 +158,6 @@ def one_shuttered_step(detectors, step, pos_cache):
     """
     motors = step.keys()
     yield from move_per_step(step, pos_cache)
-    yield from bps.mv(Shutter_control, 1)
+    yield from bps.mv(Shutter_trigger, 1)
     yield from trigger_and_read(list(detectors) + list(motors))
     yield from bps.sleep(Shutter_open_time.value)
