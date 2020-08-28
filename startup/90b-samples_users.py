@@ -143,7 +143,7 @@ def get_location(motor_list):
     locs = []
     for motor in motor_list:
         locs.append({'motor' : motor,
-                     'position': motor.user_readback.value,
+                     'position': motor.user_readback.get(),
                      'order':0})
     return locs
 
@@ -155,10 +155,10 @@ def sample_set_location(sample_dict):
 
 def get_sample_location():
     locs = []
-    locs.append({'motor': 'x', 'position': sam_X.user_readback.value, 'order': 0})
-    locs.append({'motor': 'y', 'position': sam_Y.user_readback.value, 'order': 0})
-    locs.append({'motor': 'z', 'position': sam_Z.user_readback.value, 'order': 0})
-    locs.append({'motor': 'th', 'position': sam_Th.user_readback.value, 'order': 0})
+    locs.append({'motor': 'x', 'position': sam_X.user_readback.get(), 'order': 0})
+    locs.append({'motor': 'y', 'position': sam_Y.user_readback.get(), 'order': 0})
+    locs.append({'motor': 'z', 'position': sam_Z.user_readback.get(), 'order': 0})
+    locs.append({'motor': 'th', 'position': sam_Th.user_readback.get(), 'order': 0})
     #  locs = get_location([sam_X,sam_Y,sam_Z,sam_Th])
     return locs
 
@@ -386,35 +386,35 @@ def newsample():
         acquisitions.append({'plan_name': 'full_carbon_scan','arguments': '','configuration':'WAXS'})
 
     loc = input('New Location? (if blank use current location x={:.2f},y={:.2f},z={:.2f},th={:.2f}): '.format(
-        sam_X.user_readback.value,
-        sam_Y.user_readback.value,
-        sam_Z.user_readback.value,
-        sam_Th.user_readback.value
+        sam_X.user_readback.get(),
+        sam_Y.user_readback.get(),
+        sam_Z.user_readback.get(),
+        sam_Th.user_readback.get()
     ))
     if loc is not '':
         locs = []
-        xval = input('X ({:.2f}): '.format(sam_X.user_readback.value))
+        xval = input('X ({:.2f}): '.format(sam_X.user_readback.get()))
         if xval is not '':
             locs.append({'motor': 'x', 'position': xval, 'order': 0})
         else:
-            locs.append({'motor': 'x', 'position': sam_X.user_readback.value, 'order': 0})
-        yval = input('X ({:.2f}): '.format(sam_Y.user_readback.value))
+            locs.append({'motor': 'x', 'position': sam_X.user_readback.get(), 'order': 0})
+        yval = input('X ({:.2f}): '.format(sam_Y.user_readback.get()))
         if yval is not '':
             locs.append({'motor': 'y', 'position': yval, 'order': 0})
         else:
-            locs.append({'motor': 'y', 'position': sam_Y.user_readback.value, 'order': 0})
+            locs.append({'motor': 'y', 'position': sam_Y.user_readback.get(), 'order': 0})
 
-        zval = input('X ({:.2f}): '.format(sam_Z.user_readback.value))
+        zval = input('X ({:.2f}): '.format(sam_Z.user_readback.get()))
         if zval is not '':
             locs.append({'motor': 'z', 'position': zval, 'order': 0})
         else:
-            locs.append({'motor': 'z', 'position': sam_Z.user_readback.value, 'order': 0})
+            locs.append({'motor': 'z', 'position': sam_Z.user_readback.get(), 'order': 0})
 
-        thval = input('X ({:.2f}): '.format(sam_Th.user_readback.value))
+        thval = input('X ({:.2f}): '.format(sam_Th.user_readback.get()))
         if thval is not '':
             locs.append({'motor': 'th', 'position': thval, 'order': 0})
         else:
-            locs.append({'motor': 'th', 'position': sam_Th.user_readback.value, 'order': 0})
+            locs.append({'motor': 'th', 'position': sam_Th.user_readback.get(), 'order': 0})
         return get_sample_dict(locations = locs, acq = acquisitions)
     else:
         return get_sample_dict(acq = acquisitions) #uses current location by default

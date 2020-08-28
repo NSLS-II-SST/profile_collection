@@ -473,7 +473,7 @@ class EnPos(PseudoPositioner):
     def inverse(self, real_pos):
         '''Run an inverse (real -> pseudo) calculation'''
         return self.PseudoPosition( energy=real_pos.monoen,
-                                    polarization=pol_from_mode_phase(real_pos.epuphase,epu_mode.value))
+                                    polarization=pol_from_mode_phase(real_pos.epuphase,epu_mode.get()))
 
     def where_sp(self):
         return ('Beamline Energy Setpoint : {}'
@@ -490,25 +490,25 @@ class EnPos(PseudoPositioner):
                 '\nMirror2 Readback : {}'
                 '\nCFF : {}'
                 '\nVLS : {}').format(
-            colored('{:.2f}'.format(self.monoen.setpoint.value).rstrip('0').rstrip('.'),'yellow'),
-            colored('{:.2f}'.format(self.monoen.readback.value).rstrip('0').rstrip('.'),'yellow'),
-            colored('{:.2f}'.format(self.epugap.user_setpoint.value).rstrip('0').rstrip('.'),'yellow'),
-            colored('{:.2f}'.format(self.epugap.user_readback.value).rstrip('0').rstrip('.'),'yellow'),
-            colored('{:.2f}'.format(self.epuphase.user_setpoint.value).rstrip('0').rstrip('.'),'yellow'),
-            colored('{:.2f}'.format(self.epuphase.user_readback.value).rstrip('0').rstrip('.'),'yellow'),
-            colored('{:.2f}'.format(self.epumode.user_setpoint.value).rstrip('0').rstrip('.'),'yellow'),
-            colored('{:.2f}'.format(self.epumode.user_readback.value).rstrip('0').rstrip('.'),'yellow'),
-            colored('{:.2f}'.format(self.monoen.grating.user_setpoint.value).rstrip('0').rstrip('.'),'yellow'),
-            colored('{:.2f}'.format(self.monoen.grating.user_readback.value).rstrip('0').rstrip('.'),'yellow'),
-            colored('{:.2f}'.format(self.monoen.mirror2.user_setpoint.value).rstrip('0').rstrip('.'),'yellow'),
-            colored('{:.2f}'.format(self.monoen.mirror2.user_readback.value).rstrip('0').rstrip('.'),'yellow'),
-            colored('{:.2f}'.format(self.monoen.cff.value).rstrip('0').rstrip('.'),'yellow'),
-            colored('{:.2f}'.format(self.monoen.vls.value).rstrip('0').rstrip('.'),'yellow'))
+            colored('{:.2f}'.format(self.monoen.setpoint.get()).rstrip('0').rstrip('.'),'yellow'),
+            colored('{:.2f}'.format(self.monoen.readback.get()).rstrip('0').rstrip('.'),'yellow'),
+            colored('{:.2f}'.format(self.epugap.user_setpoint.get()).rstrip('0').rstrip('.'),'yellow'),
+            colored('{:.2f}'.format(self.epugap.user_readback.get()).rstrip('0').rstrip('.'),'yellow'),
+            colored('{:.2f}'.format(self.epuphase.user_setpoint.get()).rstrip('0').rstrip('.'),'yellow'),
+            colored('{:.2f}'.format(self.epuphase.user_readback.get()).rstrip('0').rstrip('.'),'yellow'),
+            colored('{:.2f}'.format(self.epumode.user_setpoint.get()).rstrip('0').rstrip('.'),'yellow'),
+            colored('{:.2f}'.format(self.epumode.user_readback.get()).rstrip('0').rstrip('.'),'yellow'),
+            colored('{:.2f}'.format(self.monoen.grating.user_setpoint.get()).rstrip('0').rstrip('.'),'yellow'),
+            colored('{:.2f}'.format(self.monoen.grating.user_readback.get()).rstrip('0').rstrip('.'),'yellow'),
+            colored('{:.2f}'.format(self.monoen.mirror2.user_setpoint.get()).rstrip('0').rstrip('.'),'yellow'),
+            colored('{:.2f}'.format(self.monoen.mirror2.user_readback.get()).rstrip('0').rstrip('.'),'yellow'),
+            colored('{:.2f}'.format(self.monoen.cff.get()).rstrip('0').rstrip('.'),'yellow'),
+            colored('{:.2f}'.format(self.monoen.vls.get()).rstrip('0').rstrip('.'),'yellow'))
 
     def where(self):
         return ('Beamline Energy : {}\nPolarization : {}').format(
-            colored('{:.2f}'.format(self.monoen.readback.value).rstrip('0').rstrip('.'), 'yellow'),
-            colored('{:.2f}'.format(self.polarization.readback.value).rstrip('0').rstrip('.'), 'yellow'))
+            colored('{:.2f}'.format(self.monoen.readback.get()).rstrip('0').rstrip('.'), 'yellow'),
+            colored('{:.2f}'.format(self.polarization.readback.get()).rstrip('0').rstrip('.'), 'yellow'))
 
     def wh(self):
         boxed_text(self.name+" location", self.where_sp(), 'green',shrink=True)
@@ -554,20 +554,20 @@ class EnPosold(PseudoPositioner):
                 '\nMirror2 Readback : {}'
                 '\nCFF : {}'
                 '\nVLS : {}').format(
-            colored('{:.2f}'.format(self.monoen.setpoint.value).rstrip('0').rstrip('.'),'yellow'),
-            colored('{:.2f}'.format(self.monoen.readback.value).rstrip('0').rstrip('.'),'yellow'),
-            colored('{:.2f}'.format(self.epugap.user_setpoint.value).rstrip('0').rstrip('.'),'yellow'),
-            colored('{:.2f}'.format(self.epugap.user_readback.value).rstrip('0').rstrip('.'),'yellow'),
-            colored('{:.2f}'.format(self.monoen.grating.user_setpoint.value).rstrip('0').rstrip('.'),'yellow'),
-            colored('{:.2f}'.format(self.monoen.grating.user_readback.value).rstrip('0').rstrip('.'),'yellow'),
-            colored('{:.2f}'.format(self.monoen.mirror2.user_setpoint.value).rstrip('0').rstrip('.'),'yellow'),
-            colored('{:.2f}'.format(self.monoen.mirror2.user_readback.value).rstrip('0').rstrip('.'),'yellow'),
-            colored('{:.2f}'.format(self.monoen.cff.value).rstrip('0').rstrip('.'),'yellow'),
-            colored('{:.2f}'.format(self.monoen.vls.value).rstrip('0').rstrip('.'),'yellow'))
+            colored('{:.2f}'.format(self.monoen.setpoint.get()).rstrip('0').rstrip('.'),'yellow'),
+            colored('{:.2f}'.format(self.monoen.readback.get()).rstrip('0').rstrip('.'),'yellow'),
+            colored('{:.2f}'.format(self.epugap.user_setpoint.get()).rstrip('0').rstrip('.'),'yellow'),
+            colored('{:.2f}'.format(self.epugap.user_readback.get()).rstrip('0').rstrip('.'),'yellow'),
+            colored('{:.2f}'.format(self.monoen.grating.user_setpoint.get()).rstrip('0').rstrip('.'),'yellow'),
+            colored('{:.2f}'.format(self.monoen.grating.user_readback.get()).rstrip('0').rstrip('.'),'yellow'),
+            colored('{:.2f}'.format(self.monoen.mirror2.user_setpoint.get()).rstrip('0').rstrip('.'),'yellow'),
+            colored('{:.2f}'.format(self.monoen.mirror2.user_readback.get()).rstrip('0').rstrip('.'),'yellow'),
+            colored('{:.2f}'.format(self.monoen.cff.get()).rstrip('0').rstrip('.'),'yellow'),
+            colored('{:.2f}'.format(self.monoen.vls.get()).rstrip('0').rstrip('.'),'yellow'))
 
     def where(self):
         return ('Beamline Energy : {}').format(
-            colored('{:.2f}'.format(self.monoen.readback.value).rstrip('0').rstrip('.'), 'yellow'))
+            colored('{:.2f}'.format(self.monoen.readback.get()).rstrip('0').rstrip('.'), 'yellow'))
 
     def wh(self):
         boxed_text(self.name+" location", self.where_sp(), 'green',shrink=True)
@@ -614,18 +614,18 @@ sd.baseline.extend([en])
 
 def set_polarization(pol):
     if pol==1:
-        if(epu_mode.value != 0):
+        if(epu_mode.get() != 0):
             yield from bps.mv(epu_mode,0)
             yield from bps.sleep(1)
     elif pol in [100,104,108,112,115,118,121,123,126,190]:
-        if (epu_mode.value != 2):
+        if (epu_mode.get() != 2):
             yield from bps.mv(epu_mode, 2)
             yield from bps.sleep(1)
     else:
         print('need a valid polarization')
         return 1
     en.read();
-    enval = en.energy.readback.value
+    enval = en.energy.readback.get()
     phaseval = epuphase_from_en_pol(pol)
     gapval = epugap_from_en_pol(enval,pol)
     #print(enval)
@@ -664,7 +664,7 @@ del pol
 
 
 def cff_to_13():
-    energy = en.monoen.setpoint.value
+    energy = en.monoen.setpoint.get()
     yield from bps.mv(en.monoen.grating.user_offset,-0.3511242679026303,
                       en.monoen.mirror2.user_offset,-3.4610179934346594,
                       en.monoen.cff,1.3)
@@ -672,14 +672,14 @@ def cff_to_13():
 
 
 def cff_to_199():
-    energy = en.monoen.setpoint.value
+    energy = en.monoen.setpoint.get()
     yield from bps.mv(en.monoen.grating.user_offset,-0.098373,
                       en.monoen.mirror2.user_offset,-3.237992,
                       en.monoen.cff,1.99)
     yield from bps.mv(en,energy)
 
 def cff_to_19():
-    energy = en.monoen.setpoint.value
+    energy = en.monoen.setpoint.get()
     yield from bps.mv(en.monoen.grating.user_offset, -0.3511,
                       en.monoen.mirror2.user_offset, -3.461,
                       en.monoen.cff, 1.9)
@@ -706,7 +706,7 @@ def cffscan(cffs):
 
 def mono_scan(energy = None,width = 20, pnts = 51):
     if energy is None:
-        energy = en.energy.setpoint.value
+        energy = en.energy.setpoint.get()
     yield from bps.mv(en, energy)
     yield from bp.rel_scan([Izero_Mesh,Beamstop_WAXS],mono_en,-width/2,width/2,pnts)
 
@@ -723,16 +723,16 @@ def correct_mono(calibrated_eV,apply=False,current_eV=None, k=1200):
     :return:
     '''
     if current_eV is None:
-        current_eV = en.energy.setpoint.value
-    cff = en.monoen.cff.value
+        current_eV = en.energy.setpoint.get()
+    cff = en.monoen.cff.get()
     [mirror_cur, grating_cur] = get_mirror_grating_angles(current_eV, cff, 1, k)
     [mirror_cal, grating_cal] = get_mirror_grating_angles(calibrated_eV, cff, 1, k)
     d_mir = mirror_cur-mirror_cal
     d_grat = grating_cur-grating_cal
 
 
-    grat_off = mono_en.grating.user_offset.value
-    mir_off = mono_en.mirror2.user_offset.value
+    grat_off = mono_en.grating.user_offset.get()
+    mir_off = mono_en.mirror2.user_offset.get()
 
 
     print(f'grating offset is {d_grat} from ideal, mirror offset is {d_mir} from ideal'

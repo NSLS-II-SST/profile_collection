@@ -18,7 +18,7 @@ class EPS_Shutter(Device):
         #self.color = 'red'
 
     def status(self):
-        if self.state.value == self.closeval:
+        if self.state.get() == self.closeval:
             return 'closed'
         else:
             return 'open'
@@ -26,7 +26,7 @@ class EPS_Shutter(Device):
     def open_plan(self):
         #RE.msg_hook = None
         count = 0
-        while self.state.value == self.openval:
+        while self.state.get() == self.openval:
             count += 1
             print(u'\u231b', end=' ', flush=True)
             yield from bps.mv(self.opn, 1)
@@ -40,7 +40,7 @@ class EPS_Shutter(Device):
     def close_plan(self):
         #RE.msg_hook = None
         count = 0
-        while self.state.value != self.closeval:
+        while self.state.get() != self.closeval:
             count += 1
             print(u'\u231b', end=' ', flush=True)
             yield from bps.mv(self.cls, 1)
@@ -54,9 +54,9 @@ class EPS_Shutter(Device):
     def open(self):
         #RE.msg_hook = None
         self.read()
-        if self.state.value != self.openval:
+        if self.state.get() != self.openval:
             count = 0
-            while self.state.value != self.openval:
+            while self.state.get() != self.openval:
                 count += 1
                 print(u'\u231b', end=' ', flush=True)
                 yield from bps.mv(self.opn, 1)
@@ -73,9 +73,9 @@ class EPS_Shutter(Device):
     def close(self):
         #RE.msg_hook = None
         self.read()
-        if self.state.value != self.closeval:
+        if self.state.get() != self.closeval:
             count = 0
-            while self.state.value != self.closeval:
+            while self.state.get() != self.closeval:
                 count += 1
                 print(u'\u231b', end=' ', flush=True)
                 yield from bps.mv(self.cls, 1)

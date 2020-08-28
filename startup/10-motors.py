@@ -100,15 +100,15 @@ class FMBOEpicsMotor(EpicsMotor):
             if signal.upper() not in self.status_list:
                 continue
             suffix = getattr(self, signal).pvname.replace(self.prefix, '')
-            if getattr(self, signal).value:
+            if getattr(self, signal).get():
                 value_color = 'lightgreen'
             else:
                 value_color = 'lightred'
 
             text += '  %-26s : %-35s  %s   %s \n' % (
-                getattr(self, signal+'_desc').value,
-                colored(getattr(self, signal).enum_strs[getattr(self, signal).value],value_color),
-                colored(getattr(self, signal).value,value_color),
+                getattr(self, signal+'_desc').get(),
+                colored(getattr(self, signal).enum_strs[getattr(self, signal).get()],value_color),
+                colored(getattr(self, signal).get(),value_color),
                 whisper(suffix))
         boxed_text('%s status signals' % self.name, text, 'green',shrink=True)
 
@@ -119,14 +119,14 @@ class prettymotor(FMBOEpicsMotor):
     def where(self):
         return ('{} : {}').format(
             colored(self.name, 'lightblue'),
-            colored('{:.2f}'.format(self.user_readback.value).rstrip('0').rstrip('.'), 'yellow'))
+            colored('{:.2f}'.format(self.user_readback.get()).rstrip('0').rstrip('.'), 'yellow'))
 
     def where_sp(self):
         return ('{} Setpoint : {}\n{} Readback : {}').format(
             colored(self.name, 'lightblue'),
-            colored('{:.2f}'.format(self.user_readback.value).rstrip('0').rstrip('.'), 'yellow'),
+            colored('{:.2f}'.format(self.user_readback.get()).rstrip('0').rstrip('.'), 'yellow'),
             colored(self.name, 'lightblue'),
-            colored('{:.2f}'.format(self.user_setpoint.value).rstrip('0').rstrip('.'), 'yellow'))
+            colored('{:.2f}'.format(self.user_setpoint.get()).rstrip('0').rstrip('.'), 'yellow'))
 
     def wh(self):
         boxed_text(self.name+" location", self.where_sp(), 'green',shrink=True)

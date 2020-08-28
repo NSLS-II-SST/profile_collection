@@ -54,7 +54,7 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
 
         Shutter_enable.set(1)
         Shutter_delay.set(0)
-        if abs(self.cam.temperature_actual.value - self.cam.temperature.value) > 2.0:
+        if abs(self.cam.temperature_actual.get() - self.cam.temperature.get()) > 2.0:
             boxed_text("Temperature Warning!!!!",
                       self.cooling_state()+
                       "\nPlease wait until temperature has stabilized before collecting important data.",'yellow',85)
@@ -73,8 +73,8 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
             4:'unknown',
             2:'enabled'
         }
-        #return ('Shutter is {}'.format(switch[self.cam.sync.value]))
-        return ('Shutter is {}'.format(switch[self.cam.shutter_mode.value]))
+        #return ('Shutter is {}'.format(switch[self.cam.sync.get()]))
+        return ('Shutter is {}'.format(switch[self.cam.shutter_mode.get()]))
 
     def shutter_on(self):
         #self.cam.sync.set(1)
@@ -95,7 +95,7 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
     def exptime(self):
         return ("{} has an exposure time of {} seconds".format(
             colored(self.name,'lightblue'),
-            colored(str(self.cam.acquire_time.value),'lightgreen')))
+            colored(str(self.cam.acquire_time.get()),'lightgreen')))
 
     def set_temp(self,degc):
         self.cam.temperature.set(degc)
@@ -108,29 +108,29 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
 #        self.cam.
 
     def cooling_state(self):
-        if self.cam.enable_cooling.value:
+        if self.cam.enable_cooling.get():
             self.cam.temperature_actual.read()
-            if self.cam.temperature_actual.value - self.cam.temperature.value > 1.0:
+            if self.cam.temperature_actual.get() - self.cam.temperature.get() > 1.0:
                 return ("\nTemperature of {} ({} °C) is not at setpoint ({} °C) but cooling is on".format(
                     colored(self.name,'lightblue'),
-                    colored(self.cam.temperature_actual.value,'red'),
-                    colored(self.cam.temperature.value,'blue')))
+                    colored(self.cam.temperature_actual.get(),'red'),
+                    colored(self.cam.temperature.get(),'blue')))
             else:
                 return ("\nTemperature of {} ({} °C) is at setpoint ({} °C) and cooling is on".format(
                     colored(self.name,'lightblue'),
-                    colored(self.cam.temperature_actual.value,'green'),
-                    colored(self.cam.temperature.value,'blue')))
+                    colored(self.cam.temperature_actual.get(),'green'),
+                    colored(self.cam.temperature.get(),'blue')))
         else:
-            if self.cam.temperature_actual.value - self.cam.temperature.value > 1.0:
+            if self.cam.temperature_actual.get() - self.cam.temperature.get() > 1.0:
                 return ("\nTemperature of {} ({} °C) is not at setpoint ({} °C) and cooling is off".format(
                      colored(self.name,'lightblue'),
-                     colored(self.cam.temperature_actual.value,'red'),
-                     colored(self.cam.temperature.value,'lightgray')))
+                     colored(self.cam.temperature_actual.get(),'red'),
+                     colored(self.cam.temperature.get(),'lightgray')))
             else:
                 return ("\nTemperature of {} ({} °C) is at setpoint ({} °C), but cooling is off".format(
                     colored(self.name,'lightblue'),
-                    colored(self.cam.temperature_actual.value,'green'),
-                    colored(self.cam.temperature.value,'lightgray')))
+                    colored(self.cam.temperature_actual.get(),'green'),
+                    colored(self.cam.temperature.get(),'lightgray')))
 
     def set_binning(self,binx,biny):
         self.cam.bin_x.set(binx)
@@ -139,8 +139,8 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
     def binning(self):
         return ('Binning of {} is set to ({},{}) pixels'.format(
             colored(self.name,'lightblue'),
-            colored(self.cam.bin_x.value,'lightpurple'),
-            colored(self.cam.bin_y.value,'lightpurple')))
+            colored(self.cam.bin_x.get(),'lightpurple'),
+            colored(self.cam.bin_y.get(),'lightpurple')))
 
     def exposure(self):
         return self.exptime()
