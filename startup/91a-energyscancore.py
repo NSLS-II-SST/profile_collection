@@ -90,6 +90,7 @@ def en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=
     sigcycler = cycler(energy, energies)
   #  yield from bps.mv(saxs_det.cam.acquire_time,times[0])
     sigcycler += cycler(saxs_det.cam.acquire_time, times.copy())
+    sigcycler += cycler(Shutter_open_time, times.copy())
     #sigcycler += cycler(sw_det.waxs.cam.acquire_time, times.copy()) #add extra exposure time for WAXS
 
    # yield from bps.abs_set(en, energies[0], timeout=180, wait=True)
@@ -99,7 +100,7 @@ def en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=
     yield from bp.scan_nd(dets + signals,sigcycler, md={'plan_name':enscan_type})
 
 def NEXAFS_scan_core(signals,dets, energy, energies,enscan_type=None,
-                     openshutter = False,m3_pitch=7.94,diode_range=6,pol=100):
+                     openshutter = False,open_each_step=False,m3_pitch=7.94,diode_range=6,pol=100):
 
 
 
@@ -121,12 +122,42 @@ def NEXAFS_scan_core(signals,dets, energy, energies,enscan_type=None,
     yield from bps.mv(en, energies[0])
     for signal in signals:
         signal.kind = 'normal'
-    if openshutter:
+    if openshutter and not open_each_step:
         yield from bps.mv(Shutter_enable, 0)
         yield from bps.mv(Shutter_control, 1)
-
-    yield from bp.scan_nd(dets + signals + [en.energy],
-                          sigcycler,
-                          md={'plan_name':enscan_type})
-    if openshutter:
+        yield from bp.scan_nd(dets + signals + [en.energy],
+                              sigcycler,
+                              md={'plan_name':enscan_type})
         yield from bps.mv(Shutter_control, 0)
+    elif open_each_step:
+        yield from bps.mv(Shutter_enable, 0)
+        yield from bp.scan_nd(dets + signals + [en.energy],
+                              sigcycler,
+                              md={'plan_name':enscan_type},
+                              per_step=one_shuttered_step)
+    else:
+        yield from bp.scan_nd(dets + signals + [en.energy],
+                              sigcycler,
+                              md={'plan_name':enscan_type})
+
+
+def one_shuttered_step(detectors, step, pos_cache):
+    """
+    Inner loop of an N-dimensional step scan
+
+    This is the default function for ``per_step`` param`` in ND plans.
+
+    Parameters
+    ----------
+    detectors : iterable
+        devices to read
+    step : dict
+        mapping motors to positions in this step
+    pos_cache : dict
+        mapping motors to their last-set positions
+    """
+    motors = step.keys()
+    yield from move_per_step(step, pos_cache)
+    yield from bps.mv(Shutter_control, 1)
+    yield from trigger_and_read(list(detectors) + list(motors))
+    yield from bps.sleep(Shutter_open_time.value)
