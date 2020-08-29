@@ -249,3 +249,5 @@ Shutter_open_time   = EpicsSignal('XF:07IDB-CT{DIODE-MTO:1}OutWidthSet:2-SP',
                            name = 'RSoXS Shutter Opening Time (ms)', kind='normal')
 Shutter_trigger   = EpicsSignal('XF:07IDB-CT{DIODE-MTO:1}Trigger:PV-Cmd',
                            name = 'RSoXS Shutter Opening Time (ms)', kind='normal')
+Light_control   = EpicsSignal('XF:07IDB-CT{DIODE-Local:1}OutPt05:Data-Sel',
+                           name = 'RSoXS Light Toggle', kind='normal')

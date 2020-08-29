@@ -32,21 +32,20 @@ def spiralsearch_all(barin=[],diameter=.5, stepsize=.2):
 
 
 def map_bar_from_spirals(bar,spiralnums,barpos):
-	
-	for i,pos in enumerate(barpos):
-		scan = db[spiralnums[i]]
-		data = scan.table()
-		print("Sample: " + bar[pos]['sample_name'])
-		print("Scan id: "+ spiralnums[i])
-		print('Enter good point number from spiral scan or anything non-numeric to skip:')
-		good_point = input()
-		if isnumeric(good_point):
-			sam_x = data[good_point]['RSoXS Sample Outboard-Inboard']
-			sam_y = data[good_point]['RSoXS Sample Up-Down']
-			bar[pos]['location'][0]['position'] = sam_x
-			bar[pos]['location'][1]['position'] = sam_y
-		else:
-			print('Non-numeric, not touching this sample')
+    for i,pos in enumerate(barpos):
+        scan = db[spiralnums[i]]
+        data = scan.table()
+        print("Sample: " + bar[pos]['sample_name'])
+        print("Scan id: "+ spiralnums[i])
+        print("Enter good point number from spiral scan or anything non-numeric to skip:")
+        good_point = input()
+        if isnumeric(good_point):
+            sam_x = data[good_point]['RSoXS Sample Outboard-Inboard']
+            sam_y = data[good_point]['RSoXS Sample Up-Down']
+            bar[pos]['location'][0]['position'] = sam_x
+            bar[pos]['location'][1]['position'] = sam_y
+        else:
+            print('Non-numeric, not touching this sample')
 
 
 

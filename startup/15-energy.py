@@ -35,7 +35,7 @@ class Monochromator(PVPositioner):
     gratingtype = Cpt(EpicsSignal, 'GrtX}Mtr_TYPE_MON', string=True, write_pv='GrtX}Mtr_TYPE_SP',
                       name="Mono Grating Type", kind='normal')
 
-    gratingtype_proc = Cpt(EpicsSignal, 'GrtX}Mtr_DCPL_CALC.PROC',name="Mono Grating Type_proc", kind='normal')
+    gratingtype_proc = Cpt(EpicsSignal, 'GrtX}Mtr_DCPL_CALC.PROC',name="Mono Grating Type_proc", kind='omitted')
     mirror2type = Cpt(EpicsSignal, 'MirX}Mtr_TYPE_MON', write_pv='MirX}Mtr_TYPE_SP', name="Mono Mirror Type",
                       kind='normal')
     gratingx = Cpt(prettymotor, 'GrtX}Mtr', name="Mono Grating X motor",
