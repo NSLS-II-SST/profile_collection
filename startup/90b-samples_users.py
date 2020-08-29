@@ -462,7 +462,7 @@ def run_bar(bar,sortby=['p','c','a','s'],dryrun=0,rev=[False,False,False,False],
                             sample_project,                 #1
                             a['configuration'],             #2
                             a['plan_name'],                 #3
-                            avg_scan_time(a['plan_name']),  #4
+                            avg_scan_time(a['plan_name'],1),  #4
                             sample,                         #5
                             a,                              #6
                             samp_num,                       #7
@@ -497,7 +497,7 @@ def run_bar(bar,sortby=['p','c','a','s'],dryrun=0,rev=[False,False,False,False],
         boxed_text('Dry Run',text,'lightblue',width=120,shrink=True)
     else:
         for i,step in enumerate(listout):
-            time_remaining = sum([avg_scan_time(row[3]) for row in listout[i:]])
+            time_remaining = sum([avg_scan_time(row[3],1) for row in listout[i:]])
             this_step_time = avg_scan_time(step[3])
             boxed_text('Scan Status','\n\nStarting scan {} out of {}'.format(colored(f'#{i+1}','blue'),len(listout))+
                                      '\n{} which should take {} minutes\n'.format(colored(step[3],'blue'),

@@ -17,7 +17,7 @@ def full_Carbon_NEXAFS(sigs=[],
 
     normal scan takes ~ 7 minutes to complete
     '''
-    enscan_type = 'full_carbon_NEXAFS'
+    enscan_type = 'full_Carbon_NEXAFS'
     sample()
     if len(read_input("Starting a Carbon NEXAFS scan hit enter in the next 3 seconds to abort"
                       "\nYou remembered to hook up the shutter, right?", "abort", "", 3)) > 0:
@@ -31,6 +31,38 @@ def full_Carbon_NEXAFS(sigs=[],
     energies = np.append(energies,np.arange(292,310,.25))
     energies = np.append(energies,np.arange(310,320,1))
     energies = np.append(energies,np.arange(320,350,1))
+    times = energies.copy()
+
+    # Define exposures times for different energy ranges
+    # use these energies and exposure times to scan energy and record detectors and signals
+
+
+    yield from NEXAFS_scan_core(sigs, dets, energy, energies,enscan_type=enscan_type,
+                                openshutter=True,diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,open_each_step=open_each_step)
+
+def full_SulfurL_NEXAFS(sigs=[],
+                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en,pol=100,diode_range=7,m3_pitch=7.94,
+                       open_each_step=True):
+    '''
+    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
+
+
+    :param sigs: which other signals to use
+    :param dets: which detector to use
+    :param energy: what energy motor to scan
+    :return: perform scan
+
+    normal scan takes ~ 7 minutes to complete
+    '''
+    enscan_type = 'full_SulfurL_NEXAFS'
+    sample()
+    if len(read_input("Starting a Sulfur L edge NEXAFS scan hit enter in the next 3 seconds to abort"
+                      "\nYou remembered to hook up the shutter, right?", "abort", "", 3)) > 0:
+        return
+
+
+    # create a list of energies
+    energies = np.arange(180,225,.5)
     times = energies.copy()
 
     # Define exposures times for different energy ranges
