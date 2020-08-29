@@ -160,4 +160,4 @@ def one_shuttered_step(detectors, step, pos_cache):
     yield from move_per_step(step, pos_cache)
     yield from bps.mv(Shutter_trigger, 1)
     yield from trigger_and_read(list(detectors) + list(motors))
-    yield from bps.sleep(Shutter_open_time.get())
+    yield from bps.sleep(Shutter_open_time.get()/1000)
