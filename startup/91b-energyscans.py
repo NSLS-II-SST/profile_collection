@@ -712,7 +712,7 @@ def Si_SAXS(exp_time=1):
 #
 
 
-def joe_scan_verylowenergy(multiple=1,sigs=[],
+def survey_scan_verylowenergy(multiple=1,sigs=[],
                         dets=[saxs_det], energy=en,pol=100,diode_range=7,m3_pitch=7.93):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
@@ -727,7 +727,7 @@ def joe_scan_verylowenergy(multiple=1,sigs=[],
 
     normal scan takes ~ 18 minutes to complete
     '''
-    enscan_type = 'joe_scan_verylowenergy'
+    enscan_type = 'survey_scan_verylowenergy'
     sample()
     if len(read_input("Starting a low energy survey scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
@@ -745,7 +745,7 @@ def joe_scan_verylowenergy(multiple=1,sigs=[],
 
 
 
-def joe_scan_lowenergy(multiple=1,sigs=[],
+def survey_scan_lowenergy(multiple=1,sigs=[],
                         dets=[saxs_det], energy=en,pol=100,diode_range=7,m3_pitch=7.91):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
@@ -760,7 +760,7 @@ def joe_scan_lowenergy(multiple=1,sigs=[],
 
     normal scan takes ~ 18 minutes to complete
     '''
-    enscan_type = 'joe_scan_lowenergy'
+    enscan_type = 'survey_scan_lowenergy'
     sample()
     if len(read_input("Starting a Low energy survey scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
@@ -778,7 +778,7 @@ def joe_scan_lowenergy(multiple=1,sigs=[],
 
 
 
-def joe_scan_highenergy(multiple=1,sigs=[],
+def survey_scan_highenergy(multiple=1,sigs=[],
                         dets=[saxs_det], energy=en,pol=100,diode_range=7,m3_pitch=7.89):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
@@ -793,7 +793,7 @@ def joe_scan_highenergy(multiple=1,sigs=[],
 
     normal scan takes ~ 18 minutes to complete
     '''
-    enscan_type = 'joe_scan_highenergy'
+    enscan_type = 'survey_scan_highenergy'
     sample()
     if len(read_input("Starting a High energy survey scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
@@ -810,7 +810,7 @@ def joe_scan_highenergy(multiple=1,sigs=[],
                             diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
 
 
-def joe_scan_veryhighenergy(multiple=1,sigs=[],
+def survey_scan_veryhighenergy(multiple=1,sigs=[],
                         dets=[saxs_det], energy=en,pol=100,diode_range=7,m3_pitch=7.89):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
@@ -825,7 +825,7 @@ def joe_scan_veryhighenergy(multiple=1,sigs=[],
 
     normal scan takes ~ 18 minutes to complete
     '''
-    enscan_type = 'joe_scan_veryhighenergy'
+    enscan_type = 'survey_scan_veryhighenergy'
     sample()
     if len(read_input("Starting a Very High energy survey scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return

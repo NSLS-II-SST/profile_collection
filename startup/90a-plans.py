@@ -323,22 +323,6 @@ def do_2020_eputables3():
 
 
 
-def grating_to_250():
-    yield from bps.abs_set(mono_en.gratingtype, 2,wait=False)
-    yield from bps.abs_set(mono_en.gratingtype_proc, 1,wait=True)
-    yield from bps.sleep(60)
-    yield from bps.mv(mirror2.user_offset, 8.1388)
-    yield from bps.mv(grating.user_offset, 7.308-.031725)
-    yield from bps.mv(mono_en.cff, 1.385)
-
-def grating_to_1200():
-    yield from bps.abs_set(mono_en.gratingtype,9,wait=False)
-    yield from bps.abs_set(mono_en.gratingtype_proc, 1,wait=True)
-    yield from bps.sleep(60)
-    yield from bps.mv(mirror2.user_offset,8.1388)
-    yield from bps.mv(grating.user_offset,7.308)
-    yield from bps.mv(mono_en.cff,1.7)
-
 
 def tune_max(
         detectors, signal, motor,

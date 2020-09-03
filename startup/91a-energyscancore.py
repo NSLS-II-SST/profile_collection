@@ -73,18 +73,32 @@ def one_trigger_nd_step(detectors, step, pos_cache):
 
 
 # @dark_frames_enable
-def en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=7.94,diode_range=6,pol=100):
+def en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=7.94,diode_range=6,
+                 pol=100,grating='no change'):
     saxs_det.cam.acquire_time.kind = 'hinted'
     # sw_det.waxs.cam.acquire_time.kind = 'normal'
     yield from bps.abs_set(mir3.Pitch,m3_pitch,wait=True)
     yield from bps.mv(DiodeRange,diode_range)
 
-    # if pol is 1:
-    #     epu_mode.put(0)
-    # else:
-    #     epu_mode.put(2)
-    # yield from bps.sleep(1)
-    # yield from bps.mv(en.polarization,pol)
+    if grating=='1200':
+        print('Moving grating to 1200 l/mm...')
+        if abs(grating.user_offset.get()-7.308) > .1:
+            print('current grating offset is too far from known values, please update the procedure, grating will not move')
+        elif abs(mirror2.user_offset.get()-8.1388) > .1:
+            print('current Mirror 2 offset is too far from known values, please update the procedure, grating will not move')
+        else:
+            yield from grating_to_1200()
+        print('done')
+    elif grating=='250':
+        print('Moving grating to 250 l/mm...')
+        if abs(grating.user_offset.get()-7.308) > .1:
+            print('current grating offset is too far from known values, please update the procedure, grating will not move')
+        elif abs(mirror2.user_offset.get()-8.1388) > .1:
+            print('current Mirror 2 offset is too far from known values, please update the procedure, grating will not move')
+        else:
+            yield from grating_to_250()
+        print('done')
+
     yield from set_polarization(pol)
 
     sigcycler = cycler(energy, energies)
@@ -100,11 +114,12 @@ def en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=
     yield from bp.scan_nd(dets + signals,sigcycler, md={'plan_name':enscan_type})
 
 def NEXAFS_scan_core(signals,dets, energy, energies,enscan_type=None,
-                     openshutter = False,open_each_step=False,m3_pitch=7.94,diode_range=6,pol=100):
+                     openshutter = False,open_each_step=False,m3_pitch=7.94,diode_range=6,pol=100,
+                     exp_time=1,grating='no change'):
 
 
 
-   # yield from bps.abs_set(mir3.Pitch,m3_pitch,wait=True)
+    yield from bps.abs_set(mir3.Pitch,m3_pitch,wait=True)
     yield from bps.mv(DiodeRange,diode_range)
     # if pol is 1:
     #     epu_mode.put(0)
@@ -112,8 +127,28 @@ def NEXAFS_scan_core(signals,dets, energy, energies,enscan_type=None,
     #     epu_mode.put(2)
     # yield from bps.sleep(1)
     # yield from bps.mv(en.polarization,pol)
-    yield from set_polarization(pol)
+    set_exposure(exp_time)
+    if grating=='1200':
+        print('Moving grating to 1200 l/mm...')
+        if abs(grating.user_offset.get()-7.308) > .1:
+            print('current grating offset is too far from known values, please update the procedure, grating will not move')
+        elif abs(mirror2.user_offset.get()-8.1388) > .1:
+            print('current Mirror 2 offset is too far from known values, please update the procedure, grating will not move')
+        else:
+            yield from grating_to_1200()
+        print('done')
+    elif grating=='250':
+        print('Moving grating to 250 l/mm...')
+        if abs(grating.user_offset.get()-7.308) > .1:
+            print('current grating offset is too far from known values, please update the procedure, grating will not move')
+        elif abs(mirror2.user_offset.get()-8.1388) > .1:
+            print('current Mirror 2 offset is too far from known values, please update the procedure, grating will not move')
+        else:
+            yield from grating_to_250()
+        print('done')
+
     print('setting pol')
+    yield from set_polarization(pol)
     en.read;
 
     sigcycler = cycler(energy, energies)
@@ -141,6 +176,96 @@ def NEXAFS_scan_core(signals,dets, energy, energies,enscan_type=None,
                               md={'plan_name':enscan_type})
 
 
+
+
+## HACK HACK
+
+def rd(obj, *, default_value=0):
+    """Reads a single-value non-triggered object
+    This is a helper plan to get the scalar value out of a Device
+    (such as an EpicsMotor or a single EpicsSignal).
+    For devices that have more than one read key the following rules are used:
+    - if exactly 1 field is hinted that value is used
+    - if no fields are hinted and there is exactly 1 value in the
+      reading that value is used
+    - if more than one field is hinted an Exception is raised
+    - if no fields are hinted and there is more than one key in the reading an
+      Exception is raised
+    The devices is not triggered and this plan does not create any Events
+    Parameters
+    ----------
+    obj : Device
+        The device to be read
+    default_value : Any
+        The value to return when not running in a "live" RunEngine.
+        This come ups when ::
+           ret = yield Msg('read', obj)
+           assert ret is None
+        the plan is passed to `list` or some other iterator that
+        repeatedly sends `None` into the plan to advance the
+        generator.
+    Returns
+    -------
+    val : Any or None
+        The "single" value of the device
+    """
+    hints = getattr(obj, 'hints', {}).get("fields", [])
+    if len(hints) > 1:
+        msg = (
+            f"Your object {obj} ({obj.name}.{getattr(obj, 'dotted_name', '')}) "
+            f"has {len(hints)} items hinted ({hints}).  We do not know how to "
+            "pick out a single value.  Please adjust the hinting by setting the "
+            "kind of the components of this device or by rd ing one of it's components"
+        )
+        raise ValueError(msg)
+    elif len(hints) == 0:
+        hint = None
+        if hasattr(obj, "read_attrs"):
+            if len(obj.read_attrs) != 1:
+                msg = (
+                    f"Your object {obj} ({obj.name}.{getattr(obj, 'dotted_name', '')}) "
+                    f"and has {len(obj.read_attrs)} read attrs.  We do not know how to "
+                    "pick out a single value.  Please adjust the hinting/read_attrs by "
+                    "setting the kind of the components of this device or by rd ing one "
+                    "of its components"
+                )
+
+                raise ValueError(msg)
+    # len(hints) == 1
+    else:
+        (hint,) = hints
+
+    ret = yield from read(obj)
+
+    # list-ify mode
+    if ret is None:
+        return default_value
+
+    if hint is not None:
+        return ret[hint]["value"]
+
+    # handle the no hint 1 field case
+    try:
+        (data,) = ret.values()
+    except ValueError as er:
+        msg = (
+            f"Your object {obj} ({obj.name}.{getattr(obj, 'dotted_name', '')}) "
+            f"and has {len(ret)} read values.  We do not know how to pick out a "
+            "single value.  Please adjust the hinting/read_attrs by setting the "
+            "kind of the components of this device or by rd ing one of its components"
+        )
+
+        raise ValueError(msg) from er
+    else:
+        return data["value"]
+
+
+# monkey batch bluesky.plans_stubs to fix bug.
+bps.rd = rd
+
+
+
+
 def one_shuttered_step(detectors, step, pos_cache):
     """
     Inner loop of an N-dimensional step scan
@@ -156,8 +281,58 @@ def one_shuttered_step(detectors, step, pos_cache):
     pos_cache : dict
         mapping motors to their last-set positions
     """
-    motors = step.keys()
-    yield from move_per_step(step, pos_cache)
+
+    yield Msg('checkpoint')
+    grp = _short_uid('set') #stolen from move per_step to break out the wait
+    for motor, pos in step.items():
+        if pos == pos_cache[motor]:
+            # This step does not move this motor.
+            continue
+        yield Msg('set', motor, pos, group=grp)
+        pos_cache[motor] = pos
+
+    motors = step.keys() # start the acquisition now
     yield from bps.mv(Shutter_trigger, 1)
     yield from trigger_and_read(list(detectors) + list(motors))
-    yield from bps.sleep(Shutter_open_time.get()/1000)
+    t = yield from bps.rd(Shutter_open_time)
+    yield from bps.sleep(t / 1000)
+    yield Msg('wait', None, group=grp) # now wait for motors, before moving on to next step
+
+
+
+
+def one_shuttered_detector_step(detectors, step, pos_cache):
+    """
+    Inner loop of an N-dimensional step scan
+
+    This is a plan that will not wait for a detector read to be complete
+    before moving to the next step.
+
+    Parameters
+    ----------
+    detectors : iterable
+        devices to read
+    step : dict
+        mapping motors to positions in this step
+    pos_cache : dict
+        mapping motors to their last-set positions
+    """
+    yield from wait(list(motors)) # ensure previous movements / reads have completed
+    yield Msg('checkpoint')
+    grp = _short_uid('set') #stolen from move per_step to break out the wait
+    for motor, pos in step.items():
+        if pos == pos_cache[motor]:
+            # This step does not move this motor.
+            continue
+        yield Msg('set', motor, pos, group=grp)
+        pos_cache[motor] = pos
+
+    motors = step.keys() # start the acquisition now
+
+    yield from wait(list(detectors)) # make sure the detectors have finished the last step
+    yield from trigger(list(detectors) + list(motors))  # trigger the detectors (and motors)
+    yield from read(list(detectors) + list(motors)) # begin a read of the detectors and motors, but don't wait
+    t = yield from bps.rd(Shutter_open_time) # read the shutter time
+    yield from bps.sleep(t / 1000) # wait for the shutter time, it will be closed by now
+    # we could change this to look at the shutterPV state, shutter_control EpicsSignal to go to 0 as well
+    yield Msg('wait', None, group=grp) # now wait for motors, before moving on to next step

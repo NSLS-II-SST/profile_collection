@@ -663,82 +663,18 @@ del pol
 
 
 
-def cff_to_13():
-    energy = en.monoen.setpoint.get()
-    yield from bps.mv(en.monoen.grating.user_offset,-0.3511242679026303,
-                      en.monoen.mirror2.user_offset,-3.4610179934346594,
-                      en.monoen.cff,1.3)
-    yield from bps.mv(en,energy)
+def grating_to_250():
+    yield from bps.abs_set(mono_en.gratingtype, 2,wait=False)
+    yield from bps.abs_set(mono_en.gratingtype_proc, 1,wait=True)
+    yield from bps.sleep(60)
+    yield from bps.mv(mirror2.user_offset, 8.1388)
+    yield from bps.mv(grating.user_offset, 7.308-.031725)
+    yield from bps.mv(mono_en.cff, 1.385)
 
-
-def cff_to_199():
-    energy = en.monoen.setpoint.get()
-    yield from bps.mv(en.monoen.grating.user_offset,-0.098373,
-                      en.monoen.mirror2.user_offset,-3.237992,
-                      en.monoen.cff,1.99)
-    yield from bps.mv(en,energy)
-
-def cff_to_19():
-    energy = en.monoen.setpoint.get()
-    yield from bps.mv(en.monoen.grating.user_offset, -0.3511,
-                      en.monoen.mirror2.user_offset, -3.461,
-                      en.monoen.cff, 1.9)
-    yield from bps.mv(en, energy)
-
-
-cffs = [[1.8,7.94,-0.1667,-0.1295],
-        [1.75,7.915,-0.1847,-0.144],
-        [1.7,7.92,-0.1163,-0.0896],
-        [1.6,7.93,-0.2646,-0.2392],
-        [1.5,7.93,0.021,0.144],
-        [1.4,7.94,0.021,0.144],
-        [1.3,7.95,0.021,0.144]]
-
-
-def cffscan(cffs):
-    for [cff, m3p, goff, m2off] in cffs:
-        mir3.Pitch.put(m3p)
-        RE(bps.mv(en.monoen.cff, cff,
-                  en.monoen.grating.user_offset, goff,
-                  en.monoen.mirror2.user_offset, m2off))
-        RE(bp.scan([Izero_Mesh, Beamstop_WAXS], en, 280, 300, 201))
-
-
-def mono_scan(energy = None,width = 20, pnts = 51):
-    if energy is None:
-        energy = en.energy.setpoint.get()
-    yield from bps.mv(en, energy)
-    yield from bp.rel_scan([Izero_Mesh,Beamstop_WAXS],mono_en,-width/2,width/2,pnts)
-
-
-def correct_mono(calibrated_eV,apply=False,current_eV=None, k=1200):
-    '''
-
-    :param calibrated_eV:  This is the "real" energy, what you want the readout to be
-    :param apply:          Whether to apply the correction or not
-    :param current_eV:     if None, the current value for energy will be set to the calibrated value
-                           if not None, the value entered here will be set to the calibrated value
-    :param k:              the grating line spacing
-
-    :return:
-    '''
-    if current_eV is None:
-        current_eV = en.energy.setpoint.get()
-    cff = en.monoen.cff.get()
-    [mirror_cur, grating_cur] = get_mirror_grating_angles(current_eV, cff, 1, k)
-    [mirror_cal, grating_cal] = get_mirror_grating_angles(calibrated_eV, cff, 1, k)
-    d_mir = mirror_cur-mirror_cal
-    d_grat = grating_cur-grating_cal
-
-
-    grat_off = mono_en.grating.user_offset.get()
-    mir_off = mono_en.mirror2.user_offset.get()
-
-
-    print(f'grating offset is {d_grat} from ideal, mirror offset is {d_mir} from ideal'
-          f'\nGrating offset will be changed from {grat_off} to {grat_off + d_grat} and '
-          f'\nMirror2 offset will be changed from {mir_off} to {mir_off + d_mir}')
-    if apply:
-        yield from bps.amv(mono_en.grating.user_offset, grat_off + d_grat)
-        yield from bps.mv(mono_en.mirror2.user_offset, mir_off + d_mir)
-
+def grating_to_1200():
+    yield from bps.abs_set(mono_en.gratingtype,9,wait=False)
+    yield from bps.abs_set(mono_en.gratingtype_proc, 1,wait=True)
+    yield from bps.sleep(60)
+    yield from bps.mv(mirror2.user_offset,8.1388)
+    yield from bps.mv(grating.user_offset,7.308)
+    yield from bps.mv(mono_en.cff,1.7)
