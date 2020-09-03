@@ -299,40 +299,146 @@ def one_shuttered_step(detectors, step, pos_cache):
     yield Msg('wait', None, group=grp) # now wait for motors, before moving on to next step
 
 
-
-
-def one_shuttered_detector_step(detectors, step, pos_cache):
+def scan_eliot(detectors, cycler, shutter_sig,*, md=None):
     """
-    Inner loop of an N-dimensional step scan
-
-    This is a plan that will not wait for a detector read to be complete
-    before moving to the next step.
+    Scan over an arbitrary N-dimensional trajectory. begin movement as soon as detection ends
+    wait for shutter to close, not for detector readout
+    also, do not wait for motor movement
 
     Parameters
     ----------
-    detectors : iterable
-        devices to read
-    step : dict
-        mapping motors to positions in this step
-    pos_cache : dict
-        mapping motors to their last-set positions
+    detectors : list
+    cycler : Cycler
+        list of dictionaries mapping motors to positions
+    shutter_sig : Signal to wait for it to go to 0 before ending step
+        this signals the end of photons, not the end of the detector trigger
+        it is safe to move to the next step once this signal is 0
+    ***per_step : not used here, all is hard coded in
+    md : dict, optional
+        metadata
+
     """
-    yield from wait(list(motors)) # ensure previous movements / reads have completed
-    yield Msg('checkpoint')
-    grp = _short_uid('set') #stolen from move per_step to break out the wait
-    for motor, pos in step.items():
-        if pos == pos_cache[motor]:
-            # This step does not move this motor.
-            continue
-        yield Msg('set', motor, pos, group=grp)
-        pos_cache[motor] = pos
+    _md = {'detectors': [det.name for det in detectors],
+           'motors': [motor.name for motor in cycler.keys],
+           'num_points': len(cycler),
+           'num_intervals': len(cycler) - 1,
+           'plan_args': {'detectors': list(map(repr, detectors)),
+                         'cycler': repr(cycler)},
+           'plan_name': 'scan_eliot',
+           'hints': {},
+           }
+    _md.update(md or {})
+    try:
+        dimensions = [(motor.hints['fields'], 'primary')
+                      for motor in cycler.keys]
+    except (AttributeError, KeyError):
+        # Not all motors provide a 'fields' hint, so we have to skip it.
+        pass
+    else:
+        _md['hints'].setdefault('dimensions', dimensions)
 
-    motors = step.keys() # start the acquisition now
+    pos_cache = defaultdict(lambda: None)  # where last position is stashed
+    cycler = utils.merge_cycler(cycler)
+    motors = list(cycler.keys)
 
-    yield from wait(list(detectors)) # make sure the detectors have finished the last step
-    yield from trigger(list(detectors) + list(motors))  # trigger the detectors (and motors)
-    yield from read(list(detectors) + list(motors)) # begin a read of the detectors and motors, but don't wait
-    t = yield from bps.rd(Shutter_open_time) # read the shutter time
-    yield from bps.sleep(t / 1000) # wait for the shutter time, it will be closed by now
-    # we could change this to look at the shutterPV state, shutter_control EpicsSignal to go to 0 as well
-    yield Msg('wait', None, group=grp) # now wait for motors, before moving on to next step
+    @bpp.stage_decorator(list(detectors) + motors)
+    @bpp.run_decorator(md=_md)
+    def inner_scan_eliot():
+        # I'm not sure about this next line, it is in the begining of the trigger and read which I've
+        # broken out into this code here
+        devices = separate_devices(list(detectors) + motors)  # remove redundant entries
+
+
+        # go to first motor position
+        yield Msg('checkpoint')
+        motorgrp = _short_uid('set')  # stolen from move per_step to break out the wait
+        for motor, pos in list(cycler)[0].items():
+            if pos == pos_cache[motor]:
+                # This step does not move this motor.
+                continue
+            yield Msg('set', motor, pos, group=motorgrp)
+            pos_cache[motor] = pos
+        # wait for motors this time
+        yield Msg('wait', None, group=motorgrp)  # now wait for motors, before moving on to next step
+
+
+        # trigger detectors
+        detgrp = _short_uid('trigger')
+        no_wait = True
+        for obj in devices:
+            if hasattr(obj, 'trigger'):
+                no_wait = False
+                yield from trigger(obj, group=detgrp)
+
+
+        # step through the list
+        for step in list(cycler): # this is repeating the first step, I think that's alright?
+            # wait for last motor movement to end
+            yield Msg('wait', None, group=motorgrp) # now wait for motors, before moving on to next step
+
+
+            # move to next position - do not wait
+            yield Msg('checkpoint')
+            motorgrp = _short_uid('set')  # stolen from move per_step to break out the wait
+            for motor, pos in step.items():
+                if pos == pos_cache[motor]:
+                    # This step does not move this motor.
+                    continue
+                yield Msg('set', motor, pos, group=motorgrp)
+                pos_cache[motor] = pos
+
+            # wait for detector to finish
+            if not no_wait:
+                yield from wait(group=detgrp)
+
+            # not sure what this line does:
+            yield from create(name)
+
+            #not sure if this is used anywhere?
+            ret = {}  # collect and return readings to give plan access to them
+
+            # read detectors
+            for obj in devices:
+                reading = (yield from read(obj))
+                if reading is not None:
+                    ret.update(reading)
+            yield from save()
+            # Eliot question: is this saving ret?  how do I make sure that's happening
+
+            #trigger next detector step
+            detgrp = _short_uid('trigger')
+            no_wait = True
+            for obj in devices:
+                if hasattr(obj, 'trigger'):
+                    no_wait = False
+                    yield from trigger(obj, group=detgrp)
+
+            # wait for shutter to close
+            # how do I do this? I have Shutter_Control, which is an EpicsSignal, I want to wait for it to go to 0
+            # kind of weird to hard code this - maybe make it a seperate input?
+
+
+
+
+        #wait for detectors to finish the final time
+
+        if not no_wait:
+            yield from wait(group=detgrp)
+
+        #read detectors the final time
+        yield from create(name)
+        ret = {}  # collect and return readings to give plan access to them
+        for obj in devices:
+            reading = (yield from read(obj))
+            if reading is not None:
+                ret.update(reading)
+        yield from save()
+        # wait for the final motor movement
+        yield Msg('wait', None, group=motorgrp)
+
+        # should I move to the starting position, is that done automatically?
+
+
+    return (yield from inner_scan_eliot())
+
+
