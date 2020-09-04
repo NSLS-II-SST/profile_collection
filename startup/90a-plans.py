@@ -15,8 +15,7 @@ run_report(__file__)
 
 def set_exposure(exposure):
     if exposure > 0.001 and exposure < 1000 :
-        saxs_det.set_exposure(exposure)
-        waxs_det.set_exposure(exposure)
+        sw_det.set_exposure(exposure)
     else:
         print('Invalid time, exposure time not set')
 
@@ -42,7 +41,7 @@ def binning(line):
     try:
         bins = int(line)
     except:
-        boxed_text('Pixel Binning',saxs_det.binning(),'lightpurple',shrink=True)
+        boxed_text('Pixel Binning',sw_det.binning(),'lightpurple',shrink=True)
     else:
         if bins > 0 and bins < 100:
             saxs_det.set_binning(bins,bins)

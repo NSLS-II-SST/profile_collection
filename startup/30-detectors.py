@@ -92,6 +92,9 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
         self.cam.acquire_time.set(secs)
         Shutter_open_time.set(secs*1000)
 
+    def set_exptime_detonly(self,secs):
+        self.cam.acquire_time.set(secs)
+
     def exptime(self):
         return ("{} has an exposure time of {} seconds".format(
             colored(self.name,'lightblue'),
@@ -184,8 +187,9 @@ class SyncedDetectors(Device):
         yield from self.waxs.collect_asset_docs(*args, **kwargs)
 
     def set_exposure(self,seconds):
-        self.waxs.set_exptime(seconds)
-        self.saxs.set_exptime(seconds)
+        self.waxs.set_exptime_detonly(seconds)
+        self.saxs.set_exptime_detonly(seconds)
+        Shutter_open_time.set(secs*1000)
         self.waxs.trans1.type.put(1)
         self.saxs.trans1.type.put(3)
 
