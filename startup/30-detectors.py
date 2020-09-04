@@ -189,7 +189,7 @@ class SyncedDetectors(Device):
     def set_exposure(self,seconds):
         self.waxs.set_exptime_detonly(seconds)
         self.saxs.set_exptime_detonly(seconds)
-        Shutter_open_time.set(secs*1000)
+        Shutter_open_time.set(seconds*1000)
         self.waxs.trans1.type.put(1)
         self.saxs.trans1.type.put(3)
 
