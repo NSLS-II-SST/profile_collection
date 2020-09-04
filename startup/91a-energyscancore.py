@@ -260,11 +260,16 @@ def rd(obj, *, default_value=0):
         return data["value"]
 
 
+
+
+
+
+from cycler import cycler
+from bluesky.plan_stubs.utils import (Msg, short_uid as _short_uid)
+import bluesky.plan_stubs.utils as utils
+from bluesky.plan_stubs import trigger_and_read
 # monkey batch bluesky.plans_stubs to fix bug.
 bps.rd = rd
-
-
-
 
 def one_shuttered_step(detectors, step, pos_cache):
     """
@@ -299,18 +304,24 @@ def one_shuttered_step(detectors, step, pos_cache):
     yield Msg('wait', None, group=grp) # now wait for motors, before moving on to next step
 
 
-def scan_eliot(detectors, cycler, shutter_sig,*, md=None):
+def scan_eliot(detectors, cycler, exp_time,*, md=None):
     """
-    Scan over an arbitrary N-dimensional trajectory. begin movement as soon as detection ends
-    wait for shutter to close, not for detector readout
-    also, do not wait for motor movement
+    Scan over an arbitrary N-dimensional trajectory.
+    1.) begin movement as soon as photon part of detection ends
+            wait for shutter to close, not for detector readout
+    2.) do not wait for motor movement to finish before beginnning detection step
+
+    NOTE this may result in small smearing of data by one point backwards,
+        but this is usually worth it for the speed up
 
     Parameters
     ----------
     detectors : list
     cycler : Cycler
         list of dictionaries mapping motors to positions
-    shutter_sig : Signal to wait for it to go to 0 before ending step
+    exp_time : EpicsSignal
+        signal to read to get the exposure time (in ms)
+    **shutter_sig : Signal to wait for it to go to 0 before ending step
         this signals the end of photons, not the end of the detector trigger
         it is safe to move to the next step once this signal is 0
     ***per_step : not used here, all is hard coded in
@@ -344,10 +355,8 @@ def scan_eliot(detectors, cycler, shutter_sig,*, md=None):
     @bpp.stage_decorator(list(detectors) + motors)
     @bpp.run_decorator(md=_md)
     def inner_scan_eliot():
-        # I'm not sure about this next line, it is in the begining of the trigger and read which I've
-        # broken out into this code here
+        # this makes the reading step easier (usually done by trigger_and_read)
         devices = separate_devices(list(detectors) + motors)  # remove redundant entries
-
 
         # go to first motor position
         yield Msg('checkpoint')
@@ -361,7 +370,6 @@ def scan_eliot(detectors, cycler, shutter_sig,*, md=None):
         # wait for motors this time
         yield Msg('wait', None, group=motorgrp)  # now wait for motors, before moving on to next step
 
-
         # trigger detectors
         detgrp = _short_uid('trigger')
         no_wait = True
@@ -370,12 +378,11 @@ def scan_eliot(detectors, cycler, shutter_sig,*, md=None):
                 no_wait = False
                 yield from trigger(obj, group=detgrp)
 
-
         # step through the list
-        for step in list(cycler): # this is repeating the first step, I think that's alright?
+        for step in list(cycler): # this is repeating the first step
+
             # wait for last motor movement to end
             yield Msg('wait', None, group=motorgrp) # now wait for motors, before moving on to next step
-
 
             # move to next position - do not wait
             yield Msg('checkpoint')
@@ -391,19 +398,11 @@ def scan_eliot(detectors, cycler, shutter_sig,*, md=None):
             if not no_wait:
                 yield from wait(group=detgrp)
 
-            # not sure what this line does:
-            yield from create(name)
-
-            #not sure if this is used anywhere?
-            ret = {}  # collect and return readings to give plan access to them
-
             # read detectors
+            yield from create(name)
             for obj in devices:
-                reading = (yield from read(obj))
-                if reading is not None:
-                    ret.update(reading)
+                yield from read(obj)
             yield from save()
-            # Eliot question: is this saving ret?  how do I make sure that's happening
 
             #trigger next detector step
             detgrp = _short_uid('trigger')
@@ -415,29 +414,24 @@ def scan_eliot(detectors, cycler, shutter_sig,*, md=None):
 
             # wait for shutter to close
             # how do I do this? I have Shutter_Control, which is an EpicsSignal, I want to wait for it to go to 0
-            # kind of weird to hard code this - maybe make it a seperate input?
-
-
-
+            # for now, I will just wait for the exposure time
+            # NOTE: the darkframes preprocessor will sometimes delay this signifigantly, I would like to
+            # find a way to notice that and wait more time accordingly
+            t = yield from bps.rd(exp_time)
+            yield from bps.sleep(t / 1000)
 
         #wait for detectors to finish the final time
-
         if not no_wait:
             yield from wait(group=detgrp)
 
         #read detectors the final time
         yield from create(name)
-        ret = {}  # collect and return readings to give plan access to them
         for obj in devices:
-            reading = (yield from read(obj))
-            if reading is not None:
-                ret.update(reading)
+            yield from read(obj)
         yield from save()
+
         # wait for the final motor movement
         yield Msg('wait', None, group=motorgrp)
-
-        # should I move to the starting position, is that done automatically?
-
 
     return (yield from inner_scan_eliot())
 
