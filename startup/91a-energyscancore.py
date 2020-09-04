@@ -265,8 +265,8 @@ def rd(obj, *, default_value=0):
 
 
 from cycler import cycler
-from bluesky.plan_stubs.utils import (Msg, short_uid as _short_uid)
-import bluesky.plan_stubs.utils as utils
+from bluesky.utils import (Msg, short_uid as _short_uid)
+import bluesky.utils as utils
 from bluesky.plan_stubs import trigger_and_read
 # monkey batch bluesky.plans_stubs to fix bug.
 bps.rd = rd
