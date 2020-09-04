@@ -425,7 +425,7 @@ def scan_eliot(detectors, cycler, exp_time,*, md=None):
             yield from wait(group=detgrp)
 
         #read detectors the final time
-        yield from create(name)
+        yield from create('primary')
         for obj in devices:
             yield from read(obj)
         yield from save()
