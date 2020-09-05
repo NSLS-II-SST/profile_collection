@@ -181,9 +181,10 @@ def stitch_sample(images, step_size, y_off, from_image=None,flip_file=True):
     else:
         pixel_step = int(step_size * (1760) / 25)
         pixel_overlap = 2464 - pixel_step
-        result = images[0]
+        result = images[0][0]
         i = 0
-        for image in images[1:]:
+        for imageb in images[1:]:
+            image = imageb[0]
             i += 1
             result = np.concatenate((image[(y_off * i):, :], result[:-(y_off), pixel_overlap:]), axis=1)
         #result = np.flipud(result)
