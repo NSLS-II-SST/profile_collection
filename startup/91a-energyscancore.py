@@ -1,11 +1,14 @@
-run_report(__file__)
-
 import bluesky.plans as bp
 import bluesky.plan_stubs as bps
-from cycler import cycler
 from bluesky.plan_stubs import checkpoint, abs_set, sleep, trigger, read, wait, create, save
 from bluesky.preprocessors import rewindable_wrapper
 from bluesky.utils import short_uid, separate_devices, all_safe_rewind
+from collections import defaultdict
+from bluesky import preprocessors as bpp
+
+
+run_report(__file__)
+
 
 SLEEP_FOR_SHUTTER = 1
 
