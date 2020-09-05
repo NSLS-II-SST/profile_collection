@@ -380,11 +380,11 @@ def scan_eliot(detectors, cycler, exp_time,*, md=None):
 
         # step through the list
         for step in list(cycler): # this is repeating the first step
+            # wait for motor movement to end
+            yield Msg('wait', None, group=motorgrp)  # now wait for motors, before moving on to next step
+            # do we need to wait at all? - I guess the previous set might be active?
 
-            # wait for last motor movement to end
-            yield Msg('wait', None, group=motorgrp) # now wait for motors, before moving on to next step
-
-            # move to next position - do not wait
+            # move to next position - detectors might still be triggering at this point
             yield Msg('checkpoint')
             motorgrp = _short_uid('set')  # stolen from move per_step to break out the wait
             for motor, pos in step.items():
@@ -394,7 +394,7 @@ def scan_eliot(detectors, cycler, exp_time,*, md=None):
                 yield Msg('set', motor, pos, group=motorgrp)
                 pos_cache[motor] = pos
 
-            # wait for detector to finish
+            # wait for detector trigger from last step to finish
             if not no_wait:
                 yield from wait(group=detgrp)
 
@@ -407,18 +407,23 @@ def scan_eliot(detectors, cycler, exp_time,*, md=None):
             #trigger next detector step
             detgrp = _short_uid('trigger')
             no_wait = True
-            for obj in devices:
+            for obj in list(detectors): # changing this from devices, I don't want to trigger motors while they
+                        # may still be in a set() - I will just read them without a trigger
                 if hasattr(obj, 'trigger'):
                     no_wait = False
                     yield from trigger(obj, group=detgrp)
 
-            # wait for shutter to close
-            # how do I do this? I have Shutter_Control, which is an EpicsSignal, I want to wait for it to go to 0
-            # for now, I will just wait for the exposure time
-            # NOTE: the darkframes preprocessor will sometimes delay this signifigantly, I would like to
-            # find a way to notice that and wait more time accordingly
+            # wait enough time for the shutter to close
+
             t = yield from bps.rd(exp_time)
             yield from bps.sleep(t / 1000)
+
+            # how do I wait for an EpicsSignal instead?
+            # for now, I will just wait for the exposure time
+
+            # NOTE: the darkframes preprocessor will sometimes delay this significantly, I would like to
+            # find a way to notice that and wait more time accordingly
+
 
         #wait for detectors to finish the final time
         if not no_wait:
