@@ -300,8 +300,8 @@ def one_shuttered_step(detectors, step, pos_cache):
         pos_cache[motor] = pos
 
     motors = step.keys() # start the acquisition now
-    yield from bps.mv(Shutter_trigger, 1)
-    yield from trigger_and_read(list(detectors) + list(motors))
+    #yield from bps.mv(Shutter_trigger, 1)
+    yield from trigger_and_read(list(detectors) + list(motors) + [Shutter_trigger])
     t = yield from bps.rd(Shutter_open_time)
     yield from bps.sleep((t / 1000)  + 300)
     yield Msg('wait', None, group=grp) # now wait for motors, before moving on to next step
