@@ -686,3 +686,6 @@ def grating_to_1200():
     yield from bps.mv(grating.user_offset,7.308)
     yield from bps.mv(mono_en.cff,1.7)
     yield from bps.mv(mono_en,270)
+
+
+sd.monitors.extend([mono_en])
