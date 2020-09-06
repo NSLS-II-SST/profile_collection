@@ -15,7 +15,7 @@ run_report(__file__)
 
 def set_exposure(exposure):
     if exposure > 0.001 and exposure < 1000 :
-        sw_det.set_exposure(exposure)
+        saxs_det.set_exptime(exposure)
     else:
         print('Invalid time, exposure time not set')
 
