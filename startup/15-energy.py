@@ -670,6 +670,7 @@ def grating_to_250():
     yield from bps.mv(mirror2.user_offset, 8.1388)
     yield from bps.mv(grating.user_offset, 7.308-.031725)
     yield from bps.mv(mono_en.cff, 1.385)
+    yield from bps.mv(mono_en,270)
 
 def grating_to_1200():
     yield from bps.abs_set(mono_en.gratingtype,9,wait=False)
@@ -678,3 +679,4 @@ def grating_to_1200():
     yield from bps.mv(mirror2.user_offset,8.1388)
     yield from bps.mv(grating.user_offset,7.308)
     yield from bps.mv(mono_en.cff,1.7)
+    yield from bps.mv(mono_en,270)
