@@ -671,7 +671,7 @@ def grating_to_250():
     yield from bps.abs_set(mono_en.gratingtype_proc, 1,wait=True)
     yield from bps.sleep(60)
     yield from bps.mv(mirror2.user_offset, 8.1388)
-    yield from bps.mv(grating.user_offset, 7.308-.031725)
+    yield from bps.mv(grating.user_offset, 7.308-.0253)
     yield from bps.mv(mono_en.cff, 1.385)
     yield from bps.mv(mono_en,270)
 
