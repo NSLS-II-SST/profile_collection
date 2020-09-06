@@ -664,8 +664,8 @@ del pol
 
 
 def grating_to_250():
-    type = mono_en.gratingtype.get()
-    if type is 2:
+    type =  mono_en.gratingtype.enum_strs.index(mono_en.gratingtype.get())
+    if type == 2:
         return 0 # the grating is already here
     yield from bps.abs_set(mono_en.gratingtype, 2,wait=False)
     yield from bps.abs_set(mono_en.gratingtype_proc, 1,wait=True)
@@ -676,8 +676,8 @@ def grating_to_250():
     yield from bps.mv(mono_en,270)
 
 def grating_to_1200():
-    type = mono_en.gratingtype.get()
-    if type is 9:
+    type =  mono_en.gratingtype.enum_strs.index(mono_en.gratingtype.get())
+    if type == 9:
         return 0 # the grating is already here
     yield from bps.abs_set(mono_en.gratingtype,9,wait=False)
     yield from bps.abs_set(mono_en.gratingtype_proc, 1,wait=True)
