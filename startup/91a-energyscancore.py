@@ -303,7 +303,7 @@ def one_shuttered_step(detectors, step, pos_cache):
     yield from bps.mv(Shutter_trigger, 1)
     yield from trigger_and_read(list(detectors) + list(motors))
     t = yield from bps.rd(Shutter_open_time)
-    yield from bps.sleep((t / 1000)  + 0.3)
+    yield from bps.sleep((t / 1000)  + 0.5)
     yield Msg('wait', None, group=grp) # now wait for motors, before moving on to next step
 
 
