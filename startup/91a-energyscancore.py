@@ -133,18 +133,18 @@ def NEXAFS_scan_core(signals,dets, energy, energies,enscan_type=None,
     set_exposure(exp_time)
     if grating=='1200':
         print('Moving grating to 1200 l/mm...')
-        if abs(grating.user_offset.get()-7.308) > .1:
+        if abs(mono_en.grating.user_offset.get()-7.308) > .1:
             print('current grating offset is too far from known values, please update the procedure, grating will not move')
-        elif abs(mirror2.user_offset.get()-8.1388) > .1:
+        elif abs(mono_en.mirror2.user_offset.get()-8.1388) > .1:
             print('current Mirror 2 offset is too far from known values, please update the procedure, grating will not move')
         else:
             yield from grating_to_1200()
         print('done')
     elif grating=='250':
         print('Moving grating to 250 l/mm...')
-        if abs(grating.user_offset.get()-7.308) > .1:
+        if abs(mono_en.grating.user_offset.get()-7.308) > .1:
             print('current grating offset is too far from known values, please update the procedure, grating will not move')
-        elif abs(mirror2.user_offset.get()-8.1388) > .1:
+        elif abs(mono_en.mirror2.user_offset.get()-8.1388) > .1:
             print('current Mirror 2 offset is too far from known values, please update the procedure, grating will not move')
         else:
             yield from grating_to_250()
