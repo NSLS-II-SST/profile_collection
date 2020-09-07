@@ -281,4 +281,4 @@ class SyncedDetectors(Device):
 #
 # sw_det.read_attrs = ['saxs','waxs']
 
-sd.baseline.extend([saxs_det.cam, waxs_det.cam])
+sd.baseline.extend([saxs_det.cam])#, waxs_det.cam])
