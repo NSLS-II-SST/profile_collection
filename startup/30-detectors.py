@@ -157,14 +157,14 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
 
 saxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:1}', name='Small Angle CCD Detector',
                                   read_attrs=['tiff', 'stats1.total'])
-
-
-
-
-waxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:2}', name='Wide Angle CCD Detector',
-                                  read_attrs=['tiff', 'stats1.total'])
-saxs_det.transform_type = 3
-waxs_det.transform_type = 1
+#
+#
+#
+#
+# waxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:2}', name='Wide Angle CCD Detector',
+#                                   read_attrs=['tiff', 'stats1.total'])
+# saxs_det.transform_type = 3
+# waxs_det.transform_type = 1
 
 
 class SyncedDetectors(Device):
@@ -236,25 +236,25 @@ class SyncedDetectors(Device):
     def shutter(self):
         shutter_control.get()
 
-
-sw_det = SyncedDetectors('', name='Synced')
-sw_det.saxs.name = "SAXS"
-sw_det.waxs.name = "WAXS"
-sw_det.saxs.stats1.name = "SAXS ROI1"
-sw_det.waxs.stats1.name = "WAXS ROI1"
-sw_det.saxs.cam.sync.set(1)
-sw_det.waxs.cam.sync.set(1)
-
-#change this to saxs or waxs to record what the shutter state is
-shutter_status_w = sw_det.waxs.cam.sync
-shutter_status_s = saxs_det.cam.sync
-###shutter_status_s = saxs_det.cam.shutter_mode
-###shutter_status_s.name = 'shutter mode saxs'
-sw_det.waxs.cam.acquire_time.name = 'WAXS Exposure'
-sw_det.saxs.cam.acquire_time.name = 'SAXS Exposure'
-sw_det.saxs.transform_type = 3
-sw_det.waxs.transform_type = 1
 #
+# sw_det = SyncedDetectors('', name='Synced')
+# sw_det.saxs.name = "SAXS"
+# sw_det.waxs.name = "WAXS"
+# sw_det.saxs.stats1.name = "SAXS ROI1"
+# sw_det.waxs.stats1.name = "WAXS ROI1"
+# sw_det.saxs.cam.sync.set(1)
+# sw_det.waxs.cam.sync.set(1)
+#
+# #change this to saxs or waxs to record what the shutter state is
+# shutter_status_w = sw_det.waxs.cam.sync
+# shutter_status_s = saxs_det.cam.sync
+# ###shutter_status_s = saxs_det.cam.shutter_mode
+# ###shutter_status_s.name = 'shutter mode saxs'
+# sw_det.waxs.cam.acquire_time.name = 'WAXS Exposure'
+# sw_det.saxs.cam.acquire_time.name = 'SAXS Exposure'
+# sw_det.saxs.transform_type = 3
+# sw_det.waxs.transform_type = 1
+# #
 # for det in [saxs_det, waxs_det,sw_det.waxs,sw_det.saxs]:
 #      det.kind = 'normal'
 #      det.stats1.kind = 'hinted'

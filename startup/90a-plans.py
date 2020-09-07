@@ -170,8 +170,8 @@ dark_frame_preprocessor_saxs = bluesky_darkframes.DarkFramePreprocessor(
 # dark_frames_enable_waxs = make_decorator(dark_frame_preprocessor_waxs)()
 dark_frames_enable_saxs = make_decorator(dark_frame_preprocessor_saxs)()
 # RE.preprocessors.append(dark_frame_preprocessor_synced)
-# RE.preprocessors.append(dark_frame_preprocessor_waxs)
-RE.preprocessors.append(dark_frame_preprocessor_saxs)
+RE.preprocessors.append(dark_frame_preprocessor_waxs)
+# RE.preprocessors.append(dark_frame_preprocessor_saxs)
 
 
 
