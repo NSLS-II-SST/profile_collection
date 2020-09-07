@@ -134,7 +134,7 @@ def dark_plan_saxs():
 #
 
 dark_frame_preprocessor_saxs = bluesky_darkframes.DarkFramePreprocessor(
-    dark_plan=dark_plaaxs,
+    dark_plan=dark_plan_saxs,
     detector=saxs_det,
     max_age=120,
     locked_signals=[saxs_det.cam.acquire_time,
