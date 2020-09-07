@@ -19,8 +19,7 @@ def full_Carbon_NEXAFS(sigs=[],
     '''
     enscan_type = 'full_Carbon_NEXAFS'
     sample()
-    if len(read_input("Starting a Carbon NEXAFS scan hit enter in the next 3 seconds to abort"
-                      "\nYou remembered to hook up the shutter, right?", "abort", "", 3)) > 0:
+    if len(read_input("Starting a Carbon NEXAFS scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
 
 
@@ -58,8 +57,7 @@ def short_Carbon_NEXAFS(sigs=[],
     '''
     enscan_type = 'short_Carbon_NEXAFS'
     sample()
-    if len(read_input("Starting a Carbon NEXAFS scan hit enter in the next 3 seconds to abort"
-                      "\nYou remembered to hook up the shutter, right?", "abort", "", 3)) > 0:
+    if len(read_input("Starting a short Carbon NEXAFS scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
 
 
@@ -98,8 +96,7 @@ def full_SulfurL_NEXAFS(sigs=[],
     '''
     enscan_type = 'full_SulfurL_NEXAFS'
     sample()
-    if len(read_input("Starting a Sulfur L edge NEXAFS scan hit enter in the next 3 seconds to abort"
-                      "\nYou remembered to hook up the shutter, right?", "abort", "", 3)) > 0:
+    if len(read_input("Starting a Sulfur L edge NEXAFS scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
 
 
@@ -131,8 +128,7 @@ def full_Nitrogen_NEXAFS(sigs=[],
     '''
     enscan_type = 'full_Nitrogen_NEXAFS'
     sample()
-    if len(read_input("Starting a Nitrogen NEXAFS scan hit enter in the next 3 seconds to abort"
-                      "\nYou remembered to hook up the shutter, right?", "abort", "", 3)) > 0:
+    if len(read_input("Starting a Nitrogen NEXAFS scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
 
     # create a list of energies
@@ -165,8 +161,7 @@ def full_Fluorine_NEXAFS(sigs=[],
     '''
     enscan_type = 'full_Fluorine_NEXAFS'
     sample()
-    if len(read_input("Starting a Nitrogen NEXAFS scan hit enter in the next 3 seconds to abort"
-                      "\nYou remembered to hook up the shutter, right?", "abort", "", 3)) > 0:
+    if len(read_input("Starting a Fluorine NEXAFS scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
     energies = np.arange(680,720,.25)
@@ -196,8 +191,7 @@ def short_Fluorine_NEXAFS(sigs=[],
     '''
     enscan_type = 'short_Fluorine_NEXAFS'
     sample()
-    if len(read_input("Starting a Nitrogen NEXAFS scan hit enter in the next 3 seconds to abort"
-                      "\nYou remembered to hook up the shutter, right?", "abort", "", 3)) > 0:
+    if len(read_input("Starting a short Fluorine NEXAFS scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
     energies = np.arange(680,720,.5)
@@ -229,8 +223,7 @@ def full_Oxygen_NEXAFS(sigs=[],
     '''
     enscan_type = 'full_Oxygen_NEXAFS'
     sample()
-    if len(read_input("Starting a Oxygen NEXAFS scan hit enter in the next 3 seconds to abort"
-                      "\nYou remembered to hook up the shutter, right?", "abort", "", 3)) > 0:
+    if len(read_input("Starting a Oxygen NEXAFS scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
     energies = np.arange(510,525,1)
@@ -263,8 +256,7 @@ def short_Oxygen_NEXAFS(sigs=[],
     '''
     enscan_type = 'short_Oxygen_NEXAFS'
     sample()
-    if len(read_input("Starting a Oxygen NEXAFS scan hit enter in the next 3 seconds to abort"
-                      "\nYou remembered to hook up the shutter, right?", "abort", "", 3)) > 0:
+    if len(read_input("Starting a short Oxygen NEXAFS scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
     energies = np.arange(510,525,1)
@@ -298,8 +290,7 @@ def full_Al_NEXAFS(sigs=[],
     '''
     enscan_type = 'full_Al_NEXAFS'
     sample()
-    if len(read_input("Starting a Aluminum NEXAFS scan hit enter in the next 3 seconds to abort"
-                      "\nYou remembered to hook up the shutter, right?", "abort", "", 3)) > 0:
+    if len(read_input("Starting an Aluminum NEXAFS scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
 
     # create a list of energies
@@ -333,8 +324,7 @@ def full_Zn_NEXAFS(sigs=[],
     '''
     enscan_type = 'full_Zn_NEXAFS'
     sample()
-    if len(read_input("Starting a Zinc NEXAFS scan hit enter in the next 3 seconds to abort"
-                      "\nYou remembered to hook up the shutter, right?", "abort", "", 3)) > 0:
+    if len(read_input("Starting a Zinc NEXAFS scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
 
     # create a list of energies
