@@ -118,7 +118,7 @@ def en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=
 
 def NEXAFS_scan_core(signals,dets, energy, energies,enscan_type=None,
                      openshutter = False,open_each_step=False,m3_pitch=7.94,diode_range=6,pol=100,
-                     exp_time=1,grating='no change'):
+                     exp_time=1,grating='no change',motorname='None',offset=0):
 
 
 
@@ -149,7 +149,8 @@ def NEXAFS_scan_core(signals,dets, energy, energies,enscan_type=None,
         else:
             yield from grating_to_250()
         print('done')
-
+    if motorname is not 'None':
+        yield from bps.rel_set(eval(motorname),offset,wait=True)
     print('setting pol')
     yield from set_polarization(pol)
     en.read;
