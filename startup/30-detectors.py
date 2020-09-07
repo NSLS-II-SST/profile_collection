@@ -254,31 +254,31 @@ sw_det.waxs.cam.acquire_time.name = 'WAXS Exposure'
 sw_det.saxs.cam.acquire_time.name = 'SAXS Exposure'
 sw_det.saxs.transform_type = 3
 sw_det.waxs.transform_type = 1
-
-for det in [saxs_det, waxs_det,sw_det.waxs,sw_det.saxs]:
-     det.kind = 'normal'
-     det.stats1.kind = 'hinted'
-     det.stats1.total.kind = 'hinted'
-     det.cam.kind = 'normal'
-     det.cam.temperature_actual.kind = 'normal'
-     det.cam.hot_side_temp.kind = 'normal'
-     det.cam.bin_y.kind = 'normal'
-     det.cam.bin_x.kind = 'normal'
-     det.cam.adc_speed.kind = 'normal'
-     det.cam.acquire_time.kind = 'normal'
-     det.cam.model.kind = 'normal'
-     det.cam.trigger_mode.kind = 'normal'
-     det.cam.sync.kind = 'normal'
-     det.cam.shutter_mode.kind = 'normal'
-     det.cam.shutter_open_delay.kind = 'normal'
-     det.cam.shutter_close_delay.kind = 'normal'
-     det.cam.min_x.kind = 'normal'
-     det.cam.temperature.kind = 'normal'
-     det.cam.min_y.kind = 'normal'
-
-
-sw_det.kind = 'hinted'
-
-sw_det.read_attrs = ['saxs','waxs']
+#
+# for det in [saxs_det, waxs_det,sw_det.waxs,sw_det.saxs]:
+#      det.kind = 'normal'
+#      det.stats1.kind = 'hinted'
+#      det.stats1.total.kind = 'hinted'
+#      det.cam.kind = 'normal'
+#      det.cam.temperature_actual.kind = 'normal'
+#      det.cam.hot_side_temp.kind = 'normal'
+#      det.cam.bin_y.kind = 'normal'
+#      det.cam.bin_x.kind = 'normal'
+#      det.cam.adc_speed.kind = 'normal'
+#      det.cam.acquire_time.kind = 'normal'
+#      det.cam.model.kind = 'normal'
+#      det.cam.trigger_mode.kind = 'normal'
+#      det.cam.sync.kind = 'normal'
+#      det.cam.shutter_mode.kind = 'normal'
+#      det.cam.shutter_open_delay.kind = 'normal'
+#      det.cam.shutter_close_delay.kind = 'normal'
+#      det.cam.min_x.kind = 'normal'
+#      det.cam.temperature.kind = 'normal'
+#      det.cam.min_y.kind = 'normal'
+#
+#
+# sw_det.kind = 'hinted'
+#
+# sw_det.read_attrs = ['saxs','waxs']
 
 sd.baseline.extend([saxs_det.cam, waxs_det.cam])
