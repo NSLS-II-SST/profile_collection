@@ -111,7 +111,7 @@ def en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=
 
     shutters = times.copy()
     darkshutters = darktimes.copy()
-    shutters[:] = 2
+    shutters[:] = 1
     darkshutters[:] = 0
 
     times = np.concatenate((darktimes,times))
