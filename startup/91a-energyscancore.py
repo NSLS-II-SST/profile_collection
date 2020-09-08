@@ -120,18 +120,18 @@ def en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=
 
 
 
-    sigcycler = cycler(energy, energies)
+    sigcycler = cycler(Shutter_enable2, shutters)
+    sigcycler += cycler(energy, energies)
   #  yield from bps.mv(saxs_det.cam.acquire_time,times[0])
     sigcycler += cycler(saxs_det.cam.acquire_time, times.copy())
     sigcycler += cycler(Shutter_open_time, times.copy())
-    sigcycler += cycler(Shutter_enable2, shutters)
 
     #sigcycler += cycler(sw_det.waxs.cam.acquire_time, times.copy()) #add extra exposure time for WAXS
 
    # yield from bps.abs_set(en, energies[0], timeout=180, wait=True)
    # for signal in signals:
    #     signal.kind = 'normal'
-   # print(dets)
+   # print(det
     yield from bp.scan_nd(dets + signals,sigcycler, md={'plan_name':enscan_type})
 
 def NEXAFS_scan_core(signals,dets, energy, energies,enscan_type=None,
