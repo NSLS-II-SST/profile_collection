@@ -124,7 +124,7 @@ def en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=
   #  yield from bps.mv(saxs_det.cam.acquire_time,times[0])
     sigcycler += cycler(saxs_det.cam.acquire_time, times.copy())
     sigcycler += cycler(Shutter_open_time, times.copy())
-    sigcycler += cycler(saxs_det.cam.shutter_mode, shutters)
+    sigcycler += cycler(Shutter_enable2, shutters)
 
     #sigcycler += cycler(sw_det.waxs.cam.acquire_time, times.copy()) #add extra exposure time for WAXS
 
