@@ -68,10 +68,6 @@ nslsii.configure_base(
 
 
 
-
-
-from databroker.v0 import Broker
-
 try:
     from bluesky.utils import PersistentDict
 except ImportError:
