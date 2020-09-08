@@ -21,7 +21,7 @@ def set_exposure(exposure):
 
 
 def exposure():
-    return (sw_det.exposure())
+    return (saxs_det.exposure())
 
 
 @register_line_magic
@@ -41,45 +41,45 @@ def binning(line):
     try:
         bins = int(line)
     except:
-        boxed_text('Pixel Binning',sw_det.binning(),'lightpurple',shrink=True)
+        boxed_text('Pixel Binning',saxs_det.binning(),'lightpurple',shrink=True)
     else:
         if bins > 0 and bins < 100:
             saxs_det.set_binning(bins,bins)
-            waxs_det.set_binning(bins,bins)
+            #waxs_det.set_binning(bins,bins)
 del binning
 
 
 @register_line_magic
 def temp(line):
-    boxed_text('Detector cooling',sw_det.cooling_state(),'blue',shrink=True,width=95)
+    boxed_text('Detector cooling',saxs_det.cooling_state(),'blue',shrink=True,width=95)
 del temp
 
 
 @register_line_magic
 def cool(line):
     saxs_det.cooling_on()
-    waxs_det.cooling_on()
+    #waxs_det.cooling_on()
 del cool
 
 
 @register_line_magic
 def warm(line):
     saxs_det.cooling_off()
-    waxs_det.cooling_off()
+    #waxs_det.cooling_off()
 del warm
 
 
 @register_line_magic
 def dark(line):
     saxs_det.shutter_off()
-    waxs_det.shutter_off()
+    #waxs_det.shutter_off()
 del dark
 
 
 @register_line_magic
 def darkoff(line):
     saxs_det.shutter_on()
-    waxs_det.shutter_on()
+    #waxs_det.shutter_on()
 del darkoff
 
 #
@@ -487,10 +487,10 @@ def quicksnap():
     samidsave = RE.md['sample_id']
     RE.md['sample_name'] = 'CCDClear'
     RE.md['sample_id'] = '000'
-    yield from bp.count([sw_det, en.energy], num=2)
+    yield from bp.count([saxs_det, en.energy], num=2)
     RE.md['sample_name'] = samsave
     RE.md['sample_id'] = samidsave
-    sw_det.set_binning(binsave)
+    saxs_det.set_binning(binsave)
 
 
 # @dark_frames_enable
@@ -517,7 +517,7 @@ def snapshot(secs=0, count=1, name=None, energy = None, det= None):
 
 
     if det is None:
-        det = sw_det
+        det = saxs_det
 
     if isinstance(energy, float):
         yield from bps.mv(en,energy)
