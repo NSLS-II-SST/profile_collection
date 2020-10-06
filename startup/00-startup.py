@@ -135,3 +135,12 @@ RE.subscribe(publisher)
 
 logging.getLogger('ophyd').setLevel('WARNING')
 
+import logging
+import bluesky.log
+logger = logging.getLogger('bluesky_darkframes')
+handler = logging.StreamHandler()
+handler.setLevel('DEBUG')
+logger.addHandler(handler)
+logger.getEffectiveLevel()
+logger.setLevel('DEBUG')  # change DEBUG to INFO later on
+
