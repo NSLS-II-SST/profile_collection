@@ -102,6 +102,7 @@ def dark_plan_saxs():
     yield from bps.mv(saxs_det.cam.shutter_mode,0)
     yield from bps.trigger(saxs_det, group='darkframe-trigger')
     yield from bps.wait('darkframe-trigger')
+    print('dark_plan_saxs assets: ',saxs_det.tiff._asset_docs_cache)
     snapshot = bluesky_darkframes.SnapshotDevice(saxs_det)
     yield from bps.mv(saxs_det.cam.shutter_mode,shutterstate)
     return snapshot
