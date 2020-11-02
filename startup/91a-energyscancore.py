@@ -226,8 +226,6 @@ def NEXAFS_fly_scan_core(en_start,en_stop,en_speed,openshutter=False, m3_pitch=7
         else:
             yield from grating_to_250()
         print('done')
-    if motorname is not 'None':
-        yield from bps.rel_set(eval(motorname), offset, wait=True)
     print('setting pol')
     yield from set_polarization(pol)
     en.read;
