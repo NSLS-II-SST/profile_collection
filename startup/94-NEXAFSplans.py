@@ -41,7 +41,7 @@ def full_Carbon_NEXAFS(sigs=[],
                                 open_each_step=open_each_step,exp_time=exp_time,grating=grating,
                                 motorname=motorname,offset=offset)
 
-def fly_Carbon_NEXAFS(speed=.2,pol=100,diode_range=7,m3_pitch=7.92,grating='no change'):
+def fly_Carbon_NEXAFS(speed=.1,pol=100,diode_range=7,m3_pitch=7.92,grating='no change'):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
 
