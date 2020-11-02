@@ -201,7 +201,7 @@ def NEXAFS_scan_core(signals, dets, energy, energies, enscan_type=None,
 
 
 def NEXAFS_fly_scan_core(en_start,en_stop,en_speed,openshutter=False, m3_pitch=7.94, diode_range=6, pol=100,
-                     grating='no change',exp_time=.5):
+                     grating='no change',exp_time=.5,enscan_type=None):
     yield from bps.abs_set(mir3.Pitch, m3_pitch, wait=True)
     yield from bps.mv(DiodeRange, diode_range)
     if grating == '1200':
