@@ -236,12 +236,12 @@ def NEXAFS_fly_scan_core(en_start,en_stop,en_speed,openshutter=False, m3_pitch=7
         yield from bps.mv(Shutter_enable, 0)
         yield from bps.mv(Shutter_control, 1)
         yield from fly_scan_eliot(en_start,en_stop,en_speed,
-                              md={'plan_name': enscan_type},exp_time=exp_time)
+                              md={'plan_name': enscan_type},exp_time=exp_time,pol=pol)
         yield from bps.mv(Shutter_control, 0)
 
     else:
         yield from fly_scan_eliot(en_start,en_stop,en_speed,
-                              md={'plan_name': enscan_type},exp_time=exp_time)
+                              md={'plan_name': enscan_type},exp_time=exp_time,pol=pol)
 
 
 ## HACK HACK
