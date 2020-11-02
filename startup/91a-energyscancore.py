@@ -134,14 +134,12 @@ def en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=
    # print(det
     yield from bp.scan_nd(dets + signals,sigcycler, md={'plan_name':enscan_type})
 
-def NEXAFS_scan_core(signals,dets, energy, energies,enscan_type=None,
-                     openshutter = False,open_each_step=False,m3_pitch=7.94,diode_range=6,pol=100,
-                     exp_time=1,grating='no change',motorname='None',offset=0):
 
-
-
-    yield from bps.abs_set(mir3.Pitch,m3_pitch,wait=True)
-    yield from bps.mv(DiodeRange,diode_range)
+def NEXAFS_scan_core(signals, dets, energy, energies, enscan_type=None,
+                     openshutter=False, open_each_step=False, m3_pitch=7.94, diode_range=6, pol=100,
+                     exp_time=1, grating='no change', motorname='None', offset=0):
+    yield from bps.abs_set(mir3.Pitch, m3_pitch, wait=True)
+    yield from bps.mv(DiodeRange, diode_range)
     # if pol is 1:
     #     epu_mode.put(0)
     # else:
@@ -149,34 +147,38 @@ def NEXAFS_scan_core(signals,dets, energy, energies,enscan_type=None,
     # yield from bps.sleep(1)
     # yield from bps.mv(en.polarization,pol)
     set_exposure(exp_time)
-    if grating=='1200':
+    if grating == '1200':
         print('Moving grating to 1200 l/mm...')
-        if abs(mono_en.grating.user_offset.get()-7.308) > .1:
-            print('current grating offset is too far from known values, please update the procedure, grating will not move')
-        elif abs(mono_en.mirror2.user_offset.get()-8.1388) > .1:
-            print('current Mirror 2 offset is too far from known values, please update the procedure, grating will not move')
+        if abs(mono_en.grating.user_offset.get() - 7.308) > .1:
+            print(
+                'current grating offset is too far from known values, please update the procedure, grating will not move')
+        elif abs(mono_en.mirror2.user_offset.get() - 8.1388) > .1:
+            print(
+                'current Mirror 2 offset is too far from known values, please update the procedure, grating will not move')
         else:
             yield from grating_to_1200()
         print('done')
-    elif grating=='250':
+    elif grating == '250':
         print('Moving grating to 250 l/mm...')
-        if abs(mono_en.grating.user_offset.get()-7.308) > .1:
-            print('current grating offset is too far from known values, please update the procedure, grating will not move')
-        elif abs(mono_en.mirror2.user_offset.get()-8.1388) > .1:
-            print('current Mirror 2 offset is too far from known values, please update the procedure, grating will not move')
+        if abs(mono_en.grating.user_offset.get() - 7.308) > .1:
+            print(
+                'current grating offset is too far from known values, please update the procedure, grating will not move')
+        elif abs(mono_en.mirror2.user_offset.get() - 8.1388) > .1:
+            print(
+                'current Mirror 2 offset is too far from known values, please update the procedure, grating will not move')
         else:
             yield from grating_to_250()
         print('done')
     if motorname is not 'None':
-        yield from bps.rel_set(eval(motorname),offset,wait=True)
+        yield from bps.rel_set(eval(motorname), offset, wait=True)
     print('setting pol')
     yield from set_polarization(pol)
     en.read;
 
     sigcycler = cycler(energy, energies)
 
+    yield from bps.mv(en, energies[0])  # move to the initial energy
 
-    yield from bps.mv(en, energies[0])
     for signal in signals:
         signal.kind = 'normal'
     if openshutter and not open_each_step:
@@ -184,20 +186,64 @@ def NEXAFS_scan_core(signals,dets, energy, energies,enscan_type=None,
         yield from bps.mv(Shutter_control, 1)
         yield from bp.scan_nd(dets + signals + [en.energy],
                               sigcycler,
-                              md={'plan_name':enscan_type})
+                              md={'plan_name': enscan_type})
         yield from bps.mv(Shutter_control, 0)
     elif open_each_step:
         yield from bps.mv(Shutter_enable, 1)
         yield from bp.scan_nd(dets + signals + [en.energy],
                               sigcycler,
-                              md={'plan_name':enscan_type},
+                              md={'plan_name': enscan_type},
                               per_step=one_shuttered_step)
     else:
         yield from bp.scan_nd(dets + signals + [en.energy],
                               sigcycler,
-                              md={'plan_name':enscan_type})
+                              md={'plan_name': enscan_type})
 
 
+def NEXAFS_fly_scan_core(en_start,en_stop,en_speed,openshutter=False, m3_pitch=7.94, diode_range=6, pol=100,
+                     grating='no change'):
+    yield from bps.abs_set(mir3.Pitch, m3_pitch, wait=True)
+    yield from bps.mv(DiodeRange, diode_range)
+    if grating == '1200':
+        print('Moving grating to 1200 l/mm...')
+        if abs(mono_en.grating.user_offset.get() - 7.308) > .1:
+            print(
+                'current grating offset is too far from known values, please update the procedure, grating will not move')
+        elif abs(mono_en.mirror2.user_offset.get() - 8.1388) > .1:
+            print(
+                'current Mirror 2 offset is too far from known values, please update the procedure, grating will not move')
+        else:
+            yield from grating_to_1200()
+        print('done')
+    elif grating == '250':
+        print('Moving grating to 250 l/mm...')
+        if abs(mono_en.grating.user_offset.get() - 7.308) > .1:
+            print(
+                'current grating offset is too far from known values, please update the procedure, grating will not move')
+        elif abs(mono_en.mirror2.user_offset.get() - 8.1388) > .1:
+            print(
+                'current Mirror 2 offset is too far from known values, please update the procedure, grating will not move')
+        else:
+            yield from grating_to_250()
+        print('done')
+    if motorname is not 'None':
+        yield from bps.rel_set(eval(motorname), offset, wait=True)
+    print('setting pol')
+    yield from set_polarization(pol)
+    en.read;
+
+    yield from bps.mv(en, en_start)  # move to the initial energy
+
+    if openshutter:
+        yield from bps.mv(Shutter_enable, 0)
+        yield from bps.mv(Shutter_control, 1)
+        yield from fly_scan_eliot(en_start,en_stop,en_speed,
+                              md={'plan_name': enscan_type})
+        yield from bps.mv(Shutter_control, 0)
+
+    else:
+        yield from fly_scan_eliot(en_start,en_stop,en_speed,
+                              md={'plan_name': enscan_type})
 
 
 ## HACK HACK
@@ -459,6 +505,58 @@ def scan_eliot(detectors, cycler, exp_time,*, md=None):
 
         # wait for the final motor movement
         yield Msg('wait', None, group=motorgrp)
+
+    return (yield from inner_scan_eliot())
+
+
+def fly_scan_eliot(start_en,end_en,speed_en,pol, *, md=None):
+    """
+    Specific scan for SST-1 monochromator fly scan, while catching up with the undulator
+
+    scan proceeds as:
+    1.) set up the flying parameters in the monochromator
+    2.) move to the starting position in both undulator and monochromator
+    3.) begin the scan (take baseline, begin monitors)
+    4.) read the current mono readback
+    5.) set the undulator to move to the corresponding position
+    6.) if the mono is still running (not at end position), return to step 4
+    7.) if the mono is done, end the scan
+
+    Parameters
+    ----------
+    start_en : eV to begin the scan
+    stop_en : eV to stop the scan
+    speed_en : eV / second to move the monochromator
+    pol : polarization
+    md : dict, optional
+        metadata
+
+    """
+    _md = {'detectors': [mono_en],
+           'motors': [mono_en],
+           'plan_name': 'fly_scan_eliot',
+           'hints': {},
+           }
+    _md.update(md or {})
+
+
+    @bpp.stage_decorator(list(detectors) + motors)
+    @bpp.run_decorator(md=_md)
+    def inner_scan_eliot():
+        # start the scan parameters to the monoscan PVs
+        yield from bps.mv(Mono_Scan_Start_ev,start_en,
+                          Mono_Scan_Stop_ev,stop_en,
+                          Mono_Scan_Speed_ev,speed_en)
+        # move to the initial position
+        yield from set_polarization(pol)
+        yield from bps.mv(mono_en,Mono_Scan_Start_ev)
+        yield from bps.mv(epu_gap,epugap_from_en_pol(Mono_Scan_Start_ev,pol))
+        # start the mono scan
+        yield from bps.mv(Mono_Scan_Start,1)
+        monopos = mono_en.get().value
+        while np.abs(monopos < end_en)>0.1:
+            monopos = mono_en.get().value
+            yield from bps.mv(epu_gap, epugap_from_en_pol(monopos, pol))
 
     return (yield from inner_scan_eliot())
 

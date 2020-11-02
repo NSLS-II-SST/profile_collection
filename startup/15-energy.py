@@ -670,8 +670,8 @@ def grating_to_250():
     yield from bps.abs_set(mono_en.gratingtype, 2,wait=False)
     yield from bps.abs_set(mono_en.gratingtype_proc, 1,wait=True)
     yield from bps.sleep(60)
-    yield from bps.mv(mirror2.user_offset, 8.1388)
-    yield from bps.mv(grating.user_offset, 7.308-.0253)
+    yield from bps.mv(mirror2.user_offset, 8.1396)
+    yield from bps.mv(grating.user_offset, 7.3097-.0253)
     yield from bps.mv(mono_en.cff, 1.385)
     yield from bps.mv(mono_en,270)
 
@@ -682,10 +682,27 @@ def grating_to_1200():
     yield from bps.abs_set(mono_en.gratingtype,9,wait=False)
     yield from bps.abs_set(mono_en.gratingtype_proc, 1,wait=True)
     yield from bps.sleep(60)
-    yield from bps.mv(mirror2.user_offset,8.1388)
-    yield from bps.mv(grating.user_offset,7.308)
+    yield from bps.mv(mirror2.user_offset,8.1396)
+    yield from bps.mv(grating.user_offset,7.3097)
     yield from bps.mv(mono_en.cff,1.7)
     yield from bps.mv(mono_en,270)
 
 
 sd.monitors.extend([mono_en.readback])
+
+# XF:07ID1-OP{Mono:PGM1-Ax::EVSTART_SP # start energy
+# XF:07ID1-OP{Mono:PGM1-Ax::EVSTOP_SP # stop energy
+# XF:07ID1-OP{Mono:PGM1-Ax::EVVELO_SP # Ev/sec
+# XF:07ID1-OP{Mono:PGM1-Ax::START_CMD.PROC #start
+# XF:07ID1-OP{Mono:PGM1-Ax::ENERGY_ST_CMD.PROC #stop
+
+Mono_Scan_Start_ev = EpicsSignal('XF:07ID1-OP{Mono:PGM1-Ax::EVSTART_SP',
+                        name='MONO scan start energy',kind='normal')
+Mono_Scan_Stop_ev = EpicsSignal('XF:07ID1-OP{Mono:PGM1-Ax::EVSTOP_SP',
+                        name='MONO scan stop energy',kind='normal')
+Mono_Scan_Speed_ev = EpicsSignal('XF:07ID1-OP{Mono:PGM1-Ax::EVVELO_SP',
+                        name='MONO scan speed',kind='normal')
+Mono_Scan_Start = EpicsSignal('XF:07ID1-OP{Mono:PGM1-Ax::START_CMD.PROC',
+                        name='MONO scan start command',kind='normal')
+Mono_Scan_Stop = EpicsSignal('XF:07ID1-OP{Mono:PGM1-Ax::ENERGY_ST_CMD.PROC',
+                        name='MONO scan start command',kind='normal')
