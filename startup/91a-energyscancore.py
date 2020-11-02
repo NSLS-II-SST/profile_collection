@@ -200,7 +200,7 @@ def NEXAFS_scan_core(signals, dets, energy, energies, enscan_type=None,
                               md={'plan_name': enscan_type})
 
 
-def NEXAFS_fly_scan_core(en_start,en_stop,en_speed,openshutter=False, m3_pitch=7.94, diode_range=6, pol=100,
+def NEXAFS_fly_scan_core(scan_params,openshutter=False, m3_pitch=7.94, diode_range=6, pol=100,
                      grating='no change',exp_time=.5,enscan_type=None):
     yield from bps.abs_set(mir3.Pitch, m3_pitch, wait=True)
     yield from bps.mv(DiodeRange, diode_range)
@@ -229,18 +229,18 @@ def NEXAFS_fly_scan_core(en_start,en_stop,en_speed,openshutter=False, m3_pitch=7
     print('setting pol')
     yield from set_polarization(pol)
     en.read;
-
+    (en_start,en_stop,en_speed) = scan_params[0]
     yield from bps.mv(en, en_start)  # move to the initial energy
 
     if openshutter:
         yield from bps.mv(Shutter_enable, 0)
         yield from bps.mv(Shutter_control, 1)
-        yield from fly_scan_eliot(en_start,en_stop,en_speed,
+        yield from fly_scan_eliot(scan_params,
                               md={'plan_name': enscan_type},exp_time=exp_time,pol=pol)
         yield from bps.mv(Shutter_control, 0)
 
     else:
-        yield from fly_scan_eliot(en_start,en_stop,en_speed,
+        yield from fly_scan_eliot(scan_params,
                               md={'plan_name': enscan_type},exp_time=exp_time,pol=pol)
 
 
@@ -507,7 +507,7 @@ def scan_eliot(detectors, cycler, exp_time,*, md=None):
     return (yield from inner_scan_eliot())
 
 
-def fly_scan_eliot(start_en,end_en,speed_en,pol,exp_time=.5, *, md=None):
+def fly_scan_eliot(scan_params,pol,exp_time=.5, *, md=None):
     """
     Specific scan for SST-1 monochromator fly scan, while catching up with the undulator
 
@@ -542,24 +542,25 @@ def fly_scan_eliot(start_en,end_en,speed_en,pol,exp_time=.5, *, md=None):
     @bpp.run_decorator(md=_md)
     def inner_scan_eliot():
         # start the scan parameters to the monoscan PVs
-        yield from bps.mv(Mono_Scan_Start_ev,start_en,
-                          Mono_Scan_Stop_ev,end_en,
-                          Mono_Scan_Speed_ev,speed_en)
-        # move to the initial position
-        yield from set_polarization(pol)
-        yield from bps.mv(mono_en,start_en)
-        yield from bps.mv(epu_gap,epugap_from_en_pol(start_en,pol))
-        # start the mono scan
-        yield from bps.mv(Mono_Scan_Start,1)
-        monopos = mono_en.get().value
-        while np.abs(monopos < end_en)>0.1:
+        for (start_en,end_en,speed_en) in scan_params:
+            yield from bps.mv(Mono_Scan_Start_ev,start_en,
+                           Mono_Scan_Stop_ev,end_en,
+                           Mono_Scan_Speed_ev,speed_en)
+            # move to the initial position
+            yield from set_polarization(pol)
+            yield from bps.mv(mono_en,start_en)
+            yield from bps.mv(epu_gap,epugap_from_en_pol(start_en,pol))
+            # start the mono scan
+            yield from bps.mv(Mono_Scan_Start,1)
             monopos = mono_en.get().value
-            yield from bps.mv(epu_gap, epugap_from_en_pol(monopos, pol))
+            while np.abs(monopos < end_en)>0.1:
+                monopos = mono_en.get().value
+                yield from bps.mv(epu_gap, epugap_from_en_pol(monopos, pol))
 
-            yield from create('primary')
-            for obj in devices:
-                yield from read(obj)
-            yield from save()
+                yield from create('primary')
+                for obj in devices:
+                    yield from read(obj)
+                yield from save()
 
     return (yield from inner_scan_eliot())
 

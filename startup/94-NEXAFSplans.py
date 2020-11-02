@@ -57,10 +57,7 @@ def fly_Carbon_NEXAFS(speed=.2,pol=100,diode_range=7,m3_pitch=7.92,grating='no c
     sample()
     if len(read_input("Starting a Carbon NEXAFS fly scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
-
-
-
-    yield from NEXAFS_fly_scan_core(270, 340, speed, enscan_type=enscan_type,openshutter=True,exp_time=.5,
+    yield from NEXAFS_fly_scan_core([(270, 282, speed*3),(282, 293, speed),(293, 340, speed*5)], enscan_type=enscan_type,openshutter=True,exp_time=.5,
                                     diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
 
 def short_Carbon_NEXAFS(sigs=[],
