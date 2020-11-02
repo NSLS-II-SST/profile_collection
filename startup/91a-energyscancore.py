@@ -536,7 +536,7 @@ def fly_scan_eliot(scan_params,pol,exp_time=.5, *, md=None):
            'hints': {},
            }
     _md.update(md or {})
-    devices = [mono_en,Izero_Mesh]
+    devices = [mono_en,Sample_TEY]
 
     @bpp.stage_decorator(list(devices))
     @bpp.run_decorator(md=_md)
