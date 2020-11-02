@@ -41,6 +41,28 @@ def full_Carbon_NEXAFS(sigs=[],
                                 open_each_step=open_each_step,exp_time=exp_time,grating=grating,
                                 motorname=motorname,offset=offset)
 
+def fly_Carbon_NEXAFS(pol=100,diode_range=7,m3_pitch=7.92,grating='no change'):
+    '''
+    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
+
+
+    :param sigs: which other signals to use
+    :param dets: which detector to use
+    :param energy: what energy motor to scan
+    :return: perform scan
+
+    normal scan takes ~ 7 minutes to complete
+    '''
+    enscan_type = 'fly_Carbon_NEXAFS'
+    sample()
+    if len(read_input("Starting a Carbon NEXAFS fly scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
+        return
+
+
+
+    yield from NEXAFS_fly_scan_core(270, 340, 0.2, enscan_type=enscan_type,openshutter=True,exp_time=.5,
+                                    diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
+
 def short_Carbon_NEXAFS(sigs=[],
                         dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en,pol=100,diode_range=7,m3_pitch=7.92,
                        open_each_step=True,exp_time=1,grating='no change', motorname='None',offset=0):

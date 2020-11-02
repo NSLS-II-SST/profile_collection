@@ -201,7 +201,7 @@ def NEXAFS_scan_core(signals, dets, energy, energies, enscan_type=None,
 
 
 def NEXAFS_fly_scan_core(en_start,en_stop,en_speed,openshutter=False, m3_pitch=7.94, diode_range=6, pol=100,
-                     grating='no change'):
+                     grating='no change',exp_time=.5):
     yield from bps.abs_set(mir3.Pitch, m3_pitch, wait=True)
     yield from bps.mv(DiodeRange, diode_range)
     if grating == '1200':
@@ -238,12 +238,12 @@ def NEXAFS_fly_scan_core(en_start,en_stop,en_speed,openshutter=False, m3_pitch=7
         yield from bps.mv(Shutter_enable, 0)
         yield from bps.mv(Shutter_control, 1)
         yield from fly_scan_eliot(en_start,en_stop,en_speed,
-                              md={'plan_name': enscan_type})
+                              md={'plan_name': enscan_type},exp_time=exp_time)
         yield from bps.mv(Shutter_control, 0)
 
     else:
         yield from fly_scan_eliot(en_start,en_stop,en_speed,
-                              md={'plan_name': enscan_type})
+                              md={'plan_name': enscan_type},exp_time=exp_time)
 
 
 ## HACK HACK
@@ -509,7 +509,7 @@ def scan_eliot(detectors, cycler, exp_time,*, md=None):
     return (yield from inner_scan_eliot())
 
 
-def fly_scan_eliot(start_en,end_en,speed_en,pol, *, md=None):
+def fly_scan_eliot(start_en,end_en,speed_en,pol,exp_time=.5, *, md=None):
     """
     Specific scan for SST-1 monochromator fly scan, while catching up with the undulator
 
@@ -538,9 +538,9 @@ def fly_scan_eliot(start_en,end_en,speed_en,pol, *, md=None):
            'hints': {},
            }
     _md.update(md or {})
+    devices = [mono_en,Izero_Mesh,Beamstop_SAXS]
 
-
-    @bpp.stage_decorator(list(detectors) + motors)
+    @bpp.stage_decorator(devices)
     @bpp.run_decorator(md=_md)
     def inner_scan_eliot():
         # start the scan parameters to the monoscan PVs
@@ -557,6 +557,11 @@ def fly_scan_eliot(start_en,end_en,speed_en,pol, *, md=None):
         while np.abs(monopos < end_en)>0.1:
             monopos = mono_en.get().value
             yield from bps.mv(epu_gap, epugap_from_en_pol(monopos, pol))
+
+            yield from create('primary')
+            for obj in devices:
+                yield from read(obj)
+            yield from save()
 
     return (yield from inner_scan_eliot())
 
