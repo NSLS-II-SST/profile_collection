@@ -542,12 +542,13 @@ def fly_scan_eliot(scan_params,pol,exp_time=.5, *, md=None):
     @bpp.run_decorator(md=_md)
     def inner_scan_eliot():
         # start the scan parameters to the monoscan PVs
+        yield from set_polarization(pol)
         for (start_en,end_en,speed_en) in scan_params:
             yield from bps.mv(Mono_Scan_Start_ev,start_en,
                            Mono_Scan_Stop_ev,end_en,
                            Mono_Scan_Speed_ev,speed_en)
             # move to the initial position
-            yield from set_polarization(pol)
+
             yield from bps.mv(mono_en,start_en)
             yield from bps.mv(epu_gap,epugap_from_en_pol(start_en,pol))
             # start the mono scan
@@ -556,7 +557,6 @@ def fly_scan_eliot(scan_params,pol,exp_time=.5, *, md=None):
             while np.abs(monopos < end_en)>0.1:
                 monopos = mono_en.get().value
                 yield from bps.mv(epu_gap, epugap_from_en_pol(monopos, pol))
-
                 yield from create('primary')
                 for obj in devices:
                     yield from read(obj)
