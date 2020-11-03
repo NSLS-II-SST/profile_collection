@@ -258,8 +258,8 @@ def do_some_eputables_2020_en():
 
     #yield from buildeputable(200, 700, 5, 2, 14000, 15000,'C','250','C_250')
     #yield from buildeputable(80, 700, 5, 2, 14000, 0,'L','250','L0_250')
-    yield from buildeputable(100, 700, 5, 2, 14000, 4000,'L','250','L4_250')
-    yield from buildeputable(115, 700, 5, 2, 14000, 8000,'L','250','L8_250')
+    yield from buildeputable(90, 700, 5, 2, 14000, 4000,'L','250','L4_250')
+    yield from buildeputable(105, 700, 5, 2, 14000, 8000,'L','250','L8_250')
     yield from buildeputable(135, 700, 5, 2, 14000, 12000,'L','250','L12_250')
     yield from buildeputable(185, 700, 5, 2, 14000, 15000,'L','250','L15_250')
     yield from buildeputable(210, 700, 5, 2, 14000, 18000,'L','250','L18_250')
