@@ -180,43 +180,110 @@ RE.preprocessors.append(dark_frame_preprocessor_saxs)
 
 
 
-def buildeputable(start, stop, step, widfract, startinggap, name, phase):
+def buildeputable(start, stop, step, widfract, startinggap=14000, phase=0, mode='L' ,grat='1200',name='test'):
     ens = np.arange(start,stop,step)
     gaps = []
     ensout = []
     heights = []
-    IzeroDiode.kind= 'hinted'
+    Izero_Mesh.kind = 'hinted'
+    Beamstop_SAXS.kind = 'hinted'
+    mono_en.kind = 'hinted'
     #startinggap = epugap_from_energy(ens[0]) #get starting position from existing table
 
+    if grat=='1200':
+        print('Moving grating to 1200 l/mm...')
+        if abs(grating.user_offset.get()-7.308) > .1:
+            print('current grating offset is too far from known values, please update the procedure, grating will not move')
+        elif abs(mirror2.user_offset.get()-8.1388) > .1:
+            print('current Mirror 2 offset is too far from known values, please update the procedure, grating will not move')
+        else:
+            yield from grating_to_1200()
+        print('done')
+    elif grat=='250':
+        print('Moving grating to 250 l/mm...')
+        if abs(grating.user_offset.get()-7.308) > .1:
+            print('current grating offset is too far from known values, please update the procedure, grating will not move')
+        elif abs(mirror2.user_offset.get()-8.1388) > .1:
+            print('current Mirror 2 offset is too far from known values, please update the procedure, grating will not move')
+        else:
+            yield from grating_to_250()
+        print('done')
+
+    if mode == 'C':
+        set_polarization(1)
+    else:
+        set_polarization(100)
+    yield from bps.mv(epu_phase, phase)
+
     count = 0
+
     for energy in ens:
         yield from bps.mv(mono_en,energy)
-        yield from bps.mv(epu_gap,max(20000,startinggap-500*widfract))
-        #yield from bp.scan([DM4_PD],epu_gap,
-        #                   min(99500,max(20000,startinggap-1500*widfract)),
-        #                   min(100000,max(21500,startinggap+1500*widfract)),
-        #                   51)
-        yield from tune_max([Izero_Mesh],"Izero Mesh Current",epu_gap,
-                                    min(99500,max(20000,startinggap-500*widfract)),
-                                    min(100000,max(21500,startinggap+1000*widfract)),
+        yield from bps.mv(epu_gap,max(14000,startinggap-500*widfract))
+        yield from bps.mv(Shutter_enable, 0)
+        yield from bps.mv(Shutter_control, 1)
+        yield from tune_max([Izero_Mesh],'RSoXS Au Mesh Current',epu_gap,
+                                    min(99500,max(14000,startinggap-500*widfract)),
+                                    min(100000,max(15000,startinggap+1000*widfract)),
                                     10*widfract,7,3,True)
-
-        gaps.append(bec.peaks.max["Izero Mesh Current"][0])
-        heights.append(bec.peaks.max["Izero Mesh Current"][1])
+        yield from bps.mv(Shutter_control, 0)
+        yield from bps.sleep(2)
+        print(f'bec peaks max : {bec.peaks.max}')
+        startinggap = bec.peaks.max['RSoXS Au Mesh Current'][0]
+        height = bec.peaks.max['RSoXS Au Mesh Current'][1]
+        gaps.append(startinggap)
+        heights.append(height)
         ensout.append(mono_en.position)
-        startinggap = bec.peaks.max["Izero Mesh Current"][0]
-        #data = np.column_stack((ensout, gaps))
         data = {'Energies': ensout, 'EPUGaps': gaps, 'PeakCurrent': heights}
         dataframe = pd.DataFrame(data=data)
-        dataframe.to_csv('/mnt/zdrive/EPUdata' + name + '.csv')
+        dataframe.to_csv('/mnt/zdrive/EPUdata_2020en_' + name + '.csv')
         count+=1
-        if count > 50:
+        if count > 20:
             count=0
             plt.close()
+            plt.close()
+            plt.close()
+            plt.close()
+    plt.close()
+    plt.close()
+    plt.close()
+    plt.close()
     #print(ens,gaps)
 
 
-def buildeputablegaps(start, stop, step, widfract, startingen, name, phase):
+def do_some_eputables_2020_en():
+
+    slits_width = slits1.hsize.get()
+    yield from bps.mv(slits1.hsize,5)
+
+    yield from buildeputable(230, 700, 5, 2, 14000, 15000,'C','250','C_250')
+    yield from buildeputable(80, 700, 5, 2, 14000, 0,'L','250','L0_250')
+    yield from buildeputable(115, 700, 5, 2, 14000, 4000,'L','250','L4_250')
+    yield from buildeputable(125, 700, 5, 2, 14000, 8000,'L','250','L8_250')
+    yield from buildeputable(145, 700, 5, 2, 14000, 12000,'L','250','L12_250')
+    yield from buildeputable(185, 700, 5, 2, 14000, 15000,'L','250','L15_250')
+    yield from buildeputable(210, 700, 5, 2, 14000, 18000,'L','250','L18_250')
+    yield from buildeputable(200, 700, 5, 2, 14000, 21000,'L','250','L21_250')
+    yield from buildeputable(185, 700, 5, 2, 14000, 23000,'L','250','L23_250')
+    yield from buildeputable(165, 700, 5, 2, 14000, 26000,'L','250','L26_250')
+    yield from buildeputable(145, 700, 5, 2, 14000, 29500,'L','250','L29p5_250')
+
+    yield from buildeputable(280, 1300, 10, 2.5, 27645.673509277673, 0,'L','1200','L0_1200')
+    yield from buildeputable(280, 1300, 10, 2.5, 27065.89305265014, 4000,'L','1200','L4_1200')
+    yield from buildeputable(280, 1300, 10, 2.5, 24945.690795653547, 8000,'L','1200','L8_1200')
+    yield from buildeputable(280, 1300, 10, 2.5, 21163.356009915613, 12000,'L','1200','L12_1200')
+    yield from buildeputable(280, 1300, 10, 2.5, 18460.988780996147, 15000,'L','1200','L15_1200')
+    yield from buildeputable(280, 1300, 10, 2.5, 16794.337054167583, 18000,'L','1200','L18_1200')
+    yield from buildeputable(280, 1300, 10, 2.5, 16835.389909644993, 21000,'L','1200','L21_1200')
+    yield from buildeputable(280, 1300, 10, 2.5, 17512.80501268945, 23000,'L','1200','L23_1200')
+    yield from buildeputable(280, 1300, 10, 2.5, 18514.896600341806, 26000,'L','1200','L26_1200')
+    yield from buildeputable(280, 1300, 10, 2.5, 19248.140428175113, 29500,'L','1200','L29p5_1200')
+
+    yield from buildeputable(280, 2200, 10, 3, 16744.183192847733, 15000,'C','1200','C_1200')
+    yield from bps.mv(slits1.hsize,slits_width)
+
+
+def buildeputablegaps(start, stop, step, widfract, startingen, name, phase, grating):
     gaps = np.arange(start,stop,step)
     ens = []
     gapsout = []
@@ -224,8 +291,31 @@ def buildeputablegaps(start, stop, step, widfract, startingen, name, phase):
    # Beamstop_SAXS.kind= 'hinted'
    # Izero_Mesh.kind= 'hinted'
     #startinggap = epugap_from_energy(ens[0]) #get starting position from existing table
-    yield from bps.mv(epu_phase,phase)
+
     count = 0
+
+    if grating=='1200':
+        print('Moving grating to 1200 l/mm...')
+        if abs(grating.user_offset.get()-7.308) > .1:
+            print('current grating offset is too far from known values, please update the procedure, grating will not move')
+        elif abs(mirror2.user_offset.get()-8.1388) > .1:
+            print('current Mirror 2 offset is too far from known values, please update the procedure, grating will not move')
+        else:
+            yield from grating_to_1200()
+        print('done')
+    elif grating=='250':
+        print('Moving grating to 250 l/mm...')
+        if abs(grating.user_offset.get()-7.308) > .1:
+            print('current grating offset is too far from known values, please update the procedure, grating will not move')
+        elif abs(mirror2.user_offset.get()-8.1388) > .1:
+            print('current Mirror 2 offset is too far from known values, please update the procedure, grating will not move')
+        else:
+            yield from grating_to_250()
+        print('done')
+
+    yield from bps.mv(epu_phase, phase)
+
+
 
     for gap in gaps:
         yield from bps.mv(epu_gap,gap)
@@ -256,14 +346,6 @@ def buildeputablegaps(start, stop, step, widfract, startingen, name, phase):
     plt.close()
     plt.close()
     plt.close()
-
-def do_some_eputables():
-    yield from buildeputable(150, 1500, 10, 1, 21000, 'Harmonic1Phase')
-    #yield from buildeputable(850, 2500, 10, 1.5, 27650, 'H3v2')
-    yield from buildeputable(750, 2500, 10, 2, 20500, 'H5v2')
-    yield from buildeputable(1050, 2500, 10, 2, 20500, 'H7v1')
-    yield from buildeputable(1350, 2500, 10, 2, 20500, 'H9v1')
-    yield from buildeputable(1650, 2500, 10, 2, 20500, 'H11v1')
 
 
 def do_2020_eputables():
