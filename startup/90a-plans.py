@@ -222,7 +222,7 @@ def buildeputable(start, stop, step, widfract, startinggap=14000, phase=0, mode=
         yield from bps.mv(epu_gap,max(14000,startinggap-500*widfract))
         yield from bps.mv(Shutter_enable, 0)
         yield from bps.mv(Shutter_control, 1)
-        yield from tune_max([Izero_Mesh],'RSoXS Au Mesh Current',epu_gap,
+        yield from tune_max([Izero_Mesh,Beamstop_SAXS],'RSoXS Au Mesh Current',epu_gap,
                                     min(99500,max(14000,startinggap-500*widfract)),
                                     min(100000,max(15000,startinggap+1000*widfract)),
                                     10*widfract,7,3,True)
