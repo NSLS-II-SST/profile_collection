@@ -256,7 +256,7 @@ def do_some_eputables_2020_en():
     slits_width = slits1.hsize.get()
     yield from bps.mv(slits1.hsize,5)
 
-    yield from buildeputable(230, 700, 5, 2, 14000, 15000,'C','250','C_250')
+    yield from buildeputable(200, 700, 5, 2, 14000, 15000,'C','250','C_250')
     yield from buildeputable(80, 700, 5, 2, 14000, 0,'L','250','L0_250')
     yield from buildeputable(115, 700, 5, 2, 14000, 4000,'L','250','L4_250')
     yield from buildeputable(125, 700, 5, 2, 14000, 8000,'L','250','L8_250')
