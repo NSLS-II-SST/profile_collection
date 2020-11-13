@@ -9,7 +9,7 @@ from IPython.core.magic import register_line_magic
 import pathlib
 import xarray as xr
 import numpy as np
-
+import IPython
 
 class UndulatorMotor(EpicsMotor):
     user_setpoint = Cpt(EpicsSignal, '-SP', limits=True)
@@ -90,7 +90,7 @@ class EnPos(PseudoPositioner):
     def inverse(self, real_pos):
         '''Run an inverse (real -> pseudo) calculation'''
         return self.PseudoPosition( energy=real_pos.monoen,
-                                    polarization=pol_from_mode_phase(real_pos.epuphase,epu_mode.get()))
+                                    polarization=self.pol(real_pos.epuphase,epu_mode.get()))
 
     def where_sp(self):
         return ('Beamline Energy Setpoint : {}'
@@ -136,7 +136,7 @@ class EnPos(PseudoPositioner):
     
     # begin LUT functions
     
-    def __init__(self,configpath=pathlib.Path(''),**kwargs):
+    def __init__(self,configpath=pathlib.Path(IPython.paths.get_ipython_dir())/'profile_collection'/'startup'/'config',**kwargs):
         super().__init__(**kwargs)
         self.C250_gap = xr.load_dataarray(configpath/'EPU_C_250_gap.nc')
         self.C250_intens = xr.load_dataarray(configpath/'EPU_C_250_intens.nc')
