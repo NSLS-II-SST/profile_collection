@@ -77,7 +77,7 @@ def one_trigger_nd_step(detectors, step, pos_cache):
 
 # @dark_frames_enable
 def en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=7.94,diode_range=6,
-                 pol=100,grating='no change'):
+                 pol=0,grating='no change'):
     saxs_det.cam.acquire_time.kind = 'hinted'
     # sw_det.waxs.cam.acquire_time.kind = 'normal'
     yield from bps.abs_set(mir3.Pitch,m3_pitch,wait=True)
@@ -136,7 +136,7 @@ def en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=
 
 
 def NEXAFS_scan_core(signals, dets, energy, energies, enscan_type=None,
-                     openshutter=False, open_each_step=False, m3_pitch=7.94, diode_range=6, pol=100,
+                     openshutter=False, open_each_step=False, m3_pitch=7.94, diode_range=6, pol=0,
                      exp_time=1, grating='no change', motorname='None', offset=0):
     yield from bps.abs_set(mir3.Pitch, m3_pitch, wait=True)
     yield from bps.mv(DiodeRange, diode_range)
@@ -200,7 +200,7 @@ def NEXAFS_scan_core(signals, dets, energy, energies, enscan_type=None,
                               md={'plan_name': enscan_type})
 
 
-def NEXAFS_fly_scan_core(scan_params,openshutter=False, m3_pitch=7.94, diode_range=6, pol=100,
+def NEXAFS_fly_scan_core(scan_params,openshutter=False, m3_pitch=7.94, diode_range=6, pol=0,
                      grating='no change',exp_time=.5,enscan_type=None):
     yield from bps.abs_set(mir3.Pitch, m3_pitch, wait=True)
     yield from bps.mv(DiodeRange, diode_range)

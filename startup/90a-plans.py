@@ -210,9 +210,9 @@ def buildeputable(start, stop, step, widfract, startinggap=14000, phase=0, mode=
         print('done')
 
     if mode == 'C':
-        set_polarization(1)
+        set_polarization(-1)
     else:
-        set_polarization(100)
+        set_polarization(0)
     yield from bps.mv(epu_phase, phase)
 
     count = 0

@@ -64,8 +64,8 @@ class EnPos(PseudoPositioner):
 
     """
     # synthetic axis
-    energy = Cpt(PseudoSingle, kind='hinted', limits=(91,2040),name="Beamline Energy")
-    polarization = Cpt(PseudoSingle, kind='hinted', limits=(1,190),name="X-ray Polarization")
+    energy = Cpt(PseudoSingle, kind='hinted', limits=(71,2040),name="Beamline Energy")
+    polarization = Cpt(PseudoSingle, kind='hinted', limits=(-1,90),name="X-ray Polarization")
 
     # real motors
 

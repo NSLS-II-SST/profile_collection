@@ -4,7 +4,7 @@ import numpy as np
 
 
 def full_Carbon_NEXAFS(sigs=[],
-                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en,pol=100,diode_range=7,m3_pitch=7.92,
+                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en,pol=0,diode_range=7,m3_pitch=7.92,
                        open_each_step=True,exp_time=1,grating='no change', motorname='None',offset=0):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
@@ -41,7 +41,7 @@ def full_Carbon_NEXAFS(sigs=[],
                                 open_each_step=open_each_step,exp_time=exp_time,grating=grating,
                                 motorname=motorname,offset=offset)
 
-def fly_Carbon_NEXAFS(speed=.1,pol=100,diode_range=7,m3_pitch=7.92,grating='no change'):
+def fly_Carbon_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=7.92,grating='no change'):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
 
@@ -61,7 +61,7 @@ def fly_Carbon_NEXAFS(speed=.1,pol=100,diode_range=7,m3_pitch=7.92,grating='no c
                                     diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
 
 def short_Carbon_NEXAFS(sigs=[],
-                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en,pol=100,diode_range=7,m3_pitch=7.92,
+                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en,pol=0,diode_range=7,m3_pitch=7.92,
                        open_each_step=True,exp_time=1,grating='no change', motorname='None',offset=0):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
@@ -100,7 +100,7 @@ def short_Carbon_NEXAFS(sigs=[],
 
 
 def full_SulfurL_NEXAFS(sigs=[],
-                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en,pol=100,diode_range=7,m3_pitch=7.94,
+                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en,pol=0,diode_range=7,m3_pitch=7.94,
                        open_each_step=True,exp_time=1,grating='no change', motorname='None',offset=0):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
@@ -132,7 +132,7 @@ def full_SulfurL_NEXAFS(sigs=[],
                                 open_each_step=open_each_step,exp_time=exp_time,grating=grating,
                                 motorname=motorname,offset=offset)
 def full_Nitrogen_NEXAFS(sigs=[],
-                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en,pol=100,m3_pitch=7.90,diode_range=6,
+                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en,pol=0,m3_pitch=7.90,diode_range=6,
                        open_each_step=True,exp_time=1,grating='no change', motorname='None',offset=0):
     '''
     Full Nitrogen Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
@@ -165,7 +165,7 @@ def full_Nitrogen_NEXAFS(sigs=[],
                                 open_each_step=open_each_step,exp_time=exp_time,grating=grating,
                                 motorname=motorname,offset=offset)
 def full_Fluorine_NEXAFS(sigs=[],
-                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en,pol=100,m3_pitch=7.90,diode_range=7,
+                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en,pol=0,m3_pitch=7.90,diode_range=7,
                        open_each_step=True,exp_time=1,grating='no change', motorname='None',offset=0):
     '''
     Full Nitrogen Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
@@ -195,7 +195,7 @@ def full_Fluorine_NEXAFS(sigs=[],
                                 open_each_step=open_each_step,exp_time=exp_time,grating=grating,
                                 motorname=motorname,offset=offset)
 def short_Fluorine_NEXAFS(sigs=[],
-                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en,pol=100,m3_pitch=7.90,diode_range=7,
+                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en,pol=0,m3_pitch=7.90,diode_range=7,
                        open_each_step=True,exp_time=1,grating='no change', motorname='None',offset=0):
     '''
     Full Nitrogen Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
@@ -227,7 +227,7 @@ def short_Fluorine_NEXAFS(sigs=[],
 
 
 def full_Oxygen_NEXAFS(sigs=[],
-                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en,pol=100,m3_pitch=7.90,diode_range=6,
+                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en,pol=0,m3_pitch=7.90,diode_range=6,
                        open_each_step=True,exp_time=1,grating='no change', motorname='None',offset=0):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
@@ -260,7 +260,7 @@ def full_Oxygen_NEXAFS(sigs=[],
                                 motorname=motorname,offset=offset)
 
 def short_Oxygen_NEXAFS(sigs=[],
-                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en,pol=100,m3_pitch=7.90,diode_range=6,
+                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en,pol=0,m3_pitch=7.90,diode_range=6,
                        open_each_step=True,exp_time=1,grating='no change', motorname='None',offset=0):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
@@ -294,7 +294,7 @@ def short_Oxygen_NEXAFS(sigs=[],
 
 
 def full_Al_NEXAFS(sigs=[],
-                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en,pol=100,m3_pitch=7.90,diode_range=6,
+                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en,pol=0,m3_pitch=7.90,diode_range=6,
                        open_each_step=True,exp_time=1,grating='no change', motorname='None',offset=0):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
@@ -328,7 +328,7 @@ def full_Al_NEXAFS(sigs=[],
 
 
 def full_Zn_NEXAFS(sigs=[],
-                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en,pol=100,m3_pitch=7.9,diode_range=7,
+                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en,pol=0,m3_pitch=7.9,diode_range=7,
                        open_each_step=True,exp_time=1,grating='no change', motorname='None',offset=0):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
@@ -361,7 +361,7 @@ def full_Zn_NEXAFS(sigs=[],
 
 
 def do_HOPGscans_epu():
-    pols = [100,104,112,116,120,125,190,1]
+    pols = [0,20,40,55,70,90,-1]
     yield from load_sample(hopggrazing)
     for polarization in pols:
         yield from full_Carbon_NEXAFS(dets=[Sample_TEY, IzeroMesh], pol=polarization)
