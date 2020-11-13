@@ -55,8 +55,6 @@ class Monochromator(PVPositioner):
 
 from scipy import interpolate
 import xarray as xr
-from exceptions import LookupError
-
 
 class EnPos(PseudoPositioner):
     """Energy pseudopositioner class.
@@ -136,8 +134,8 @@ class EnPos(PseudoPositioner):
     
     # begin LUT functions
     
-    def __init__(self,configpath=pathlib.Path(IPython.paths.get_ipython_dir())/'profile_collection'/'startup'/'config',**kwargs):
-        super().__init__(**kwargs)
+    def __init__(self,a,configpath=pathlib.Path(IPython.paths.get_ipython_dir())/'profile_collection'/'startup'/'config',**kwargs):
+        super().__init__(a,**kwargs)
         self.C250_gap = xr.load_dataarray(configpath/'EPU_C_250_gap.nc')
         self.C250_intens = xr.load_dataarray(configpath/'EPU_C_250_intens.nc')
         self.C1200_gap = xr.load_dataarray(configpath/'EPU_C_1200_gap.nc')
