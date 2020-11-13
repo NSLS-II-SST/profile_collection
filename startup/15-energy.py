@@ -162,7 +162,7 @@ class EnPos(PseudoPositioner):
             g1200_gap = float(self.L1200_gap.interp(Energies=energy,phase=phase))
             g1200_intens = float(self.L1200_intens.interp(Energies=energy,phase=phase))
         else:
-            raise LookupError
+            return np.nan
         
         if verbose:
             print(f'For pol {pol}, energy {energy} phase {phase}: ')
@@ -170,17 +170,17 @@ class EnPos(PseudoPositioner):
             print(f'  . 1200 l/mm grating: gap = {g1200_gap}, intensity {g1200_intens}')
         
         if grating=='250' or np.isnan(g1200_gap):
-            return g250_gap
+            return min(100000,max(14000,g250_gap))
         elif grating=='1200' or np.isnan(g250_gap):
-            return g1200_gap
+            return min(100000,max(14000,g1200_gap))
         else:
             if g250_intens > g1200_intens:
-                return g250_gap
+                return min(100000,max(14000,g250_gap))
             else:
-                return g1200_gap
+                return min(100000,max(14000,g1200_gap))
 
     def phase(self,en,pol):
-        return float(self.polphase.interp(pol=pol))
+        return min(29500,max(0,float(self.polphase.interp(pol=pol))))
     def pol(self,phase,mode):
         if mode == 2:
             return -1
@@ -292,11 +292,11 @@ sd.baseline.extend([en])
 
 
 def set_polarization(pol):
-    if pol==1:
+    if pol==-1:
         if(epu_mode.get() != 0):
             yield from bps.mv(epu_mode,0)
             yield from bps.sleep(1)
-    elif pol in [100,104,108,112,115,118,121,123,126,190]:
+    elif 0 <= pol <=90 :
         if (epu_mode.get() != 2):
             yield from bps.mv(epu_mode, 2)
             yield from bps.sleep(1)
@@ -305,8 +305,8 @@ def set_polarization(pol):
         return 1
     en.read();
     enval = en.energy.readback.get()
-    phaseval = epuphase_from_en_pol(pol)
-    gapval = epugap_from_en_pol(enval,pol)
+    phaseval = en.phase(enval,pol)
+    gapval = en.gap(enval,pol)
     #print(enval)
     #print(pol)
     #print(phaseval)
