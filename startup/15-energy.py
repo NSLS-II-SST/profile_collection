@@ -147,8 +147,9 @@ class EnPos(PseudoPositioner):
         self.polphase = xr.load_dataarray(configpath/'polphase.nc')
         self.phasepol = xr.DataArray(data=self.polphase.pol,coords={'phase':self.polphase.values},dims={'phase'})
         
-    def gap(self,energy,pol,grating='best',verbose=False):
-        
+    def gap(self,energy,pol,grating='best',harmonic='best',en_cutoff=1100,verbose=False):
+        if energy>en_cutoff and harmonic != '1' and harmonic != '3':
+            energy = energy/3
         if pol == -1:
             g250_gap = float(self.C250_gap.interp(Energies=energy))
             g250_intens = float(self.C250_intens.interp(Energies=energy))
