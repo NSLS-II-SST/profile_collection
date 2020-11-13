@@ -161,7 +161,7 @@ class EnPos(PseudoPositioner):
             g1200_gap = float(self.L1200_gap.interp(Energies=energy,phase=phase))
             g1200_intens = float(self.L1200_intens.interp(Energies=energy,phase=phase))
         else:
-            raise LookupError
+            return np.nan
         
         if verbose:
             print(f'For pol {pol}, energy {energy} phase {phase}: ')
