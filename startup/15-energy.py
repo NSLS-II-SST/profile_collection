@@ -155,7 +155,7 @@ class EnPos(PseudoPositioner):
             g1200_gap = float(self.C1200_gap.interp(Energies=energy))
             g1200_intens = float(self.C1200_intens.interp(Energies=energy))
         elif pol>=0 and pol<=90:
-            phase = self.phase(energy,pol)
+            phase = self.phase(energy,pol)/1000
             g250_gap = float(self.L250_gap.interp(Energies=energy,phase=phase))
             g250_intens = float(self.L250_intens.interp(Energies=energy,phase=phase))
             g1200_gap = float(self.L1200_gap.interp(Energies=energy,phase=phase))
@@ -179,12 +179,12 @@ class EnPos(PseudoPositioner):
                 return g1200_gap
 
     def phase(self,en,pol):
-        return float(self.polphase.interp(pol=pol))/1000
+        return float(self.polphase.interp(pol=pol))
     def pol(self,phase,mode):
         if mode == 2:
             return -1
         else:
-            return float(self.phasepol.interp(phase=phase*1000))
+            return float(self.phasepol.interp(phase=phase))
     def mode(self,pol):
         if pol == -1:
             return 2
