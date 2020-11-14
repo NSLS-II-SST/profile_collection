@@ -121,6 +121,7 @@ class OSEmailHandler(logging.Handler):
         
 class MakeSafeHandler(logging.Handler):
     def emit(self,record):
+        print('close the shutter here')
         #@TODO insert code to make instrument 'safe', e.g. close shutter
 
 
