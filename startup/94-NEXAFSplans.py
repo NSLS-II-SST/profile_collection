@@ -4,7 +4,8 @@ import numpy as np
 
 
 def epu_angle_from_grazing(real_incident_angle,grazing_angle=20):
-    return np.arccos(np.cos(real_incident_angle*np.pi/180)*np.sec(grazing_angle*np.pi/180))*180/np.pi
+    return np.arccos(
+        np.cos(real_incident_angle * np.pi / 180) * 1 / (np.cos(grazing_angle * np.pi / 180))) * 180 / np.pi
 
 
 def Carbon_angle_NEXAFS(grazing_angle=20,speed=.1,diode_range=7,angles = [20,40,55,70,90]):
@@ -93,7 +94,7 @@ def fly_Carbon_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=7.92,grating='no cha
     sample()
     if len(read_input("Starting a Carbon NEXAFS fly scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
-    yield from NEXAFS_fly_scan_core([(270, 282, speed*3),(282, 293, speed),(293, 340, speed*5)], enscan_type=enscan_type,openshutter=True,exp_time=.5,
+    yield from NEXAFS_fly_scan_core([(270, 282, speed*3),(282, 297, speed),(297, 340, speed*5)], enscan_type=enscan_type,openshutter=True,exp_time=.5,
                                     diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
 
 def fly_Nitrogen_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=7.92,grating='no change'):
