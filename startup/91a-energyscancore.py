@@ -553,10 +553,10 @@ def fly_scan_eliot(scan_params,pol,exp_time=.5, *, md=None):
                 yield from wait(group='EPU')
 
             yield from bps.mv(mono_en,start_en)
-            yield from bps.mv(epu_gap,epugap_from_en_pol(start_en,pol))
+            yield from bps.mv(epu_gap,en.gap(start_en,pol))
             if step == 0 :
                 monopos = mono_en.get().value
-                yield from bps.abs_set(epu_gap, epugap_from_en_pol(monopos, pol), wait=False, group='EPU')
+                yield from bps.abs_set(epu_gap, en.gap(monopos, pol), wait=False, group='EPU')
                 yield from wait(group='EPU')
             # start the mono scan
             yield from bps.mv(Mono_Scan_Start,1)
@@ -564,7 +564,7 @@ def fly_scan_eliot(scan_params,pol,exp_time=.5, *, md=None):
             while np.abs(monopos < end_en)>0.1:
                 yield from wait(group='EPU')
                 monopos = mono_en.get().value
-                yield from bps.abs_set(epu_gap, epugap_from_en_pol(monopos, pol),wait=False,group='EPU')
+                yield from bps.abs_set(epu_gap, en.gap(monopos, pol),wait=False,group='EPU')
                 yield from create('primary')
                 for obj in devices:
                     yield from read(obj)
