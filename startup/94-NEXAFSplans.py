@@ -7,14 +7,35 @@ def epu_angle_from_grazing(real_incident_angle,grazing_angle=20):
     return np.arccos(cos(real_incident_angle*np.pi/180)*np.sec(grazing_angle*np.pi/180))*180/np.pi
 
 
-def fiveangleNEXAFS(grazing_angle=20,speed=.1,diode_range=7):
-    angles = [20,40,55,70,90]
+def Carbon_angle_NEXAFS(grazing_angle=20,speed=.1,diode_range=7,angles = [20,40,55,70,90]):
     for angle in angles:
         yield from fly_Carbon_NEXAFS(speed=speed,
                                      pol=epu_angle_from_grazing(angle,grazing_angle),
                                      diode_range=diode_range,
                                      grating='250',
                                      m3_pitch=7.95)
+def Oxygen_angle_NEXAFS(grazing_angle=20,speed=.2,diode_range=7,angles = [20,40,55,70,90]):
+    for angle in angles:
+        yield from fly_Oxygen_NEXAFS(speed=speed,
+                                     pol=epu_angle_from_grazing(angle,grazing_angle),
+                                     diode_range=diode_range,
+                                     grating='250',
+                                     m3_pitch=7.95)
+def Nitrogen_angle_NEXAFS(grazing_angle=20,speed=.1,diode_range=7,angles = [20,40,55,70,90]):
+    for angle in angles:
+        yield from fly_Nitrogen_NEXAFS(speed=speed,
+                                     pol=epu_angle_from_grazing(angle,grazing_angle),
+                                     diode_range=diode_range,
+                                     grating='250',
+                                     m3_pitch=7.95)
+def Fluorine_angle_NEXAFS(grazing_angle=20,speed=.3,diode_range=7,angles = [20,40,55,70,90]):
+    for angle in angles:
+        yield from fly_Fluorine_NEXAFS(speed=speed,
+                                     pol=epu_angle_from_grazing(angle,grazing_angle),
+                                     diode_range=diode_range,
+                                     grating='1200',
+                                     m3_pitch=7.95)
+
 
 
 
@@ -73,6 +94,64 @@ def fly_Carbon_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=7.92,grating='no cha
     if len(read_input("Starting a Carbon NEXAFS fly scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     yield from NEXAFS_fly_scan_core([(270, 282, speed*3),(282, 293, speed),(293, 340, speed*5)], enscan_type=enscan_type,openshutter=True,exp_time=.5,
+                                    diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
+
+def fly_Nitrogen_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=7.92,grating='no change'):
+    '''
+    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
+
+
+    :param sigs: which other signals to use
+    :param dets: which detector to use
+    :param energy: what energy motor to scan
+    :return: perform scan
+
+    normal scan takes ~ 7 minutes to complete
+    '''
+    enscan_type = 'fly_Carbon_NEXAFS'
+    sample()
+    if len(read_input("Starting a Carbon NEXAFS fly scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
+        return
+    yield from NEXAFS_fly_scan_core([(385, 397, speed*3),(397, 407, speed),(407, 440, speed*5)], enscan_type=enscan_type,openshutter=True,exp_time=.5,
+                                    diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
+
+
+def fly_Oxygen_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=7.92,grating='no change'):
+    '''
+    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
+
+
+    :param sigs: which other signals to use
+    :param dets: which detector to use
+    :param energy: what energy motor to scan
+    :return: perform scan
+
+    normal scan takes ~ 7 minutes to complete
+    '''
+    enscan_type = 'fly_Carbon_NEXAFS'
+    sample()
+    if len(read_input("Starting a Carbon NEXAFS fly scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
+        return
+    yield from NEXAFS_fly_scan_core([(510, 525, speed*3),(525, 540, speed),(540, 560, speed*5)], enscan_type=enscan_type,openshutter=True,exp_time=.5,
+                                    diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
+
+def fly_Fluorine_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=7.92,grating='no change'):
+    '''
+    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
+
+
+    :param sigs: which other signals to use
+    :param dets: which detector to use
+    :param energy: what energy motor to scan
+    :return: perform scan
+
+    normal scan takes ~ 7 minutes to complete
+    '''
+    enscan_type = 'fly_Carbon_NEXAFS'
+    sample()
+    if len(read_input("Starting a Carbon NEXAFS fly scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
+        return
+    yield from NEXAFS_fly_scan_core([(680, 720, speed)], enscan_type=enscan_type,openshutter=True,exp_time=.5,
                                     diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
 
 def short_Carbon_NEXAFS(sigs=[],
