@@ -604,7 +604,7 @@ def full_fluorine_scan_nd(multiple=1,sigs=[],
     yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
                             diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
 
-def short_fluorine_scan_nd(multiple=1,sigs=[],
+def veryshort_fluorine_scan_nd(multiple=1,sigs=[],
                         dets=[saxs_det], energy=en,pol=0,diode_range=7,m3_pitch=7.89):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
@@ -619,7 +619,7 @@ def short_fluorine_scan_nd(multiple=1,sigs=[],
 
     normal scan takes ~ 18 minutes to complete
     '''
-    enscan_type = 'full_fluorine_scan_nd'
+    enscan_type = 'veryshort_fluorine_scan_nd'
     sample()
     if len(read_input("Starting a Fluorine energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
