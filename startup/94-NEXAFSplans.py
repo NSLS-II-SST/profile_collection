@@ -4,7 +4,7 @@ import numpy as np
 
 
 def epu_angle_from_grazing(real_incident_angle,grazing_angle=20):
-    return np.arccos(cos(real_incident_angle*np.pi/180)*np.sec(grazing_angle*np.pi/180))*180/np.pi
+    return np.arccos(np.cos(real_incident_angle*np.pi/180)*np.sec(grazing_angle*np.pi/180))*180/np.pi
 
 
 def Carbon_angle_NEXAFS(grazing_angle=20,speed=.1,diode_range=7,angles = [20,40,55,70,90]):
