@@ -34,7 +34,7 @@ def Fluorine_angle_NEXAFS(grazing_angle=20,speed=.3,diode_range=7,angles = [20,4
                                      pol=epu_angle_from_grazing(angle,grazing_angle),
                                      diode_range=diode_range,
                                      grating='1200',
-                                     m3_pitch=7.95)
+                                     m3_pitch=8.01)
 
 
 
