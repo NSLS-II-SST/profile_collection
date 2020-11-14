@@ -3,6 +3,21 @@ run_report(__file__)
 import numpy as np
 
 
+def epu_angle_from_grazing(real_incident_angle,grazing_angle=20):
+    return np.arccos(cos(real_incident_angle*np.pi/180)*np.sec(grazing_angle*np.pi/180))*180/np.pi
+
+
+def fiveangleNEXAFS(grazing_angle=20,speed=.1,diode_range=7):
+    angles = [20,40,55,70,90]
+    for angle in angles:
+        yield from fly_Carbon_NEXAFS(speed=speed,
+                                     pol=epu_angle_from_grazing(angle,grazing_angle),
+                                     diode_range=diode_range,
+                                     grating='250',
+                                     m3_pitch=7.95)
+
+
+
 def full_Carbon_NEXAFS(sigs=[],
                         dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en,pol=0,diode_range=7,m3_pitch=7.92,
                        open_each_step=True,exp_time=1,grating='no change', motorname='None',offset=0):
