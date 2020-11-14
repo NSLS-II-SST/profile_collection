@@ -210,9 +210,9 @@ def buildeputable(start, stop, step, widfract, startinggap=14000, phase=0, mode=
         print('done')
 
     if mode == 'C':
-        set_polarization(-1)
+        yield from set_polarization(-1)
     else:
-        set_polarization(0)
+        yield from set_polarization(0)
     yield from bps.mv(epu_phase, phase)
 
     count = 0
@@ -279,7 +279,7 @@ def do_some_eputables_2020_en():
     yield from buildeputable(280, 1300, 20, 3, 18514.896600341806,  26000 ,'L','1200','L26_1200'  )
     yield from buildeputable(280, 1300, 20, 3, 19248.140428175113,  29500 ,'L','1200','L29p5_1200')
 
-    yield from buildeputable(280, 2200, 20, 3, 16744.183192847733,  15000 ,'C','1200','C_1200'    )
+    yield from buildeputable(200, 2200, 20, 5, 14000,  15000 ,'C','1200','C2_1200'    )
     yield from bps.mv(slits1.hsize,slits_width)
 
 
