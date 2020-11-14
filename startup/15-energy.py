@@ -185,7 +185,7 @@ class EnPos(PseudoPositioner):
         if mode == 0:
             return -1
         else:
-            return float(self.phasepol.interp(phase=phase))
+            return float(self.phasepol.interp(phase=np.abs(phase)))
     def mode(self,pol):
         if pol == -1:
             return 2
