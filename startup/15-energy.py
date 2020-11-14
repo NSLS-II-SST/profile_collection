@@ -182,7 +182,7 @@ class EnPos(PseudoPositioner):
     def phase(self,en,pol):
         return min(29500,max(0,float(self.polphase.interp(pol=pol))))
     def pol(self,phase,mode):
-        if mode == 2:
+        if mode == 0:
             return -1
         else:
             return float(self.phasepol.interp(phase=phase))
