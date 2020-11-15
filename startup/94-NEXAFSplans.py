@@ -107,7 +107,7 @@ def fly_Calcium_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=7.99,grating='250')
 
     normal scan takes ~ 7 minutes to complete
     '''
-    enscan_type = 'fly_Carbon_NEXAFS'
+    enscan_type = 'fly_Calcium_NEXAFS'
     sample()
     if len(read_input("Starting a Carbon NEXAFS fly scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
@@ -126,7 +126,7 @@ def fly_SulfurL_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=8.01,grating='250')
 
     normal scan takes ~ 7 minutes to complete
     '''
-    enscan_type = 'fly_Carbon_NEXAFS'
+    enscan_type = 'fly_SulfurL_NEXAFS'
     sample()
     if len(read_input("Starting a Carbon NEXAFS fly scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
@@ -145,7 +145,7 @@ def fly_Nitrogen_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=7.99,grating='250'
 
     normal scan takes ~ 7 minutes to complete
     '''
-    enscan_type = 'fly_Carbon_NEXAFS'
+    enscan_type = 'fly_Nitrogen_NEXAFS'
     sample()
     if len(read_input("Starting a Carbon NEXAFS fly scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
@@ -165,7 +165,7 @@ def fly_Oxygen_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=7.99,grating='250'):
 
     normal scan takes ~ 7 minutes to complete
     '''
-    enscan_type = 'fly_Carbon_NEXAFS'
+    enscan_type = 'fly_Oxygen_NEXAFS'
     sample()
     if len(read_input("Starting a Carbon NEXAFS fly scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
@@ -184,7 +184,7 @@ def fly_Fluorine_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=8.01,grating='1200
 
     normal scan takes ~ 7 minutes to complete
     '''
-    enscan_type = 'fly_Carbon_NEXAFS'
+    enscan_type = 'fly_Fluorine_NEXAFS'
     sample()
     if len(read_input("Starting a Carbon NEXAFS fly scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
