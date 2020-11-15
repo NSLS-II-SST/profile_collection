@@ -89,7 +89,7 @@ class EnPos(PseudoPositioner):
         '''Run an inverse (real -> pseudo) calculation'''
         return self.PseudoPosition( energy=real_pos.monoen,
                                     polarization=self.pol(real_pos.epuphase,epu_mode.get()),
-                                    sample_polarization = self.sample_pol(sam_Th))
+                                    sample_polarization = self.sample_pol(self.pol(real_pos.epuphase,epu_mode.get()),sam_Th))
 
     def where_sp(self):
         return ('Beamline Energy Setpoint : {}'
@@ -194,9 +194,9 @@ class EnPos(PseudoPositioner):
         else:
             return 0
 
-    def sample_pol(self,rotation_motor=sam_Th):
+    def sample_pol(self,pol,rotation_motor=sam_Th):
         th = rotation_motor.get()
-        return np.arccos(np.cos(self.polarization.get()*np.pi/180)*np.sin(th*np.pi/180))*180/np.pi
+        return np.arccos(np.cos(pol*np.pi/180)*np.sin(th*np.pi/180))*180/np.pi
 
     
 
