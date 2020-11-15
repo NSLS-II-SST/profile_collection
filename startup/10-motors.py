@@ -115,7 +115,7 @@ class FMBOEpicsMotor(EpicsMotor):
 class prettymotor(FMBOEpicsMotor):
     def __init__(self,*args,**kwargs):
         super(prettymotor, self).__init__(*args,**kwargs)
-        self.read_attrs = ['user_readback']
+        self.read_attrs = ['user_readback', 'user_setpoint']
     def where(self):
         return ('{} : {}').format(
             colored(self.name, 'lightblue'),
