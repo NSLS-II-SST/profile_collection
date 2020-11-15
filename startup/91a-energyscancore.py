@@ -542,9 +542,11 @@ def fly_scan_eliot(scan_params,pol,exp_time=.5, *, md=None):
     @bpp.run_decorator(md=_md)
     def inner_scan_eliot():
         # start the scan parameters to the monoscan PVs
+        yield Msg('checkpoint')
         yield from set_polarization(pol)
         step = 0
         for (start_en,end_en,speed_en) in scan_params:
+            yield Msg('checkpoint')
             yield from bps.mv(Mono_Scan_Start_ev,start_en,
                            Mono_Scan_Stop_ev,end_en,
                            Mono_Scan_Speed_ev,speed_en)
