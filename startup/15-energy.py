@@ -66,7 +66,7 @@ class EnPos(PseudoPositioner):
     # synthetic axis
     energy = Cpt(PseudoSingle, kind='hinted', limits=(71,2040),name="Beamline Energy")
     polarization = Cpt(PseudoSingle, kind='hinted', limits=(-1,90),name="X-ray Polarization")
-
+    sample_polarization = Cpt(PseudoSingle, kind='hinted',name="Sample X-ray polarization")
     # real motors
 
     monoen = Cpt(Monochromator, 'XF:07ID1-OP{Mono:PGM1-Ax:',kind='hinted',name='Mono Energy')
@@ -88,7 +88,8 @@ class EnPos(PseudoPositioner):
     def inverse(self, real_pos):
         '''Run an inverse (real -> pseudo) calculation'''
         return self.PseudoPosition( energy=real_pos.monoen,
-                                    polarization=self.pol(real_pos.epuphase,epu_mode.get()))
+                                    polarization=self.pol(real_pos.epuphase,epu_mode.get()),
+                                    sample_polarization = self.sample_pol(sam_Th))
 
     def where_sp(self):
         return ('Beamline Energy Setpoint : {}'
@@ -121,9 +122,10 @@ class EnPos(PseudoPositioner):
             colored('{:.2f}'.format(self.monoen.vls.get()).rstrip('0').rstrip('.'),'yellow'))
 
     def where(self):
-        return ('Beamline Energy : {}\nPolarization : {}').format(
+        return ('Beamline Energy : {}\nPolarization : {}\nSample Polarization : {}').format(
             colored('{:.2f}'.format(self.monoen.readback.get()).rstrip('0').rstrip('.'), 'yellow'),
-            colored('{:.2f}'.format(self.polarization.readback.get()).rstrip('0').rstrip('.'), 'yellow'))
+            colored('{:.2f}'.format(self.polarization.readback.get()).rstrip('0').rstrip('.'), 'yellow'),
+            colored('{:.2f}'.format(self.sample_polarization.readback.get()).rstrip('0').rstrip('.'), 'yellow'))
 
     def wh(self):
         boxed_text(self.name+" location", self.where_sp(), 'green',shrink=True)
@@ -191,6 +193,10 @@ class EnPos(PseudoPositioner):
             return 2
         else:
             return 0
+
+    def sample_pol(self,rotation_motor=sam_Th):
+        th = rotation_motor.get()
+        return np.arccos(np.cos(self.polarization.get()*np.pi/180)*np.sin(th*np.pi/180))*180/np.pi
 
     
 
