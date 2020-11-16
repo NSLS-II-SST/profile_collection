@@ -147,7 +147,7 @@ def fly_Nitrogen_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=7.99,grating='250'
     '''
     enscan_type = 'fly_Nitrogen_NEXAFS'
     sample()
-    if len(read_input("Starting a Carbon NEXAFS fly scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
+    if len(read_input("Starting a Nitrogen NEXAFS fly scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     yield from NEXAFS_fly_scan_core([(385, 397, speed*3),(397, 407, speed),(407, 440, speed*5)], enscan_type=enscan_type,openshutter=True,exp_time=.5,
                                     diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
@@ -167,7 +167,7 @@ def fly_Oxygen_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=7.99,grating='250'):
     '''
     enscan_type = 'fly_Oxygen_NEXAFS'
     sample()
-    if len(read_input("Starting a Carbon NEXAFS fly scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
+    if len(read_input("Starting a Oxygen NEXAFS fly scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     yield from NEXAFS_fly_scan_core([(510, 525, speed*3),(525, 540, speed),(540, 560, speed*5)], enscan_type=enscan_type,openshutter=True,exp_time=.5,
                                     diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
@@ -186,7 +186,7 @@ def fly_Fluorine_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=8.01,grating='1200
     '''
     enscan_type = 'fly_Fluorine_NEXAFS'
     sample()
-    if len(read_input("Starting a Carbon NEXAFS fly scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
+    if len(read_input("Starting a Fluorine NEXAFS fly scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     yield from NEXAFS_fly_scan_core([(680, 720, speed)], enscan_type=enscan_type,openshutter=True,exp_time=.5,
                                     diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
