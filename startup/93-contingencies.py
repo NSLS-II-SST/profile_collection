@@ -118,12 +118,21 @@ class OSEmailHandler(logging.Handler):
         user_email = RE.md['user_email']
         send_notice(bls_email+','+user_email, 'SST has thrown an exception', record.getMessage()) # record.stack_info
 
+        
+class MakeSafeHandler(logging.Handler):
+    def emit(self,record):
+        print('close the shutter here')
+        #@TODO insert code to make instrument 'safe', e.g. close shutter
+
 
 logger = logging.getLogger('bluesky.RE')
-handler = OSEmailHandler()
-handler.setLevel('ERROR')  # Only email for if the level is ERROR or higher (CRITICAL).
-logger.addHandler(handler)
+mail_handler = OSEmailHandler()
+mail_handler.setLevel('ERROR')  # Only email for if the level is ERROR or higher (CRITICAL).
+logger.addHandler(mail_handler)
 
+safe_handler = MakeSafeHandler()
+safe_handler.setLevel('ERROR') # is this correct?
+logger.addHandler(safe_handler)
 
 def turn_on_checks():
     RE.install_suspender(suspend_shutter1)

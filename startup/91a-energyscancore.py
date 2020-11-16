@@ -77,7 +77,7 @@ def one_trigger_nd_step(detectors, step, pos_cache):
 
 # @dark_frames_enable
 def en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=7.94,diode_range=6,
-                 pol=100,grating='no change'):
+                 pol=0,grating='no change'):
     saxs_det.cam.acquire_time.kind = 'hinted'
     # sw_det.waxs.cam.acquire_time.kind = 'normal'
     yield from bps.abs_set(mir3.Pitch,m3_pitch,wait=True)
@@ -136,7 +136,7 @@ def en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=
 
 
 def NEXAFS_scan_core(signals, dets, energy, energies, enscan_type=None,
-                     openshutter=False, open_each_step=False, m3_pitch=7.94, diode_range=6, pol=100,
+                     openshutter=False, open_each_step=False, m3_pitch=7.94, diode_range=6, pol=0,
                      exp_time=1, grating='no change', motorname='None', offset=0):
     yield from bps.abs_set(mir3.Pitch, m3_pitch, wait=True)
     yield from bps.mv(DiodeRange, diode_range)
@@ -200,7 +200,7 @@ def NEXAFS_scan_core(signals, dets, energy, energies, enscan_type=None,
                               md={'plan_name': enscan_type})
 
 
-def NEXAFS_fly_scan_core(scan_params,openshutter=False, m3_pitch=7.94, diode_range=6, pol=100,
+def NEXAFS_fly_scan_core(scan_params,openshutter=False, m3_pitch=7.94, diode_range=6, pol=0,
                      grating='no change',exp_time=.5,enscan_type=None):
     yield from bps.abs_set(mir3.Pitch, m3_pitch, wait=True)
     yield from bps.mv(DiodeRange, diode_range)
@@ -542,9 +542,11 @@ def fly_scan_eliot(scan_params,pol,exp_time=.5, *, md=None):
     @bpp.run_decorator(md=_md)
     def inner_scan_eliot():
         # start the scan parameters to the monoscan PVs
+        yield Msg('checkpoint')
         yield from set_polarization(pol)
         step = 0
         for (start_en,end_en,speed_en) in scan_params:
+            yield Msg('checkpoint')
             yield from bps.mv(Mono_Scan_Start_ev,start_en,
                            Mono_Scan_Stop_ev,end_en,
                            Mono_Scan_Speed_ev,speed_en)
@@ -553,10 +555,10 @@ def fly_scan_eliot(scan_params,pol,exp_time=.5, *, md=None):
                 yield from wait(group='EPU')
 
             yield from bps.mv(mono_en,start_en)
-            yield from bps.mv(epu_gap,epugap_from_en_pol(start_en,pol))
+            yield from bps.mv(epu_gap,en.gap(start_en,pol))
             if step == 0 :
                 monopos = mono_en.get().value
-                yield from bps.abs_set(epu_gap, epugap_from_en_pol(monopos, pol), wait=False, group='EPU')
+                yield from bps.abs_set(epu_gap, en.gap(monopos, pol), wait=False, group='EPU')
                 yield from wait(group='EPU')
             # start the mono scan
             yield from bps.mv(Mono_Scan_Start,1)
@@ -564,7 +566,7 @@ def fly_scan_eliot(scan_params,pol,exp_time=.5, *, md=None):
             while np.abs(monopos < end_en)>0.1:
                 yield from wait(group='EPU')
                 monopos = mono_en.get().value
-                yield from bps.abs_set(epu_gap, epugap_from_en_pol(monopos, pol),wait=False,group='EPU')
+                yield from bps.abs_set(epu_gap, en.gap(monopos, pol),wait=False,group='EPU')
                 yield from create('primary')
                 for obj in devices:
                     yield from read(obj)

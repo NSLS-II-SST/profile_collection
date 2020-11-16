@@ -216,10 +216,10 @@ def SAXS():
         'motor':    Izero_Y,
         'position': -29,
         'order': 0},
-        {
-        'motor':    Det_W,
-        'position': -94,
-        'order': 0},
+        #{
+        #'motor':    Det_W,
+        #'position': -94,
+        #'order': 0},
         {
         'motor':    Det_S,
         'position': 0,

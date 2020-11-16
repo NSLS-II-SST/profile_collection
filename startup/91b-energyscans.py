@@ -6,7 +6,7 @@ import bluesky.plan_stubs as bps
 
 
 def full_oxygen_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det],energy=en,pol=100,diode_range=6,m3_pitch=7.91):
+                        dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=7.91):
     '''
     Full Oxygen Scan runs an RSoXS sample set through the O edge, with particular emphasis in he pre edge region
     this results in 110 exposures
@@ -42,7 +42,7 @@ def full_oxygen_scan_nd(multiple=1,sigs=[],
                             diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
 
 def short_oxygen_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det],energy=en,pol=100,diode_range=6,m3_pitch=7.91):
+                        dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=7.91):
     '''
     Short Oxygen Scan runs an RSoXS sample set through the O edge, with particular emphasis in he pre edge region
 
@@ -79,7 +79,7 @@ def short_oxygen_scan_nd(multiple=1,sigs=[],
 
 
 def short_fluorine_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det],energy=en,pol=100,diode_range=6,m3_pitch=7.89):
+                        dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=7.89):
     '''
     Short Fluorine Scan runs an RSoXS sample set through the F edge, with particular emphasis in he pre edge region
 
@@ -119,7 +119,7 @@ def short_fluorine_scan_nd(multiple=1,sigs=[],
 
 
 def full_nitrogen_scan_nd(multiple=1,sigs=[],
-                          dets=[saxs_det],energy=en,pol=100,diode_range=6,m3_pitch=7.93):
+                          dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=7.93):
     '''
     Full Nitrogen Scan runs an RSoXS sample set through the N edge, with particular emphasis in he pre edge region
     this results in 95 exposures
@@ -156,7 +156,7 @@ def full_nitrogen_scan_nd(multiple=1,sigs=[],
 
 
 def full_test_scan_nd(multiple=1,sigs=[],
-                          dets=[saxs_det],energy=en,pol=100,diode_range=6,m3_pitch=7.94):
+                          dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=7.94):
     '''
     Full Nitrogen Scan runs an RSoXS sample set through the N edge, with particular emphasis in he pre edge region
     this results in 95 exposures
@@ -191,7 +191,7 @@ def full_test_scan_nd(multiple=1,sigs=[],
 
 
 def short_nitrogen_scan_nd(multiple=1,sigs=[],
-                          dets=[saxs_det],energy=en,pol=100,diode_range=6,m3_pitch=7.93):
+                          dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=7.93):
     '''
     Short Nitrogen Scan runs an RSoXS sample set through the N edge, with particular emphasis in he pre edge region
 
@@ -230,7 +230,7 @@ def short_nitrogen_scan_nd(multiple=1,sigs=[],
 
 
 def very_short_carbon_scan_nd(multiple=1,sigs=[],
-                              dets=[saxs_det],energy=en,pol=100,diode_range=7,m3_pitch=7.93):
+                              dets=[saxs_det],energy=en,pol=0,diode_range=7,m3_pitch=7.93):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 40 exposures
@@ -272,7 +272,7 @@ def very_short_carbon_scan_nd(multiple=1,sigs=[],
 
 
 def short_carbon_scan_nd(multiple=1,sigs=[],
-                         dets=[saxs_det],energy=en,pol=100,diode_range=6,m3_pitch=7.93):
+                         dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=7.93):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 61 exposures
@@ -316,7 +316,7 @@ def short_carbon_scan_nd(multiple=1,sigs=[],
 #en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=7.94,diode_range=6,pol=100)
 
 def short_sulfurl_scan_nd(multiple=1,sigs=[],
-                         dets=[saxs_det],energy=en,pol=100,diode_range=6,m3_pitch=7.98):
+                         dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=7.98):
     '''
     Full Sulfur L Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 61 exposures
@@ -356,7 +356,7 @@ def short_sulfurl_scan_nd(multiple=1,sigs=[],
 
 
 def focused_carbon_scan_nd(multiple=1,sigs=[],
-                         dets=[saxs_det],energy=en,pol=100,diode_range=6,m3_pitch=7.93):
+                         dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=7.93):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 61 exposures
@@ -398,7 +398,7 @@ def focused_carbon_scan_nd(multiple=1,sigs=[],
 
 
 def g_carbon_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en,pol=100,diode_range=6,m3_pitch=7.93):
+                        dets=[saxs_det], energy=en,pol=0,diode_range=6,m3_pitch=7.93):
     '''
     G Carbon Scan runs an RSoXS sample set through the carbon edge, with a targeted 5 exposures
 
@@ -429,7 +429,7 @@ def g_carbon_scan_nd(multiple=1,sigs=[],
 
 
 def t_carbon_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en,pol=100,diode_range=6,m3_pitch=7.93):
+                        dets=[saxs_det], energy=en,pol=0,diode_range=6,m3_pitch=7.93):
     '''
     T Carbon Scan runs an RSoXS sample set through the carbon edge, with a targeted 6 exposures
 
@@ -460,7 +460,7 @@ def t_carbon_scan_nd(multiple=1,sigs=[],
 
 
 def sufficient_carbon_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en,pol=100,diode_range=6,m3_pitch=7.96):
+                        dets=[saxs_det], energy=en,pol=0,diode_range=6,m3_pitch=7.96):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 128 exposures
@@ -500,7 +500,7 @@ def sufficient_carbon_scan_nd(multiple=1,sigs=[],
 
 
 def picky_carbon_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en,pol=100,diode_range=6,m3_pitch=7.93):
+                        dets=[saxs_det], energy=en,pol=0,diode_range=6,m3_pitch=7.93):
     '''
     Subh's picky Carbon Scan runs an RSoXS sample set through the useless energies before the carbon edge
     this results in 15 exposures
@@ -534,7 +534,7 @@ def picky_carbon_scan_nd(multiple=1,sigs=[],
 
 
 def full_carbon_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en,pol=100,diode_range=7,m3_pitch=7.93):
+                        dets=[saxs_det], energy=en,pol=0,diode_range=7,m3_pitch=7.93):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 128 exposures
@@ -572,7 +572,7 @@ def full_carbon_scan_nd(multiple=1,sigs=[],
                             diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
 
 def full_fluorine_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en,pol=100,diode_range=7,m3_pitch=7.89):
+                        dets=[saxs_det], energy=en,pol=0,diode_range=7,m3_pitch=7.89):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 128 exposures
@@ -604,8 +604,8 @@ def full_fluorine_scan_nd(multiple=1,sigs=[],
     yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
                             diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
 
-def short_fluorine_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en,pol=100,diode_range=7,m3_pitch=7.89):
+def veryshort_fluorine_scan_nd(multiple=1,sigs=[],
+                        dets=[saxs_det], energy=en,pol=0,diode_range=7,m3_pitch=7.89):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 128 exposures
@@ -619,7 +619,7 @@ def short_fluorine_scan_nd(multiple=1,sigs=[],
 
     normal scan takes ~ 18 minutes to complete
     '''
-    enscan_type = 'full_fluorine_scan_nd'
+    enscan_type = 'veryshort_fluorine_scan_nd'
     sample()
     if len(read_input("Starting a Fluorine energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
@@ -639,7 +639,7 @@ def short_fluorine_scan_nd(multiple=1,sigs=[],
 
 
 def full_ca_scan_nd(multiple=1,sigs=[],
-                    dets=[saxs_det],energy=en,pol=100,diode_range=6,m3_pitch=7.96):
+                    dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=7.96):
     '''
     Calcium Scan runs an RSoXS sample set through the Ca edge, with particular emphasis in he pre edge region
 
@@ -672,7 +672,7 @@ def full_ca_scan_nd(multiple=1,sigs=[],
 
 
 def full_carbon_calcium_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en,pol=100,diode_range=6,m3_pitch=7.96):
+                        dets=[saxs_det], energy=en,pol=0,diode_range=6,m3_pitch=7.96):
     '''
     Full Carbon and Calcium Scan runs an RSoXS sample set through the carbon and calcium edges,
     with particular emphasis in he pre edge region
@@ -746,7 +746,7 @@ def Si_SAXS(exp_time=1):
 
 
 def survey_scan_verylowenergy(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en,pol=100,diode_range=7,m3_pitch=7.93):
+                        dets=[saxs_det], energy=en,pol=0,diode_range=7,m3_pitch=7.93):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 128 exposures
@@ -779,7 +779,7 @@ def survey_scan_verylowenergy(multiple=1,sigs=[],
 
 
 def survey_scan_lowenergy(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en,pol=100,diode_range=7,m3_pitch=7.91):
+                        dets=[saxs_det], energy=en,pol=0,diode_range=7,m3_pitch=7.91):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 128 exposures
@@ -812,7 +812,7 @@ def survey_scan_lowenergy(multiple=1,sigs=[],
 
 
 def survey_scan_highenergy(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en,pol=100,diode_range=7,m3_pitch=7.89):
+                        dets=[saxs_det], energy=en,pol=0,diode_range=7,m3_pitch=7.89):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 128 exposures
@@ -844,7 +844,7 @@ def survey_scan_highenergy(multiple=1,sigs=[],
 
 
 def survey_scan_veryhighenergy(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en,pol=100,diode_range=7,m3_pitch=7.89):
+                        dets=[saxs_det], energy=en,pol=0,diode_range=7,m3_pitch=7.89):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 128 exposures

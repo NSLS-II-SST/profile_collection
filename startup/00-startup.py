@@ -44,7 +44,7 @@ run_report(__file__)
 nslsii.configure_base(
     get_ipython().user_ns,
     'rsoxs',
-    publish_documents_to_kafka=True
+    publish_documents_to_kafka=False
 )
 
 # After the above call, you will now have the following in your namespace:
