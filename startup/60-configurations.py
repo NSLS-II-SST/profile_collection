@@ -154,7 +154,7 @@ def SAXSmode():
     yield from bps.mv(Shutter_Y, 2.2,
                       Izero_Y, -29,
                       Det_S, 0,
-                      Det_W, -94,
+                      # Det_W, -94,
                       BeamStopW, 3,
                       BeamStopS, 67)
 
@@ -299,10 +299,10 @@ def SAXSNEXAFS():
         'motor':    Izero_Y,
         'position': -29,
         'order': 0},
-        {
-        'motor':    Det_W,
-        'position': -94,
-        'order': 0},
+        # {
+        # 'motor':    Det_W,
+        # 'position': -94,
+        # 'order': 0},
         {
         'motor':    Det_S,
         'position': -94,
@@ -383,10 +383,10 @@ def TEYNEXAFS():
         'position': -29,
         'order': 0},
         {
-        'motor':    Det_W,
-        'position': -94,
-        'order': 0},
-        {
+        # 'motor':    Det_W,
+        # 'position': -94,
+        # 'order': 0},
+        # {
         'motor':    Det_S,
         'position': -94,
         'order': 0},
@@ -413,7 +413,7 @@ def WAXSmode():
     yield from slits_in_WAXS()
     yield from bps.mv(Shutter_Y, 2.2,
                       Izero_Y, -29,
-                      Det_W, -10,
+                      # Det_W, -10,
                       Det_S, -94,
                       BeamStopW, 66.1,
                       BeamStopS, 3,
@@ -476,10 +476,10 @@ def WAXS():
         'motor':    Izero_Y,
         'position': -29,
         'order': 1},
-        {
-        'motor':    Det_W,
-        'position': -10,
-        'order': 1},
+        # {
+        # 'motor':    Det_W,
+        # 'position': -10,
+        # 'order': 1},
         {
         'motor':    Det_S,
         'position':-94,
@@ -560,10 +560,10 @@ def WAXSNEXAFS():
         'motor':    Izero_Y,
         'position': -29,
         'order': 1},
-        {
-        'motor':    Det_W,
-        'position': -94,
-        'order': 1},
+        # {
+        # 'motor':    Det_W,
+        # 'position': -94,
+        # 'order': 1},
         {
         'motor':    Det_S,
         'position': -94,
@@ -644,10 +644,10 @@ def oldTEYNEXAFS():
         'motor':    Izero_Y,
         'position': -29,
         'order': 1},
-        {
-        'motor':    Det_W,
-        'position': -94,
-        'order': 1},
+        # {
+        # 'motor':    Det_W,
+        # 'position': -94,
+        # 'order': 1},
         {
         'motor':    Det_S,
         'position': -94,
@@ -678,7 +678,7 @@ def all_out():
     print('Moving the rest of RSoXS components')
     yield from bps.mv(Shutter_Y, 44,
                       Izero_Y, 144,
-                      Det_W, -94,
+                      # Det_W, -94,
                       Det_S, -94,
                       BeamStopW, 3,
                       BeamStopS, 3,
