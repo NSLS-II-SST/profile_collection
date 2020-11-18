@@ -670,6 +670,39 @@ def full_ca_scan_nd(multiple=1,sigs=[],
     yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
                             diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
 
+def short_calcium_scan_nd(multiple=1,sigs=[],
+                    dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=7.96):
+    '''
+    Calcium Scan runs an RSoXS sample set through the Ca edge, with particular emphasis in he pre edge region
+
+
+    :param multiple: adjustment for exposure times
+    :param mesh: which Izero channel to use
+    :param det: which detector to use
+    :param energy: what energy motor to scan
+    :return: perform scan
+
+    normal scan takes ~ 12 minutes to complete
+    '''
+    beamline_status()
+    if len(read_input("Starting a Calcium energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
+        return
+    enscan_type = 'short_calcium_scan_nd'
+    # create a list of energies
+    energies = np.arange(320,340,5)
+    energies = np.append(energies,np.arange(340,345,1))
+    energies = np.append(energies,np.arange(345,355,.5))
+    times = energies.copy()
+
+    # Define exposures times for different energy ranges
+    times[energies<400] = 20
+    times *= multiple
+
+    # use these energies and exposure times to scan energy and record detectors and signals
+    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
+
+
 
 def full_carbon_calcium_scan_nd(multiple=1,sigs=[],
                         dets=[saxs_det], energy=en,pol=0,diode_range=6,m3_pitch=7.96):

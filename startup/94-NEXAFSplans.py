@@ -95,7 +95,7 @@ def fly_Carbon_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=7.99,grating='250'):
     yield from NEXAFS_fly_scan_core([(270, 282, speed*3),(282, 297, speed),(297, 340, speed*5)], enscan_type=enscan_type,openshutter=True,exp_time=.5,
                                     diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
 
-def fly_Calcium_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=7.99,grating='250'):
+def fly_Calcium_NEXAFS(speed=.15,pol=0,diode_range=7,m3_pitch=7.99,grating='250'):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
 
