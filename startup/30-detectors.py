@@ -51,7 +51,7 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
     def stage(self, *args, **kwargs):
         self.cam.temperature_actual.read()
         self.cam.temperature.read()
-
+        print('staging the detector')
         Shutter_enable.set(1)
         Shutter_delay.set(0)
         if abs(self.cam.temperature_actual.get() - self.cam.temperature.get()) > 2.0:
