@@ -172,7 +172,7 @@ def fly_Oxygen_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=7.99,grating='250'):
     yield from NEXAFS_fly_scan_core([(510, 525, speed*3),(525, 540, speed),(540, 560, speed*5)], enscan_type=enscan_type,openshutter=True,exp_time=.5,
                                     diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
 
-def fly_Fluorine_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=8.01,grating='1200'):
+def fly_Fluorine_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=7.99,grating='1200'):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
 
