@@ -120,8 +120,8 @@ def en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=
 
 
 
-    sigcycler = cycler(Shutter_enable, shutters)
-    sigcycler += cycler(energy, energies)
+  #  sigcycler = cycler(Shutter_enable, shutters)
+    sigcycler = cycler(energy, energies)
   #  yield from bps.mv(saxs_det.cam.acquire_time,times[0])
     sigcycler += cycler(saxs_det.cam.acquire_time, times.copy())
     sigcycler += cycler(Shutter_open_time, times.copy())
