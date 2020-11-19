@@ -671,7 +671,7 @@ def full_ca_scan_nd(multiple=1,sigs=[],
                             diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
 
 def short_calcium_scan_nd(multiple=1,sigs=[],
-                    dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=8.03):
+                    dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=8.03,grating='1200'):
     '''
     Calcium Scan runs an RSoXS sample set through the Ca edge, with particular emphasis in he pre edge region
 
@@ -700,7 +700,7 @@ def short_calcium_scan_nd(multiple=1,sigs=[],
 
     # use these energies and exposure times to scan energy and record detectors and signals
     yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
-                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
+                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
 
 
 
