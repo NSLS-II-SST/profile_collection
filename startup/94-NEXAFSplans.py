@@ -511,6 +511,3 @@ def do_HOPGscans_epu():
     yield from load_sample(hopgnormal)
     for polarization in pols:
         yield from full_Carbon_NEXAFS(dets=[Sample_TEY, IzeroMesh], pol=polarization)
-
-
-[{'plan_name': 'Carbon_angle_NEXAFS', 'arguments': '', 'configuration': 'SAXS'},      {'plan_name': 'Nitrogen_angle_NEXAFS', 'arguments': 'angles=[20,55,90]', 'configuration': 'SAXS'},       {'plan_name': 'Oxygen_angle_NEXAFS', 'arguments': 'angles=[20,55,90]', 'configuration': 'SAXS'},     {'plan_name': 'Fluorine_angle_NEXAFS', 'arguments': 'angles=[20,55,90]', 'configuration': 'SAXS'}]

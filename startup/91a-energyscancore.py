@@ -5,7 +5,7 @@ from bluesky.preprocessors import rewindable_wrapper
 from bluesky.utils import short_uid, separate_devices, all_safe_rewind
 from collections import defaultdict
 from bluesky import preprocessors as bpp
-
+import numpy as np
 
 run_report(__file__)
 
@@ -200,10 +200,12 @@ def NEXAFS_scan_core(signals, dets, energy, energies, enscan_type=None,
                               md={'plan_name': enscan_type})
 
 
-def NEXAFS_fly_scan_core(scan_params,openshutter=False, m3_pitch=7.94, diode_range=6, pol=0,
-                     grating='no change',exp_time=.5,enscan_type=None):
-    yield from bps.abs_set(mir3.Pitch, m3_pitch, wait=True)
-    yield from bps.mv(DiodeRange, diode_range)
+def NEXAFS_fly_scan_core(scan_params,openshutter=False, m3_pitch=np.nan, diode_range=np.nan, pol=np.nan,
+                     grating='best',exp_time=.5,enscan_type=None):
+    if np.isnan(m3_pitch) is False:
+        yield from bps.abs_set(mir3.Pitch, m3_pitch, wait=True)
+    if np.isnan(diode_range) is False:
+        yield from bps.mv(DiodeRange, diode_range)
     if grating == '1200':
         print('Moving grating to 1200 l/mm...')
         if abs(mono_en.grating.user_offset.get() - 7.308) > .1:
@@ -227,7 +229,10 @@ def NEXAFS_fly_scan_core(scan_params,openshutter=False, m3_pitch=7.94, diode_ran
             yield from grating_to_250()
         print('done')
     print('setting pol')
-    yield from set_polarization(pol)
+    if np.isnan(pol) is False:
+        yield from set_polarization(pol)
+    else:
+        pol = en.polarization.setpoint.get()
     en.read;
     (en_start,en_stop,en_speed) = scan_params[0]
     yield from bps.mv(en, en_start)  # move to the initial energy
@@ -236,12 +241,12 @@ def NEXAFS_fly_scan_core(scan_params,openshutter=False, m3_pitch=7.94, diode_ran
         yield from bps.mv(Shutter_enable, 0)
         yield from bps.mv(Shutter_control, 1)
         yield from fly_scan_eliot(scan_params,
-                              md={'plan_name': enscan_type},exp_time=exp_time,pol=pol)
+                              md={'plan_name': enscan_type},grating=grating,pol=pol)
         yield from bps.mv(Shutter_control, 0)
 
     else:
         yield from fly_scan_eliot(scan_params,
-                              md={'plan_name': enscan_type},exp_time=exp_time,pol=pol)
+                              md={'plan_name': enscan_type},grating=grating,pol=pol)
 
 
 ## HACK HACK
@@ -507,7 +512,7 @@ def scan_eliot(detectors, cycler, exp_time,*, md=None):
     return (yield from inner_scan_eliot())
 
 
-def fly_scan_eliot(scan_params,pol,exp_time=.5, *, md=None):
+def fly_scan_eliot(scan_params,pol=np.nan,grating='best', *, md=None):
     """
     Specific scan for SST-1 monochromator fly scan, while catching up with the undulator
 
@@ -518,14 +523,19 @@ def fly_scan_eliot(scan_params,pol,exp_time=.5, *, md=None):
     4.) read the current mono readback
     5.) set the undulator to move to the corresponding position
     6.) if the mono is still running (not at end position), return to step 4
-    7.) if the mono is done, end the scan
+    7.) if the mono is done, load the next parameters and start at step 1
+    8.) if no more parameters, end the scan
 
     Parameters
     ----------
-    start_en : eV to begin the scan
-    stop_en : eV to stop the scan
-    speed_en : eV / second to move the monochromator
-    pol : polarization
+    scan_params : a list of tuples consisting of:
+        (start_en : eV to begin the scan,
+        stop_en : eV to stop the scan,
+        speed_en : eV / second to move the monochromator)
+        the stop energy of each tuple should match the start of the next to make a continuous scan
+            although this is not strictly enforced to allow for flexibility
+    pol : polarization to run the scan
+    grating : grating to run the scan
     md : dict, optional
         metadata
 
@@ -543,7 +553,10 @@ def fly_scan_eliot(scan_params,pol,exp_time=.5, *, md=None):
     def inner_scan_eliot():
         # start the scan parameters to the monoscan PVs
         yield Msg('checkpoint')
-        yield from set_polarization(pol)
+        if np.isnan(pol) is False:
+            yield from set_polarization(pol)
+        else:
+            pol = en.polarization.setpoint.get()
         step = 0
         for (start_en,end_en,speed_en) in scan_params:
             yield Msg('checkpoint')
@@ -558,7 +571,7 @@ def fly_scan_eliot(scan_params,pol,exp_time=.5, *, md=None):
             yield from bps.mv(epu_gap,en.gap(start_en,pol))
             if step == 0 :
                 monopos = mono_en.get().value
-                yield from bps.abs_set(epu_gap, en.gap(monopos, pol), wait=False, group='EPU')
+                yield from bps.abs_set(epu_gap, en.gap(monopos, pol,grating=grating), wait=False, group='EPU')
                 yield from wait(group='EPU')
             # start the mono scan
             yield from bps.mv(Mono_Scan_Start,1)
@@ -566,7 +579,7 @@ def fly_scan_eliot(scan_params,pol,exp_time=.5, *, md=None):
             while np.abs(monopos < end_en)>0.1:
                 yield from wait(group='EPU')
                 monopos = mono_en.get().value
-                yield from bps.abs_set(epu_gap, en.gap(monopos, pol),wait=False,group='EPU')
+                yield from bps.abs_set(epu_gap, en.gap(monopos, pol,grating=grating),wait=False,group='EPU')
                 yield from create('primary')
                 for obj in devices:
                     yield from read(obj)
