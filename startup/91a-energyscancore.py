@@ -512,7 +512,7 @@ def scan_eliot(detectors, cycler, exp_time,*, md=None):
     return (yield from inner_scan_eliot())
 
 
-def fly_scan_eliot(scan_params,pol=np.nan,grating='best', *, md=None):
+def fly_scan_eliot(scan_params , polarization = np.nan , grating = 'best', *, md=None):
     """
     Specific scan for SST-1 monochromator fly scan, while catching up with the undulator
 
@@ -553,8 +553,9 @@ def fly_scan_eliot(scan_params,pol=np.nan,grating='best', *, md=None):
     def inner_scan_eliot():
         # start the scan parameters to the monoscan PVs
         yield Msg('checkpoint')
-        if np.isnan(pol) is False:
-            yield from set_polarization(pol)
+        if np.isnan( polarization ) is False:
+            yield from set_polarization(polarization)
+            pol = polarization
         else:
             pol = en.polarization.setpoint.get()
         step = 0
