@@ -178,8 +178,7 @@ Exit_Slit = prettymotor('XF:07ID2-BI{Slt:11-Ax:YGap}Mtr', name='Exit Slit of Mon
 grating = prettymotor('XF:07ID1-OP{Mono:PGM1-Ax:GrtP}Mtr',name="Mono Grating",kind='hinted')
 mirror2 = prettymotor('XF:07ID1-OP{Mono:PGM1-Ax:MirP}Mtr',name="Mono Mirror",kind='hinted')
 
-sd.baseline.extend([sam_viewer, sam_X, sam_Y, sam_Z, sam_Th, BeamStopS, BeamStopW, Det_S, Det_W,
-                    Shutter_Y, Izero_Y, Izero_ds, grating, mirror2])
+
 
 
 @register_line_magic
@@ -251,10 +250,14 @@ Shutter_control   = EpicsSignal('XF:07IDB-CT{DIODE-Local:1}OutPt01:Data-Sel',
 Shutter_delay   = EpicsSignal('XF:07IDB-CT{DIODE-MTO:1}OutDelaySet:2-SP',
                            name = 'RSoXS Shutter Delay (ms)', kind='normal')
 Shutter_open_time   = EpicsSignal('XF:07IDB-CT{DIODE-MTO:1}OutWidthSet:2-SP',
-                           name = 'RSoXS Shutter Opening Time (ms)', kind='normal')
+                           name = 'RSoXS Shutter Opening Time (ms)', kind='hinted')
 Shutter_trigger   = EpicsSignal('XF:07IDB-CT{DIODE-MTO:1}Trigger:PV-Cmd',
                            name = 'RSoXS Shutter Trigger', kind='normal')
 Light_control   = EpicsSignal('XF:07IDB-CT{DIODE-Local:1}OutPt05:Data-Sel',
                            name = 'RSoXS Light Toggle', kind='normal')
 
-sd.monitors.append(Shutter_control) # this will give us a monitor to time the shutter opens and closes
+sd.monitors.append(Shutter_control,Shutter_open_time) # this will give us a monitor to time the shutter opens and close
+
+sd.baseline.extend([sam_viewer, sam_X, sam_Y, sam_Z, sam_Th, BeamStopS, BeamStopW, Det_S, Det_W,
+                    Shutter_Y, Izero_Y, Izero_ds, grating, mirror2,Shutter_open_time])
+# s
