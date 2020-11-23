@@ -232,13 +232,13 @@ def NEXAFS_fly_scan_core(scan_params,openshutter=False, m3_pitch=np.nan, diode_r
     if np.isnan(pol):
         pol = en.polarization.setpoint.get()
     else:
-        print(f'setting pol to {pol}')
+        print(f'setting undulator polarization to {pol}')
         yield from set_polarization(pol)
     en.read;
     samplepol = en.sample_polarization.setpoint.get()
     (en_start,en_stop,en_speed) = scan_params[0]
     yield from bps.mv(en, en_start)  # move to the initial energy
-    print(f'Effective Sample polarization set to {samplepol}')
+    print(f'Effective sample polarization is now {samplepol}')
     if openshutter:
         yield from bps.mv(Shutter_enable, 0)
         yield from bps.mv(Shutter_control, 1)
