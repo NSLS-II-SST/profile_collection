@@ -4,6 +4,8 @@ import numpy as np
 
 
 def epu_angle_from_grazing(real_incident_angle,grazing_angle=20):
+    print(
+        f'Angle for Polarization = {np.arccos(np.cos(real_incident_angle * np.pi / 180) * 1 / (np.cos(grazing_angle * np.pi / 180))) * 180 / np.pi}')
     return np.arccos(
         np.cos(real_incident_angle * np.pi / 180) * 1 / (np.cos(grazing_angle * np.pi / 180))) * 180 / np.pi
 
