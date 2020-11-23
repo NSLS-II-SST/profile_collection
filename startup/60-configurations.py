@@ -238,8 +238,8 @@ def SAXS():
       'RSoXS_WAXS_SDD': None,
       'RSoXS_WAXS_BCX': None,
       'RSoXS_WAXS_BCY': None,
-      'RSoXS_SAXS_SDD': 459,
-      'RSoXS_SAXS_BCX': 487,
+      'RSoXS_SAXS_SDD': 508,
+      'RSoXS_SAXS_BCX': 374.2,
       'RSoXS_SAXS_BCY': 491,}]
 
 def SAXSNEXAFS():
