@@ -14,7 +14,7 @@ def Carbon_angle_NEXAFS(grazing_angle=20,speed=.1,diode_range=7,angles = [20,40,
                                      pol=epu_angle_from_grazing(angle,grazing_angle),
                                      diode_range=diode_range,
                                      grating='250',
-                                     m3_pitch=7.99)
+                                     m3_pitch=7.97)
 def Oxygen_angle_NEXAFS(grazing_angle=20,speed=.2,diode_range=7,angles = [20,40,55,70,90]):
     for angle in angles:
         yield from fly_Oxygen_NEXAFS(speed=speed,
