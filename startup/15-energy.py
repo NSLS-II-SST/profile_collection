@@ -171,7 +171,7 @@ class EnPos(PseudoPositioner):
             print(f'  . 250 l/mm grating: gap = {g250_gap}, intensity {g250_intens}')
             print(f'  . 1200 l/mm grating: gap = {g1200_gap}, intensity {g1200_intens}')
 
-        if grating=='250':
+        if grating=='250' or np.isnan(g1200_gap):
             if np.isnan(g250_gap):
                 if pol==0:
                     return epugap_from_en_pol(energy, 100)
@@ -273,12 +273,12 @@ class EnPosold(PseudoPositioner):
 en = EnPos('', name='en')
 en.energy.kind = 'hinted'
 en.monoen.kind = 'normal'
-en.monoen.readback.kind = 'normal'
+en.monoen.readback.kind = 'hinted'
 mono_en = en.monoen
 epu_gap = en.epugap
 epu_phase = en.epuphase
 #epu_mode = en.epumode
-mono_en.read_attrs = ['readback']
+# mono_en.read_attrs = ['readback']
 en.epugap.kind = 'normal'
 en.epuphase.kind = 'normal'
 en.polarization.kind = 'normal'

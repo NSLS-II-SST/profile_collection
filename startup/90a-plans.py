@@ -146,8 +146,6 @@ dark_frame_preprocessor_saxs = bluesky_darkframes.DarkFramePreprocessor(
                     Det_S.user_setpoint,
                     saxs_det.cam.bin_x,
                     saxs_det.cam.bin_y,
-                    sam_X.user_setpoint,
-                    sam_Y.user_setpoint,
                     ],
     limit=10)
 
