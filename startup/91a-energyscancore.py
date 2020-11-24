@@ -555,11 +555,11 @@ def fly_scan_eliot(scan_params , polarization = np.nan , grating = 'best', *, md
     def inner_scan_eliot():
         # start the scan parameters to the monoscan PVs
         yield Msg('checkpoint')
-        if np.isnan( polarization ) is False:
+        if np.isnan( polarization ):
+            pol = en.polarization.setpoint.get()
+        else:
             yield from set_polarization(polarization)
             pol = polarization
-        else:
-            pol = en.polarization.setpoint.get()
         step = 0
         for (start_en,end_en,speed_en) in scan_params:
             yield Msg('checkpoint')

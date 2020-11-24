@@ -171,12 +171,14 @@ class EnPos(PseudoPositioner):
             print(f'  . 250 l/mm grating: gap = {g250_gap}, intensity {g250_intens}')
             print(f'  . 1200 l/mm grating: gap = {g1200_gap}, intensity {g1200_intens}')
 
-        if grating=='250' or np.isnan(g1200_gap):
+        if grating=='250':
             if np.isnan(g250_gap):
                 if pol==0:
                     return epugap_from_en_pol(energy, 100)
                 if pol==90:
                     return epugap_from_en_pol(energy, 190)
+                else:
+                    return min(100000, max(14000, g1200_gap))
             else:
                 return min(100000,max(14000,g250_gap))
         elif grating=='1200' or np.isnan(g250_gap):
