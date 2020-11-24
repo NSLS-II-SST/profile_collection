@@ -256,8 +256,8 @@ Shutter_trigger   = EpicsSignal('XF:07IDB-CT{DIODE-MTO:1}Trigger:PV-Cmd',
 Light_control   = EpicsSignal('XF:07IDB-CT{DIODE-Local:1}OutPt05:Data-Sel',
                            name = 'RSoXS Light Toggle', kind='normal')
 
-sd.monitors.extend([Shutter_control,Shutter_open_time]) # this will give us a monitor to time the shutter opens and close
+sd.monitors.extend([Shutter_control]) # this will give us a monitor to time the shutter opens and close
 
 sd.baseline.extend([sam_viewer, sam_X, sam_Y, sam_Z, sam_Th, BeamStopS, BeamStopW, Det_S, Det_W,
-                    Shutter_Y, Izero_Y, Izero_ds, grating, mirror2,Shutter_open_time])
+                    Shutter_Y, Izero_Y, Izero_ds, grating, mirror2])
 # s
