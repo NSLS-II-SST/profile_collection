@@ -104,34 +104,11 @@ def en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=
 
     yield from set_polarization(pol)
 
-    # Hack in darkframes manually
-    darktimes = np.unique(times)
-    darkenergies = darktimes.copy()
-    darkenergies[:] = energies[0]
-
-    shutters = times.copy()
-    darkshutters = darktimes.copy()
-    shutters[:] = 1
-    darkshutters[:] = 0
-
-    times = np.concatenate((darktimes,times))
-    energies = np.concatenate((darkenergies,energies))
-    shutters = np.concatenate((darkshutters,shutters))
-
-
-
-  #  sigcycler = cycler(Shutter_enable, shutters)
     sigcycler = cycler(energy, energies)
-  #  yield from bps.mv(saxs_det.cam.acquire_time,times[0])
     sigcycler += cycler(saxs_det.cam.acquire_time, times.copy())
     sigcycler += cycler(Shutter_open_time, times.copy()*1000)
-
     #sigcycler += cycler(sw_det.waxs.cam.acquire_time, times.copy()) #add extra exposure time for WAXS
 
-   # yield from bps.abs_set(en, energies[0], timeout=180, wait=True)
-   # for signal in signals:
-   #     signal.kind = 'normal'
-   # print(det
     yield from bp.scan_nd(dets + signals,sigcycler, md={'plan_name':enscan_type})
 
 
