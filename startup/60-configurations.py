@@ -554,8 +554,8 @@ def WAXSNEXAFS():
         'order': 1},
         {
         'motor':    Shutter_Y,
-        'position': 32.2,
-        'order': 2},
+        'position': 2.2,
+        'order': 1},
         {
         'motor':    Izero_Y,
         'position': -29,
