@@ -190,7 +190,7 @@ def move_to_location(locs=get_sample_location()):
               slits3.hcenter: slits3.hcenter,
               Shutter_Y: Shutter_Y,
               Izero_Y: Izero_Y,
-              # Det_W: Det_W,
+              Det_W: Det_W,
               Det_S: Det_S,
               BeamStopS: BeamStopS,
               BeamStopW: BeamStopW}
