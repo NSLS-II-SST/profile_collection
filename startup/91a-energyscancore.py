@@ -78,8 +78,8 @@ def one_trigger_nd_step(detectors, step, pos_cache):
 # @dark_frames_enable
 def en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=7.94,diode_range=6,
                  pol=0,grating='no change'):
-    saxs_det.cam.acquire_time.kind = 'hinted'
-    # sw_det.waxs.cam.acquire_time.kind = 'normal'
+    for det in dets:
+        det.cam.acquire_time.kind = 'hinted'
     yield from bps.abs_set(mir3.Pitch,m3_pitch,wait=True)
     yield from bps.mv(DiodeRange,diode_range)
 
@@ -105,9 +105,10 @@ def en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=
     yield from set_polarization(pol)
 
     sigcycler = cycler(energy, energies)
-    sigcycler += cycler(saxs_det.cam.acquire_time, times.copy())
+    for det in dets:
+        sigcycler += cycler(det.cam.acquire_time, times.copy())
+
     sigcycler += cycler(Shutter_open_time, times.copy()*1000)
-    #sigcycler += cycler(sw_det.waxs.cam.acquire_time, times.copy()) #add extra exposure time for WAXS
 
     yield from bp.scan_nd(dets + signals,sigcycler, md={'plan_name':enscan_type})
 

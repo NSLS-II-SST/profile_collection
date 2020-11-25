@@ -16,12 +16,13 @@ run_report(__file__)
 def set_exposure(exposure):
     if exposure > 0.001 and exposure < 1000 :
         saxs_det.set_exptime(exposure)
+        waxs_det.set_exptime(exposure)
     else:
         print('Invalid time, exposure time not set')
 
 
 def exposure():
-    return (saxs_det.exposure())
+    return (saxs_det.exposure()+'\n'+waxs_det.exposure())
 
 
 @register_line_magic
@@ -41,45 +42,45 @@ def binning(line):
     try:
         bins = int(line)
     except:
-        boxed_text('Pixel Binning',saxs_det.binning(),'lightpurple',shrink=True)
+        boxed_text('Pixel Binning',saxs_det.binning()+'\n'+waxs_det.binning(),'lightpurple',shrink=True)
     else:
         if bins > 0 and bins < 100:
             saxs_det.set_binning(bins,bins)
-            #waxs_det.set_binning(bins,bins)
+            waxs_det.set_binning(bins,bins)
 del binning
 
 
 @register_line_magic
 def temp(line):
-    boxed_text('Detector cooling',saxs_det.cooling_state(),'blue',shrink=True,width=95)
+    boxed_text('Detector cooling',saxs_det.cooling_state()+'\n'+saxs_det.cooling_state(),'blue',shrink=True,width=95)
 del temp
 
 
 @register_line_magic
 def cool(line):
     saxs_det.cooling_on()
-    #waxs_det.cooling_on()
+    waxs_det.cooling_on()
 del cool
 
 
 @register_line_magic
 def warm(line):
     saxs_det.cooling_off()
-    #waxs_det.cooling_off()
+    waxs_det.cooling_off()
 del warm
 
 
 @register_line_magic
 def dark(line):
     saxs_det.shutter_off()
-    #waxs_det.shutter_off()
+    waxs_det.shutter_off()
 del dark
 
 
 @register_line_magic
 def darkoff(line):
     saxs_det.shutter_on()
-    #waxs_det.shutter_on()
+    waxs_det.shutter_on()
 del darkoff
 
 #
@@ -109,6 +110,21 @@ def dark_plan_saxs():
     yield from bps.mv(saxs_det.cam.shutter_mode,shutterstate)
     yield from saxs_det.skinnyunstage()
     yield from saxs_det.skinnystage()
+    return snapshot
+
+
+def dark_plan_waxs():
+    yield from waxs_det.skinnyunstage()
+    yield from waxs_det.skinnystage()
+    shutterstate = waxs_det.cam.shutter_mode.get()
+    yield from bps.mv(waxs_det.cam.shutter_mode,0)
+    yield from bps.trigger(waxs_det, group='darkframe-trigger')
+    yield from bps.wait('darkframe-trigger')
+    print('dark_plan_saxs assets: ',waxs_det.tiff._asset_docs_cache)
+    snapshot = bluesky_darkframes.SnapshotDevice(waxs_det)
+    yield from bps.mv(waxs_det.cam.shutter_mode,shutterstate)
+    yield from waxs_det.skinnyunstage()
+    yield from waxs_det.skinnystage()
     return snapshot
 
 #
@@ -150,18 +166,18 @@ dark_frame_preprocessor_saxs = bluesky_darkframes.DarkFramePreprocessor(
     limit=10)
 
 #
-# dark_frame_preprocessor_waxs = bluesky_darkframes.DarkFramePreprocessor(
-#     dark_plan=dark_plan_waxs,
-#     detector=waxs_det,
-#     max_age=120,
-#     locked_signals=[waxs_det.cam.acquire_time,
-#                     Det_W.user_setpoint,
-#                     waxs_det.cam.bin_x,
-#                     waxs_det.cam.bin_y,
-#                     sam_X.user_setpoint,
-#                     sam_Y.user_setpoint,
-#                     ],
-#     limit=10)
+dark_frame_preprocessor_waxs = bluesky_darkframes.DarkFramePreprocessor(
+    dark_plan=dark_plan_waxs,
+    detector=waxs_det,
+    max_age=120,
+    locked_signals=[waxs_det.cam.acquire_time,
+                    Det_W.user_setpoint,
+                    waxs_det.cam.bin_x,
+                    waxs_det.cam.bin_y,
+                    sam_X.user_setpoint,
+                    sam_Y.user_setpoint,
+                    ],
+    limit=10)
 #
 
 # possibly add a exposure time preprocessor to check beam exposure on CCD over exposure
@@ -170,10 +186,10 @@ dark_frame_preprocessor_saxs = bluesky_darkframes.DarkFramePreprocessor(
 
 # if there is no scatter, pause
 # dark_frames_enable_synced = make_decorator(dark_frame_preprocessor_synced)()
-# dark_frames_enable_waxs = make_decorator(dark_frame_preprocessor_waxs)()
+dark_frames_enable_waxs = make_decorator(dark_frame_preprocessor_waxs)()
 dark_frames_enable_saxs = make_decorator(dark_frame_preprocessor_saxs)()
 # RE.preprocessors.append(dark_frame_preprocessor_synced)
-# RE.preprocessors.append(dark_frame_preprocessor_waxs)
+RE.preprocessors.append(dark_frame_preprocessor_waxs)
 RE.preprocessors.append(dark_frame_preprocessor_saxs)
 
 
@@ -579,11 +595,12 @@ def quicksnap():
 
 
 # @dark_frames_enable
-def snapshot(secs=0, count=1, name=None, energy = None, det= None):
+def snapshot(secs=0, count=1, name=None, energy = None, det= saxs_det):
     '''
     snap of detectors to clear any charge from light hitting them - needed before starting scans or snapping images
     :return:
     '''
+
     if count==1:
         counts = ''
     elif count <=0 :
@@ -593,7 +610,7 @@ def snapshot(secs=0, count=1, name=None, energy = None, det= None):
         count = round(count)
         counts = 's'
     if secs <= 0:
-        secs = saxs_det.cam.acquire_time.get()
+        secs = det.cam.acquire_time.get()
 
     if secs == 1:
         secss = ''
@@ -601,8 +618,6 @@ def snapshot(secs=0, count=1, name=None, energy = None, det= None):
         secss = 's'
 
 
-    if det is None:
-        det = saxs_det
 
     if isinstance(energy, float):
         yield from bps.mv(en,energy)

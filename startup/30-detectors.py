@@ -164,14 +164,14 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
 
 saxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:1}', name='Small Angle CCD Detector',
                                   read_attrs=['tiff', 'stats1.total'])
-#
-#
-#
-#
-# waxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:2}', name='Wide Angle CCD Detector',
-#                                   read_attrs=['tiff', 'stats1.total'])
 saxs_det.transform_type = 3
-# waxs_det.transform_type = 1
+#
+#
+#
+waxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:2}', name='Wide Angle CCD Detector',
+                                   read_attrs=['tiff', 'stats1.total'])
+
+waxs_det.transform_type = 1
 
 
 class SyncedDetectors(Device):
@@ -262,7 +262,7 @@ class SyncedDetectors(Device):
 # sw_det.saxs.transform_type = 3
 # sw_det.waxs.transform_type = 1
 # #
-for det in [saxs_det]:#, waxs_det,sw_det.waxs,sw_det.saxs]:
+for det in [saxs_det,waxs_det]:#, waxs_det,sw_det.waxs,sw_det.saxs]:
      det.kind = 'hinted'
      det.stats1.kind = 'hinted'
      det.stats1.total.kind = 'hinted'
@@ -288,4 +288,4 @@ for det in [saxs_det]:#, waxs_det,sw_det.waxs,sw_det.saxs]:
 #
 # sw_det.read_attrs = ['saxs','waxs']
 
-sd.baseline.extend([saxs_det.cam])#, waxs_det.cam])
+sd.baseline.extend([saxs_det.cam,waxs_det.cam])#, waxs_det.cam])
