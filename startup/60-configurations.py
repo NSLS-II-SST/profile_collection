@@ -33,7 +33,7 @@ def DetW_out():
     yield from bps.mv(Det_W,-94)
 
 def BSw_in():
-    yield from bps.mv(BeamStopW,66.1)
+    yield from bps.mv(BeamStopW,66.66)
 def BSw_out():
     yield from bps.mv(BeamStopW,3)
 
@@ -415,7 +415,7 @@ def WAXSmode():
                       Izero_Y, -29,
                       Det_W, -10,
                       Det_S, -94,
-                      BeamStopW, 66.1,
+                      BeamStopW, 66.66,
                       BeamStopS, 3,
                       sam_Y, -125)
 
@@ -486,7 +486,7 @@ def WAXS():
         'order': 1},
         {
         'motor':    BeamStopW,
-        'position': 66.1,
+        'position': 66.66,
         'order': 1},
         {
         'motor':    BeamStopS,
@@ -570,7 +570,7 @@ def WAXSNEXAFS():
         'order': 1},
         {
         'motor':    BeamStopW,
-        'position': 66.1,
+        'position': 66.66,
         'order': 0},
         {
         'motor':    BeamStopS,
@@ -654,7 +654,7 @@ def oldTEYNEXAFS():
         'order': 1},
         {
         'motor':    BeamStopW,
-        'position': 66.1,
+        'position': 66.66,
         'order': 0},
         {
         'motor':    BeamStopS,
