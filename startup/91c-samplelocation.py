@@ -30,6 +30,22 @@ def spiralsearch_all(barin=[],diameter=.5, stepsize=.2):
         RE.md['project_name'] = 'spiral_searches'
         yield from spiralsearch(diameter, stepsize)
 
+def spiralsearchwaxs(diameter=.6, stepsize=.2, energy=None):
+    if energy is not None:
+        if energy > 150 and energy < 2200:
+            yield from bps.mv(en, energy)
+    x_center = sam_X.user_setpoint.get()
+    y_center = sam_Y.user_setpoint.get()
+    num = round(diameter / stepsize) + 1
+    yield from spiral_square([waxs_det], sam_X, sam_Y, x_center=x_center, y_center=y_center,
+                             x_range=diameter, y_range=diameter, x_num=num, y_num=num)
+
+def spiralsearchwaxs_all(barin=[], diameter=.5, stepsize=.2):
+    for sample in barin:
+        yield from load_sample(sample)
+        RE.md['project_name'] = 'spiral_searches'
+        yield from spiralsearchwaxs(diameter, stepsize)
+
 
 def map_bar_from_spirals(bar,spiralnums,barpos):
     for i,pos in enumerate(barpos):

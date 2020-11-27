@@ -288,4 +288,4 @@ for det in [saxs_det,waxs_det]:#, waxs_det,sw_det.waxs,sw_det.saxs]:
 #
 # sw_det.read_attrs = ['saxs','waxs']
 
-sd.baseline.extend([saxs_det.cam,waxs_det.cam])#, waxs_det.cam])
+# sd.baseline.extend([saxs_det.cam,waxs_det.cam])#, waxs_det.cam])
