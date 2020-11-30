@@ -321,9 +321,9 @@ def SAXSNEXAFS():
       'RSoXS_WAXS_SDD': None,
       'RSoXS_WAXS_BCX': None,
       'RSoXS_WAXS_BCY': None,
-      'RSoXS_SAXS_SDD': 459,
+      'RSoXS_SAXS_SDD': 500,
       'RSoXS_SAXS_BCX': 488,
-      'RSoXS_SAXS_BCY': 494,}]
+      'RSoXS_SAXS_BCY': 490,}]
 
 def TEYNEXAFS():
     return [[{

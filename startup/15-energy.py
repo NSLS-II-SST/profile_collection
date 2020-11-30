@@ -279,6 +279,7 @@ epu_gap = en.epugap
 epu_phase = en.epuphase
 #epu_mode = en.epumode
 mono_en.read_attrs = ['readback']
+mono_en.readback.kind='normal'
 en.epugap.kind = 'normal'
 en.epuphase.kind = 'normal'
 en.polarization.kind = 'normal'
