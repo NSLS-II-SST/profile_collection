@@ -652,7 +652,7 @@ def full_ca_scan_nd(multiple=1,sigs=[],
 
     normal scan takes ~ 12 minutes to complete
     '''
-    beamline_status()
+    sample()
     if len(read_input("Starting a Calcium energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     enscan_type = 'full_ca_scan_nd'
@@ -684,7 +684,7 @@ def short_calcium_scan_nd(multiple=1,sigs=[],
 
     normal scan takes ~ 12 minutes to complete
     '''
-    beamline_status()
+    sample()
     if len(read_input("Starting a Calcium energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     enscan_type = 'short_calcium_scan_nd'
