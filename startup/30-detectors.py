@@ -264,15 +264,15 @@ class SyncedDetectors(Device):
 # #
 for det in [saxs_det,waxs_det]:#, waxs_det,sw_det.waxs,sw_det.saxs]:
      det.kind = 'hinted'
-     det.stats1.kind = 'hinted'
-     det.stats1.total.kind = 'hinted'
+     det.stats1.kind = 'normal'
+     det.stats1.total.kind = 'normal'
      det.cam.kind = 'hinted'
      det.cam.temperature_actual.kind = 'normal'
      det.cam.hot_side_temp.kind = 'normal'
      det.cam.bin_y.kind = 'normal'
      det.cam.bin_x.kind = 'normal'
      det.cam.adc_speed.kind = 'normal'
-     det.cam.acquire_time.kind = 'hinted'
+     det.cam.acquire_time.kind = 'normal'
      det.cam.model.kind = 'normal'
      det.cam.trigger_mode.kind = 'normal'
      det.cam.sync.kind = 'normal'

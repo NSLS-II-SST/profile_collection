@@ -144,3 +144,5 @@ logger.addHandler(handler)
 logger.getEffectiveLevel()
 logger.setLevel('DEBUG')  # change DEBUG to INFO later on
 
+from databroker.v0 import Broker
+db = Broker.named('rsoxs')
