@@ -512,7 +512,7 @@ def WAXSNEXAFS():
         'order': 1},
         {
         'motor':    slits2.vsize,
-        'position': 0.451,
+        'position': 0.45,
         'order': 1},
         {
         'motor':    slits2.vcenter,
@@ -545,7 +545,7 @@ def WAXSNEXAFS():
         {
         'motor':    Shutter_Y,
         'position': 2.2,
-        'order': 1},
+        'order': 0},
         {
         'motor':    Izero_Y,
         'position': -29,
@@ -555,9 +555,13 @@ def WAXSNEXAFS():
         'position': -94,
         'order': 1},
         {
+        'motor':    Det_S,
+        'position': -94,
+        'order': 1},
+        {
         'motor':    BeamStopW,
         'position': 71.4,
-        'order': 0},
+        'order': 1},
     ],
     {'RSoXS_Config': 'WAXSNEXAFS',
       'RSoXS_Main_DET': 'Beamstop_WAXS',
