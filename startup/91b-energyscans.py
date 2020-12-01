@@ -42,7 +42,7 @@ def full_oxygen_scan_nd(multiple=1,sigs=[],
                             diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
 
 def short_oxygen_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=8.01,grating='1200'):
+                        dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=7.99,grating='1200'):
     '''
     Short Oxygen Scan runs an RSoXS sample set through the O edge, with particular emphasis in he pre edge region
 
