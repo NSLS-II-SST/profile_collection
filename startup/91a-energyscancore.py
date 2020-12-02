@@ -180,9 +180,9 @@ def NEXAFS_scan_core(signals, dets, energy, energies, enscan_type=None,
 
 def NEXAFS_fly_scan_core(scan_params,openshutter=False, m3_pitch=np.nan, diode_range=np.nan, pol=np.nan,
                      grating='best',exp_time=.5,enscan_type=None):
-    if np.isnan(m3_pitch) is False:
+    if not np.isnan(m3_pitch):
         yield from bps.abs_set(mir3.Pitch, m3_pitch, wait=True)
-    if np.isnan(diode_range) is False:
+    if not np.isnan(diode_range):
         yield from bps.mv(DiodeRange, diode_range)
     if grating == '1200':
         print('Moving grating to 1200 l/mm...')

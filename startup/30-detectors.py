@@ -63,7 +63,6 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
         self.image.nd_array_port.set('TRANS1')
         self.tiff.nd_array_port.set('TRANS1')
 
-
         return [self].append(super().stage(*args, **kwargs))
 
 
