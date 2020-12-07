@@ -82,7 +82,7 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
 
     def shutter_on(self):
         #self.cam.sync.set(1)
-        self.cam.sync.set(2)
+        self.cam.sync.set(1)
 
     def shutter_off(self):
         #self.cam.sync.set(0)
