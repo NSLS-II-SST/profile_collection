@@ -73,7 +73,7 @@ suspend_shutter4 = SuspendBoolHigh(psh4.state,sleep = 30,
                                   tripped_message="Shutter 4 Closed, waiting for it to open",
                                   pre_plan=beamdown_notice, post_plan=beamup_notice)
 
-suspend_shutter1 = SuspendBoolHigh(psh4.state,sleep = 30,
+suspend_shutter1 = SuspendBoolHigh(psh1.state,sleep = 30,
                                   tripped_message="Front End Shutter Closed, waiting for it to open",
                                   pre_plan=beamdown_notice, post_plan=beamup_notice)
 
