@@ -9,11 +9,9 @@ class RSoXSPrompt(Prompts):
         dt = datetime.datetime.now()
         formatted_date = dt.strftime('%Y-%m-%d')
 
-        if len(RE.md['user_name']) > 0 and len(RE.md['project_name']) > 0 and len(RE.md['institution']) > 0:
-            RSoXStoken = (Token.Prompt, 'RSoXS '+'{}/{}_{}_{}/{}/{}/ '.format(RE.md['cycle'],
-                                                                             RE.md['cycle'],
-                                                                             RE.md['institution'],
-                                                                             RE.md['user_name'],
+        if len(RE.md['proposal_id']) > 0 and len(RE.md['project_name']) > 0 and len(RE.md['cycle']) > 0:
+            RSoXStoken = (Token.Prompt, 'RSoXS '+'{}/{}/{}/auto/{}/ '.format(RE.md['cycle'],
+                                                                             RE.md['proposal_id'],
                                                                              RE.md['project_name'],
                                                                              formatted_date)
                           )

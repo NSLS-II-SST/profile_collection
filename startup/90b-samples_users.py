@@ -14,6 +14,8 @@ def user():
     text = ""
     if len(RE.md["proposal_id"]) > 0 :
         text += '   proposal ID:         '+colored('{}'.format(str(RE.md["proposal_id"])).center(40,' '),'yellow')
+    if len(RE.md["saf_id"]) > 0 :
+        text += '   saf ID:         '+colored('{}'.format(str(RE.md["saf_id"])).center(40,' '),'yellow')
     if len(RE.md["user_name"]) > 0 :
         text += '\n   User Name:           '+colored('{}'.format(RE.md["user_name"]).center(40,' '),'yellow')
     if len(RE.md["user_email"]) > 0 :
@@ -50,6 +52,10 @@ def sample():
         text += '\n   Sample Set:            '+colored('{}'.format(RE.md["sample_set"]).center(38,' '),'cyan')
     if len(str(RE.md["sample_date"])) > 0 :
         text += '\n   Sample Creation Date:  '+colored('{}'.format(RE.md["sample_date"]).center(38,' '),'cyan')
+    if len(str(RE.md["proposal_id"])) > 0 :
+        text += '\n   Proposal ID:          '+colored('{}'.format(RE.md["proposal_id"]).center(38,' '),'cyan')
+    if len(str(RE.md["saf_id"])) > 0 :
+        text += '\n   SAF id:          '+colored('{}'.format(RE.md["saf_id"]).center(38,' '),'cyan')
     if len(str(RE.md["project_name"])) > 0 :
         text += '\n   Project name:          '+colored('{}'.format(RE.md["project_name"]).center(38,' '),'cyan')
     if len(str(RE.md["project_desc"])) > 0 :
@@ -233,6 +239,8 @@ def get_sample_dict(acq = [],locations = []):
     sample_set = RE.md['sample_set']
     sample_date = RE.md['sample_date']
     project_name = RE.md['project_name']
+    proposal_id = RE.md['proposal_id']
+    saf_id = RE.md['saf_id']
     project_desc = RE.md['project_desc']
     samp_user_id = RE.md['samp_user_id']
     composition = RE.md['composition']
@@ -245,6 +253,8 @@ def get_sample_dict(acq = [],locations = []):
     return {'sample_name': sample_name,
             'sample_desc': sample_desc,
             'sample_id': sample_id,
+            'proposal_id': proposal_id,
+            'saf_id': saf_id,
             'sample_set': sample_set,
             'sample_date': sample_date,
             'project_name': project_name,
@@ -262,6 +272,7 @@ def get_sample_dict(acq = [],locations = []):
 
 def user_dict(user_id = RE.md['user_id'],
                 proposal_id = RE.md['proposal_id'],
+                saf_id = RE.md['saf_id'],
                 institution = RE.md['institution'],
                 user_name = RE.md['user_name'],
                 user_start_date = RE.md['user_start_date'],
@@ -270,6 +281,7 @@ def user_dict(user_id = RE.md['user_id'],
                 ):
     return {'user_id': user_id,
             'proposal_id': proposal_id,
+            'saf_id': saf_id,
             'institution': institution,
             'user_name': user_name,
             'user_start_date': user_start_date,
@@ -290,6 +302,8 @@ def load_sample(sam_dict):
     RE.md['sample_set'] = sam_dict['sample_set']
     RE.md['sample_date'] = sam_dict['sample_date']
     RE.md['project_name'] = sam_dict['project_name']
+    RE.md['proposal_id'] = sam_dict['proposal_id']
+    RE.md['saf_id'] = sam_dict['saf_id']
     RE.md['project_desc'] = sam_dict['project_desc']
     RE.md['samp_user_id'] = sam_dict['samp_user_id']
     RE.md['composition'] = sam_dict['composition']
@@ -310,6 +324,7 @@ def run_sample(sam_dict):
 def load_user_dict_to_md(user_dict):
     RE.md['user_id'] = user_dict['user_id']
     RE.md['proposal_id'] = user_dict['proposal_id']
+    RE.md['saf_id'] = user_dict['saf_id']
     RE.md['institution'] = user_dict['institution']
     RE.md['user_name'] = user_dict['user_name']
     RE.md['project_name'] = user_dict['project_name']
@@ -335,6 +350,14 @@ def newsample():
     sample_id = input('Your sample id - if you have one ({}): '.format(RE.md['sample_id']))
     if sample_id is not '':
         RE.md['sample_id'] = sample_id
+
+    proposal_id = input('Your Proposal ID from PASS ({}): '.format(RE.md['proposal_id']))
+    if proposal_id is not '':
+        RE.md['proposal_id'] = proposal_id
+
+    saf_id = input('Your SAF ID number from PASS ({}): '.format(RE.md['saf_id']))
+    if saf_id is not '':
+        RE.md['saf_id'] = saf_id
 
     sample_set = input('What set does this sample belong to ({}): '.format(RE.md['sample_set']))
     if sample_set is not '':
