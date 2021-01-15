@@ -238,8 +238,8 @@ def SAXS():
       'RSoXS_WAXS_SDD': None,
       'RSoXS_WAXS_BCX': None,
       'RSoXS_WAXS_BCY': None,
-      'RSoXS_SAXS_SDD': 508,
-      'RSoXS_SAXS_BCX': 374.2,
+      'RSoXS_SAXS_SDD': 521.8,
+      'RSoXS_SAXS_BCX': 489.86,
       'RSoXS_SAXS_BCY': 491,}]
 
 def SAXSNEXAFS():
@@ -321,9 +321,9 @@ def SAXSNEXAFS():
       'RSoXS_WAXS_SDD': None,
       'RSoXS_WAXS_BCX': None,
       'RSoXS_WAXS_BCY': None,
-      'RSoXS_SAXS_SDD': 500,
-      'RSoXS_SAXS_BCX': 488,
-      'RSoXS_SAXS_BCY': 490,}]
+      'RSoXS_SAXS_SDD': None,
+      'RSoXS_SAXS_BCX': None,
+      'RSoXS_SAXS_BCY': None,}]
 
 def TEYNEXAFS():
     return [[{
@@ -404,9 +404,9 @@ def TEYNEXAFS():
       'RSoXS_WAXS_SDD': None,
       'RSoXS_WAXS_BCX': None,
       'RSoXS_WAXS_BCY': None,
-      'RSoXS_SAXS_SDD': 459,
-      'RSoXS_SAXS_BCX': 488,
-      'RSoXS_SAXS_BCY': 494,}]
+      'RSoXS_SAXS_SDD': None,
+      'RSoXS_SAXS_BCX': None,
+      'RSoXS_SAXS_BCY': None,}]
 
 def WAXSmode():
     yield from psh10.close()
@@ -485,9 +485,9 @@ def WAXS():
     ],
     {'RSoXS_Config': 'WAXS',
       'RSoXS_Main_DET': 'WAXS',
-      'RSoXS_WAXS_SDD': 34,
-      'RSoXS_WAXS_BCX': 465,
-      'RSoXS_WAXS_BCY': 544,
+      'RSoXS_WAXS_SDD': 38.7,
+      'RSoXS_WAXS_BCX': 400.5,
+      'RSoXS_WAXS_BCY': 531,
       'RSoXS_SAXS_SDD': None,
       'RSoXS_SAXS_BCX': None,
       'RSoXS_SAXS_BCY': None,}]
@@ -672,6 +672,14 @@ def all_out():
                       sam_X, 0,
                       sam_Z, 0,
                       sam_Th, 0)
+    RE.md.update({'RSoXS_Config': 'inactive',
+      'RSoXS_Main_DET': None,
+      'RSoXS_WAXS_SDD': None,
+      'RSoXS_WAXS_BCX': None,
+      'RSoXS_WAXS_BCY': None,
+      'RSoXS_SAXS_SDD': None,
+      'RSoXS_SAXS_BCX': None,
+      'RSoXS_SAXS_BCY': None,})
     print('All done - Happy NEXAFSing')
 
 
