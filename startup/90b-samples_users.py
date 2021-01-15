@@ -13,13 +13,13 @@ def user():
     title = "User metadata - stored in every scan:"
     text = ""
     if len(RE.md["proposal_id"]) > 0 :
-        text += '   proposal ID:         '+colored('{}'.format(str(RE.md["proposal_id"])).center(40,' '),'yellow')
+        text += '   proposal ID:           '+colored('{}'.format(str(RE.md["proposal_id"])).center(40,' '),'yellow')
     if len(RE.md["saf_id"]) > 0 :
-        text += '   saf ID:         '+colored('{}'.format(str(RE.md["saf_id"])).center(40,' '),'yellow')
+        text += '\n   saf ID:              '+colored('{}'.format(str(RE.md["saf_id"])).center(40,' '),'yellow')
     if len(RE.md["user_name"]) > 0 :
         text += '\n   User Name:           '+colored('{}'.format(RE.md["user_name"]).center(40,' '),'yellow')
     if len(RE.md["user_email"]) > 0 :
-        text += '\n   User Email:           '+colored('{}'.format(RE.md["user_name"]).center(40,' '),'yellow')
+        text += '\n   User Email:          '+colored('{}'.format(RE.md["user_name"]).center(40,' '),'yellow')
     if len(RE.md["user_start_date"]) > 0 :
         text += '\n   User Start Date:     '+colored('{}'.format(RE.md["user_start_date"]).center(40,' '),'yellow')
     if len(RE.md["user_id"]) > 0 :
@@ -37,7 +37,9 @@ def sample():
     title = "Sample metadata - stored in every scan:"
     text = ''
     if len(str(RE.md["proposal_id"])) > 0 :
-        text += '   proposal ID:           '+colored('{}'.format(str(RE.md["proposal_id"])).center(38,' '),'cyan')
+        text += '   proposal ID:             '+colored('{}'.format(RE.md["proposal_id"]).center(38,' '),'cyan')
+    if len(str(RE.md["saf_id"])) > 0 :
+        text += '\n   SAF id:                '+colored('{}'.format(RE.md["saf_id"]).center(38,' '),'cyan')
     if len(str(RE.md["user_name"])) > 0 :
         text += '\n   User Name:             '+colored('{}'.format(RE.md["user_name"]).center(38,' '),'cyan')
     if len(str(RE.md["institution"])) > 0 :
@@ -52,10 +54,6 @@ def sample():
         text += '\n   Sample Set:            '+colored('{}'.format(RE.md["sample_set"]).center(38,' '),'cyan')
     if len(str(RE.md["sample_date"])) > 0 :
         text += '\n   Sample Creation Date:  '+colored('{}'.format(RE.md["sample_date"]).center(38,' '),'cyan')
-    if len(str(RE.md["proposal_id"])) > 0 :
-        text += '\n   Proposal ID:          '+colored('{}'.format(RE.md["proposal_id"]).center(38,' '),'cyan')
-    if len(str(RE.md["saf_id"])) > 0 :
-        text += '\n   SAF id:          '+colored('{}'.format(RE.md["saf_id"]).center(38,' '),'cyan')
     if len(str(RE.md["project_name"])) > 0 :
         text += '\n   Project name:          '+colored('{}'.format(RE.md["project_name"]).center(38,' '),'cyan')
     if len(str(RE.md["project_desc"])) > 0 :
