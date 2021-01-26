@@ -14,7 +14,7 @@ def user():
     text = ""
     if len(RE.md["proposal_id"]) > 0 :
         text += '   proposal ID:           '+colored('{}'.format(str(RE.md["proposal_id"])).center(40,' '),'yellow')
-    if len(RE.md["saf_id"]) > 0 :
+    if type(str(RE.md["saf_id"])) >0 :
         text += '\n   saf ID:              '+colored('{}'.format(str(RE.md["saf_id"])).center(40,' '),'yellow')
     if len(RE.md["user_name"]) > 0 :
         text += '\n   User Name:           '+colored('{}'.format(RE.md["user_name"]).center(40,' '),'yellow')
