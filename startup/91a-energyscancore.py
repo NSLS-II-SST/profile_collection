@@ -85,9 +85,9 @@ def en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=
 
     if grating=='1200':
         print('Moving grating to 1200 l/mm...')
-        if abs(mono_en.grating.user_offset.get()-7.2788) > .1:
+        if abs(mono_en.grating.user_offset.get()-7.2948) > .1:
             print('current grating offset is too far from known values, please update the procedure, grating will not move')
-        elif abs(mono_en.mirror2.user_offset.get()-8.1388) > .1:
+        elif abs(mono_en.mirror2.user_offset.get()-8.1264) > .1:
             print('current Mirror 2 offset is too far from known values, please update the procedure, grating will not move')
         else:
             yield from grating_to_1200()
@@ -127,10 +127,10 @@ def NEXAFS_scan_core(signals, dets, energy, energies, enscan_type=None,
     set_exposure(exp_time)
     if grating == '1200':
         print('Moving grating to 1200 l/mm...')
-        if abs(mono_en.grating.user_offset.get() - 7.2788) > .1:
+        if abs(mono_en.grating.user_offset.get() - 7.2948) > .1:
             print(
                 'current grating offset is too far from known values, please update the procedure, grating will not move')
-        elif abs(mono_en.mirror2.user_offset.get() - 8.1388) > .1:
+        elif abs(mono_en.mirror2.user_offset.get() - 8.1264) > .1:
             print(
                 'current Mirror 2 offset is too far from known values, please update the procedure, grating will not move')
         else:
@@ -186,10 +186,10 @@ def NEXAFS_fly_scan_core(scan_params,openshutter=False, m3_pitch=np.nan, diode_r
         yield from bps.mv(DiodeRange, diode_range)
     if grating == '1200':
         print('Moving grating to 1200 l/mm...')
-        if abs(mono_en.grating.user_offset.get() - 7.2788) > .1:
+        if abs(mono_en.grating.user_offset.get() - 7.2948) > .1:
             print(
                 'current grating offset is too far from known values, please update the procedure, grating will not move')
-        elif abs(mono_en.mirror2.user_offset.get() - 8.1388) > .1:
+        elif abs(mono_en.mirror2.user_offset.get() - 8.1264) > .1:
             print(
                 'current Mirror 2 offset is too far from known values, please update the procedure, grating will not move')
         else:

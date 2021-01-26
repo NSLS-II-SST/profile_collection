@@ -206,9 +206,9 @@ def buildeputable(start, stop, step, widfract, startinggap=14000, phase=0, mode=
 
     if grat=='1200':
         print('Moving grating to 1200 l/mm...')
-        if abs(grating.user_offset.get()-7.2788) > .1:
+        if abs(grating.user_offset.get()-7.2948) > .1:
             print('current grating offset is too far from known values, please update the procedure, grating will not move')
-        elif abs(mirror2.user_offset.get()-8.1388) > .1:
+        elif abs(mirror2.user_offset.get()-8.1264) > .1:
             print('current Mirror 2 offset is too far from known values, please update the procedure, grating will not move')
         else:
             yield from grating_to_1200()
@@ -310,9 +310,9 @@ def buildeputablegaps(start, stop, step, widfract, startingen, name, phase, grat
 
     if grating=='1200':
         print('Moving grating to 1200 l/mm...')
-        if abs(grating.user_offset.get()-7.2788) > .1:
+        if abs(grating.user_offset.get()-7.2948) > .1:
             print('current grating offset is too far from known values, please update the procedure, grating will not move')
-        elif abs(mirror2.user_offset.get()-8.1388) > .1:
+        elif abs(mirror2.user_offset.get()-8.1264) > .1:
             print('current Mirror 2 offset is too far from known values, please update the procedure, grating will not move')
         else:
             yield from grating_to_1200()
