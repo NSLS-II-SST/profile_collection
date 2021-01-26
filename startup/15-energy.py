@@ -51,6 +51,19 @@ class Monochromator(PVPositioner):
     done_value = 1
     stop_signal = Cpt(EpicsSignal, ':ENERGY_ST_CMD')
 
+    def set(self, *args, **kwargs):
+        "Temporary: Extend just to add debuging log messages."
+        status = super().set(*args, **kwargs)
+        # Temporarily using loud (ERROR-level) log messages for debugging purposes
+
+        def notify(status):
+            self.log.error("Status is done")
+
+        status.add_callback(notify)
+
+        self.log.error("Returning status object")
+        return status
+
 # mono_en= Monochromator('XF:07ID1-OP{Mono:PGM1-Ax:', name='Monochromator Energy',kind='normal')
 
 from scipy import interpolate
