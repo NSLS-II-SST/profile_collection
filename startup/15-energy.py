@@ -43,9 +43,9 @@ class Monochromator(PVPositioner):
     mirror2type = Cpt(EpicsSignal, 'MirX}Mtr_TYPE_MON', write_pv='MirX}Mtr_TYPE_SP', name="Mono Mirror Type",
                       kind='normal',auto_monitor=True)
     gratingx = Cpt(prettymotor, 'GrtX}Mtr', name="Mono Grating X motor",
-                      kind='normal',auto_monitor=True)
+                      kind='normal')
     mirror2x = Cpt(prettymotor, 'MirX}Mtr', name="Mono Mirror X motor",
-                      kind='normal',auto_monitor=True)
+                      kind='normal')
 
     done = Cpt(EpicsSignalRO, ':ERDY_STS')
     done_value = 1
