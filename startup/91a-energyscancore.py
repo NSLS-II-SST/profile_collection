@@ -528,6 +528,7 @@ def fly_scan_eliot(scan_params , polarization = np.nan , grating = 'best', *, md
     _md.update(md or {})
     devices = [mono_en]
 
+    @bpp.monitor_during_decorator([mono_en])
     @bpp.stage_decorator(list(devices))
     @bpp.run_decorator(md=_md)
     def inner_scan_eliot():

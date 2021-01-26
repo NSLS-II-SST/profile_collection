@@ -408,7 +408,7 @@ def grating_to_1200():
     yield from psh4.open()
 
 
-sd.monitors.extend([mono_en.readback])
+#sd.monitors.extend([mono_en.readback])
 
 # XF:07ID1-OP{Mono:PGM1-Ax::EVSTART_SP # start energy
 # XF:07ID1-OP{Mono:PGM1-Ax::EVSTOP_SP # stop energy
