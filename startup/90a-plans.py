@@ -206,7 +206,7 @@ def buildeputable(start, stop, step, widfract, startinggap=14000, phase=0, mode=
 
     if grat=='1200':
         print('Moving grating to 1200 l/mm...')
-        if abs(grating.user_offset.get()-7.308) > .1:
+        if abs(grating.user_offset.get()-7.2788) > .1:
             print('current grating offset is too far from known values, please update the procedure, grating will not move')
         elif abs(mirror2.user_offset.get()-8.1388) > .1:
             print('current Mirror 2 offset is too far from known values, please update the procedure, grating will not move')
@@ -215,7 +215,7 @@ def buildeputable(start, stop, step, widfract, startinggap=14000, phase=0, mode=
         print('done')
     elif grat=='250':
         print('Moving grating to 250 l/mm...')
-        if abs(grating.user_offset.get()-7.308) > .1:
+        if abs(grating.user_offset.get()-7.2788) > .1:
             print('current grating offset is too far from known values, please update the procedure, grating will not move')
         elif abs(mirror2.user_offset.get()-8.1388) > .1:
             print('current Mirror 2 offset is too far from known values, please update the procedure, grating will not move')
@@ -310,7 +310,7 @@ def buildeputablegaps(start, stop, step, widfract, startingen, name, phase, grat
 
     if grating=='1200':
         print('Moving grating to 1200 l/mm...')
-        if abs(grating.user_offset.get()-7.308) > .1:
+        if abs(grating.user_offset.get()-7.2788) > .1:
             print('current grating offset is too far from known values, please update the procedure, grating will not move')
         elif abs(mirror2.user_offset.get()-8.1388) > .1:
             print('current Mirror 2 offset is too far from known values, please update the procedure, grating will not move')
@@ -319,7 +319,7 @@ def buildeputablegaps(start, stop, step, widfract, startingen, name, phase, grat
         print('done')
     elif grating=='250':
         print('Moving grating to 250 l/mm...')
-        if abs(grating.user_offset.get()-7.308) > .1:
+        if abs(grating.user_offset.get()-7.2788) > .1:
             print('current grating offset is too far from known values, please update the procedure, grating will not move')
         elif abs(mirror2.user_offset.get()-8.1388) > .1:
             print('current Mirror 2 offset is too far from known values, please update the procedure, grating will not move')
