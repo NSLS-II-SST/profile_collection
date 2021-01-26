@@ -91,18 +91,24 @@ class EnPos(PseudoPositioner):
     @pseudo_position_argument
     def forward(self, pseudo_pos):
         '''Run a forward (pseudo -> real) calculation'''
-        return self.RealPosition(epugap=self.gap(pseudo_pos.energy, pseudo_pos.polarization),
+        print('In forward')
+        ret = self.RealPosition(epugap=self.gap(pseudo_pos.energy, pseudo_pos.polarization),
                                  monoen=pseudo_pos.energy,
                                  epuphase=self.phase(pseudo_pos.energy, pseudo_pos.polarization),
                                  #epumode=self.mode(pseudo_pos.polarization)
                                  )
+        print('finished forward')
+        return ret
 
     @real_position_argument
     def inverse(self, real_pos):
         '''Run an inverse (real -> pseudo) calculation'''
-        return self.PseudoPosition( energy=real_pos.monoen,
+        print('in Inverse')
+        ret =  self.PseudoPosition( energy=real_pos.monoen,
                                     polarization=self.pol(real_pos.epuphase,epu_mode.get()),
                                     sample_polarization = self.sample_pol(self.pol(real_pos.epuphase,epu_mode.get()),sam_Th))
+        print('Finished inverse')
+        return ret
 
     def where_sp(self):
         return ('Beamline Energy Setpoint : {}'
