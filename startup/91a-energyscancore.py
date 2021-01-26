@@ -553,15 +553,15 @@ def fly_scan_eliot(scan_params , polarization = np.nan , grating = 'best', *, md
             yield from wait(group='EPU')
             yield from bps.mv(epu_gap,en.gap(start_en,pol))
             if step == 0 :
-                monopos = mono_en.get().value
+                monopos = mono_en.readback.get()
                 yield from bps.abs_set(epu_gap, en.gap(monopos, pol,grating=grating), wait=False, group='EPU')
                 yield from wait(group='EPU')
             # start the mono scan
             yield from bps.mv(Mono_Scan_Start,1)
-            monopos = mono_en.get().value
+            monopos = mono_en.readback.get()
             while np.abs(monopos < end_en)>0.1:
                 yield from wait(group='EPU')
-                monopos = mono_en.get().value
+                monopos = mono_en.readback.get()
                 yield from bps.abs_set(epu_gap, en.gap(monopos, pol,grating=grating),wait=False,group='EPU')
                 yield from create('primary')
                 for obj in devices:
