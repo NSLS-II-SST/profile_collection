@@ -541,6 +541,7 @@ def fly_scan_eliot(scan_params , polarization = np.nan , grating = 'best', *, md
             pol = polarization
         step = 0
         for (start_en,end_en,speed_en) in scan_params:
+            print('starting step')
             yield Msg('checkpoint')
             yield from bps.mv(Mono_Scan_Start_ev,start_en,
                            Mono_Scan_Stop_ev,end_en,
@@ -548,15 +549,20 @@ def fly_scan_eliot(scan_params , polarization = np.nan , grating = 'best', *, md
             # move to the initial position
             if step > 0 :
                 yield from wait(group='EPU')
-
+            print('sent setup parameters to mono')
             yield from bps.abs_set(mono_en,start_en,group='EPU')
+            print('sent mono to start position')
             yield from wait(group='EPU')
+
+            print('done waiting')
             yield from bps.mv(epu_gap,en.gap(start_en,pol))
+            print('sent gap to start position')
             if step == 0 :
                 monopos = mono_en.readback.get()
                 yield from bps.abs_set(epu_gap, en.gap(monopos, pol,grating=grating), wait=False, group='EPU')
                 yield from wait(group='EPU')
             # start the mono scan
+            print('starting the fly')
             yield from bps.mv(Mono_Scan_Start,1)
             monopos = mono_en.readback.get()
             while np.abs(monopos < end_en)>0.1:
