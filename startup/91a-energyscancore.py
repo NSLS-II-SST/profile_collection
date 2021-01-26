@@ -548,7 +548,8 @@ def fly_scan_eliot(scan_params , polarization = np.nan , grating = 'best', *, md
             if step > 0 :
                 yield from wait(group='EPU')
 
-            yield from bps.mv(mono_en,start_en)
+            yield from bps.abs_set(mono_en,start_en,group='EPU')
+            yield from wait(group='EPU')
             yield from bps.mv(epu_gap,en.gap(start_en,pol))
             if step == 0 :
                 monopos = mono_en.get().value

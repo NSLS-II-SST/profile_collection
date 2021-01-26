@@ -29,7 +29,7 @@ epu_mode = EpicsSignal('SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP',
 
 class Monochromator(PVPositioner):
     setpoint = Cpt(EpicsSignal,':ENERGY_SP', kind='normal', write_timeout=180.)
-    value = Cpt(EpicsSignalRO, ':ENERGY_MON',kind='hinted')
+    #value = Cpt(EpicsSignalRO, ':ENERGY_MON',kind='hinted')
     readback = Cpt(EpicsSignalRO, ':ENERGY_MON',kind='hinted')
 
     grating = Cpt(prettymotor, 'GrtP}Mtr', name="Mono Grating", kind='normal')
@@ -286,7 +286,7 @@ class EnPosold(PseudoPositioner):
 en = EnPos('', name='en')
 en.energy.kind = 'hinted'
 en.monoen.kind = 'normal'
-en.monoen.readback.kind = 'hinted'
+#en.monoen.readback.kind = 'hinted'
 mono_en = en.monoen
 epu_gap = en.epugap
 epu_phase = en.epuphase
