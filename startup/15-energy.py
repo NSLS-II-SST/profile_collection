@@ -101,8 +101,8 @@ class EnPos(PseudoPositioner):
     def inverse(self, real_pos):
         '''Run an inverse (real -> pseudo) calculation'''
         return self.PseudoPosition( energy=real_pos.monoen,
-                                    polarization=0,#self.pol(real_pos.epuphase,epu_mode.get()),
-                                    sample_polarization = 0,)#self.sample_pol(self.pol(real_pos.epuphase,epu_mode.get()),sam_Th))
+                                    polarization=self.pol(real_pos.epuphase,epu_mode.get()),
+                                    sample_polarization = self.sample_pol(self.pol(real_pos.epuphase,epu_mode.get()),sam_Th))
 
     def where_sp(self):
         return ('Beamline Energy Setpoint : {}'
