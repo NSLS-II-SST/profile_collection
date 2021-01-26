@@ -34,18 +34,18 @@ class Monochromator(PVPositioner):
 
     grating = Cpt(prettymotor, 'GrtP}Mtr', name="Mono Grating", kind='normal')
     mirror2 = Cpt(prettymotor, 'MirP}Mtr', name="Mono Mirror", kind='normal')
-    cff = Cpt(EpicsSignal, ':CFF_SP', name="Mono CFF", kind='normal',auto_monitor=True)
-    vls = Cpt(EpicsSignal, ':VLS_B2.A', name="Mono CFF", kind='normal',auto_monitor=True)
+    cff = Cpt(EpicsSignal, ':CFF_SP', name="Mono CFF", kind='normal',automonitor=True)
+    vls = Cpt(EpicsSignal, ':VLS_B2.A', name="Mono CFF", kind='normal',automonitor=True)
     gratingtype = Cpt(EpicsSignal, 'GrtX}Mtr_TYPE_MON', string=True, write_pv='GrtX}Mtr_TYPE_SP',
-                      name="Mono Grating Type", kind='normal',auto_monitor=True)
+                      name="Mono Grating Type", kind='normal',automonitor=True)
 
     gratingtype_proc = Cpt(EpicsSignal, 'GrtX}Mtr_DCPL_CALC.PROC',name="Mono Grating Type_proc", kind='omitted')
     mirror2type = Cpt(EpicsSignal, 'MirX}Mtr_TYPE_MON', write_pv='MirX}Mtr_TYPE_SP', name="Mono Mirror Type",
-                      kind='normal',auto_monitor=True)
+                      kind='normal',automonitor=True)
     gratingx = Cpt(prettymotor, 'GrtX}Mtr', name="Mono Grating X motor",
-                      kind='normal',auto_monitor=True)
+                      kind='normal',automonitor=True)
     mirror2x = Cpt(prettymotor, 'MirX}Mtr', name="Mono Mirror X motor",
-                      kind='normal',auto_monitor=True)
+                      kind='normal',automonitor=True)
 
     done = Cpt(EpicsSignalRO, ':ERDY_STS')
     done_value = 1
