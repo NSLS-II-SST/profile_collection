@@ -733,3 +733,27 @@ def isvar_scan():
         for polarization in polarizations:
             yield from bps.mv(en.polarization,polarization)
             yield from bp.scan([waxs_det],en,270,670,5)
+
+from slack import WebClient
+
+class RSoXSBot:
+    # The constructor for the class. It takes the channel name as the a
+    # parameter and then sets it as an instance variable
+    def __init__(self,token,proxy,channel):
+        self.channel = channel
+        self.webclient = WebClient(token=token, proxy=proxy)
+
+    # Craft and return the entire message payload as a dictionary.
+    def send_message(self, message):
+        composed_message =  {
+            "channel": self.channel,
+            "blocks": [
+                {"type": "section", "text": {"type": "mrkdwn", "text": message}},
+            ],
+        }
+        self.webclient.chat_postMessage(**composed_message)
+
+slack_token = os.environ["SLACK_API_TOKEN"]
+rsoxs_bot = RSoXSBot(token=slack_token,
+                     proxy="proxy:8888",
+                     channel="#sst-1-rsoxs-station")

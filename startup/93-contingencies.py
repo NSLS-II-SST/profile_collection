@@ -31,7 +31,8 @@ def resume_notices():
     no_notifications_until = None
 
 def send_notice(email,subject,msg):
-    os.system('echo '+msg+' | mail -s "'+subject+'" '+email)
+    #os.system('echo '+msg+' | mail -s "'+subject+'" '+email)
+    rsoxs_bot.send_message(subject+'\n'+msg)
 
 
 def send_notice_plan(email,subject,msg):
@@ -50,18 +51,18 @@ def enc_clr_x():
 
 def beamdown_notice():
     user_email = RE.md['user_email']
-    send_notice(bls_email+','+user_email,'SST-1 has lost beam','Beam to RSoXS has been lost.'
-                                                               '\rYour scan has been paused automatically.'
-                                                               '\rNo intervention needed, but thought you might like to know.')
+    send_notice(bls_email + ',' + user_email, 'SST-1 has lost beam', 'Beam to RSoXS has been lost.'
+                                                                     '\rYour scan has been paused automatically.'
+                                                                     '\rNo intervention needed, but thought you might like to know.')
     yield from bps.null()
 
 
 def beamup_notice():
     user_email = RE.md['user_email']
-    send_notice(bls_email+','+user_email,'SST-1 beam restored','Beam to RSoXS has been restored.'
-                                                               '\rYour scan has resumed running.'
-                                                               '\rIf able, you may want to check the data and make sure intensity is still OK.'
-                                                               '\rOne exposure may have been affected')
+    send_notice(bls_email + ',' + user_email, 'SST-1 beam restored', 'Beam to RSoXS has been restored.'
+                                                                     '\rYour scan has resumed running.'
+                                                                     '\rIf able, you may want to check the data and make sure intensity is still OK.'
+                                                                     '\rOne exposure may have been affected')
     yield from bps.null()
 
 
@@ -151,26 +152,3 @@ def turn_off_checks():
     logger.removeHandler(handler)
 
 
-from slack import WebClient
-
-class RSoXSBot:
-    # The constructor for the class. It takes the channel name as the a
-    # parameter and then sets it as an instance variable
-    def __init__(self,token,proxy,channel):
-        self.channel = channel
-        self.webclient = WebClient(token=token, proxy=proxy)
-
-    # Craft and return the entire message payload as a dictionary.
-    def send_message(self, message):
-        composed_message =  {
-            "channel": self.channel,
-            "blocks": [
-                {"type": "section", "text": {"type": "mrkdwn", "text": message}},
-            ],
-        }
-        self.webclient.chat_postMessage(**composed_message)
-
-slack_token = os.environ["SLACK_API_TOKEN"]
-rsoxs_bot = RSoXSBot(token=slack_token,
-                     proxy="proxy:8888",
-                     channel="#sst-1-rsoxs-station")

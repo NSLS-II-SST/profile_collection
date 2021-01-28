@@ -1,4 +1,3 @@
-
 from IPython.core.magic import register_line_magic
 from operator import itemgetter
 import collections, json
@@ -9,70 +8,72 @@ from math import floor
 import datetime
 from ophyd import Device
 
+
 def user():
     title = "User metadata - stored in every scan:"
     text = ""
-    if len(RE.md["proposal_id"]) > 0 :
-        text += '   proposal ID:           '+colored('{}'.format(str(RE.md["proposal_id"])).center(40,' '),'yellow')
-    if len(str(RE.md["saf_id"])) > 0 :
-        text += '\n   saf ID:              '+colored('{}'.format(str(RE.md["saf_id"])).center(40,' '),'yellow')
-    if len(RE.md["user_name"]) > 0 :
-        text += '\n   User Name:           '+colored('{}'.format(RE.md["user_name"]).center(40,' '),'yellow')
-    if len(RE.md["user_email"]) > 0 :
-        text += '\n   User Email:          '+colored('{}'.format(RE.md["user_name"]).center(40,' '),'yellow')
-    if len(RE.md["user_start_date"]) > 0 :
-        text += '\n   User Start Date:     '+colored('{}'.format(RE.md["user_start_date"]).center(40,' '),'yellow')
-    if len(RE.md["user_id"]) > 0 :
-        text += '\n   User ID:             '+colored('{}'.format(str(RE.md["user_id"])).center(40,' '),'yellow')
-    if len(RE.md["institution"]) > 0 :
-        text += '\n   Institution:         '+colored('{}'.format(RE.md["institution"]).center(40,' '),'yellow')
-    if len(RE.md["project_name"]) > 0 :
-        text += '\n   project:             '+colored('{}'.format(RE.md["project_name"]).center(40,' '),'yellow')
-    if len(RE.md["project_desc"]) > 0 :
-        text += '\n   Project Description: '+colored('{}'.format(RE.md["project_desc"]).center(40,' '),'yellow')
-    boxed_text(title, text, 'green',80,shrink=True)
+    if len(RE.md["proposal_id"]) > 0:
+        text += '   proposal ID:           ' + colored('{}'.format(str(RE.md["proposal_id"])).center(40, ' '), 'yellow')
+    if len(str(RE.md["saf_id"])) > 0:
+        text += '\n   saf ID:              ' + colored('{}'.format(str(RE.md["saf_id"])).center(40, ' '), 'yellow')
+    if len(RE.md["user_name"]) > 0:
+        text += '\n   User Name:           ' + colored('{}'.format(RE.md["user_name"]).center(40, ' '), 'yellow')
+    if len(RE.md["user_email"]) > 0:
+        text += '\n   User Email:          ' + colored('{}'.format(RE.md["user_name"]).center(40, ' '), 'yellow')
+    if len(RE.md["user_start_date"]) > 0:
+        text += '\n   User Start Date:     ' + colored('{}'.format(RE.md["user_start_date"]).center(40, ' '), 'yellow')
+    if len(RE.md["user_id"]) > 0:
+        text += '\n   User ID:             ' + colored('{}'.format(str(RE.md["user_id"])).center(40, ' '), 'yellow')
+    if len(RE.md["institution"]) > 0:
+        text += '\n   Institution:         ' + colored('{}'.format(RE.md["institution"]).center(40, ' '), 'yellow')
+    if len(RE.md["project_name"]) > 0:
+        text += '\n   project:             ' + colored('{}'.format(RE.md["project_name"]).center(40, ' '), 'yellow')
+    if len(RE.md["project_desc"]) > 0:
+        text += '\n   Project Description: ' + colored('{}'.format(RE.md["project_desc"]).center(40, ' '), 'yellow')
+    boxed_text(title, text, 'green', 80, shrink=True)
 
 
 def sample():
     title = "Sample metadata - stored in every scan:"
     text = ''
-    if len(str(RE.md["proposal_id"])) > 0 :
-        text +=   '   proposal ID:           '+colored('{}'.format(RE.md["proposal_id"]).center(38,' '),'cyan')
-    if len(str(RE.md["saf_id"])) > 0 :
-        text += '\n   SAF id:                '+colored('{}'.format(RE.md["saf_id"]).center(38,' '),'cyan')
-    if len(str(RE.md["user_name"])) > 0 :
-        text += '\n   User Name:             '+colored('{}'.format(RE.md["user_name"]).center(38,' '),'cyan')
-    if len(str(RE.md["institution"])) > 0 :
-        text += '\n   Institution:           '+colored('{}'.format(RE.md["institution"]).center(38,' '),'cyan')
-    if len(str(RE.md["sample_name"])) > 0 :
-        text += '\n   Sample Name:           '+colored('{}'.format(RE.md["sample_name"]).center(38,' '),'cyan')
-    if len(str(RE.md["sample_desc"])) > 0 :
-        text += '\n   Sample Description:    '+colored('{}'.format(RE.md["sample_desc"]).center(38,' '),'cyan')
-    if len(str(RE.md["sample_id"])) > 0 :
-        text += '\n   Sample ID:             '+colored('{}'.format(str(RE.md["sample_id"])).center(38,' '),'cyan')
-    if len(str(RE.md["sample_set"])) > 0 :
-        text += '\n   Sample Set:            '+colored('{}'.format(RE.md["sample_set"]).center(38,' '),'cyan')
-    if len(str(RE.md["sample_date"])) > 0 :
-        text += '\n   Sample Creation Date:  '+colored('{}'.format(RE.md["sample_date"]).center(38,' '),'cyan')
-    if len(str(RE.md["project_name"])) > 0 :
-        text += '\n   Project name:          '+colored('{}'.format(RE.md["project_name"]).center(38,' '),'cyan')
-    if len(str(RE.md["project_desc"])) > 0 :
-        text += '\n   Project Description:   '+colored('{}'.format(RE.md["project_desc"]).center(38,' '),'cyan')
-    if len(str(RE.md["samp_user_id"])) > 0 :
-        text += '\n   Creator User ID:       '+colored('{}'.format(str(RE.md["samp_user_id"])).center(38,' '),'cyan')
-    if len(str(RE.md["composition"])) > 0 :
-        text += '\n   Composition(formula):  '+colored('{}'.format(RE.md["composition"]).center(38,' '),'cyan')
-    if len(str(RE.md["density"])) > 0 :
-        text += '\n   Density:               '+colored('{}'.format(str(RE.md["density"])).center(38,' '),'cyan')
-    if len(str(RE.md["components"])) > 0 :
-        text += '\n   List of Components:    '+colored('{}'.format(RE.md["components"]).center(38,' '),'cyan')
-    if len(str(RE.md["thickness"])) > 0 :
-        text += '\n   Thickness:             '+colored('{}'.format(str(RE.md["thickness"])).center(38,' '),'cyan')
-    if len(str(RE.md["sample_state"])) > 0 :
-        text += '\n   Sample state:          '+colored('{}'.format(RE.md["sample_state"]).center(38,' '),'cyan')
-    if len(str(RE.md["notes"])) > 0 :
-        text += '\n   Notes:                 '+colored('{}'.format(RE.md["notes"]).center(38,' '),'cyan')
-    boxed_text(title, text, 'red',80,shrink=True)
+    if len(str(RE.md["proposal_id"])) > 0:
+        text += '   proposal ID:           ' + colored('{}'.format(RE.md["proposal_id"]).center(38, ' '), 'cyan')
+    if len(str(RE.md["saf_id"])) > 0:
+        text += '\n   SAF id:                ' + colored('{}'.format(RE.md["saf_id"]).center(38, ' '), 'cyan')
+    if len(str(RE.md["user_name"])) > 0:
+        text += '\n   User Name:             ' + colored('{}'.format(RE.md["user_name"]).center(38, ' '), 'cyan')
+    if len(str(RE.md["institution"])) > 0:
+        text += '\n   Institution:           ' + colored('{}'.format(RE.md["institution"]).center(38, ' '), 'cyan')
+    if len(str(RE.md["sample_name"])) > 0:
+        text += '\n   Sample Name:           ' + colored('{}'.format(RE.md["sample_name"]).center(38, ' '), 'cyan')
+    if len(str(RE.md["sample_desc"])) > 0:
+        text += '\n   Sample Description:    ' + colored('{}'.format(RE.md["sample_desc"]).center(38, ' '), 'cyan')
+    if len(str(RE.md["sample_id"])) > 0:
+        text += '\n   Sample ID:             ' + colored('{}'.format(str(RE.md["sample_id"])).center(38, ' '), 'cyan')
+    if len(str(RE.md["sample_set"])) > 0:
+        text += '\n   Sample Set:            ' + colored('{}'.format(RE.md["sample_set"]).center(38, ' '), 'cyan')
+    if len(str(RE.md["sample_date"])) > 0:
+        text += '\n   Sample Creation Date:  ' + colored('{}'.format(RE.md["sample_date"]).center(38, ' '), 'cyan')
+    if len(str(RE.md["project_name"])) > 0:
+        text += '\n   Project name:          ' + colored('{}'.format(RE.md["project_name"]).center(38, ' '), 'cyan')
+    if len(str(RE.md["project_desc"])) > 0:
+        text += '\n   Project Description:   ' + colored('{}'.format(RE.md["project_desc"]).center(38, ' '), 'cyan')
+    if len(str(RE.md["samp_user_id"])) > 0:
+        text += '\n   Creator User ID:       ' + colored('{}'.format(str(RE.md["samp_user_id"])).center(38, ' '),
+                                                         'cyan')
+    if len(str(RE.md["composition"])) > 0:
+        text += '\n   Composition(formula):  ' + colored('{}'.format(RE.md["composition"]).center(38, ' '), 'cyan')
+    if len(str(RE.md["density"])) > 0:
+        text += '\n   Density:               ' + colored('{}'.format(str(RE.md["density"])).center(38, ' '), 'cyan')
+    if len(str(RE.md["components"])) > 0:
+        text += '\n   List of Components:    ' + colored('{}'.format(RE.md["components"]).center(38, ' '), 'cyan')
+    if len(str(RE.md["thickness"])) > 0:
+        text += '\n   Thickness:             ' + colored('{}'.format(str(RE.md["thickness"])).center(38, ' '), 'cyan')
+    if len(str(RE.md["sample_state"])) > 0:
+        text += '\n   Sample state:          ' + colored('{}'.format(RE.md["sample_state"]).center(38, ' '), 'cyan')
+    if len(str(RE.md["notes"])) > 0:
+        text += '\n   Notes:                 ' + colored('{}'.format(RE.md["notes"]).center(38, ' '), 'cyan')
+    boxed_text(title, text, 'red', 80, shrink=True)
 
 
 @register_line_magic
@@ -84,13 +85,15 @@ def md(line):
 def u(line):
     user()
 
-del md, u
 
+del md, u
 
 
 @register_line_magic
 def status(line):
     beamline_status()
+
+
 del status
 
 
@@ -136,7 +139,7 @@ def newuser():
     return user_dict()
 
 
-def add_acq(sample_dict,plan_name='full_carbon_scan',arguments='',config='WAXS'):
+def add_acq(sample_dict, plan_name='full_carbon_scan', arguments='', config='WAXS'):
     sample_dict['acquisitions'].append({'plan_name': plan_name,
                                         'arguments': arguments,
                                         'configuration': config})
@@ -146,9 +149,9 @@ def add_acq(sample_dict,plan_name='full_carbon_scan',arguments='',config='WAXS')
 def get_location(motor_list):
     locs = []
     for motor in motor_list:
-        locs.append({'motor' : motor,
+        locs.append({'motor': motor,
                      'position': motor.user_readback.get(),
-                     'order':0})
+                     'order': 0})
     return locs
 
 
@@ -166,9 +169,10 @@ def get_sample_location():
     #  locs = get_location([sam_X,sam_Y,sam_Z,sam_Th])
     return locs
 
+
 def move_to_location(locs=get_sample_location()):
     for item in locs:
-        item.setdefault('order',0)
+        item.setdefault('order', 0)
     locs = sorted(locs, key=itemgetter('order'))
     orderlist = [o for o in collections.Counter([d['order'] for d in locs]).keys()]
 
@@ -205,11 +209,11 @@ def move_to_location(locs=get_sample_location()):
 
 
 def get_location_from_config(config):
-    return eval(config+'()[0]')
+    return eval(config + '()[0]')
 
 
 def get_md_from_config(config):
-    return eval(config+'()[1]')
+    return eval(config + '()[1]')
 
 
 def load_configuration(config):
@@ -225,10 +229,10 @@ def load_configuration(config):
 def do_acquisitions(acq_list):
     for acq in acq_list:
         yield from load_configuration(acq['configuration'])
-        yield from eval(acq['plan_name']+'('+acq['arguments']+')')
+        yield from eval(acq['plan_name'] + '(' + acq['arguments'] + ')')
 
 
-def get_sample_dict(acq = [],locations = []):
+def get_sample_dict(acq=[], locations=[]):
     if locations is []:
         locations = get_sample_location()
     sample_name = RE.md['sample_name']
@@ -268,15 +272,15 @@ def get_sample_dict(acq = [],locations = []):
             'acquisitions': acq}
 
 
-def user_dict(user_id = RE.md['user_id'],
-                proposal_id = RE.md['proposal_id'],
-                saf_id = RE.md['saf_id'],
-                institution = RE.md['institution'],
-                user_name = RE.md['user_name'],
-                user_start_date = RE.md['user_start_date'],
-                project_name = RE.md['project_name'],
-                project_desc = RE.md['project_desc'],
-                ):
+def user_dict(user_id=RE.md['user_id'],
+              proposal_id=RE.md['proposal_id'],
+              saf_id=RE.md['saf_id'],
+              institution=RE.md['institution'],
+              user_name=RE.md['user_name'],
+              user_start_date=RE.md['user_start_date'],
+              project_name=RE.md['project_name'],
+              project_desc=RE.md['project_desc'],
+              ):
     return {'user_id': user_id,
             'proposal_id': proposal_id,
             'saf_id': saf_id,
@@ -404,7 +408,7 @@ def newsample():
     acquisitions = []
     add_default_acq = input('add acquisition (full_carbon_scan - WAXS)? : ')
     if add_default_acq is '':
-        acquisitions.append({'plan_name': 'full_carbon_scan','arguments': '','configuration':'WAXS'})
+        acquisitions.append({'plan_name': 'full_carbon_scan', 'arguments': '', 'configuration': 'WAXS'})
 
     loc = input('New Location? (if blank use current location x={:.2f},y={:.2f},z={:.2f},th={:.2f}): '.format(
         sam_X.user_readback.get(),
@@ -436,26 +440,28 @@ def newsample():
             locs.append({'motor': 'th', 'position': thval, 'order': 0})
         else:
             locs.append({'motor': 'th', 'position': sam_Th.user_readback.get(), 'order': 0})
-        return get_sample_dict(locations = locs, acq = acquisitions)
+        return get_sample_dict(locations=locs, acq=acquisitions)
     else:
-        return get_sample_dict(acq = acquisitions) #uses current location by default
+        return get_sample_dict(acq=acquisitions)  # uses current location by default
 
-def avg_scan_time(plan_name,nscans=50,new_scan_duration=600):
+
+def avg_scan_time(plan_name, nscans=50, new_scan_duration=600):
     scans = db0(plan_name=plan_name)
     durations = np.array([])
-    for i,sc in enumerate(scans):
-        if('exit_status' in sc.stop.keys()):
-            if(sc.stop['exit_status']=='success'):
-                durations = np.append(durations,sc.stop['time'] - sc.start['time'])
+    for i, sc in enumerate(scans):
+        if ('exit_status' in sc.stop.keys()):
+            if (sc.stop['exit_status'] == 'success'):
+                durations = np.append(durations, sc.stop['time'] - sc.start['time'])
             if i > nscans:
                 break
     if len(durations) > 0:
         return np.mean(durations)
-    else:  
-        #we have never run a scan of this type before (?!?) - assume it takes some default value (10 min)
+    else:
+        # we have never run a scan of this type before (?!?) - assume it takes some default value (10 min)
         return new_scan_duration
 
-def run_bar(bar,sortby=['p','c','a','s'],dryrun=0,rev=[False,False,False,False],delete_as_complete=True):
+
+def run_bar(bar, sortby=['p', 'c', 'a', 's'], dryrun=0, rev=[False, False, False, False], delete_as_complete=True):
     '''
     run all sample dictionaries stored in the list bar
     :param bar: simply a list of sample dictionaries
@@ -474,146 +480,158 @@ def run_bar(bar,sortby=['p','c','a','s'],dryrun=0,rev=[False,False,False,False],
     '''
     config_change_time = 360  # time to change between configurations, in seconds.
     listout = []
-    for samp_num,s in enumerate(bar):
+    for samp_num, s in enumerate(bar):
         sample = s
         sample_id = s['sample_id']
         sample_project = s['project_name']
-        for acq_num,a in enumerate(s['acquisitions']):
-            listout.append([sample_id,                      #0
-                            sample_project,                 #1
-                            a['configuration'],             #2
-                            a['plan_name'],                 #3
-                            avg_scan_time(a['plan_name'],1),  #4
-                            sample,                         #5
-                            a,                              #6
-                            samp_num,                       #7
-                            acq_num,                        #8
-                            a['arguments'],                #9
-                            s['density']])                    #10
-    switcher = {'p':1,'s':0,'c':2,'a':3,'g':9,'d':10}
+        for acq_num, a in enumerate(s['acquisitions']):
+            listout.append([sample_id,  # 0
+                            sample_project,  # 1
+                            a['configuration'],  # 2
+                            a['plan_name'],  # 3
+                            avg_scan_time(a['plan_name'], 1),  # 4
+                            sample,  # 5
+                            a,  # 6
+                            samp_num,  # 7
+                            acq_num,  # 8
+                            a['arguments'],  # 9
+                            s['density'],  # 10
+                            s['proposal_id']])  # 11
+    switcher = {'p': 1, 's': 0, 'c': 2, 'a': 3, 'g': 9, 'd': 10}
     try:
         sortby.reverse()
     except AttributeError:
-        if isinstance(sortby,str):
+        if isinstance(sortby, str):
             sortby = [sortby]
         else:
             print('sortby needs to be a list of strings\n p - project\n c - configuration\n s - sample \n a - scantype')
             return
     try:
-        for k,r in zip(sortby,rev):
-            listout = sorted(listout, key=itemgetter(switcher[k]),reverse = r)
+        for k, r in zip(sortby, rev):
+            listout = sorted(listout, key=itemgetter(switcher[k]), reverse=r)
     except KeyError:
         print('sortby needs to be a list of strings\n p - project\n c - configuration\n s - sample \n a - scantype')
         return
     if dryrun:
         text = ''
         total_time = 0
-        for i,step in enumerate(listout):
+        for i, step in enumerate(listout):
             text += 'move to {} from {}, load configuration {}, scan {}, starts @ {} min and takes {} min\n'.format(
-                step[5]['sample_name'],step[1],step[2],step[3],floor(total_time/60),floor(step[4]/60))
+                step[5]['sample_name'], step[1], step[2], step[3], floor(total_time / 60), floor(step[4] / 60))
             total_time += step[4]
-            if(step[2] != listout[i-1][2]):
+            if (step[2] != listout[i - 1][2]):
                 total_time += config_change_time
-        text += f'\n\nTotal estimated time {floor(total_time/3600)} h, {floor((total_time%3600)/60)} m... have fun!'
-        boxed_text('Dry Run',text,'lightblue',width=120,shrink=True)
+        text += f'\n\nTotal estimated time {floor(total_time / 3600)} h, {floor((total_time % 3600) / 60)} m... have fun!'
+        boxed_text('Dry Run', text, 'lightblue', width=120, shrink=True)
     else:
-        for i,step in enumerate(listout):
-            time_remaining = sum([avg_scan_time(row[3],1) for row in listout[i:]])
+        for i, step in enumerate(listout):
+            time_remaining = sum([avg_scan_time(row[3], 1) for row in listout[i:]])
             this_step_time = avg_scan_time(step[3])
-            boxed_text('Scan Status','\n\nStarting scan {} out of {}'.format(colored(f'#{i+1}','blue'),len(listout))+
-                                     '\n{} which should take {} minutes\n'.format(colored(step[3],'blue'),
-                                                                                floor(this_step_time/60)) +
-                                     f'time remaining approx {floor(time_remaining/3600)} h '
-                                     f'{floor((time_remaining % 3600) / 60)} m \n\n',
-                       'red',width=120,shrink=True)
-            yield from load_configuration(step[2]) # move to configuration
-            yield from load_sample(step[5]) # move to sample / load sample metadata
-            yield from do_acquisitions([step[6]]) # run scan
+            boxed_text('Scan Status',
+                       '\n\nStarting scan {} out of {}'.format(colored(f'#{i + 1}', 'blue'), len(listout)) +
+                       '\n{} of {} in project {}\n which should take {} minutes\n'.format(colored(step[3], 'blue'),
+                                                                                          colored(step[0], 'blue'),
+                                                                                          colored(step[1], 'blue'),
+                                                                                          colored(step[11], 'blue'),
+                                                                                          floor(this_step_time / 60)) +
+                       f'time remaining approx {floor(time_remaining / 3600)} h '
+                       f'{floor((time_remaining % 3600) / 60)} m \n\n',
+                       'red', width=120, shrink=True)
+            rsoxs_bot.send_message('Starting scan {} out of {}\n'.format(i + 1, len(listout)) +
+                                   '{} of {} in project {} Proposal # {}\n which should take {} minutes\n'.format(
+                                       step[3], step[0], step[1], step[11], floor(this_step_time / 60)) +
+                                   f'time remaining approx {floor(time_remaining / 3600)} h '
+                                   f'{floor((time_remaining % 3600) / 60)} m')
+            yield from load_configuration(step[2])  # move to configuration
+            yield from load_sample(step[5])  # move to sample / load sample metadata
+            yield from do_acquisitions([step[6]])  # run scan
             if delete_as_complete:
                 bar[step[7]]['acquisitions'].remove(step[6])
+
 
 def list_samples(bar):
     samples = [s['sample_name'] for s in bar]
     text = '  i        Sample Name'
-    for index,sample in enumerate(samples):
+    for index, sample in enumerate(samples):
         text += '\n  {}        {}'.format(index, sample)
         acqs = bar[index]['acquisitions']
         for acq in acqs:
-            text +='\n            {}({}) in {} configuration'.format(acq['plan_name'],acq['arguments'],acq['configuration'])
-    boxed_text('Samples on bar',text,'lightblue',shrink=True)
+            text += '\n            {}({}) in {} configuration'.format(acq['plan_name'], acq['arguments'],
+                                                                      acq['configuration'])
+    boxed_text('Samples on bar', text, 'lightblue', shrink=True)
 
 
-def save_samples(sample,filename):
-    switch= {sam_X.name:'x',
-             sam_Y.name:'y',
-             sam_Z.name:'z',
-             sam_Th.name:'th',
-             'x':  'x',
-             'y':  'y',
-             'z':  'z',
-             'th': 'th'}
+def save_samples(sample, filename):
+    switch = {sam_X.name: 'x',
+              sam_Y.name: 'y',
+              sam_Z.name: 'z',
+              sam_Th.name: 'th',
+              'x': 'x',
+              'y': 'y',
+              'z': 'z',
+              'th': 'th'}
     samplenew = deepcopy(sample)
-    if isinstance(samplenew,list):
-        for i,sam in enumerate(samplenew):
-            for j,loc in enumerate(sam['location']):
-                if isinstance(switch[loc['motor'],Device]) :
-                    samplenew[i]['location'][j]['motor']= switch[loc['motor'].name]
+    if isinstance(samplenew, list):
+        for i, sam in enumerate(samplenew):
+            for j, loc in enumerate(sam['location']):
+                if isinstance(switch[loc['motor'], Device]):
+                    samplenew[i]['location'][j]['motor'] = switch[loc['motor'].name]
     else:
-        for j,loc in enumerate(samplenew['location']):
+        for j, loc in enumerate(samplenew['location']):
             if isinstance(switch[loc['motor'], Device]):
                 samplenew['location'][j]['motor'] = switch[loc['motor'].name]
-    with open(filename,'w') as f:
-        json.dump(samplenew,f,indent=2)
+    with open(filename, 'w') as f:
+        json.dump(samplenew, f, indent=2)
 
 
-def save_samplesxls(sample,filename):
-    switch= {sam_X.name:'x',
-             sam_Y.name:'y',
-             sam_Z.name:'z',
-             sam_Th.name:'th',
-             'x':'x',
-             'y':'y',
-             'z':'z',
-             'th':'th'}
+def save_samplesxls(sample, filename):
+    switch = {sam_X.name: 'x',
+              sam_Y.name: 'y',
+              sam_Z.name: 'z',
+              sam_Th.name: 'th',
+              'x': 'x',
+              'y': 'y',
+              'z': 'z',
+              'th': 'th'}
     sampledf = pd.DataFrame.from_dict(sample, orient='columns')
     sampledf.to_excel('temp.xls')
 
-    df = pd.read_excel('temp.xls',na_values='')
-    df.replace(np.nan, '', regex=True,inplace=True)
+    df = pd.read_excel('temp.xls', na_values='')
+    df.replace(np.nan, '', regex=True, inplace=True)
     testdict = df.to_dict(orient='records')
-    if isinstance(testdict,list):
-        for i,sam in enumerate(testdict):
+    if isinstance(testdict, list):
+        for i, sam in enumerate(testdict):
             testdict[i]['location'] = eval(sam['location'])
             testdict[i]['acquisitions'] = eval(sam['acquisitions'])
     else:
         testdict['location'] = eval(testdict['location'])
         testdict['acquisitions'] = eval(testdict['acquisitions'])
 
-    if isinstance(testdict,list):
-        for i,sam in enumerate(testdict):
-            for j,loc in enumerate(sam['location']):
-                if isinstance(loc['motor'],Device):
-                    testdict[i]['location'][j]['motor']= switch[loc['motor'].name]
+    if isinstance(testdict, list):
+        for i, sam in enumerate(testdict):
+            for j, loc in enumerate(sam['location']):
+                if isinstance(loc['motor'], Device):
+                    testdict[i]['location'][j]['motor'] = switch[loc['motor'].name]
     else:
-        for j,loc in enumerate(testdict['location']):
+        for j, loc in enumerate(testdict['location']):
             if isinstance(loc['motor'], Device):
                 testdict['location'][j]['motor'] = switch[loc['motor'].name]
-    sampledf = pd.DataFrame.from_dict(testdict,orient='columns')
+    sampledf = pd.DataFrame.from_dict(testdict, orient='columns')
     sampledf.to_excel(filename)
 
 
 def load_samples(filename):
-    with open(filename,'r') as f:
+    with open(filename, 'r') as f:
         samplenew = json.loads(f.read())
     return samplenew
 
 
 def load_samplesxls(filename):
-    df = pd.read_excel(filename,na_values='',converters= {'sample_date': str})
-    df.replace(np.nan, '', regex=True,inplace=True)
+    df = pd.read_excel(filename, na_values='', converters={'sample_date': str})
+    df.replace(np.nan, '', regex=True, inplace=True)
     samplenew = df.to_dict(orient='records')
-    if isinstance(samplenew,list):
-        for i,sam in enumerate(samplenew):
+    if isinstance(samplenew, list):
+        for i, sam in enumerate(samplenew):
             samplenew[i]['location'] = eval(sam['location'])
             samplenew[i]['acquisitions'] = eval(sam['acquisitions'])
             for key in [key for key, value in sam.items() if 'named' in key.lower()]:
@@ -626,28 +644,28 @@ def load_samplesxls(filename):
     return samplenew
 
 
-def sample_by_value_match(bar,key,string):
+def sample_by_value_match(bar, key, string):
     results = [d for (index, d) in enumerate(bar) if d[key].find(string) >= 0]
-    if len(results) == 1 :
+    if len(results) == 1:
         return results[0]
-    elif len(results) < 1 :
+    elif len(results) < 1:
         print('No Match')
         return None
-    elif len(results) > 1 :
+    elif len(results) > 1:
         print('More than one result found, returning them all')
         return results
 
 
-def sample_by_name(bar,name):
-    return sample_by_value_match(bar,'sample_name',name)
+def sample_by_name(bar, name):
+    return sample_by_value_match(bar, 'sample_name', name)
 
 
-def NEXAFS_WAXS_bar(barin,start_en,stop_en,num_en):
-    yield from bps.mv(Shutter_Y,30)
+def NEXAFS_WAXS_bar(barin, start_en, stop_en, num_en):
+    yield from bps.mv(Shutter_Y, 30)
     for sample in barin:
         yield from load_sample(sample)
         RE.md['project_name'] = 'NEXAFS'
-        yield from bp.scan([en.energy],en,start_en,stop_en,num_en)
+        yield from bp.scan([en.energy], en, start_en, stop_en, num_en)
 
 
 def offset_bar(bar, xoff, yoff, zoff, thoff):
@@ -671,23 +689,25 @@ def flip_bar(bar):
             if mot['motor'] is 'th':
                 mot['position'] = 180
 
-def straighten_bar(bar,d_y, d_x, y_center):
- for samp in bar:
-     xpos = samp['location'][0]['position']
-     ypos = samp['location'][1]['position']
-     samp['location'][0]['position'] = straighten_x(xpos,ypos,d_x,d_y,y_center)
 
-def straighten_x(x, y, dx, dy, y_center ):
-    return x - (y+y_center)*dx/dy
+def straighten_bar(bar, d_y, d_x, y_center):
+    for samp in bar:
+        xpos = samp['location'][0]['position']
+        ypos = samp['location'][1]['position']
+        samp['location'][0]['position'] = straighten_x(xpos, ypos, d_x, d_y, y_center)
 
-def correct_bar(bar,af1x,af1y,af2x,af2y):
+
+def straighten_x(x, y, dx, dy, y_center):
+    return x - (y + y_center) * dx / dy
+
+
+def correct_bar(bar, af1x, af1y, af2x, af2y):
     x_offset = af1x - bar[0]['location'][0]['position']
     y_offset = af1y - bar[0]['location'][1]['position']
     x_image_offset = bar[0]['location'][0]['position'] - bar[-1]['location'][0]['position']
 
-    dx = (af2x-af1x) + x_image_offset
-    dy = af2y-af1y
-
+    dx = (af2x - af1x) + x_image_offset
+    dy = af2y - af1y
 
     for samp in bar:
         xpos = samp['location'][0]['position']
@@ -696,8 +716,7 @@ def correct_bar(bar,af1x,af1y,af2x,af2y):
         xpos = xpos + x_offset
         ypos = ypos + y_offset
 
-        newx = xpos + (ypos - af1y) * dx/dy
+        newx = xpos + (ypos - af1y) * dx / dy
 
         samp['location'][0]['position'] = newx
         samp['location'][1]['position'] = ypos
-
