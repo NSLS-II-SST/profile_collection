@@ -234,7 +234,7 @@ def SAXS():
         'order': 1},
     ],
     {'RSoXS_Config': 'SAXS',
-      'RSoXS_Main_DET': 'SAXS',
+      'RSoXS_Main_DET':'SAXS',
       'RSoXS_WAXS_SDD': None,
       'RSoXS_WAXS_BCX': None,
       'RSoXS_WAXS_BCY': None,

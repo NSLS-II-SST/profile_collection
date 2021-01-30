@@ -24,10 +24,13 @@ def spiralsearch(diameter=.6, stepsize=.2, energy = None):
     yield from spiral_square([saxs_det], sam_X, sam_Y, x_center=x_center, y_center=y_center,
                      x_range=diameter, y_range=diameter, x_num=num, y_num=num)
 
+
 def spiralsearch_all(barin=[],diameter=.5, stepsize=.2):
-    for sample in barin:
-        yield from load_sample(sample)
+    for samp in barin:
+        yield from load_sample(samp)
         RE.md['project_name'] = 'spiral_searches'
+        sample()
+        rsoxs_bot.send_message(f'running spiral scan on {samp["proposal_id"]} {samp["sample_name"]}')
         yield from spiralsearch(diameter, stepsize)
 
 def spiralsearchwaxs(diameter=.6, stepsize=.2, energy=None):
