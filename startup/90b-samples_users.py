@@ -489,7 +489,7 @@ def run_bar(bar, sortby=['p', 'c', 'a', 's'], dryrun=0, rev=[False, False, False
                             sample_project,  # 1
                             a['configuration'],  # 2
                             a['plan_name'],  # 3
-                            avg_scan_time(a['plan_name'], 1),  # 4
+                            avg_scan_time(a['plan_name'], 10),  # 4
                             sample,  # 5
                             a,  # 6
                             samp_num,  # 7
