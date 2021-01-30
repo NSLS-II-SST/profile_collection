@@ -548,6 +548,8 @@ def run_bar(bar, sortby=['p', 'c', 'a', 's'], dryrun=0, rev=[False, False, False
             yield from do_acquisitions([step[6]])  # run scan
             if delete_as_complete:
                 bar[step[7]]['acquisitions'].remove(step[6])
+            rsoxs_bot.send_message('Scan complete.')
+        rsoxs_bot.send_message('All scans complete!')
 
 
 def list_samples(bar):
