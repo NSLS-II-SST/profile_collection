@@ -16,8 +16,22 @@ def samxscan():
 
 def spiralsearch(diameter=.6, stepsize=.2, energy = None):
     if energy is not None:
-        if energy > 150 and energy < 2200:
+        if energy > 70 and energy < 2200:
             yield from bps.mv(en, energy)
+    x_center = sam_X.user_setpoint.get()
+    y_center = sam_Y.user_setpoint.get()
+    num = round(diameter / stepsize) + 1
+    yield from spiral_square([saxs_det], sam_X, sam_Y, x_center=x_center, y_center=y_center,
+                     x_range=diameter, y_range=diameter, x_num=num, y_num=num)
+
+
+def spiraldata(diameter=.6, stepsize=.2, energy = None,exp_time=None):
+    if energy is not None:
+        if energy > 70 and energy < 2200:
+            yield from bps.mv(en, energy)
+    if exp_time is not None:
+        if exp_time > 0.001 and exp_time < 1000:
+            set_exposure(exp_time)
     x_center = sam_X.user_setpoint.get()
     y_center = sam_Y.user_setpoint.get()
     num = round(diameter / stepsize) + 1
