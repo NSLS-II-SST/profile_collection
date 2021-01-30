@@ -529,11 +529,12 @@ def run_bar(bar, sortby=['p', 'c', 'a', 's'], dryrun=0, rev=[False, False, False
             this_step_time = avg_scan_time(step[3])
             boxed_text('Scan Status',
                        '\n\nStarting scan {} out of {}'.format(colored(f'#{i + 1}', 'blue'), len(listout)) +
-                       '\n{} of {} in project {}\n which should take {} minutes\n'.format(colored(step[3], 'blue'),
-                                                                                          colored(step[0], 'blue'),
-                                                                                          colored(step[1], 'blue'),
-                                                                                          colored(step[11], 'blue'),
-                                                                                          floor(this_step_time / 60)) +
+                       '{} of {} in project {} Proposal # {}\n which should take {} minutes\n'.format(
+                           colored(step[3], 'blue'),
+                           colored(step[0], 'blue'),
+                           colored(step[1], 'blue'),
+                           colored(step[11], 'blue'),
+                           floor(this_step_time / 60)) +
                        f'time remaining approx {floor(time_remaining / 3600)} h '
                        f'{floor((time_remaining % 3600) / 60)} m \n\n',
                        'red', width=120, shrink=True)
