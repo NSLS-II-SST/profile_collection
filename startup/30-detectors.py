@@ -47,6 +47,7 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
     roi3 = C(ROIPlugin, 'ROI3:')
     roi4 = C(ROIPlugin, 'ROI4:')
     proc1 = C(ProcessPlugin, 'Proc1:')
+    binvalue = 4
 
     def stage(self, *args, **kwargs):
         self.cam.temperature_actual.read()
@@ -73,6 +74,8 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
         self.cam.sync.set(1)
         self.cam.temperature.set(-80)
         self.cam.enable_cooling.set(1)
+        self.cam.bin_x.set(self.binvalue)
+        self.cam.bin_y.set(self.binvalue)
         return [self].append(super().trigger(*args, **kwargs))
 
     def skinnystage(self, *args, **kwargs):
@@ -152,6 +155,7 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
                     colored(self.cam.temperature.get(),'lightgray')))
 
     def set_binning(self,binx,biny):
+        self.binvalue = binx
         self.cam.bin_x.set(binx)
         self.cam.bin_y.set(biny)
 
