@@ -51,10 +51,14 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
     def stage(self, *args, **kwargs):
         self.cam.temperature_actual.read()
         self.cam.temperature.read()
+        self.cam.sync.set(1)
+        self.cam.temperature.set(-80)
+        self.cam.enable_cooling.set(1)
         print('staging the detector')
         Shutter_enable.set(1)
         Shutter_delay.set(0)
         if abs(self.cam.temperature_actual.get() - self.cam.temperature.get()) > 2.0:
+
             boxed_text("Temperature Warning!!!!",
                       self.cooling_state()+
                       "\nPlease wait until temperature has stabilized before collecting important data.",'yellow',85)
@@ -65,6 +69,11 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
 
         return [self].append(super().stage(*args, **kwargs))
 
+    def trigger(self,*args,**kwargs):
+        self.cam.sync.set(1)
+        self.cam.temperature.set(-80)
+        self.cam.enable_cooling.set(1)
+        return [self].append(super().trigger(*args, **kwargs))
 
     def skinnystage(self, *args, **kwargs):
         yield Msg('stage',super())
