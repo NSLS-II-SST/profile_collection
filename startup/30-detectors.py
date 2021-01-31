@@ -52,10 +52,10 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
     def stage(self, *args, **kwargs):
         self.cam.temperature_actual.read()
         self.cam.temperature.read()
-        self.cam.sync.set(1)
-        self.cam.temperature.set(-80)
-        self.cam.enable_cooling.set(1)
-        print('staging the detector')
+        #self.cam.sync.set(1)
+        #self.cam.temperature.set(-80)
+        #self.cam.enable_cooling.set(1)
+        #print('staging the detector')
         Shutter_enable.set(1)
         Shutter_delay.set(0)
         if abs(self.cam.temperature_actual.get() - self.cam.temperature.get()) > 2.0:
@@ -71,8 +71,8 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
         return [self].append(super().stage(*args, **kwargs))
 
     def trigger(self,*args,**kwargs):
-        if(self.cam.sync.get() != 1):
-            print(f'Warning: It looks like the {self.name} restarted, putting in default values again')
+        #if(self.cam.sync.get() != 1):
+        #    print(f'Warning: It looks like the {self.name} restarted, putting in default values again')
         self.cam.temperature.set(-80)
         self.cam.enable_cooling.set(1)
         self.cam.bin_x.set(self.binvalue)
