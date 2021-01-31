@@ -79,7 +79,7 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
         self.cam.bin_x.set(self.binvalue)
         self.cam.bin_y.set(self.binvalue)
 
-        return [self].append(super().trigger(*args, **kwargs))
+        return super().trigger(*args, **kwargs)
 
     def skinnystage(self, *args, **kwargs):
         yield Msg('stage',super())
