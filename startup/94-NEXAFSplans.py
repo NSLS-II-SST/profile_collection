@@ -10,34 +10,34 @@ def epu_angle_from_grazing(real_incident_angle,grazing_angle=20):
         np.cos(real_incident_angle * np.pi / 180) * 1 / (np.cos(grazing_angle * np.pi / 180))) * 180 / np.pi
 
 
-def Carbon_angle_NEXAFS(grazing_angle=20,speed=.1,diode_range=7,angles = [20,40,55,70,90]):
+def Carbon_angle_NEXAFS(grazing_angle=20,speed=.1,diode_range=7,angles = [20,40,55,70,90],grating='250',m3_pitch=7.97):
     for angle in angles:
         yield from fly_Carbon_NEXAFS(speed=speed,
                                      pol=epu_angle_from_grazing(angle,grazing_angle),
                                      diode_range=diode_range,
-                                     grating='250',
-                                     m3_pitch=7.97)
-def Oxygen_angle_NEXAFS(grazing_angle=20,speed=.2,diode_range=7,angles = [20,40,55,70,90]):
+                                     grating=grating,
+                                     m3_pitch=m3_pitch)
+def Oxygen_angle_NEXAFS(grazing_angle=20,speed=.2,diode_range=7,angles = [20,40,55,70,90],grating='250',m3_pitch=7.97):
     for angle in angles:
         yield from fly_Oxygen_NEXAFS(speed=speed,
                                      pol=epu_angle_from_grazing(angle,grazing_angle),
                                      diode_range=diode_range,
-                                     grating='250',
-                                     m3_pitch=7.97)
-def Nitrogen_angle_NEXAFS(grazing_angle=20,speed=.1,diode_range=7,angles = [20,40,55,70,90]):
+                                     grating=grating,
+                                     m3_pitch=m3_pitch)
+def Nitrogen_angle_NEXAFS(grazing_angle=20,speed=.1,diode_range=7,angles = [20,40,55,70,90],grating='250',m3_pitch=7.95):
     for angle in angles:
         yield from fly_Nitrogen_NEXAFS(speed=speed,
                                      pol=epu_angle_from_grazing(angle,grazing_angle),
                                      diode_range=diode_range,
-                                     grating='250',
-                                     m3_pitch=7.95)
-def Fluorine_angle_NEXAFS(grazing_angle=20,speed=.3,diode_range=7,angles = [20,40,55,70,90]):
+                                     grating=grating,
+                                     m3_pitch=m3_pitch)
+def Fluorine_angle_NEXAFS(grazing_angle=20,speed=.3,diode_range=7,angles = [20,40,55,70,90],grating='1200',m3_pitch=7.99):
     for angle in angles:
         yield from fly_Fluorine_NEXAFS(speed=speed,
                                      pol=epu_angle_from_grazing(angle,grazing_angle),
                                      diode_range=diode_range,
-                                     grating='1200',
-                                     m3_pitch=7.99)
+                                     grating=grating,
+                                     m3_pitch=m3_pitch)
 
 
 def full_Carbon_NEXAFS(sigs=[],
