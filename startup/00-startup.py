@@ -155,7 +155,7 @@ runengine_metadata_dir = appdirs.user_data_dir(appname="bluesky") / Path("runeng
 RE.md = PersistentDict(runengine_metadata_dir)
 
 # Temporary fix from Dan Allan Feb 2, 2021
-import collections.abc, zict
+import collections.abc, zict, msgpack
 
 
 class PersistentDict(collections.abc.MutableMapping):
