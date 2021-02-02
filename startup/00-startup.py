@@ -154,6 +154,100 @@ runengine_metadata_dir = appdirs.user_data_dir(appname="bluesky") / Path("runeng
 # PersistentDict will create the directory if it does not exist
 RE.md = PersistentDict(runengine_metadata_dir)
 
+# Temporary fix from Dan Allan Feb 2, 2021
+import collections.abc
+
+
+class PersistentDict(collections.abc.MutableMapping):
+    """
+    A MutableMapping which syncs it contents to disk.
+    The contents are stored as msgpack-serialized files, with one file per item
+    in the mapping.
+    Note that when an item is *mutated* it is not immediately synced:
+    >>> d['sample'] = {"color": "red"}  # immediately synced
+    >>> d['sample']['shape'] = 'bar'  # not immediately synced
+    but that the full contents are synced to disk when the PersistentDict
+    instance is garbage collected.
+    """
+    def __init__(self, directory):
+        self._directory = directory
+        self._file = zict.File(directory)
+        self._func = zict.Func(self._dump, self._load, self._file)
+        self._cache = {}
+        self.reload()
+
+        # Similar to flush() or _do_update(), but without reference to self
+        # to avoid circular reference preventing collection.
+        # NOTE: This still doesn't guarantee call on delete or gc.collect()!
+        #       Explicitly call flush() if immediate write to disk required.
+        def finalize(zfile, cache, dump):
+            zfile.update((k, dump(v)) for k, v in cache.items())
+
+        import weakref
+        self._finalizer = weakref.finalize(
+            self, finalize, self._file, self._cache, PersistentDict._dump)
+
+    @property
+    def directory(self):
+        return self._directory
+
+    def __setitem__(self, key, value):
+        self._cache[key] = value
+        self._func[key] = value
+
+    def __getitem__(self, key):
+        return self._cache[key]
+
+    def __delitem__(self, key):
+        del self._cache[key]
+        del self._func[key]
+
+    def __len__(self):
+        return len(self._cache)
+
+    def __repr__(self):
+        return f"<{self.__class__.__name__} {dict(self)!r}>"
+
+    def __iter__(self):
+        yield from self._cache
+
+    def popitem(self):
+        key, _value = self._cache.popitem()
+        del self._func[key]
+
+    @staticmethod
+    def _dump(obj):
+        "Encode as msgpack using numpy-aware encoder."
+        # See https://github.com/msgpack/msgpack-python#string-and-binary-type
+        # for more on use_bin_type.
+        return msgpack.packb(
+            obj,
+            default=msgpack_numpy.encode,
+            use_bin_type=True)
+
+    @staticmethod
+    def _load(file):
+        return msgpack.unpackb(
+            file,
+            object_hook=msgpack_numpy.decode,
+            raw=False)
+
+    def flush(self):
+        """Force a write of the current state to disk"""
+        for k, v in self.items():
+            self._func[k] = v
+
+    def reload(self):
+        """Force a reload from disk, overwriting current cache"""
+        self._cache = dict(self._func.items())
+
+
+
+RE.md = PersistentDict(RE.md.directory)  # Use fixed PersistentDict. aimed at same directory as built-in one
+
+# end temporary fix
+
+
 # === END PERSISTENT DICT CODE ===
 
 
