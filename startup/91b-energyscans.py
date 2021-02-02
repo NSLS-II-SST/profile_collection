@@ -230,7 +230,7 @@ def short_nitrogen_scan_nd(multiple=1,sigs=[],
 
 
 def very_short_carbon_scan_nd(multiple=1,sigs=[],
-                              dets=[saxs_det],energy=en,pol=0,diode_range=7,m3_pitch=7.97):
+                              dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=8.01,grating='1200'):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 40 exposures
@@ -262,13 +262,13 @@ def very_short_carbon_scan_nd(multiple=1,sigs=[],
 
     # Define exposures times for different energy ranges
     times[energies<282] = 2
-    times[(energies < 286) & (energies >= 282)] = 5
+    times[(energies < 286) & (energies >= 282)] = 2
     times[energies >= 286] = 2
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
     yield from en_scan_core(sigs, dets,energy,energies,times,enscan_type=enscan_type,
-                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
+                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
 
 
 def short_carbon_scan_nd(multiple=1,sigs=[],
