@@ -156,7 +156,6 @@ RE.md = PersistentDict(runengine_metadata_dir)
 
 # Temporary fix from Dan Allan Feb 2, 2021
 import collections.abc, zict, msgpack, msgpack_numpy
-from msgpack import ms
 
 
 class PersistentDict(collections.abc.MutableMapping):
