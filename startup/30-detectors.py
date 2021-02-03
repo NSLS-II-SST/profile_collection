@@ -135,26 +135,26 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
         if self.cam.enable_cooling.get():
             self.cam.temperature_actual.read()
             if self.cam.temperature_actual.get() - self.cam.temperature.get() > 1.0:
-                return ("\nTemperature of {} ({} °C) is not at setpoint ({} °C) but cooling is on".format(
+                return ("\nTemperature of {} ({} °C) is not at setpoint ({}°C) but cooling is on".format(
                     colored(self.name,'lightblue'),
                     colored(self.cam.temperature_actual.get(),'red'),
                     colored(self.cam.temperature.get(),'blue')))
             else:
-                return ("\nTemperature of {} ({} °C) is at setpoint ({} °C) and cooling is on".format(
+                return ("\nTemperature of {} ({} °C) is at setpoint ({}°C) and cooling is on".format(
                     colored(self.name,'lightblue'),
-                    colored(self.cam.temperature_actual.get(),'green'),
+                    colored(self.cam.temperature_actual.get(),'darkgreen'),
                     colored(self.cam.temperature.get(),'blue')))
         else:
             if self.cam.temperature_actual.get() - self.cam.temperature.get() > 1.0:
-                return ("\nTemperature of {} ({} °C) is not at setpoint ({} °C) and cooling is off".format(
+                return ("\nTemperature of {} ({} °C) is not at setpoint ({}°C) and cooling is off".format(
                      colored(self.name,'lightblue'),
                      colored(self.cam.temperature_actual.get(),'red'),
-                     colored(self.cam.temperature.get(),'lightgray')))
+                     colored(self.cam.temperature.get(),'gray')))
             else:
-                return ("\nTemperature of {} ({} °C) is at setpoint ({} °C), but cooling is off".format(
+                return ("\nTemperature of {} ({} °C) is at setpoint ({}°C), but cooling is off".format(
                     colored(self.name,'lightblue'),
                     colored(self.cam.temperature_actual.get(),'green'),
-                    colored(self.cam.temperature.get(),'lightgray')))
+                    colored(self.cam.temperature.get(),'gray')))
 
     def set_binning(self,binx,biny):
         self.binvalue = binx

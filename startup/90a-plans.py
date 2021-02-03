@@ -52,7 +52,7 @@ del binning
 
 @register_line_magic
 def temp(line):
-    boxed_text('Detector cooling',saxs_det.cooling_state()+'\n'+saxs_det.cooling_state(),'blue',shrink=True,width=95)
+    boxed_text('Detector cooling',saxs_det.cooling_state()+'\n'+waxs_det.cooling_state(),'blue',shrink=True,width=95)
 del temp
 
 

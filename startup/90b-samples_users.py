@@ -13,69 +13,69 @@ def user():
     title = "User metadata - stored in every scan:"
     text = ""
     if len(RE.md["proposal_id"]) > 0:
-        text += '   proposal ID:           ' + colored('{}'.format(str(RE.md["proposal_id"])).center(40, ' '), 'yellow')
+        text += '   proposal ID:           ' + colored('{}'.format(str(RE.md["proposal_id"])).center(50, ' '), 'yellow')
     if len(str(RE.md["saf_id"])) > 0:
-        text += '\n   saf ID:              ' + colored('{}'.format(str(RE.md["saf_id"])).center(40, ' '), 'yellow')
+        text += '\n   saf ID:              ' + colored('{}'.format(str(RE.md["saf_id"])).center(50, ' '), 'yellow')
     if len(RE.md["user_name"]) > 0:
-        text += '\n   User Name:           ' + colored('{}'.format(RE.md["user_name"]).center(40, ' '), 'yellow')
+        text += '\n   User Name:           ' + colored('{}'.format(RE.md["user_name"]).center(50, ' '), 'yellow')
     if len(RE.md["user_email"]) > 0:
-        text += '\n   User Email:          ' + colored('{}'.format(RE.md["user_name"]).center(40, ' '), 'yellow')
+        text += '\n   User Email:          ' + colored('{}'.format(RE.md["user_name"]).center(50, ' '), 'yellow')
     if len(RE.md["user_start_date"]) > 0:
-        text += '\n   User Start Date:     ' + colored('{}'.format(RE.md["user_start_date"]).center(40, ' '), 'yellow')
+        text += '\n   User Start Date:     ' + colored('{}'.format(RE.md["user_start_date"]).center(50, ' '), 'yellow')
     if len(RE.md["user_id"]) > 0:
-        text += '\n   User ID:             ' + colored('{}'.format(str(RE.md["user_id"])).center(40, ' '), 'yellow')
+        text += '\n   User ID:             ' + colored('{}'.format(str(RE.md["user_id"])).center(50, ' '), 'yellow')
     if len(RE.md["institution"]) > 0:
-        text += '\n   Institution:         ' + colored('{}'.format(RE.md["institution"]).center(40, ' '), 'yellow')
+        text += '\n   Institution:         ' + colored('{}'.format(RE.md["institution"]).center(50, ' '), 'yellow')
     if len(RE.md["project_name"]) > 0:
-        text += '\n   project:             ' + colored('{}'.format(RE.md["project_name"]).center(40, ' '), 'yellow')
+        text += '\n   project:             ' + colored('{}'.format(RE.md["project_name"]).center(50, ' '), 'yellow')
     if len(RE.md["project_desc"]) > 0:
-        text += '\n   Project Description: ' + colored('{}'.format(RE.md["project_desc"]).center(40, ' '), 'yellow')
-    boxed_text(title, text, 'green', 80, shrink=True)
+        text += '\n   Project Description: ' + colored('{}'.format(RE.md["project_desc"]).center(50, ' '), 'yellow')
+    boxed_text(title, text, 'green', 80, shrink=False)
 
 
 def sample():
     title = "Sample metadata - stored in every scan:"
     text = ''
     if len(str(RE.md["proposal_id"])) > 0:
-        text += '   proposal ID:           ' + colored('{}'.format(RE.md["proposal_id"]).center(38, ' '), 'cyan')
+        text += '   proposal ID:           ' + colored('{}'.format(RE.md["proposal_id"]).center(48, ' '), 'cyan')
     if len(str(RE.md["saf_id"])) > 0:
-        text += '\n   SAF id:                ' + colored('{}'.format(RE.md["saf_id"]).center(38, ' '), 'cyan')
+        text += '\n   SAF id:                ' + colored('{}'.format(RE.md["saf_id"]).center(48, ' '), 'cyan')
     if len(str(RE.md["user_name"])) > 0:
-        text += '\n   User Name:             ' + colored('{}'.format(RE.md["user_name"]).center(38, ' '), 'cyan')
+        text += '\n   User Name:             ' + colored('{}'.format(RE.md["user_name"]).center(48, ' '), 'cyan')
     if len(str(RE.md["institution"])) > 0:
-        text += '\n   Institution:           ' + colored('{}'.format(RE.md["institution"]).center(38, ' '), 'cyan')
+        text += '\n   Institution:           ' + colored('{}'.format(RE.md["institution"]).center(48, ' '), 'cyan')
     if len(str(RE.md["sample_name"])) > 0:
-        text += '\n   Sample Name:           ' + colored('{}'.format(RE.md["sample_name"]).center(38, ' '), 'cyan')
+        text += '\n   Sample Name:           ' + colored('{}'.format(RE.md["sample_name"]).center(48, ' '), 'cyan')
     if len(str(RE.md["sample_desc"])) > 0:
-        text += '\n   Sample Description:    ' + colored('{}'.format(RE.md["sample_desc"]).center(38, ' '), 'cyan')
+        text += '\n   Sample Description:    ' + colored('{}'.format(RE.md["sample_desc"]).center(48, ' '), 'cyan')
     if len(str(RE.md["sample_id"])) > 0:
-        text += '\n   Sample ID:             ' + colored('{}'.format(str(RE.md["sample_id"])).center(38, ' '), 'cyan')
+        text += '\n   Sample ID:             ' + colored('{}'.format(str(RE.md["sample_id"])).center(48, ' '), 'cyan')
     if len(str(RE.md["sample_set"])) > 0:
-        text += '\n   Sample Set:            ' + colored('{}'.format(RE.md["sample_set"]).center(38, ' '), 'cyan')
+        text += '\n   Sample Set:            ' + colored('{}'.format(RE.md["sample_set"]).center(48, ' '), 'cyan')
     if len(str(RE.md["sample_date"])) > 0:
-        text += '\n   Sample Creation Date:  ' + colored('{}'.format(RE.md["sample_date"]).center(38, ' '), 'cyan')
+        text += '\n   Sample Creation Date:  ' + colored('{}'.format(RE.md["sample_date"]).center(48, ' '), 'cyan')
     if len(str(RE.md["project_name"])) > 0:
-        text += '\n   Project name:          ' + colored('{}'.format(RE.md["project_name"]).center(38, ' '), 'cyan')
+        text += '\n   Project name:          ' + colored('{}'.format(RE.md["project_name"]).center(48, ' '), 'cyan')
     if len(str(RE.md["project_desc"])) > 0:
-        text += '\n   Project Description:   ' + colored('{}'.format(RE.md["project_desc"]).center(38, ' '), 'cyan')
+        text += '\n   Project Description:   ' + colored('{}'.format(RE.md["project_desc"]).center(48, ' '), 'cyan')
     if len(str(RE.md["samp_user_id"])) > 0:
-        text += '\n   Creator User ID:       ' + colored('{}'.format(str(RE.md["samp_user_id"])).center(38, ' '),
+        text += '\n   Creator User ID:       ' + colored('{}'.format(str(RE.md["samp_user_id"])).center(48, ' '),
                                                          'cyan')
     if len(str(RE.md["bar_loc"])) > 0:
-        text += '\n   Location on Bar:       ' + colored('{}'.format(RE.md["bar_loc"]).center(38, ' '), 'cyan')
+        text += '\n   Location on Bar:       ' + colored('{}'.format(RE.md["bar_loc"]).center(48, ' '), 'cyan')
     if len(str(RE.md["composition"])) > 0:
-        text += '\n   Composition(formula):  ' + colored('{}'.format(RE.md["composition"]).center(38, ' '), 'cyan')
+        text += '\n   Composition(formula):  ' + colored('{}'.format(RE.md["composition"]).center(48, ' '), 'cyan')
     if len(str(RE.md["density"])) > 0:
-        text += '\n   Density:               ' + colored('{}'.format(str(RE.md["density"])).center(38, ' '), 'cyan')
+        text += '\n   Density:               ' + colored('{}'.format(str(RE.md["density"])).center(48, ' '), 'cyan')
     if len(str(RE.md["components"])) > 0:
-        text += '\n   List of Components:    ' + colored('{}'.format(RE.md["components"]).center(38, ' '), 'cyan')
+        text += '\n   List of Components:    ' + colored('{}'.format(RE.md["components"]).center(48, ' '), 'cyan')
     if len(str(RE.md["thickness"])) > 0:
-        text += '\n   Thickness:             ' + colored('{}'.format(str(RE.md["thickness"])).center(38, ' '), 'cyan')
+        text += '\n   Thickness:             ' + colored('{}'.format(str(RE.md["thickness"])).center(48, ' '), 'cyan')
     if len(str(RE.md["sample_state"])) > 0:
-        text += '\n   Sample state:          ' + colored('{}'.format(RE.md["sample_state"]).center(38, ' '), 'cyan')
+        text += '\n   Sample state:          ' + colored('{}'.format(RE.md["sample_state"]).center(48, ' '), 'cyan')
     if len(str(RE.md["notes"])) > 0:
-        text += '\n   Notes:                 ' + colored('{}'.format(RE.md["notes"]).center(38, ' '), 'cyan')
-    boxed_text(title, text, 'red', 80, shrink=True)
+        text += '\n   Notes:                 ' + colored('{}'.format(RE.md["notes"]).center(48, ' '), 'cyan')
+    boxed_text(title, text, 'red', 80, shrink=False)
 
 
 @register_line_magic
