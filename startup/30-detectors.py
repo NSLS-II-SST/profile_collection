@@ -142,7 +142,7 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
             else:
                 return ("\n{} is {}°C, at setpoint ({}°C, enabled)".format(
                     colored(self.name,'lightblue'),
-                    colored(self.cam.temperature_actual.get(),'darkgreen'),
+                    colored(self.cam.temperature_actual.get(),'green'),
                     colored(self.cam.temperature.get(),'blue')))
         else:
             if self.cam.temperature_actual.get() - self.cam.temperature.get() > 1.0:
