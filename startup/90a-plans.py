@@ -22,7 +22,7 @@ def set_exposure(exposure):
 
 
 def exposure():
-    return (saxs_det.exposure()+'\n'+waxs_det.exposure())
+    return ('   '+saxs_det.exposure()+'\n   '+waxs_det.exposure())
 
 
 @register_line_magic
