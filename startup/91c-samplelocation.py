@@ -149,7 +149,7 @@ def bar_add_from_click(event):
                     front = False
             else:
                 grazing = False
-                front = False
+                front = True
             yloc = event.xdata
             if grazing:
                 if front:
