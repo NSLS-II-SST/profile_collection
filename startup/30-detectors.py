@@ -135,23 +135,23 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
         if self.cam.enable_cooling.get():
             self.cam.temperature_actual.read()
             if self.cam.temperature_actual.get() - self.cam.temperature.get() > 1.0:
-                return ("\n{} is {}°C, not at setpoint ({}°C) but cooling is on".format(
+                return ("\n{} is {}°C, not at setpoint ({}°C) cooling on".format(
                     colored(self.name,'lightblue'),
                     colored(self.cam.temperature_actual.get(),'red'),
                     colored(self.cam.temperature.get(),'blue')))
             else:
-                return ("\n{} is {}°C, at setpoint ({}°C) and cooling is on".format(
+                return ("\n{} is {}°C, at setpoint ({}°C) cooling on".format(
                     colored(self.name,'lightblue'),
                     colored(self.cam.temperature_actual.get(),'darkgreen'),
                     colored(self.cam.temperature.get(),'blue')))
         else:
             if self.cam.temperature_actual.get() - self.cam.temperature.get() > 1.0:
-                return ("\n{} is {}°C, not at setpoint ({}°C) anf cooling is off".format(
+                return ("\n{} is {}°C, not at setpoint ({}°C) cooling off".format(
                      colored(self.name,'lightblue'),
                      colored(self.cam.temperature_actual.get(),'red'),
                      colored(self.cam.temperature.get(),'darkgray')))
             else:
-                return ("\n{} is {}°C, at setpoint ({}°C) but cooling is off".format(
+                return ("\n{} is {}°C, at setpoint ({}°C) cooling off".format(
                     colored(self.name,'lightblue'),
                     colored(self.cam.temperature_actual.get(),'green'),
                     colored(self.cam.temperature.get(),'darkgray')))
