@@ -42,7 +42,7 @@ def binning(line):
     try:
         bins = int(line)
     except:
-        boxed_text('Pixel Binning',saxs_det.binning()+'\n'+waxs_det.binning(),'lightpurple',shrink=True)
+        boxed_text('Pixel Binning','   ' + saxs_det.binning()+'\n   '+waxs_det.binning(),'lightpurple',shrink=True)
     else:
         if bins > 0 and bins < 100:
             saxs_det.set_binning(bins,bins)
@@ -52,7 +52,7 @@ del binning
 
 @register_line_magic
 def temp(line):
-    boxed_text('Detector cooling',saxs_det.cooling_state()+'\n'+waxs_det.cooling_state(),'blue',shrink=True,width=95)
+    boxed_text('Detector cooling','   ' + saxs_det.cooling_state()+'\n   '+waxs_det.cooling_state(),'blue',shrink=True,width=95)
 del temp
 
 

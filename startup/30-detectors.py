@@ -91,8 +91,8 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
             4:'unknown',
             2:'enabled'
         }
-        #return ('Shutter is {}'.format(switch[self.cam.sync.get()]))
-        return ('Shutter is {}'.format(switch[self.cam.shutter_mode.get()]))
+        return ('Shutter is {}'.format(switch[self.cam.sync.get()]))
+        #return ('Shutter is {}'.format(switch[self.cam.shutter_mode.get()]))
 
     def shutter_on(self):
         #self.cam.sync.set(1)
