@@ -10,10 +10,10 @@ class RSoXSPrompt(Prompts):
         formatted_date = dt.strftime('%Y-%m-%d')
 
         if len(RE.md['proposal_id']) > 0 and len(RE.md['project_name']) > 0 and len(RE.md['cycle']) > 0:
-            RSoXStoken = (Token.Prompt, 'RSoXS '+'{}/{}/{}/auto/{}/ '.format(RE.md['cycle'],
-                                                                             RE.md['proposal_id'],
-                                                                             RE.md['project_name'],
-                                                                             formatted_date)
+            RSoXStoken = (Token.Prompt, 'RSoXS ' + '{}/{}/{}/auto/{}/ '.format(RE.md['cycle'],
+                                                                               RE.md['proposal_id'],
+                                                                               RE.md['project_name'],
+                                                                               formatted_date)
                           )
         else:
             RSoXStoken = (Token.OutPrompt, 'RSoXS (define metadata before scanning)')
@@ -21,6 +21,7 @@ class RSoXSPrompt(Prompts):
                 (Token.Prompt, ' ['),
                 (Token.PromptNum, str(self.shell.execution_count)),
                 (Token.Prompt, ']: ')]
+
 
 ip = get_ipython()
 ip.prompts = RSoXSPrompt(ip)
@@ -30,8 +31,13 @@ def beamline_status():
     # user()
     sample()
     boxed_text('Detector status',
-               exposure()+'\n'+saxs_det.binning()+'\n'+saxs_det.cooling_state(),
-               'lightblue',80,shrink=True)
+               exposure() +
+               '\n' + saxs_det.binning() +
+               '\n' + waxs_det.binning() +
+               '\n' + saxs_det.cooling_state() +
+               '\n' + waxs_det.cooling_state(),
+               'lightblue', 80, shrink=True)
+
 
 user()
 beamline_status()
