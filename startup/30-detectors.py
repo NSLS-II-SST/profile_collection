@@ -149,12 +149,12 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
                 return ("\nTemperature of {} ({} °C) is not at setpoint ({}°C) and cooling is off".format(
                      colored(self.name,'lightblue'),
                      colored(self.cam.temperature_actual.get(),'red'),
-                     colored(self.cam.temperature.get(),'gray')))
+                     colored(self.cam.temperature.get(),'darkgray')))
             else:
                 return ("\nTemperature of {} ({} °C) is at setpoint ({}°C), but cooling is off".format(
                     colored(self.name,'lightblue'),
                     colored(self.cam.temperature_actual.get(),'green'),
-                    colored(self.cam.temperature.get(),'gray')))
+                    colored(self.cam.temperature.get(),'darkgray')))
 
     def set_binning(self,binx,biny):
         self.binvalue = binx
