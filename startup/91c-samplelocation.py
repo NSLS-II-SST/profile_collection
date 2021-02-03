@@ -126,6 +126,9 @@ def locate_samples_from_image(bar, impath):
     update_bar(bar, loc_Q)
 
 
+def front_x_from_back(xfront):
+    return 3.6 - xfront
+
 def bar_add_from_click(event):
     global bar
     # print(event.xdata, event.ydata)
@@ -134,10 +137,46 @@ def bar_add_from_click(event):
 
         # print(event.xdata,event.ydata)
         if barnum >= 0 and barnum < len(bar):
-            bar[barnum]['location'][0] = {'motor': 'x', 'position': event.ydata}
-            bar[barnum]['location'][1] = {'motor': 'y', 'position': event.xdata}
+            #read the bar and decide if the sample is a grazing incidence, front or back, and set the theta accordingly
+            if 'bar_loc' in bar[barnum].keys():
+                if 'g' in bar[barnum]['bar_loc']:
+                    grazing = True
+                else:
+                    grazing = False
+                if 'f' in bar[barnum]['bar_loc']:
+                    front = True
+                else:
+                    front = False
+            else:
+                grazing = False
+                front = False
+            yloc = event.xdata
+            if grazing:
+                if front:
+                    xloc = .08 -.33*front_x_from_back(event.ydata)
+                    # adjust position to grazing position (20 degrees)
+                    # flip back to the front position
+                    thloc = 70
+                    # image taken from front of the bar, so the flipped position needs to be flipped back
+                else:
+                    xloc =-2.7 + .33*front_x_from_back(event.ydata)
+                    # adjust position to 20 degrees incidence
+                    # adjust position from camera, which assumes camera from front
+                    # image taken of the back of the bar so does not need flipping
+                    thloc = 110
+            else:
+                if front:
+                    xloc = event.ydata
+                    thloc = 180
+                else:
+                    xloc = front_x_from_back(event.ydata)
+                    thloc = 0
+
+            bar[barnum]['location'][0] = {'motor': 'x', 'position': xloc}
+            bar[barnum]['location'][1] = {'motor': 'y', 'position': yloc}
             bar[barnum]['location'][2] = {'motor': 'z', 'position': 0}
-            bar[barnum]['location'][3] = {'motor': 'th', 'position': 180}
+
+            bar[barnum]['location'][3] = {'motor': 'th', 'position': thloc}
             print('position added')
         else:
             print('Invalid bar location')
