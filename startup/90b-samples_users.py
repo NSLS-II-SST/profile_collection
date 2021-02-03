@@ -61,6 +61,8 @@ def sample():
     if len(str(RE.md["samp_user_id"])) > 0:
         text += '\n   Creator User ID:       ' + colored('{}'.format(str(RE.md["samp_user_id"])).center(38, ' '),
                                                          'cyan')
+    if len(str(RE.md["bar_loc"])) > 0:
+        text += '\n   Location on Bar:       ' + colored('{}'.format(RE.md["bar_loc"]).center(38, ' '), 'cyan')
     if len(str(RE.md["composition"])) > 0:
         text += '\n   Composition(formula):  ' + colored('{}'.format(RE.md["composition"]).center(38, ' '), 'cyan')
     if len(str(RE.md["density"])) > 0:
@@ -246,6 +248,7 @@ def get_sample_dict(acq=[], locations=[]):
     project_desc = RE.md['project_desc']
     samp_user_id = RE.md['samp_user_id']
     composition = RE.md['composition']
+    bar_loc = RE.md['bar_loc']
     density = RE.md['density']
     components = RE.md['components']
     thickness = RE.md['thickness']
@@ -263,6 +266,7 @@ def get_sample_dict(acq=[], locations=[]):
             'project_desc': project_desc,
             'samp_user_id': samp_user_id,
             'composition': composition,
+            'bar_loc': bar_loc,
             'density': density,
             'components': components,
             'thickness': thickness,
@@ -298,22 +302,7 @@ def load_sample(sam_dict):
     :param sam_dict: sample dictionary containing all metadata and sample location
     :return:
     '''
-    RE.md['sample_name'] = sam_dict['sample_name']
-    RE.md['sample_desc'] = sam_dict['sample_desc']
-    RE.md['sample_id'] = sam_dict['sample_id']
-    RE.md['sample_set'] = sam_dict['sample_set']
-    RE.md['sample_date'] = sam_dict['sample_date']
-    RE.md['project_name'] = sam_dict['project_name']
-    RE.md['proposal_id'] = sam_dict['proposal_id']
-    RE.md['saf_id'] = sam_dict['saf_id']
-    RE.md['project_desc'] = sam_dict['project_desc']
-    RE.md['samp_user_id'] = sam_dict['samp_user_id']
-    RE.md['composition'] = sam_dict['composition']
-    RE.md['density'] = sam_dict['density']
-    RE.md['components'] = sam_dict['components']
-    RE.md['thickness'] = sam_dict['thickness']
-    RE.md['sample_state'] = sam_dict['sample_state']
-    RE.md['notes'] = sam_dict['notes']
+    RE.md.update(sam_dict)
     yield from move_to_location(locs=sam_dict['location'])
     # sample()
 
@@ -324,13 +313,7 @@ def run_sample(sam_dict):
 
 
 def load_user_dict_to_md(user_dict):
-    RE.md['user_id'] = user_dict['user_id']
-    RE.md['proposal_id'] = user_dict['proposal_id']
-    RE.md['saf_id'] = user_dict['saf_id']
-    RE.md['institution'] = user_dict['institution']
-    RE.md['user_name'] = user_dict['user_name']
-    RE.md['project_name'] = user_dict['project_name']
-    RE.md['project_desc'] = user_dict['project_desc']
+    RE.md.update(user_dict)
 
 
 def newsample():
@@ -380,6 +363,10 @@ def newsample():
     samp_user_id = input('Associated User ID ({}): '.format(RE.md['samp_user_id']))
     if samp_user_id is not '':
         RE.md['samp_user_id'] = samp_user_id
+
+    bar_loc = input('Location on the Bar ({}): '.format(RE.md['bar_loc']))
+    if bar_loc is not '':
+        RE.md['bar_loc'] = bar_loc
 
     composition = input('Sample composition or chemical formula ({}): '.format(RE.md['composition']))
     if composition is not '':
@@ -446,6 +433,14 @@ def newsample():
 
 
 def avg_scan_time(plan_name, nscans=50, new_scan_duration=600):
+    if plan_name is 'Carbon_angle_NEXAFS' :
+        multiple = 5
+        plan_name = 'fly_Carbon_NEXAFS'
+    elif plan_name is 'something_else' :
+        multiple = 5
+        plan_name = 'something_else'
+    else:
+        multiple = 1
     scans = db0(plan_name=plan_name)
     durations = np.array([])
     for i, sc in enumerate(scans):
@@ -455,7 +450,7 @@ def avg_scan_time(plan_name, nscans=50, new_scan_duration=600):
             if i > nscans:
                 break
     if len(durations) > 0:
-        return np.mean(durations)
+        return np.mean(durations) * multiple
     else:
         # we have never run a scan of this type before (?!?) - assume it takes some default value (10 min)
         return new_scan_duration
@@ -489,7 +484,7 @@ def run_bar(bar, sortby=['p', 'c', 'a', 's'], dryrun=0, rev=[False, False, False
                             sample_project,  # 1
                             a['configuration'],  # 2
                             a['plan_name'],  # 3
-                            avg_scan_time(a['plan_name'], 10),  # 4
+                            avg_scan_time(a['plan_name'], 50),  # 4
                             sample,  # 5
                             a,  # 6
                             samp_num,  # 7

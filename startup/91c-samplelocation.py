@@ -155,7 +155,7 @@ def update_bar(bar,loc_Q):
         while True:
 #        for sample in bar:
             sample = bar[samplenum]
-            print(f'Right-click on {sample["sample_name"]} location.  Press n on plot or enter to skip to next sample, p for previous sample, esc to end')
+            print(f'Right-click on {sample["sample_name"]} location (recorded location is {sample["bar_loc"]}).  Press n on plot or enter to skip to next sample, p for previous sample, esc to end')
             # ipython input x,y or click in plt which outputs x, y location
             while True:
                 try:
