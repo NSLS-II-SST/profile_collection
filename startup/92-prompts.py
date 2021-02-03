@@ -36,7 +36,7 @@ def beamline_status():
                '\n   ' + waxs_det.binning() +
                '\n   ' + saxs_det.cooling_state()+
                '\n   ' + waxs_det.cooling_state(),
-               'lightblue', 80, shrink=True)
+               'lightblue', 80, shrink=False)
 
 
 user()
