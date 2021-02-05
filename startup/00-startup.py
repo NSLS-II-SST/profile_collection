@@ -286,3 +286,5 @@ logger.setLevel('DEBUG')  # change DEBUG to INFO later on
 from databroker.v0 import Broker
 db0 = Broker.named('rsoxs')
 
+bec.disable_table()
+bec.disable_plots()
