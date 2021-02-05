@@ -117,11 +117,11 @@ class MakeSafeHandler(logging.Handler):
 
 logger = logging.getLogger('bluesky')
 mail_handler = OSEmailHandler()
-mail_handler.setLevel('CRITICAL')  # Only email for if the level is ERROR or higher (CRITICAL).
+mail_handler.setLevel('ERROR')  # Only email for if the level is ERROR or higher (CRITICAL).
 logger.addHandler(mail_handler)
 
 safe_handler = MakeSafeHandler()
-safe_handler.setLevel('CRITICAL')  # is this correct?
+safe_handler.setLevel('ERROR')  # is this correct?
 logger.addHandler(safe_handler)
 
 
