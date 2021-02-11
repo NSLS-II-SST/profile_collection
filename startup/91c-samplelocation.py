@@ -184,7 +184,10 @@ def bar_add_from_click(event):
         print('invalid bar')
 
 
-def update_bar(bar, loc_Q):
+def update_bar(bar, loc_Q,th0):
+    '''
+    updated with th0 position recording whether we are pointing at the front or the back of the bar
+    '''
     from threading import Thread
     try:
         loc_Q.get_nowait()
@@ -198,7 +201,7 @@ def update_bar(bar, loc_Q):
             #        for sample in bar:
             sample = bar[samplenum]
             print(
-                f'Right-click on {sample["sample_name"]} location (recorded location is {sample["bar_loc"]}).  ' +
+                f'Right-click on {sample["sample_name"]} location (recorded location is {sample["bar_loc"]["spot"]}).  ' +
                 'Press n on plot or enter to skip to next sample, p for previous sample, esc to end')
             # ipython input x,y or click in plt which outputs x, y location
             while True:
@@ -213,6 +216,9 @@ def update_bar(bar, loc_Q):
                     break
             if item is not ('enter' or 'escape' or 'n' or 'p') and isinstance(item, list):
                 sample['location'] = item
+                sample['bar_loc']['ximg']=item[0]['position']
+                sample['bar_loc']['yimg']=item[1]['position']
+                sample['bar_loc']['th0']=th0
                 annotateImage(sample_image_axes, item, sample['sample_name'])
                 # advance sample and loop
                 samplenum += 1
@@ -357,6 +363,9 @@ def offset_bar(bar, xoff, yoff, zoff, thoff):
 
 
 def flip_bar(bar):
+    '''
+    obsolete, use rotate_sample instead
+    '''
     for samp in bar:
         for mot in samp['location']:
             if mot['motor'] is 'x':
@@ -376,11 +385,39 @@ def straighten_x(x, y, dx, dy, y_center):
     return x - (y + y_center) * dx / dy
 
 
-def correct_bar(bar, af1x, af1y, af2x, af2y, training_wheels=True):
-    x_offset = af1x - bar[0]['location'][0]['position']
-    y_offset = af1y - bar[0]['location'][1]['position']
-    x_image_offset = bar[0]['location'][0]['position'] - bar[-1]['location'][0]['position']
-    y_image_offset = bar[0]['location'][1]['position'] - bar[-1]['location'][0]['position']
+def correct_bar(bar, fiduciallist,front,training_wheels=True):
+    '''
+    originally this function adjusted the x, y, positions of samples on a bar
+    to align with the x-y locations found by fiducials
+    now the fiducial needs 4 x measurements at the different angles, (-90,0.90,180)
+    and the one measurement of y for each fiducial
+    and the sample z offset can be found as well
+    so apritrary angles can be gone to if requested (this should be recorded in the 'th' parameter in bar_loc
+
+    fiducial list is the list output by find_fiducials()
+    '''
+    af2y = fiduciallist[0]
+    af2xm90 = fiduciallist[1]
+    af2x0 = fiduciallist[2]
+    af2x90 = fiduciallist[3]
+    af2x180 = fiduciallist[4]
+    af1y = fiduciallist[5]
+    af1xm90 = fiduciallist[6]
+    af1x0 = fiduciallist[7]
+    af1x90 = fiduciallist[8]
+    af1x180 = fiduciallist[9]
+    af1x_img = bar[0]['location'][0]['position']
+    af1y_img = bar[0]['location'][1]['position']
+    af2x_img = bar[-1]['location'][0]['position']
+    af2y_img = bar[-1]['location'][1]['position']
+
+    af1x, af1zoff,af1xoff = af_rotation(af1xm90, af1x0, af1x90, af1x180) # find the center of rotation from fiducials
+    af2x, af2zoff,af2xoff = af_rotation(af2xm90, af2x0, af2x90, af2x180)
+
+    x_offset = af1x - af1x_img # offset from X-rays to image in x
+    y_offset = af1y - af1y_img # offset from X-rays to image in y
+
+    y_image_offset = af1y_img - af2y_img # distance between fiducial y positions (should be ~ -190)
     if (training_wheels):
         assert abs(abs(af2y - af1y) - abs(y_image_offset)) < 5, \
             "Hmm... " \
@@ -388,17 +425,123 @@ def correct_bar(bar, af1x, af1y, af2x, af2y, training_wheels=True):
             " 5 mm between the imager and the chamber.  \n \n Are you sure" \
             " your alignment fiducials are correctly located?  \n\n If you're" \
             " really sure, rerun with training_wheels=false."
-    dx = (af2x - af1x) + x_image_offset
-    dy = af2y - af1y
+
+    dx = af2x - af2x_img - x_offset  # offset of Af2 X-rays to image in x relative to Af1 (mostly rotating)
+    dy = af2y - af2y_img - y_offset  # offset of Af2 X-rays to image in y relative to Af1 (mostly stretching)
+    run_y = af2y - af1y # (distance between the fiducial markers) (above are the total delta over this run,
+                        # in between this will be scaled
 
     for samp in bar:
-        xpos = samp['location'][0]['position']
-        ypos = samp['location'][1]['position']
+        xpos = samp['bar_loc']['ximg'] # x position from the image
+        ypos = samp['bar_loc']['yimg'] # y position from the image
 
-        xpos = xpos + x_offset
-        ypos = ypos + y_offset
+        newx = xpos + x_offset + (ypos - af1y) * dx / run_y
+        newy = ypos + y_offset + (ypos - af1y) * dy / run_y
+        # add in the scaled rotated x amount (should be very small) to make Af2 line up correctly
 
-        newx = xpos + (ypos - af1y) * dx / dy
+        samp['bar_loc']['x0'] = newx
+        samp['bar_loc']['y0'] = newy
+        # ADDING in recording of fiducial information as well with every sample, so they will know how to rotate
+        samp['bar_loc']['af1y'] = af1y
+        samp['bar_loc']['af2y'] = af2y
+        samp['bar_loc']['af1xoff'] = af1xoff
+        samp['bar_loc']['af2xoff'] = af2xoff
+        samp['bar_loc']['af1zoff'] = af1zoff
+        samp['bar_loc']['af2zoff'] = af2zoff
 
-        samp['location'][0]['position'] = newx
-        samp['location'][1]['position'] = ypos
+        zoff = zoffset(af1zoff,af2zoff,newy,front = front,height=samp['height'],af1y=af1y,af2y=af2y)
+
+        samp['bar_loc']['zoff'] = zoff
+
+        # now we can rotate the sample to the desired position
+
+        th = samp['bar_loc']['th'] # this is the requested theta (should be 180 if beam comes from the back)
+
+
+        samp['location'][0]['position'] = rotatedx(newx,th,zoff,af1xoff)
+        samp['location'][1]['position'] = newy
+        samp['location'][3]['position'] = th
+
+        # samp['location'][2]['position'] = rotatedz(newx, th, zoff, af1xoff)
+        # moving z is dangerous = best to keep it at 0 by default
+
+def zoffset(af1zoff,af2zoff,y,front=True,height=.25,af1y=-186.3,af2y=4):
+    '''
+    Using the z offset of the fiducial positions from the center of rotation,
+    project the z offset of the surface of a given sample at some y position between
+    the fiducials.
+    '''
+
+    m = (af1zoff-af2zoff)/(af1y-af2y)
+    z0 = af1zoff - m*af1y
+
+    # offset the line by the front/back offset + height
+    if front:
+        return z0 - 3.5 - height + y*m
+    else:
+        return z0 + height + y*m
+    # return the offset intersect
+
+
+def rotatedx(x0,theta,zoff,xoff=1.88,thoff=1.6):
+    '''
+    given the x position at 0 rotation (from the image of the sample bar)
+    and a rotation angle, the offset of rotation in z and x (as well as a potential theta offset)
+    find the correct x position to move to at a different rotation angle
+    '''
+    return xoff + (x0 - xoff) * np.cos((theta - thoff) * np.pi / 180) - zoff * np.sin((theta - thoff) * np.pi / 180)
+
+
+def rotatedz(x0,theta,zoff,xoff=1.88,thoff=1.6):
+    '''
+    given the x position at 0 rotation (from the image of the sample bar)
+    and a rotation angle, the offset of rotation in z and x axes (as well as a potential theta offset)
+    find the correct z position to move to to keep a particular sample at the same intersection point with X-rays
+    '''
+    return zoff + (x0 - xoff) * np.sin((theta - thoff) * np.pi / 180) - zoff * np.cos((theta - thoff) * np.pi / 180)
+
+
+def af_rotation(xfm90,xf0,xf90,xf180):
+    '''
+    takes the fiducial centers measured in the x direction at -90, 0, 90, and 180 degrees
+    and returns the offset in x and z from the center of rotation, as well as the
+    unrotated x positon of the fiducial marker.
+
+    the x offset is not expected to vary between loads, and has been measured to be 1.88,
+    while the z offset is as the bar flexes in this direction, and will be used to
+    map the surface locations of other samples between the fiducials
+
+    '''
+
+    x0 = xf0
+    xoff = (xf180+x0)/2
+    zoff = xf90 - xfm90
+    return (x0,zoff, xoff)
+
+def find_fiducials():
+    thoffset = 1.6
+    angles = [-90+thoffset,0+thoffset,90+thoffset,180+thoffset]
+    xrange = 3.5
+    xnum = 36
+    startxss = [[2,1,-1.5,-1],[5,1,-4.5,-1]]
+    startys = [4,-186.35]
+    maxlocs = []
+    yield from bps.mv(Shutter_enable, 0)
+    yield from bps.mv(Shutter_control, 0)
+    yield from load_configuration('SAXSNEXAFS')
+    Beamstop_SAXS.kind = 'hinted'
+    for startxs,starty in zip(startxss,startys):
+        yield from bps.mv(sam_Y,starty,sam_X,startxs[0],sam_th,-90,sam_Z=0)
+        yield from bps.mv(Shutter_control, 1)
+        yield from bp.rel_scan([Beamstop_SAXS], sam_Y, -.5,.5,11)
+        yield from bps.mv(Shutter_control, 0)
+        maxlocs.append(bec.peaks.max["Beamstop_SAXS"][0])
+        for startx,angle in zip(startxs,angles):
+            yield from bps.mv(sam_X,startx)
+            yield from bps.mv(Shutter_control, 1)
+            yield from bp.scan([Beamstop_SAXS],sam_X,startx,startx+xrange,xnum)
+            yield from bps.mv(Shutter_control, 0)
+            maxlocs.append(bec.peaks.max["Beamstop_SAXS"][0])
+    return maxlocs # [af2y,af2xm90,af2x0,af2x90,af2x180,af1y,af1xm90,af1x0,af1x90,af1x180]
+
+

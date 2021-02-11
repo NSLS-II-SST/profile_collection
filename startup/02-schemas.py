@@ -77,15 +77,37 @@ sample_schema = {
         'saf_id': {'type': 'string'},
         'project_name': {'type': 'string'},
         'institution_id': {'type': 'number'},
-        'bar_loc': {'type': 'string'},
+        'bar_loc': {'type': 'object',
+                    'properties': {
+                        'spot': {'type': 'string'}, # e.g. 1A. 16C (first row first sample, 16th row third sample)
+                        'front': {'type': 'boolean'}, # default rotation
+                        'beam_from_back': {'type':'boolean'}, # default measurement rotation
+                        'th': {'type': 'number'}, # measurement theta (will determine measurement x and y)
+                        'x0': {'type': 'number'}, # best unrotated location of sample in x dimension
+                        'ximg': {'type': 'number'}, # for bookkeeping, the original location of x from the image
+                        'y0': {'type': 'number'}, # best corrected y location of sample (from image/refinements)
+                        'yimg': {'type': 'number'}, # for bookkeeping, the original location of y from the image
+                        'th0': {'type': 'number'}, # determined from image/refinement (front ~ 0, back ~ 180)
+                        'xoff': {'type': 'number'}, # determined from fiducials / y position
+                        'zoff': {'type': 'number'}, # determined from fiducials / y position
+                        'z0': {'type': 'number'}, # default 0, can be used if necessary for some samples.
+                        'af1y': {'type': 'number'}, # used to calculate the zoffset
+                        'af2y': {'type': 'number'},
+                        'af1zoff': {'type': 'number'},
+                        'af2zoff': {'type': 'number'},
+                        'af1xoff': {'type': 'number'},
+                        'af2xoff': {'type': 'number'},
+                    },
+                    'required': ['x0', 'y0', 'th0', 'front','beam_from_back','th', 'xoff', 'yoff']
+                    },
         'composition': {'type': 'string'},
         'density': {'type': 'number'},
         'thickness': {'type': 'number'},
         'notes': {'type': 'string'},
-        'state': {'type': 'string','enum': ["loaded", "fresh", "broken", "lost", "unloaded"]},
+        'state': {'type': 'string', 'enum': ["loaded", "fresh", "broken", "lost", "unloaded"]},
         'current_bar_id': {'type': 'number'},
         'current_slot_name': {'type': 'string'},
-        'past_bar_ids':{'type': 'array'},
+        'past_bar_ids': {'type': 'array'},
         'location': {'$ref': '#/definitions/location'},
         'collections': {'type': 'array',
                         'uniqueItems': True,
@@ -98,7 +120,7 @@ sample_schema = {
                                    }
                                   ]
                         }
-        },
+    },
     'required': ['sample_name',
                  'date_created',
                  'user_id',

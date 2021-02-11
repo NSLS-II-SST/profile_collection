@@ -61,8 +61,10 @@ def sample():
     if len(str(RE.md["samp_user_id"])) > 0:
         text += '\n   Creator User ID:       ' + colored('{}'.format(str(RE.md["samp_user_id"])).center(48, ' '),
                                                          'cyan')
-    if len(str(RE.md["bar_loc"])) > 0:
-        text += '\n   Location on Bar:       ' + colored('{}'.format(RE.md["bar_loc"]).center(48, ' '), 'cyan')
+    if len(str(RE.md["bar_loc"]['spot'])) > 0:
+        text += '\n   Location on Bar:       ' + colored('{}'.format(RE.md["bar_loc"]['spot']).center(48, ' '), 'cyan')
+    if len(str(RE.md["bar_loc"]['th'])) > 0:
+        text += '\n   Angle of incidence:    ' + colored('{}'.format(RE.md["bar_loc"]['th']).center(48, ' '), 'cyan')
     if len(str(RE.md["composition"])) > 0:
         text += '\n   Composition(formula):  ' + colored('{}'.format(RE.md["composition"]).center(48, ' '), 'cyan')
     if len(str(RE.md["density"])) > 0:
@@ -364,9 +366,13 @@ def newsample():
     if samp_user_id is not '':
         RE.md['samp_user_id'] = samp_user_id
 
-    bar_loc = input('Location on the Bar ({}): '.format(RE.md['bar_loc']))
+    bar_loc = input('Location on the Bar ({}): '.format(RE.md['bar_loc']['spot']))
     if bar_loc is not '':
-        RE.md['bar_loc'] = bar_loc
+        RE.md['bar_loc']['spot'] = bar_loc
+
+    th = input('Angle desired for sample acquisition (-180 for transmission from back) ({}): '.format(RE.md['bar_loc']['th']))
+    if th is not '':
+        RE.md['bar_loc']['th'] = th
 
     composition = input('Sample composition or chemical formula ({}): '.format(RE.md['composition']))
     if composition is not '':
@@ -410,19 +416,19 @@ def newsample():
             locs.append({'motor': 'x', 'position': xval, 'order': 0})
         else:
             locs.append({'motor': 'x', 'position': sam_X.user_readback.get(), 'order': 0})
-        yval = input('X ({:.2f}): '.format(sam_Y.user_readback.get()))
+        yval = input('Y ({:.2f}): '.format(sam_Y.user_readback.get()))
         if yval is not '':
             locs.append({'motor': 'y', 'position': yval, 'order': 0})
         else:
             locs.append({'motor': 'y', 'position': sam_Y.user_readback.get(), 'order': 0})
 
-        zval = input('X ({:.2f}): '.format(sam_Z.user_readback.get()))
+        zval = input('Z ({:.2f}): '.format(sam_Z.user_readback.get()))
         if zval is not '':
             locs.append({'motor': 'z', 'position': zval, 'order': 0})
         else:
             locs.append({'motor': 'z', 'position': sam_Z.user_readback.get(), 'order': 0})
 
-        thval = input('X ({:.2f}): '.format(sam_Th.user_readback.get()))
+        thval = input('Theta ({:.2f}): '.format(sam_Th.user_readback.get()))
         if thval is not '':
             locs.append({'motor': 'th', 'position': thval, 'order': 0})
         else:
@@ -601,9 +607,13 @@ def save_samplesxls(sample, filename):
         for i, sam in enumerate(testdict):
             testdict[i]['location'] = eval(sam['location'])
             testdict[i]['acquisitions'] = eval(sam['acquisitions'])
+            testdict[i]['bar_loc'] = eval(sam['bar_loc'])
+            testdict[i]['bar_loc']['th'] = sam['angle']
     else:
         testdict['location'] = eval(testdict['location'])
         testdict['acquisitions'] = eval(testdict['acquisitions'])
+        testdict['bar_loc'] = eval(testdict['bar_loc'])
+        testdict['bar_loc']['th'] = testdict['angle']
 
     if isinstance(testdict, list):
         for i, sam in enumerate(testdict):
@@ -632,11 +642,15 @@ def load_samplesxls(filename):
         for i, sam in enumerate(samplenew):
             samplenew[i]['location'] = eval(sam['location'])
             samplenew[i]['acquisitions'] = eval(sam['acquisitions'])
+            samplenew[i]['bar_loc'] = eval(sam['bar_loc'])
+            samplenew[i]['bar_loc']['th'] = sam['angle']
             for key in [key for key, value in sam.items() if 'named' in key.lower()]:
                 del samplenew[i][key]
     else:
         samplenew['location'] = eval(samplenew['location'])
         samplenew['acquisitions'] = eval(samplenew['acquisitions'])
+        samplenew['bar_loc'] = eval(samplenew['bar_loc'])
+        samplenew['bar_loc']['th'] = samplenew['angle']
         for key in [key for key, value in samplenew.items() if 'named' in key.lower()]:
             del samplenew[key]
     return samplenew
