@@ -123,7 +123,7 @@ def image_bar(bar, path=None,front=True):
         im.save(path)
 
 
-def locate_samples_from_image(bar, impath,ront=True):
+def locate_samples_from_image(bar, impath,front=True):
     global loc_Q
     loc_Q = queue.Queue(1)
     image = stitch_sample(False, False, False, from_image=impath, flip_file=False)
