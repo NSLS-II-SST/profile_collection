@@ -608,13 +608,11 @@ def save_samplesxls(sample, filename):
             testdict[i]['location'] = eval(sam['location'])
             testdict[i]['acquisitions'] = eval(sam['acquisitions'])
             testdict[i]['bar_loc'] = eval(sam['bar_loc'])
-            testdict[i]['bar_loc']['th'] = sam['angle']
             testdict[i]['bar_loc']['spot'] = sam['bar_spot']
     else:
         testdict['location'] = eval(testdict['location'])
         testdict['acquisitions'] = eval(testdict['acquisitions'])
         testdict['bar_loc'] = eval(testdict['bar_loc'])
-        testdict['bar_loc']['th'] = testdict['angle']
         testdict['bar_loc']['spot'] = testdict['bar_spot']
 
     if isinstance(testdict, list):
@@ -645,6 +643,7 @@ def load_samplesxls(filename):
             samplenew[i]['location'] = eval(sam['location'])
             samplenew[i]['acquisitions'] = eval(sam['acquisitions'])
             samplenew[i]['bar_loc'] = eval(sam['bar_loc'])
+            # interpret/translate angle to the actual incidence angle needed
             if(samplenew[i]['grazing']):
                 if(samplenew[i]['front']):
                     samplenew[i]['bar_loc']['th'] = np.mod(np.abs(90 - sam['angle']),180)
