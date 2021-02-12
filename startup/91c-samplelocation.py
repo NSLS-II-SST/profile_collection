@@ -457,7 +457,7 @@ def correct_bar(bar, fiduciallist,front,training_wheels=True):
         newx = xpos + x_offset + (ypos - af1y) * dx / run_y
         newy = ypos + y_offset + (ypos - af1y) * dy / run_y
         # add in the scaled rotated x amount (should be very small) to make Af2 line up correctly
-        xoff = af1xoff - (af1xoff-af2xoff)*(ypos-af1y) / runy
+        xoff = af1xoff - (af1xoff-af2xoff)*(ypos-af1y) / run_y
         samp['bar_loc']['xoff'] = xoff # this should pretty much be the same for both fiducials,
                                         # but just in case there is a tilt,
                                         # we account for that here
@@ -549,7 +549,7 @@ def find_fiducials():
     xrange = 3.5
     xnum = 36
     startxss = [[2,1,-1.5,-1],[5,1,-4.5,-1]]
-    startys = [4,-186.35]
+    startys = [4,-186.35] # af2 first because it is a safer location
     maxlocs = []
     yield from bps.mv(Shutter_enable, 0)
     yield from bps.mv(Shutter_control, 0)
