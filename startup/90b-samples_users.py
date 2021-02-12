@@ -609,11 +609,13 @@ def save_samplesxls(sample, filename):
             testdict[i]['acquisitions'] = eval(sam['acquisitions'])
             testdict[i]['bar_loc'] = eval(sam['bar_loc'])
             testdict[i]['bar_loc']['th'] = sam['angle']
+            testdict[i]['bar_loc']['spot'] = sam['bar_spot']
     else:
         testdict['location'] = eval(testdict['location'])
         testdict['acquisitions'] = eval(testdict['acquisitions'])
         testdict['bar_loc'] = eval(testdict['bar_loc'])
         testdict['bar_loc']['th'] = testdict['angle']
+        testdict['bar_loc']['spot'] = testdict['bar_spot']
 
     if isinstance(testdict, list):
         for i, sam in enumerate(testdict):
@@ -644,6 +646,7 @@ def load_samplesxls(filename):
             samplenew[i]['acquisitions'] = eval(sam['acquisitions'])
             samplenew[i]['bar_loc'] = eval(sam['bar_loc'])
             samplenew[i]['bar_loc']['th'] = sam['angle']
+            samplenew[i]['bar_loc']['spot'] = sam['bar_spot']
             for key in [key for key, value in sam.items() if 'named' in key.lower()]:
                 del samplenew[i][key]
     else:
@@ -651,6 +654,7 @@ def load_samplesxls(filename):
         samplenew['acquisitions'] = eval(samplenew['acquisitions'])
         samplenew['bar_loc'] = eval(samplenew['bar_loc'])
         samplenew['bar_loc']['th'] = samplenew['angle']
+        samplenew['bar_loc']['spot'] = samplenew['bar_spot']
         for key in [key for key, value in samplenew.items() if 'named' in key.lower()]:
             del samplenew[key]
     return samplenew
