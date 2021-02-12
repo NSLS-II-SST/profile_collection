@@ -9,7 +9,7 @@ from pathlib import Path
 import appdirs
 
 # Use caproto not pyepics.
-os.environ['OPHYD_CONTROL_LAYER'] = 'pyepics'
+# os.environ['OPHYD_CONTROL_LAYER'] = 'pyepics'
 
 
 def colored(text, tint='white', attrs=[]):
