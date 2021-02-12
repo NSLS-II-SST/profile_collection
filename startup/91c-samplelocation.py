@@ -411,8 +411,19 @@ def correct_bar(bar, fiduciallist,front,training_wheels=True):
     af2x_img = bar[-1]['location'][0]['position']
     af2y_img = bar[-1]['location'][1]['position']
 
+
+
     af1x, af1zoff,af1xoff = af_rotation(af1xm90, af1x0, af1x90, af1x180) # find the center of rotation from fiducials
     af2x, af2zoff,af2xoff = af_rotation(af2xm90, af2x0, af2x90, af2x180)
+    # these values are the corresponding values at theta=0,
+    # which is what we want if the image is of the front of the bar
+
+    if not front:
+        af1x = rotatedx(af1x,180,af1zoff,af1xoff)
+        af2x = rotatedx(af2x,180,af2zoff,af2xoff)
+        # if we are looking at the sample from the back,
+        # then we need to rotate the fiducial x and y location for the sample corrections
+
 
     x_offset = af1x - af1x_img # offset from X-rays to image in x
     y_offset = af1y - af1y_img # offset from X-rays to image in y
@@ -438,10 +449,20 @@ def correct_bar(bar, fiduciallist,front,training_wheels=True):
         newx = xpos + x_offset + (ypos - af1y) * dx / run_y
         newy = ypos + y_offset + (ypos - af1y) * dy / run_y
         # add in the scaled rotated x amount (should be very small) to make Af2 line up correctly
+        xoff = af1xoff - (af1xoff-af2xoff)*(ypos-af1y) / runy
+        samp['bar_loc']['xoff'] = xoff # this should pretty much be the same for both fiducials,
+                                        # but just in case there is a tilt,
+                                        # we account for that here
 
-        samp['bar_loc']['x0'] = newx
-        samp['bar_loc']['y0'] = newy
-        # ADDING in recording of fiducial information as well with every sample, so they will know how to rotate
+        if front:
+            samp['bar_loc']['x0'] = newx # these are the positions at 0 rotation, so for the front, we are already good
+            samp['bar_loc']['y0'] = newy
+        else:
+            # for the back, we need to rotate the sample back to 0 (only the x changes)
+            samp['bar_loc']['x0'] = 2*xoff-newx
+            samp['bar_loc']['y0'] = newy
+
+        # recording of fiducial information as well with every sample, so they will know how to rotate
         samp['bar_loc']['af1y'] = af1y
         samp['bar_loc']['af2y'] = af2y
         samp['bar_loc']['af1xoff'] = af1xoff
@@ -450,7 +471,6 @@ def correct_bar(bar, fiduciallist,front,training_wheels=True):
         samp['bar_loc']['af2zoff'] = af2zoff
 
         zoff = zoffset(af1zoff,af2zoff,newy,front = front,height=samp['height'],af1y=af1y,af2y=af2y)
-
         samp['bar_loc']['zoff'] = zoff
 
         # now we can rotate the sample to the desired position
@@ -458,12 +478,9 @@ def correct_bar(bar, fiduciallist,front,training_wheels=True):
         th = samp['bar_loc']['th'] # this is the requested theta (should be 180 if beam comes from the back)
 
 
-        samp['location'][0]['position'] = rotatedx(newx,th,zoff,af1xoff)
-        samp['location'][1]['position'] = newy
-        samp['location'][3]['position'] = th
-
-        # samp['location'][2]['position'] = rotatedz(newx, th, zoff, af1xoff)
         # moving z is dangerous = best to keep it at 0 by default
+        rotate_sample(samp) # this will take the positions found above and the desired incident angle and
+                            # rotate the location of the sample accordingly
 
 def zoffset(af1zoff,af2zoff,y,front=True,height=.25,af1y=-186.3,af2y=4):
     '''
@@ -544,4 +561,27 @@ def find_fiducials():
             maxlocs.append(bec.peaks.max["Beamstop_SAXS"][0])
     return maxlocs # [af2y,af2xm90,af2x0,af2x90,af2x180,af1y,af1xm90,af1x0,af1x90,af1x180]
 
+
+def rotate_sample(samp):
+    '''
+    rotate a sample position to the requested theta position
+    '''
+    theta_new = samp['bar_loc']['th']
+    x0 = samp['bar_loc']['x0']
+    y0 = samp['bar_loc']['y0']
+    xoff = samp['bar_loc']['xoff']
+    zoff = samp['bar_loc']['zoff']
+
+    newx = rotatedx(x0, theta_new, zoff, xoff=xoff)
+    for motor in samp['location']:
+        if motor['motor'] is 'x':
+            motor['position'] = newx
+        if motor['motor'] is 'th':
+            motor['position'] = theta_new
+        if motor['motor'] is 'y':
+            motor['position'] = y0
+
+    # in future, updating y (if the rotation axis is not perfectly along y
+    # and z (to keep the sample-detector distance constant) as needed would be good as well
+    # newz = rotatedz(newx, th, zoff, af1xoff)
 
