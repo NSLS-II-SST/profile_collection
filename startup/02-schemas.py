@@ -77,6 +77,8 @@ sample_schema = {
         'saf_id': {'type': 'string'},
         'project_name': {'type': 'string'},
         'institution_id': {'type': 'number'},
+        'front': {'type': 'boolean'},
+        'grazing': {'type': 'boolean'},
         'bar_loc': {'type': 'object',
                     'properties': {
                         'spot': {'type': 'string'}, # e.g. 1A. 16C (first row first sample, 16th row third sample)
