@@ -103,7 +103,7 @@ def map_bar_from_spirals(bar, spiralnums, barpos):
 # correct_bar(bar,af1x,af1y,af2x,af2y)
 
 
-def image_bar(bar, path=None):
+def image_bar(bar, path=None,front=True):
     global loc_Q
     loc_Q = queue.Queue(1)
     ypos = np.arange(-100, 110, 25)
@@ -113,17 +113,25 @@ def image_bar(bar, path=None):
     print(imageuid)
     images = list(db[imageuid].data('Sample Imager Detector Area Camera_image'))
     image = stitch_sample(images, 25, 5)
-    update_bar(bar, loc_Q)
+    if(front):
+        th0 = 0
+    else:
+        th0= 180
+    update_bar(bar, loc_Q,th0)
     if isinstance(path, str):
         im = Image.fromarray(image)
         im.save(path)
 
 
-def locate_samples_from_image(bar, impath):
+def locate_samples_from_image(bar, impath,ront=True):
     global loc_Q
     loc_Q = queue.Queue(1)
     image = stitch_sample(False, False, False, from_image=impath, flip_file=False)
-    update_bar(bar, loc_Q)
+    if(front):
+        th0 = 0
+    else:
+        th0= 180
+    update_bar(bar, loc_Q,th0)
 
 
 def front_x_from_back(xfront):
