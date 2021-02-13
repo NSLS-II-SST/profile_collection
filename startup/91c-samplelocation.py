@@ -541,7 +541,7 @@ def af_rotation(xfm90,xf0,xf90,xf180):
 
     x0 = xf0
     xoff = (xf180+x0)/2
-    zoff = (xf90 - xfm90)/2
+    zoff = (xfm90 - xf90)/2
     return (x0,zoff, xoff)
 
 def find_fiducials():
