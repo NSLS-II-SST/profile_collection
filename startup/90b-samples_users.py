@@ -160,7 +160,8 @@ def get_location(motor_list):
 
 
 def sample_set_location(sample_dict):
-    sample_dict['location'] = get_sample_location()
+    sample_dict['location'] = get_sample_location() # set the location metadata
+    sample_recenter_sample(sample_dict) # change the x0, y0, theta to result in this new position (including angle)
     return sample_dict
 
 
@@ -732,3 +733,4 @@ def offset_bar(bar, xoff, yoff, zoff, thoff):
                 mot['position'] += zoff
             if mot['motor'] is 'th':
                 mot['position'] += thoff
+        sample_recenter_sample(samp)

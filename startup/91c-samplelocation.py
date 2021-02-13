@@ -492,6 +492,10 @@ def correct_bar(bar, fiduciallist,front,training_wheels=True):
         rotate_sample(samp) # this will take the positions found above and the desired incident angle and
                             # rotate the location of the sample accordingly
 
+
+
+
+
 def zoffset(af1zoff,af2zoff,y,front=True,height=.25,af1y=-186.3,af2y=4):
     '''
     Using the z offset of the fiducial positions from the center of rotation,
@@ -572,6 +576,13 @@ def find_fiducials():
     return maxlocs # [af2y,af2xm90,af2x0,af2x90,af2x180,af1y,af1xm90,af1x0,af1x90,af1x180]
 
 
+def rotate_now(theta):
+    samp = get_sample_dict()
+    samp['angle'] = theta
+    rotate_sample(samp)
+    yield from load_sample(samp)
+
+
 def rotate_sample(samp):
     '''
     rotate a sample position to the requested theta position
@@ -597,3 +608,23 @@ def rotate_sample(samp):
     # and z (to keep the sample-detector distance constant) as needed would be good as well
     # newz = rotatedz(newx, th, zoff, af1xoff)
 
+def sample_recenter_sample(samp):
+    # the current samp['location'] is correct, the point of this is to make sure the x0 and y0 and incident angles
+    # are updated accordingly, because the samp['location'] will generally be recalculated and overwritten next time
+    # a sample rotation is requested
+    # assume the center of rotation for the sample is already calculated correctly (otherwise correct bar is needed)
+    # first record the location
+    for loc in samp['location']:
+        if loc['motor'] is 'x':
+            newrotatedx = loc['position']
+        if loc['motor'] is 'y':
+            newy = loc['position']
+        if loc['motor'] is 'th':
+            newangle = loc['position']
+    # get the rotation parameters from the metadata
+    xoff = samp['bar_loc']['xoff']
+    zoff = samp['bar_loc']['zoff']
+    # find the x0 location which would result in this new position
+    newx0 = rotatedx(newrotatedx, -newangle, zoff, xoff=xoff) # we rotate by the negative angle to get back to x0
+    samp['bar_loc']['x0'] = newx0
+    samp['bar_loc']['y0'] = newy # y and y0 are the same, so we can just copy this
