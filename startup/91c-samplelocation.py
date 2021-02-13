@@ -103,6 +103,7 @@ def map_bar_from_spirals(bar, spiralnums, barpos):
 # correct_bar(bar,af1x,af1y,af2x,af2y)
 
 
+
 def image_bar(bar, path=None,front=True):
     global loc_Q
     loc_Q = queue.Queue(1)
@@ -574,7 +575,9 @@ def find_fiducials():
 def rotate_sample(samp):
     '''
     rotate a sample position to the requested theta position
+    the requested sample position is set in the angle metadata (sample['angle'])
     '''
+    sanatize_angle(samp) # makes sure the requested angle is translated into a real angle for acquisition
     theta_new = samp['bar_loc']['th']
     x0 = samp['bar_loc']['x0']
     y0 = samp['bar_loc']['y0']

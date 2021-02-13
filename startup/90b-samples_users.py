@@ -656,6 +656,30 @@ def load_samples(filename):
     return samplenew
 
 
+
+def sanatize_angle(samp):
+    # translates a requested angle (something in sample['angle'] into an actual angle depending on the kind of sample
+    if (samp['grazing']):
+        if (samp['front']):
+            samp['bar_loc']['th'] = np.mod(np.abs(90 - samp['angle']), 180)
+            # front grazing sample angle is interpreted as grazing angle
+        else:
+            samp['bar_loc']['th'] = 90 + np.round(np.mod(100 * samp['angle'] - 9000.01, 9000.01)) / 100
+            # back grazing sample angle is interpreted as grazing angle but subtracted from 180
+    else:
+        if (samp['front']):
+            samp['bar_loc']['th'] = 90 + np.round(np.mod(100 * samp['angle'] - 9000.01, 9000.01)) / 100
+            if samp['bar_loc']['x0'] < -1.8 and samp['bar_loc']['th'] < 160:
+                # transmission from the left side of the bar at a incident angle more than 20 degrees,
+                # flip to come from the front side
+                samp['bar_loc']['th'] = 90 - np.round(np.mod(100 * samp['angle'] - 9000.01, 9000.01)) / 100
+        else:
+            samp['bar_loc']['th'] = np.mod(np.abs(90 - samp['angle']), 180)
+            if samp['bar_loc']['x0'] > -1.8 and samp['bar_loc']['th'] < 160:
+                # transmission from the right side of the bar at a incident angle more than 20 degrees,
+                # flip to come from the front side
+                samp['bar_loc']['th'] = 180 - np.mod(np.abs(90 - samp['angle']), 180)
+
 def load_samplesxls(filename):
     df = pd.read_excel(filename, na_values='', converters={'sample_date': str})
     df.replace(np.nan, '', regex=True, inplace=True)
@@ -666,27 +690,7 @@ def load_samplesxls(filename):
             samplenew[i]['acquisitions'] = eval(sam['acquisitions'])
             samplenew[i]['bar_loc'] = eval(sam['bar_loc'])
             # interpret/translate angle to the actual incidence angle needed
-            if(samplenew[i]['grazing']):
-                if(samplenew[i]['front']):
-                    samplenew[i]['bar_loc']['th'] = np.mod(np.abs(90 - sam['angle']),180)
-                    # front grazing sample angle is interpreted as grazing angle
-                else:
-                    samplenew[i]['bar_loc']['th'] = 90+np.round(np.mod(100*sam['angle']-9000.01,9000.01))/100
-                    # back grazing sample angle is interpreted as grazing angle but subtracted from 180
-            else:
-                if (samplenew[i]['front']):
-                    samplenew[i]['bar_loc']['th'] = 90+np.round(np.mod(100*sam['angle']-9000.01,9000.01))/100
-                    if samplenew[i]['bar_loc']['x0'] < -1.8 and samplenew[i]['bar_loc']['th'] < 160 :
-                        # transmission from the left side of the bar at a incident angle more than 20 degrees,
-                        # flip to come from the front side
-                        samplenew[i]['bar_loc']['th'] = 90-np.round(np.mod(100*sam['angle']-9000.01,9000.01))/100
-                else:
-                    samplenew[i]['bar_loc']['th'] = np.mod(np.abs(90 - sam['angle']), 180)
-                    if samplenew[i]['bar_loc']['x0'] > -1.8 and samplenew[i]['bar_loc']['th'] < 160 :
-                        # transmission from the right side of the bar at a incident angle more than 20 degrees,
-                        # flip to come from the front side
-                        samplenew[i]['bar_loc']['th'] = 180-np.mod(np.abs(90 - sam['angle']), 180)
-            samplenew[i]['bar_loc']['th'] = sam['angle']
+            sanatize_angle(samplenew[i])
             samplenew[i]['bar_loc']['spot'] = sam['bar_spot']
             for key in [key for key, value in sam.items() if 'named' in key.lower()]:
                 del samplenew[i][key]
@@ -694,28 +698,7 @@ def load_samplesxls(filename):
         samplenew['location'] = eval(samplenew['location'])
         samplenew['acquisitions'] = eval(samplenew['acquisitions'])
         samplenew['bar_loc'] = eval(samplenew['bar_loc'])
-
-        if (samplenew['grazing']):
-            if (samplenew['front']):
-                samplenew['bar_loc']['th'] = np.mod(np.abs(90 - sam['angle']), 180)
-                # front grazing sample angle is interpreted as grazing angle
-            else:
-                samplenew['bar_loc']['th'] = 90 + np.round(np.mod(100 * sam['angle'] - 9000.01, 9000.01)) / 100
-                # back grazing sample angle is interpreted as grazing angle but subtracted from 180
-        else:
-            if (samplenew['front']):
-                samplenew['bar_loc']['th'] = 90 + np.round(np.mod(100 * sam['angle'] - 9000.01, 9000.01)) / 100
-                if samplenew['bar_loc']['x0'] < -1.8 and samplenew['bar_loc']['th'] < 160:
-                    # transmission from the left side of the bar at a incident angle more than 20 degrees,
-                    # flip to come from the front side
-                    samplenew['bar_loc']['th'] = 90 - np.round(np.mod(100 * sam['angle'] - 9000.01, 9000.01)) / 100
-            else:
-                samplenew['bar_loc']['th'] = np.mod(np.abs(90 - sam['angle']), 180)
-                if samplenew['bar_loc']['x0'] > -1.8 and samplenew['bar_loc']['th'] < 160:
-                    # transmission from the right side of the bar at a incident angle more than 20 degrees,
-                    # flip to come from the front side
-                    samplenew['bar_loc']['th'] = 180 - np.mod(np.abs(90 - sam['angle']), 180)
-        samplenew['bar_loc']['th'] = samplenew['angle']
+        sanatize_angle(samplenew)
         samplenew['bar_loc']['spot'] = samplenew['bar_spot']
         for key in [key for key, value in samplenew.items() if 'named' in key.lower()]:
             del samplenew[key]
