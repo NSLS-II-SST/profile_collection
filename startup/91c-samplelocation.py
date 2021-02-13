@@ -130,7 +130,7 @@ def locate_samples_from_image(bar, impath,front=True):
         image = stitch_sample(False, False, False, from_image=impath, flip_file=True)
         th0 = 0
     else:
-        image = stitch_sample(False, False, False, from_image=impath, flip_file=False)
+        image = stitch_sample(False, False, False, from_image=impath, flip_file=True)
         th0= 180
     update_bar(bar, loc_Q,th0)
 
@@ -262,7 +262,7 @@ def annotateImage(axes, item, name):
     plt.draw()
 
 
-def stitch_sample(images, step_size, y_off, from_image=None, flip_file=True):
+def stitch_sample(images, step_size, y_off, from_image=None, flip_file=False):
     global sample_image_axes
 
     if isinstance(from_image, str):
@@ -282,7 +282,7 @@ def stitch_sample(images, step_size, y_off, from_image=None, flip_file=True):
         # result = np.flipud(result)
 
     fig, ax = plt.subplots()
-    ax.imshow(result, extent=[-210, 25, 14.5, -14.5])
+    ax.imshow(result, extent=[-210, 25, -14.5, 14.5])
     sample_image_axes = ax
     fig.canvas.mpl_connect('button_press_event', plot_click)
     fig.canvas.mpl_connect('key_press_event', plot_key_press)
