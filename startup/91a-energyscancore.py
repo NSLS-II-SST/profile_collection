@@ -151,7 +151,7 @@ def NEXAFS_scan_core(signals, dets, energy, energies, enscan_type=None,
         yield from bps.rel_set(eval(motorname), offset, wait=True)
     print('setting pol')
     yield from set_polarization(pol)
-    en.read;
+    en.read()
 
     sigcycler = cycler(energy, energies)
 
@@ -212,7 +212,7 @@ def NEXAFS_fly_scan_core(scan_params,openshutter=False, m3_pitch=np.nan, diode_r
     else:
         print(f'setting undulator polarization to {pol}')
         yield from set_polarization(pol)
-    en.read;
+    en.read()
     samplepol = en.sample_polarization.setpoint.get()
     (en_start,en_stop,en_speed) = scan_params[0]
     yield from bps.mv(en, en_start)  # move to the initial energy
