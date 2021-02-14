@@ -593,6 +593,7 @@ def rotate_sample(samp):
     # and z (to keep the sample-detector distance constant) as needed would be good as well
     # newz = rotatedz(newx, th, zoff, af1xoff)
 
+
 def sample_recenter_sample(samp):
     # the current samp['location'] is correct, the point of this is to make sure the x0 and y0 and incident angles
     # are updated accordingly, because the samp['location'] will generally be recalculated and overwritten next time
@@ -613,3 +614,11 @@ def sample_recenter_sample(samp):
     newx0 = rotatedx(newrotatedx, -newangle, zoff, xoff=xoff) # we rotate by the negative angle to get back to x0
     samp['bar_loc']['x0'] = newx0
     samp['bar_loc']['y0'] = newy # y and y0 are the same, so we can just copy this
+    samp['angle'] = newangle
+
+
+def read_positions(bar):
+    # for when the positions are altered by hand in the excel sheet, (i.e. after spiral scans)
+    # this reads those positions and sets the default positions (x0 and y0) to match
+    for samp in bar:
+        sample_recenter_sample(samp)

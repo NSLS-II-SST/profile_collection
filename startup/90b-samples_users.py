@@ -237,8 +237,8 @@ def do_acquisitions(acq_list):
         yield from eval(acq['plan_name'] + '(' + acq['arguments'] + ')')
 
 
-def get_sample_dict(acq=[], locations=[]):
-    if locations is []:
+def get_sample_dict(acq=[], locations=None):
+    if locations is None:
         locations = get_sample_location()
     sample_name = RE.md['sample_name']
     sample_desc = RE.md['sample_desc']
