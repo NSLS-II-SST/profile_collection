@@ -202,6 +202,11 @@ def update_bar(bar, loc_Q,front):
                 bar.remove(sample_by_name(bar, 'AF2_front'))
             bar.insert(0,AF1)
             bar.append(AF2)
+            # add in a diode position as well
+            diode = default_sample('diode')
+            if sample_by_name(bar, 'diode') is not None:
+                bar.remove(sample_by_name(bar, 'diode'))
+            bar.insert(-1, diode)
 
         else:
             # if front fiducials don't exist,add dummy ones (so thge AF2 ones are in the correct position)
@@ -224,10 +229,6 @@ def update_bar(bar, loc_Q,front):
             AF2['front'] = False
             bar.insert(1,AF1) # inserts in the second position
             bar.insert(-1,AF2) # inserts in the second to last position
-        # add in a diode position as well
-        diode = default_sample('diode')
-        bar.remove(sample_by_name(bar, 'diode'))
-        bar.insert(-2, diode)
         while True:
             #        for sample in bar:
             sample = bar[samplenum]
