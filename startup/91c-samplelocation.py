@@ -235,7 +235,11 @@ def update_bar(bar, loc_Q,front):
             if sample['front'] != front: # skip if we are not on the right side of the sample bar
                                          # (only locate samples that we can see in this image!)
                 samplenum += 1
-                continue
+                if samplenum >= len(bar):
+                    print("done")
+                    break
+                else:
+                    continue
             print(
                 f'Right-click on {sample["sample_name"]} location (recorded location is {sample["bar_loc"]["spot"]}).  ' +
                 'Press n on plot or enter to skip to next sample, p for previous sample, esc to end')
