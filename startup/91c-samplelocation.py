@@ -472,7 +472,7 @@ def correct_bar(bar, fiduciallist, include_back, training_wheels=True):
         samp['bar_loc']['af1zoff'] = af1zoff
         samp['bar_loc']['af2zoff'] = af2zoff
 
-        zoff = zoffset(af1zoff,af2zoff,newy,front = front,height=samp['height'],af1y=af1y,af2y=af2y)
+        zoff = zoffset(af1zoff,af2zoff,newy,front=samp['front'],height=samp['height'],af1y=af1y,af2y=af2y)
         samp['bar_loc']['zoff'] = zoff
 
         # now we can rotate the sample to the desired position (in the 'angle' metadata)
