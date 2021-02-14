@@ -129,11 +129,9 @@ def locate_samples_from_image(bar, impath,front=True):
     loc_Q = queue.Queue(1)
     if(front):
         image = stitch_sample(False, False, False, from_image=impath, flip_file=False)
-        th0 = 0
     else:
         image = stitch_sample(False, False, False, from_image=impath, flip_file=False)
-        th0= 180
-    update_bar(bar, loc_Q,th0)
+    update_bar(bar, loc_Q,front)
 
 
 def front_x_from_back(xfront):
@@ -194,7 +192,7 @@ def bar_add_from_click(event):
         print('invalid bar')
 
 
-def update_bar(bar, loc_Q,th0):
+def update_bar(bar, loc_Q,front):
     '''
     updated with th0 position recording whether we are pointing at the front or the back of the bar
     '''
@@ -207,9 +205,20 @@ def update_bar(bar, loc_Q,th0):
     def worker():
         global bar, sample_image_axes
         samplenum = 0
+        if(front):
+            ...
+            # add / replace the front fiducial bar entries (bar[0], bar[-1])
+        else:
+            ...
+            # add / replace the back fiducial bar entries (bar[1], bar[-2])
+            # if front fiducials don't exist,add dummy ones of those as well
+        # add in a diode position as well
         while True:
             #        for sample in bar:
             sample = bar[samplenum]
+            if sample['front'] != front: # skip if we are not on the right side of the sample bar (only locate samples
+                samplenum += 1
+                continue
             print(
                 f'Right-click on {sample["sample_name"]} location (recorded location is {sample["bar_loc"]["spot"]}).  ' +
                 'Press n on plot or enter to skip to next sample, p for previous sample, esc to end')
@@ -228,7 +237,10 @@ def update_bar(bar, loc_Q,th0):
                 sample['location'] = item
                 sample['bar_loc']['ximg']=item[0]['position']
                 sample['bar_loc']['yimg']=item[1]['position']
-                sample['bar_loc']['th0']=th0
+                if front:
+                    sample['bar_loc']['th0']=0
+                else:
+                    sample['bar_loc']['th0'] = 180
                 annotateImage(sample_image_axes, item, sample['sample_name'])
                 # advance sample and loop
                 samplenum += 1
@@ -395,7 +407,7 @@ def straighten_x(x, y, dx, dy, y_center):
     return x - (y + y_center) * dx / dy
 
 
-def correct_bar(bar, fiduciallist,front,training_wheels=True):
+def correct_bar(bar, fiduciallist,include_back,training_wheels=True):
     '''
     originally this function adjusted the x, y, positions of samples on a bar
     to align with the x-y locations found by fiducials
@@ -420,6 +432,13 @@ def correct_bar(bar, fiduciallist,front,training_wheels=True):
     af1y_img = bar[0]['location'][1]['position']
     af2x_img = bar[-1]['location'][0]['position']
     af2y_img = bar[-1]['location'][1]['position']
+    # adding the possibility of a back fiducial position as well as front
+    # these will be nonsense if there was no back image (image bar didn't add in these positions)
+    # but they won't be used, unless a sample is marked as being on the back
+    af1xback_img = bar[1]['location'][0]['position']
+    af1yback_img = bar[1]['location'][1]['position']
+    af2xback_img = bar[-2]['location'][0]['position']
+    af2yback_img = bar[-2]['location'][1]['position']
 
 
 
@@ -428,19 +447,21 @@ def correct_bar(bar, fiduciallist,front,training_wheels=True):
     # these values are the corresponding values at theta=0,
     # which is what we want if the image is of the front of the bar
 
-    if not front:
-        af1x = rotatedx(af1x,180,af1zoff,af1xoff)
-        af2x = rotatedx(af2x,180,af2zoff,af2xoff)
-        # if we are looking at the sample from the back,
-        # then we need to rotate the fiducial x and y location for the sample corrections
-
+    af1xback = rotatedx(af1x,180,af1zoff,af1xoff)
+    af2xback = rotatedx(af2x,180,af2zoff,af2xoff)
+    # if we are looking at the sample from the back,
+    # then we need to rotate the fiducial x and y location for the sample corrections
 
     x_offset = af1x - af1x_img # offset from X-rays to image in x
     y_offset = af1y - af1y_img # offset from X-rays to image in y
+    x_offset_back = af1xback - af1xback_img  # offset from X-rays to image in x
+    y_offset_back = af1yback - af1yback_img  # offset from X-rays to image in x
 
-    y_image_offset = af1y_img - af2y_img # distance between fiducial y positions (should be ~ -190)
+    y_image_offset = af1y_img - af2y_img  # distance between fiducial y positions (should be ~ -190)
+    y_image_offset_back = af1yback_img - af2yback_img  # distance between fiducial y positions (should be ~ -190)
     if (training_wheels):
-        assert abs(abs(af2y - af1y) - abs(y_image_offset)) < 5, \
+        assert abs(abs(af2y - af1y) - abs(y_image_offset_back)) < 5 or abs(
+            abs(af2y - af1y) - abs(y_image_offset_back)) < 5, \
             "Hmm... " \
             "it seems like the length of the bar has changed by more than" \
             " 5 mm between the imager and the chamber.  \n \n Are you sure" \
@@ -449,29 +470,31 @@ def correct_bar(bar, fiduciallist,front,training_wheels=True):
 
     dx = af2x - af2x_img - x_offset  # offset of Af2 X-rays to image in x relative to Af1 (mostly rotating)
     dy = af2y - af2y_img - y_offset  # offset of Af2 X-rays to image in y relative to Af1 (mostly stretching)
+
+    dxb = af2xback - af2xback_img - x_offset_back  # offset of Af2 X-rays to image in x relative to Af1 (mostly rotating)
+    dyb = af2yback - af2yback_img - y_offset_back  # offset of Af2 X-rays to image in y relative to Af1 (mostly stretching)
+
     run_y = af2y - af1y # (distance between the fiducial markers) (above are the total delta over this run,
                         # in between this will be scaled
 
     for samp in bar:
         xpos = samp['bar_loc']['ximg'] # x position from the image
         ypos = samp['bar_loc']['yimg'] # y position from the image
+        xoff = af1xoff - (af1xoff - af2xoff) * (ypos - af1y) / run_y
+        samp['bar_loc']['xoff'] = xoff  # this should pretty much be the same for both fiducials,
+        # but just in case there is a tilt,
+        # we account for that here
 
-        newx = xpos + x_offset + (ypos - af1y) * dx / run_y
-        newy = ypos + y_offset + (ypos - af1y) * dy / run_y
-        # add in the scaled rotated x amount (should be very small) to make Af2 line up correctly
-        xoff = af1xoff - (af1xoff-af2xoff)*(ypos-af1y) / run_y
-        samp['bar_loc']['xoff'] = xoff # this should pretty much be the same for both fiducials,
-                                        # but just in case there is a tilt,
-                                        # we account for that here
-
-        if front:
+        if samp['front']:
+            newx = xpos + x_offset + (ypos - af1y) * dx / run_y
+            newy = ypos + y_offset + (ypos - af1y) * dy / run_y
             samp['bar_loc']['x0'] = newx # these are the positions at 0 rotation, so for the front, we are already good
-            samp['bar_loc']['y0'] = newy
         else:
-            # for the back, we need to rotate the sample back to 0 (only the x changes)
-            samp['bar_loc']['x0'] = 2*xoff-newx
-            samp['bar_loc']['y0'] = newy
-
+            newx = xpos + x_offset_back + (ypos - af1y) * dxb / run_y
+            newy = ypos + y_offset_back + (ypos - af1y) * dyb / run_y
+            samp['bar_loc']['x0'] = 2*xoff - newx # these are the positions at 0 rotation,
+                                                    # so for the back, we have to correct
+        samp['bar_loc']['y0'] = newy
         # recording of fiducial information as well with every sample, so they will know how to rotate
         samp['bar_loc']['af1y'] = af1y
         samp['bar_loc']['af2y'] = af2y
@@ -483,11 +506,7 @@ def correct_bar(bar, fiduciallist,front,training_wheels=True):
         zoff = zoffset(af1zoff,af2zoff,newy,front = front,height=samp['height'],af1y=af1y,af2y=af2y)
         samp['bar_loc']['zoff'] = zoff
 
-        # now we can rotate the sample to the desired position
-
-        th = samp['bar_loc']['th'] # this is the requested theta (should be 180 if beam comes from the back)
-
-
+        # now we can rotate the sample to the desired position (in the 'angle' metadata)
         # moving z is dangerous = best to keep it at 0 by default
         rotate_sample(samp) # this will take the positions found above and the desired incident angle and
                             # rotate the location of the sample accordingly
