@@ -424,7 +424,7 @@ def correct_bar(bar, fiduciallist, include_back, training_wheels=True):
     y_image_offset = af1y_img - af2y_img  # distance between fiducial y positions (should be ~ -190)
     if back:
         x_offset_back = af1xback - af1xback_img  # offset from X-rays to image in x
-        y_offset_back = af1yback - af1yback_img  # offset from X-rays to image in x
+        y_offset_back = af1y - af1yback_img  # offset from X-rays to image in x
         y_image_offset_back = af1yback_img - af2yback_img  # distance between fiducial y positions (should be ~ -190)
 
     if (training_wheels):
@@ -439,7 +439,7 @@ def correct_bar(bar, fiduciallist, include_back, training_wheels=True):
     dy = af2y - af2y_img - y_offset  # offset of Af2 X-rays to image in y relative to Af1 (mostly stretching)
     if back:
         dxb = af2xback - af2xback_img - x_offset_back  # offset of Af2 X-rays to image in x relative to Af1 (mostly rotating)
-        dyb = af2yback - af2yback_img - y_offset_back  # offset of Af2 X-rays to image in y relative to Af1 (mostly stretching)
+        dyb = af2y - af2yback_img - y_offset_back  # offset of Af2 X-rays to image in y relative to Af1 (mostly stretching)
 
     run_y = af2y - af1y # (distance between the fiducial markers) (above are the total delta over this run,
                         # in between this will be scaled
