@@ -196,9 +196,10 @@ def update_bar(bar, loc_Q,front):
             # add / replace the front fiducial bar entries (bar[0], bar[-1])
             AF1 = default_sample('AF1_front')
             AF2 = default_sample('AF2_front')
-
-            bar.remove(sample_by_name(bar, 'AF1_front'))
-            bar.remove(sample_by_name(bar, 'AF2_front'))
+            if sample_by_name(bar, 'AF1_front') is not None:
+                bar.remove(sample_by_name(bar, 'AF1_front'))
+            if sample_by_name(bar, 'AF2_front') is not None:
+                bar.remove(sample_by_name(bar, 'AF2_front'))
             bar.insert(0,AF1)
             bar.append(AF2)
 
@@ -212,8 +213,11 @@ def update_bar(bar, loc_Q,front):
                 bar.append(AF2)
 
             # add / replace the back fiducial bar entries (bar[1], bar[-2])
-            bar.remove(sample_by_name(bar, 'AF1_back'))
-            bar.remove(sample_by_name(bar, 'AF2_back'))
+
+            if sample_by_name(bar, 'AF1_back') is not None:
+                bar.remove(sample_by_name(bar, 'AF1_back'))
+            if sample_by_name(bar, 'AF2_back') is not None:
+                bar.remove(sample_by_name(bar, 'AF2_back'))
             AF1 = default_sample('AF1_back')
             AF2 = default_sample('AF2_back')
             AF1['front'] = False
