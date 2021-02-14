@@ -659,7 +659,7 @@ def load_samples(filename):
 
 
 def sanatize_angle(samp):
-    # translates a requested angle (something in sample['angle'] into an actual angle depending on the kind of sample
+    # translates a requested angle (something in sample['angle']) into an actual angle depending on the kind of sample
     if (samp['grazing']):
         if (samp['front']):
             samp['bar_loc']['th'] = np.mod(np.abs(90 - samp['angle']), 180)
@@ -680,6 +680,7 @@ def sanatize_angle(samp):
                 # transmission from the right side of the bar at a incident angle more than 20 degrees,
                 # flip to come from the front side
                 samp['bar_loc']['th'] = 180 - np.mod(np.abs(90 - samp['angle']), 180)
+
 
 def load_samplesxls(filename):
     df = pd.read_excel(filename, na_values='', converters={'sample_date': str})
