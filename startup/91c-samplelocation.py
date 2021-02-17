@@ -159,7 +159,7 @@ def image_bar(bar, path=None,front=True):
     imageuid = yield from bp.list_scan([SampleViewer_cam], sam_viewer, ypos)
     print(imageuid)
     images = list(db[imageuid].data('Sample Imager Detector Area Camera_image'))
-    image = stitch_sample(images, 25, 5) # this will start the interactive pointing of samples
+    image = stitch_sample(images, 25, -6) # this will start the interactive pointing of samples
     update_bar(bar, loc_Q,front)
     if isinstance(path, str):
         im = Image.fromarray(image)
@@ -312,7 +312,12 @@ def stitch_sample(images, step_size, y_off, from_image=None, flip_file=False):
         for imageb in images[1:]:
             image = imageb[0]
             i += 1
-            result = np.concatenate((image[(y_off * i):, :], result[:-(y_off), pixel_overlap:]), axis=1)
+            if y_off>0:
+                result = np.concatenate((image[(y_off * i):, :], result[:-(y_off), pixel_overlap:]), axis=1)
+            elif y_off<0:
+                result = np.concatenate((image[:(y_off * i), :], result[-(y_off):, pixel_overlap:]), axis=1)
+            else:
+                result = np.concatenate((image[:,:], result[:, pixel_overlap:]), axis=1)
         # result = np.flipud(result)
 
     fig, ax = plt.subplots()
