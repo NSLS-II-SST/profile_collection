@@ -562,18 +562,18 @@ def run_bar(bar, sortby=['p', 'c', 'a', 's'], dryrun=0, rev=[False, False, False
                        f'time remaining approx {floor(time_remaining / 3600)} h '
                        f'{floor((time_remaining % 3600) / 60)} m \n\n',
                        'red', width=120, shrink=True)
-            # rsoxs_bot.send_message('Starting scan {} out of {}\n'.format(i + 1, len(listout)) +
-            #                        '{} of {} in project {} Proposal # {}\n which should take {} minutes\n'.format(
-            #                            step[3], step[0], step[1], step[11], floor(this_step_time / 60)) +
-            #                        f'time remaining approx {floor(time_remaining / 3600)} h '
-            #                        f'{floor((time_remaining % 3600) / 60)} m')
+            rsoxs_bot.send_message('Starting scan {} out of {}\n'.format(i + 1, len(listout)) +
+                                   '{} of {} in project {} Proposal # {}\n which should take {} minutes\n'.format(
+                                       step[3], step[0], step[1], step[11], floor(this_step_time / 60)) +
+                                   f'time remaining approx {floor(time_remaining / 3600)} h '
+                                   f'{floor((time_remaining % 3600) / 60)} m')
             yield from load_configuration(step[2])  # move to configuration
             yield from load_sample(step[5])  # move to sample / load sample metadata
             yield from do_acquisitions([step[6]])  # run scan
             if delete_as_complete:
                 bar[step[7]]['acquisitions'].remove(step[6])
-        #     rsoxs_bot.send_message('Scan complete.')
-        # rsoxs_bot.send_message('All scans complete!')
+            rsoxs_bot.send_message('Scan complete.')
+        rsoxs_bot.send_message('All scans complete!')
 
 
 def list_samples(bar):
