@@ -337,11 +337,12 @@ def custom_scan(sigs=[],energies=[],times=[],
     if len(read_input("Starting a specified energy scan hit enter in "
                       "the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
-
+    newenergies = np.asarray(energies)
+    newtimes = np.asarray(times)
     #Feb 2019, this pitch value seems to be optimal for carbon
 
 
-    yield from en_scan_core(sigs, dets,energy,energies,times,enscan_type=enscan_type,
+    yield from en_scan_core(sigs, dets,energy,newenergies,newtimes,enscan_type=enscan_type,
                             diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
 #en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=7.94,diode_range=6,pol=100)
 
