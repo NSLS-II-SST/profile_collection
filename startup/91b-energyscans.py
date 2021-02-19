@@ -318,7 +318,7 @@ def short_carbon_scan_nd(multiple=1,sigs=[],
 
 
 def custom_scan(sigs=[],energies=[],times=[],
-                         dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=8.01,grating='1200'):
+                         dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=7.97,grating='1200'):
     '''
     Custom scan is a more direct route to the energy scan code, with the user providing the exact times, and energies
     to go to.
