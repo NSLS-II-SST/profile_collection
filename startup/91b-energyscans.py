@@ -320,8 +320,8 @@ def short_carbon_scan_nd(multiple=1,sigs=[],
 def custom_scan(sigs=[],energies=[],times=[],
                          dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=8.01,grating='1200'):
     '''
-    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
-    this results in 61 exposures
+    Custom scan is a more direct route to the energy scan code, with the user providing the exact times, and energies
+    to go to.
 
 
     :param multiple: adjustment for exposure times
