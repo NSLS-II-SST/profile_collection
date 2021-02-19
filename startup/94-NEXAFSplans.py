@@ -130,10 +130,55 @@ def fly_SulfurL_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=7.97,grating='250')
     '''
     enscan_type = 'fly_SulfurL_NEXAFS'
     sample()
-    if len(read_input("Starting a Carbon NEXAFS fly scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
+    if len(read_input("Starting a Sulfur L-edge NEXAFS fly scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     yield from NEXAFS_fly_scan_core([(180,225, speed)], enscan_type=enscan_type,openshutter=True,exp_time=.5,
                                     diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
+
+
+
+def fly_SiliconL_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=7.97,grating='250'):
+    '''
+    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
+
+
+    :param sigs: which other signals to use
+    :param dets: which detector to use
+    :param energy: what energy motor to scan
+    :return: perform scan
+
+    normal scan takes ~ 7 minutes to complete
+    '''
+    enscan_type = 'fly_SiliconL_NEXAFS'
+    sample()
+    if len(read_input("Starting a Silicon L-edge NEXAFS fly scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
+        return
+    yield from NEXAFS_fly_scan_core([(100,140, speed)], enscan_type=enscan_type,openshutter=True,exp_time=.5,
+                                    diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
+
+
+
+def fly_SiliconK_NEXAFS(speed=.3,pol=0,diode_range=7,m3_pitch=7.97,grating='1200'):
+    '''
+    Full SiliconK Scan runs an RSoXS sample set through the Silicon K edge
+
+
+    :param sigs: which other signals to use
+    :param dets: which detector to use
+    :param energy: what energy motor to scan
+    :return: perform scan
+
+    normal scan takes ~ 7 minutes to complete
+    '''
+    enscan_type = 'fly_SiliconK_NEXAFS'
+    sample()
+    if len(read_input("Starting a Silicon K-edge NEXAFS fly scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
+        return
+    yield from NEXAFS_fly_scan_core([(1830,1870, speed)], enscan_type=enscan_type,openshutter=True,exp_time=.5,
+                                    diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
+
+
+
 
 def fly_Nitrogen_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=7.95,grating='250'):
     '''
