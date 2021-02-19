@@ -80,13 +80,7 @@ def full_Carbon_NEXAFS(sigs=[],
 
 def fly_Carbon_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=7.97,grating='250'):
     '''
-    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
-
-
-    :param sigs: which other signals to use
-    :param dets: which detector to use
-    :param energy: what energy motor to scan
-    :return: perform scan
+    fly_Carbon_NEXAFS runs an sample set through the carbon k-edge, with particular emphasis in he pre edge region
 
     normal scan takes ~ 7 minutes to complete
     '''
@@ -99,13 +93,7 @@ def fly_Carbon_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=7.97,grating='250'):
 
 def fly_Calcium_NEXAFS(speed=.15,pol=0,diode_range=7,m3_pitch=7.99,grating='250'):
     '''
-    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
-
-
-    :param sigs: which other signals to use
-    :param dets: which detector to use
-    :param energy: what energy motor to scan
-    :return: perform scan
+    fly_Calcium_NEXAFS runs an sample through the calcium l-edge edge
 
     normal scan takes ~ 7 minutes to complete
     '''
@@ -118,13 +106,7 @@ def fly_Calcium_NEXAFS(speed=.15,pol=0,diode_range=7,m3_pitch=7.99,grating='250'
 
 def fly_SulfurL_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=7.97,grating='250'):
     '''
-    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
-
-
-    :param sigs: which other signals to use
-    :param dets: which detector to use
-    :param energy: what energy motor to scan
-    :return: perform scan
+    fly_SulfurL_NEXAFS runs an RSoXS sample set through the sulfur l-edge
 
     normal scan takes ~ 7 minutes to complete
     '''
@@ -137,17 +119,11 @@ def fly_SulfurL_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=7.97,grating='250')
 
 
 
-def fly_SiliconL_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=7.97,grating='250'):
+def fly_SiliconL_NEXAFS(speed=.1,pol=0,diode_range=6,m3_pitch=8.01,grating='250'):
     '''
-    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
+    Full Silicon L-edge Scan runs an sample set through the silicon L-edge
 
-
-    :param sigs: which other signals to use
-    :param dets: which detector to use
-    :param energy: what energy motor to scan
-    :return: perform scan
-
-    normal scan takes ~ 7 minutes to complete
+    normal scan takes ~ ? minutes to complete
     '''
     enscan_type = 'fly_SiliconL_NEXAFS'
     sample()
@@ -158,17 +134,11 @@ def fly_SiliconL_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=7.97,grating='250'
 
 
 
-def fly_SiliconK_NEXAFS(speed=.3,pol=0,diode_range=7,m3_pitch=7.97,grating='1200'):
+def fly_SiliconK_NEXAFS(speed=.2,pol=0,diode_range=6,m3_pitch=7.97,grating='1200'):
     '''
-    Full SiliconK Scan runs an RSoXS sample set through the Silicon K edge
+    fly_SiliconK_NEXAFS runs an RSoXS sample set through the Silicon K edge
 
-
-    :param sigs: which other signals to use
-    :param dets: which detector to use
-    :param energy: what energy motor to scan
-    :return: perform scan
-
-    normal scan takes ~ 7 minutes to complete
+    normal scan takes ~ ? minutes to complete
     '''
     enscan_type = 'fly_SiliconK_NEXAFS'
     sample()
