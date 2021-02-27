@@ -353,6 +353,38 @@ def short_carbon_scan_nd(multiple=1,sigs=[],
                             diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
 #en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=7.94,diode_range=6,pol=100)
 
+
+
+def custom_scan(sigs=[],energies=[],times=[],
+                         dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=8.01,grating='1200'):
+    '''
+    Custom scan is a more direct route to the energy scan code, with the user providing the exact times, and energies
+    to go to.
+
+
+    :param multiple: adjustment for exposure times
+    :param mesh: which Izero channel to use
+    :param det: which detector to use
+    :param energy: what energy motor to scan
+    :return: perform scan
+
+    normal scan takes ~ 10 minutes to complete
+    '''
+    sample()
+    enscan_type = 'custom_en_scan'
+    if len(read_input("Starting a specified energy scan hit enter in "
+                      "the next 3 seconds to abort", "abort", "", 3)) > 0:
+        return
+    newenergies = np.asarray(energies)
+    newtimes = np.asarray(times)
+    #Feb 2019, this pitch value seems to be optimal for carbon
+
+
+    yield from en_scan_core(sigs, dets,energy,newenergies,newtimes,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
+#en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=7.94,diode_range=6,pol=100)
+
+
 def short_sulfurl_scan_nd(multiple=1,sigs=[],
                          dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=7.98,grating='250'):
     '''
