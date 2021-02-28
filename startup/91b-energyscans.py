@@ -695,7 +695,7 @@ def veryshort_fluorine_scan_nd(multiple=1,sigs=[],
         return
     # create a list of energies
     energies = np.arange(680,700,1)
-    energies = np.arange(700,720.5,5)
+    energies = np.append(energies,np.arange(700,720.5,5))
     times = energies.copy()
 
     # Define exposures times for different energy ranges
