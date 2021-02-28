@@ -749,7 +749,10 @@ class RSoXSBot:
                 {"type": "section", "text": {"type": "mrkdwn", "text": message}},
             ],
         }
-        self.webclient.chat_postMessage(**composed_message)
+        try:
+            self.webclient.chat_postMessage(**composed_message)
+        except Exception:
+            pass
 
 slack_token = os.environ["SLACK_API_TOKEN"]
 rsoxs_bot = RSoXSBot(token=slack_token,
