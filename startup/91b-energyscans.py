@@ -694,7 +694,8 @@ def veryshort_fluorine_scan_nd(multiple=1,sigs=[],
     if len(read_input("Starting a Fluorine energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
-    energies = np.arange(680,720.25,1)
+    energies = np.arange(680,700,1)
+    energies = np.arange(700,720.5,5)
     times = energies.copy()
 
     # Define exposures times for different energy ranges
