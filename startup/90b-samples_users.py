@@ -485,7 +485,8 @@ def avg_scan_time(plan_name, nscans=50, new_scan_duration=600):
         return new_scan_duration
 
 
-def run_bar(bar, sortby=['p', 'c', 'a', 's'], dryrun=0, rev=[False, False, False, False], delete_as_complete=True):
+def run_bar(bar, sortby=['p', 'c', 'a', 's'], dryrun=0, rev=[False, False, False, False], delete_as_complete=True,
+            retract_when_done=False):
     '''
     run all sample dictionaries stored in the list bar
     :param bar: simply a list of sample dictionaries
@@ -574,6 +575,8 @@ def run_bar(bar, sortby=['p', 'c', 'a', 's'], dryrun=0, rev=[False, False, False
                 bar[step[7]]['acquisitions'].remove(step[6])
             rsoxs_bot.send_message('Scan complete.')
         rsoxs_bot.send_message('All scans complete!')
+        if retract_when_done:
+            yield from all_out()
 
 
 def list_samples(bar):
