@@ -62,10 +62,9 @@ def samxscan():
     yield from psh10.close()
 
 
-def spiralsearch(diameter=.6, stepsize=.2, energy=None):
-    if energy is not None:
-        if energy > 70 and energy < 2200:
-            yield from bps.mv(en, energy)
+def spiralsearch(diameter=.6, stepsize=.2, energy=270, pol=0):
+    yield from bps.mv(en, energy)
+    yield from set_polarization(pol)
     x_center = sam_X.user_setpoint.get()
     y_center = sam_Y.user_setpoint.get()
     num = round(diameter / stepsize) + 1
