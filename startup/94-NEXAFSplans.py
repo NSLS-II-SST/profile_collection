@@ -10,28 +10,28 @@ def epu_angle_from_grazing(real_incident_angle,grazing_angle=20):
         np.cos(real_incident_angle * np.pi / 180) * 1 / (np.cos(grazing_angle * np.pi / 180))) * 180 / np.pi
 
 
-def Carbon_angle_NEXAFS(grazing_angle=20,speed=.1,diode_range=7,angles = [20,40,55,70,90],grating='250',m3_pitch=7.97):
+def Carbon_angle_NEXAFS(grazing_angle=20,speed=.1,diode_range=7,angles = [20,40,55,70,90],grating='250',m3_pitch=7.98):
     for angle in angles:
         yield from fly_Carbon_NEXAFS(speed=speed,
                                      pol=epu_angle_from_grazing(angle,grazing_angle),
                                      diode_range=diode_range,
                                      grating=grating,
                                      m3_pitch=m3_pitch)
-def Oxygen_angle_NEXAFS(grazing_angle=20,speed=.2,diode_range=7,angles = [20,40,55,70,90],grating='250',m3_pitch=7.97):
+def Oxygen_angle_NEXAFS(grazing_angle=20,speed=.2,diode_range=7,angles = [20,40,55,70,90],grating='250',m3_pitch=7.96):
     for angle in angles:
         yield from fly_Oxygen_NEXAFS(speed=speed,
                                      pol=epu_angle_from_grazing(angle,grazing_angle),
                                      diode_range=diode_range,
                                      grating=grating,
                                      m3_pitch=m3_pitch)
-def Nitrogen_angle_NEXAFS(grazing_angle=20,speed=.1,diode_range=7,angles = [20,40,55,70,90],grating='250',m3_pitch=7.95):
+def Nitrogen_angle_NEXAFS(grazing_angle=20,speed=.1,diode_range=7,angles = [20,40,55,70,90],grating='250',m3_pitch=7.96):
     for angle in angles:
         yield from fly_Nitrogen_NEXAFS(speed=speed,
                                      pol=epu_angle_from_grazing(angle,grazing_angle),
                                      diode_range=diode_range,
                                      grating=grating,
                                      m3_pitch=m3_pitch)
-def Fluorine_angle_NEXAFS(grazing_angle=20,speed=.3,diode_range=7,angles = [20,40,55,70,90],grating='1200',m3_pitch=7.99):
+def Fluorine_angle_NEXAFS(grazing_angle=20,speed=.3,diode_range=7,angles = [20,40,55,70,90],grating='1200',m3_pitch=7.98):
     for angle in angles:
         yield from fly_Fluorine_NEXAFS(speed=speed,
                                      pol=epu_angle_from_grazing(angle,grazing_angle),
@@ -41,7 +41,7 @@ def Fluorine_angle_NEXAFS(grazing_angle=20,speed=.3,diode_range=7,angles = [20,4
 
 
 def full_Carbon_NEXAFS(sigs=[],
-                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en,pol=0,diode_range=7,m3_pitch=7.95,
+                        dets=[Sample_TEY,Izero_Mesh,Beamstop_WAXS], energy=en,pol=0,diode_range=7,m3_pitch=7.98,
                        open_each_step=True,exp_time=1,grating='no change', motorname='None',offset=0):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
@@ -78,7 +78,7 @@ def full_Carbon_NEXAFS(sigs=[],
                                 open_each_step=open_each_step,exp_time=exp_time,grating=grating,
                                 motorname=motorname,offset=offset)
 
-def fly_Carbon_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=7.97,grating='250'):
+def fly_Carbon_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=7.98,grating='250'):
     '''
     fly_Carbon_NEXAFS runs an sample set through the carbon k-edge, with particular emphasis in he pre edge region
 
@@ -150,7 +150,7 @@ def fly_SiliconK_NEXAFS(speed=.2,pol=0,diode_range=6,m3_pitch=7.97,grating='1200
 
 
 
-def fly_Nitrogen_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=7.95,grating='250'):
+def fly_Nitrogen_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=7.96,grating='250'):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
 
@@ -170,7 +170,7 @@ def fly_Nitrogen_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=7.95,grating='250'
                                     diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
 
 
-def fly_Oxygen_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=7.95,grating='250'):
+def fly_Oxygen_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=7.96,grating='250'):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
 
@@ -189,7 +189,7 @@ def fly_Oxygen_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=7.95,grating='250'):
     yield from NEXAFS_fly_scan_core([(510, 525, speed*3),(525, 540, speed),(540, 560, speed*5)], enscan_type=enscan_type,openshutter=True,exp_time=.5,
                                     diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
 
-def fly_Fluorine_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=7.99,grating='1200'):
+def fly_Fluorine_NEXAFS(speed=.1,pol=0,diode_range=7,m3_pitch=7.98,grating='1200'):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
 
