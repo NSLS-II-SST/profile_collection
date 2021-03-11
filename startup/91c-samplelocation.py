@@ -543,12 +543,12 @@ def find_fiducials():
     angles = [-90+thoffset,0+thoffset,90+thoffset,180+thoffset]
     xrange = 3.5
     xnum = 36
-    startxss = [[8.21,2.7,-4,1.2],[3.84,2.94,.55,1.05]]
+    startxss = [[5,3,-1,1.1],[3.84,2.94,.55,1.1]]
     yield from bps.mv(Shutter_enable, 0)
     yield from bps.mv(Shutter_control, 0)
     yield from load_configuration('SAXSNEXAFS')
     Beamstop_SAXS.kind = 'hinted'
-    startys = [4.2,-186.25] # af2 first because it is a safer location
+    startys = [4,-186.25] # af2 first because it is a safer location
     maxlocs = []
     for startxs,starty in zip(startxss,startys):
         yield from bps.mv(sam_Y,starty,sam_X,startxs[1],sam_Th,0,sam_Z,0)
