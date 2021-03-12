@@ -117,7 +117,7 @@ def very_short_oxygen_scan_nd(multiple=1,sigs=[],
 
 
 def short_fluorine_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=7.98,grating='1200'):
+                        dets=[saxs_det],energy=en,pol=0,diode_range=5,m3_pitch=7.98,grating='1200'):
     '''
     Short Fluorine Scan runs an RSoXS sample set through the F edge, with particular emphasis in he pre edge region
 
