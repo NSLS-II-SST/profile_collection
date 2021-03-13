@@ -23,7 +23,7 @@ def Carbon_rotation_NEXAFS(speed=.1,diode_range=7,polarizations = [0,20,45,70,90
 
 def Carbon_angle_NEXAFS_rot(speed=.1,diode_range=7,angles = [20,40,55,70,90],grating='250',m3_pitch=7.98):
     for angle in angles:
-        rotate_now(angle)
+        yield from rotate_now(angle)
         yield from fly_Carbon_NEXAFS(speed=speed,
                                      pol=0,
                                      diode_range=diode_range,
