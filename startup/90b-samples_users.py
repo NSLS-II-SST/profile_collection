@@ -462,12 +462,12 @@ def newsample():
 
 
 def avg_scan_time(plan_name, nscans=50, new_scan_duration=600):
-    if plan_name is 'Carbon_angle_NEXAFS' :
+    if plan_name is 'normal_incidence_rotate_pol_nexafs' :
+        multiple = 6
+        plan_name = 'fly_Carbon_NEXAFS'
+    elif plan_name is 'fixed_pol_rotate_sample_nexafs' or plan_name is 'fixed_sample_rotate_pol_nexafs':
         multiple = 5
         plan_name = 'fly_Carbon_NEXAFS'
-    elif plan_name is 'something_else' :
-        multiple = 5
-        plan_name = 'something_else'
     else:
         multiple = 1
     scans = db0(plan_name=plan_name)
