@@ -110,15 +110,15 @@ class StandardProsilicaV33(SingleTriggerV33, ProsilicaDetector):
 class StandardProsilicaWithTIFF(StandardProsilica):
     tiff = Cpt(TIFFPluginWithFileStore,
                suffix='TIFF1:',
-               write_path_template='/DATA/images/data/%Y/%m/%d/',
-               root='/DATA/images/data')
+               write_path_template='/areadata/images/data/%Y/%m/%d/',
+               root='/areadata/images/data')
 
 
 class StandardProsilicaWithTIFFV33(StandardProsilicaV33):
     tiff = Cpt(TIFFPluginWithFileStore,
                suffix='TIFF1:',
-               write_path_template='/DATA/images/data/%Y/%m/%d/',
-               root='/DATA/images/data')
+               write_path_template='/areadata/images/data/%Y/%m/%d/',
+               root='/areadata/images/data')
 
 
 Side_cam = StandardProsilica('XF:07ID1-ES:1{Scr:2}', name='RSoXS Sample Area Camera')
