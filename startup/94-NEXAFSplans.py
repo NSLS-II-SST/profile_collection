@@ -173,7 +173,7 @@ def fly_Oxygen_NEXAFS(speed=.1, pol=0, diode_range=7, m3_pitch=7.96, grating='25
                                     diode_range=diode_range, m3_pitch=m3_pitch, pol=pol, grating=grating)
 
 
-def fly_Fluorine_NEXAFS(speed=.1, pol=0, diode_range=7, m3_pitch=7.98, grating='1200'):
+def fly_Fluorine_NEXAFS(speed=.5, pol=0, diode_range=7, m3_pitch=7.98, grating='1200'):
     """
 
     @param speed: the speed in eV/second to fly the mono
@@ -189,6 +189,25 @@ def fly_Fluorine_NEXAFS(speed=.1, pol=0, diode_range=7, m3_pitch=7.98, grating='
                       3)) > 0:
         return
     yield from NEXAFS_fly_scan_core([(680, 720, speed)], enscan_type=enscan_type, openshutter=True, exp_time=.5,
+                                    diode_range=diode_range, m3_pitch=m3_pitch, pol=pol, grating=grating)
+
+
+def fly_Boron_NEXAFS(speed=.1, pol=0, diode_range=6, m3_pitch=8.0, grating='250'):
+    """
+
+    @param speed: the speed in eV/second to fly the mono
+    @param pol: the polarization of the EPU to set before run
+    @param diode_range: sets the range of the SAXS and WAXS beamstop DIODEs for direct beam measurements
+    @param m3_pitch: the pitch of the M3 mirror to use for this energy range
+    @param grating: the grating of the mono to use for the scan (currently "1200" and "250" are only valid choices)
+    @return: perform a flying NEXAFS scan
+    """
+    enscan_type = 'fly_Fluorine_NEXAFS'
+    sample()
+    if len(read_input("Starting a Fluorine NEXAFS fly scan hit enter in the next 3 seconds to abort", "abort", "",
+                      3)) > 0:
+        return
+    yield from NEXAFS_fly_scan_core([(190, 215, speed)], enscan_type=enscan_type, openshutter=True, exp_time=.5,
                                     diode_range=diode_range, m3_pitch=m3_pitch, pol=pol, grating=grating)
 
 

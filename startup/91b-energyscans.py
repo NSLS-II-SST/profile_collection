@@ -334,7 +334,7 @@ def short_carbon_scan_nd(multiple=1,sigs=[],
 
 
     # create a list of energies
-    energies = np.arange(270,282,1)
+    energies = np.arange(270,282,2)
     energies = np.append(energies,np.arange(282,286,.25))
     energies = np.append(energies,np.arange(286,292,.5))
     energies = np.append(energies,np.arange(292,306,1))
