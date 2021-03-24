@@ -204,7 +204,7 @@ class EnPos(PseudoPositioner):
         elif grating=='1200' or np.isnan(g250_gap):
             return min(100000,max(14000,g1200_gap))
         else:
-            if g250_intens > g1200_intens:
+            if '250' in monoen.gratingtype.get():
                 return min(100000,max(14000,g250_gap))
             else:
                 return min(100000,max(14000,g1200_gap))
