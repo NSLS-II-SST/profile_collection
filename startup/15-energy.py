@@ -209,7 +209,10 @@ class EnPos(PseudoPositioner):
                 return min(100000,max(14000,g1200_gap))
 
     def phase(self,en,pol):
-        return min(29500,max(0,float(self.polphase.interp(pol=pol,method='cubic'))))
+        if(pol==-1):
+            return 15000
+        else:
+            return min(29500,max(0,float(self.polphase.interp(pol=pol,method='cubic'))))
     def pol(self,phase,mode):
         if mode == 0:
             return -1
