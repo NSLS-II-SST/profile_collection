@@ -549,7 +549,7 @@ def find_fiducials():
     yield from load_configuration('SAXSNEXAFS')
     Beamstop_SAXS.kind = 'hinted'
     startys = [4,-186.25] # af2 first because it is a safer location
-    maxlocs = []
+    maxlocs=[]
     for startxs,starty in zip(startxss,startys):
         yield from bps.mv(sam_Y,starty,sam_X,startxs[1],sam_Th,0,sam_Z,0)
         yield from bps.mv(Shutter_control, 1)
@@ -562,7 +562,7 @@ def find_fiducials():
             yield from bp.scan([Beamstop_SAXS],sam_X,startx-.5*xrange,startx+.5*xrange,xnum)
             yield from bps.mv(Shutter_control, 0)
             maxlocs.append(bec.peaks.max["SAXS Beamstop"][0])
-    return maxlocs # [af2y,af2xm90,af2x0,af2x90,af2x180,af1y,af1xm90,af1x0,af1x90,af1x180]
+    print(maxlocs) # [af2y,af2xm90,af2x0,af2x90,af2x180,af1y,af1xm90,af1x0,af1x90,af1x180]
 
 
 def rotate_now(theta):
