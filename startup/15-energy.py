@@ -172,6 +172,7 @@ class EnPos(PseudoPositioner):
         if (energy>en_cutoff and harmonic != '1') or harmonic == '3':
             energy = energy/3
         if pol == -1:
+            phase=15000
             g250_gap = float(self.C250_gap.interp(Energies=energy))
             g250_intens = float(self.C250_intens.interp(Energies=energy))
             g1200_gap = float(self.C1200_gap.interp(Energies=energy))
