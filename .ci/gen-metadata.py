@@ -9,22 +9,23 @@ if not md_path:
     raise RuntimeError("Env. variable 'RE_METADATA' is not defined or empty.")
 
 # Get all keys based on the RE.md occurrences in the module.
-md_keys = []
+md_keys = set()
 with open("startup/90b-samples_users.py") as f:
     lines = f.readlines()
 
-    for line in lines:
-        if re.search(r"=\s*RE.md", line):
-            # Parsing lines such as:
-            # ...
-            # sample_state = RE.md['sample_state']
-            # ...
-            # proposal_id=RE.md['proposal_id'],
-            # ...
-            key = line.split("=")[-1].strip().split("'")[1]
-            md_keys.append(key)
-    md_keys.append("user_email")  # not captured by the code above
-    md_keys.sort()
+for line in lines:
+    if re.search(r"=\s*RE.md", line):
+        # Parsing lines such as:
+        # sample_state = RE.md['sample_state']
+        # proposal_id=RE.md['proposal_id'],
+        key = line.split("=")[-1].strip().split("'")[1]
+        md_keys.add(key)
+    elif re.search(r"RE.md\S+\s*=", line):
+        # Parsing lines such as:
+        # RE.md['project_name'] = project_name
+        key = line.split("=")[0].strip().split("'")[1]
+        md_keys.add(key)
+md_keys = sorted(list(md_keys))
 
 md = PersistentDict(md_path)
 
