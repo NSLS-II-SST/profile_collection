@@ -33,6 +33,9 @@ md = PersistentDict(md_path)
 for k in md_keys:
     md[k] = f"test_{k}"
 
+# Special cases:
+md["bar_loc"] = {"spot": 0, "th": 0}
+
 print(f"Metadata dir: {md.directory}")
 print(f"Repr: {md.__repr__()}")
 pprint(dict(md))
