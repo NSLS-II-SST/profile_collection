@@ -1,4 +1,5 @@
 import os
+import re
 from pprint import pprint
 
 from bluesky.utils import PersistentDict
@@ -13,7 +14,7 @@ with open("startup/90b-samples_users.py") as f:
     lines = f.readlines()
 
     for line in lines:
-        if "=RE.md" in line or "= RE.md" in line:
+        if re.search(r"=\s*RE.md", line):
             # Parsing lines such as:
             # ...
             # sample_state = RE.md['sample_state']
@@ -22,6 +23,7 @@ with open("startup/90b-samples_users.py") as f:
             # ...
             key = line.split("=")[-1].strip().split("'")[1]
             md_keys.append(key)
+    md_keys.append("user_email")  # not captured by the code above
     md_keys.sort()
 
 md = PersistentDict(md_path)
