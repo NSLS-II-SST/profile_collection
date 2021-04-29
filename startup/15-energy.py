@@ -155,7 +155,7 @@ class EnPos(PseudoPositioner):
     
     # begin LUT functions
     
-    def __init__(self,a,configpath=pathlib.Path(IPython.paths.get_ipython_dir())/'profile_collection'/'startup'/'config',**kwargs):
+    def __init__(self, a, configpath=pathlib.Path(get_ipython().profile_dir.startup_dir) / 'config', **kwargs):
         super().__init__(a,**kwargs)
         self.C250_gap = xr.load_dataarray(configpath/'EPU_C_250_gap.nc')
         self.C250_intens = xr.load_dataarray(configpath/'EPU_C_250_intens.nc')
