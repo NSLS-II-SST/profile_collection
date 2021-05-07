@@ -96,7 +96,7 @@ class FMBOEpicsMotor(EpicsMotor):
 
     def status(self):
         text = '\n  EPICS PV base : %s\n\n' % (self.prefix)
-        for signal in self.read_attrs:
+        for signal in self.status_list:
             if signal.upper() not in self.status_list:
                 continue
             suffix = getattr(self, signal).pvname.replace(self.prefix, '')

@@ -109,9 +109,9 @@ def newuser():
     if proposal_id is not '':
         RE.md['proposal_id'] = proposal_id
 
-    SAF_id = input('Your SAF id ({}): '.format(RE.md['SAF_id']))
+    SAF_id = input('Your SAF id ({}): '.format(RE.md['saf_id']))
     if SAF_id is not '':
-        RE.md['SAF_id'] = SAF_id
+        RE.md['saf_id'] = SAF_id
 
     institution = input('Your institution ({}): '.format(RE.md['institution']))
     if institution is not '':
