@@ -33,8 +33,11 @@ def resume_notices():
 
 
 def send_notice(email, subject, msg):
-    os.system('echo '+msg+' | mail -s "'+subject+'" '+email)
-    # rsoxs_bot.send_message(subject + '\n' + msg)
+    # os.system('echo '+msg+' | mail -s "'+subject+'" '+email)
+    try:
+        rsoxs_bot.send_message(subject + '\n' + msg)
+    except Exception:
+        pass
 
 
 def send_notice_plan(email, subject, msg):

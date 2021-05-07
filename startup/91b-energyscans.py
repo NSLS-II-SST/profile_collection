@@ -42,7 +42,7 @@ def full_oxygen_scan_nd(multiple=1,sigs=[],
                             diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
 
 def short_oxygen_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=7.97,grating='1200'):
+                        dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=8.00,grating='1200'):
     '''
     Short Oxygen Scan runs an RSoXS sample set through the O edge, with particular emphasis in he pre edge region
 
@@ -78,8 +78,46 @@ def short_oxygen_scan_nd(multiple=1,sigs=[],
 
 
 
+def very_short_oxygen_scan_nd(multiple=1,sigs=[],
+                        dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=7.97,grating='1200'):
+    '''
+    Very Short Oxygen Scan runs an RSoXS sample set through the O edge, with particular emphasis in he pre edge region
+
+    :param multiple: adjustment for exposure times
+    :param mesh: which Izero channel to use
+    :param det: which detector to use
+    :param energy: what energy motor to scan
+    :return: perform scan
+
+    normal scan takes ~ 16 minutes to complete
+    '''
+    sample()
+    enscan_type = 'very_short_oxygen_scan_nd'
+    #beamline_status()
+    if len(read_input("Starting a Oxygen energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
+        return
+    # create a list of energies
+    energies = np.arange(510,525,5)
+    energies = np.append(energies,np.arange(525,531,0.5))
+    energies = np.append(energies,np.arange(531,535,2))
+    energies = np.append(energies,np.arange(535,560,10))
+    times = energies.copy()
+
+    # Define exposures times for different energy ranges
+    #times[energies<525] = 2
+    #times[(energies < 540) & (energies >= 525)] = 5
+    #times[energies >= 540] = 2
+    times[:] = 2
+    times *= multiple
+
+    # use these energies and exposure times to scan energy and record detectors and signals
+    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
+
+
+
 def short_fluorine_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=7.99,grating='1200'):
+                        dets=[saxs_det],energy=en,pol=0,diode_range=7,m3_pitch=7.98,grating='1200'):
     '''
     Short Fluorine Scan runs an RSoXS sample set through the F edge, with particular emphasis in he pre edge region
 
@@ -191,7 +229,7 @@ def full_test_scan_nd(multiple=1,sigs=[],
 
 
 def short_nitrogen_scan_nd(multiple=1,sigs=[],
-                          dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=7.97,grating='1200'):
+                          dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=8.00,grating='1200'):
     '''
     Short Nitrogen Scan runs an RSoXS sample set through the N edge, with particular emphasis in he pre edge region
 
@@ -272,7 +310,7 @@ def very_short_carbon_scan_nd(multiple=1,sigs=[],
 
 
 def short_carbon_scan_nd(multiple=1,sigs=[],
-                         dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=8.01,grating='1200'):
+                         dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=8.00,grating='1200'):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 61 exposures
@@ -296,7 +334,7 @@ def short_carbon_scan_nd(multiple=1,sigs=[],
 
 
     # create a list of energies
-    energies = np.arange(270,282,1)
+    energies = np.arange(270,282,2)
     energies = np.append(energies,np.arange(282,286,.25))
     energies = np.append(energies,np.arange(286,292,.5))
     energies = np.append(energies,np.arange(292,306,1))
@@ -314,6 +352,81 @@ def short_carbon_scan_nd(multiple=1,sigs=[],
     yield from en_scan_core(sigs, dets,energy,energies,times,enscan_type=enscan_type,
                             diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
 #en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=7.94,diode_range=6,pol=100)
+
+
+def short_carbon_scan_nonaromatic(multiple=1,sigs=[],
+                         dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=8.00,grating='1200'):
+    '''
+    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
+    this results in 61 exposures
+
+
+    :param multiple: adjustment for exposure times
+    :param mesh: which Izero channel to use
+    :param det: which detector to use
+    :param energy: what energy motor to scan
+    :return: perform scan
+
+    normal scan takes ~ 10 minutes to complete
+    '''
+    sample()
+    enscan_type = 'short_carbon_scan_nonaromatic'
+    if len(read_input("Starting a short Carbon energy scan hit enter in "
+                      "the next 3 seconds to abort", "abort", "", 3)) > 0:
+        return
+
+    # create a list of energies
+    energies = np.arange(270,282,2)
+    energies = np.append(energies,np.arange(282,286,.5))
+    energies = np.append(energies,np.arange(286,290,.25))
+    energies = np.append(energies,np.arange(290,292,.5))
+    energies = np.append(energies,np.arange(292,306,1))
+    energies = np.append(energies,np.arange(306,320,4))
+    energies = np.append(energies,np.arange(320,350,10))
+    times = energies.copy()
+
+    # Define exposures times for different energy ranges
+    times[energies<282] = 2
+    times[(energies < 286) & (energies >= 282)] = 2
+    times[energies >= 286] = 2
+    times *= multiple
+
+    # use these energies and exposure times to scan energy and record detectors and signals
+    yield from en_scan_core(sigs, dets,energy,energies,times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
+#en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=7.94,diode_range=6,pol=100)
+
+
+
+def custom_scan(sigs=[],energies=[],times=[],
+                         dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=8.01,grating='1200'):
+    '''
+    Custom scan is a more direct route to the energy scan code, with the user providing the exact times, and energies
+    to go to.
+
+
+    :param multiple: adjustment for exposure times
+    :param mesh: which Izero channel to use
+    :param det: which detector to use
+    :param energy: what energy motor to scan
+    :return: perform scan
+
+    normal scan takes ~ 10 minutes to complete
+    '''
+    sample()
+    enscan_type = 'custom_en_scan'
+    if len(read_input("Starting a specified energy scan hit enter in "
+                      "the next 3 seconds to abort", "abort", "", 3)) > 0:
+        return
+    newenergies = np.asarray(energies)
+    newtimes = np.asarray(times)
+    #Feb 2019, this pitch value seems to be optimal for carbon
+
+
+    yield from en_scan_core(sigs, dets,energy,newenergies,newtimes,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
+#en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=7.94,diode_range=6,pol=100)
+
 
 def short_sulfurl_scan_nd(multiple=1,sigs=[],
                          dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=7.98,grating='250'):
@@ -571,6 +684,46 @@ def full_carbon_scan_nd(multiple=1,sigs=[],
     yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
                             diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
 
+
+def full_carbon_scan_nonaromatic(multiple=1,sigs=[],
+                        dets=[saxs_det], energy=en,pol=0,diode_range=6,m3_pitch=7.97,grating='1200'):
+    '''
+    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
+    this results in 128 exposures
+
+
+    :param multiple: adjustment for exposure times
+    :param mesh: which Izero channel to use
+    :param det: which detector to use
+    :param energy: what energy motor to scan
+    :return: perform scan
+
+    normal scan takes ~ 18 minutes to complete
+    '''
+    enscan_type = 'full_carbon_scan_nonaromatic'
+    sample()
+    if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
+        return
+    # create a list of energies
+    energies = np.arange(270,282,.5)
+    energies = np.append(energies,np.arange(282,286,.2))
+    energies = np.append(energies,np.arange(286,292,.1))
+    energies = np.append(energies,np.arange(292,305,1))
+    energies = np.append(energies,np.arange(305,320,2))
+    energies = np.append(energies,np.arange(320,350,5))
+    times = energies.copy()
+
+    # Define exposures times for different energy ranges
+    times[energies<282] = 2
+    times[(energies < 286) & (energies >= 282)] = 2
+    times[energies >= 286] = 2
+    times *= multiple
+
+    # use these energies and exposure times to scan energy and record detectors and signals
+    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
+
+
 def full_fluorine_scan_nd(multiple=1,sigs=[],
                         dets=[saxs_det], energy=en,pol=0,diode_range=7,m3_pitch=7.89):
     '''
@@ -605,7 +758,7 @@ def full_fluorine_scan_nd(multiple=1,sigs=[],
                             diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
 
 def veryshort_fluorine_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en,pol=0,diode_range=7,m3_pitch=7.75):
+                        dets=[saxs_det], energy=en,pol=0,diode_range=7,m3_pitch=7.99):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 128 exposures
@@ -624,7 +777,8 @@ def veryshort_fluorine_scan_nd(multiple=1,sigs=[],
     if len(read_input("Starting a Fluorine energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
-    energies = np.arange(680,720.25,1)
+    energies = np.arange(680,700,1)
+    energies = np.append(energies,np.arange(700,720.5,5))
     times = energies.copy()
 
     # Define exposures times for different energy ranges
@@ -906,3 +1060,15 @@ def survey_scan_veryhighenergy(multiple=1,sigs=[],
     # use these energies and exposure times to scan energy and record detectors and signals
     yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
                             diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
+
+def runtempsample(name='SGPT03',temp='RT',):
+    RE.md['sample_name'] = name + '_' + temp
+    RE.md['sample_id'] = name + '_' + temp
+    RE.md['sample_id'] = name + '_' + temp
+    yield from short_carbon_scan_nd(dets=[waxs_det],pol=0)
+    yield from short_carbon_scan_nd(dets=[waxs_det],pol=90)
+    yield from very_short_oxygen_scan_nd(dets=[waxs_det],pol=0)
+    yield from very_short_oxygen_scan_nd(dets=[waxs_det],pol=90)
+    yield from veryshort_fluorine_scan_nd(dets=[waxs_det],pol=0)
+    yield from veryshort_fluorine_scan_nd(dets=[waxs_det],pol=90)
+

@@ -155,7 +155,7 @@ class EnPos(PseudoPositioner):
     
     # begin LUT functions
     
-    def __init__(self,a,configpath=pathlib.Path(IPython.paths.get_ipython_dir())/'profile_collection'/'startup'/'config',**kwargs):
+    def __init__(self, a, configpath=pathlib.Path(get_ipython().profile_dir.startup_dir) / 'config', **kwargs):
         super().__init__(a,**kwargs)
         self.C250_gap = xr.load_dataarray(configpath/'EPU_C_250_gap.nc')
         self.C250_intens = xr.load_dataarray(configpath/'EPU_C_250_intens.nc')
@@ -172,6 +172,7 @@ class EnPos(PseudoPositioner):
         if (energy>en_cutoff and harmonic != '1') or harmonic == '3':
             energy = energy/3
         if pol == -1:
+            phase=15000
             g250_gap = float(self.C250_gap.interp(Energies=energy))
             g250_intens = float(self.C250_intens.interp(Energies=energy))
             g1200_gap = float(self.C1200_gap.interp(Energies=energy))
@@ -203,13 +204,16 @@ class EnPos(PseudoPositioner):
         elif grating=='1200' or np.isnan(g250_gap):
             return min(100000,max(14000,g1200_gap))
         else:
-            if g250_intens > g1200_intens:
+            if '250' in self.monoen.gratingtype.get():
                 return min(100000,max(14000,g250_gap))
             else:
                 return min(100000,max(14000,g1200_gap))
 
     def phase(self,en,pol):
-        return min(29500,max(0,float(self.polphase.interp(pol=pol,method='cubic'))))
+        if(pol==-1):
+            return 15000
+        else:
+            return min(29500,max(0,float(self.polphase.interp(pol=pol,method='cubic'))))
     def pol(self,phase,mode):
         if mode == 0:
             return -1
@@ -382,7 +386,9 @@ del pol
 def grating_to_250():
     type =  mono_en.gratingtype.enum_strs.index(mono_en.gratingtype.get())
     if type == 2:
+        print('the grating is already at 250 l/mm')
         return 0 # the grating is already here
+    print('Moving the grating to 250 l/mm.  This will take a minute...')
     yield from psh4.close()
     yield from bps.abs_set(mono_en.gratingtype, 2,wait=False)
     yield from bps.abs_set(mono_en.gratingtype_proc, 1,wait=True)
@@ -392,11 +398,14 @@ def grating_to_250():
     yield from bps.mv(mono_en.cff, 1.385)
     yield from bps.mv(en,270)
     yield from psh4.open()
+    print('the grating is now at 250 l/mm')
 
 def grating_to_1200():
     type =  mono_en.gratingtype.enum_strs.index(mono_en.gratingtype.get())
     if type == 9:
+        print('the grating is already at 1200 l/mm')
         return 0 # the grating is already here
+    print('Moving the grating to 1200 l/mm.  This will take a minute...')
     yield from psh4.close()
     yield from bps.abs_set(mono_en.gratingtype,9,wait=False)
     yield from bps.abs_set(mono_en.gratingtype_proc, 1,wait=True)
@@ -406,6 +415,7 @@ def grating_to_1200():
     yield from bps.mv(mono_en.cff,1.7)
     yield from bps.mv(en,270)
     yield from psh4.open()
+    print('the grating is now at 1200 l/mm')
 
 
 #sd.monitors.extend([mono_en.readback])

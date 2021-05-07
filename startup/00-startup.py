@@ -149,7 +149,10 @@ except ImportError:
             """Force a reload from disk, overwriting current cache"""
             self._cache = dict(super().items())
 
-runengine_metadata_dir = appdirs.user_data_dir(appname="bluesky") / Path("runengine-metadata")
+# runengine_metadata_dir = appdirs.user_data_dir(appname="bluesky") / Path("runengine-metadata")
+# Updated on 2021-04-28 by DSSI/@mrakitin to have a shared location for
+# metadata for new RHEL8 machines (and old ones).
+runengine_metadata_dir = Path("/areadata/rsoxs-collection/runengine-metadata")
 
 # PersistentDict will create the directory if it does not exist
 RE.md = PersistentDict(runengine_metadata_dir)

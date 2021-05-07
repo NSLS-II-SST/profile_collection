@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 
 
 class plotpvs(list):
-    archiver_addr = "http://xf07id1-ca1.cs.nsls2.local:17668/retrieval/data/getData.json"
+    archiver_addr = "http://archiver.sst.nsls2.bnl.local:17668/retrieval/data/getData.json"
     timezone = 'US/Eastern'
     pvdict = {}
 

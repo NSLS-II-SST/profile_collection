@@ -61,8 +61,10 @@ def sample():
     if len(str(RE.md["samp_user_id"])) > 0:
         text += '\n   Creator User ID:       ' + colored('{}'.format(str(RE.md["samp_user_id"])).center(48, ' '),
                                                          'cyan')
-    if len(str(RE.md["bar_loc"])) > 0:
-        text += '\n   Location on Bar:       ' + colored('{}'.format(RE.md["bar_loc"]).center(48, ' '), 'cyan')
+    if len(str(RE.md["bar_loc"]['spot'])) > 0:
+        text += '\n   Location on Bar:       ' + colored('{}'.format(RE.md["bar_loc"]['spot']).center(48, ' '), 'cyan')
+    if len(str(RE.md["bar_loc"]['th'])) > 0:
+        text += '\n   Angle of incidence:    ' + colored('{}'.format(RE.md["bar_loc"]['th']).center(48, ' '), 'cyan')
     if len(str(RE.md["composition"])) > 0:
         text += '\n   Composition(formula):  ' + colored('{}'.format(RE.md["composition"]).center(48, ' '), 'cyan')
     if len(str(RE.md["density"])) > 0:
@@ -158,7 +160,8 @@ def get_location(motor_list):
 
 
 def sample_set_location(sample_dict):
-    sample_dict['location'] = get_sample_location()
+    sample_dict['location'] = get_sample_location() # set the location metadata
+    sample_recenter_sample(sample_dict) # change the x0, y0, theta to result in this new position (including angle)
     return sample_dict
 
 
@@ -234,8 +237,8 @@ def do_acquisitions(acq_list):
         yield from eval(acq['plan_name'] + '(' + acq['arguments'] + ')')
 
 
-def get_sample_dict(acq=[], locations=[]):
-    if locations is []:
+def get_sample_dict(acq=[], locations=None):
+    if locations is None:
         locations = get_sample_location()
     sample_name = RE.md['sample_name']
     sample_desc = RE.md['sample_desc']
@@ -250,6 +253,11 @@ def get_sample_dict(acq=[], locations=[]):
     composition = RE.md['composition']
     bar_loc = RE.md['bar_loc']
     density = RE.md['density']
+    grazing = RE.md['grazing']
+    bar_spot = RE.md['bar_spot']
+    front = RE.md['front']
+    height = RE.md['height']
+    angle = RE.md['angle']
     components = RE.md['components']
     thickness = RE.md['thickness']
     sample_state = RE.md['sample_state']
@@ -268,6 +276,11 @@ def get_sample_dict(acq=[], locations=[]):
             'composition': composition,
             'bar_loc': bar_loc,
             'density': density,
+            'grazing': grazing,
+            'bar_spot': bar_spot,
+            'front': front,
+            'height': height,
+            'angle': angle,
             'components': components,
             'thickness': thickness,
             'sample_state': sample_state,
@@ -364,9 +377,15 @@ def newsample():
     if samp_user_id is not '':
         RE.md['samp_user_id'] = samp_user_id
 
-    bar_loc = input('Location on the Bar ({}): '.format(RE.md['bar_loc']))
+    bar_loc = input('Location on the Bar ({}): '.format(RE.md['bar_loc']['spot']))
     if bar_loc is not '':
-        RE.md['bar_loc'] = bar_loc
+        RE.md['bar_loc']['spot'] = bar_loc
+        RE.md['bar_spot'] = bar_loc
+
+    th = input('Angle desired for sample acquisition (-180 for transmission from back) ({}): '.format(RE.md['bar_loc']['th']))
+    if th is not '':
+        RE.md['bar_loc']['th'] = th
+        RE.md['angle'] = th
 
     composition = input('Sample composition or chemical formula ({}): '.format(RE.md['composition']))
     if composition is not '':
@@ -392,6 +411,16 @@ def newsample():
     if notes is not '':
         RE.md['notes'] = notes
 
+    grazing = input('Is the sample for grazing incidence? ({}): '.format(RE.md['grazing']))
+    if grazing is not '':
+        RE.md['grazing'] = eval(grazing)
+    front = input('Is the sample on the front of the bar? ({}): '.format(RE.md['front']))
+    if front is not '':
+        RE.md['front'] = eval(front)
+    height = input('Sample height? ({}): '.format(RE.md['height']))
+    if height is not '':
+        RE.md['height'] = eval(height)
+
     acquisitions = []
     add_default_acq = input('add acquisition (full_carbon_scan - WAXS)? : ')
     if add_default_acq is '':
@@ -410,19 +439,19 @@ def newsample():
             locs.append({'motor': 'x', 'position': xval, 'order': 0})
         else:
             locs.append({'motor': 'x', 'position': sam_X.user_readback.get(), 'order': 0})
-        yval = input('X ({:.2f}): '.format(sam_Y.user_readback.get()))
+        yval = input('Y ({:.2f}): '.format(sam_Y.user_readback.get()))
         if yval is not '':
             locs.append({'motor': 'y', 'position': yval, 'order': 0})
         else:
             locs.append({'motor': 'y', 'position': sam_Y.user_readback.get(), 'order': 0})
 
-        zval = input('X ({:.2f}): '.format(sam_Z.user_readback.get()))
+        zval = input('Z ({:.2f}): '.format(sam_Z.user_readback.get()))
         if zval is not '':
             locs.append({'motor': 'z', 'position': zval, 'order': 0})
         else:
             locs.append({'motor': 'z', 'position': sam_Z.user_readback.get(), 'order': 0})
 
-        thval = input('X ({:.2f}): '.format(sam_Th.user_readback.get()))
+        thval = input('Theta ({:.2f}): '.format(sam_Th.user_readback.get()))
         if thval is not '':
             locs.append({'motor': 'th', 'position': thval, 'order': 0})
         else:
@@ -433,12 +462,12 @@ def newsample():
 
 
 def avg_scan_time(plan_name, nscans=50, new_scan_duration=600):
-    if plan_name is 'Carbon_angle_NEXAFS' :
+    if plan_name is 'normal_incidence_rotate_pol_nexafs' :
+        multiple = 6
+        plan_name = 'fly_Carbon_NEXAFS'
+    elif plan_name is 'fixed_pol_rotate_sample_nexafs' or plan_name is 'fixed_sample_rotate_pol_nexafs':
         multiple = 5
         plan_name = 'fly_Carbon_NEXAFS'
-    elif plan_name is 'something_else' :
-        multiple = 5
-        plan_name = 'something_else'
     else:
         multiple = 1
     scans = db0(plan_name=plan_name)
@@ -456,7 +485,8 @@ def avg_scan_time(plan_name, nscans=50, new_scan_duration=600):
         return new_scan_duration
 
 
-def run_bar(bar, sortby=['p', 'c', 'a', 's'], dryrun=0, rev=[False, False, False, False], delete_as_complete=True):
+def run_bar(bar, sortby=['p', 'c', 'a', 's'], dryrun=0, rev=[False, False, False, False], delete_as_complete=True,
+            retract_when_done=False):
     '''
     run all sample dictionaries stored in the list bar
     :param bar: simply a list of sample dictionaries
@@ -533,18 +563,20 @@ def run_bar(bar, sortby=['p', 'c', 'a', 's'], dryrun=0, rev=[False, False, False
                        f'time remaining approx {floor(time_remaining / 3600)} h '
                        f'{floor((time_remaining % 3600) / 60)} m \n\n',
                        'red', width=120, shrink=True)
-            # rsoxs_bot.send_message('Starting scan {} out of {}\n'.format(i + 1, len(listout)) +
-            #                        '{} of {} in project {} Proposal # {}\n which should take {} minutes\n'.format(
-            #                            step[3], step[0], step[1], step[11], floor(this_step_time / 60)) +
-            #                        f'time remaining approx {floor(time_remaining / 3600)} h '
-            #                        f'{floor((time_remaining % 3600) / 60)} m')
+            rsoxs_bot.send_message('Starting scan {} out of {}\n'.format(i + 1, len(listout)) +
+                                   '{} at {} in project {} Proposal # {}\n which should take {} minutes\n'.format(
+                                       step[3],step[5]['bar_spot'], step[1], step[11], floor(this_step_time / 60)) +
+                                   f'time remaining approx {floor(time_remaining / 3600)} h '
+                                   f'{floor((time_remaining % 3600) / 60)} m')
             yield from load_configuration(step[2])  # move to configuration
             yield from load_sample(step[5])  # move to sample / load sample metadata
             yield from do_acquisitions([step[6]])  # run scan
             if delete_as_complete:
                 bar[step[7]]['acquisitions'].remove(step[6])
-        #     rsoxs_bot.send_message('Scan complete.')
-        # rsoxs_bot.send_message('All scans complete!')
+            rsoxs_bot.send_message('Scan complete.')
+        rsoxs_bot.send_message('All scans complete!')
+        if retract_when_done:
+            yield from all_out()
 
 
 def list_samples(bar):
@@ -601,9 +633,13 @@ def save_samplesxls(sample, filename):
         for i, sam in enumerate(testdict):
             testdict[i]['location'] = eval(sam['location'])
             testdict[i]['acquisitions'] = eval(sam['acquisitions'])
+            testdict[i]['bar_loc'] = eval(sam['bar_loc'])
+            testdict[i]['bar_loc']['spot'] = sam['bar_spot']
     else:
         testdict['location'] = eval(testdict['location'])
         testdict['acquisitions'] = eval(testdict['acquisitions'])
+        testdict['bar_loc'] = eval(testdict['bar_loc'])
+        testdict['bar_loc']['spot'] = testdict['bar_spot']
 
     if isinstance(testdict, list):
         for i, sam in enumerate(testdict):
@@ -624,6 +660,31 @@ def load_samples(filename):
     return samplenew
 
 
+
+def sanatize_angle(samp):
+    # translates a requested angle (something in sample['angle']) into an actual angle depending on the kind of sample
+    if (samp['grazing']):
+        if (samp['front']):
+            samp['bar_loc']['th'] = np.mod(np.abs(90 - samp['angle']), 180)
+            # front grazing sample angle is interpreted as grazing angle
+        else:
+            samp['bar_loc']['th'] = 90 + np.round(np.mod(100 * samp['angle'] - 9000.01, 9000.01)) / 100
+            # back grazing sample angle is interpreted as grazing angle but subtracted from 180
+    else:
+        if (samp['front']):
+            samp['bar_loc']['th'] = 90 + np.round(np.mod(100 * samp['angle'] - 9000.01, 9000.01)) / 100
+            if samp['bar_loc']['x0'] < -1.8 and samp['bar_loc']['th'] < 160:
+                # transmission from the left side of the bar at a incident angle more than 20 degrees,
+                # flip to come from the front side
+                samp['bar_loc']['th'] = 90 - np.round(np.mod(100 * samp['angle'] - 9000.01, 9000.01)) / 100
+        else:
+            samp['bar_loc']['th'] = np.mod(np.abs(90 - samp['angle']), 180)
+            if samp['bar_loc']['x0'] > -1.8 and samp['bar_loc']['th'] < 160:
+                # transmission from the right side of the bar at a incident angle more than 20 degrees,
+                # flip to come from the front side
+                samp['bar_loc']['th'] = 180 - np.mod(np.abs(90 - samp['angle']), 180)
+
+
 def load_samplesxls(filename):
     df = pd.read_excel(filename, na_values='', converters={'sample_date': str})
     df.replace(np.nan, '', regex=True, inplace=True)
@@ -632,11 +693,18 @@ def load_samplesxls(filename):
         for i, sam in enumerate(samplenew):
             samplenew[i]['location'] = eval(sam['location'])
             samplenew[i]['acquisitions'] = eval(sam['acquisitions'])
+            samplenew[i]['bar_loc'] = eval(sam['bar_loc'])
+            # interpret/translate angle to the actual incidence angle needed
+            sanatize_angle(samplenew[i])
+            samplenew[i]['bar_loc']['spot'] = sam['bar_spot']
             for key in [key for key, value in sam.items() if 'named' in key.lower()]:
                 del samplenew[i][key]
     else:
         samplenew['location'] = eval(samplenew['location'])
         samplenew['acquisitions'] = eval(samplenew['acquisitions'])
+        samplenew['bar_loc'] = eval(samplenew['bar_loc'])
+        sanatize_angle(samplenew)
+        samplenew['bar_loc']['spot'] = samplenew['bar_spot']
         for key in [key for key, value in samplenew.items() if 'named' in key.lower()]:
             del samplenew[key]
     return samplenew
@@ -658,14 +726,6 @@ def sample_by_name(bar, name):
     return sample_by_value_match(bar, 'sample_name', name)
 
 
-def NEXAFS_WAXS_bar(barin, start_en, stop_en, num_en):
-    yield from bps.mv(Shutter_Y, 30)
-    for sample in barin:
-        yield from load_sample(sample)
-        RE.md['project_name'] = 'NEXAFS'
-        yield from bp.scan([en.energy], en, start_en, stop_en, num_en)
-
-
 def offset_bar(bar, xoff, yoff, zoff, thoff):
     for samp in bar:
         for mot in samp['location']:
@@ -677,44 +737,4 @@ def offset_bar(bar, xoff, yoff, zoff, thoff):
                 mot['position'] += zoff
             if mot['motor'] is 'th':
                 mot['position'] += thoff
-
-
-def flip_bar(bar):
-    for samp in bar:
-        for mot in samp['location']:
-            if mot['motor'] is 'x':
-                mot['position'] = .5 - mot['position']
-            if mot['motor'] is 'th':
-                mot['position'] = 180
-
-
-def straighten_bar(bar, d_y, d_x, y_center):
-    for samp in bar:
-        xpos = samp['location'][0]['position']
-        ypos = samp['location'][1]['position']
-        samp['location'][0]['position'] = straighten_x(xpos, ypos, d_x, d_y, y_center)
-
-
-def straighten_x(x, y, dx, dy, y_center):
-    return x - (y + y_center) * dx / dy
-
-
-def correct_bar(bar, af1x, af1y, af2x, af2y):
-    x_offset = af1x - bar[0]['location'][0]['position']
-    y_offset = af1y - bar[0]['location'][1]['position']
-    x_image_offset = bar[0]['location'][0]['position'] - bar[-1]['location'][0]['position']
-
-    dx = (af2x - af1x) + x_image_offset
-    dy = af2y - af1y
-
-    for samp in bar:
-        xpos = samp['location'][0]['position']
-        ypos = samp['location'][1]['position']
-
-        xpos = xpos + x_offset
-        ypos = ypos + y_offset
-
-        newx = xpos + (ypos - af1y) * dx / dy
-
-        samp['location'][0]['position'] = newx
-        samp['location'][1]['position'] = ypos
+        sample_recenter_sample(samp)
