@@ -543,7 +543,7 @@ def run_bar(bar, sortby=['p', 'c', 'a', 's'], dryrun=0, rev=[False, False, False
         total_time = 0
         for i, step in enumerate(listout):
             text += 'move to {} from {}, load configuration {}, scan {}, starts @ {} min and takes {} min\n'.format(
-                step[5]['sample_name'], step[1], step[2], step[3], floor(total_time / 60), floor(step[4] / 60))
+                step[5]['sample_name'], step[1], step[2], step[12], floor(total_time / 60), floor(step[4] / 60))
             total_time += step[4]
             if (step[2] != listout[i - 1][2]):
                 total_time += config_change_time
