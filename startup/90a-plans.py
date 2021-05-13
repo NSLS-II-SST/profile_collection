@@ -756,5 +756,5 @@ class RSoXSBot:
 
 slack_token = os.environ.get("SLACK_API_TOKEN", None)
 rsoxs_bot = RSoXSBot(token=slack_token,
-                     proxy="proxy:8888",
+                     proxy=None,
                      channel="#sst-1-rsoxs-station")
