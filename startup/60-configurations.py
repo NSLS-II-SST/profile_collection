@@ -232,6 +232,10 @@ def SAXS():
         'motor':    BeamStopW,
         'position': 3,
         'order': 1},
+        {
+        'motor':    Exit_Slit,
+        'position': -3.05,
+        'order': 2},
     ],
     {'RSoXS_Config': 'SAXS',
       'RSoXS_Main_DET':'SAXS',
@@ -315,6 +319,10 @@ def SAXSNEXAFS():
         'motor':    BeamStopW,
         'position': 3,
         'order': 1},
+        {
+        'motor':    Exit_Slit,
+        'position': -3.05,
+        'order': 2},
     ],
     {'RSoXS_Config': 'SAXSNEXAFS',
       'RSoXS_Main_DET': 'Beamstop_SAXS',
@@ -398,6 +406,10 @@ def TEYNEXAFS():
         'motor':    BeamStopW,
         'position': 3,
         'order': 1},
+        {
+        'motor':    Exit_Slit,
+        'position': -3.05,
+        'order': 2},
     ],
     {'RSoXS_Config': 'TEYNEXAFS',
       'RSoXS_Main_DET': 'Beamstop_SAXS',
@@ -482,6 +494,10 @@ def WAXS():
         'motor':    BeamStopW,
         'position': 71.4,
         'order': 1},
+        {
+        'motor':    Exit_Slit,
+        'position': -3.05,
+        'order': 2},
     ],
     {'RSoXS_Config': 'WAXS',
       'RSoXS_Main_DET': 'WAXS',
@@ -562,6 +578,10 @@ def WAXSNEXAFS():
         'motor':    BeamStopW,
         'position': 71.4,
         'order': 1},
+        {
+        'motor':    Exit_Slit,
+        'position': -3.05,
+        'order': 2},
     ],
     {'RSoXS_Config': 'WAXSNEXAFS',
       'RSoXS_Main_DET': 'Beamstop_WAXS',
@@ -671,7 +691,15 @@ def all_out():
                       sam_Y, 345,
                       sam_X, 0,
                       sam_Z, 0,
-                      sam_Th, 0)
+                      sam_Th, 0,
+                      en.polarization,0,
+                      Exit_Slit,-0.05)
+    print('moving back to 1200 l/mm grating')
+    yield from grating_to_1200()
+    print('resetting cff to 2.0')
+    yield from bps.mv(mono_en.cff,2)
+    print('moving to 270 eV')
+    yield from bps.mv(en,270)
     RE.md.update({'RSoXS_Config': 'inactive',
       'RSoXS_Main_DET': None,
       'RSoXS_WAXS_SDD': None,
