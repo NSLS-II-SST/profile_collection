@@ -521,8 +521,9 @@ def run_bar(bar, sortby=['p', 'c', 'a', 's'], dryrun=0, rev=[False, False, False
                             acq_num,  # 8
                             a['arguments'],  # 9
                             s['density'],  # 10
-                            s['proposal_id']])  # 11
-    switcher = {'p': 1, 's': 0, 'c': 2, 'a': 3, 'g': 9, 'd': 10}
+                            s['proposal_id'], # 11
+                            a['plan_name']+a['arguments']])  # 12
+    switcher = {'p': 1, 's': 0, 'c': 2, 'a': 12, 'g': 9, 'd': 10}
     try:
         sortby.reverse()
     except AttributeError:
@@ -542,7 +543,7 @@ def run_bar(bar, sortby=['p', 'c', 'a', 's'], dryrun=0, rev=[False, False, False
         total_time = 0
         for i, step in enumerate(listout):
             text += 'move to {} from {}, load configuration {}, scan {}, starts @ {} min and takes {} min\n'.format(
-                step[5]['sample_name'], step[1], step[2], step[3], floor(total_time / 60), floor(step[4] / 60))
+                step[5]['sample_name'], step[1], step[2], step[12], floor(total_time / 60), floor(step[4] / 60))
             total_time += step[4]
             if (step[2] != listout[i - 1][2]):
                 total_time += config_change_time
