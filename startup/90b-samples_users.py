@@ -704,7 +704,7 @@ def load_samplesxls(filename):
             samplenew[i]['acquisitions'] = eval(sam['acquisitions'])
             samplenew[i]['bar_loc'] = eval(sam['bar_loc'])
             # interpret/translate angle to the actual incidence angle needed
-            sanatize_angle(samplenew[i])
+            # sanatize_angle(samplenew[i])
             samplenew[i]['bar_loc']['spot'] = sam['bar_spot']
             for key in [key for key, value in sam.items() if 'named' in key.lower()]:
                 del samplenew[i][key]
@@ -712,7 +712,7 @@ def load_samplesxls(filename):
         samplenew['location'] = eval(samplenew['location'])
         samplenew['acquisitions'] = eval(samplenew['acquisitions'])
         samplenew['bar_loc'] = eval(samplenew['bar_loc'])
-        sanatize_angle(samplenew)
+        # sanatize_angle(samplenew)
         samplenew['bar_loc']['spot'] = samplenew['bar_spot']
         for key in [key for key, value in samplenew.items() if 'named' in key.lower()]:
             del samplenew[key]
