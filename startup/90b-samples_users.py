@@ -660,7 +660,7 @@ def save_samplesxls(sample, filename):
             if isinstance(loc['motor'], Device):
                 testdict['location'][j]['motor'] = switch[loc['motor'].name]
     sampledf = pd.DataFrame.from_dict(testdict, orient='columns')
-    sampledf.to_excel(filename)
+    sampledf.to_excel(filename,index=False)
 
 
 def load_samples(filename):
@@ -695,7 +695,7 @@ def sanatize_angle(samp):
 
 
 def load_samplesxls(filename):
-    df = pd.read_excel(filename, na_values='', converters={'sample_date': str})
+    df = pd.read_excel(filename, na_values='', converters={'sample_date': str},sheet_name='Sheet1')
     df.replace(np.nan, '', regex=True, inplace=True)
     samplenew = df.to_dict(orient='records')
     if isinstance(samplenew, list):
