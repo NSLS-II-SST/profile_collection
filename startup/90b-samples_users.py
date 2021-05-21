@@ -697,6 +697,7 @@ def sanatize_angle(samp):
 def load_samplesxls(filename):
     df = pd.read_excel(filename,
                        na_values='',
+                       engine='openpyxl',
                        keep_default_na=True,
                        converters={'sample_date': str},
                        sheet_name='Sheet1',
