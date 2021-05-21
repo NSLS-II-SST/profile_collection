@@ -81,6 +81,8 @@ sample_schema = {
 
     'properties': {
         'sample_name': {'type': 'string'},
+        'sample_id': {'type': 'string'},
+        'sample_priority': {'type': 'number'},
         'sample_desc': {'type': 'string'},
         'date_created': {'type': 'string', 'format': 'date'},
         'user_id': {'type': 'number'},
@@ -135,6 +137,8 @@ sample_schema = {
                         }
     },
     'required': ['sample_name',
+                 'sample_id',
+                 'sample_priority',
                  'date_created',
                  'user_id',
                  'proposal_id',

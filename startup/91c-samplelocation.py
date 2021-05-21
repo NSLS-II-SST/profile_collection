@@ -45,6 +45,7 @@ def default_sample(name):
             'sample_date': '2021-03-09 00:00:00',
             'sample_id': name,
             'sample_name': name,
+            'sample_priority': name,
             'sample_desc': name,
             'project_name': 'Calibration',
             'notes': '',
@@ -113,8 +114,18 @@ def spiralsearchwaxs_all(barin=[], diameter=.5, stepsize=.2):
         yield from spiralsearchwaxs(diameter, stepsize)
 
 
-def map_bar_from_spirals(bar, spiralnums, barpos):
-    for i, pos in enumerate(barpos):
+def map_bar_from_spirals(bar,time_limit):
+    """
+    Interactively ask users to pick best location from spiral scans.
+    will go through all samples on bar and try to find a matching spiral scan taken within the last
+    hours defined by time_limit.
+    Asking for the number of the best location
+    @param bar: list of sample dictionaries
+    @param time_limit: time in hours to limit database search
+    @return: alters the locations of samples in bar if requested
+    """
+
+    for samp in bar:
         scan = db[spiralnums[i]]
         data = scan.table()
         print("Sample: " + bar[pos]['sample_name'])
@@ -124,8 +135,11 @@ def map_bar_from_spirals(bar, spiralnums, barpos):
         if isnumeric(good_point):
             sam_x = data[good_point]['RSoXS Sample Outboard-Inboard']
             sam_y = data[good_point]['RSoXS Sample Up-Down']
-            bar[pos]['location'][0]['position'] = sam_x
-            bar[pos]['location'][1]['position'] = sam_y
+            for mot in bar[pos]['location']:
+                if mot['motor'] is 'x':
+                    mot['position'] = sam_x
+                if mot['motor'] is 'y':
+                    mot['position'] = sam_y
         else:
             print('Non-numeric, not touching this sample')
 

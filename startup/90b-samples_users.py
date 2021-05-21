@@ -46,6 +46,8 @@ def sample():
         text += '\n   Institution:           ' + colored('{}'.format(RE.md["institution"]).center(48, ' '), 'cyan')
     if len(str(RE.md["sample_name"])) > 0:
         text += '\n   Sample Name:           ' + colored('{}'.format(RE.md["sample_name"]).center(48, ' '), 'cyan')
+    if len(str(RE.md["sample_priority"])) > 0:
+        text += '\n   Sample Priority:       ' + colored('{}'.format(RE.md["sample_priority"]).center(48, ' '), 'cyan')
     if len(str(RE.md["sample_desc"])) > 0:
         text += '\n   Sample Description:    ' + colored('{}'.format(RE.md["sample_desc"]).center(48, ' '), 'cyan')
     if len(str(RE.md["sample_id"])) > 0:
@@ -241,6 +243,7 @@ def get_sample_dict(acq=[], locations=None):
     if locations is None:
         locations = get_sample_location()
     sample_name = RE.md['sample_name']
+    sample_priority = RE.md['sample_priority']
     sample_desc = RE.md['sample_desc']
     sample_id = RE.md['sample_id']
     sample_set = RE.md['sample_set']
@@ -340,6 +343,10 @@ def newsample():
     sample_name = input('Your sample name  - be concise ({}): '.format(RE.md['sample_name']))
     if sample_name is not '':
         RE.md['sample_name'] = sample_name
+
+    sample_priority = input('Your sample priority  - 0 - highest to 100-lowest ({}): '.format(RE.md['sample_priority']))
+    if sample_priority is not '':
+        RE.md['sample_priority'] = sample_priority
 
     sample_desc = input('Describe your sample - be thorough ({}): '.format(RE.md['sample_desc']))
     if sample_desc is not '':
@@ -485,32 +492,27 @@ def avg_scan_time(plan_name, nscans=50, new_scan_duration=600):
         return new_scan_duration
 
 
-def run_bar(bar, sortby=['p', 'c', 'a', 's'], dryrun=0, rev=[False, False, False, False], delete_as_complete=True,
+def run_bar(bar, sort_by=['apriority','spriority'], dryrun=0, rev=[False, False], delete_as_complete=True,
             retract_when_done=False):
     '''
     run all sample dictionaries stored in the list bar
-    :param bar: simply a list of sample dictionaries
-    :param sortby: list of strings determining the sorting of scans
-        string starting with c means configuration
-                             p means project
-                             s means sample
-                             a means acquisition
-                             g means plan arguments
-        ['p','c','a','s','g'] means to all of one project first, within which all of one configurations,
+    :param bar: a list of sample dictionaries
+    :param sort_by: list of strings determining the sorting of scans
+        strings include project, configuration, sample_id, plan, plan_args, spriority, apriority
             within which all of one acquisition, etc
     :return: none
 
-
-    I guess the order should default to alphabetical - more options to be added??
     '''
-    config_change_time = 360  # time to change between configurations, in seconds.
-    listout = []
+    config_change_time = 120  # time to change between configurations, in seconds.
+    list_out = []
     for samp_num, s in enumerate(bar):
         sample = s
         sample_id = s['sample_id']
         sample_project = s['project_name']
         for acq_num, a in enumerate(s['acquisitions']):
-            listout.append([sample_id,  # 0
+            if priority not in a.keys():
+                a['priority']=50
+            list_out.append([sample_id,  # 0
                             sample_project,  # 1
                             a['configuration'],  # 2
                             a['plan_name'],  # 3
@@ -522,21 +524,27 @@ def run_bar(bar, sortby=['p', 'c', 'a', 's'], dryrun=0, rev=[False, False, False
                             a['arguments'],  # 9
                             s['density'],  # 10
                             s['proposal_id'], # 11
-                            a['plan_name']+a['arguments']])  # 12
-    switcher = {'p': 1, 's': 0, 'c': 2, 'a': 12, 'g': 9, 'd': 10}
+                            a['plan_name'], # 12
+                            s['priority'], # 13
+                            a['priority']])  # 14
+    switcher = {'project': 1, 'sample_id': 0, 'config': 2, 'plan': 12, 'plan_args': 9, 'spriority': 13, 'apriority': 14}
     try:
-        sortby.reverse()
+        sort_by.reverse()
+        rev.reverse()
     except AttributeError:
-        if isinstance(sortby, str):
-            sortby = [sortby]
+        if isinstance(sort_by, str):
+            sort_by = [sort_by]
+        elif isinstance(rev,str):
+            rev = [rev]
         else:
-            print('sortby needs to be a list of strings\n p - project\n c - configuration\n s - sample \n a - scantype')
+            print('sort_by needs to be a list of strings\n'
+                  'such as project, configuration, sample_id, plan, plan_args, spriority, apriority')
             return
     try:
-        for k, r in zip(sortby, rev):
-            listout = sorted(listout, key=itemgetter(switcher[k]), reverse=r)
+        for k, r in zip(sort_by, rev):
+            list_out = sorted(list_out, key=itemgetter(switcher[k]), reverse=r)
     except KeyError:
-        print('sortby needs to be a list of strings\n p - project\n c - configuration\n s - sample \n a - scantype')
+        print('sort_by needs to be a list of strings\n p - project\n c - configuration\n s - sample \n a - scantype')
         return
     if dryrun:
         text = ''
@@ -545,13 +553,13 @@ def run_bar(bar, sortby=['p', 'c', 'a', 's'], dryrun=0, rev=[False, False, False
             text += 'move to {} from {}, load configuration {}, scan {}, starts @ {} min and takes {} min\n'.format(
                 step[5]['sample_name'], step[1], step[2], step[12], floor(total_time / 60), floor(step[4] / 60))
             total_time += step[4]
-            if (step[2] != listout[i - 1][2]):
+            if step[2] != list_out[i - 1][2]:
                 total_time += config_change_time
         text += f'\n\nTotal estimated time {floor(total_time / 3600)} h, {floor((total_time % 3600) / 60)} m... have fun!'
         boxed_text('Dry Run', text, 'lightblue', width=120, shrink=True)
     else:
         for i, step in enumerate(listout):
-            time_remaining = sum([avg_scan_time(row[3], 1) for row in listout[i:]])
+            time_remaining = sum([avg_scan_time(row[3]) for row in listout[i:]])
             this_step_time = avg_scan_time(step[3])
             boxed_text('Scan Status',
                        '\n\nStarting scan {} out of {}'.format(colored(f'#{i + 1}', 'blue'), len(listout)) +
@@ -565,8 +573,8 @@ def run_bar(bar, sortby=['p', 'c', 'a', 's'], dryrun=0, rev=[False, False, False
                        f'{floor((time_remaining % 3600) / 60)} m \n\n',
                        'red', width=120, shrink=True)
             rsoxs_bot.send_message('Starting scan {} out of {}\n'.format(i + 1, len(listout)) +
-                                   '{} at {} in project {} Proposal # {}\n which should take {} minutes\n'.format(
-                                       step[3],step[5]['bar_spot'], step[1], step[11], floor(this_step_time / 60)) +
+                                   '{} of {} in project {} Proposal # {}\n which should take {} minutes\n'.format(
+                                       step[3],step[0], step[1], step[11], floor(this_step_time / 60)) +
                                    f'time remaining approx {floor(time_remaining / 3600)} h '
                                    f'{floor((time_remaining % 3600) / 60)} m')
             yield from load_configuration(step[2])  # move to configuration
