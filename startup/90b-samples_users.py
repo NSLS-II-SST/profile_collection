@@ -549,7 +549,7 @@ def run_bar(bar, sort_by=['apriority','spriority'], dryrun=0, rev=[False, False]
     if dryrun:
         text = ''
         total_time = 0
-        for i, step in enumerate(listout):
+        for i, step in enumerate(list_out):
             text += 'move to {} from {}, load configuration {}, scan {}, starts @ {} min and takes {} min\n'.format(
                 step[5]['sample_name'], step[1], step[2], step[12], floor(total_time / 60), floor(step[4] / 60))
             total_time += step[4]
@@ -558,11 +558,11 @@ def run_bar(bar, sort_by=['apriority','spriority'], dryrun=0, rev=[False, False]
         text += f'\n\nTotal estimated time {floor(total_time / 3600)} h, {floor((total_time % 3600) / 60)} m... have fun!'
         boxed_text('Dry Run', text, 'lightblue', width=120, shrink=True)
     else:
-        for i, step in enumerate(listout):
-            time_remaining = sum([avg_scan_time(row[3]) for row in listout[i:]])
+        for i, step in enumerate(list_out):
+            time_remaining = sum([avg_scan_time(row[3]) for row in list_out[i:]])
             this_step_time = avg_scan_time(step[3])
             boxed_text('Scan Status',
-                       '\n\nStarting scan {} out of {}'.format(colored(f'#{i + 1}', 'blue'), len(listout)) +
+                       '\n\nStarting scan {} out of {}'.format(colored(f'#{i + 1}', 'blue'), len(list_out)) +
                        '{} of {} in project {} Proposal # {}\n which should take {} minutes\n'.format(
                            colored(step[3], 'blue'),
                            colored(step[0], 'blue'),
@@ -572,7 +572,7 @@ def run_bar(bar, sort_by=['apriority','spriority'], dryrun=0, rev=[False, False]
                        f'time remaining approx {floor(time_remaining / 3600)} h '
                        f'{floor((time_remaining % 3600) / 60)} m \n\n',
                        'red', width=120, shrink=True)
-            rsoxs_bot.send_message('Starting scan {} out of {}\n'.format(i + 1, len(listout)) +
+            rsoxs_bot.send_message('Starting scan {} out of {}\n'.format(i + 1, len(list_out)) +
                                    '{} of {} in project {} Proposal # {}\n which should take {} minutes\n'.format(
                                        step[3],step[0], step[1], step[11], floor(this_step_time / 60)) +
                                    f'time remaining approx {floor(time_remaining / 3600)} h '
