@@ -699,8 +699,7 @@ def load_samplesxls(filename):
                        na_values='',
                        keep_default_na=True,
                        converters={'sample_date': str},
-                       sheet_name='Sheet1',
-                       skip_blank_lines=True)
+                       sheet_name='Sheet1',)
     df.replace(np.nan, '', regex=True, inplace=True)
     samplenew = df.to_dict(orient='records')
     if isinstance(samplenew, list):
