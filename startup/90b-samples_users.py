@@ -510,7 +510,7 @@ def run_bar(bar, sort_by=['apriority','spriority'], dryrun=0, rev=[False, False]
         sample_id = s['sample_id']
         sample_project = s['project_name']
         for acq_num, a in enumerate(s['acquisitions']):
-            if priority not in a.keys():
+            if 'priority' not in a.keys():
                 a['priority']=50
             list_out.append([sample_id,  # 0
                             sample_project,  # 1
