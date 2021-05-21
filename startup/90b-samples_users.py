@@ -525,7 +525,7 @@ def run_bar(bar, sort_by=['apriority','spriority'], dryrun=0, rev=[False, False]
                             s['density'],  # 10
                             s['proposal_id'], # 11
                             a['plan_name'], # 12
-                            s['priority'], # 13
+                            s['sample_priority'], # 13
                             a['priority']])  # 14
     switcher = {'project': 1, 'sample_id': 0, 'config': 2, 'plan': 12, 'plan_args': 9, 'spriority': 13, 'apriority': 14}
     try:
