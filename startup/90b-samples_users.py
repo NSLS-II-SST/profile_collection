@@ -690,7 +690,7 @@ def load_samplesxls(filename):
                              usecols='A:E',
                              verbose=True)
         acqs = acqsdf.to_dict(orient='records')
-        if not isinstance(acgs, list):
+        if not isinstance(acqs, list):
             acqs = [acqs]
         for acq in acqs:
             samp = [d for (index, d) in enumerate(bar) if d['sample_id'].find(acq['sample_id']) >= 0]
