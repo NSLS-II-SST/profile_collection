@@ -679,6 +679,7 @@ def load_samplesxls(filename):
     samplenew = df.to_dict(orient='records')
     if not isinstance(samplenew, list):
         samplenew = [samplenew]
+    print(samplenew[0].keys())
     if 'acquisitions' not in samplenew[0].keys():
         for samp in samplenew:
             samp['acquisitions']=[]
