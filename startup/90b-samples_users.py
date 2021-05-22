@@ -690,7 +690,7 @@ def load_samplesxls(filename):
         if not isinstance(acqs, list):
             acqs = [acqs]
         for acq in acqs:
-            if np.isnan(acq['Priority']):
+            if np.isnan(acq['priority']):
                 break
             samp = next(dict for dict in samplenew if dict['sample_id'] == acq['sample_id'])
             add_acq(samp,acq['plan_name'],acq['arguments'],acq['configuration'],acq['priority'])
