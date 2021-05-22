@@ -602,7 +602,7 @@ def list_samples(bar):
 
 
 
-def save_samplesxls(sample, filename):
+def save_samplesxls(bar, filename):
     switch = {sam_X.name: 'x',
               sam_Y.name: 'y',
               sam_Z.name: 'z',
@@ -611,35 +611,33 @@ def save_samplesxls(sample, filename):
               'y': 'y',
               'z': 'z',
               'th': 'th'}
-    sampledf = pd.DataFrame.from_dict(sample, orient='columns')
+    sampledf = pd.DataFrame.from_dict(bar, orient='columns')
     sampledf.to_excel('temp.xls')
 
     df = pd.read_excel('temp.xls', na_values='')
     df.replace(np.nan, '', regex=True, inplace=True)
     testdict = df.to_dict(orient='records')
-    if isinstance(testdict, list):
-        for i, sam in enumerate(testdict):
-            testdict[i]['location'] = eval(sam['location'])
-            testdict[i]['acquisitions'] = eval(sam['acquisitions'])
-            testdict[i]['bar_loc'] = eval(sam['bar_loc'])
-            testdict[i]['bar_loc']['spot'] = sam['bar_spot']
-    else:
-        testdict['location'] = eval(testdict['location'])
-        testdict['acquisitions'] = eval(testdict['acquisitions'])
-        testdict['bar_loc'] = eval(testdict['bar_loc'])
-        testdict['bar_loc']['spot'] = testdict['bar_spot']
-
-    if isinstance(testdict, list):
-        for i, sam in enumerate(testdict):
-            for j, loc in enumerate(sam['location']):
-                if isinstance(loc['motor'], Device):
-                    testdict[i]['location'][j]['motor'] = switch[loc['motor'].name]
-    else:
-        for j, loc in enumerate(testdict['location']):
+    for i, sam in enumerate(testdict):
+        testdict[i]['location'] = eval(sam['location'])
+        testdict[i]['acquisitions'] = eval(sam['acquisitions'])
+        testdict[i]['bar_loc'] = eval(sam['bar_loc'])
+        testdict[i]['bar_loc']['spot'] = sam['bar_spot']
+    acqlist = []
+    for i, sam in enumerate(testdict):
+        for j, loc in enumerate(sam['location']):
             if isinstance(loc['motor'], Device):
-                testdict['location'][j]['motor'] = switch[loc['motor'].name]
+                testdict[i]['location'][j]['motor'] = switch[loc['motor'].name]
+        for acq in sam['acquisitions']:
+            acqlist.append(acq)
+
     sampledf = pd.DataFrame.from_dict(testdict, orient='columns')
-    sampledf.to_excel(filename,index=False)
+    sampledf = sampledf.loc[:, df.columns != 'acquisitions']
+    acqdf = pd.DataFrame.from_dict(acqlist, orient='columns')
+    writer = pd.ExcelWriter(filename)
+    sampledf.to_excel(writer,index=False,sheet_name='Samples')
+    acqdf.to_excel(writer,index=False,sheet_name='Acquisitions')
+    writer.close()
+    return acqlist
 
 
 def sanatize_angle(samp):
@@ -672,13 +670,12 @@ def load_samplesxls(filename):
                        engine='openpyxl',
                        keep_default_na=True,
                        converters={'sample_date': str},
-                       sheet_name='Sheet1',
+                       sheet_name='Samples',
                        verbose=True)
     df.replace(np.nan, '', regex=True, inplace=True)
     samplenew = df.to_dict(orient='records')
     if not isinstance(samplenew, list):
         samplenew = [samplenew]
-    print(samplenew[0].keys())
     if 'acquisitions' not in samplenew[0].keys():
         for samp in samplenew:
             samp['acquisitions']=[]
@@ -696,7 +693,7 @@ def load_samplesxls(filename):
             if np.isnan(acq['Priority']):
                 break
             samp = next(dict for dict in samplenew if dict['sample_id'] == acq['sample_id'])
-            add_acq(samp,acq['Plan Name'],acq['Arguments'],acq['Configuration'],acq['Priority'])
+            add_acq(samp,acq['plan_name'],acq['arguments'],acq['configuration'],acq['priority'])
     else:
         for i, sam in enumerate(samplenew):
             samplenew[i]['acquisitions'] = eval(sam['acquisitions'])
