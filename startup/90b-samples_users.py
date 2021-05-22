@@ -639,7 +639,6 @@ def save_samplesxls(sample, filename):
             if isinstance(loc['motor'], Device):
                 testdict['location'][j]['motor'] = switch[loc['motor'].name]
     sampledf = pd.DataFrame.from_dict(testdict, orient='columns')
-    sampledf = sampledf.loc[:, df.columns != 'acquisitions']
     sampledf.to_excel(filename,index=False)
 
 
