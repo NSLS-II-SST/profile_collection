@@ -612,7 +612,7 @@ def save_samplesxls(bar, filename):
               'z': 'z',
               'th': 'th'}
     sampledf = pd.DataFrame.from_dict(bar, orient='columns')
-    sampledf.to_excel('temp.xls')
+    sampledf.to_excel('temp.xls',index=False)
 
     df = pd.read_excel('temp.xls', na_values='')
     df.replace(np.nan, '', regex=True, inplace=True)
@@ -628,6 +628,7 @@ def save_samplesxls(bar, filename):
             if isinstance(loc['motor'], Device):
                 testdict[i]['location'][j]['motor'] = switch[loc['motor'].name]
         for acq in sam['acquisitions']:
+            acq.update({'sample_id':sam['sample_id']})
             acqlist.append(acq)
 
     sampledf = pd.DataFrame.from_dict(testdict, orient='columns')
