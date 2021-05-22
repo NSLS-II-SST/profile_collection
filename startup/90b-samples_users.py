@@ -637,7 +637,6 @@ def save_samplesxls(bar, filename):
     sampledf.to_excel(writer,index=False,sheet_name='Samples')
     acqdf.to_excel(writer,index=False,sheet_name='Acquisitions')
     writer.close()
-    return acqlist
 
 
 def sanatize_angle(samp):
