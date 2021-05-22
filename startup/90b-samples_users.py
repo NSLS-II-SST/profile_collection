@@ -145,10 +145,11 @@ def newuser():
     return user_dict()
 
 
-def add_acq(sample_dict, plan_name='full_carbon_scan', arguments='', config='WAXS'):
+def add_acq(sample_dict, plan_name='full_carbon_scan', arguments='', config='WAXS',priority=50):
     sample_dict['acquisitions'].append({'plan_name': plan_name,
                                         'arguments': arguments,
-                                        'configuration': config})
+                                        'configuration': config,
+                                        'priority':priority})
     return sample_dict
 
 
@@ -600,28 +601,6 @@ def list_samples(bar):
     boxed_text('Samples on bar', text, 'lightblue', shrink=True)
 
 
-def save_samples(sample, filename):
-    switch = {sam_X.name: 'x',
-              sam_Y.name: 'y',
-              sam_Z.name: 'z',
-              sam_Th.name: 'th',
-              'x': 'x',
-              'y': 'y',
-              'z': 'z',
-              'th': 'th'}
-    samplenew = deepcopy(sample)
-    if isinstance(samplenew, list):
-        for i, sam in enumerate(samplenew):
-            for j, loc in enumerate(sam['location']):
-                if isinstance(switch[loc['motor'], Device]):
-                    samplenew[i]['location'][j]['motor'] = switch[loc['motor'].name]
-    else:
-        for j, loc in enumerate(samplenew['location']):
-            if isinstance(switch[loc['motor'], Device]):
-                samplenew['location'][j]['motor'] = switch[loc['motor'].name]
-    with open(filename, 'w') as f:
-        json.dump(samplenew, f, indent=2)
-
 
 def save_samplesxls(sample, filename):
     switch = {sam_X.name: 'x',
@@ -660,14 +639,8 @@ def save_samplesxls(sample, filename):
             if isinstance(loc['motor'], Device):
                 testdict['location'][j]['motor'] = switch[loc['motor'].name]
     sampledf = pd.DataFrame.from_dict(testdict, orient='columns')
+    sampledf = sampledf.loc[:, df.columns != 'acquisitions']
     sampledf.to_excel(filename,index=False)
-
-
-def load_samples(filename):
-    with open(filename, 'r') as f:
-        samplenew = json.loads(f.read())
-    return samplenew
-
 
 
 def sanatize_angle(samp):
@@ -704,24 +677,33 @@ def load_samplesxls(filename):
                        verbose=True)
     df.replace(np.nan, '', regex=True, inplace=True)
     samplenew = df.to_dict(orient='records')
-    if isinstance(samplenew, list):
-        for i, sam in enumerate(samplenew):
-            samplenew[i]['location'] = eval(sam['location'])
-            samplenew[i]['acquisitions'] = eval(sam['acquisitions'])
-            samplenew[i]['bar_loc'] = eval(sam['bar_loc'])
-            # interpret/translate angle to the actual incidence angle needed
-            # sanatize_angle(samplenew[i])
-            samplenew[i]['bar_loc']['spot'] = sam['bar_spot']
-            for key in [key for key, value in sam.items() if 'named' in key.lower()]:
-                del samplenew[i][key]
+    if not isinstance(samplenew, list):
+        samplenew = [samplenew]
+    if 'scquisitions' not in samplenew[0].keys():
+        for samp in samplenew:
+            samp['acquisitions']=[]
+        acqsdf = pd.read_excel(filename,
+                             na_values='',
+                             engine='openpyxl',
+                             keep_default_na=True,
+                             sheet_name='Acquisitions',
+                             usecols='A:E',
+                             verbose=True)
+        acqs = acqsdf.to_dict(orient='records')
+        if not isinstance(acgs, list):
+            acqs = [acqs]
+        for acq in acqs:
+            samp = [d for (index, d) in enumerate(bar) if d['sample_id'].find(acq['sample_id']) >= 0]
+            add_acq(samp,acq['plan_name'],acq['Arguments'],acq['Configuration'],acq['Priority'])
     else:
-        samplenew['location'] = eval(samplenew['location'])
-        samplenew['acquisitions'] = eval(samplenew['acquisitions'])
-        samplenew['bar_loc'] = eval(samplenew['bar_loc'])
-        # sanatize_angle(samplenew)
-        samplenew['bar_loc']['spot'] = samplenew['bar_spot']
-        for key in [key for key, value in samplenew.items() if 'named' in key.lower()]:
-            del samplenew[key]
+        for i, sam in enumerate(samplenew):
+            samplenew[i]['acquisitions'] = eval(sam['acquisitions'])
+    for i, sam in enumerate(samplenew):
+        samplenew[i]['location'] = eval(sam['location'])
+        samplenew[i]['bar_loc'] = eval(sam['bar_loc'])
+        samplenew[i]['bar_loc']['spot'] = sam['bar_spot']
+        for key in [key for key, value in sam.items() if 'named' in key.lower()]:
+            del samplenew[i][key]
     return samplenew
 
 
