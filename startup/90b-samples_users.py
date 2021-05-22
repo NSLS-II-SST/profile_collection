@@ -693,7 +693,7 @@ def load_samplesxls(filename):
         if not isinstance(acqs, list):
             acqs = [acqs]
         for acq in acqs:
-            samp = [d for (index, d) in enumerate(samplenew) if d['sample_id'].find(acq['sample_id']) >= 0]
+            samp = [dict for dict in samplenew if dict['sample_id'] == acq['sample_id']]
             add_acq(samp,acq['Plan Name'],acq['Arguments'],acq['Configuration'],acq['Priority'])
     else:
         for i, sam in enumerate(samplenew):
