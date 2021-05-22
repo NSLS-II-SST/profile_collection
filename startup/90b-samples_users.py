@@ -694,7 +694,7 @@ def load_samplesxls(filename):
             acqs = [acqs]
         for acq in acqs:
             samp = [d for (index, d) in enumerate(samplenew) if d['sample_id'].find(acq['sample_id']) >= 0]
-            add_acq(samp,acq['plan_name'],acq['Arguments'],acq['Configuration'],acq['Priority'])
+            add_acq(samp,acq['Plan Name'],acq['Arguments'],acq['Configuration'],acq['Priority'])
     else:
         for i, sam in enumerate(samplenew):
             samplenew[i]['acquisitions'] = eval(sam['acquisitions'])
