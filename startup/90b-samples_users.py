@@ -573,10 +573,11 @@ def run_bar(bar, sort_by=['apriority','spriority'], dryrun=0, rev=[False, False]
         text = ''
         total_time = 0
         for i, step in enumerate(list_out):
-            text += 'move to {} from {}, load configuration {}, scan {}, starts @ {} and takes {}\n'.format(
+            text += 'move to {} from {}, load configuration {}, scan {} priority {}, starts @ {} and takes {}\n'.format(
                 step[5]['sample_name'],
                 step[1],
                 step[2],
+                step[3],
                 step[12],
                 time_sec(total_time),
                 time_sec(step[4]))
