@@ -494,17 +494,30 @@ def avg_scan_time(plan_name, nscans=50, new_scan_duration=600):
 
 
 def run_bar(bar, sort_by=['apriority','spriority'], dryrun=0, rev=[False, False], delete_as_complete=True,
-            retract_when_done=False):
+            retract_when_done=False, save_as_complete=''):
     '''
     run all sample dictionaries stored in the list bar
-    :param bar: a list of sample dictionaries
-    :param sort_by: list of strings determining the sorting of scans
-        strings include project, configuration, sample_id, plan, plan_args, spriority, apriority
-            within which all of one acquisition, etc
-    :return: none
-
+    @param bar: a list of sample dictionaries
+    @param sort_by: list of strings determining the sorting of scans
+                    strings include project, configuration, sample_id, plan, plan_args, spriority, apriority
+                    within which all of one acquisition, etc
+    @param dryrun: Print out the list of plans instead of actually doing anything - safe to do during setup
+    @param rev: list the same length of sort_by, or booleans, wetierh to reverse that sort
+    @param delete_as_complete: remove the acquisitions from the bar as we go, so we can automatically start back up
+    @param retract_when_done: go to throughstation mode at the end of all runs.
+    @param save_as_complete: if a valid path, will save the running bar to this position in case of failure
+    @return:
     '''
+
     config_change_time = 120  # time to change between configurations, in seconds.
+    save_to_file=False
+    try:
+        open(save_as_complete, 'w')
+    except OSError:
+        save_to_file = False
+        pass
+    else:
+        save_to_file = True
     list_out = []
     for samp_num, s in enumerate(bar):
         sample = s
@@ -513,29 +526,37 @@ def run_bar(bar, sort_by=['apriority','spriority'], dryrun=0, rev=[False, False]
         for acq_num, a in enumerate(s['acquisitions']):
             if 'priority' not in a.keys():
                 a['priority']=50
-            list_out.append([sample_id,  # 0
-                            sample_project,  # 1
-                            a['configuration'],  # 2
-                            a['plan_name'],  # 3
-                            avg_scan_time(a['plan_name'], 50),  # 4
-                            sample,  # 5
-                            a,  # 6
-                            samp_num,  # 7
-                            acq_num,  # 8
-                            a['arguments'],  # 9
-                            s['density'],  # 10
-                            s['proposal_id'], # 11
-                            a['plan_name'], # 12
-                            s['sample_priority'], # 13
-                            a['priority']])  # 14
-    switcher = {'project': 1, 'sample_id': 0, 'config': 2, 'plan': 12, 'plan_args': 9, 'spriority': 13, 'apriority': 14}
+            list_out.append([sample_id,                         # 0  X
+                            sample_project,                     # 1  X
+                            a['configuration'],                 # 2  X
+                            a['plan_name'],                     # 3
+                            avg_scan_time(a['plan_name'], 50),  # 4 calculated plan time
+                            sample,                             # 5 full sample dict
+                            a,                                  # 6 full acquisition dict
+                            samp_num,                           # 7 sample index
+                            acq_num,                            # 8 acq index
+                            a['arguments'],                     # 9  X
+                            s['density'],                       # 10
+                            s['proposal_id'],                   # 11 X
+                            s['sample_priority'],               # 12 X
+                            a['priority']])                     # 13 X
+    switcher = {
+                'sample_id':    0,
+                'project':      1,
+                'config':       2,
+                'plan':         3,
+                'plan_args':    9,
+                'proposal':     11,
+                'spriority':    12,
+                'apriority':    13}
+    # add anything to the above list, and make a key in the above dictionary,
+    # using that element to sort by something else
     try:
         sort_by.reverse()
         rev.reverse()
     except AttributeError:
         if isinstance(sort_by, str):
             sort_by = [sort_by]
-        elif isinstance(rev,str):
             rev = [rev]
         else:
             print('sort_by needs to be a list of strings\n'
@@ -545,60 +566,71 @@ def run_bar(bar, sort_by=['apriority','spriority'], dryrun=0, rev=[False, False]
         for k, r in zip(sort_by, rev):
             list_out = sorted(list_out, key=itemgetter(switcher[k]), reverse=r)
     except KeyError:
-        print('sort_by needs to be a list of strings\n p - project\n c - configuration\n s - sample \n a - scantype')
+        print('sort_by needs to be a list of strings\n'
+              'such as project, configuration, sample_id, plan, plan_args, spriority, apriority')
         return
     if dryrun:
         text = ''
         total_time = 0
         for i, step in enumerate(list_out):
-            text += 'move to {} from {}, load configuration {}, scan {}, starts @ {} min and takes {} min\n'.format(
-                step[5]['sample_name'], step[1], step[2], step[12], floor(total_time / 60), floor(step[4] / 60))
+            text += 'move to {} from {}, load configuration {}, scan {}, starts @ {} and takes {}\n'.format(
+                step[5]['sample_name'],
+                step[1],
+                step[2],
+                step[12],
+                str(datetime.timedelta(seconds=total_time)),
+                str(datetime.timedelta(seconds=step[4])))
             total_time += step[4]
             if step[2] != list_out[i - 1][2]:
                 total_time += config_change_time
-        text += f'\n\nTotal estimated time {floor(total_time / 3600)} h, {floor((total_time % 3600) / 60)} m... have fun!'
+        text += f'\n\nTotal estimated time including config changes {str(datetime.timedelta(seconds=total_time))}'
         boxed_text('Dry Run', text, 'lightblue', width=120, shrink=True)
     else:
+        run_start_time = datetime.datetime.now()
         for i, step in enumerate(list_out):
             time_remaining = sum([avg_scan_time(row[3]) for row in list_out[i:]])
             this_step_time = avg_scan_time(step[3])
+            start_time = datetime.datetime.now()
+            total_time = datetime.datetime.now() - run_start_time
             boxed_text('Scan Status',
-                       '\n\nStarting scan {} out of {}'.format(colored(f'#{i + 1}', 'blue'), len(list_out)) +
-                       '{} of {} in project {} Proposal # {}\n which should take {} minutes\n'.format(
-                           colored(step[3], 'blue'),
-                           colored(step[0], 'blue'),
-                           colored(step[1], 'blue'),
-                           colored(step[11], 'blue'),
-                           floor(this_step_time / 60)) +
-                       f'time remaining approx {floor(time_remaining / 3600)} h '
-                       f'{floor((time_remaining % 3600) / 60)} m \n\n',
+                       '\nTime so far: {}'.format(str(total_time)) +
+                       '\nStarting scan {} out of {}'.format(colored(f'#{i + 1}', 'blue'), len(list_out)) +
+                       '{} of {} in project {} Proposal # {}\n which should take {}\n'.format(
+                           colored(step[3], 'blue'),# plan
+                           colored(step[0], 'blue'),# sample_id
+                           colored(step[1], 'blue'),# project
+                           colored(step[11], 'blue'),# proposal
+                           str(datetime.timedelta(seconds=this_step_time))) +
+                       f'time remaining approx {str(datetime.timedelta(seconds=time_remaining))} \n\n',
                        'red', width=120, shrink=True)
-            rsoxs_bot.send_message('Starting scan {} out of {}\n'.format(i + 1, len(list_out)) +
-                                   '{} of {} in project {} Proposal # {}\n which should take {} minutes\n'.format(
-                                       step[3],step[0], step[1], step[11], floor(this_step_time / 60)) +
-                                   f'time remaining approx {floor(time_remaining / 3600)} h '
-                                   f'{floor((time_remaining % 3600) / 60)} m')
+            rsoxs_bot.send_message(f'Starting scan {i + 1} out of {len(list_out)}\n' +
+                                   f'{step[3]} of {step[0]} in project {step[1]} Proposal # {step[11]}'
+                                   f'\nwhich should take {str(datetime.timedelta(seconds=this_step_time))}' +
+                                   f'\nTime so far: {str(total_time)}'
+                                   f'time remaining approx {str(datetime.timedelta(seconds=time_remaining))}')
             yield from load_configuration(step[2])  # move to configuration
             yield from load_sample(step[5])  # move to sample / load sample metadata
-            yield from do_acquisitions([step[6]])  # run scan
+            yield from do_acquisitions([step[6]])  # run acquisition (will load configuration again)
             if delete_as_complete:
                 bar[step[7]]['acquisitions'].remove(step[6])
-            rsoxs_bot.send_message('Scan complete.')
+            if save_to_file:
+                save_samplesxls(bar,save_as_complete)
+            elapsed_time = datetime.datetime.now() - start_time
+            rsoxs_bot.send_message(f'Acquisition complete. Actual time : {str(elapsed_time)},')
         rsoxs_bot.send_message('All scans complete!')
         if retract_when_done:
             yield from all_out()
 
 
 def list_samples(bar):
-    samples = [s['sample_name'] for s in bar]
-    text = '  i        Sample Name'
-    for index, sample in enumerate(samples):
-        text += '\n  {}        {}'.format(index, sample)
+    text = '  i   priority  Sample Name'
+    for index, sample in enumerate(bar):
+        text += '\n {}  {} {}'.format(index, sample['sample_priority'], sample['sample_name'])
         acqs = bar[index]['acquisitions']
         for acq in acqs:
-            text += '\n            {}({}) in {} configuration'.format(acq['plan_name'], acq['arguments'],
-                                                                      acq['configuration'])
-    boxed_text('Samples on bar', text, 'lightblue', shrink=True)
+            text += '\n   {}({}) in {} config, priority {}'.format(acq['plan_name'], acq['arguments'],
+                                                                   acq['configuration'],acq['priority'])
+    boxed_text('Samples on bar', text, 'lightblue', shrink=False)
 
 
 
