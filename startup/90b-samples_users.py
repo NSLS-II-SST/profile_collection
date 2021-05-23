@@ -579,7 +579,7 @@ def run_bar(bar, sort_by=['apriority','spriority'], dryrun=0, rev=[False, False]
                 step[2],
                 step[12],
                 time_sec(total_time),
-                stime_sec(step[4]))
+                time_sec(step[4]))
             total_time += step[4]
             if step[2] != list_out[i - 1][2]:
                 total_time += config_change_time
@@ -606,7 +606,7 @@ def run_bar(bar, sort_by=['apriority','spriority'], dryrun=0, rev=[False, False]
                        'red', width=120, shrink=True)
             rsoxs_bot.send_message(f'Starting scan {i + 1} out of {len(list_out)}\n' +
                                    f'{step[3]} of {step[0]} in project {step[1]} Proposal # {step[11]}'
-                                   f'\nwhich should take {str(datetime.timedelta(seconds=this_step_time))}' +
+                                   f'\nwhich should take {time_sec(this_step_time)}' +
                                    f'\nTime so far: {str(total_time)}'
                                    f'time remaining approx {time_sec(time_remaining)}')
             yield from load_configuration(step[2])  # move to configuration
