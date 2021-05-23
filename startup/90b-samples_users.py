@@ -578,12 +578,12 @@ def run_bar(bar, sort_by=['apriority','spriority'], dryrun=0, rev=[False, False]
                 step[1],
                 step[2],
                 step[12],
-                str(datetime.timedelta(seconds=total_time)),
-                str(datetime.timedelta(seconds=step[4])))
+                time_sec(total_time),
+                stime_sec(step[4]))
             total_time += step[4]
             if step[2] != list_out[i - 1][2]:
                 total_time += config_change_time
-        text += f'\n\nTotal estimated time including config changes {str(datetime.timedelta(seconds=total_time))}'
+        text += f'\n\nTotal estimated time including config changes {time_sec(total_time)}'
         boxed_text('Dry Run', text, 'lightblue', width=120, shrink=True)
     else:
         run_start_time = datetime.datetime.now()
@@ -592,6 +592,7 @@ def run_bar(bar, sort_by=['apriority','spriority'], dryrun=0, rev=[False, False]
             this_step_time = avg_scan_time(step[3])
             start_time = datetime.datetime.now()
             total_time = datetime.datetime.now() - run_start_time
+            total_time.replace(microsecond=0)
             boxed_text('Scan Status',
                        '\nTime so far: {}'.format(str(total_time)) +
                        '\nStarting scan {} out of {}'.format(colored(f'#{i + 1}', 'blue'), len(list_out)) +
@@ -600,14 +601,14 @@ def run_bar(bar, sort_by=['apriority','spriority'], dryrun=0, rev=[False, False]
                            colored(step[0], 'blue'),# sample_id
                            colored(step[1], 'blue'),# project
                            colored(step[11], 'blue'),# proposal
-                           str(datetime.timedelta(seconds=this_step_time))) +
-                       f'time remaining approx {str(datetime.timedelta(seconds=time_remaining))} \n\n',
+                           time_sec(this_step_time)) +
+                       f'time remaining approx {time_sec(time_remaining)} \n\n',
                        'red', width=120, shrink=True)
             rsoxs_bot.send_message(f'Starting scan {i + 1} out of {len(list_out)}\n' +
                                    f'{step[3]} of {step[0]} in project {step[1]} Proposal # {step[11]}'
                                    f'\nwhich should take {str(datetime.timedelta(seconds=this_step_time))}' +
                                    f'\nTime so far: {str(total_time)}'
-                                   f'time remaining approx {str(datetime.timedelta(seconds=time_remaining))}')
+                                   f'time remaining approx {time_sec(time_remaining)}')
             yield from load_configuration(step[2])  # move to configuration
             yield from load_sample(step[5])  # move to sample / load sample metadata
             yield from do_acquisitions([step[6]])  # run acquisition (will load configuration again)
@@ -620,6 +621,11 @@ def run_bar(bar, sort_by=['apriority','spriority'], dryrun=0, rev=[False, False]
         rsoxs_bot.send_message('All scans complete!')
         if retract_when_done:
             yield from all_out()
+
+
+def time_sec(seconds):
+    dt = datetime.timedelta(seconds=seconds)
+    return str(dt).split(".")[0]
 
 
 def list_samples(bar):
