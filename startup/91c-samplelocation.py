@@ -557,7 +557,7 @@ def find_fiducials():
     angles = [-90+thoffset,0+thoffset,90+thoffset,180+thoffset]
     xrange = 3.5
     xnum = 36
-    startxss = [[7,3,-3,1.1],[3.84,2.94,.55,1.1]]
+    startxss = [[7.5,3.5,-1.8,1.1],[3.84,2.94,.55,1.1]]
     yield from bps.mv(Shutter_enable, 0)
     yield from bps.mv(Shutter_control, 0)
     yield from load_configuration('SAXSNEXAFS')
