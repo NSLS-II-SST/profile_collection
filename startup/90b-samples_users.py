@@ -494,7 +494,7 @@ def avg_scan_time(plan_name, nscans=50, new_scan_duration=600):
         return new_scan_duration
 
 
-def run_bar(bar, sort_by=['apriority','spriority'], dryrun=0, rev=[False, False], delete_as_complete=True,
+def run_bar(bar, sort_by=['sample_num'], dryrun=0, rev=[False], delete_as_complete=True,
             retract_when_done=False, save_as_complete=''):
     '''
     run all sample dictionaries stored in the list bar
@@ -549,7 +549,8 @@ def run_bar(bar, sort_by=['apriority','spriority'], dryrun=0, rev=[False, False]
                 'plan_args':    9,
                 'proposal':     11,
                 'spriority':    12,
-                'apriority':    13}
+                'apriority':    13,
+                'sample_num':   7,}
     # add anything to the above list, and make a key in the above dictionary,
     # using that element to sort by something else
     try:
