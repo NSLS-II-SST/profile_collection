@@ -42,7 +42,7 @@ def full_oxygen_scan_nd(multiple=1,sigs=[],
                             diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
 
 def short_oxygen_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=8.00,grating='1200'):
+                        dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=7.98,grating='1200'):
     '''
     Short Oxygen Scan runs an RSoXS sample set through the O edge, with particular emphasis in he pre edge region
 
@@ -78,7 +78,7 @@ def short_oxygen_scan_nd(multiple=1,sigs=[],
 
 
 def short_zincl_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=8.00,grating='1200'):
+                        dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=7.98,grating='1200'):
     '''
     Short zinc Scan runs an RSoXS sample set through the O edge, with particular emphasis in he pre edge region
 
@@ -462,7 +462,7 @@ def custom_scan(sigs=[],energies=[],times=[],
 
 
 def short_sulfurl_scan_nd(multiple=1,sigs=[],
-                         dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=7.98,grating='250'):
+                         dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=8.02,grating='250'):
     '''
     Full Sulfur L Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 61 exposures
