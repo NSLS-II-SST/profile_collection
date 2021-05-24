@@ -77,6 +77,39 @@ def short_oxygen_scan_nd(multiple=1,sigs=[],
                             diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
 
 
+def short_zincl_scan_nd(multiple=1,sigs=[],
+                        dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=8.00,grating='1200'):
+    '''
+    Short zinc Scan runs an RSoXS sample set through the O edge, with particular emphasis in he pre edge region
+
+    :param multiple: adjustment for exposure times
+    :param mesh: which Izero channel to use
+    :param det: which detector to use
+    :param energy: what energy motor to scan
+    :return: perform scan
+
+    normal scan takes ~ 16 minutes to complete
+    '''
+    sample()
+    enscan_type = 'short_zincl_scan_nd'
+    #beamline_status()
+    if len(read_input("Starting a Zinc energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
+        return
+    # create a list of energies
+    energies = np.arange(1015,1020,1)
+    energies = np.append(energies,np.arange(1020,1027,0.5))
+    energies = np.append(energies,np.arange(1027,1035,1))
+    times = energies.copy()
+
+
+    times[:] = 2
+    times *= multiple
+
+    # use these energies and exposure times to scan energy and record detectors and signals
+    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
+
+
 
 def very_short_oxygen_scan_nd(multiple=1,sigs=[],
                         dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=7.97,grating='1200'):
