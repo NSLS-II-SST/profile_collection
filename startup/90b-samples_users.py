@@ -209,7 +209,8 @@ def move_to_location(locs=get_sample_location()):
               Det_W: Det_W,
               Det_S: Det_S,
               BeamStopS: BeamStopS,
-              BeamStopW: BeamStopW}
+              BeamStopW: BeamStopW,
+              Exit_Slit: Exit_Slit}
     for order in orderlist:
         outputlist = [[switch[items['motor']], float(items['position'])] for items in locs if items['order'] == order]
         flat_list = [item for sublist in outputlist for item in sublist]
