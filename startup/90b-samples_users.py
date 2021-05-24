@@ -594,7 +594,6 @@ def run_bar(bar, sort_by=['apriority','spriority'], dryrun=0, rev=[False, False]
             this_step_time = avg_scan_time(step[3])
             start_time = datetime.datetime.now()
             total_time = datetime.datetime.now() - run_start_time
-            total_time.replace(microsecond=0)
             boxed_text('Scan Status',
                        '\nTime so far: {}'.format(str(total_time)) +
                        '\nStarting scan {} out of {}'.format(colored(f'#{i + 1}', 'blue'), len(list_out)) +
