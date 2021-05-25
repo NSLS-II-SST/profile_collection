@@ -1,5 +1,6 @@
 run_report(__file__)
 from ophyd import (EpicsMotor, Device, Component as Cpt, EpicsSignal)
+from ophyd import FormattedComponent as FmtCpt
 
 mir2_type = EpicsSignal('XF:07ID1-OP{Mono:PGM1-Ax:MirX}Mtr_TYPE_MON',name='SST 2 Mirror 2 Stripe')
 
