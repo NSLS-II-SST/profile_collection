@@ -575,7 +575,7 @@ def run_bar(bar, sort_by=['sample_num'], dryrun=0, rev=[False], delete_as_comple
         text = ''
         total_time = 0
         for i, step in enumerate(list_out):
-            text += 'move to {} from {}, load configuration {}, scan {} priority {}, starts @ {} and takes {}\n'.format(
+            text += 'load {} from {}, config {}, run {} (p {}), starts @ {} takes {}\n'.format(
                 step[5]['sample_name'],
                 step[1],
                 step[2],

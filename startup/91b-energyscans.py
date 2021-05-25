@@ -462,7 +462,7 @@ def custom_scan(sigs=[],energies=[],times=[],
 
 
 def short_sulfurl_scan_nd(multiple=1,sigs=[],
-                         dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=8.02,grating='250'):
+                         dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=8.02,grating='1200'):
     '''
     Full Sulfur L Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     this results in 61 exposures
