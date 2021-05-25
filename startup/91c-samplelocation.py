@@ -114,22 +114,30 @@ def spiralsearchwaxs_all(barin=[], diameter=.5, stepsize=.2):
         yield from spiralsearchwaxs(diameter, stepsize)
 
 
-def map_bar_from_spirals(bar,time_limit):
+def map_bar_from_spirals(bar,num_previous_scans=150):
     """
     Interactively ask users to pick best location from spiral scans.
     will go through all samples on bar and try to find a matching spiral scan taken within the last
     hours defined by time_limit.
     Asking for the number of the best location
     @param bar: list of sample dictionaries
-    @param time_limit: time in hours to limit database search
+    @param num_previous_scans: number of previous scans to search backward
     @return: alters the locations of samples in bar if requested
     """
-
+    samps = []
+    scans = db0(plan_name='spiral_square')
+    for i, sc in enumerate(scans):
+        if ('exit_status' in sc.stop.keys()):
+            if (sc.stop['exit_status'] == 'success'):
+                sampnames.append(sc.start['sample_id'],sc.start['uid'])
+            if i > num_previous_scans:
+                break
     for samp in bar:
-        scan = db[spiralnums[i]]
+        uid = next(uid for uid, samplename in samps if samplename is samp['sample_id'])
+        scan = db[uid]
         data = scan.table()
-        print("Sample: " + bar[pos]['sample_name'])
-        print("Scan id: " + spiralnums[i])
+        print("Sample: " + samp['sample_name'])
+        print("Scan date: " + datetime.datetime.fromtimestamp(scan.start['time']).strftime("%A, %B %d, %Y %I:%M:%S"))
         print("Enter good point number from spiral scan or anything non-numeric to skip:")
         good_point = input()
         if isnumeric(good_point):
@@ -552,16 +560,17 @@ def af_rotation(xfm90,xf0,xf90,xf180):
     zoff = (xfm90 - xf90)/2
     return (x0,zoff, xoff)
 
-def find_fiducials():
+def find_fiducials(f2=[7.5,3.5,-1.8,1.1]):
     thoffset = 1.6
     angles = [-90+thoffset,0+thoffset,90+thoffset,180+thoffset]
     xrange = 3.5
     xnum = 36
-    startxss = [[7.5,3.5,-1.8,1.1],[3.84,2.94,.55,1.1]]
+    startxss = [f2,[3.84,2.94,.55,1.1]]
     yield from bps.mv(Shutter_enable, 0)
     yield from bps.mv(Shutter_control, 0)
     yield from load_configuration('SAXSNEXAFS')
     Beamstop_SAXS.kind = 'hinted'
+    bec.enable_plots()
     startys = [4,-186.25] # af2 first because it is a safer location
     maxlocs=[]
     for startxs,starty in zip(startxss,startys):
@@ -577,6 +586,7 @@ def find_fiducials():
             yield from bps.mv(Shutter_control, 0)
             maxlocs.append(bec.peaks.max["SAXS Beamstop"][0])
     print(maxlocs) # [af2y,af2xm90,af2x0,af2x90,af2x180,af1y,af1xm90,af1x0,af1x90,af1x180]
+    bec.disable_plots()
 
 
 def rotate_now(theta):
