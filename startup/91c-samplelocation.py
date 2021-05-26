@@ -126,10 +126,11 @@ def map_bar_from_spirals(bar,num_previous_scans=150):
     """
     samps = []
     scans = db0(plan_name='spiral_square')
+    sampnames=[]
     for i, sc in enumerate(scans):
         if ('exit_status' in sc.stop.keys()):
             if (sc.stop['exit_status'] == 'success'):
-                sampnames.append(sc.start['sample_id'],sc.start['uid'])
+                sampnames.append(sc.start['uid'],sc.start['sample_id'])
             if i > num_previous_scans:
                 break
     for samp in bar:
