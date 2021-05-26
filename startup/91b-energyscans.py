@@ -826,7 +826,7 @@ def veryshort_fluorine_scan_nd(multiple=1,sigs=[],
 
 
 def full_ca_scan_nd(multiple=1,sigs=[],
-                    dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=7.96):
+                    dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=8.00,grating='1200'):
     '''
     Calcium Scan runs an RSoXS sample set through the Ca edge, with particular emphasis in he pre edge region
 
@@ -847,15 +847,17 @@ def full_ca_scan_nd(multiple=1,sigs=[],
     energies = np.arange(320,340,5)
     energies = np.append(energies,np.arange(340,345,1))
     energies = np.append(energies,np.arange(345,355,.5))
+    energies = np.append(energies,np.arange(355,360,1))
     times = energies.copy()
 
     # Define exposures times for different energy ranges
-    times[energies<400] = 20
+    times[energies<400] = 3
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
     yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
-                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
+                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
+
 
 def short_calcium_scan_nd(multiple=1,sigs=[],
                     dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=8.00,grating='1200'):
