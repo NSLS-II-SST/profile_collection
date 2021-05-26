@@ -33,20 +33,20 @@ class FMBHexapodMirrorAxis(PVPositioner):
 
 class FMBHexapodMirror(Device):
     z = Cpt(FMBHexapodMirrorAxis, '-Ax:Z}')
-    y = Cpt(FMBHexapodMirrorAxis, '-Ax:Y}')
-    x = Cpt(FMBHexapodMirrorAxis, '-Ax:X}')
-    pit = Cpt(FMBHexapodMirrorAxis, '-Ax:P}')
-    yaw = Cpt(FMBHexapodMirrorAxis, '-Ax:Yaw}')
-    rol = Cpt(FMBHexapodMirrorAxis, '-Ax:R}')
+    Y = Cpt(FMBHexapodMirrorAxis, '-Ax:Y}')
+    X = Cpt(FMBHexapodMirrorAxis, '-Ax:X}')
+    Pitch = Cpt(FMBHexapodMirrorAxis, '-Ax:P}')
+    Yaw = Cpt(FMBHexapodMirrorAxis, '-Ax:Yaw}')
+    Roll = Cpt(FMBHexapodMirrorAxis, '-Ax:R}')
 
 
 
-mir4 = HexapodMirror('XF:07ID2-OP{Mir:M4CD-Ax:',name='SST 1 Mirror 4',kind='hinted')
-mir3 = HexapodMirror('XF:07ID1-OP{Mir:M3ABC-Ax:',name='SST 1 Mirror 3',kind='hinted')
-mir1 = HexapodMirror('XF:07IDA-OP{Mir:M1-Ax:',name='SST 1 Mirror 1',kind='hinted')
+mir4OLD = HexapodMirror('XF:07ID2-OP{Mir:M4CD-Ax:',name='SST 1 Mirror 4',kind='hinted')
+mir3OLD = HexapodMirror('XF:07ID1-OP{Mir:M3ABC-Ax:',name='SST 1 Mirror 3',kind='hinted')
+mir1OLD = HexapodMirror('XF:07IDA-OP{Mir:M1-Ax:',name='SST 1 Mirror 1',kind='hinted')
 
-mir4f = FMBHexapodMirror('XF:07ID2-OP{Mir:M4CD',name='SST 1 Mirror 4 fmb',kind='hinted')
-mir3f = FMBHexapodMirror('XF:07ID1-OP{Mir:M3ABC',name='SST 1 Mirror 3 fmb',kind='hinted')
-mir1f = FMBHexapodMirror('XF:07IDA-OP{Mir:M1',name='SST 1 Mirror 1 fmb',kind='hinted')
+mir4 = FMBHexapodMirror('XF:07ID2-OP{Mir:M4CD',name='SST 1 Mirror 4 fmb',kind='hinted')
+mir3 = FMBHexapodMirror('XF:07ID1-OP{Mir:M3ABC',name='SST 1 Mirror 3 fmb',kind='hinted')
+mir1 = FMBHexapodMirror('XF:07IDA-OP{Mir:M1',name='SST 1 Mirror 1 fmb',kind='hinted')
 
 sd.baseline.extend([mir3,mir4,mir2_type])
