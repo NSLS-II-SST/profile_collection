@@ -307,23 +307,10 @@ def buildeputablegaps(start, stop, step, widfract, startingen, name, phase, grat
     count = 0
 
     if grating=='1200':
-        print('Moving grating to 1200 l/mm...')
-        if abs(grating.user_offset.get()-7.2948) > .1:
-            print('current grating offset is too far from known values, please update the procedure, grating will not move')
-        elif abs(mirror2.user_offset.get()-8.1264) > .1:
-            print('current Mirror 2 offset is too far from known values, please update the procedure, grating will not move')
-        else:
-            yield from grating_to_1200()
-        print('done')
+        yield from grating_to_1200()
+
     elif grating=='250':
-        print('Moving grating to 250 l/mm...')
-        if abs(grating.user_offset.get()-7.2788) > .1:
-            print('current grating offset is too far from known values, please update the procedure, grating will not move')
-        elif abs(mirror2.user_offset.get()-8.1388) > .1:
-            print('current Mirror 2 offset is too far from known values, please update the procedure, grating will not move')
-        else:
-            yield from grating_to_250()
-        print('done')
+        yield from grating_to_250()
 
     yield from bps.mv(epu_phase, phase)
 
@@ -336,7 +323,7 @@ def buildeputablegaps(start, stop, step, widfract, startingen, name, phase, grat
         #                   min(99500,max(20000,startinggap-1500*widfract)),
         #                   min(100000,max(21500,startinggap+1500*widfract)),
         #                   51)
-        yield from tune_max([Izero_Mesh,Beamstop_SAXS],"RSoXS Au Mesh Current",mono_en,
+        yield from tune_max([Izero_Mesh,Beamstop_WAXS],"RSoXS Au Mesh Current",mono_en,
                                     min(2100,max(72,startingen-10*widfract)),
                                     min(2200,max(90,startingen+50*widfract)),
                                     1,25,2,True,md={'plan_name':'energy_tune'})
@@ -380,49 +367,46 @@ def do_2020_eputables():
    # yield from bps.mv(epu_mode,2)
 
 
-def do_2020_eputables3():
+def do_2021_eputables3():
     Izero_Mesh.kind = 'hinted'
-    Beamstop_SAXS.kind = 'hinted'
+    Beamstop_WAXS.kind = 'hinted'
     mono_en.readback.kind = 'hinted'
     mono_en.kind = 'hinted'
     mono_en.read_attrs = ['readback']
-
-    yield from bps.mv(BeamStopS, 67)
-    yield from Izero_mesh()
-    yield from Shutter_out()
+    bec.enable_plots()
+    yield from load_configuration('WAXSNEXAFS')
     yield from bps.mv(slits1.hsize,1)
     yield from bps.mv(slits2.hsize,1)
+    yield from bps.mv(epu_mode,3)
 
-    #yield from grating_to_250()
+    yield from grating_to_250()
 
-    #yield from buildeputablegaps(14000, 30000, 500, 2, 150, '_Aug_H1phase29500_250', 29500)
-    #yield from buildeputablegaps(14000, 30000, 500, 2, 150, '_Aug_H1phase26000_250', 26000)
-    #yield from buildeputablegaps(14000, 30000, 500, 2, 150, '_Aug_H1phase25000_250', 23000)
-    #yield from buildeputablegaps(14000, 30000, 500, 2, 150, '_Aug_H1phase21000_250', 21000)
-    #yield from buildeputablegaps(14000, 30000, 500, 2, 150, '_Aug_H1phase18000_250', 18000)
-    #yield from buildeputablegaps(14000, 30000, 500, 2, 150, '_Aug_H1phase15000_250', 15000)
-    #yield from buildeputablegaps(14000, 30000, 500, 2, 150, '_Aug_H1phase12000_250', 12000)
-    #yield from buildeputablegaps(14000, 35000, 500, 1, 80, '_Aug_H1phase8000_250', 8000)
-    #yield from buildeputablegaps(14000, 35000, 500, 1, 80, '_Aug_H1phase4000_250', 4000)
-
-
-    #yield from grating_to_1200()
+    yield from buildeputablegaps(14000, 30000, 500, 2, 150, '_May_H1m3phase29500_250', 29500,250)
+    yield from buildeputablegaps(14000, 30000, 500, 2, 150, '_May_H1m3phase26000_250', 26000,250)
+    yield from buildeputablegaps(14000, 30000, 500, 2, 150, '_May_H1m3phase25000_250', 23000,250)
+    yield from buildeputablegaps(14000, 30000, 500, 2, 150, '_May_H1m3phase21000_250', 21000,250)
+    yield from buildeputablegaps(14000, 30000, 500, 2, 150, '_May_H1m3phase18000_250', 18000,250)
+    yield from buildeputablegaps(14000, 30000, 500, 2, 150, '_May_H1m3phase15000_250', 15000,250)
+    yield from buildeputablegaps(14000, 30000, 500, 2, 150, '_May_H1m3phase12000_250', 12000,250)
+    yield from buildeputablegaps(14000, 35000, 500, 1, 80, '_May_H1m3phase8000_250', 8000,250)
+    yield from buildeputablegaps(14000, 35000, 500, 1, 80, '_May_H1m3phase4000_250', 4000,250)
 
 
+    yield from grating_to_1200()
 
-    #yield from buildeputablegaps(19000, 50000, 1000, 1, 132, '_Aug_H1phase0',0)
-    #yield from buildeputablegaps(14000, 50000, 1000, 2, 140, '_Aug_H1phase29500',29500)
-    #yield from buildeputablegaps(14000, 50000, 1000, 2, 160, '_Aug_H1phase26000',26000)
-    #yield from buildeputablegaps(14000, 50000, 1000, 2, 160, '_Aug_H1phase23000',23000)
-    #yield from buildeputablegaps(14000, 50000, 1000, 2, 160, '_Aug_H1phase21000',21000)
-    #yield from buildeputablegaps(14000, 50000, 1000, 2, 150, '_Aug_H1phase18000',18000)
-    yield from buildeputablegaps(14000, 50000, 1000, 2, 140, '_Aug_H1phase15000',15000)
-    yield from buildeputablegaps(14000, 50000, 1000, 2, 130, '_Aug_H1phase12000',12000)
-    yield from buildeputablegaps(16000, 50000, 1000, 1.3, 100, '_Aug_H1phase8000',8000)
-    yield from buildeputablegaps(18000, 50000, 1000, 1.3, 100, '_Aug_H1phase4000',4000)
 
-    yield from bps.mv(epu_mode,0)
-    yield from buildeputablegaps(15000, 50000, 500, 2, 190, '_Aug_C1_ph15000', 15000)
+
+    yield from buildeputablegaps(19000, 50000, 1000, 1, 132, '_May_H1m3phase0',0,1200)
+    yield from buildeputablegaps(14000, 50000, 1000, 2, 140, '_May_H1m3phase29500',29500,1200)
+    yield from buildeputablegaps(14000, 50000, 1000, 2, 160, '_May_H1m3phase26000',26000,1200)
+    yield from buildeputablegaps(14000, 50000, 1000, 2, 160, '_May_H1m3phase23000',23000,1200)
+    yield from buildeputablegaps(14000, 50000, 1000, 2, 160, '_May_H1m3phase21000',21000,1200)
+    yield from buildeputablegaps(14000, 50000, 1000, 2, 150, '_May_H1m3phase18000',18000,1200)
+    yield from buildeputablegaps(14000, 50000, 1000, 2, 140, '_May_H1m3phase15000',15000,1200)
+    yield from buildeputablegaps(14000, 50000, 1000, 2, 130, '_May_H1m3phase12000',12000,1200)
+    yield from buildeputablegaps(16000, 50000, 1000, 1.3, 100, '_May_H1m3phase8000',8000,1200)
+    yield from buildeputablegaps(18000, 50000, 1000, 1.3, 100, '_May_H1m3phase4000',4000,1200)
+
 
 
 
