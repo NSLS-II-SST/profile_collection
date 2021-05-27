@@ -228,7 +228,7 @@ def buildeputable(start, stop, step, widfract, startinggap=14000, phase=0, mode=
                                     min(100000,max(15000,startinggap+1000*widfract)),
                                     10*widfract,7,3,True)
         yield from bps.mv(Shutter_control, 0)
-        yield from bps.sleep(2)
+        yield from bps.sleep(3)
         print(f'bec peaks max : {bec.peaks.max}')
         startinggap = bec.peaks.max['RSoXS Au Mesh Current'][0]
         height = bec.peaks.max['RSoXS Au Mesh Current'][1]
@@ -254,7 +254,6 @@ def buildeputable(start, stop, step, widfract, startinggap=14000, phase=0, mode=
 
 def do_some_eputables_2021_en():
 
-    slits_width = slits1.hsize.get()
     yield from bps.mv(slits1.hsize,5)
 
     bec.enable_plots()
@@ -265,7 +264,7 @@ def do_some_eputables_2021_en():
     yield from bps.mv(epu_mode,3)
 
     #yield from buildeputable(200, 700, 5, 2, 14000, 15000,'C','250','C_250')
-    yield from buildeputable(80, 700, 5, 2, 14000, 0,'L3','250','m3L0_250')
+    #yield from buildeputable(80, 700, 5, 2, 14000, 0,'L3','250','m3L0_250')
     yield from buildeputable(90, 700, 5, 2, 14000, 4000,'L3','250','m3L4_250')
     yield from buildeputable(105, 700, 5, 2, 14000, 8000,'L3','250','m3L8_250')
     yield from buildeputable(135, 700, 5, 2, 14000, 12000,'L3','250','m3L12_250')
