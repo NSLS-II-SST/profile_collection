@@ -5,24 +5,17 @@ import bluesky.plans as bp
 import bluesky.plan_stubs as bps
 
 
-def full_oxygen_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=7.99):
+def full_oxygen_scan_nd(multiple=1,diode_range=6,m3_pitch=7.99,grating='1200',**kwargs):
     '''
-    Full Oxygen Scan runs an RSoXS sample set through the O edge, with particular emphasis in he pre edge region
-    this results in 110 exposures
-
-
-    :param multiple: adjustment for exposure times
-    :param mesh: which Izero channel to use
-    :param det: which detector to use
-    :param energy: what energy motor to scan
-    :return: perform scan
-
-    normal scan takes ~ 16 minutes to complete
+    full_oxygen_scan_nd
+    @param multiple: default exposure times is multipled by this
+    @param diode_range: integer range for the dilde
+    @param m3_pitch: pitch value for M3 for this energy range - check before scans
+    @param grating: '1200' high energy or '250' low energy
+    @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
+    @return: Do a step scan and take images
     '''
-    sample()
     enscan_type = 'full_oxygen_scan_nd'
-    #beamline_status()
     if len(read_input("Starting a Oxygen energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
@@ -38,25 +31,20 @@ def full_oxygen_scan_nd(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
-                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
-def short_oxygen_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=7.98,grating='1200'):
+def short_oxygen_scan_nd(multiple=1,diode_range=6,m3_pitch=7.98,grating='1200',**kwargs):
     '''
-    Short Oxygen Scan runs an RSoXS sample set through the O edge, with particular emphasis in he pre edge region
-
-    :param multiple: adjustment for exposure times
-    :param mesh: which Izero channel to use
-    :param det: which detector to use
-    :param energy: what energy motor to scan
-    :return: perform scan
-
-    normal scan takes ~ 16 minutes to complete
+    short_oxygen_scan_nd
+    @param multiple: default exposure times is multipled by this
+    @param diode_range: integer range for the dilde
+    @param m3_pitch: pitch value for M3 for this energy range - check before scans
+    @param grating: '1200' high energy or '250' low energy
+    @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
+    @return: Do a step scan and take images
     '''
-    sample()
     enscan_type = 'short_oxygen_scan_nd'
-    #beamline_status()
     if len(read_input("Starting a Oxygen energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
@@ -73,26 +61,21 @@ def short_oxygen_scan_nd(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
-                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
-def short_zincl_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=7.98,grating='1200'):
+def short_zincl_scan_nd(multiple=1,diode_range=6,m3_pitch=7.98,grating='1200',**kwargs):
     '''
-    Short zinc Scan runs an RSoXS sample set through the O edge, with particular emphasis in he pre edge region
-
-    :param multiple: adjustment for exposure times
-    :param mesh: which Izero channel to use
-    :param det: which detector to use
-    :param energy: what energy motor to scan
-    :return: perform scan
-
-    normal scan takes ~ 16 minutes to complete
+    short_zincl_scan_nd
+    @param multiple: default exposure times is multipled by this
+    @param diode_range: integer range for the dilde
+    @param m3_pitch: pitch value for M3 for this energy range - check before scans
+    @param grating: '1200' high energy or '250' low energy
+    @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
+    @return: Do a step scan and take images
     '''
-    sample()
     enscan_type = 'short_zincl_scan_nd'
-    #beamline_status()
     if len(read_input("Starting a Zinc energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
@@ -106,27 +89,22 @@ def short_zincl_scan_nd(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
-                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
 
-def very_short_oxygen_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=7.97,grating='1200'):
+def very_short_oxygen_scan_nd(multiple=1,diode_range=6,m3_pitch=7.97,grating='1200',**kwargs):
     '''
-    Very Short Oxygen Scan runs an RSoXS sample set through the O edge, with particular emphasis in he pre edge region
-
-    :param multiple: adjustment for exposure times
-    :param mesh: which Izero channel to use
-    :param det: which detector to use
-    :param energy: what energy motor to scan
-    :return: perform scan
-
-    normal scan takes ~ 16 minutes to complete
+    very_short_oxygen_scan_nd
+    @param multiple: default exposure times is multipled by this
+    @param diode_range: integer range for the dilde
+    @param m3_pitch: pitch value for M3 for this energy range - check before scans
+    @param grating: '1200' high energy or '250' low energy
+    @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
+    @return: Do a step scan and take images
     '''
-    sample()
     enscan_type = 'very_short_oxygen_scan_nd'
-    #beamline_status()
     if len(read_input("Starting a Oxygen energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
@@ -144,28 +122,22 @@ def very_short_oxygen_scan_nd(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
-                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
 
-def short_fluorine_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det],energy=en,pol=0,diode_range=7,m3_pitch=7.98,grating='1200'):
+def short_fluorine_scan_nd(multiple=1,diode_range=7,m3_pitch=7.98,grating='1200',**kwargs):
     '''
-    Short Fluorine Scan runs an RSoXS sample set through the F edge, with particular emphasis in he pre edge region
-
-
-    :param multiple: adjustment for exposure times
-    :param mesh: which Izero channel to use
-    :param det: which detector to use
-    :param energy: what energy motor to scan
-    :return: perform scan
-
-    normal scan takes ~ 16 minutes to complete
+    short_fluorine_scan_nd
+    @param multiple: default exposure times is multipled by this
+    @param diode_range: integer range for the dilde
+    @param m3_pitch: pitch value for M3 for this energy range - check before scans
+    @param grating: '1200' high energy or '250' low energy
+    @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
+    @return: Do a step scan and take images
     '''
-    sample()
     enscan_type = 'short_fluorine_scan_nd'
-    #beamline_status()
     if len(read_input("Starting a fluorine energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
 
@@ -183,30 +155,22 @@ def short_fluorine_scan_nd(multiple=1,sigs=[],
     times[:] = 2
     times *= multiple
     # use these energies and exposure times to scan energy and record detectors and signals
-
-    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
-                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
-
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
-def full_nitrogen_scan_nd(multiple=1,sigs=[],
-                          dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=7.93):
+
+def full_nitrogen_scan_nd(multiple=1,diode_range=6,m3_pitch=7.93,grating='1200',**kwargs):
     '''
-    Full Nitrogen Scan runs an RSoXS sample set through the N edge, with particular emphasis in he pre edge region
-    this results in 95 exposures
-
-
-    :param multiple: adjustment for exposure times
-    :param mesh: which Izero channel to use
-    :param det: which detector to use
-    :param energy: what energy motor to scan
-    :return: perform scan
-
-    normal scan takes ~ 15 minutes to complete
+    full_nitrogen_scan_nd
+    @param multiple: default exposure times is multipled by this
+    @param diode_range: integer range for the dilde
+    @param m3_pitch: pitch value for M3 for this energy range - check before scans
+    @param grating: '1200' high energy or '250' low energy
+    @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
+    @return: Do a step scan and take images
     '''
     enscan_type = 'full_nitrogen_scan_nd'
-    sample()
-    #beamline_status()
     if len(read_input("Starting a Nitrogen energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
@@ -222,62 +186,21 @@ def full_nitrogen_scan_nd(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
-                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
-def full_test_scan_nd(multiple=1,sigs=[],
-                          dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=7.94):
+def short_nitrogen_scan_nd(multiple=1,diode_range=6,m3_pitch=8.00,grating='1200',**kwargs):
     '''
-    Full Nitrogen Scan runs an RSoXS sample set through the N edge, with particular emphasis in he pre edge region
-    this results in 95 exposures
-
-
-    :param multiple: adjustment for exposure times
-    :param mesh: which Izero channel to use
-    :param det: which detector to use
-    :param energy: what energy motor to scan
-    :return: perform scan
-
-    normal scan takes ~ 15 minutes to complete
-    '''
-    enscan_type = 'full_nitrogen_scan_nd'
-    sample()
-    #beamline_status()
-    if len(read_input("Starting a Nitrogen energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
-        return
-    # create a list of energies
-    energies = np.arange(1500,1540,1)
-    times = energies.copy()
-
-    # Define exposures times for different energy ranges
-    times[energies < 400] = 2
-    # times[(energies < 286) & (energies >= 282)] = 5
-    times[energies >= 400] = 2
-    times *= multiple
-
-    # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
-                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
-
-
-def short_nitrogen_scan_nd(multiple=1,sigs=[],
-                          dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=8.00,grating='1200'):
-    '''
-    Short Nitrogen Scan runs an RSoXS sample set through the N edge, with particular emphasis in he pre edge region
-
-
-    :param multiple: adjustment for exposure times
-    :param mesh: which Izero channel to use
-    :param det: which detector to use
-    :param energy: what energy motor to scan
-    :return: perform scan
-
-    normal scan takes ~ 15 minutes to complete
+    short_nitrogen_scan_nd
+    @param multiple: default exposure times is multipled by this
+    @param diode_range: integer range for the dilde
+    @param m3_pitch: pitch value for M3 for this energy range - check before scans
+    @param grating: '1200' high energy or '250' low energy
+    @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
+    @return: Do a step scan and take images
     '''
     enscan_type='short_nitrogen_scan_nd'
-    sample()
-    #beamline_status()
     if len(read_input("Starting a Short Nitrogen energy scan "
                       "hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
@@ -296,28 +219,21 @@ def short_nitrogen_scan_nd(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
-                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
-def very_short_carbon_scan_nd(multiple=1,sigs=[],
-                              dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=8.01,grating='1200'):
+def very_short_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=8.01,grating='1200',**kwargs):
     '''
-    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
-    this results in 40 exposures
-
-
-    :param multiple: adjustment for exposure times
-    :param mesh: which Izero channel to use
-    :param det: which detector to use
-    :param energy: what energy motor to scan
-    :return: perform scan
-
-    normal scan takes ~ 6 minutes to complete
+    very_short_carbon_scan_nd
+    @param multiple: default exposure times is multipled by this
+    @param diode_range: integer range for the dilde
+    @param m3_pitch: pitch value for M3 for this energy range - check before scans
+    @param grating: '1200' high energy or '250' low energy
+    @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
+    @return: Do a step scan and take images
     '''
     enscan_type = 'very_short_carbon_scan_nd'
-    sample()
-    #beamline_status()
     if len(read_input("Starting a very short Carbon energy scan hit "
                       "enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
@@ -338,33 +254,24 @@ def very_short_carbon_scan_nd(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets,energy,energies,times,enscan_type=enscan_type,
-                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
-def short_carbon_scan_nd(multiple=1,sigs=[],
-                         dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=8.00,grating='1200'):
+def short_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=8.00,grating='1200'):
     '''
-    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
-    this results in 61 exposures
-
-
-    :param multiple: adjustment for exposure times
-    :param mesh: which Izero channel to use
-    :param det: which detector to use
-    :param energy: what energy motor to scan
-    :return: perform scan
-
-    normal scan takes ~ 10 minutes to complete
+    short_carbon_scan_nd
+    @param multiple: default exposure times is multipled by this
+    @param diode_range: integer range for the dilde
+    @param m3_pitch: pitch value for M3 for this energy range - check before scans
+    @param grating: '1200' high energy or '250' low energy
+    @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
+    @return: Do a step scan and take images
     '''
-    sample()
     enscan_type = 'short_carbon_scan_nd'
     if len(read_input("Starting a short Carbon energy scan hit enter in "
                       "the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
-
-    #Oct 2019, this pitch value seems to be optimal for carbon
-
 
     # create a list of energies
     energies = np.arange(270,282,2)
@@ -382,27 +289,19 @@ def short_carbon_scan_nd(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets,energy,energies,times,enscan_type=enscan_type,
-                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
-#en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=7.94,diode_range=6,pol=100)
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
-
-def short_carbon_scan_nonaromatic(multiple=1,sigs=[],
-                         dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=8.00,grating='1200'):
+def short_carbon_scan_nonaromatic(multiple=1,diode_range=6,m3_pitch=8.00,grating='1200',**kwargs):
     '''
-    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
-    this results in 61 exposures
-
-
-    :param multiple: adjustment for exposure times
-    :param mesh: which Izero channel to use
-    :param det: which detector to use
-    :param energy: what energy motor to scan
-    :return: perform scan
-
-    normal scan takes ~ 10 minutes to complete
+    short_carbon_scan_nonaromatic
+    @param multiple: default exposure times is multipled by this
+    @param diode_range: integer range for the dilde
+    @param m3_pitch: pitch value for M3 for this energy range - check before scans
+    @param grating: '1200' high energy or '250' low energy
+    @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
+    @return: Do a step scan and take images
     '''
-    sample()
     enscan_type = 'short_carbon_scan_nonaromatic'
     if len(read_input("Starting a short Carbon energy scan hit enter in "
                       "the next 3 seconds to abort", "abort", "", 3)) > 0:
@@ -425,58 +324,50 @@ def short_carbon_scan_nonaromatic(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets,energy,energies,times,enscan_type=enscan_type,
-                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
-#en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=7.94,diode_range=6,pol=100)
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
-
-def custom_scan(sigs=[],energies=[],times=[],
-                         dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=8.01,grating='1200'):
+def custom_rsoxs_scan(energies=[((270,340,1),2)],plan_name='custom_rsoxs_scan',**kwargs):
     '''
-    Custom scan is a more direct route to the energy scan code, with the user providing the exact times, and energies
-    to go to.
-
-
-    :param multiple: adjustment for exposure times
-    :param mesh: which Izero channel to use
-    :param det: which detector to use
-    :param energy: what energy motor to scan
-    :return: perform scan
-
-    normal scan takes ~ 10 minutes to complete
+    custom_rsoxs_scan
+    @param multiple: default exposure times is multipled by this
+    @param diode_range: integer range for the dilde
+    @param m3_pitch: pitch value for M3 for this energy range - check before scans
+    @param grating: '1200' high energy or '250' low energy
+    @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
+    @return: Do a step scan and take images
     '''
-    sample()
-    enscan_type = 'custom_en_scan'
+
+    
+    enscan_type = plan_name
+    newenergies = []
+    newtimes = []
     if len(read_input("Starting a specified energy scan hit enter in "
                       "the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
-    newenergies = np.asarray(energies)
-    newtimes = np.asarray(times)
-    #Feb 2019, this pitch value seems to be optimal for carbon
+    for ((start,stop,step),exp) in energies:
+        tempenergies =  np.arange(start, stop, step)
+        newenergies = np.append(newenergies, tempenergies)
+        temptimes =  tempenergies.copy()
+        temptimes[:] = exp
+        newtimes = np.append(newtimes,temptimes)
+        
+
+    yield from en_scan_core(energies=newenergies,times=newtimes,enscan_type=enscan_type,**kwargs)
 
 
-    yield from en_scan_core(sigs, dets,energy,newenergies,newtimes,enscan_type=enscan_type,
-                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
-#en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=7.94,diode_range=6,pol=100)
 
-
-def short_sulfurl_scan_nd(multiple=1,sigs=[],
-                         dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=8.02,grating='1200'):
+def short_sulfurl_scan_nd(multiple=1,diode_range=6,m3_pitch=8.02,grating='1200',**kwargs):
     '''
-    Full Sulfur L Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
-    this results in 61 exposures
-
-
-    :param multiple: adjustment for exposure times
-    :param mesh: which Izero channel to use
-    :param det: which detector to use
-    :param energy: what energy motor to scan
-    :return: perform scan
-
-    normal scan takes ~ 10 minutes to complete
+    short_sulfurl_scan_nd
+    @param multiple: default exposure times is multipled by this
+    @param diode_range: integer range for the dilde
+    @param m3_pitch: pitch value for M3 for this energy range - check before scans
+    @param grating: '1200' high energy or '250' low energy
+    @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
+    @return: Do a step scan and take images
     '''
-    sample()
     enscan_type = 'short_sulfurl_scan_nd'
     if len(read_input("Starting a short Sulfur L energy scan hit enter in "
                       "the next 3 seconds to abort", "abort", "", 3)) > 0:
@@ -496,27 +387,21 @@ def short_sulfurl_scan_nd(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets,energy,energies,times,enscan_type=enscan_type,
-                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
 
-def focused_carbon_scan_nd(multiple=1,sigs=[],
-                         dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=7.93):
+def focused_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=7.93,grating='1200',**kwargs):
     '''
-    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
-    this results in 61 exposures
-
-
-    :param multiple: adjustment for exposure times
-    :param mesh: which Izero channel to use
-    :param det: which detector to use
-    :param energy: what energy motor to scan
-    :return: perform scan
-
-    normal scan takes ~ 11 minutes to complete
+    focused_carbon_scan_nd
+    @param multiple: default exposure times is multipled by this
+    @param diode_range: integer range for the dilde
+    @param m3_pitch: pitch value for M3 for this energy range - check before scans
+    @param grating: '1200' high energy or '250' low energy
+    @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
+    @return: Do a step scan and take images
     '''
-    sample()
     enscan_type = 'focused_carbon_scan_nd'
     if len(read_input("Starting a short Carbon energy scan hit enter in "
                       "the next 3 seconds to abort", "abort", "", 3)) > 0:
@@ -539,26 +424,21 @@ def focused_carbon_scan_nd(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets,energy,energies,times,enscan_type=enscan_type,
-                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
-def g_carbon_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en,pol=0,diode_range=6,m3_pitch=7.93):
+def g_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=7.93,grating='1200',**kwargs):
     '''
-    G Carbon Scan runs an RSoXS sample set through the carbon edge, with a targeted 5 exposures
-
-
-    :param multiple: adjustment for exposure times
-    :param mesh: which Izero channel to use
-    :param det: which detector to use
-    :param energy: what energy motor to scan
-    :return: perform scan
-
-    normal scan takes ~ 18 minutes to complete
+    g_carbon_scan_nd
+    @param multiple: default exposure times is multipled by this
+    @param diode_range: integer range for the dilde
+    @param m3_pitch: pitch value for M3 for this energy range - check before scans
+    @param grating: '1200' high energy or '250' low energy
+    @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
+    @return: Do a step scan and take images
     '''
     enscan_type = 'g_carbon_scan_nd'
-    sample()
     if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
@@ -570,26 +450,21 @@ def g_carbon_scan_nd(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
-                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
-def t_carbon_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en,pol=0,diode_range=6,m3_pitch=7.93):
+def t_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=7.93,grating='1200',**kwargs):
     '''
-    T Carbon Scan runs an RSoXS sample set through the carbon edge, with a targeted 6 exposures
-
-
-    :param multiple: adjustment for exposure times
-    :param mesh: which Izero channel to use
-    :param det: which detector to use
-    :param energy: what energy motor to scan
-    :return: perform scan
-
-    normal scan takes ~ 2 minutes to complete
+    t_carbon_scan_nd
+    @param multiple: default exposure times is multipled by this
+    @param diode_range: integer range for the dilde
+    @param m3_pitch: pitch value for M3 for this energy range - check before scans
+    @param grating: '1200' high energy or '250' low energy
+    @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
+    @return: Do a step scan and take images
     '''
     enscan_type = 't_carbon_scan_nd'
-    sample()
     if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
@@ -601,27 +476,21 @@ def t_carbon_scan_nd(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
-                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
-def sufficient_carbon_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en,pol=0,diode_range=6,m3_pitch=7.96):
+def sufficient_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=7.96,grating='1200',**kwargs):
     '''
-    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
-    this results in 128 exposures
-
-
-    :param multiple: adjustment for exposure times
-    :param mesh: which Izero channel to use
-    :param det: which detector to use
-    :param energy: what energy motor to scan
-    :return: perform scan
-
-    normal scan takes ~ 18 minutes to complete
+    sufficient_carbon_scan_nd
+    @param multiple: default exposure times is multipled by this
+    @param diode_range: integer range for the dilde
+    @param m3_pitch: pitch value for M3 for this energy range - check before scans
+    @param grating: '1200' high energy or '250' low energy
+    @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
+    @return: Do a step scan and take images
     '''
     enscan_type = 'sufficient_carbon_scan_nd'
-    sample()
     if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
@@ -640,28 +509,22 @@ def sufficient_carbon_scan_nd(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
-                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
 
-def picky_carbon_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en,pol=0,diode_range=6,m3_pitch=7.93):
+def picky_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=7.93,grating='1200',**kwargs):
     '''
-    Subh's picky Carbon Scan runs an RSoXS sample set through the useless energies before the carbon edge
-    this results in 15 exposures
-
-
-    :param multiple: adjustment for exposure times
-    :param mesh: which Izero channel to use
-    :param det: which detector to use
-    :param energy: what energy motor to scan
-    :return: perform scan
-
-    normal scan takes ~ 18 minutes to complete
+    picky_carbon_scan_nd
+    @param multiple: default exposure times is multipled by this
+    @param diode_range: integer range for the dilde
+    @param m3_pitch: pitch value for M3 for this energy range - check before scans
+    @param grating: '1200' high energy or '250' low energy
+    @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
+    @return: Do a step scan and take images
     '''
-    enscan_type = 'sufficient_carbon_scan_nd'
-    sample()
+    enscan_type = 'picky_carbon_scan_nd'
     if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     yield from bps.abs_set(mir3.Pitch,7.96,wait=True)
@@ -674,28 +537,22 @@ def picky_carbon_scan_nd(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
-                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
 
-def full_carbon_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en,pol=0,diode_range=6,m3_pitch=7.97,grating='1200'):
+def full_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=7.97,grating='1200',**kwargs):
     '''
-    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
-    this results in 128 exposures
-
-
-    :param multiple: adjustment for exposure times
-    :param mesh: which Izero channel to use
-    :param det: which detector to use
-    :param energy: what energy motor to scan
-    :return: perform scan
-
-    normal scan takes ~ 18 minutes to complete
+    full_carbon_scan_nd
+    @param multiple: default exposure times is multipled by this
+    @param diode_range: integer range for the dilde
+    @param m3_pitch: pitch value for M3 for this energy range - check before scans
+    @param grating: '1200' high energy or '250' low energy
+    @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
+    @return: Do a step scan and take images
     '''
     enscan_type = 'full_carbon_scan_nd'
-    sample()
     if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
@@ -714,27 +571,21 @@ def full_carbon_scan_nd(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
-                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
-def full_carbon_scan_nonaromatic(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en,pol=0,diode_range=6,m3_pitch=7.97,grating='1200'):
+def full_carbon_scan_nonaromatic(multiple=1,diode_range=6,m3_pitch=7.97,grating='1200',**kwargs):
     '''
-    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
-    this results in 128 exposures
-
-
-    :param multiple: adjustment for exposure times
-    :param mesh: which Izero channel to use
-    :param det: which detector to use
-    :param energy: what energy motor to scan
-    :return: perform scan
-
-    normal scan takes ~ 18 minutes to complete
+    full_carbon_scan_nonaromatic
+    @param multiple: default exposure times is multipled by this
+    @param diode_range: integer range for the dilde
+    @param m3_pitch: pitch value for M3 for this energy range - check before scans
+    @param grating: '1200' high energy or '250' low energy
+    @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
+    @return: Do a step scan and take images
     '''
     enscan_type = 'full_carbon_scan_nonaromatic'
-    sample()
     if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
@@ -753,27 +604,21 @@ def full_carbon_scan_nonaromatic(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
-                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
-def full_fluorine_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en,pol=0,diode_range=7,m3_pitch=7.89):
+def full_fluorine_scan_nd(multiple=1,diode_range=7,m3_pitch=7.89,grating='1200',**kwargs):
     '''
-    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
-    this results in 128 exposures
-
-
-    :param multiple: adjustment for exposure times
-    :param mesh: which Izero channel to use
-    :param det: which detector to use
-    :param energy: what energy motor to scan
-    :return: perform scan
-
-    normal scan takes ~ 18 minutes to complete
+    full_fluorine_scan_nd
+    @param multiple: default exposure times is multipled by this
+    @param diode_range: integer range for the dilde
+    @param m3_pitch: pitch value for M3 for this energy range - check before scans
+    @param grating: '1200' high energy or '250' low energy
+    @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
+    @return: Do a step scan and take images
     '''
     enscan_type = 'full_fluorine_scan_nd'
-    sample()
     if len(read_input("Starting a Fluorine energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
@@ -787,26 +632,20 @@ def full_fluorine_scan_nd(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
-                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
-def veryshort_fluorine_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en,pol=0,diode_range=7,m3_pitch=7.99):
+def veryshort_fluorine_scan_nd(multiple=1,diode_range=7,m3_pitch=7.99,grating='1200',**kwargs):
     '''
-    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
-    this results in 128 exposures
-
-
-    :param multiple: adjustment for exposure times
-    :param mesh: which Izero channel to use
-    :param det: which detector to use
-    :param energy: what energy motor to scan
-    :return: perform scan
-
-    normal scan takes ~ 18 minutes to complete
+    veryshort_fluorine_scan_nd
+    @param multiple: default exposure times is multipled by this
+    @param diode_range: integer range for the dilde
+    @param m3_pitch: pitch value for M3 for this energy range - check before scans
+    @param grating: '1200' high energy or '250' low energy
+    @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
+    @return: Do a step scan and take images
     '''
     enscan_type = 'veryshort_fluorine_scan_nd'
-    sample()
     if len(read_input("Starting a Fluorine energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
@@ -821,25 +660,20 @@ def veryshort_fluorine_scan_nd(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
-                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
-def full_ca_scan_nd(multiple=1,sigs=[],
-                    dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=8.00,grating='1200'):
+def full_ca_scan_nd(multiple=1,diode_range=6,m3_pitch=8.00,grating='1200',**kwargs):
     '''
-    Calcium Scan runs an RSoXS sample set through the Ca edge, with particular emphasis in he pre edge region
-
-
-    :param multiple: adjustment for exposure times
-    :param mesh: which Izero channel to use
-    :param det: which detector to use
-    :param energy: what energy motor to scan
-    :return: perform scan
-
-    normal scan takes ~ 12 minutes to complete
+    full_ca_scan_nd
+    @param multiple: default exposure times is multipled by this
+    @param diode_range: integer range for the dilde
+    @param m3_pitch: pitch value for M3 for this energy range - check before scans
+    @param grating: '1200' high energy or '250' low energy
+    @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
+    @return: Do a step scan and take images
     '''
-    sample()
     if len(read_input("Starting a Calcium energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     enscan_type = 'full_ca_scan_nd'
@@ -855,25 +689,20 @@ def full_ca_scan_nd(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
-                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
-def short_calcium_scan_nd(multiple=1,sigs=[],
-                    dets=[saxs_det],energy=en,pol=0,diode_range=6,m3_pitch=8.00,grating='1200'):
+def short_calcium_scan_nd(multiple=1,diode_range=6,m3_pitch=8.00,grating='1200',**kwargs):
     '''
-    Calcium Scan runs an RSoXS sample set through the Ca edge, with particular emphasis in he pre edge region
-
-
-    :param multiple: adjustment for exposure times
-    :param mesh: which Izero channel to use
-    :param det: which detector to use
-    :param energy: what energy motor to scan
-    :return: perform scan
-
-    normal scan takes ~ 12 minutes to complete
+    short_calcium_scan_nd
+    @param multiple: default exposure times is multipled by this
+    @param diode_range: integer range for the dilde
+    @param m3_pitch: pitch value for M3 for this energy range - check before scans
+    @param grating: '1200' high energy or '250' low energy
+    @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
+    @return: Do a step scan and take images
     '''
-    sample()
     if len(read_input("Starting a Calcium energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     enscan_type = 'short_calcium_scan_nd'
@@ -888,26 +717,21 @@ def short_calcium_scan_nd(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
-                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol,grating=grating)
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
 
-def full_carbon_calcium_scan_nd(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en,pol=0,diode_range=6,m3_pitch=7.96):
+def full_carbon_calcium_scan_nd(multiple=1,diode_range=6,m3_pitch=7.96,grating='1200',**kwargs):
     '''
-    Full Carbon and Calcium Scan runs an RSoXS sample set through the carbon and calcium edges,
-    with particular emphasis in he pre edge region
-
-    :param multiple: adjustment for exposure times
-    :param mesh: which Izero channel to use
-    :param det: which detector to use
-    :param energy: what energy motor to scan
-    :return: perform scan
-
-    normal scan takes ~ 18 minutes to complete
+    full_carbon_calcium_scan_nd
+    @param multiple: default exposure times is multipled by this
+    @param diode_range: integer range for the dilde
+    @param m3_pitch: pitch value for M3 for this energy range - check before scans
+    @param grating: '1200' high energy or '250' low energy
+    @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
+    @return: Do a step scan and take images
     '''
-    sample()
     enscan_type = 'full_carbon_calcium_scan_nd'
     if len(read_input("Starting a full carbon and calcium energy scan hit "
                       "enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
@@ -932,62 +756,24 @@ def full_carbon_calcium_scan_nd(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
-                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
-from ophyd.sim import det_with_count_time
-from cycler import cycler
-
-def fluorine_SAXS(exp_time=1):
-    enscan_type = 'fluorine_SAXS'
-    #Oct 2019, this pitch value seems to be optimal for carbon
-   # yield from bps.abs_set(mir3.Pitch,7.94)
-    set_exposure(exp_time)
-    yield from bps.abs_set(en, 680, timeout=180, wait=True)
-    yield from bp.scan([saxs_det, en.energy],en,680,720,81,md={'plan_name':enscan_type})
-
-
-def Si_SAXS(exp_time=1):
-    enscan_type = 'Si_SAXS'
-    # Oct 2019, this pitch value seems to be optimal for carbon
-   # yield from bps.abs_set(mir3.Pitch,7.94)
-    set_exposure(exp_time)
-    yield from bps.abs_set(en, 1830, timeout=180, wait=True)
-    yield from bp.scan([saxs_det, en.energy], en, 1830, 1870, 41, md={'plan_name': enscan_type})
-
-
-# def fluorine_WAXS(exp_time=2):
-#
-#     enscan_type = 'fluorine_WAXS'
-#     #Oct 2019, this pitch value seems to be optimal for carbon
-#
-#     yield from bps.mv(en,680)
-#     yield from bps.abs_set(mir3.Pitch,7.89)
-#     yield from bp.scan([sw_det, en.energy],en,680,700,41,md={'plan_name':enscan_type})
-#
-
-
-def survey_scan_verylowenergy(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en,pol=0,diode_range=7,m3_pitch=7.93):
+def survey_scan_verylowenergy(multiple=1,diode_range=7,m3_pitch=7.93,grating='250',**kwargs):
     '''
-    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
-    this results in 128 exposures
-
-
-    :param multiple: adjustment for exposure times
-    :param mesh: which Izero channel to use
-    :param det: which detector to use
-    :param energy: what energy motor to scan
-    :return: perform scan
-
-    normal scan takes ~ 18 minutes to complete
+    survey_scan_verylowenergy
+    @param multiple: default exposure times is multipled by this
+    @param diode_range: integer range for the dilde
+    @param m3_pitch: pitch value for M3 for this energy range - check before scans
+    @param grating: '1200' high energy or '250' low energy
+    @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
+    @return: Do a step scan and take images
     '''
     enscan_type = 'survey_scan_verylowenergy'
-    sample()
     if len(read_input("Starting a low energy survey scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
-    energies = np.arange(170.0,260.0,1.0)
+    energies = np.arange(70.0,260.0,1.0)
     times = energies.copy()
 
     # Define exposures times for different energy ranges
@@ -995,28 +781,22 @@ def survey_scan_verylowenergy(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
-                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
 
-def survey_scan_lowenergy(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en,pol=0,diode_range=7,m3_pitch=7.91):
+def survey_scan_lowenergy(multiple=1,diode_range=7,m3_pitch=7.91,grating='1200',**kwargs):
     '''
-    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
-    this results in 128 exposures
-
-
-    :param multiple: adjustment for exposure times
-    :param mesh: which Izero channel to use
-    :param det: which detector to use
-    :param energy: what energy motor to scan
-    :return: perform scan
-
-    normal scan takes ~ 18 minutes to complete
+    survey_scan_lowenergy
+    @param multiple: default exposure times is multipled by this
+    @param diode_range: integer range for the dilde
+    @param m3_pitch: pitch value for M3 for this energy range - check before scans
+    @param grating: '1200' high energy or '250' low energy
+    @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
+    @return: Do a step scan and take images
     '''
     enscan_type = 'survey_scan_lowenergy'
-    sample()
     if len(read_input("Starting a Low energy survey scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
@@ -1028,28 +808,22 @@ def survey_scan_lowenergy(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
-                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
 
-def survey_scan_highenergy(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en,pol=0,diode_range=7,m3_pitch=7.89):
+def survey_scan_highenergy(multiple=1,diode_range=7,m3_pitch=7.89,grating='1200',**kwargs):
     '''
-    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
-    this results in 128 exposures
-
-
-    :param multiple: adjustment for exposure times
-    :param mesh: which Izero channel to use
-    :param det: which detector to use
-    :param energy: what energy motor to scan
-    :return: perform scan
-
-    normal scan takes ~ 18 minutes to complete
+    survey_scan_highenergy
+    @param multiple: default exposure times is multipled by this
+    @param diode_range: integer range for the dilde
+    @param m3_pitch: pitch value for M3 for this energy range - check before scans
+    @param grating: '1200' high energy or '250' low energy
+    @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
+    @return: Do a step scan and take images
     '''
     enscan_type = 'survey_scan_highenergy'
-    sample()
     if len(read_input("Starting a High energy survey scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
@@ -1061,27 +835,21 @@ def survey_scan_highenergy(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
-                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
-def survey_scan_veryhighenergy(multiple=1,sigs=[],
-                        dets=[saxs_det], energy=en,pol=0,diode_range=7,m3_pitch=7.89):
+def survey_scan_veryhighenergy(multiple=1,diode_range=7,m3_pitch=7.89,grating='1200',**kwargs):
     '''
-    Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
-    this results in 128 exposures
-
-
-    :param multiple: adjustment for exposure times
-    :param mesh: which Izero channel to use
-    :param det: which detector to use
-    :param energy: what energy motor to scan
-    :return: perform scan
-
-    normal scan takes ~ 18 minutes to complete
+    survey_scan_veryhighenergy
+    @param multiple: default exposure times is multipled by this
+    @param diode_range: integer range for the dilde
+    @param m3_pitch: pitch value for M3 for this energy range - check before scans
+    @param grating: '1200' high energy or '250' low energy
+    @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
+    @return: Do a step scan and take images
     '''
     enscan_type = 'survey_scan_veryhighenergy'
-    sample()
     if len(read_input("Starting a Very High energy survey scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
@@ -1093,17 +861,7 @@ def survey_scan_veryhighenergy(multiple=1,sigs=[],
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(sigs, dets, energy, energies, times,enscan_type=enscan_type,
-                            diode_range=diode_range,m3_pitch=m3_pitch, pol=pol)
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
-def runtempsample(name='SGPT03',temp='RT',):
-    RE.md['sample_name'] = name + '_' + temp
-    RE.md['sample_id'] = name + '_' + temp
-    RE.md['sample_id'] = name + '_' + temp
-    yield from short_carbon_scan_nd(dets=[waxs_det],pol=0)
-    yield from short_carbon_scan_nd(dets=[waxs_det],pol=90)
-    yield from very_short_oxygen_scan_nd(dets=[waxs_det],pol=0)
-    yield from very_short_oxygen_scan_nd(dets=[waxs_det],pol=90)
-    yield from veryshort_fluorine_scan_nd(dets=[waxs_det],pol=0)
-    yield from veryshort_fluorine_scan_nd(dets=[waxs_det],pol=90)
 

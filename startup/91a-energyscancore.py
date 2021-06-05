@@ -76,81 +76,63 @@ def one_trigger_nd_step(detectors, step, pos_cache):
 
 
 # @dark_frames_enable
-def en_scan_core(signals,dets, energy, energies,times,enscan_type=None,m3_pitch=7.94,diode_range=6,
-                 pol=0,grating='no change'):
+def en_scan_core(signals=[],
+                 dets=[saxs_det],
+                 energy=en,
+                 energies=[],
+                 times=[],
+                 enscan_type=None,
+                 m3_pitch=7.94,
+                 diode_range=6,
+                 pol=0,
+                 grating='no change',
+                 angle=None):
+    # rotate the sample to the requested angle (if not None)
+    rotate_now(angle)
+    # print the current sample information
+    sample()  # print the sample information
+    # set the exposure times to be hinted for the detector which will be used
     for det in dets:
         det.cam.acquire_time.kind = 'hinted'
+    # set the M3 pitch
     yield from bps.abs_set(mir3.Pitch,m3_pitch,wait=True)
+    # set the photodiode gain setting
     yield from bps.mv(DiodeRange,diode_range)
-
+    # set the grating
     if grating=='1200':
-        print('Moving grating to 1200 l/mm...')
-        if abs(mono_en.grating.user_offset.get()-7.2948) > .1:
-            print('current grating offset is too far from known values, please update the procedure, grating will not move')
-        elif abs(mono_en.mirror2.user_offset.get()-8.1264) > .1:
-            print('current Mirror 2 offset is too far from known values, please update the procedure, grating will not move')
-        else:
-            yield from grating_to_1200()
-        print('done')
+        yield from grating_to_1200()
     elif grating=='250':
-        print('Moving grating to 250 l/mm...')
-        if abs(mono_en.grating.user_offset.get()-7.2788) > .1:
-            print('current grating offset is too far from known values, please update the procedure, grating will not move')
-        elif abs(mono_en.mirror2.user_offset.get()-8.1388) > .1:
-            print('current Mirror 2 offset is too far from known values, please update the procedure, grating will not move')
-        else:
-            yield from grating_to_250()
-        print('done')
-
+        yield from grating_to_250()
+    # set the polarization
     yield from set_polarization(pol)
-
+    # set up the scan cycler
     sigcycler = cycler(energy, energies)
     for det in dets:
         sigcycler += cycler(det.cam.acquire_time, times.copy())
-
     sigcycler += cycler(Shutter_open_time, times.copy()*1000)
-
     yield from bp.scan_nd(dets + signals,sigcycler, md={'plan_name':enscan_type})
 
 
 def NEXAFS_scan_core(signals, dets, energy, energies, enscan_type=None,
                      openshutter=False, open_each_step=False, m3_pitch=7.94, diode_range=6, pol=0,
                      exp_time=1, grating='no change', motorname='None', offset=0):
+    # set mirror 3 pitch
     yield from bps.abs_set(mir3.Pitch, m3_pitch, wait=True)
+    # set the diode range
     yield from bps.mv(DiodeRange, diode_range)
-    # if pol is 1:
-    #     epu_mode.put(0)
-    # else:
-    #     epu_mode.put(2)
-    # yield from bps.sleep(1)
-    # yield from bps.mv(en.polarization,pol)
+    # set exposure
     set_exposure(exp_time)
+    # set grating
     if grating == '1200':
-        #print('Moving grating to 1200 l/mm...')
-        if abs(mono_en.grating.user_offset.get() - 7.2948) > .1:
-            print(
-                'current grating offset is too far from known values, please update the procedure, grating will not move')
-        elif abs(mono_en.mirror2.user_offset.get() - 8.1264) > .1:
-            print(
-                'current Mirror 2 offset is too far from known values, please update the procedure, grating will not move')
-        else:
-            yield from grating_to_1200()
-        #print('done')
+        yield from grating_to_1200()
     elif grating == '250':
-        #print('Moving grating to 250 l/mm...')
-        if abs(mono_en.grating.user_offset.get() - 7.2788) > .1:
-            print(
-                'current grating offset is too far from known values, please update the procedure, grating will not move')
-        elif abs(mono_en.mirror2.user_offset.get() - 8.1388) > .1:
-            print(
-                'current Mirror 2 offset is too far from known values, please update the procedure, grating will not move')
-        else:
-            yield from grating_to_250()
-        #print('done')
+        yield from grating_to_250()
+    # set motor offset if it's set
     if motorname is not 'None':
         yield from bps.rel_set(eval(motorname), offset, wait=True)
-    #print('setting pol')
+    # set polarization
     yield from set_polarization(pol)
+    # make sure the energy is completely read, so we know where we are
     en.read()
 
     sigcycler = cycler(energy, energies)
@@ -185,32 +167,13 @@ def NEXAFS_fly_scan_core(scan_params,openshutter=False, m3_pitch=np.nan, diode_r
     if not np.isnan(diode_range):
         yield from bps.mv(DiodeRange, diode_range)
     if grating == '1200':
-        #print('Moving grating to 1200 l/mm...')
-        if abs(mono_en.grating.user_offset.get() - 7.2948) > .1:
-            print(
-                'current grating offset is too far from known values, please update the procedure, grating will not move')
-        elif abs(mono_en.mirror2.user_offset.get() - 8.1264) > .1:
-            print(
-                'current Mirror 2 offset is too far from known values, please update the procedure, grating will not move')
-        else:
-            yield from grating_to_1200()
-        #print('done')
+        yield from grating_to_1200()
     elif grating == '250':
-        #print('Moving grating to 250 l/mm...')
-        if abs(mono_en.grating.user_offset.get() - 7.2788) > .1:
-            print(
-                'current grating offset is too far from known values, please update the procedure, grating will not move')
-        elif abs(mono_en.mirror2.user_offset.get() - 8.1388) > .1:
-            print(
-                'current Mirror 2 offset is too far from known values, please update the procedure, grating will not move')
-        else:
-            yield from grating_to_250()
-        #print('done')
+        yield from grating_to_250()
 
     if np.isnan(pol):
         pol = en.polarization.setpoint.get()
     else:
-        #print(f'setting undulator polarization to {pol}')
         yield from set_polarization(pol)
     en.read()
     samplepol = en.sample_polarization.setpoint.get()

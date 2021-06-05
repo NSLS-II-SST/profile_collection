@@ -63,7 +63,7 @@ def samxscan():
     yield from psh10.close()
 
 
-def spiralsearch(diameter=.6, stepsize=.2, energy=270, pol=0):
+def spiralsearch(diameter=.6, stepsize=.2, energy=270, pol=0) :
     yield from bps.mv(en, energy)
     yield from set_polarization(pol)
     x_center = sam_X.user_setpoint.get()
@@ -590,10 +590,11 @@ def find_fiducials(f2=[7.5,3.5,-1.8,1.1]):
 
 
 def rotate_now(theta):
-    samp = get_sample_dict()
-    samp['angle'] = theta
-    rotate_sample(samp)
-    yield from load_sample(samp)
+    if theta is not None:
+        samp = get_sample_dict()
+        samp['angle'] = theta
+        rotate_sample(samp)
+        yield from load_sample(samp)
 
 
 def rotate_sample(samp):

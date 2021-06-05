@@ -682,27 +682,46 @@ def save_samplesxls(bar, filename):
 
 def sanatize_angle(samp):
     # translates a requested angle (something in sample['angle']) into an actual angle depending on the kind of sample
+    if type(samp['angle']) == int or type(samp['angle']) == float:
+        goodnumber = True # make the number fall in the necessary range
+    else:
+        goodnumber = False # make all transmission 90 degrees from the back, and all grading 20 deg
     if (samp['grazing']):
         if (samp['front']):
-            samp['bar_loc']['th'] = np.mod(np.abs(90 - samp['angle']), 180)
-            # front grazing sample angle is interpreted as grazing angle
+            if goodnumber:
+                samp['bar_loc']['th'] = np.mod(np.abs(90 - samp['angle']), 180)
+            else:
+                samp['bar_loc']['th'] = 70
+                samp['angle'] = 70
+                # front grazing sample angle is interpreted as grazing angle
         else:
-            samp['bar_loc']['th'] = 90 + np.round(np.mod(100 * samp['angle'] - 9000.01, 9000.01)) / 100
+            if goodnumber:
+                samp['bar_loc']['th'] = 90 + np.round(np.mod(100 * samp['angle'] - 9000.01, 9000.01)) / 100
+            else:
+                samp['bar_loc']['th'] = 110
+                samp['angle'] = 110
             # back grazing sample angle is interpreted as grazing angle but subtracted from 180
     else:
         if (samp['front']):
-            samp['bar_loc']['th'] = 90 + np.round(np.mod(100 * samp['angle'] - 9000.01, 9000.01)) / 100
-            if samp['bar_loc']['x0'] < -1.8 and samp['bar_loc']['th'] < 160:
-                # transmission from the left side of the bar at a incident angle more than 20 degrees,
-                # flip to come from the front side
-                samp['bar_loc']['th'] = 90 - np.round(np.mod(100 * samp['angle'] - 9000.01, 9000.01)) / 100
+            if goodnumber:
+                samp['bar_loc']['th'] = 90 + np.round(np.mod(100 * samp['angle'] - 9000.01, 9000.01)) / 100
+                if samp['bar_loc']['x0'] < -1.8 and samp['bar_loc']['th'] < 160:
+                    # transmission from the left side of the bar at a incident angle more than 20 degrees,
+                    # flip to come from the front side
+                    samp['bar_loc']['th'] = 90 - np.round(np.mod(100 * samp['angle'] - 9000.01, 9000.01)) / 100
+            else:
+                samp['bar_loc']['th'] = 180
+                samp['angle'] = 180
         else:
-            samp['bar_loc']['th'] = np.mod(np.abs(90 - samp['angle']), 180)
-            if samp['bar_loc']['x0'] > -1.8 and samp['bar_loc']['th'] < 160:
-                # transmission from the right side of the bar at a incident angle more than 20 degrees,
-                # flip to come from the front side
-                samp['bar_loc']['th'] = 180 - np.mod(np.abs(90 - samp['angle']), 180)
-
+            if goodnumber:
+                samp['bar_loc']['th'] = np.mod(np.abs(90 - samp['angle']), 180)
+                if samp['bar_loc']['x0'] > -1.8 and samp['bar_loc']['th'] < 160:
+                    # transmission from the right side of the bar at a incident angle more than 20 degrees,
+                    # flip to come from the front side
+                    samp['bar_loc']['th'] = 180 - np.mod(np.abs(90 - samp['angle']), 180)
+            else:
+                samp['bar_loc']['th'] = 0
+                samp['angle'] = 0
 
 def load_samplesxls(filename):
     df = pd.read_excel(filename,
