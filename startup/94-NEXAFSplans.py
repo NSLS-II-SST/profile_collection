@@ -175,7 +175,6 @@ def fly_Oxygen_NEXAFS(speed=.1, pol=0, diode_range=7, m3_pitch=7.96, grating='25
 
 def fly_Fluorine_NEXAFS(speed=.5, pol=0, diode_range=7, m3_pitch=7.98, grating='1200'):
     """
-
     @param speed: the speed in eV/second to fly the mono
     @param pol: the polarization of the EPU to set before run
     @param diode_range: sets the range of the SAXS and WAXS beamstop DIODEs for direct beam measurements
@@ -188,7 +187,8 @@ def fly_Fluorine_NEXAFS(speed=.5, pol=0, diode_range=7, m3_pitch=7.98, grating='
     if len(read_input("Starting a Fluorine NEXAFS fly scan hit enter in the next 3 seconds to abort", "abort", "",
                       3)) > 0:
         return
-    yield from NEXAFS_fly_scan_core([(680, 720, speed)], enscan_type=enscan_type, openshutter=True, exp_time=.5,
+    yield from NEXAFS_fly_scan_core([(670, 685, 3*speed),(685, 700, speed),(700, 740, 3*speed)],
+                                    enscan_type=enscan_type, openshutter=True, exp_time=.5,
                                     diode_range=diode_range, m3_pitch=m3_pitch, pol=pol, grating=grating)
 
 
