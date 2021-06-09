@@ -55,6 +55,18 @@ def enc_clr_x():
     yield from bps.mv(sam_X, xpos)
 
 
+def enc_clr_gx():
+    send_notice('egann@bnl.gov', 'SST had a small problem', 'the encoder loss has happened on the RSoXS beamline'
+                                                            '\rEverything is probably just fine')
+
+
+    yield from gratingx.clear_encoder_loss()
+    yield from gratingx.enable()
+    yield from mirror2x.enable()
+    yield from mirror2.enable()
+    yield from grating.enable()
+
+
 def beamdown_notice():
     user_email = RE.md['user_email']
     send_notice(bls_email + ',' + user_email, 'SST-1 has lost beam', 'Beam to RSoXS has been lost.'
@@ -99,6 +111,10 @@ suspendx = SuspendBoolHigh(sam_X.enc_lss, sleep=40,
                            tripped_message="Sample X has lost encoder position, resetting, please wait, scan will "
                                            "resume automatically.",
                            pre_plan=enc_clr_x)
+suspendgx = SuspendBoolHigh(sam_X.enc_lss, sleep=40,
+                           tripped_message="Grating X has lost encoder position, resetting, please wait, scan will "
+                                           "resume automatically.",
+                           pre_plan=enc_clr_gx)
 RE.install_suspender(suspendx)
 
 

@@ -328,7 +328,8 @@ def short_carbon_scan_nonaromatic(multiple=1,diode_range=6,m3_pitch=8.00,grating
                             diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
-def custom_rsoxs_scan(energies=[((270,340,1),2)],plan_name='custom_rsoxs_scan',**kwargs):
+def custom_rsoxs_scan(energies=[((270,340,1),2)],plan_name='custom_rsoxs_scan',
+                      diode_range=6,m3_pitch=8.00,grating='1200',**kwargs):
     '''
     custom_rsoxs_scan
     @param multiple: default exposure times is multipled by this
@@ -354,7 +355,8 @@ def custom_rsoxs_scan(energies=[((270,340,1),2)],plan_name='custom_rsoxs_scan',*
         newtimes = np.append(newtimes,temptimes)
         
 
-    yield from en_scan_core(energies=newenergies,times=newtimes,enscan_type=enscan_type,**kwargs)
+    yield from en_scan_core(energies=newenergies,times=newtimes,enscan_type=enscan_type,
+                            diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
 

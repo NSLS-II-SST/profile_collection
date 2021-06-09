@@ -173,7 +173,7 @@ def fly_Oxygen_NEXAFS(speed=.1, pol=0, diode_range=7, m3_pitch=7.96, grating='25
                                     diode_range=diode_range, m3_pitch=m3_pitch, pol=pol, grating=grating)
 
 
-def fly_Fluorine_NEXAFS(speed=.5, pol=0, diode_range=7, m3_pitch=7.98, grating='1200'):
+def fly_Fluorine_NEXAFS(speed=.3, pol=0, diode_range=7, m3_pitch=7.98, grating='1200'):
     """
     @param speed: the speed in eV/second to fly the mono
     @param pol: the polarization of the EPU to set before run

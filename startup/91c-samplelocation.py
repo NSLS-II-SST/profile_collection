@@ -560,7 +560,7 @@ def af_rotation(xfm90,xf0,xf90,xf180):
     zoff = (xfm90 - xf90)/2
     return (x0,zoff, xoff)
 
-def find_fiducials(f2=[7.5,3.5,-1.8,1.1]):
+def find_fiducials(f2=[5,3.5,-0.3,1.1]):
     thoffset = 1.6
     angles = [-90+thoffset,0+thoffset,90+thoffset,180+thoffset]
     xrange = 3.5
