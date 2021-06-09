@@ -258,7 +258,7 @@ def very_short_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=8.01,grating='12
                             diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
-def short_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=8.00,grating='1200'):
+def short_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=8.00,grating='1200',**kwargs):
     '''
     short_carbon_scan_nd
     @param multiple: default exposure times is multipled by this
