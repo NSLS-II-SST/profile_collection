@@ -224,10 +224,10 @@ def SAXS():
         'motor':    Det_S,
         'position': 0,
         'order': 0},
-        {
-        'motor':    BeamStopS,
-        'position': 67.7,
-        'order': 0},
+#        {
+#        'motor':    BeamStopS,
+#        'position': 67.7,
+#        'order': 0},
         {
         'motor':    BeamStopW,
         'position': 3,
