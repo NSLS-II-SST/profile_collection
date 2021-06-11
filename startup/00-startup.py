@@ -246,7 +246,7 @@ class PersistentDict(collections.abc.MutableMapping):
 
 
 
-RE.md = {}#PersistentDict(RE.md.directory)  # Use fixed PersistentDict. aimed at same directory as built-in one
+RE.md = PersistentDict(RE.md.directory)  # Use fixed PersistentDict. aimed at same directory as built-in one
 
 # end temporary fix
 
