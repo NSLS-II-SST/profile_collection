@@ -326,16 +326,16 @@ def buildeputablegaps(start, stop, step, widfract, startingen, name, phase, grat
     for gap in gaps:
         yield from bps.mv(epu_gap,gap)
         yield from bps.mv(mono_en,max(72,startingen-10*widfract))
-
-        (peak_en,peak_val) = yield from tune_max([Izero_Mesh, Beamstop_WAXS], "RSoXS Au Mesh Current", mono_en,
+        peaklist = []
+        yield from tune_max([Izero_Mesh, Beamstop_WAXS], "RSoXS Au Mesh Current", mono_en,
                                                  min(2100, max(72, startingen - 10 * widfract)),
                                                  min(2200, max(90, startingen + 50 * widfract)),
-                                                 1, 25, 2, True, md={'plan_name': 'energy_tune'})
+                                                 1, 25, 2, True, md={'plan_name': 'energy_tune'},peaklist=peaklist)
 
-        ens.append(peak_en)
-        heights.append(peak_val)
+        ens.append(peaklist[0])
+        heights.append(peaklist[1])
         gapsout.append(epu_gap.position)
-        startingen = peak_en
+        startingen = peaklist[0]
         data = {'Energies': ens, 'EPUGaps': gapsout, 'PeakCurrent': heights}
         dataframe = pd.DataFrame(data=data)
         dataframe.to_csv('/mnt/zdrive/EPUdata_2021_' + name + '.csv')
@@ -419,7 +419,7 @@ def tune_max(
         start, stop, min_step,
         num=10,
         step_factor=3.0,
-        snake=False,
+        snake=False,peaklist=[],
         *, md=None):
     r"""
     plan: tune a motor to the maximum of signal(motor)
@@ -509,7 +509,7 @@ def tune_max(
 
     @bpp.stage_decorator(list(detectors) + [motor])
     @bpp.run_decorator(md=_md)
-    def _tune_core(start, stop, num, signal):
+    def _tune_core(start, stop, num, signal,peaklist):
         next_pos = start
         step = (stop - start) / (num - 1)
         peak_position = None
@@ -554,9 +554,9 @@ def tune_max(
             # improvement: report final peak_position
             # print("final position = {}".format(peak_position))
             yield from bps.mv(motor, peak_position)
-        return (peak_position,max_I)
+        peaklist += [peak_position, max_I]
 
-    return (yield from _tune_core(start, stop, num, signal))
+    return (yield from _tune_core(start, stop, num, signal, peaklist))
 
 
 def quicksnap():
