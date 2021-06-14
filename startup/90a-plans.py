@@ -327,15 +327,18 @@ def buildeputablegaps(start, stop, step, widfract, startingen, name, phase, grat
         yield from bps.mv(epu_gap,gap)
         yield from bps.mv(mono_en,max(72,startingen-10*widfract))
 
-        ps = yield from Scan_izero_peak(startingen,widfract)
+        (peak_en,peak_val) = tune_max([Izero_Mesh, Beamstop_WAXS], "RSoXS Au Mesh Current", mono_en,
+                 min(2100, max(72, startingen - 10 * widfract)),
+                 min(2200, max(90, startingen + 50 * widfract)),
+                 1, 25, 2, True, md={'plan_name': 'energy_tune'})
 
-        ens.append(ps.max["RSoXS Au Mesh Current"][0])
-        heights.append(ps.max["RSoXS Au Mesh Current"][1])
+        ens.append(peak_en)
+        heights.append(peak_val)
         gapsout.append(epu_gap.position)
-        startingen = ps.max["RSoXS Au Mesh Current"][0]
+        startingen = peak_en
         data = {'Energies': ens, 'EPUGaps': gapsout, 'PeakCurrent': heights}
         dataframe = pd.DataFrame(data=data)
-        dataframe.to_csv('/mnt/zdrive/EPUdata_2020_' + name + '.csv')
+        dataframe.to_csv('/mnt/zdrive/EPUdata_2021_' + name + '.csv')
         count+=1
         if count > 20:
             count=0
@@ -551,6 +554,7 @@ def tune_max(
             # improvement: report final peak_position
             # print("final position = {}".format(peak_position))
             yield from bps.mv(motor, peak_position)
+        return (peak_position,max_I)
 
     return (yield from _tune_core(start, stop, num, signal))
 
