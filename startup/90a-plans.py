@@ -9,6 +9,8 @@ import datetime
 from bluesky.preprocessors import make_decorator
 import queue
 from PIL import Image
+from bluesky.callbacks.fitting import PeakStats
+from bluesky.preprocessors import subs_wrapper
 
 run_report(__file__)
 
@@ -264,8 +266,8 @@ def do_some_eputables_2021_en():
     yield from bps.mv(epu_mode,3)
 
     #yield from buildeputable(200, 700, 5, 2, 14000, 15000,'C','250','C_250')
-    #yield from buildeputable(80, 700, 5, 2, 14000, 0,'L3','250','m3L0_250')
-    #yield from buildeputable(90, 700, 5, 2, 14000, 4000,'L3','250','m3L4_250')
+    yield from buildeputable(80, 700, 5, 2, 14000, 0,'L3','250','m3L0_250')
+    yield from buildeputable(90, 700, 5, 2, 14000, 4000,'L3','250','m3L4_250')
     yield from buildeputable(105, 700, 5, 2, 14000, 8000,'L3','250','m3L8_250')
     yield from buildeputable(135, 700, 5, 2, 14000, 12000,'L3','250','m3L12_250')
     yield from buildeputable(185, 700, 5, 2, 14000, 15000,'L3','250','m3L15_250')
@@ -287,6 +289,17 @@ def do_some_eputables_2021_en():
     yield from buildeputable(280, 1300, 20, 3, 19248.140428175113,  29500 ,'L3','1200','m3L29p5_1200')
 
     yield from bps.mv(slits1.hsize,slits_width)
+
+
+def Scan_izero_peak(startingen,widfract):
+    ps = PeakStats('en_energy','RSoXS Au Mesh Current')
+    yield from subs_wrapper(tune_max([Izero_Mesh,Beamstop_WAXS],"RSoXS Au Mesh Current",mono_en,
+                                    min(2100,max(72,startingen-10*widfract)),
+                                    min(2200,max(90,startingen+50*widfract)),
+                                    1,25,2,True,md={'plan_name':'energy_tune'}), ps)
+    print(ps.cen)
+    return ps
+
 
 
 def buildeputablegaps(start, stop, step, widfract, startingen, name, phase, grating):
@@ -313,20 +326,13 @@ def buildeputablegaps(start, stop, step, widfract, startingen, name, phase, grat
     for gap in gaps:
         yield from bps.mv(epu_gap,gap)
         yield from bps.mv(mono_en,max(72,startingen-10*widfract))
-        #yield from bp.scan([DM4_PD],epu_gap,
-        #                   min(99500,max(20000,startinggap-1500*widfract)),
-        #                   min(100000,max(21500,startinggap+1500*widfract)),
-        #                   51)
-        yield from tune_max([Izero_Mesh,Beamstop_WAXS],"RSoXS Au Mesh Current",mono_en,
-                                    min(2100,max(72,startingen-10*widfract)),
-                                    min(2200,max(90,startingen+50*widfract)),
-                                    1,25,2,True,md={'plan_name':'energy_tune'})
 
-        ens.append(bec.peaks.max["RSoXS Au Mesh Current"][0])
-        heights.append(bec.peaks.max["RSoXS Au Mesh Current"][1])
+        ps = yield from Scan_izero_peak(startingen,widfract)
+
+        ens.append(ps.max["RSoXS Au Mesh Current"][0])
+        heights.append(ps.max["RSoXS Au Mesh Current"][1])
         gapsout.append(epu_gap.position)
-        startingen = bec.peaks.max["RSoXS Au Mesh Current"][0]
-        #data = np.column_stack((ensout, gaps))
+        startingen = ps.max["RSoXS Au Mesh Current"][0]
         data = {'Energies': ens, 'EPUGaps': gapsout, 'PeakCurrent': heights}
         dataframe = pd.DataFrame(data=data)
         dataframe.to_csv('/mnt/zdrive/EPUdata_2020_' + name + '.csv')
