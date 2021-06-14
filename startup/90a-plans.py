@@ -327,10 +327,10 @@ def buildeputablegaps(start, stop, step, widfract, startingen, name, phase, grat
         yield from bps.mv(epu_gap,gap)
         yield from bps.mv(mono_en,max(72,startingen-10*widfract))
 
-        (peak_en,peak_val) = tune_max([Izero_Mesh, Beamstop_WAXS], "RSoXS Au Mesh Current", mono_en,
-                 min(2100, max(72, startingen - 10 * widfract)),
-                 min(2200, max(90, startingen + 50 * widfract)),
-                 1, 25, 2, True, md={'plan_name': 'energy_tune'})
+        (peak_en,peak_val) = yield from tune_max([Izero_Mesh, Beamstop_WAXS], "RSoXS Au Mesh Current", mono_en,
+                                                 min(2100, max(72, startingen - 10 * widfract)),
+                                                 min(2200, max(90, startingen + 50 * widfract)),
+                                                 1, 25, 2, True, md={'plan_name': 'energy_tune'})
 
         ens.append(peak_en)
         heights.append(peak_val)
