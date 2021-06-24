@@ -213,6 +213,7 @@ def update_bar(bar, loc_Q,front):
     def worker():
         global bar, sample_image_axes
         samplenum = 0
+        lastclicked = 0
         if(front):
             # add / replace the front fiducial bar entries (bar[0], bar[-1])
             AF1 = default_sample('AF1_front')
@@ -285,16 +286,18 @@ def update_bar(bar, loc_Q,front):
                     sample['bar_loc']['th0'] = 180
                 annotateImage(sample_image_axes, item, sample['sample_name'])
                 # advance sample and loop
+                lastclicked = samplenum
                 samplenum += 1
             elif item is 'escape':
                 print('aborting')
                 break
             elif item is 'enter' or item is 'n':
                 print(f'leaving this {sample["sample_name"]} unchanged')
+                lastclicked = samplenum
                 samplenum += 1
             elif item is 'p':
                 print('Previous sample')
-                samplenum -= 1
+                samplenum = lastclicked
             if (samplenum >= len(bar)):
                 print("done")
                 break
