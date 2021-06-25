@@ -2,7 +2,7 @@ run_report(__file__)
 from ophyd import (EpicsMotor, Device, Component as Cpt, EpicsSignal)
 from ophyd import FormattedComponent as FmtCpt
 
-mir2_type = EpicsSignal('XF:07ID1-OP{Mono:PGM1-Ax:MirX}Mtr_TYPE_MON',name='SST 2 Mirror 2 Stripe')
+mir2_type = EpicsSignal('XF:07ID1-OP{Mono:PGM1-Ax:MirX}Mtr_TYPE_MON',name='SST 1 Mirror 2 Stripe')
 
 class HexapodMirror(Device):
     X = Cpt(EpicsSignal, 'X}Mtr_MON',write_pv='X}Mtr_SP',kind='hinted')
@@ -32,7 +32,7 @@ class FMBHexapodMirrorAxis(PVPositioner):
 
 
 class FMBHexapodMirror(Device):
-    z = Cpt(FMBHexapodMirrorAxis, '-Ax:Z}')
+    Z = Cpt(FMBHexapodMirrorAxis, '-Ax:Z}')
     Y = Cpt(FMBHexapodMirrorAxis, '-Ax:Y}')
     X = Cpt(FMBHexapodMirrorAxis, '-Ax:X}')
     Pitch = Cpt(FMBHexapodMirrorAxis, '-Ax:P}')
@@ -49,4 +49,4 @@ mir4 = FMBHexapodMirror('XF:07ID2-OP{Mir:M4CD',name='SST 1 Mirror 4 fmb',kind='h
 mir3 = FMBHexapodMirror('XF:07ID1-OP{Mir:M3ABC',name='SST 1 Mirror 3 fmb',kind='hinted')
 mir1 = FMBHexapodMirror('XF:07IDA-OP{Mir:M1',name='SST 1 Mirror 1 fmb',kind='hinted')
 
-sd.baseline.extend([mir3,mir4,mir2_type])
+sd.baseline.extend([mir1,mir3,mir4,mir2_type])
