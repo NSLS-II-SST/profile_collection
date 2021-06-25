@@ -5,7 +5,7 @@ import bluesky.plans as bp
 import bluesky.plan_stubs as bps
 
 
-def full_oxygen_scan_nd(multiple=1,diode_range=6,m3_pitch=7.99,grating='1200',**kwargs):
+def full_oxygen_scan_nd(multiple=1,diode_range=6,m3_pitch=7.99,grating='1200',master_plan=None,**kwargs):
     '''
     full_oxygen_scan_nd
     @param multiple: default exposure times is multipled by this
@@ -31,10 +31,10 @@ def full_oxygen_scan_nd(multiple=1,diode_range=6,m3_pitch=7.99,grating='1200',**
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,master_plan=master_plan,
                             diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
-def short_oxygen_scan_nd(multiple=1,diode_range=6,m3_pitch=7.98,grating='1200',**kwargs):
+def short_oxygen_scan_nd(multiple=1,diode_range=6,m3_pitch=7.98,grating='1200',master_plan=None,**kwargs):
     '''
     short_oxygen_scan_nd
     @param multiple: default exposure times is multipled by this
@@ -61,11 +61,11 @@ def short_oxygen_scan_nd(multiple=1,diode_range=6,m3_pitch=7.98,grating='1200',*
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,master_plan=master_plan,
                             diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
-def short_zincl_scan_nd(multiple=1,diode_range=6,m3_pitch=7.98,grating='1200',**kwargs):
+def short_zincl_scan_nd(multiple=1,diode_range=6,m3_pitch=7.98,grating='1200',master_plan=None,**kwargs):
     '''
     short_zincl_scan_nd
     @param multiple: default exposure times is multipled by this
@@ -89,12 +89,12 @@ def short_zincl_scan_nd(multiple=1,diode_range=6,m3_pitch=7.98,grating='1200',**
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,master_plan=master_plan,
                             diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
 
-def very_short_oxygen_scan_nd(multiple=1,diode_range=6,m3_pitch=7.97,grating='1200',**kwargs):
+def very_short_oxygen_scan_nd(multiple=1,diode_range=6,m3_pitch=7.97,grating='1200',master_plan=None,**kwargs):
     '''
     very_short_oxygen_scan_nd
     @param multiple: default exposure times is multipled by this
@@ -122,12 +122,12 @@ def very_short_oxygen_scan_nd(multiple=1,diode_range=6,m3_pitch=7.97,grating='12
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,master_plan=master_plan,
                             diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
 
-def short_fluorine_scan_nd(multiple=1,diode_range=7,m3_pitch=7.98,grating='1200',**kwargs):
+def short_fluorine_scan_nd(multiple=1,diode_range=7,m3_pitch=7.98,grating='1200',master_plan=None,**kwargs):
     '''
     short_fluorine_scan_nd
     @param multiple: default exposure times is multipled by this
@@ -155,12 +155,12 @@ def short_fluorine_scan_nd(multiple=1,diode_range=7,m3_pitch=7.98,grating='1200'
     times[:] = 2
     times *= multiple
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,master_plan=master_plan,
                             diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
 
-def full_nitrogen_scan_nd(multiple=1,diode_range=6,m3_pitch=7.93,grating='1200',**kwargs):
+def full_nitrogen_scan_nd(multiple=1,diode_range=6,m3_pitch=7.93,grating='1200',master_plan=None,**kwargs):
     '''
     full_nitrogen_scan_nd
     @param multiple: default exposure times is multipled by this
@@ -186,11 +186,11 @@ def full_nitrogen_scan_nd(multiple=1,diode_range=6,m3_pitch=7.93,grating='1200',
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,master_plan=master_plan,
                             diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
-def short_nitrogen_scan_nd(multiple=1,diode_range=6,m3_pitch=8.00,grating='1200',**kwargs):
+def short_nitrogen_scan_nd(multiple=1,diode_range=6,m3_pitch=8.00,grating='1200',master_plan=None,**kwargs):
     '''
     short_nitrogen_scan_nd
     @param multiple: default exposure times is multipled by this
@@ -219,11 +219,11 @@ def short_nitrogen_scan_nd(multiple=1,diode_range=6,m3_pitch=8.00,grating='1200'
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,master_plan=master_plan,
                             diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
-def very_short_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=8.01,grating='1200',**kwargs):
+def very_short_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=8.01,grating='1200',master_plan=None,**kwargs):
     '''
     very_short_carbon_scan_nd
     @param multiple: default exposure times is multipled by this
@@ -254,11 +254,11 @@ def very_short_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=8.01,grating='12
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,master_plan=master_plan,
                             diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
-def short_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=8.00,grating='1200',**kwargs):
+def short_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=8.00,grating='1200',master_plan=None,**kwargs):
     '''
     short_carbon_scan_nd
     @param multiple: default exposure times is multipled by this
@@ -289,10 +289,10 @@ def short_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=8.00,grating='1200',*
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,master_plan=master_plan,
                             diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
-def short_carbon_scan_nonaromatic(multiple=1,diode_range=6,m3_pitch=8.00,grating='1200',**kwargs):
+def short_carbon_scan_nonaromatic(multiple=1,diode_range=6,m3_pitch=8.00,grating='1200',master_plan=None,**kwargs):
     '''
     short_carbon_scan_nonaromatic
     @param multiple: default exposure times is multipled by this
@@ -324,11 +324,11 @@ def short_carbon_scan_nonaromatic(multiple=1,diode_range=6,m3_pitch=8.00,grating
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,master_plan=master_plan,
                             diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
-def custom_rsoxs_scan(energies=[((270,340,1),2)],plan_name='custom_rsoxs_scan',
+def custom_rsoxs_scan(energies=[((270,340,1),2)],plan_name='custom_rsoxs_scan',master_plan=None,
                       diode_range=6,m3_pitch=8.00,grating='1200',**kwargs):
     '''
     custom_rsoxs_scan
@@ -355,12 +355,12 @@ def custom_rsoxs_scan(energies=[((270,340,1),2)],plan_name='custom_rsoxs_scan',
         newtimes = np.append(newtimes,temptimes)
         
 
-    yield from en_scan_core(energies=newenergies,times=newtimes,enscan_type=enscan_type,
+    yield from en_scan_core(energies=newenergies,times=newtimes,enscan_type=enscan_type,master_plan=master_plan,
                             diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
 
-def short_sulfurl_scan_nd(multiple=1,diode_range=6,m3_pitch=8.02,grating='1200',**kwargs):
+def short_sulfurl_scan_nd(multiple=1,diode_range=6,m3_pitch=8.02,grating='1200',master_plan=None,**kwargs):
     '''
     short_sulfurl_scan_nd
     @param multiple: default exposure times is multipled by this
@@ -389,12 +389,12 @@ def short_sulfurl_scan_nd(multiple=1,diode_range=6,m3_pitch=8.02,grating='1200',
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,master_plan=master_plan,
                             diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
 
-def focused_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=7.93,grating='1200',**kwargs):
+def focused_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=7.93,grating='1200',master_plan=None,**kwargs):
     '''
     focused_carbon_scan_nd
     @param multiple: default exposure times is multipled by this
@@ -426,11 +426,11 @@ def focused_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=7.93,grating='1200'
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,master_plan=master_plan,
                             diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
-def g_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=7.93,grating='1200',**kwargs):
+def g_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=7.93,grating='1200',master_plan=None,**kwargs):
     '''
     g_carbon_scan_nd
     @param multiple: default exposure times is multipled by this
@@ -452,11 +452,11 @@ def g_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=7.93,grating='1200',**kwa
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,master_plan=master_plan,
                             diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
-def t_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=7.93,grating='1200',**kwargs):
+def t_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=7.93,grating='1200',master_plan=None,**kwargs):
     '''
     t_carbon_scan_nd
     @param multiple: default exposure times is multipled by this
@@ -478,11 +478,11 @@ def t_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=7.93,grating='1200',**kwa
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,master_plan=master_plan,
                             diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
-def sufficient_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=7.96,grating='1200',**kwargs):
+def sufficient_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=7.96,grating='1200',master_plan=None,**kwargs):
     '''
     sufficient_carbon_scan_nd
     @param multiple: default exposure times is multipled by this
@@ -511,12 +511,12 @@ def sufficient_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=7.96,grating='12
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,master_plan=master_plan,
                             diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
 
-def picky_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=7.93,grating='1200',**kwargs):
+def picky_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=7.93,grating='1200',master_plan=None,**kwargs):
     '''
     picky_carbon_scan_nd
     @param multiple: default exposure times is multipled by this
@@ -539,12 +539,12 @@ def picky_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=7.93,grating='1200',*
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,master_plan=master_plan,
                             diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
 
-def full_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=7.97,grating='1200',**kwargs):
+def full_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=7.97,grating='1200',master_plan=None,**kwargs):
     '''
     full_carbon_scan_nd
     @param multiple: default exposure times is multipled by this
@@ -573,11 +573,11 @@ def full_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=7.97,grating='1200',**
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,master_plan=master_plan,
                             diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
-def full_carbon_scan_nonaromatic(multiple=1,diode_range=6,m3_pitch=7.97,grating='1200',**kwargs):
+def full_carbon_scan_nonaromatic(multiple=1,diode_range=6,m3_pitch=7.97,grating='1200',master_plan=None,**kwargs):
     '''
     full_carbon_scan_nonaromatic
     @param multiple: default exposure times is multipled by this
@@ -606,11 +606,11 @@ def full_carbon_scan_nonaromatic(multiple=1,diode_range=6,m3_pitch=7.97,grating=
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,master_plan=master_plan,
                             diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
-def full_fluorine_scan_nd(multiple=1,diode_range=7,m3_pitch=7.89,grating='1200',**kwargs):
+def full_fluorine_scan_nd(multiple=1,diode_range=7,m3_pitch=7.89,grating='1200',master_plan=None,**kwargs):
     '''
     full_fluorine_scan_nd
     @param multiple: default exposure times is multipled by this
@@ -634,10 +634,10 @@ def full_fluorine_scan_nd(multiple=1,diode_range=7,m3_pitch=7.89,grating='1200',
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,master_plan=master_plan,
                             diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
-def veryshort_fluorine_scan_nd(multiple=1,diode_range=7,m3_pitch=7.99,grating='1200',**kwargs):
+def veryshort_fluorine_scan_nd(multiple=1,diode_range=7,m3_pitch=7.99,grating='1200',master_plan=None,**kwargs):
     '''
     veryshort_fluorine_scan_nd
     @param multiple: default exposure times is multipled by this
@@ -662,11 +662,11 @@ def veryshort_fluorine_scan_nd(multiple=1,diode_range=7,m3_pitch=7.99,grating='1
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,master_plan=master_plan,
                             diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
-def full_ca_scan_nd(multiple=1,diode_range=6,m3_pitch=8.00,grating='1200',**kwargs):
+def full_ca_scan_nd(multiple=1,diode_range=6,m3_pitch=8.00,grating='1200',master_plan=None,**kwargs):
     '''
     full_ca_scan_nd
     @param multiple: default exposure times is multipled by this
@@ -691,11 +691,11 @@ def full_ca_scan_nd(multiple=1,diode_range=6,m3_pitch=8.00,grating='1200',**kwar
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,master_plan=master_plan,
                             diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
-def short_calcium_scan_nd(multiple=1,diode_range=6,m3_pitch=8.00,grating='1200',**kwargs):
+def short_calcium_scan_nd(multiple=1,diode_range=6,m3_pitch=8.00,grating='1200',master_plan=None,**kwargs):
     '''
     short_calcium_scan_nd
     @param multiple: default exposure times is multipled by this
@@ -719,12 +719,12 @@ def short_calcium_scan_nd(multiple=1,diode_range=6,m3_pitch=8.00,grating='1200',
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,master_plan=master_plan,
                             diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
 
-def full_carbon_calcium_scan_nd(multiple=1,diode_range=6,m3_pitch=7.96,grating='1200',**kwargs):
+def full_carbon_calcium_scan_nd(multiple=1,diode_range=6,m3_pitch=7.96,grating='1200',master_plan=None,**kwargs):
     '''
     full_carbon_calcium_scan_nd
     @param multiple: default exposure times is multipled by this
@@ -758,10 +758,10 @@ def full_carbon_calcium_scan_nd(multiple=1,diode_range=6,m3_pitch=7.96,grating='
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,master_plan=master_plan,
                             diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
-def survey_scan_verylowenergy(multiple=1,diode_range=7,m3_pitch=7.93,grating='250',**kwargs):
+def survey_scan_verylowenergy(multiple=1,diode_range=7,m3_pitch=7.93,grating='250',master_plan=None,**kwargs):
     '''
     survey_scan_verylowenergy
     @param multiple: default exposure times is multipled by this
@@ -783,12 +783,12 @@ def survey_scan_verylowenergy(multiple=1,diode_range=7,m3_pitch=7.93,grating='25
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,master_plan=master_plan,
                             diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
 
-def survey_scan_lowenergy(multiple=1,diode_range=7,m3_pitch=7.91,grating='1200',**kwargs):
+def survey_scan_lowenergy(multiple=1,diode_range=7,m3_pitch=7.91,grating='1200',master_plan=None,**kwargs):
     '''
     survey_scan_lowenergy
     @param multiple: default exposure times is multipled by this
@@ -810,12 +810,12 @@ def survey_scan_lowenergy(multiple=1,diode_range=7,m3_pitch=7.91,grating='1200',
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,master_plan=master_plan,
                             diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
 
-def survey_scan_highenergy(multiple=1,diode_range=7,m3_pitch=7.89,grating='1200',**kwargs):
+def survey_scan_highenergy(multiple=1,diode_range=7,m3_pitch=7.89,grating='1200',master_plan=None,**kwargs):
     '''
     survey_scan_highenergy
     @param multiple: default exposure times is multipled by this
@@ -837,11 +837,11 @@ def survey_scan_highenergy(multiple=1,diode_range=7,m3_pitch=7.89,grating='1200'
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,master_plan=master_plan,
                             diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
-def survey_scan_veryhighenergy(multiple=1,diode_range=7,m3_pitch=7.89,grating='1200',**kwargs):
+def survey_scan_veryhighenergy(multiple=1,diode_range=7,m3_pitch=7.89,grating='1200',master_plan=None,**kwargs):
     '''
     survey_scan_veryhighenergy
     @param multiple: default exposure times is multipled by this
@@ -863,7 +863,7 @@ def survey_scan_veryhighenergy(multiple=1,diode_range=7,m3_pitch=7.89,grating='1
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
-    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,
+    yield from en_scan_core(energies=energies, times=times,enscan_type=enscan_type,master_plan=master_plan,
                             diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 

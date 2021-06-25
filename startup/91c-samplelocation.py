@@ -63,17 +63,18 @@ def samxscan():
     yield from psh10.close()
 
 
-def spiralsearch(diameter=.6, stepsize=.2, energy=270, pol=0) :
+def spiralsearch(diameter=.6, stepsize=.2, energy=270, pol=0,master_plan=None):
     yield from bps.mv(en, energy)
     yield from set_polarization(pol)
     x_center = sam_X.user_setpoint.get()
     y_center = sam_Y.user_setpoint.get()
     num = round(diameter / stepsize) + 1
     yield from spiral_square([saxs_det], sam_X, sam_Y, x_center=x_center, y_center=y_center,
-                             x_range=diameter, y_range=diameter, x_num=num, y_num=num,md={'plan_name': 'spiralsearch'})
+                             x_range=diameter, y_range=diameter, x_num=num, y_num=num,
+                             md={'plan_name': 'spiralsearch','master_plan':master_plan})
 
 
-def spiraldata(diameter=.6, stepsize=.2, energy=None, exp_time=None):
+def spiraldata(diameter=.6, stepsize=.2, energy=None, exp_time=None,master_plan=None):
     if energy is not None:
         if energy > 70 and energy < 2200:
             yield from bps.mv(en, energy)
@@ -84,7 +85,8 @@ def spiraldata(diameter=.6, stepsize=.2, energy=None, exp_time=None):
     y_center = sam_Y.user_setpoint.get()
     num = round(diameter / stepsize) + 1
     yield from spiral_square([saxs_det], sam_X, sam_Y, x_center=x_center, y_center=y_center,
-                             x_range=diameter, y_range=diameter, x_num=num, y_num=num,md={'plan_name': 'spiraldata'})
+                             x_range=diameter, y_range=diameter, x_num=num, y_num=num,
+                             md={'plan_name': 'spiraldata','master_plan':master_plan})
 
 
 def spiralsearch_all(barin=[], diameter=.5, stepsize=.2):
@@ -93,10 +95,10 @@ def spiralsearch_all(barin=[], diameter=.5, stepsize=.2):
         RE.md['project_name'] = 'spiral_searches'
         sample()
         rsoxs_bot.send_message(f'running spiral scan on {samp["proposal_id"]} {samp["sample_name"]}')
-        yield from spiralsearch(diameter, stepsize)
+        yield from spiralsearch(diameter, stepsize,master_plan='spiralsearch_all')
 
 
-def spiralsearchwaxs(diameter=.6, stepsize=.2, energy=None):
+def spiralsearchwaxs(diameter=.6, stepsize=.2, energy=None,master_plan=None):
     if energy is not None:
         if energy > 150 and energy < 2200:
             yield from bps.mv(en, energy)
@@ -104,14 +106,15 @@ def spiralsearchwaxs(diameter=.6, stepsize=.2, energy=None):
     y_center = sam_Y.user_setpoint.get()
     num = round(diameter / stepsize) + 1
     yield from spiral_square([waxs_det], sam_X, sam_Y, x_center=x_center, y_center=y_center,
-                             x_range=diameter, y_range=diameter, x_num=num, y_num=num)
+                             x_range=diameter, y_range=diameter, x_num=num, y_num=num,
+                             md={'plan_name': 'spiralsearchwaxs','master_plan':master_plan})
 
 
 def spiralsearchwaxs_all(barin=[], diameter=.5, stepsize=.2):
     for sample in barin:
         yield from load_sample(sample)
         RE.md['project_name'] = 'spiral_searches'
-        yield from spiralsearchwaxs(diameter, stepsize)
+        yield from spiralsearchwaxs(diameter, stepsize,master_plan='spiralsearchwaxs_all')
 
 
 def map_bar_from_spirals(bar,num_previous_scans=150):

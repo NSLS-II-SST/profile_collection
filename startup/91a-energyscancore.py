@@ -86,7 +86,8 @@ def en_scan_core(signals=[],
                  diode_range=6,
                  pol=0,
                  grating='no change',
-                 angle=None):
+                 angle=None,
+                 master_plan=None):
     # rotate the sample to the requested angle (if not None)
     rotate_now(angle)
     # print the current sample information
@@ -110,10 +111,10 @@ def en_scan_core(signals=[],
     for det in dets:
         sigcycler += cycler(det.cam.acquire_time, times.copy())
     sigcycler += cycler(Shutter_open_time, times.copy()*1000)
-    yield from bp.scan_nd(dets + signals,sigcycler, md={'plan_name':enscan_type})
+    yield from bp.scan_nd(dets + signals,sigcycler, md={'plan_name':enscan_type,'master_plan': master_plan})
 
 
-def NEXAFS_scan_core(signals, dets, energy, energies, enscan_type=None,
+def NEXAFS_scan_core(signals, dets, energy, energies, enscan_type=None,master_plan=None,
                      openshutter=False, open_each_step=False, m3_pitch=7.94, diode_range=6, pol=0,
                      exp_time=1, grating='no change', motorname='None', offset=0):
     # set mirror 3 pitch
@@ -146,22 +147,22 @@ def NEXAFS_scan_core(signals, dets, energy, energies, enscan_type=None,
         yield from bps.mv(Shutter_control, 1)
         yield from bp.scan_nd(dets + signals + [en.energy],
                               sigcycler,
-                              md={'plan_name': enscan_type})
+                              md={'plan_name': enscan_type,'master_plan': master_plan})
         yield from bps.mv(Shutter_control, 0)
     elif open_each_step:
         yield from bps.mv(Shutter_enable, 1)
         yield from bp.scan_nd(dets + signals + [en.energy],
                               sigcycler,
-                              md={'plan_name': enscan_type},
+                              md={'plan_name': enscan_type,'master_plan': master_plan},
                               per_step=one_shuttered_step)
     else:
         yield from bp.scan_nd(dets + signals + [en.energy],
                               sigcycler,
-                              md={'plan_name': enscan_type})
+                              md={'plan_name': enscan_type,'master_plan': master_plan})
 
 
 def NEXAFS_fly_scan_core(scan_params,openshutter=False, m3_pitch=np.nan, diode_range=np.nan, pol=np.nan,
-                     grating='best',exp_time=.5,enscan_type=None):
+                     grating='best',exp_time=.5,enscan_type=None,master_plan=None):
     if not np.isnan(m3_pitch):
         yield from bps.abs_set(mir3.Pitch, m3_pitch, wait=True)
     if not np.isnan(diode_range):
@@ -184,12 +185,14 @@ def NEXAFS_fly_scan_core(scan_params,openshutter=False, m3_pitch=np.nan, diode_r
         yield from bps.mv(Shutter_enable, 0)
         yield from bps.mv(Shutter_control, 1)
         yield from fly_scan_eliot(scan_params,
-                              md={'plan_name': enscan_type},grating=grating,polarization=pol)
+                                  md={'plan_name': enscan_type,'master_plan': master_plan},
+                                  grating=grating,polarization=pol)
         yield from bps.mv(Shutter_control, 0)
 
     else:
         yield from fly_scan_eliot(scan_params,
-                              md={'plan_name': enscan_type},grating=grating,polarization=pol)
+                                  md={'plan_name': enscan_type,'master_plan': master_plan},
+                                  grating=grating,polarization=pol)
 
 
 ## HACK HACK
