@@ -70,7 +70,7 @@ def spiralsearch(diameter=.6, stepsize=.2, energy=270, pol=0) :
     y_center = sam_Y.user_setpoint.get()
     num = round(diameter / stepsize) + 1
     yield from spiral_square([saxs_det], sam_X, sam_Y, x_center=x_center, y_center=y_center,
-                             x_range=diameter, y_range=diameter, x_num=num, y_num=num)
+                             x_range=diameter, y_range=diameter, x_num=num, y_num=num,md={'plan_name': 'spiralsearch'})
 
 
 def spiraldata(diameter=.6, stepsize=.2, energy=None, exp_time=None):
@@ -84,7 +84,7 @@ def spiraldata(diameter=.6, stepsize=.2, energy=None, exp_time=None):
     y_center = sam_Y.user_setpoint.get()
     num = round(diameter / stepsize) + 1
     yield from spiral_square([saxs_det], sam_X, sam_Y, x_center=x_center, y_center=y_center,
-                             x_range=diameter, y_range=diameter, x_num=num, y_num=num)
+                             x_range=diameter, y_range=diameter, x_num=num, y_num=num,md={'plan_name': 'spiraldata'})
 
 
 def spiralsearch_all(barin=[], diameter=.5, stepsize=.2):
