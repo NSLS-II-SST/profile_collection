@@ -491,7 +491,18 @@ def avg_scan_time(plan_name, nscans=50, new_scan_duration=600):
         return np.mean(durations) * multiple
     else:
         # we have never run a scan of this type before (?!?) - assume it takes some default value (10 min)
-        return new_scan_duration
+        scans = db0(master_plan=plan_name)
+        durations = np.array([])
+        for i, sc in enumerate(scans):
+            if ('exit_status' in sc.stop.keys()):
+                if (sc.stop['exit_status'] == 'success'):
+                    durations = np.append(durations, sc.stop['time'] - sc.start['time'])
+                if i > nscans:
+                    break
+        if len(durations) > 0:
+            return np.mean(durations) * multiple
+        else:
+            return new_scan_duration
 
 
 def run_bar(bar, sort_by=['sample_num'], dryrun=0, rev=[False], delete_as_complete=True,
