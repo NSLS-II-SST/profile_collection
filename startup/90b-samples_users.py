@@ -145,11 +145,11 @@ def newuser():
     return user_dict()
 
 
-def add_acq(sample_dict, plan_name='full_carbon_scan', arguments='', config='WAXS',priority=50):
+def add_acq(sample_dict, plan_name='full_carbon_scan', arguments='', config='WAXS', priority=50):
     sample_dict['acquisitions'].append({'plan_name': plan_name,
                                         'arguments': arguments,
                                         'configuration': config,
-                                        'priority':priority})
+                                        'priority': priority})
     return sample_dict
 
 
@@ -163,8 +163,8 @@ def get_location(motor_list):
 
 
 def sample_set_location(sample_dict):
-    sample_dict['location'] = get_sample_location() # set the location metadata
-    sample_recenter_sample(sample_dict) # change the x0, y0, theta to result in this new position (including angle)
+    sample_dict['location'] = get_sample_location()  # set the location metadata
+    sample_recenter_sample(sample_dict)  # change the x0, y0, theta to result in this new position (including angle)
     return sample_dict
 
 
@@ -391,7 +391,8 @@ def newsample():
         RE.md['bar_loc']['spot'] = bar_loc
         RE.md['bar_spot'] = bar_loc
 
-    th = input('Angle desired for sample acquisition (-180 for transmission from back) ({}): '.format(RE.md['bar_loc']['th']))
+    th = input(
+        'Angle desired for sample acquisition (-180 for transmission from back) ({}): '.format(RE.md['bar_loc']['th']))
     if th is not '':
         RE.md['bar_loc']['th'] = th
         RE.md['angle'] = th
@@ -471,7 +472,7 @@ def newsample():
 
 
 def avg_scan_time(plan_name, nscans=50, new_scan_duration=600):
-    if plan_name is 'normal_incidence_rotate_pol_nexafs' :
+    if plan_name is 'normal_incidence_rotate_pol_nexafs':
         multiple = 6
         plan_name = 'fly_Carbon_NEXAFS'
     elif plan_name is 'fixed_pol_rotate_sample_nexafs' or plan_name is 'fixed_sample_rotate_pol_nexafs':
@@ -522,7 +523,7 @@ def run_bar(bar, sort_by=['sample_num'], dryrun=0, rev=[False], delete_as_comple
     '''
 
     config_change_time = 120  # time to change between configurations, in seconds.
-    save_to_file=False
+    save_to_file = False
     try:
         open(save_as_complete, 'w')
     except OSError:
@@ -537,31 +538,31 @@ def run_bar(bar, sort_by=['sample_num'], dryrun=0, rev=[False], delete_as_comple
         sample_project = s['project_name']
         for acq_num, a in enumerate(s['acquisitions']):
             if 'priority' not in a.keys():
-                a['priority']=50
-            list_out.append([sample_id,                         # 0  X
-                            sample_project,                     # 1  X
-                            a['configuration'],                 # 2  X
-                            a['plan_name'],                     # 3
-                            avg_scan_time(a['plan_name'], 50),  # 4 calculated plan time
-                            sample,                             # 5 full sample dict
-                            a,                                  # 6 full acquisition dict
-                            samp_num,                           # 7 sample index
-                            acq_num,                            # 8 acq index
-                            a['arguments'],                     # 9  X
-                            s['density'],                       # 10
-                            s['proposal_id'],                   # 11 X
-                            s['sample_priority'],               # 12 X
-                            a['priority']])                     # 13 X
+                a['priority'] = 50
+            list_out.append([sample_id,  # 0  X
+                             sample_project,  # 1  X
+                             a['configuration'],  # 2  X
+                             a['plan_name'],  # 3
+                             avg_scan_time(a['plan_name'], 50),  # 4 calculated plan time
+                             sample,  # 5 full sample dict
+                             a,  # 6 full acquisition dict
+                             samp_num,  # 7 sample index
+                             acq_num,  # 8 acq index
+                             a['arguments'],  # 9  X
+                             s['density'],  # 10
+                             s['proposal_id'],  # 11 X
+                             s['sample_priority'],  # 12 X
+                             a['priority']])  # 13 X
     switcher = {
-                'sample_id':    0,
-                'project':      1,
-                'config':       2,
-                'plan':         3,
-                'plan_args':    9,
-                'proposal':     11,
-                'spriority':    12,
-                'apriority':    13,
-                'sample_num':   7,}
+        'sample_id': 0,
+        'project': 1,
+        'config': 2,
+        'plan': 3,
+        'plan_args': 9,
+        'proposal': 11,
+        'spriority': 12,
+        'apriority': 13,
+        'sample_num': 7, }
     # add anything to the above list, and make a key in the above dictionary,
     # using that element to sort by something else
     try:
@@ -610,10 +611,10 @@ def run_bar(bar, sort_by=['sample_num'], dryrun=0, rev=[False], delete_as_comple
                        '\nTime so far: {}'.format(str(total_time)) +
                        '\nStarting scan {} out of {}'.format(colored(f'#{i + 1}', 'blue'), len(list_out)) +
                        '{} of {} in project {} Proposal # {}\n which should take {}\n'.format(
-                           colored(step[3], 'blue'),# plan
-                           colored(step[0], 'blue'),# sample_id
-                           colored(step[1], 'blue'),# project
-                           colored(step[11], 'blue'),# proposal
+                           colored(step[3], 'blue'),  # plan
+                           colored(step[0], 'blue'),  # sample_id
+                           colored(step[1], 'blue'),  # project
+                           colored(step[11], 'blue'),  # proposal
                            time_sec(this_step_time)) +
                        f'time remaining approx {time_sec(time_remaining)} \n\n',
                        'red', width=120, shrink=True)
@@ -628,7 +629,7 @@ def run_bar(bar, sort_by=['sample_num'], dryrun=0, rev=[False], delete_as_comple
             if delete_as_complete:
                 bar[step[7]]['acquisitions'].remove(step[6])
             if save_to_file:
-                save_samplesxls(bar,save_as_complete)
+                save_samplesxls(bar, save_as_complete)
             elapsed_time = datetime.datetime.now() - start_time
             rsoxs_bot.send_message(f'Acquisition complete. Actual time : {str(elapsed_time)},')
         rsoxs_bot.send_message('All scans complete!')
@@ -648,9 +649,8 @@ def list_samples(bar):
         acqs = bar[index]['acquisitions']
         for acq in acqs:
             text += '\n   {}({}) in {} config, priority {}'.format(acq['plan_name'], acq['arguments'],
-                                                                   acq['configuration'],acq['priority'])
+                                                                   acq['configuration'], acq['priority'])
     boxed_text('Samples on bar', text, 'lightblue', shrink=False)
-
 
 
 def save_samplesxls(bar, filename):
@@ -663,7 +663,7 @@ def save_samplesxls(bar, filename):
               'z': 'z',
               'th': 'th'}
     sampledf = pd.DataFrame.from_dict(bar, orient='columns')
-    sampledf.to_excel('temp.xls',index=False)
+    sampledf.to_excel('temp.xls', index=False)
 
     df = pd.read_excel('temp.xls', na_values='')
     df.replace(np.nan, '', regex=True, inplace=True)
@@ -679,26 +679,28 @@ def save_samplesxls(bar, filename):
             if isinstance(loc['motor'], Device):
                 testdict[i]['location'][j]['motor'] = switch[loc['motor'].name]
         for acq in sam['acquisitions']:
-            acq.update({'sample_id':sam['sample_id']})
+            acq.update({'sample_id': sam['sample_id']})
             acqlist.append(acq)
 
     sampledf = pd.DataFrame.from_dict(testdict, orient='columns')
     sampledf = sampledf.loc[:, df.columns != 'acquisitions']
     acqdf = pd.DataFrame.from_dict(acqlist, orient='columns')
     writer = pd.ExcelWriter(filename)
-    sampledf.to_excel(writer,index=False,sheet_name='Samples')
-    acqdf.to_excel(writer,index=False,sheet_name='Acquisitions')
+    sampledf.to_excel(writer, index=False, sheet_name='Samples')
+    acqdf.to_excel(writer, index=False, sheet_name='Acquisitions')
     writer.close()
 
 
-def sanatize_angle(samp):
+def sanatize_angle(samp, force=False):
     # translates a requested angle (something in sample['angle']) into an actual angle depending on the kind of sample
     if type(samp['angle']) == int or type(samp['angle']) == float:
-        goodnumber = True # make the number fall in the necessary range
+        goodnumber = True  # make the number fall in the necessary range
     else:
-        goodnumber = False # make all transmission 90 degrees from the back, and all grading 20 deg
-    if (samp['grazing']):
-        if (samp['front']):
+        goodnumber = False  # make all transmission 90 degrees from the back, and all grading 20 deg
+    if force and -95 < samp['angle'] < 185:
+        samp['bar_loc']['th'] = samp['angle']
+    if samp['grazing']:
+        if samp['front']:
             if goodnumber:
                 samp['bar_loc']['th'] = np.mod(np.abs(90 - samp['angle']), 180)
             else:
@@ -713,7 +715,7 @@ def sanatize_angle(samp):
                 samp['angle'] = 110
             # back grazing sample angle is interpreted as grazing angle but subtracted from 180
     else:
-        if (samp['front']):
+        if samp['front']:
             if goodnumber:
                 samp['bar_loc']['th'] = 90 + np.round(np.mod(100 * samp['angle'] - 9000.01, 9000.01)) / 100
                 if samp['bar_loc']['x0'] < -1.8 and samp['bar_loc']['th'] < 160:
@@ -734,6 +736,7 @@ def sanatize_angle(samp):
                 samp['bar_loc']['th'] = 0
                 samp['angle'] = 0
 
+
 def load_samplesxls(filename):
     df = pd.read_excel(filename,
                        na_values='',
@@ -748,14 +751,14 @@ def load_samplesxls(filename):
         samplenew = [samplenew]
     if 'acquisitions' not in samplenew[0].keys():
         for samp in samplenew:
-            samp['acquisitions']=[]
+            samp['acquisitions'] = []
         acqsdf = pd.read_excel(filename,
-                             na_values='',
-                             engine='openpyxl',
-                             keep_default_na=True,
-                             sheet_name='Acquisitions',
-                             usecols='A:E',
-                             verbose=True)
+                               na_values='',
+                               engine='openpyxl',
+                               keep_default_na=True,
+                               sheet_name='Acquisitions',
+                               usecols='A:E',
+                               verbose=True)
         acqs = acqsdf.to_dict(orient='records')
         if not isinstance(acqs, list):
             acqs = [acqs]
@@ -763,7 +766,7 @@ def load_samplesxls(filename):
             if np.isnan(acq['priority']):
                 break
             samp = next(dict for dict in samplenew if dict['sample_id'] == acq['sample_id'])
-            add_acq(samp,acq['plan_name'],acq['arguments'],acq['configuration'],acq['priority'])
+            add_acq(samp, acq['plan_name'], acq['arguments'], acq['configuration'], acq['priority'])
     else:
         for i, sam in enumerate(samplenew):
             samplenew[i]['acquisitions'] = eval(sam['acquisitions'])

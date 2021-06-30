@@ -63,9 +63,10 @@ def samxscan():
     yield from psh10.close()
 
 
-def spiralsearch(diameter=.6, stepsize=.2, energy=270, pol=0,master_plan=None):
+def spiralsearch(diameter=.6, stepsize=.2, energy=270, pol=0,exposure=1,master_plan=None):
     yield from bps.mv(en, energy)
     yield from set_polarization(pol)
+    set_exposure(exposure)
     x_center = sam_X.user_setpoint.get()
     y_center = sam_Y.user_setpoint.get()
     num = round(diameter / stepsize) + 1
@@ -595,20 +596,20 @@ def find_fiducials(f2=[5,3.5,-0.3,1.1]):
     bec.disable_plots()
 
 
-def rotate_now(theta):
+def rotate_now(theta,force=False):
     if theta is not None:
         samp = get_sample_dict()
         samp['angle'] = theta
-        rotate_sample(samp)
+        rotate_sample(samp,force)
         yield from load_sample(samp)
 
 
-def rotate_sample(samp):
+def rotate_sample(samp,force=False):
     '''
     rotate a sample position to the requested theta position
     the requested sample position is set in the angle metadata (sample['angle'])
     '''
-    sanatize_angle(samp) # makes sure the requested angle is translated into a real angle for acquisition
+    sanatize_angle(samp,force) # makes sure the requested angle is translated into a real angle for acquisition
     theta_new = samp['bar_loc']['th']
     x0 = samp['bar_loc']['x0']
     y0 = samp['bar_loc']['y0']

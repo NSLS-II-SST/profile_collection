@@ -867,3 +867,34 @@ def survey_scan_veryhighenergy(multiple=1,diode_range=7,m3_pitch=7.89,grating='1
                             diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
 
 
+
+def cdsaxs_scan(energies=[(250,2),(270,2),(280,2),(285,2),(300,2)],
+                angles=(-60,61,2),plan_name='cdsaxs_single',master_plan='cdsaxs_scan',
+                diode_range=6,m3_pitch=8.00,grating='1200',**kwargs):
+    '''
+    custom_rsoxs_scan
+    @param multiple: default exposure times is multipled by this
+    @param energies: list of touples of energy, exposure time
+    @param angles: list of angles.  at each angle, the energy list will be collected
+    @param diode_range: integer range for the dilde
+    @param m3_pitch: pitch value for M3 for this energy range - check before scans
+    @param grating: '1200' high energy or '250' low energy
+    @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
+    @return: Do a step scan and take images
+    '''
+
+    enscan_type = plan_name
+    newenergies = []
+    newtimes = []
+    if len(read_input("Starting a CD-SAXS energy,angle scan hit enter in "
+                      "the next 3 seconds to abort", "abort", "", 3)) > 0:
+        return
+    for (energy,exp) in energies:
+        newenergies.append(energy)
+        newtimes.append(exp)
+
+    for angle in np.arange(*angles):
+        yield from rotate_now(angle,force=True)
+        yield from en_scan_core(energies=newenergies,times=newtimes,enscan_type=enscan_type,master_plan=master_plan,
+                                diode_range=diode_range,m3_pitch=m3_pitch, grating=grating,**kwargs)
+
