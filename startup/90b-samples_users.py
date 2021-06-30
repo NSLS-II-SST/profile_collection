@@ -587,12 +587,13 @@ def run_bar(bar, sort_by=['sample_num'], dryrun=0, rev=[False], delete_as_comple
         text = ''
         total_time = 0
         for i, step in enumerate(list_out):
-            text += 'load {} from {}, config {}, run {} (p {}), starts @ {} takes {}\n'.format(
+            text += 'load {} from {}, config {}, run {} (p {} a {}), starts @ {} takes {}\n'.format(
                 step[5]['sample_name'],
                 step[1],
                 step[2],
                 step[3],
                 step[12],
+                step[13],
                 time_sec(total_time),
                 time_sec(step[4]))
             total_time += step[4]
@@ -699,6 +700,7 @@ def sanatize_angle(samp, force=False):
         goodnumber = False  # make all transmission 90 degrees from the back, and all grading 20 deg
     if force and -95 < samp['angle'] < 185:
         samp['bar_loc']['th'] = samp['angle']
+        return
     if samp['grazing']:
         if samp['front']:
             if goodnumber:

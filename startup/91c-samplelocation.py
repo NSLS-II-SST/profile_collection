@@ -63,14 +63,14 @@ def samxscan():
     yield from psh10.close()
 
 
-def spiralsearch(diameter=.6, stepsize=.2, energy=270, pol=0,exposure=1,master_plan=None):
+def spiralsearch(diameter=.6, stepsize=.2, energy=270, pol=0,exposure=1,master_plan=None,dets=[saxs_det]):
     yield from bps.mv(en, energy)
     yield from set_polarization(pol)
     set_exposure(exposure)
     x_center = sam_X.user_setpoint.get()
     y_center = sam_Y.user_setpoint.get()
     num = round(diameter / stepsize) + 1
-    yield from spiral_square([saxs_det], sam_X, sam_Y, x_center=x_center, y_center=y_center,
+    yield from spiral_square(dets, sam_X, sam_Y, x_center=x_center, y_center=y_center,
                              x_range=diameter, y_range=diameter, x_num=num, y_num=num,
                              md={'plan_name': 'spiralsearch','master_plan':master_plan})
 
@@ -162,7 +162,7 @@ def map_bar_from_spirals(bar,num_previous_scans=150):
 
 # load bar onto imager, load bar file, and do image_bar(bar,path='path_to_image')
 
-# this will automatically go into image tagging, but to pick up where you left off, do 
+# this will automatically go into image tagging, but to pick up where you left off, do
 
 # locate_samples_from_image(bar,'path_to_image')
 
