@@ -544,7 +544,7 @@ def picky_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=7.93,grating='1200',m
 
 
 
-def full_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=7.97,grating='1200',master_plan=None,**kwargs):
+def full_carbon_scan_nd(multiple=1,diode_range=6,m3_pitch=8.00,grating='1200',master_plan=None,**kwargs):
     '''
     full_carbon_scan_nd
     @param multiple: default exposure times is multipled by this
