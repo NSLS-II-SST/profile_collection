@@ -109,4 +109,4 @@ startup/.idea/
 # ipython
 db/
 static/
-history.sqlite
+*history.sqlite
