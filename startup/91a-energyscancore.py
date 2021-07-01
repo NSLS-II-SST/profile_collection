@@ -105,10 +105,11 @@ def en_scan_core(signals=[],
     yield from set_polarization(pol)
     # set up the scan cycler
     sigcycler = cycler(energy, energies)
-    shutter_times = [i * 5 for i in times]
+    shutter_times = [i * 1000 for i in times]
     for det in dets:
         sigcycler += cycler(det.cam.acquire_time, times.copy())
     sigcycler += cycler(Shutter_open_time, shutter_times)
+    #print(sigcycler)
     yield from bp.scan_nd(dets + signals,sigcycler, md={'plan_name':enscan_type,'master_plan': master_plan})
 
 
