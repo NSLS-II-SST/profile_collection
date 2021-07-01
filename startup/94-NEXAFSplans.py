@@ -2,10 +2,11 @@ run_report(__file__)
 
 import numpy as np
 
+
 def full_Carbon_NEXAFS(sigs=[],
                        dets=[Sample_TEY, Izero_Mesh, Beamstop_WAXS], energy=en, pol=0, diode_range=7, m3_pitch=7.98,
                        open_each_step=True, exp_time=1, grating='no change', motorname='None', offset=0,
-                       master_plan=None):
+                       master_plan=None, md={}):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     typically this is not run anymore as of jan 2021.  fly scans are the preferred NEXAFS method
@@ -31,14 +32,14 @@ def full_Carbon_NEXAFS(sigs=[],
     energies = np.append(energies, np.arange(310, 320, 1))
     energies = np.append(energies, np.arange(320, 350, 1))
 
-    yield from NEXAFS_scan_core(sigs, dets, energy, energies, enscan_type=enscan_type,master_plan=master_plan,
+    yield from NEXAFS_scan_core(sigs, dets, energy, energies, enscan_type=enscan_type, master_plan=master_plan, md=md,
                                 openshutter=True, diode_range=diode_range, m3_pitch=m3_pitch, pol=pol,
                                 open_each_step=open_each_step, exp_time=exp_time, grating=grating,
                                 motorname=motorname, offset=offset)
 
 
 def fly_Carbon_NEXAFS(speed=.1, pol=0, diode_range=7, m3_pitch=7.98, grating='250',
-                       master_plan=None):
+                      master_plan=None, md={}):
     """
 
     @param speed: the speed in eV/second to fly the mono
@@ -48,18 +49,21 @@ def fly_Carbon_NEXAFS(speed=.1, pol=0, diode_range=7, m3_pitch=7.98, grating='25
     @param grating: the grating of the mono to use for the scan (currently "1200" and "250" are only valid choices)
     @return: perform a flying NEXAFS scan
     """
+    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'fly_Carbon_NEXAFS',
+                                                            'arguments': dict(locals())})
     enscan_type = 'fly_Carbon_NEXAFS'
     sample()
     if len(read_input("Starting a Carbon NEXAFS fly scan hit enter in the next 3 seconds to abort", "abort", "",
                       3)) > 0:
         return
     yield from NEXAFS_fly_scan_core([(270, 282, speed * 3), (282, 297, speed), (297, 340, speed * 5)],
-                                    enscan_type=enscan_type, openshutter=True, exp_time=.5,master_plan=master_plan,
+                                    enscan_type=enscan_type, openshutter=True, exp_time=.5, master_plan=master_plan,
+                                    md=md,
                                     diode_range=diode_range, m3_pitch=m3_pitch, pol=pol, grating=grating)
 
 
 def fly_Calcium_NEXAFS(speed=.15, pol=0, diode_range=7, m3_pitch=7.99, grating='250',
-                       master_plan=None):
+                       master_plan=None, md={}):
     """
 
     @param speed: the speed in eV/second to fly the mono
@@ -69,18 +73,20 @@ def fly_Calcium_NEXAFS(speed=.15, pol=0, diode_range=7, m3_pitch=7.99, grating='
     @param grating: the grating of the mono to use for the scan (currently "1200" and "250" are only valid choices)
     @return: perform a flying NEXAFS scan
     """
+    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'survey_scan_lowenergy',
+                                                            'arguments': dict(locals())})
     enscan_type = 'fly_Calcium_NEXAFS'
     sample()
     if len(read_input("Starting a Carbon NEXAFS fly scan hit enter in the next 3 seconds to abort", "abort", "",
                       3)) > 0:
         return
     yield from NEXAFS_fly_scan_core([(320, 340, speed * 3), (340, 355, speed)], enscan_type=enscan_type,
-                                    openshutter=True, exp_time=.5,master_plan=master_plan,
+                                    openshutter=True, exp_time=.5, master_plan=master_plan, md=md,
                                     diode_range=diode_range, m3_pitch=m3_pitch, pol=pol, grating=grating)
 
 
 def fly_SulfurL_NEXAFS(speed=.1, pol=0, diode_range=7, m3_pitch=7.97, grating='250',
-                       master_plan=None):
+                       master_plan=None, md={}):
     """
 
     @param speed: the speed in eV/second to fly the mono
@@ -90,6 +96,8 @@ def fly_SulfurL_NEXAFS(speed=.1, pol=0, diode_range=7, m3_pitch=7.97, grating='2
     @param grating: the grating of the mono to use for the scan (currently "1200" and "250" are only valid choices)
     @return: perform a flying NEXAFS scan
     """
+    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'fly_SulfurL_NEXAFS',
+                                                            'arguments': dict(locals())})
     enscan_type = 'fly_SulfurL_NEXAFS'
     sample()
     if len(read_input("Starting a Sulfur L-edge NEXAFS fly scan hit enter in the next 3 seconds to abort", "abort", "",
@@ -101,7 +109,7 @@ def fly_SulfurL_NEXAFS(speed=.1, pol=0, diode_range=7, m3_pitch=7.97, grating='2
 
 
 def fly_SiliconL_NEXAFS(speed=.1, pol=0, diode_range=6, m3_pitch=8.01, grating='250',
-                       master_plan=None):
+                        master_plan=None, md={}):
     """
 
     @param speed: the speed in eV/second to fly the mono
@@ -111,6 +119,8 @@ def fly_SiliconL_NEXAFS(speed=.1, pol=0, diode_range=6, m3_pitch=8.01, grating='
     @param grating: the grating of the mono to use for the scan (currently "1200" and "250" are only valid choices)
     @return: perform a flying NEXAFS scan
     """
+    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'fly_SiliconL_NEXAFS',
+                                                            'arguments': dict(locals())})
     enscan_type = 'fly_SiliconL_NEXAFS'
     sample()
     if len(read_input("Starting a Silicon L-edge NEXAFS fly scan hit enter in the next 3 seconds to abort", "abort", "",
@@ -122,7 +132,7 @@ def fly_SiliconL_NEXAFS(speed=.1, pol=0, diode_range=6, m3_pitch=8.01, grating='
 
 
 def fly_SiliconK_NEXAFS(speed=.2, pol=0, diode_range=6, m3_pitch=7.97, grating='1200',
-                       master_plan=None):
+                        master_plan=None, md={}):
     """
 
     @param speed: the speed in eV/second to fly the mono
@@ -132,6 +142,8 @@ def fly_SiliconK_NEXAFS(speed=.2, pol=0, diode_range=6, m3_pitch=7.97, grating='
     @param grating: the grating of the mono to use for the scan (currently "1200" and "250" are only valid choices)
     @return: perform a flying NEXAFS scan
     """
+    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'fly_SiliconK_NEXAFS',
+                                                            'arguments': dict(locals())})
     enscan_type = 'fly_SiliconK_NEXAFS'
     sample()
     if len(read_input("Starting a Silicon K-edge NEXAFS fly scan hit enter in the next 3 seconds to abort", "abort", "",
@@ -143,7 +155,7 @@ def fly_SiliconK_NEXAFS(speed=.2, pol=0, diode_range=6, m3_pitch=7.97, grating='
 
 
 def fly_Nitrogen_NEXAFS(speed=.1, pol=0, diode_range=7, m3_pitch=7.96, grating='250',
-                       master_plan=None):
+                        master_plan=None, md={}):
     """
 
     @param speed: the speed in eV/second to fly the mono
@@ -153,6 +165,8 @@ def fly_Nitrogen_NEXAFS(speed=.1, pol=0, diode_range=7, m3_pitch=7.96, grating='
     @param grating: the grating of the mono to use for the scan (currently "1200" and "250" are only valid choices)
     @return: perform a flying NEXAFS scan
     """
+    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'fly_Nitrogen_NEXAFS',
+                                                            'arguments': dict(locals())})
     enscan_type = 'fly_Nitrogen_NEXAFS'
     sample()
     if len(read_input("Starting a Nitrogen NEXAFS fly scan hit enter in the next 3 seconds to abort", "abort", "",
@@ -165,7 +179,7 @@ def fly_Nitrogen_NEXAFS(speed=.1, pol=0, diode_range=7, m3_pitch=7.96, grating='
 
 
 def fly_Oxygen_NEXAFS(speed=.1, pol=0, diode_range=7, m3_pitch=7.96, grating='250',
-                       master_plan=None):
+                      master_plan=None, md={}):
     """
 
     @param speed: the speed in eV/second to fly the mono
@@ -175,6 +189,8 @@ def fly_Oxygen_NEXAFS(speed=.1, pol=0, diode_range=7, m3_pitch=7.96, grating='25
     @param grating: the grating of the mono to use for the scan (currently "1200" and "250" are only valid choices)
     @return: perform a flying NEXAFS scan
     """
+    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'fly_Oxygen_NEXAFS',
+                                                            'arguments': dict(locals())})
     enscan_type = 'fly_Oxygen_NEXAFS'
     sample()
     if len(read_input("Starting a Oxygen NEXAFS fly scan hit enter in the next 3 seconds to abort", "abort", "",
@@ -187,7 +203,7 @@ def fly_Oxygen_NEXAFS(speed=.1, pol=0, diode_range=7, m3_pitch=7.96, grating='25
 
 
 def fly_Fluorine_NEXAFS(speed=.3, pol=0, diode_range=7, m3_pitch=7.98, grating='1200',
-                       master_plan=None):
+                        master_plan=None, md={}):
     """
     @param speed: the speed in eV/second to fly the mono
     @param pol: the polarization of the EPU to set before run
@@ -196,19 +212,21 @@ def fly_Fluorine_NEXAFS(speed=.3, pol=0, diode_range=7, m3_pitch=7.98, grating='
     @param grating: the grating of the mono to use for the scan (currently "1200" and "250" are only valid choices)
     @return: perform a flying NEXAFS scan
     """
+    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'fly_Fluorine_NEXAFS',
+                                                            'arguments': dict(locals())})
     enscan_type = 'fly_Fluorine_NEXAFS'
     sample()
     if len(read_input("Starting a Fluorine NEXAFS fly scan hit enter in the next 3 seconds to abort", "abort", "",
                       3)) > 0:
         return
-    yield from NEXAFS_fly_scan_core([(670, 685, 3*speed),(685, 700, speed),(700, 740, 3*speed)],
+    yield from NEXAFS_fly_scan_core([(670, 685, 3 * speed), (685, 700, speed), (700, 740, 3 * speed)],
                                     enscan_type=enscan_type, openshutter=True, exp_time=.5,
                                     diode_range=diode_range, m3_pitch=m3_pitch, pol=pol, grating=grating,
                                     master_plan=master_plan)
 
 
 def fly_Boron_NEXAFS(speed=.1, pol=0, diode_range=6, m3_pitch=8.0, grating='250',
-                       master_plan=None):
+                     master_plan=None, md={}):
     """
 
     @param speed: the speed in eV/second to fly the mono
@@ -218,6 +236,8 @@ def fly_Boron_NEXAFS(speed=.1, pol=0, diode_range=6, m3_pitch=8.0, grating='250'
     @param grating: the grating of the mono to use for the scan (currently "1200" and "250" are only valid choices)
     @return: perform a flying NEXAFS scan
     """
+    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'fly_Fluorine_NEXAFS',
+                                                            'arguments': dict(locals())})
     enscan_type = 'fly_Fluorine_NEXAFS'
     sample()
     if len(read_input("Starting a Fluorine NEXAFS fly scan hit enter in the next 3 seconds to abort", "abort", "",
@@ -226,7 +246,6 @@ def fly_Boron_NEXAFS(speed=.1, pol=0, diode_range=6, m3_pitch=8.0, grating='250'
     yield from NEXAFS_fly_scan_core([(190, 215, speed)], enscan_type=enscan_type, openshutter=True, exp_time=.5,
                                     diode_range=diode_range, m3_pitch=m3_pitch, pol=pol, grating=grating,
                                     master_plan=master_plan)
-
 
 
 def do_HOPGscans_epu():
@@ -253,14 +272,16 @@ def do_HOPGscans_epu():
 
 def normal_incidence_rotate_pol_nexafs(nexafs_plan=fly_Carbon_NEXAFS,
                                        polarizations=[0, 20, 45, 70, 90],
-                                       master_plan='normal_incidence_rotate_pol_nexafs',
+                                       master_plan='normal_incidence_rotate_pol_nexafs', md={},
                                        **kwargs):
     """
     At normal incidence, rotate the polarization of the X-ray beam and conduct a NEXAFS scan at each polarization
     """
+    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'normal_incidence_rotate_pol_nexafs',
+                                                            'arguments': dict(locals())})
     yield from rotate_now(90)
     for pol in polarizations:
-        yield from nexafs_plan(pol=pol, master_plan=master_plan, **kwargs)
+        yield from nexafs_plan(pol=pol, master_plan=master_plan, md=md, **kwargs)
 
 
 def fixed_pol_rotate_sample_nexafs(nexafs_plan=fly_Carbon_NEXAFS,
@@ -271,9 +292,11 @@ def fixed_pol_rotate_sample_nexafs(nexafs_plan=fly_Carbon_NEXAFS,
     """
     At fixed polarization, rotate the sample to do a traditional angle dependant NEXAFS measurement
     """
+    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'fixed_pol_rotate_sample_nexafs',
+                                                            'arguments': dict(locals())})
     for angle in angles:
         yield from rotate_now(angle)
-        yield from nexafs_plan(pol=polarization, master_plan=master_plan, **kwargs)
+        yield from nexafs_plan(pol=polarization, master_plan=master_plan, md=md, **kwargs)
 
 
 def epu_angle_from_grazing(real_incident_angle, grazing_angle=20):
@@ -291,8 +314,11 @@ def fixed_sample_rotate_pol_nexafs(nexafs_plan=fly_Carbon_NEXAFS,
     polarization is calculated relative to the sample normal
     angles less than the grazing angle are not allowed and are ignored
     """
+    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'fixed_sample_rotate_pol_nexafs',
+                                                            'arguments': dict(locals())})
     yield from rotate_now(grazing_angle)
     for angle in angles:
         if angle < grazing_angle:
             continue
-        yield from nexafs_plan(pol=epu_angle_from_grazing(angle, grazing_angle), master_plan=master_plan, **kwargs)
+        yield from nexafs_plan(pol=epu_angle_from_grazing(angle, grazing_angle), master_plan=master_plan, md=md,
+                               **kwargs)

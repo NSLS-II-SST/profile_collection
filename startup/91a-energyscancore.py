@@ -166,7 +166,11 @@ def NEXAFS_scan_core(signals, dets, energy, energies, enscan_type=None,master_pl
 
 
 def NEXAFS_fly_scan_core(scan_params,openshutter=False, m3_pitch=np.nan, diode_range=np.nan, pol=np.nan,
-                     grating='best',exp_time=.5,enscan_type=None,master_plan=None):
+                         grating='best',exp_time=.5,enscan_type=None,master_plan=None,
+                         md={}):
+    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'NEXAFS_fly_scan_core',
+                                                            'arguments': dict(locals())})
+    md.update({'plan_name': enscan_type, 'master_plan': master_plan})
     if not np.isnan(m3_pitch):
         yield from bps.abs_set(mir3.Pitch, m3_pitch, wait=True)
     if not np.isnan(diode_range):
@@ -189,13 +193,13 @@ def NEXAFS_fly_scan_core(scan_params,openshutter=False, m3_pitch=np.nan, diode_r
         yield from bps.mv(Shutter_enable, 0)
         yield from bps.mv(Shutter_control, 1)
         yield from fly_scan_eliot(scan_params,
-                                  md={'plan_name': enscan_type,'master_plan': master_plan},
+                                  md=md,
                                   grating=grating,polarization=pol)
         yield from bps.mv(Shutter_control, 0)
 
     else:
         yield from fly_scan_eliot(scan_params,
-                                  md={'plan_name': enscan_type,'master_plan': master_plan},
+                                  md=md,
                                   grating=grating,polarization=pol)
 
 
