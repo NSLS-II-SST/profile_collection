@@ -86,10 +86,7 @@ def en_scan_core(signals=[],
                  diode_range=6,
                  pol=0,
                  grating='no change',
-                 angle=None,
                  master_plan=None):
-    # rotate the sample to the requested angle (if not None)
-    rotate_now(angle)
     # print the current sample information
     sample()  # print the sample information
     # set the exposure times to be hinted for the detector which will be used
