@@ -86,7 +86,12 @@ def en_scan_core(signals=[],
                  diode_range=6,
                  pol=0,
                  grating='no change',
-                 master_plan=None):
+                 master_plan=None,
+                 md={}):
+
+    md['plan_history'] = md.get('plan_history', []).append({'plan_name':'en_scan_core',
+                                                            'arguments':dict(locals())})
+    md.update({'plan_name':enscan_type,'master_plan': master_plan})
     # print the current sample information
     sample()  # print the sample information
     # set the exposure times to be hinted for the detector which will be used
@@ -110,7 +115,7 @@ def en_scan_core(signals=[],
         sigcycler += cycler(det.cam.acquire_time, times.copy())
     sigcycler += cycler(Shutter_open_time, shutter_times)
     #print(sigcycler)
-    yield from bp.scan_nd(dets + signals,sigcycler, md={'plan_name':enscan_type,'master_plan': master_plan})
+    yield from bp.scan_nd(dets + signals,sigcycler, md=md)
 
 
 def NEXAFS_scan_core(signals, dets, energy, energies, enscan_type=None,master_plan=None,
