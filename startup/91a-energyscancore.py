@@ -94,6 +94,8 @@ def en_scan_core(signals=[],
     arguments['dets'] = [det.name for det in arguments['dets']]
     arguments['signals'] = [signal.name for signal in arguments['signals']]
     arguments['energy'] = arguments['energy'].name
+    if md is None:
+        md = {}
     md.setdefault('plan_history', [])
     md['plan_history'].append({'plan_name': 'en_scan_core','arguments': arguments})
     md.update({'plan_name': enscan_type, 'master_plan': master_plan})

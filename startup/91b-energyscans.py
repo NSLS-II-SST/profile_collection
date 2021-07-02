@@ -5,7 +5,7 @@ import bluesky.plans as bp
 import bluesky.plan_stubs as bps
 from copy import deepcopy
 
-def clean_up_md(arguments={},md={},**kwargs):
+def clean_up_md(arguments={},md=None,**kwargs):
     del arguments['md']  # no recursion here!
     del arguments['kwargs']
     for key in kwargs:
@@ -15,6 +15,9 @@ def clean_up_md(arguments={},md={},**kwargs):
             arguments[key] = kwargs[key].name
         else:
             arguments[key] = kwargs[key]
+
+    if md is None:
+        md = {}
     md.setdefault('plan_history', [])
     md['plan_history'].append({'plan_name': arguments['plan_name'],'arguments': arguments})
     md.update({'plan_name': arguments['enscan_type'], 'master_plan': arguments['master_plan']})
