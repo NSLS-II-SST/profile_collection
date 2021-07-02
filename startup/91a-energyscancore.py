@@ -87,15 +87,15 @@ def en_scan_core(signals=[],
                  pol=0,
                  grating='no change',
                  master_plan=None,
-                 md={'plan_history': []}):
+                 md=None):
     # grab locals
     arguments = dict(locals())
-    del arguments['md'] # no recursion here!
+    del arguments['md']  # no recursion here!
     arguments['dets'] = [det.name for det in arguments['dets']]
     arguments['signals'] = [signal.name for signal in arguments['signals']]
     arguments['energy'] = arguments['energy'].name
-    md.get('plan_history', []).append({'plan_name': 'en_scan_core',
-                                       'arguments': arguments})
+    md.setdefault('plan_history', [])
+    md['plan_history'].append({'plan_name': 'en_scan_core','arguments': arguments})
     md.update({'plan_name': enscan_type, 'master_plan': master_plan})
     # print the current sample information
     sample()  # print the sample information
@@ -172,12 +172,12 @@ def NEXAFS_scan_core(signals, dets, energy, energies, enscan_type=None, master_p
 
 def NEXAFS_fly_scan_core(scan_params, openshutter=False, m3_pitch=np.nan, diode_range=np.nan, pol=np.nan,
                          grating='best', exp_time=.5, enscan_type=None, master_plan=None,
-                         md={'plan_history': []}):
+                         md=None):
     # grab locals
     arguments = dict(locals())
-    del arguments['md'] # no recursion here!
-    md.get('plan_history', []).append({'plan_name': 'NEXAFS_fly_scan_core',
-                                       'arguments': arguments})
+    del arguments['md']  # no recursion here!
+    md.setdefault('plan_history', [])
+    md['plan_history'].append({'plan_name': 'NEXAFS_fly_scan_core','arguments': arguments})
     md.update({'plan_name': enscan_type, 'master_plan': master_plan})
     if not np.isnan(m3_pitch):
         yield from bps.abs_set(mir3.Pitch, m3_pitch, wait=True)

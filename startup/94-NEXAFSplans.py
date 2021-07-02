@@ -6,7 +6,7 @@ import numpy as np
 def full_Carbon_NEXAFS(sigs=[],
                        dets=[Sample_TEY, Izero_Mesh, Beamstop_WAXS], energy=en, pol=0, diode_range=7, m3_pitch=7.98,
                        open_each_step=True, exp_time=1, grating='no change', motorname='None', offset=0,
-                       master_plan=None, md={'plan_history': []}, enscan_type = 'full_Carbon_NEXAFS',**kwargs):
+                       master_plan=None, md=None, enscan_type = 'full_Carbon_NEXAFS',**kwargs):
     '''
     Full Carbon Scan runs an RSoXS sample set through the carbon edge, with particular emphasis in he pre edge region
     typically this is not run anymore as of jan 2021.  fly scans are the preferred NEXAFS method
@@ -39,7 +39,7 @@ def full_Carbon_NEXAFS(sigs=[],
 
 
 def fly_Carbon_NEXAFS(speed=.1, pol=0, diode_range=7, m3_pitch=7.98, grating='250',
-                      master_plan=None, md={'plan_history': []}, enscan_type = 'fly_Carbon_NEXAFS',**kwargs):
+                      master_plan=None, md=None, enscan_type = 'fly_Carbon_NEXAFS',**kwargs):
     """
 
     @param speed: the speed in eV/second to fly the mono
@@ -64,7 +64,7 @@ def fly_Carbon_NEXAFS(speed=.1, pol=0, diode_range=7, m3_pitch=7.98, grating='25
 
 
 def fly_Calcium_NEXAFS(speed=.15, pol=0, diode_range=7, m3_pitch=7.99, grating='250',
-                       master_plan=None, md={'plan_history': []}, enscan_type = 'fly_Calcium_NEXAFS',**kwargs):
+                       master_plan=None, md=None, enscan_type = 'fly_Calcium_NEXAFS',**kwargs):
     """
 
     @param speed: the speed in eV/second to fly the mono
@@ -88,7 +88,7 @@ def fly_Calcium_NEXAFS(speed=.15, pol=0, diode_range=7, m3_pitch=7.99, grating='
 
 
 def fly_SulfurL_NEXAFS(speed=.1, pol=0, diode_range=7, m3_pitch=7.97, grating='250',
-                       master_plan=None, md={'plan_history': []}, enscan_type = 'fly_SulfurL_NEXAFS',**kwargs):
+                       master_plan=None, md=None, enscan_type = 'fly_SulfurL_NEXAFS',**kwargs):
     """
 
     @param speed: the speed in eV/second to fly the mono
@@ -112,7 +112,7 @@ def fly_SulfurL_NEXAFS(speed=.1, pol=0, diode_range=7, m3_pitch=7.97, grating='2
 
 
 def fly_SiliconL_NEXAFS(speed=.1, pol=0, diode_range=6, m3_pitch=8.01, grating='250',
-                        master_plan=None, md={'plan_history': []}, enscan_type = 'fly_SiliconL_NEXAFS',**kwargs):
+                        master_plan=None, md=None, enscan_type = 'fly_SiliconL_NEXAFS',**kwargs):
     """
 
     @param speed: the speed in eV/second to fly the mono
@@ -136,7 +136,7 @@ def fly_SiliconL_NEXAFS(speed=.1, pol=0, diode_range=6, m3_pitch=8.01, grating='
 
 
 def fly_SiliconK_NEXAFS(speed=.2, pol=0, diode_range=6, m3_pitch=7.97, grating='1200',
-                        master_plan=None, md={'plan_history': []}, enscan_type = 'fly_SiliconK_NEXAFS',**kwargs):
+                        master_plan=None, md=None, enscan_type = 'fly_SiliconK_NEXAFS',**kwargs):
     """
 
     @param speed: the speed in eV/second to fly the mono
@@ -160,7 +160,7 @@ def fly_SiliconK_NEXAFS(speed=.2, pol=0, diode_range=6, m3_pitch=7.97, grating='
 
 
 def fly_Nitrogen_NEXAFS(speed=.1, pol=0, diode_range=7, m3_pitch=7.96, grating='250',
-                        master_plan=None, md={'plan_history': []}, enscan_type = 'fly_Nitrogen_NEXAFS',**kwargs):
+                        master_plan=None, md=None, enscan_type = 'fly_Nitrogen_NEXAFS',**kwargs):
     """
 
     @param speed: the speed in eV/second to fly the mono
@@ -185,7 +185,7 @@ def fly_Nitrogen_NEXAFS(speed=.1, pol=0, diode_range=7, m3_pitch=7.96, grating='
 
 
 def fly_Oxygen_NEXAFS(speed=.1, pol=0, diode_range=7, m3_pitch=7.96, grating='250',
-                      master_plan=None, md={'plan_history': []}, enscan_type = 'fly_Oxygen_NEXAFS',**kwargs):
+                      master_plan=None, md=None, enscan_type = 'fly_Oxygen_NEXAFS',**kwargs):
     """
 
     @param speed: the speed in eV/second to fly the mono
@@ -210,7 +210,7 @@ def fly_Oxygen_NEXAFS(speed=.1, pol=0, diode_range=7, m3_pitch=7.96, grating='25
 
 
 def fly_Fluorine_NEXAFS(speed=.3, pol=0, diode_range=7, m3_pitch=7.98, grating='1200',
-                        master_plan=None, md={'plan_history': []}, enscan_type = 'fly_Fluorine_NEXAFS',**kwargs):
+                        master_plan=None, md=None, enscan_type = 'fly_Fluorine_NEXAFS',**kwargs):
     """
     @param speed: the speed in eV/second to fly the mono
     @param pol: the polarization of the EPU to set before run
@@ -234,7 +234,7 @@ def fly_Fluorine_NEXAFS(speed=.3, pol=0, diode_range=7, m3_pitch=7.98, grating='
 
 
 def fly_Boron_NEXAFS(speed=.1, pol=0, diode_range=6, m3_pitch=8.0, grating='250',
-                     master_plan=None, md={'plan_history': []}, enscan_type = 'fly_Boron_NEXAFS',**kwargs):
+                     master_plan=None, md=None, enscan_type = 'fly_Boron_NEXAFS',**kwargs):
     """
 
     @param speed: the speed in eV/second to fly the mono
@@ -282,7 +282,7 @@ def do_HOPGscans_epu():
 def normal_incidence_rotate_pol_nexafs(nexafs_plan=fly_Carbon_NEXAFS,
                                        polarizations=[0, 20, 45, 70, 90],
                                        master_plan='normal_incidence_rotate_pol_nexafs',
-                                       md={'plan_history': []}, enscan_type = 'normal_incidence_rotate_pol_nexafs',**kwargs):
+                                       md=None, enscan_type = 'normal_incidence_rotate_pol_nexafs',**kwargs):
     """
     At normal incidence, rotate the polarization of the X-ray beam and conduct a NEXAFS scan at each polarization
     """
@@ -299,7 +299,7 @@ def fixed_pol_rotate_sample_nexafs(nexafs_plan=fly_Carbon_NEXAFS,
                                    angles=[20, 40, 55, 70, 90],
                                    polarization=0,
                                    master_plan='fixed_pol_rotate_sample_nexafs',
-                                   md={'plan_history': []}, enscan_type = 'fixed_pol_rotate_sample_nexafs',**kwargs):
+                                   md=None, enscan_type = 'fixed_pol_rotate_sample_nexafs',**kwargs):
     """
     At fixed polarization, rotate the sample to do a traditional angle dependant NEXAFS measurement
     """
@@ -321,7 +321,7 @@ def fixed_sample_rotate_pol_nexafs(nexafs_plan=fly_Carbon_NEXAFS,
                                    grazing_angle=20,
                                    master_plan='fixed_sample_rotate_pol_nexafs',
                                    angles=[20, 40, 55, 70, 90],
-                                   md={'plan_history': []}, enscan_type = 'fixed_sample_rotate_pol_nexafs',**kwargs):
+                                   md=None, enscan_type = 'fixed_sample_rotate_pol_nexafs',**kwargs):
     """
     At fixed incident angle, rotate the polarization angle of the X-rays and take NEXAFS at each step
     polarization is calculated relative to the sample normal
