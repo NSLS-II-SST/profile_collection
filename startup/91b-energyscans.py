@@ -7,7 +7,7 @@ import bluesky.plan_stubs as bps
 
 def clean_up_md(arguments={},md={}):
     del arguments['md']  # no recursion here!
-    if kwargs in arguments.keys():
+    if 'kwargs' in arguments.keys():
         if 'dets' in arguments['kwargs'].keys():
             arguments['kwargs']['dets'] = [det.name for det in arguments['kwargs']['dets']]
         if 'signals' in arguments['kwargs'].keys():
