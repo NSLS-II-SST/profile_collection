@@ -5,10 +5,27 @@ import bluesky.plans as bp
 import bluesky.plan_stubs as bps
 
 
+def clean_up_md(arguments={},md={}):
+    del arguments['md']  # no recursion here!
+    if kwargs in arguments.keys():
+        if 'dets' in arguments['kwargs'].keys():
+            arguments['kwargs']['dets'] = [det.name for det in arguments['kwargs']['dets']]
+        if 'signals' in arguments['kwargs'].keys():
+            arguments['kwargs']['signals'] = [signal.name for signal in arguments['kwargs']['signals']]
+        if 'energy' in arguments['kwargs'].keys():
+            arguments['kwargs']['energy'] = arguments['kwargs']['energy'].name
+    md.get('plan_history', []).append({'plan_name': arguments['plan_name'],
+                                       'arguments': arguments})
+    md.update({'plan_name': arguments['enscan_type'], 'master_plan': arguments['master_plan']})
+
+
 def full_oxygen_scan_nd(multiple=1, diode_range=6, m3_pitch=7.99, grating='1200', master_plan=None,
-                        md={'plan_history': []}, **kwargs):
+                        md={'plan_history': []}, enscan_type = 'full_oxygen_scan_nd', **kwargs):
     '''
     full_oxygen_scan_nd
+    @param master_plan: a category of higher level plan which you might want to sort by
+    @param enscan_type: the granular level plan you might want to sort by - generally for timing or data lookup
+    @param md: metadata to push through to lower level plans and eventually a bluesky document
     @param multiple: default exposure times is multipled by this
     @param diode_range: integer range for the dilde
     @param m3_pitch: pitch value for M3 for this energy range - check before scans
@@ -16,9 +33,11 @@ def full_oxygen_scan_nd(multiple=1, diode_range=6, m3_pitch=7.99, grating='1200'
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md.get('plan_history', []).append({'plan_name': 'full_oxygen_scan_nd',
-                                                            'arguments': dict(locals())})
-    enscan_type = 'full_oxygen_scan_nd'
+    plan_name = 'full_oxygen_scan_nd'
+    # grab locals
+    arguments = dict(locals())
+    clean_up_md(arguments,md)
+    
     if len(read_input("Starting a Oxygen energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
@@ -39,9 +58,12 @@ def full_oxygen_scan_nd(multiple=1, diode_range=6, m3_pitch=7.99, grating='1200'
 
 
 def short_oxygen_scan_nd(multiple=1, diode_range=6, m3_pitch=7.98, grating='1200', master_plan=None,
-                         md={'plan_history': []}, **kwargs):
+                         md={'plan_history': []}, enscan_type = 'short_oxygen_scan_nd', **kwargs):
     '''
     short_oxygen_scan_nd
+    @param master_plan: a category of higher level plan which you might want to sort by
+    @param enscan_type: the granular level plan you might want to sort by - generally for timing or data lookup
+    @param md: metadata to push through to lower level plans and eventually a bluesky document
     @param multiple: default exposure times is multipled by this
     @param diode_range: integer range for the dilde
     @param m3_pitch: pitch value for M3 for this energy range - check before scans
@@ -49,9 +71,10 @@ def short_oxygen_scan_nd(multiple=1, diode_range=6, m3_pitch=7.98, grating='1200
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md.get('plan_history', []).append({'plan_name': 'short_oxygen_scan_nd',
-                                                            'arguments': dict(locals())})
-    enscan_type = 'short_oxygen_scan_nd'
+    plan_name = 'short_oxygen_scan_nd'
+    # grab locals
+    arguments = dict(locals())
+    clean_up_md(arguments,md)
     if len(read_input("Starting a Oxygen energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
@@ -73,9 +96,12 @@ def short_oxygen_scan_nd(multiple=1, diode_range=6, m3_pitch=7.98, grating='1200
 
 
 def short_zincl_scan_nd(multiple=1, diode_range=6, m3_pitch=7.98, grating='1200', master_plan=None,
-                        md={'plan_history': []}, **kwargs):
+                        md={'plan_history': []}, enscan_type = 'short_zincl_scan_nd', **kwargs):
     '''
     short_zincl_scan_nd
+    @param master_plan: a category of higher level plan which you might want to sort by
+    @param enscan_type: the granular level plan you might want to sort by - generally for timing or data lookup
+    @param md: metadata to push through to lower level plans and eventually a bluesky document
     @param multiple: default exposure times is multipled by this
     @param diode_range: integer range for the dilde
     @param m3_pitch: pitch value for M3 for this energy range - check before scans
@@ -83,9 +109,10 @@ def short_zincl_scan_nd(multiple=1, diode_range=6, m3_pitch=7.98, grating='1200'
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md.get('plan_history', []).append({'plan_name': 'short_zincl_scan_nd',
-                                                            'arguments': dict(locals())})
-    enscan_type = 'short_zincl_scan_nd'
+    plan_name = 'short_zincl_scan_nd'
+    # grab locals
+    arguments = dict(locals())
+    clean_up_md(arguments,md)
     if len(read_input("Starting a Zinc energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
@@ -103,9 +130,12 @@ def short_zincl_scan_nd(multiple=1, diode_range=6, m3_pitch=7.98, grating='1200'
 
 
 def very_short_oxygen_scan_nd(multiple=1, diode_range=6, m3_pitch=7.97, grating='1200', master_plan=None,
-                              md={'plan_history': []}, **kwargs):
+                              md={'plan_history': []}, enscan_type = 'very_short_oxygen_scan_nd', **kwargs):
     '''
     very_short_oxygen_scan_nd
+    @param master_plan: a category of higher level plan which you might want to sort by
+    @param enscan_type: the granular level plan you might want to sort by - generally for timing or data lookup
+    @param md: metadata to push through to lower level plans and eventually a bluesky document
     @param multiple: default exposure times is multipled by this
     @param diode_range: integer range for the dilde
     @param m3_pitch: pitch value for M3 for this energy range - check before scans
@@ -113,9 +143,10 @@ def very_short_oxygen_scan_nd(multiple=1, diode_range=6, m3_pitch=7.97, grating=
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md.get('plan_history', []).append({'plan_name': 'very_short_oxygen_scan_nd',
-                                                            'arguments': dict(locals())})
-    enscan_type = 'very_short_oxygen_scan_nd'
+    plan_name = 'very_short_oxygen_scan_nd'
+    # grab locals
+    arguments = dict(locals())
+    clean_up_md(arguments,md)
     if len(read_input("Starting a Oxygen energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
@@ -138,9 +169,12 @@ def very_short_oxygen_scan_nd(multiple=1, diode_range=6, m3_pitch=7.97, grating=
 
 
 def short_fluorine_scan_nd(multiple=1, diode_range=7, m3_pitch=7.98, grating='1200', master_plan=None,
-                           md={'plan_history': []}, **kwargs):
+                           md={'plan_history': []}, enscan_type = 'short_fluorine_scan_nd', **kwargs):
     '''
     short_fluorine_scan_nd
+    @param master_plan: a category of higher level plan which you might want to sort by
+    @param enscan_type: the granular level plan you might want to sort by - generally for timing or data lookup
+    @param md: metadata to push through to lower level plans and eventually a bluesky document
     @param multiple: default exposure times is multipled by this
     @param diode_range: integer range for the dilde
     @param m3_pitch: pitch value for M3 for this energy range - check before scans
@@ -148,9 +182,10 @@ def short_fluorine_scan_nd(multiple=1, diode_range=7, m3_pitch=7.98, grating='12
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md.get('plan_history', []).append({'plan_name': 'short_fluorine_scan_nd',
-                                                            'arguments': dict(locals())})
-    enscan_type = 'short_fluorine_scan_nd'
+    plan_name = 'short_fluorine_scan_nd'
+    # grab locals
+    arguments = dict(locals())
+    clean_up_md(arguments,md)
     if len(read_input("Starting a fluorine energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
 
@@ -173,9 +208,12 @@ def short_fluorine_scan_nd(multiple=1, diode_range=7, m3_pitch=7.98, grating='12
 
 
 def full_nitrogen_scan_nd(multiple=1, diode_range=6, m3_pitch=7.93, grating='1200', master_plan=None,
-                          md={'plan_history': []}, **kwargs):
+                          md={'plan_history': []}, enscan_type = 'full_nitrogen_scan_nd', **kwargs):
     '''
     full_nitrogen_scan_nd
+    @param master_plan: a category of higher level plan which you might want to sort by
+    @param enscan_type: the granular level plan you might want to sort by - generally for timing or data lookup
+    @param md: metadata to push through to lower level plans and eventually a bluesky document
     @param multiple: default exposure times is multipled by this
     @param diode_range: integer range for the dilde
     @param m3_pitch: pitch value for M3 for this energy range - check before scans
@@ -183,9 +221,10 @@ def full_nitrogen_scan_nd(multiple=1, diode_range=6, m3_pitch=7.93, grating='120
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md.get('plan_history', []).append({'plan_name': 'full_nitrogen_scan_nd',
-                                                            'arguments': dict(locals())})
-    enscan_type = 'full_nitrogen_scan_nd'
+    plan_name = 'full_nitrogen_scan_nd'
+    # grab locals
+    arguments = dict(locals())
+    clean_up_md(arguments,md)
     if len(read_input("Starting a Nitrogen energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
@@ -206,9 +245,12 @@ def full_nitrogen_scan_nd(multiple=1, diode_range=6, m3_pitch=7.93, grating='120
 
 
 def short_nitrogen_scan_nd(multiple=1, diode_range=6, m3_pitch=8.00, grating='1200', master_plan=None,
-                           md={'plan_history': []}, **kwargs):
+                           md={'plan_history': []}, enscan_type = 'short_nitrogen_scan_nd', **kwargs):
     '''
     short_nitrogen_scan_nd
+    @param master_plan: a category of higher level plan which you might want to sort by
+    @param enscan_type: the granular level plan you might want to sort by - generally for timing or data lookup
+    @param md: metadata to push through to lower level plans and eventually a bluesky document
     @param multiple: default exposure times is multipled by this
     @param diode_range: integer range for the dilde
     @param m3_pitch: pitch value for M3 for this energy range - check before scans
@@ -216,9 +258,10 @@ def short_nitrogen_scan_nd(multiple=1, diode_range=6, m3_pitch=8.00, grating='12
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md.get('plan_history', []).append({'plan_name': 'short_nitrogen_scan_nd',
-                                                            'arguments': dict(locals())})
-    enscan_type = 'short_nitrogen_scan_nd'
+    plan_name = 'short_nitrogen_scan_nd'
+    # grab locals
+    arguments = dict(locals())
+    clean_up_md(arguments,md)
     if len(read_input("Starting a Short Nitrogen energy scan "
                       "hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
@@ -242,9 +285,12 @@ def short_nitrogen_scan_nd(multiple=1, diode_range=6, m3_pitch=8.00, grating='12
 
 
 def very_short_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=8.01, grating='1200', master_plan=None,
-                              md={'plan_history': []}, **kwargs):
+                              md={'plan_history': []}, enscan_type = 'very_short_carbon_scan_nd', **kwargs):
     '''
     very_short_carbon_scan_nd
+    @param master_plan: a category of higher level plan which you might want to sort by
+    @param enscan_type: the granular level plan you might want to sort by - generally for timing or data lookup
+    @param md: metadata to push through to lower level plans and eventually a bluesky document
     @param multiple: default exposure times is multipled by this
     @param diode_range: integer range for the dilde
     @param m3_pitch: pitch value for M3 for this energy range - check before scans
@@ -252,9 +298,10 @@ def very_short_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=8.01, grating=
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md.get('plan_history', []).append({'plan_name': 'very_short_carbon_scan_nd',
-                                                            'arguments': dict(locals())})
-    enscan_type = 'very_short_carbon_scan_nd'
+    plan_name = 'very_short_carbon_scan_nd'
+    # grab locals
+    arguments = dict(locals())
+    clean_up_md(arguments,md)
     if len(read_input("Starting a very short Carbon energy scan hit "
                       "enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
@@ -280,9 +327,12 @@ def very_short_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=8.01, grating=
 
 
 def short_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=8.00, grating='1200', master_plan=None,
-                         md={'plan_history': []}, **kwargs):
+                         md={'plan_history': []}, enscan_type = 'short_carbon_scan_nd', **kwargs):
     '''
     short_carbon_scan_nd
+    @param master_plan: a category of higher level plan which you might want to sort by
+    @param enscan_type: the granular level plan you might want to sort by - generally for timing or data lookup
+    @param md: metadata to push through to lower level plans and eventually a bluesky document
     @param multiple: default exposure times is multipled by this
     @param diode_range: integer range for the dilde
     @param m3_pitch: pitch value for M3 for this energy range - check before scans
@@ -290,9 +340,10 @@ def short_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=8.00, grating='1200
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md.get('plan_history', []).append({'plan_name': 'short_carbon_scan_nd',
-                                                            'arguments': dict(locals())})
-    enscan_type = 'short_carbon_scan_nd'
+    plan_name = 'short_carbon_scan_nd'
+    # grab locals
+    arguments = dict(locals())
+    clean_up_md(arguments,md)
     if len(read_input("Starting a short Carbon energy scan hit enter in "
                       "the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
@@ -318,9 +369,12 @@ def short_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=8.00, grating='1200
 
 
 def short_carbon_scan_nonaromatic(multiple=1, diode_range=6, m3_pitch=8.00, grating='1200', master_plan=None,
-                                  md={'plan_history': []}, **kwargs):
+                                  md={'plan_history': []}, enscan_type = 'short_carbon_scan_nonaromatic', **kwargs):
     '''
     short_carbon_scan_nonaromatic
+    @param master_plan: a category of higher level plan which you might want to sort by
+    @param enscan_type: the granular level plan you might want to sort by - generally for timing or data lookup
+    @param md: metadata to push through to lower level plans and eventually a bluesky document
     @param multiple: default exposure times is multipled by this
     @param diode_range: integer range for the dilde
     @param m3_pitch: pitch value for M3 for this energy range - check before scans
@@ -328,9 +382,10 @@ def short_carbon_scan_nonaromatic(multiple=1, diode_range=6, m3_pitch=8.00, grat
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md.get('plan_history', []).append({'plan_name': 'short_carbon_scan_nonaromatic',
-                                                            'arguments': dict(locals())})
-    enscan_type = 'short_carbon_scan_nonaromatic'
+    plan_name = 'short_carbon_scan_nonaromatic'
+    # grab locals
+    arguments = dict(locals())
+    clean_up_md(arguments,md)
     if len(read_input("Starting a short Carbon energy scan hit enter in "
                       "the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
@@ -356,10 +411,13 @@ def short_carbon_scan_nonaromatic(multiple=1, diode_range=6, m3_pitch=8.00, grat
                             diode_range=diode_range, m3_pitch=m3_pitch, grating=grating, **kwargs)
 
 
-def custom_rsoxs_scan(energies=[((270, 340, 1), 2)], plan_name='custom_rsoxs_scan', master_plan=None,
-                      diode_range=6, m3_pitch=8.00, grating='1200', md={'plan_history': []}, **kwargs):
+def custom_rsoxs_scan(energies=[((270, 340, 1), 2)], master_plan=None,
+                      diode_range=6, m3_pitch=8.00, grating='1200', md={'plan_history': []}, enscan_type = 'custom_rsoxs_scan', **kwargs):
     '''
     custom_rsoxs_scan
+    @param master_plan: a category of higher level plan which you might want to sort by
+    @param enscan_type: the granular level plan you might want to sort by - generally for timing or data lookup
+    @param md: metadata to push through to lower level plans and eventually a bluesky document
     @param multiple: default exposure times is multipled by this
     @param diode_range: integer range for the dilde
     @param m3_pitch: pitch value for M3 for this energy range - check before scans
@@ -367,10 +425,10 @@ def custom_rsoxs_scan(energies=[((270, 340, 1), 2)], plan_name='custom_rsoxs_sca
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md.get('plan_history', []).append({'plan_name': 'custom_rsoxs_scan',
-                                                            'arguments': dict(locals())})
-
-    enscan_type = plan_name
+    plan_name = 'custom_rsoxs_scan'
+    # grab locals
+    arguments = dict(locals())
+    clean_up_md(arguments,md)
     newenergies = []
     newtimes = []
     if len(read_input("Starting a specified energy scan hit enter in "
@@ -389,9 +447,12 @@ def custom_rsoxs_scan(energies=[((270, 340, 1), 2)], plan_name='custom_rsoxs_sca
 
 
 def short_sulfurl_scan_nd(multiple=1, diode_range=6, m3_pitch=8.02, grating='1200', master_plan=None,
-                          md={'plan_history': []}, **kwargs):
+                          md={'plan_history': []}, enscan_type = 'short_sulfurl_scan_nd', **kwargs):
     '''
     short_sulfurl_scan_nd
+    @param master_plan: a category of higher level plan which you might want to sort by
+    @param enscan_type: the granular level plan you might want to sort by - generally for timing or data lookup
+    @param md: metadata to push through to lower level plans and eventually a bluesky document
     @param multiple: default exposure times is multipled by this
     @param diode_range: integer range for the dilde
     @param m3_pitch: pitch value for M3 for this energy range - check before scans
@@ -399,9 +460,10 @@ def short_sulfurl_scan_nd(multiple=1, diode_range=6, m3_pitch=8.02, grating='120
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md.get('plan_history', []).append({'plan_name': 'short_sulfurl_scan_nd',
-                                                            'arguments': dict(locals())})
-    enscan_type = 'short_sulfurl_scan_nd'
+    plan_name = 'short_sulfurl_scan_nd'
+    # grab locals
+    arguments = dict(locals())
+    clean_up_md(arguments,md)
     if len(read_input("Starting a short Sulfur L energy scan hit enter in "
                       "the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
@@ -425,9 +487,12 @@ def short_sulfurl_scan_nd(multiple=1, diode_range=6, m3_pitch=8.02, grating='120
 
 
 def focused_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=7.93, grating='1200', master_plan=None,
-                           md={'plan_history': []}, **kwargs):
+                           md={'plan_history': []}, enscan_type = 'focused_carbon_scan_nd', **kwargs):
     '''
     focused_carbon_scan_nd
+    @param master_plan: a category of higher level plan which you might want to sort by
+    @param enscan_type: the granular level plan you might want to sort by - generally for timing or data lookup
+    @param md: metadata to push through to lower level plans and eventually a bluesky document
     @param multiple: default exposure times is multipled by this
     @param diode_range: integer range for the dilde
     @param m3_pitch: pitch value for M3 for this energy range - check before scans
@@ -435,9 +500,10 @@ def focused_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=7.93, grating='12
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md.get('plan_history', []).append({'plan_name': 'focused_carbon_scan_nd',
-                                                            'arguments': dict(locals())})
-    enscan_type = 'focused_carbon_scan_nd'
+    plan_name = 'focused_carbon_scan_nd'
+    # grab locals
+    arguments = dict(locals())
+    clean_up_md(arguments,md)
     if len(read_input("Starting a short Carbon energy scan hit enter in "
                       "the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
@@ -463,9 +529,12 @@ def focused_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=7.93, grating='12
 
 
 def g_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=7.93, grating='1200', master_plan=None,
-                     md={'plan_history': []}, **kwargs):
+                     md={'plan_history': []}, enscan_type = 'g_carbon_scan_nd', **kwargs):
     '''
     g_carbon_scan_nd
+    @param master_plan: a category of higher level plan which you might want to sort by
+    @param enscan_type: the granular level plan you might want to sort by - generally for timing or data lookup
+    @param md: metadata to push through to lower level plans and eventually a bluesky document
     @param multiple: default exposure times is multipled by this
     @param diode_range: integer range for the dilde
     @param m3_pitch: pitch value for M3 for this energy range - check before scans
@@ -473,9 +542,10 @@ def g_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=7.93, grating='1200', m
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md.get('plan_history', []).append({'plan_name': 'g_carbon_scan_nd',
-                                                            'arguments': dict(locals())})
-    enscan_type = 'g_carbon_scan_nd'
+    plan_name = 'g_carbon_scan_nd'
+    # grab locals
+    arguments = dict(locals())
+    clean_up_md(arguments,md)
     if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
@@ -492,9 +562,12 @@ def g_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=7.93, grating='1200', m
 
 
 def t_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=7.93, grating='1200', master_plan=None,
-                     md={'plan_history': []}, **kwargs):
+                     md={'plan_history': []}, enscan_type = 't_carbon_scan_nd', **kwargs):
     '''
     t_carbon_scan_nd
+    @param master_plan: a category of higher level plan which you might want to sort by
+    @param enscan_type: the granular level plan you might want to sort by - generally for timing or data lookup
+    @param md: metadata to push through to lower level plans and eventually a bluesky document
     @param multiple: default exposure times is multipled by this
     @param diode_range: integer range for the dilde
     @param m3_pitch: pitch value for M3 for this energy range - check before scans
@@ -502,9 +575,10 @@ def t_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=7.93, grating='1200', m
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md.get('plan_history', []).append({'plan_name': 't_carbon_scan_nd',
-                                                            'arguments': dict(locals())})
-    enscan_type = 't_carbon_scan_nd'
+    plan_name = 't_carbon_scan_nd'
+    # grab locals
+    arguments = dict(locals())
+    clean_up_md(arguments,md)
     if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
@@ -521,9 +595,12 @@ def t_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=7.93, grating='1200', m
 
 
 def sufficient_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=7.96, grating='1200', master_plan=None,
-                              md={'plan_history': []}, **kwargs):
+                              md={'plan_history': []}, enscan_type = 'sufficient_carbon_scan_nd', **kwargs):
     '''
     sufficient_carbon_scan_nd
+    @param master_plan: a category of higher level plan which you might want to sort by
+    @param enscan_type: the granular level plan you might want to sort by - generally for timing or data lookup
+    @param md: metadata to push through to lower level plans and eventually a bluesky document
     @param multiple: default exposure times is multipled by this
     @param diode_range: integer range for the dilde
     @param m3_pitch: pitch value for M3 for this energy range - check before scans
@@ -531,9 +608,10 @@ def sufficient_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=7.96, grating=
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md.get('plan_history', []).append({'plan_name': 'sufficient_carbon_scan_nd',
-                                                            'arguments': dict(locals())})
-    enscan_type = 'sufficient_carbon_scan_nd'
+    plan_name = 'sufficient_carbon_scan_nd'
+    # grab locals
+    arguments = dict(locals())
+    clean_up_md(arguments,md)
     if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
@@ -557,9 +635,12 @@ def sufficient_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=7.96, grating=
 
 
 def picky_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=7.93, grating='1200', master_plan=None,
-                         md={'plan_history': []}, **kwargs):
+                         md={'plan_history': []}, enscan_type = 'picky_carbon_scan_nd', **kwargs):
     '''
     picky_carbon_scan_nd
+    @param master_plan: a category of higher level plan which you might want to sort by
+    @param enscan_type: the granular level plan you might want to sort by - generally for timing or data lookup
+    @param md: metadata to push through to lower level plans and eventually a bluesky document
     @param multiple: default exposure times is multipled by this
     @param diode_range: integer range for the dilde
     @param m3_pitch: pitch value for M3 for this energy range - check before scans
@@ -567,9 +648,10 @@ def picky_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=7.93, grating='1200
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md.get('plan_history', []).append({'plan_name': 'picky_carbon_scan_nd',
-                                                            'arguments': dict(locals())})
-    enscan_type = 'picky_carbon_scan_nd'
+    plan_name = 'picky_carbon_scan_nd'
+    # grab locals
+    arguments = dict(locals())
+    clean_up_md(arguments,md)
     if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     yield from bps.abs_set(mir3.Pitch, 7.96, wait=True)
@@ -587,9 +669,12 @@ def picky_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=7.93, grating='1200
 
 
 def full_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=8.00, grating='1200', master_plan=None,
-                        md={'plan_history': []}, **kwargs):
+                        md={'plan_history': []}, enscan_type = 'full_carbon_scan_nd', **kwargs):
     '''
     full_carbon_scan_nd
+    @param master_plan: a category of higher level plan which you might want to sort by
+    @param enscan_type: the granular level plan you might want to sort by - generally for timing or data lookup
+    @param md: metadata to push through to lower level plans and eventually a bluesky document
     @param multiple: default exposure times is multipled by this
     @param diode_range: integer range for the dilde
     @param m3_pitch: pitch value for M3 for this energy range - check before scans
@@ -597,9 +682,10 @@ def full_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=8.00, grating='1200'
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md.get('plan_history', []).append({'plan_name': 'full_carbon_scan_nd',
-                                                            'arguments': dict(locals())})
-    enscan_type = 'full_carbon_scan_nd'
+    plan_name = 'full_carbon_scan_nd'
+    # grab locals
+    arguments = dict(locals())
+    clean_up_md(arguments,md)
     if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
@@ -623,9 +709,12 @@ def full_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=8.00, grating='1200'
 
 
 def full_carbon_scan_nonaromatic(multiple=1, diode_range=6, m3_pitch=7.97, grating='1200', master_plan=None,
-                                 md={'plan_history': []}, **kwargs):
+                                 md={'plan_history': []}, enscan_type = 'full_carbon_scan_nonaromatic', **kwargs):
     '''
     full_carbon_scan_nonaromatic
+    @param master_plan: a category of higher level plan which you might want to sort by
+    @param enscan_type: the granular level plan you might want to sort by - generally for timing or data lookup
+    @param md: metadata to push through to lower level plans and eventually a bluesky document
     @param multiple: default exposure times is multipled by this
     @param diode_range: integer range for the dilde
     @param m3_pitch: pitch value for M3 for this energy range - check before scans
@@ -633,9 +722,10 @@ def full_carbon_scan_nonaromatic(multiple=1, diode_range=6, m3_pitch=7.97, grati
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md.get('plan_history', []).append({'plan_name': 'full_carbon_scan_nonaromatic',
-                                                            'arguments': dict(locals())})
-    enscan_type = 'full_carbon_scan_nonaromatic'
+    plan_name = 'full_carbon_scan_nonaromatic'
+    # grab locals
+    arguments = dict(locals())
+    clean_up_md(arguments,md)
     if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
@@ -659,9 +749,12 @@ def full_carbon_scan_nonaromatic(multiple=1, diode_range=6, m3_pitch=7.97, grati
 
 
 def full_fluorine_scan_nd(multiple=1, diode_range=7, m3_pitch=7.89, grating='1200', master_plan=None,
-                          md={'plan_history': []}, **kwargs):
+                          md={'plan_history': []}, enscan_type = 'full_fluorine_scan_nd', **kwargs):
     '''
     full_fluorine_scan_nd
+    @param master_plan: a category of higher level plan which you might want to sort by
+    @param enscan_type: the granular level plan you might want to sort by - generally for timing or data lookup
+    @param md: metadata to push through to lower level plans and eventually a bluesky document
     @param multiple: default exposure times is multipled by this
     @param diode_range: integer range for the dilde
     @param m3_pitch: pitch value for M3 for this energy range - check before scans
@@ -669,9 +762,10 @@ def full_fluorine_scan_nd(multiple=1, diode_range=7, m3_pitch=7.89, grating='120
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md.get('plan_history', []).append({'plan_name': 'full_fluorine_scan_nd',
-                                                            'arguments': dict(locals())})
-    enscan_type = 'full_fluorine_scan_nd'
+    plan_name = 'full_fluorine_scan_nd'
+    # grab locals
+    arguments = dict(locals())
+    clean_up_md(arguments,md)
     if len(read_input("Starting a Fluorine energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
@@ -690,9 +784,12 @@ def full_fluorine_scan_nd(multiple=1, diode_range=7, m3_pitch=7.89, grating='120
 
 
 def veryshort_fluorine_scan_nd(multiple=1, diode_range=7, m3_pitch=7.99, grating='1200', master_plan=None,
-                               md={'plan_history': []}, **kwargs):
+                               md={'plan_history': []}, enscan_type = 'veryshort_fluorine_scan_nd', **kwargs):
     '''
     veryshort_fluorine_scan_nd
+    @param master_plan: a category of higher level plan which you might want to sort by
+    @param enscan_type: the granular level plan you might want to sort by - generally for timing or data lookup
+    @param md: metadata to push through to lower level plans and eventually a bluesky document
     @param multiple: default exposure times is multipled by this
     @param diode_range: integer range for the dilde
     @param m3_pitch: pitch value for M3 for this energy range - check before scans
@@ -700,9 +797,10 @@ def veryshort_fluorine_scan_nd(multiple=1, diode_range=7, m3_pitch=7.99, grating
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md.get('plan_history', []).append({'plan_name': 'veryshort_fluorine_scan_nd',
-                                                            'arguments': dict(locals())})
-    enscan_type = 'veryshort_fluorine_scan_nd'
+    plan_name = 'veryshort_fluorine_scan_nd'
+    # grab locals
+    arguments = dict(locals())
+    clean_up_md(arguments,md)
     if len(read_input("Starting a Fluorine energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
     # create a list of energies
@@ -722,9 +820,12 @@ def veryshort_fluorine_scan_nd(multiple=1, diode_range=7, m3_pitch=7.99, grating
 
 
 def full_ca_scan_nd(multiple=1, diode_range=6, m3_pitch=8.00, grating='1200', master_plan=None, md={'plan_history': []},
-                    **kwargs):
+                     enscan_type = 'full_ca_scan_nd',**kwargs):
     '''
     full_ca_scan_nd
+    @param master_plan: a category of higher level plan which you might want to sort by
+    @param enscan_type: the granular level plan you might want to sort by - generally for timing or data lookup
+    @param md: metadata to push through to lower level plans and eventually a bluesky document
     @param multiple: default exposure times is multipled by this
     @param diode_range: integer range for the dilde
     @param m3_pitch: pitch value for M3 for this energy range - check before scans
@@ -732,11 +833,12 @@ def full_ca_scan_nd(multiple=1, diode_range=6, m3_pitch=8.00, grating='1200', ma
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md.get('plan_history', []).append({'plan_name': 'full_ca_scan_nd',
-                                                            'arguments': dict(locals())})
+    plan_name = 'full_ca_scan_nd'
+    # grab locals
+    arguments = dict(locals())
+    clean_up_md(arguments,md)
     if len(read_input("Starting a Calcium energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
-    enscan_type = 'full_ca_scan_nd'
     # create a list of energies
     energies = np.arange(320, 340, 5)
     energies = np.append(energies, np.arange(340, 345, 1))
@@ -754,9 +856,12 @@ def full_ca_scan_nd(multiple=1, diode_range=6, m3_pitch=8.00, grating='1200', ma
 
 
 def short_calcium_scan_nd(multiple=1, diode_range=6, m3_pitch=8.00, grating='1200', master_plan=None,
-                          md={'plan_history': []}, **kwargs):
+                          md={'plan_history': []}, enscan_type = 'short_calcium_scan_nd', **kwargs):
     '''
     short_calcium_scan_nd
+    @param master_plan: a category of higher level plan which you might want to sort by
+    @param enscan_type: the granular level plan you might want to sort by - generally for timing or data lookup
+    @param md: metadata to push through to lower level plans and eventually a bluesky document
     @param multiple: default exposure times is multipled by this
     @param diode_range: integer range for the dilde
     @param m3_pitch: pitch value for M3 for this energy range - check before scans
@@ -764,11 +869,12 @@ def short_calcium_scan_nd(multiple=1, diode_range=6, m3_pitch=8.00, grating='120
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md.get('plan_history', []).append({'plan_name': 'short_calcium_scan_nd',
-                                                            'arguments': dict(locals())})
+    plan_name = 'short_calcium_scan_nd'
+    # grab locals
+    arguments = dict(locals())
+    clean_up_md(arguments,md)
     if len(read_input("Starting a Calcium energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
-    enscan_type = 'short_calcium_scan_nd'
     # create a list of energies
     energies = np.arange(320, 340, 5)
     energies = np.append(energies, np.arange(340, 345, 1))
@@ -785,9 +891,12 @@ def short_calcium_scan_nd(multiple=1, diode_range=6, m3_pitch=8.00, grating='120
 
 
 def full_carbon_calcium_scan_nd(multiple=1, diode_range=6, m3_pitch=7.96, grating='1200', master_plan=None,
-                                md={'plan_history': []}, **kwargs):
+                                md={'plan_history': []}, enscan_type = 'full_carbon_calcium_scan_nd', **kwargs):
     '''
     full_carbon_calcium_scan_nd
+    @param master_plan: a category of higher level plan which you might want to sort by
+    @param enscan_type: the granular level plan you might want to sort by - generally for timing or data lookup
+    @param md: metadata to push through to lower level plans and eventually a bluesky document
     @param multiple: default exposure times is multipled by this
     @param diode_range: integer range for the dilde
     @param m3_pitch: pitch value for M3 for this energy range - check before scans
@@ -795,9 +904,10 @@ def full_carbon_calcium_scan_nd(multiple=1, diode_range=6, m3_pitch=7.96, gratin
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md.get('plan_history', []).append({'plan_name': 'full_carbon_calcium_scan_nd',
-                                                            'arguments': dict(locals())})
-    enscan_type = 'full_carbon_calcium_scan_nd'
+    plan_name = 'full_carbon_calcium_scan_nd'
+    # grab locals
+    arguments = dict(locals())
+    clean_up_md(arguments,md)
     if len(read_input("Starting a full carbon and calcium energy scan hit "
                       "enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
@@ -826,9 +936,12 @@ def full_carbon_calcium_scan_nd(multiple=1, diode_range=6, m3_pitch=7.96, gratin
 
 
 def survey_scan_verylowenergy(multiple=1, diode_range=7, m3_pitch=7.93, grating='250', master_plan=None,
-                              md={'plan_history': []}, **kwargs):
+                              md={'plan_history': []}, enscan_type = 'survey_scan_verylowenergy', **kwargs):
     '''
     survey_scan_verylowenergy
+    @param master_plan: a category of higher level plan which you might want to sort by
+    @param enscan_type: the granular level plan you might want to sort by - generally for timing or data lookup
+    @param md: metadata to push through to lower level plans and eventually a bluesky document
     @param multiple: default exposure times is multipled by this
     @param diode_range: integer range for the dilde
     @param m3_pitch: pitch value for M3 for this energy range - check before scans
@@ -836,9 +949,10 @@ def survey_scan_verylowenergy(multiple=1, diode_range=7, m3_pitch=7.93, grating=
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md.get('plan_history', []).append({'plan_name': 'survey_scan_verylowenergy',
-                                                            'arguments': dict(locals())})
-    enscan_type = 'survey_scan_verylowenergy'
+    plan_name = 'survey_scan_verylowenergy'
+    # grab locals
+    arguments = dict(locals())
+    clean_up_md(arguments,md)
     if len(read_input("Starting a low energy survey scan hit enter in the next 3 seconds to abort", "abort", "",
                       3)) > 0:
         return
@@ -856,9 +970,12 @@ def survey_scan_verylowenergy(multiple=1, diode_range=7, m3_pitch=7.93, grating=
 
 
 def survey_scan_lowenergy(multiple=1, diode_range=7, m3_pitch=7.91, grating='1200', master_plan=None,
-                          md={'plan_history': []}, **kwargs):
+                          md={'plan_history': []}, enscan_type = 'survey_scan_lowenergy', **kwargs):
     '''
     survey_scan_lowenergy
+    @param master_plan: a category of higher level plan which you might want to sort by
+    @param enscan_type: the granular level plan you might want to sort by - generally for timing or data lookup
+    @param md: metadata to push through to lower level plans and eventually a bluesky document
     @param multiple: default exposure times is multipled by this
     @param diode_range: integer range for the dilde
     @param m3_pitch: pitch value for M3 for this energy range - check before scans
@@ -866,9 +983,10 @@ def survey_scan_lowenergy(multiple=1, diode_range=7, m3_pitch=7.91, grating='120
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md.get('plan_history', []).append({'plan_name': 'survey_scan_lowenergy',
-                                                            'arguments': dict(locals())})
-    enscan_type = 'survey_scan_lowenergy'
+    plan_name = 'survey_scan_lowenergy'
+    # grab locals
+    arguments = dict(locals())
+    clean_up_md(arguments,md)
     if len(read_input("Starting a Low energy survey scan hit enter in the next 3 seconds to abort", "abort", "",
                       3)) > 0:
         return
@@ -886,11 +1004,14 @@ def survey_scan_lowenergy(multiple=1, diode_range=7, m3_pitch=7.91, grating='120
 
 
 def survey_scan_highenergy(multiple=1, diode_range=7, m3_pitch=7.89, grating='1200', master_plan=None,
-                           md={'plan_history': []}, **kwargs):
+                           md={'plan_history': []}, enscan_type = 'survey_scan_highenergy', **kwargs):
     '''
     survey_scan_highenergy
     @param master_plan: higher level plan for timing purposes
     @param md: any metadata to push through to acquisition
+    @param master_plan: a category of higher level plan which you might want to sort by
+    @param enscan_type: the granular level plan you might want to sort by - generally for timing or data lookup
+    @param md: metadata to push through to lower level plans and eventually a bluesky document
     @param multiple: default exposure times is multipled by this
     @param diode_range: integer range for the dilde
     @param m3_pitch: pitch value for M3 for this energy range - check before scans
@@ -898,9 +1019,10 @@ def survey_scan_highenergy(multiple=1, diode_range=7, m3_pitch=7.89, grating='12
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md.get('plan_history', []).append({'plan_name': 'survey_scan_highenergy',
-                                                            'arguments': dict(locals())})
-    enscan_type = 'survey_scan_highenergy'
+    plan_name = 'survey_scan_highenergy'
+    # grab locals
+    arguments = dict(locals())
+    clean_up_md(arguments,md)
     if len(read_input("Starting a High energy survey scan hit enter in the next 3 seconds to abort", "abort", "",
                       3)) > 0:
         return
@@ -918,9 +1040,12 @@ def survey_scan_highenergy(multiple=1, diode_range=7, m3_pitch=7.89, grating='12
 
 
 def survey_scan_veryhighenergy(multiple=1, diode_range=7, m3_pitch=7.89, grating='1200', master_plan=None,
-                               md={'plan_history': []}, **kwargs):
+                               md={'plan_history': []}, enscan_type = 'survey_scan_veryhighenergy', **kwargs):
     '''
     survey_scan_veryhighenergy
+    @param master_plan: a category of higher level plan which you might want to sort by
+    @param enscan_type: the granular level plan you might want to sort by - generally for timing or data lookup
+    @param md: metadata to push through to lower level plans and eventually a bluesky document
     @param multiple: default exposure times is multipled by this
     @param diode_range: integer range for the dilde
     @param m3_pitch: pitch value for M3 for this energy range - check before scans
@@ -928,9 +1053,10 @@ def survey_scan_veryhighenergy(multiple=1, diode_range=7, m3_pitch=7.89, grating
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md.get('plan_history', []).append({'plan_name': 'survey_scan_veryhighenergy',
-                                                            'arguments': dict(locals())})
-    enscan_type = 'survey_scan_veryhighenergy'
+    plan_name = 'survey_scan_veryhighenergy'
+    # grab locals
+    arguments = dict(locals())
+    clean_up_md(arguments,md)
     if len(read_input("Starting a Very High energy survey scan hit enter in the next 3 seconds to abort", "abort", "",
                       3)) > 0:
         return
@@ -948,10 +1074,13 @@ def survey_scan_veryhighenergy(multiple=1, diode_range=7, m3_pitch=7.89, grating
 
 
 def cdsaxs_scan(energies=[(250, 2), (270, 2), (280, 2), (285, 2), (300, 2)],
-                angles=(-60, 61, 2), plan_name='cdsaxs_single', master_plan='cdsaxs_scan',
-                diode_range=6, m3_pitch=8.00, grating='1200', md={'plan_history': []}, **kwargs):
+                angles=(-60, 61, 2), master_plan='cdsaxs_scan',
+                diode_range=6, m3_pitch=8.00, grating='1200', md={'plan_history': []}, enscan_type = 'full_oxygen_scan_nd', **kwargs):
     '''
     custom_rsoxs_scan
+    @param master_plan: a category of higher level plan which you might want to sort by
+    @param enscan_type: the granular level plan you might want to sort by - generally for timing or data lookup
+    @param md: metadata to push through to lower level plans and eventually a bluesky document
     @param multiple: default exposure times is multipled by this
     @param energies: list of touples of energy, exposure time
     @param angles: list of angles.  at each angle, the energy list will be collected
@@ -961,9 +1090,10 @@ def cdsaxs_scan(energies=[(250, 2), (270, 2), (280, 2), (285, 2), (300, 2)],
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md.get('plan_history', []).append({'plan_name': 'cdsaxs_scan',
-                                                            'arguments': dict(locals())})
-    enscan_type = plan_name
+    plan_name = 'cdsaxs_scan'
+    # grab locals
+    arguments = dict(locals())
+    clean_up_md(arguments,md)
     newenergies = []
     newtimes = []
     if len(read_input("Starting a CD-SAXS energy,angle scan hit enter in "
