@@ -5,7 +5,7 @@ import bluesky.plans as bp
 import bluesky.plan_stubs as bps
 from copy import deepcopy
 
-def clean_up_md(arguments={},md=None,**kwargs):
+def clean_up_md(arguments={},md = {},**kwargs):
     del arguments['md']  # no recursion here!
     del arguments['kwargs']
     for key in kwargs:
@@ -24,7 +24,7 @@ def clean_up_md(arguments={},md=None,**kwargs):
 
 
 def full_oxygen_scan_nd(multiple=1, diode_range=6, m3_pitch=7.99, grating='1200', master_plan=None,
-                        md=None, enscan_type = 'full_oxygen_scan_nd', **kwargs):
+                        md = {}, enscan_type = 'full_oxygen_scan_nd', **kwargs):
     '''
     full_oxygen_scan_nd
     @param master_plan: a category of higher level plan which you might want to sort by
@@ -62,7 +62,7 @@ def full_oxygen_scan_nd(multiple=1, diode_range=6, m3_pitch=7.99, grating='1200'
 
 
 def short_oxygen_scan_nd(multiple=1, diode_range=6, m3_pitch=7.98, grating='1200', master_plan=None,
-                         md=None, enscan_type = 'short_oxygen_scan_nd', **kwargs):
+                         md = {}, enscan_type = 'short_oxygen_scan_nd', **kwargs):
     '''
     short_oxygen_scan_nd
     @param master_plan: a category of higher level plan which you might want to sort by
@@ -100,7 +100,7 @@ def short_oxygen_scan_nd(multiple=1, diode_range=6, m3_pitch=7.98, grating='1200
 
 
 def short_zincl_scan_nd(multiple=1, diode_range=6, m3_pitch=7.98, grating='1200', master_plan=None,
-                        md=None, enscan_type = 'short_zincl_scan_nd', **kwargs):
+                        md = {}, enscan_type = 'short_zincl_scan_nd', **kwargs):
     '''
     short_zincl_scan_nd
     @param master_plan: a category of higher level plan which you might want to sort by
@@ -134,7 +134,7 @@ def short_zincl_scan_nd(multiple=1, diode_range=6, m3_pitch=7.98, grating='1200'
 
 
 def very_short_oxygen_scan_nd(multiple=1, diode_range=6, m3_pitch=7.97, grating='1200', master_plan=None,
-                              md=None, enscan_type = 'very_short_oxygen_scan_nd', **kwargs):
+                              md = {}, enscan_type = 'very_short_oxygen_scan_nd', **kwargs):
     '''
     very_short_oxygen_scan_nd
     @param master_plan: a category of higher level plan which you might want to sort by
@@ -173,7 +173,7 @@ def very_short_oxygen_scan_nd(multiple=1, diode_range=6, m3_pitch=7.97, grating=
 
 
 def short_fluorine_scan_nd(multiple=1, diode_range=7, m3_pitch=7.98, grating='1200', master_plan=None,
-                           md=None, enscan_type = 'short_fluorine_scan_nd', **kwargs):
+                           md = {}, enscan_type = 'short_fluorine_scan_nd', **kwargs):
     '''
     short_fluorine_scan_nd
     @param master_plan: a category of higher level plan which you might want to sort by
@@ -212,7 +212,7 @@ def short_fluorine_scan_nd(multiple=1, diode_range=7, m3_pitch=7.98, grating='12
 
 
 def full_nitrogen_scan_nd(multiple=1, diode_range=6, m3_pitch=7.93, grating='1200', master_plan=None,
-                          md=None, enscan_type = 'full_nitrogen_scan_nd', **kwargs):
+                          md = {}, enscan_type = 'full_nitrogen_scan_nd', **kwargs):
     '''
     full_nitrogen_scan_nd
     @param master_plan: a category of higher level plan which you might want to sort by
@@ -249,7 +249,7 @@ def full_nitrogen_scan_nd(multiple=1, diode_range=6, m3_pitch=7.93, grating='120
 
 
 def short_nitrogen_scan_nd(multiple=1, diode_range=6, m3_pitch=8.00, grating='1200', master_plan=None,
-                           md=None, enscan_type = 'short_nitrogen_scan_nd', **kwargs):
+                           md = {}, enscan_type = 'short_nitrogen_scan_nd', **kwargs):
     '''
     short_nitrogen_scan_nd
     @param master_plan: a category of higher level plan which you might want to sort by
@@ -289,7 +289,7 @@ def short_nitrogen_scan_nd(multiple=1, diode_range=6, m3_pitch=8.00, grating='12
 
 
 def very_short_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=8.01, grating='1200', master_plan=None,
-                              md=None, enscan_type = 'very_short_carbon_scan_nd', **kwargs):
+                              md = {}, enscan_type = 'very_short_carbon_scan_nd', **kwargs):
     '''
     very_short_carbon_scan_nd
     @param master_plan: a category of higher level plan which you might want to sort by
@@ -331,7 +331,7 @@ def very_short_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=8.01, grating=
 
 
 def short_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=8.00, grating='1200', master_plan=None,
-                         md=None, enscan_type = 'short_carbon_scan_nd', **kwargs):
+                         md = {}, enscan_type = 'short_carbon_scan_nd', **kwargs):
     '''
     short_carbon_scan_nd
     @param master_plan: a category of higher level plan which you might want to sort by
@@ -373,7 +373,7 @@ def short_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=8.00, grating='1200
 
 
 def short_carbon_scan_nonaromatic(multiple=1, diode_range=6, m3_pitch=8.00, grating='1200', master_plan=None,
-                                  md=None, enscan_type = 'short_carbon_scan_nonaromatic', **kwargs):
+                                  md = {}, enscan_type = 'short_carbon_scan_nonaromatic', **kwargs):
     '''
     short_carbon_scan_nonaromatic
     @param master_plan: a category of higher level plan which you might want to sort by
@@ -416,7 +416,7 @@ def short_carbon_scan_nonaromatic(multiple=1, diode_range=6, m3_pitch=8.00, grat
 
 
 def custom_rsoxs_scan(energies=[((270, 340, 1), 2)], master_plan=None,
-                      diode_range=6, m3_pitch=8.00, grating='1200', md=None, enscan_type = 'custom_rsoxs_scan', **kwargs):
+                      diode_range=6, m3_pitch=8.00, grating='1200', md = {}, enscan_type = 'custom_rsoxs_scan', **kwargs):
     '''
     custom_rsoxs_scan
     @param master_plan: a category of higher level plan which you might want to sort by
@@ -451,7 +451,7 @@ def custom_rsoxs_scan(energies=[((270, 340, 1), 2)], master_plan=None,
 
 
 def short_sulfurl_scan_nd(multiple=1, diode_range=6, m3_pitch=8.02, grating='1200', master_plan=None,
-                          md=None, enscan_type = 'short_sulfurl_scan_nd', **kwargs):
+                          md = {}, enscan_type = 'short_sulfurl_scan_nd', **kwargs):
     '''
     short_sulfurl_scan_nd
     @param master_plan: a category of higher level plan which you might want to sort by
@@ -491,7 +491,7 @@ def short_sulfurl_scan_nd(multiple=1, diode_range=6, m3_pitch=8.02, grating='120
 
 
 def focused_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=7.93, grating='1200', master_plan=None,
-                           md=None, enscan_type = 'focused_carbon_scan_nd', **kwargs):
+                           md = {}, enscan_type = 'focused_carbon_scan_nd', **kwargs):
     '''
     focused_carbon_scan_nd
     @param master_plan: a category of higher level plan which you might want to sort by
@@ -533,7 +533,7 @@ def focused_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=7.93, grating='12
 
 
 def g_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=7.93, grating='1200', master_plan=None,
-                     md=None, enscan_type = 'g_carbon_scan_nd', **kwargs):
+                     md = {}, enscan_type = 'g_carbon_scan_nd', **kwargs):
     '''
     g_carbon_scan_nd
     @param master_plan: a category of higher level plan which you might want to sort by
@@ -566,7 +566,7 @@ def g_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=7.93, grating='1200', m
 
 
 def t_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=7.93, grating='1200', master_plan=None,
-                     md=None, enscan_type = 't_carbon_scan_nd', **kwargs):
+                     md = {}, enscan_type = 't_carbon_scan_nd', **kwargs):
     '''
     t_carbon_scan_nd
     @param master_plan: a category of higher level plan which you might want to sort by
@@ -599,7 +599,7 @@ def t_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=7.93, grating='1200', m
 
 
 def sufficient_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=7.96, grating='1200', master_plan=None,
-                              md=None, enscan_type = 'sufficient_carbon_scan_nd', **kwargs):
+                              md = {}, enscan_type = 'sufficient_carbon_scan_nd', **kwargs):
     '''
     sufficient_carbon_scan_nd
     @param master_plan: a category of higher level plan which you might want to sort by
@@ -639,7 +639,7 @@ def sufficient_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=7.96, grating=
 
 
 def picky_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=7.93, grating='1200', master_plan=None,
-                         md=None, enscan_type = 'picky_carbon_scan_nd', **kwargs):
+                         md = {}, enscan_type = 'picky_carbon_scan_nd', **kwargs):
     '''
     picky_carbon_scan_nd
     @param master_plan: a category of higher level plan which you might want to sort by
@@ -673,7 +673,7 @@ def picky_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=7.93, grating='1200
 
 
 def full_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=8.00, grating='1200', master_plan=None,
-                        md=None, enscan_type = 'full_carbon_scan_nd', **kwargs):
+                        md = {}, enscan_type = 'full_carbon_scan_nd', **kwargs):
     '''
     full_carbon_scan_nd
     @param master_plan: a category of higher level plan which you might want to sort by
@@ -713,7 +713,7 @@ def full_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=8.00, grating='1200'
 
 
 def full_carbon_scan_nonaromatic(multiple=1, diode_range=6, m3_pitch=7.97, grating='1200', master_plan=None,
-                                 md=None, enscan_type = 'full_carbon_scan_nonaromatic', **kwargs):
+                                 md = {}, enscan_type = 'full_carbon_scan_nonaromatic', **kwargs):
     '''
     full_carbon_scan_nonaromatic
     @param master_plan: a category of higher level plan which you might want to sort by
@@ -753,7 +753,7 @@ def full_carbon_scan_nonaromatic(multiple=1, diode_range=6, m3_pitch=7.97, grati
 
 
 def full_fluorine_scan_nd(multiple=1, diode_range=7, m3_pitch=7.89, grating='1200', master_plan=None,
-                          md=None, enscan_type = 'full_fluorine_scan_nd', **kwargs):
+                          md = {}, enscan_type = 'full_fluorine_scan_nd', **kwargs):
     '''
     full_fluorine_scan_nd
     @param master_plan: a category of higher level plan which you might want to sort by
@@ -788,7 +788,7 @@ def full_fluorine_scan_nd(multiple=1, diode_range=7, m3_pitch=7.89, grating='120
 
 
 def veryshort_fluorine_scan_nd(multiple=1, diode_range=7, m3_pitch=7.99, grating='1200', master_plan=None,
-                               md=None, enscan_type = 'veryshort_fluorine_scan_nd', **kwargs):
+                               md = {}, enscan_type = 'veryshort_fluorine_scan_nd', **kwargs):
     '''
     veryshort_fluorine_scan_nd
     @param master_plan: a category of higher level plan which you might want to sort by
@@ -823,7 +823,7 @@ def veryshort_fluorine_scan_nd(multiple=1, diode_range=7, m3_pitch=7.99, grating
                             diode_range=diode_range, m3_pitch=m3_pitch, grating=grating, **kwargs)
 
 
-def full_ca_scan_nd(multiple=1, diode_range=6, m3_pitch=8.00, grating='1200', master_plan=None, md=None,
+def full_ca_scan_nd(multiple=1, diode_range=6, m3_pitch=8.00, grating='1200', master_plan=None, md = {},
                      enscan_type = 'full_ca_scan_nd',**kwargs):
     '''
     full_ca_scan_nd
@@ -860,7 +860,7 @@ def full_ca_scan_nd(multiple=1, diode_range=6, m3_pitch=8.00, grating='1200', ma
 
 
 def short_calcium_scan_nd(multiple=1, diode_range=6, m3_pitch=8.00, grating='1200', master_plan=None,
-                          md=None, enscan_type = 'short_calcium_scan_nd', **kwargs):
+                          md = {}, enscan_type = 'short_calcium_scan_nd', **kwargs):
     '''
     short_calcium_scan_nd
     @param master_plan: a category of higher level plan which you might want to sort by
@@ -895,7 +895,7 @@ def short_calcium_scan_nd(multiple=1, diode_range=6, m3_pitch=8.00, grating='120
 
 
 def full_carbon_calcium_scan_nd(multiple=1, diode_range=6, m3_pitch=7.96, grating='1200', master_plan=None,
-                                md=None, enscan_type = 'full_carbon_calcium_scan_nd', **kwargs):
+                                md = {}, enscan_type = 'full_carbon_calcium_scan_nd', **kwargs):
     '''
     full_carbon_calcium_scan_nd
     @param master_plan: a category of higher level plan which you might want to sort by
@@ -940,7 +940,7 @@ def full_carbon_calcium_scan_nd(multiple=1, diode_range=6, m3_pitch=7.96, gratin
 
 
 def survey_scan_verylowenergy(multiple=1, diode_range=7, m3_pitch=7.93, grating='250', master_plan=None,
-                              md=None, enscan_type = 'survey_scan_verylowenergy', **kwargs):
+                              md = {}, enscan_type = 'survey_scan_verylowenergy', **kwargs):
     '''
     survey_scan_verylowenergy
     @param master_plan: a category of higher level plan which you might want to sort by
@@ -974,7 +974,7 @@ def survey_scan_verylowenergy(multiple=1, diode_range=7, m3_pitch=7.93, grating=
 
 
 def survey_scan_lowenergy(multiple=1, diode_range=7, m3_pitch=7.91, grating='1200', master_plan=None,
-                          md=None, enscan_type = 'survey_scan_lowenergy', **kwargs):
+                          md = {}, enscan_type = 'survey_scan_lowenergy', **kwargs):
     '''
     survey_scan_lowenergy
     @param master_plan: a category of higher level plan which you might want to sort by
@@ -1008,7 +1008,7 @@ def survey_scan_lowenergy(multiple=1, diode_range=7, m3_pitch=7.91, grating='120
 
 
 def survey_scan_highenergy(multiple=1, diode_range=7, m3_pitch=7.89, grating='1200', master_plan=None,
-                           md=None, enscan_type = 'survey_scan_highenergy', **kwargs):
+                           md = {}, enscan_type = 'survey_scan_highenergy', **kwargs):
     '''
     survey_scan_highenergy
     @param master_plan: higher level plan for timing purposes
@@ -1044,7 +1044,7 @@ def survey_scan_highenergy(multiple=1, diode_range=7, m3_pitch=7.89, grating='12
 
 
 def survey_scan_veryhighenergy(multiple=1, diode_range=7, m3_pitch=7.89, grating='1200', master_plan=None,
-                               md=None, enscan_type = 'survey_scan_veryhighenergy', **kwargs):
+                               md = {}, enscan_type = 'survey_scan_veryhighenergy', **kwargs):
     '''
     survey_scan_veryhighenergy
     @param master_plan: a category of higher level plan which you might want to sort by
@@ -1079,7 +1079,7 @@ def survey_scan_veryhighenergy(multiple=1, diode_range=7, m3_pitch=7.89, grating
 
 def cdsaxs_scan(energies=[(250, 2), (270, 2), (280, 2), (285, 2), (300, 2)],
                 angles=(-60, 61, 2), master_plan='cdsaxs_scan',
-                diode_range=6, m3_pitch=8.00, grating='1200', md=None, enscan_type = 'full_oxygen_scan_nd', **kwargs):
+                diode_range=6, m3_pitch=8.00, grating='1200', md = {}, enscan_type = 'full_oxygen_scan_nd', **kwargs):
     '''
     custom_rsoxs_scan
     @param master_plan: a category of higher level plan which you might want to sort by

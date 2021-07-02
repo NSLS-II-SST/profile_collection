@@ -87,7 +87,7 @@ def en_scan_core(signals=[],
                  pol=0,
                  grating='no change',
                  master_plan=None,
-                 md=None):
+                 md={}):
     # grab locals
     arguments = dict(locals())
     del arguments['md']  # no recursion here!
@@ -174,7 +174,7 @@ def NEXAFS_scan_core(signals, dets, energy, energies, enscan_type=None, master_p
 
 def NEXAFS_fly_scan_core(scan_params, openshutter=False, m3_pitch=np.nan, diode_range=np.nan, pol=np.nan,
                          grating='best', exp_time=.5, enscan_type=None, master_plan=None,
-                         md=None):
+                         md={}):
     # grab locals
     arguments = dict(locals())
     del arguments['md']  # no recursion here!
@@ -339,7 +339,7 @@ def one_shuttered_step(detectors, step, pos_cache):
     yield Msg('wait', None, group=grp)  # now wait for motors, before moving on to next step
 
 
-def scan_eliot(detectors, cycler, exp_time, *, md=None):
+def scan_eliot(detectors, cycler, exp_time, *, md={}):
     """
     Scan over an arbitrary N-dimensional trajectory.
     1.) begin movement as soon as photon part of detection ends
@@ -475,7 +475,7 @@ def scan_eliot(detectors, cycler, exp_time, *, md=None):
     return (yield from inner_scan_eliot())
 
 
-def fly_scan_eliot(scan_params, polarization=np.nan, grating='best', *, md=None):
+def fly_scan_eliot(scan_params, polarization=np.nan, grating='best', *, md={}):
     """
     Specific scan for SST-1 monochromator fly scan, while catching up with the undulator
 
