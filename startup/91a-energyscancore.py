@@ -89,9 +89,8 @@ def en_scan_core(signals=[],
                  master_plan=None,
                  md={'plan_history': []}):
     # grab locals
-    arguments = deepcopy(dict(locals()))
+    arguments = dict(locals())
     del arguments['md'] # no recursion here!
-    arguments = arguments.deepcopy()
     arguments['dets'] = [det.name for det in arguments['dets']]
     arguments['signals'] = [signal.name for signal in arguments['signals']]
     arguments['energy'] = arguments['energy'].name
@@ -177,7 +176,6 @@ def NEXAFS_fly_scan_core(scan_params, openshutter=False, m3_pitch=np.nan, diode_
     # grab locals
     arguments = dict(locals())
     del arguments['md'] # no recursion here!
-    arguments = arguments.deepcopy()
     md.get('plan_history', []).append({'plan_name': 'NEXAFS_fly_scan_core',
                                        'arguments': arguments})
     md.update({'plan_name': enscan_type, 'master_plan': master_plan})
