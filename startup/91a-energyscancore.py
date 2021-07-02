@@ -88,7 +88,7 @@ def en_scan_core(signals=[],
                  master_plan=None,
                  md={'plan_history': []}):
     # grab locals
-    arguments = dict(locals())
+    arguments = dict(locals()).deepcopy()
     del arguments['md'] # no recursion here!
     arguments['dets'] = [det.name for det in arguments['dets']]
     arguments['signals'] = [signal.name for signal in arguments['signals']]
