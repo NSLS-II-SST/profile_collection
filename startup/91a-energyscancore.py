@@ -178,6 +178,8 @@ def NEXAFS_fly_scan_core(scan_params, openshutter=False, m3_pitch=np.nan, diode_
     # grab locals
     arguments = dict(locals())
     del arguments['md']  # no recursion here!
+    if md is None:
+        md = {}
     md.setdefault('plan_history', [])
     md['plan_history'].append({'plan_name': 'NEXAFS_fly_scan_core','arguments': arguments})
     md.update({'plan_name': enscan_type, 'master_plan': master_plan})
