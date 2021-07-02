@@ -113,7 +113,7 @@ def en_scan_core(signals=[],
         sigcycler += cycler(det.cam.acquire_time, times.copy())
     sigcycler += cycler(Shutter_open_time, shutter_times)
     # print(sigcycler)
-    yield from scan_eliot(dets + signals, sigcycler, md=md)
+    yield from scan_eliot(dets + signals, sigcycler,Shutter_open_time, md=md)
 
 
 def NEXAFS_scan_core(signals, dets, energy, energies, enscan_type=None, master_plan=None,
