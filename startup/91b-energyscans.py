@@ -16,7 +16,7 @@ def full_oxygen_scan_nd(multiple=1, diode_range=6, m3_pitch=7.99, grating='1200'
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'full_oxygen_scan_nd',
+    md.get('plan_history', []).append({'plan_name': 'full_oxygen_scan_nd',
                                                             'arguments': dict(locals())})
     enscan_type = 'full_oxygen_scan_nd'
     if len(read_input("Starting a Oxygen energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
@@ -49,7 +49,7 @@ def short_oxygen_scan_nd(multiple=1, diode_range=6, m3_pitch=7.98, grating='1200
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'short_oxygen_scan_nd',
+    md.get('plan_history', []).append({'plan_name': 'short_oxygen_scan_nd',
                                                             'arguments': dict(locals())})
     enscan_type = 'short_oxygen_scan_nd'
     if len(read_input("Starting a Oxygen energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
@@ -83,7 +83,7 @@ def short_zincl_scan_nd(multiple=1, diode_range=6, m3_pitch=7.98, grating='1200'
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'short_zincl_scan_nd',
+    md.get('plan_history', []).append({'plan_name': 'short_zincl_scan_nd',
                                                             'arguments': dict(locals())})
     enscan_type = 'short_zincl_scan_nd'
     if len(read_input("Starting a Zinc energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
@@ -113,7 +113,7 @@ def very_short_oxygen_scan_nd(multiple=1, diode_range=6, m3_pitch=7.97, grating=
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'very_short_oxygen_scan_nd',
+    md.get('plan_history', []).append({'plan_name': 'very_short_oxygen_scan_nd',
                                                             'arguments': dict(locals())})
     enscan_type = 'very_short_oxygen_scan_nd'
     if len(read_input("Starting a Oxygen energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
@@ -148,7 +148,7 @@ def short_fluorine_scan_nd(multiple=1, diode_range=7, m3_pitch=7.98, grating='12
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'short_fluorine_scan_nd',
+    md.get('plan_history', []).append({'plan_name': 'short_fluorine_scan_nd',
                                                             'arguments': dict(locals())})
     enscan_type = 'short_fluorine_scan_nd'
     if len(read_input("Starting a fluorine energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
@@ -183,7 +183,7 @@ def full_nitrogen_scan_nd(multiple=1, diode_range=6, m3_pitch=7.93, grating='120
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'full_nitrogen_scan_nd',
+    md.get('plan_history', []).append({'plan_name': 'full_nitrogen_scan_nd',
                                                             'arguments': dict(locals())})
     enscan_type = 'full_nitrogen_scan_nd'
     if len(read_input("Starting a Nitrogen energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
@@ -216,7 +216,7 @@ def short_nitrogen_scan_nd(multiple=1, diode_range=6, m3_pitch=8.00, grating='12
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'short_nitrogen_scan_nd',
+    md.get('plan_history', []).append({'plan_name': 'short_nitrogen_scan_nd',
                                                             'arguments': dict(locals())})
     enscan_type = 'short_nitrogen_scan_nd'
     if len(read_input("Starting a Short Nitrogen energy scan "
@@ -252,7 +252,7 @@ def very_short_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=8.01, grating=
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'very_short_carbon_scan_nd',
+    md.get('plan_history', []).append({'plan_name': 'very_short_carbon_scan_nd',
                                                             'arguments': dict(locals())})
     enscan_type = 'very_short_carbon_scan_nd'
     if len(read_input("Starting a very short Carbon energy scan hit "
@@ -290,7 +290,7 @@ def short_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=8.00, grating='1200
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'short_carbon_scan_nd',
+    md.get('plan_history', []).append({'plan_name': 'short_carbon_scan_nd',
                                                             'arguments': dict(locals())})
     enscan_type = 'short_carbon_scan_nd'
     if len(read_input("Starting a short Carbon energy scan hit enter in "
@@ -328,7 +328,7 @@ def short_carbon_scan_nonaromatic(multiple=1, diode_range=6, m3_pitch=8.00, grat
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'short_carbon_scan_nonaromatic',
+    md.get('plan_history', []).append({'plan_name': 'short_carbon_scan_nonaromatic',
                                                             'arguments': dict(locals())})
     enscan_type = 'short_carbon_scan_nonaromatic'
     if len(read_input("Starting a short Carbon energy scan hit enter in "
@@ -367,7 +367,7 @@ def custom_rsoxs_scan(energies=[((270, 340, 1), 2)], plan_name='custom_rsoxs_sca
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'custom_rsoxs_scan',
+    md.get('plan_history', []).append({'plan_name': 'custom_rsoxs_scan',
                                                             'arguments': dict(locals())})
 
     enscan_type = plan_name
@@ -399,7 +399,7 @@ def short_sulfurl_scan_nd(multiple=1, diode_range=6, m3_pitch=8.02, grating='120
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'short_sulfurl_scan_nd',
+    md.get('plan_history', []).append({'plan_name': 'short_sulfurl_scan_nd',
                                                             'arguments': dict(locals())})
     enscan_type = 'short_sulfurl_scan_nd'
     if len(read_input("Starting a short Sulfur L energy scan hit enter in "
@@ -435,7 +435,7 @@ def focused_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=7.93, grating='12
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'focused_carbon_scan_nd',
+    md.get('plan_history', []).append({'plan_name': 'focused_carbon_scan_nd',
                                                             'arguments': dict(locals())})
     enscan_type = 'focused_carbon_scan_nd'
     if len(read_input("Starting a short Carbon energy scan hit enter in "
@@ -473,7 +473,7 @@ def g_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=7.93, grating='1200', m
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'g_carbon_scan_nd',
+    md.get('plan_history', []).append({'plan_name': 'g_carbon_scan_nd',
                                                             'arguments': dict(locals())})
     enscan_type = 'g_carbon_scan_nd'
     if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
@@ -502,7 +502,7 @@ def t_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=7.93, grating='1200', m
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 't_carbon_scan_nd',
+    md.get('plan_history', []).append({'plan_name': 't_carbon_scan_nd',
                                                             'arguments': dict(locals())})
     enscan_type = 't_carbon_scan_nd'
     if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
@@ -531,7 +531,7 @@ def sufficient_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=7.96, grating=
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'sufficient_carbon_scan_nd',
+    md.get('plan_history', []).append({'plan_name': 'sufficient_carbon_scan_nd',
                                                             'arguments': dict(locals())})
     enscan_type = 'sufficient_carbon_scan_nd'
     if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
@@ -567,7 +567,7 @@ def picky_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=7.93, grating='1200
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'picky_carbon_scan_nd',
+    md.get('plan_history', []).append({'plan_name': 'picky_carbon_scan_nd',
                                                             'arguments': dict(locals())})
     enscan_type = 'picky_carbon_scan_nd'
     if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
@@ -597,7 +597,7 @@ def full_carbon_scan_nd(multiple=1, diode_range=6, m3_pitch=8.00, grating='1200'
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'full_carbon_scan_nd',
+    md.get('plan_history', []).append({'plan_name': 'full_carbon_scan_nd',
                                                             'arguments': dict(locals())})
     enscan_type = 'full_carbon_scan_nd'
     if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
@@ -633,7 +633,7 @@ def full_carbon_scan_nonaromatic(multiple=1, diode_range=6, m3_pitch=7.97, grati
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'full_carbon_scan_nonaromatic',
+    md.get('plan_history', []).append({'plan_name': 'full_carbon_scan_nonaromatic',
                                                             'arguments': dict(locals())})
     enscan_type = 'full_carbon_scan_nonaromatic'
     if len(read_input("Starting a Carbon energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
@@ -669,7 +669,7 @@ def full_fluorine_scan_nd(multiple=1, diode_range=7, m3_pitch=7.89, grating='120
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'full_fluorine_scan_nd',
+    md.get('plan_history', []).append({'plan_name': 'full_fluorine_scan_nd',
                                                             'arguments': dict(locals())})
     enscan_type = 'full_fluorine_scan_nd'
     if len(read_input("Starting a Fluorine energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
@@ -700,7 +700,7 @@ def veryshort_fluorine_scan_nd(multiple=1, diode_range=7, m3_pitch=7.99, grating
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'veryshort_fluorine_scan_nd',
+    md.get('plan_history', []).append({'plan_name': 'veryshort_fluorine_scan_nd',
                                                             'arguments': dict(locals())})
     enscan_type = 'veryshort_fluorine_scan_nd'
     if len(read_input("Starting a Fluorine energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
@@ -732,7 +732,7 @@ def full_ca_scan_nd(multiple=1, diode_range=6, m3_pitch=8.00, grating='1200', ma
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'full_ca_scan_nd',
+    md.get('plan_history', []).append({'plan_name': 'full_ca_scan_nd',
                                                             'arguments': dict(locals())})
     if len(read_input("Starting a Calcium energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
@@ -764,7 +764,7 @@ def short_calcium_scan_nd(multiple=1, diode_range=6, m3_pitch=8.00, grating='120
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'short_calcium_scan_nd',
+    md.get('plan_history', []).append({'plan_name': 'short_calcium_scan_nd',
                                                             'arguments': dict(locals())})
     if len(read_input("Starting a Calcium energy scan hit enter in the next 3 seconds to abort", "abort", "", 3)) > 0:
         return
@@ -795,7 +795,7 @@ def full_carbon_calcium_scan_nd(multiple=1, diode_range=6, m3_pitch=7.96, gratin
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'full_carbon_calcium_scan_nd',
+    md.get('plan_history', []).append({'plan_name': 'full_carbon_calcium_scan_nd',
                                                             'arguments': dict(locals())})
     enscan_type = 'full_carbon_calcium_scan_nd'
     if len(read_input("Starting a full carbon and calcium energy scan hit "
@@ -836,7 +836,7 @@ def survey_scan_verylowenergy(multiple=1, diode_range=7, m3_pitch=7.93, grating=
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'survey_scan_verylowenergy',
+    md.get('plan_history', []).append({'plan_name': 'survey_scan_verylowenergy',
                                                             'arguments': dict(locals())})
     enscan_type = 'survey_scan_verylowenergy'
     if len(read_input("Starting a low energy survey scan hit enter in the next 3 seconds to abort", "abort", "",
@@ -866,7 +866,7 @@ def survey_scan_lowenergy(multiple=1, diode_range=7, m3_pitch=7.91, grating='120
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'survey_scan_lowenergy',
+    md.get('plan_history', []).append({'plan_name': 'survey_scan_lowenergy',
                                                             'arguments': dict(locals())})
     enscan_type = 'survey_scan_lowenergy'
     if len(read_input("Starting a Low energy survey scan hit enter in the next 3 seconds to abort", "abort", "",
@@ -898,7 +898,7 @@ def survey_scan_highenergy(multiple=1, diode_range=7, m3_pitch=7.89, grating='12
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'survey_scan_highenergy',
+    md.get('plan_history', []).append({'plan_name': 'survey_scan_highenergy',
                                                             'arguments': dict(locals())})
     enscan_type = 'survey_scan_highenergy'
     if len(read_input("Starting a High energy survey scan hit enter in the next 3 seconds to abort", "abort", "",
@@ -928,7 +928,7 @@ def survey_scan_veryhighenergy(multiple=1, diode_range=7, m3_pitch=7.89, grating
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'survey_scan_veryhighenergy',
+    md.get('plan_history', []).append({'plan_name': 'survey_scan_veryhighenergy',
                                                             'arguments': dict(locals())})
     enscan_type = 'survey_scan_veryhighenergy'
     if len(read_input("Starting a Very High energy survey scan hit enter in the next 3 seconds to abort", "abort", "",
@@ -961,7 +961,7 @@ def cdsaxs_scan(energies=[(250, 2), (270, 2), (280, 2), (285, 2), (300, 2)],
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     '''
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'cdsaxs_scan',
+    md.get('plan_history', []).append({'plan_name': 'cdsaxs_scan',
                                                             'arguments': dict(locals())})
     enscan_type = plan_name
     newenergies = []

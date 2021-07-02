@@ -49,7 +49,7 @@ def fly_Carbon_NEXAFS(speed=.1, pol=0, diode_range=7, m3_pitch=7.98, grating='25
     @param grating: the grating of the mono to use for the scan (currently "1200" and "250" are only valid choices)
     @return: perform a flying NEXAFS scan
     """
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'fly_Carbon_NEXAFS',
+    md.get('plan_history', []).append({'plan_name': 'fly_Carbon_NEXAFS',
                                                             'arguments': dict(locals())})
     enscan_type = 'fly_Carbon_NEXAFS'
     sample()
@@ -73,7 +73,7 @@ def fly_Calcium_NEXAFS(speed=.15, pol=0, diode_range=7, m3_pitch=7.99, grating='
     @param grating: the grating of the mono to use for the scan (currently "1200" and "250" are only valid choices)
     @return: perform a flying NEXAFS scan
     """
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'survey_scan_lowenergy',
+    md.get('plan_history', []).append({'plan_name': 'survey_scan_lowenergy',
                                                             'arguments': dict(locals())})
     enscan_type = 'fly_Calcium_NEXAFS'
     sample()
@@ -96,7 +96,7 @@ def fly_SulfurL_NEXAFS(speed=.1, pol=0, diode_range=7, m3_pitch=7.97, grating='2
     @param grating: the grating of the mono to use for the scan (currently "1200" and "250" are only valid choices)
     @return: perform a flying NEXAFS scan
     """
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'fly_SulfurL_NEXAFS',
+    md.get('plan_history', []).append({'plan_name': 'fly_SulfurL_NEXAFS',
                                                             'arguments': dict(locals())})
     enscan_type = 'fly_SulfurL_NEXAFS'
     sample()
@@ -119,7 +119,7 @@ def fly_SiliconL_NEXAFS(speed=.1, pol=0, diode_range=6, m3_pitch=8.01, grating='
     @param grating: the grating of the mono to use for the scan (currently "1200" and "250" are only valid choices)
     @return: perform a flying NEXAFS scan
     """
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'fly_SiliconL_NEXAFS',
+    md.get('plan_history', []).append({'plan_name': 'fly_SiliconL_NEXAFS',
                                                             'arguments': dict(locals())})
     enscan_type = 'fly_SiliconL_NEXAFS'
     sample()
@@ -142,7 +142,7 @@ def fly_SiliconK_NEXAFS(speed=.2, pol=0, diode_range=6, m3_pitch=7.97, grating='
     @param grating: the grating of the mono to use for the scan (currently "1200" and "250" are only valid choices)
     @return: perform a flying NEXAFS scan
     """
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'fly_SiliconK_NEXAFS',
+    md.get('plan_history', []).append({'plan_name': 'fly_SiliconK_NEXAFS',
                                                             'arguments': dict(locals())})
     enscan_type = 'fly_SiliconK_NEXAFS'
     sample()
@@ -165,7 +165,7 @@ def fly_Nitrogen_NEXAFS(speed=.1, pol=0, diode_range=7, m3_pitch=7.96, grating='
     @param grating: the grating of the mono to use for the scan (currently "1200" and "250" are only valid choices)
     @return: perform a flying NEXAFS scan
     """
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'fly_Nitrogen_NEXAFS',
+    md.get('plan_history', []).append({'plan_name': 'fly_Nitrogen_NEXAFS',
                                                             'arguments': dict(locals())})
     enscan_type = 'fly_Nitrogen_NEXAFS'
     sample()
@@ -189,7 +189,7 @@ def fly_Oxygen_NEXAFS(speed=.1, pol=0, diode_range=7, m3_pitch=7.96, grating='25
     @param grating: the grating of the mono to use for the scan (currently "1200" and "250" are only valid choices)
     @return: perform a flying NEXAFS scan
     """
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'fly_Oxygen_NEXAFS',
+    md.get('plan_history', []).append({'plan_name': 'fly_Oxygen_NEXAFS',
                                                             'arguments': dict(locals())})
     enscan_type = 'fly_Oxygen_NEXAFS'
     sample()
@@ -212,7 +212,7 @@ def fly_Fluorine_NEXAFS(speed=.3, pol=0, diode_range=7, m3_pitch=7.98, grating='
     @param grating: the grating of the mono to use for the scan (currently "1200" and "250" are only valid choices)
     @return: perform a flying NEXAFS scan
     """
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'fly_Fluorine_NEXAFS',
+    md.get('plan_history', []).append({'plan_name': 'fly_Fluorine_NEXAFS',
                                                             'arguments': dict(locals())})
     enscan_type = 'fly_Fluorine_NEXAFS'
     sample()
@@ -236,7 +236,7 @@ def fly_Boron_NEXAFS(speed=.1, pol=0, diode_range=6, m3_pitch=8.0, grating='250'
     @param grating: the grating of the mono to use for the scan (currently "1200" and "250" are only valid choices)
     @return: perform a flying NEXAFS scan
     """
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'fly_Fluorine_NEXAFS',
+    md.get('plan_history', []).append({'plan_name': 'fly_Fluorine_NEXAFS',
                                                             'arguments': dict(locals())})
     enscan_type = 'fly_Fluorine_NEXAFS'
     sample()
@@ -277,7 +277,7 @@ def normal_incidence_rotate_pol_nexafs(nexafs_plan=fly_Carbon_NEXAFS,
     """
     At normal incidence, rotate the polarization of the X-ray beam and conduct a NEXAFS scan at each polarization
     """
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'normal_incidence_rotate_pol_nexafs',
+    md.get('plan_history', []).append({'plan_name': 'normal_incidence_rotate_pol_nexafs',
                                                             'arguments': dict(locals())})
     yield from rotate_now(90)
     for pol in polarizations:
@@ -292,7 +292,7 @@ def fixed_pol_rotate_sample_nexafs(nexafs_plan=fly_Carbon_NEXAFS,
     """
     At fixed polarization, rotate the sample to do a traditional angle dependant NEXAFS measurement
     """
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'fixed_pol_rotate_sample_nexafs',
+    md.get('plan_history', []).append({'plan_name': 'fixed_pol_rotate_sample_nexafs',
                                                             'arguments': dict(locals())})
     for angle in angles:
         yield from rotate_now(angle)
@@ -314,7 +314,7 @@ def fixed_sample_rotate_pol_nexafs(nexafs_plan=fly_Carbon_NEXAFS,
     polarization is calculated relative to the sample normal
     angles less than the grazing angle are not allowed and are ignored
     """
-    md['plan_history'] = md.get('plan_history', []).append({'plan_name': 'fixed_sample_rotate_pol_nexafs',
+    md.get('plan_history', []).append({'plan_name': 'fixed_sample_rotate_pol_nexafs',
                                                             'arguments': dict(locals())})
     yield from rotate_now(grazing_angle)
     for angle in angles:
