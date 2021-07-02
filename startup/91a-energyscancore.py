@@ -6,6 +6,7 @@ from bluesky.utils import short_uid, separate_devices, all_safe_rewind
 from collections import defaultdict
 from bluesky import preprocessors as bpp
 import numpy as np
+from copy import deepcopy
 
 run_report(__file__)
 
@@ -88,7 +89,7 @@ def en_scan_core(signals=[],
                  master_plan=None,
                  md={'plan_history': []}):
     # grab locals
-    arguments = dict(locals()).deepcopy()
+    arguments = deepcopy(dict(locals()))
     del arguments['md'] # no recursion here!
     arguments['dets'] = [det.name for det in arguments['dets']]
     arguments['signals'] = [signal.name for signal in arguments['signals']]
@@ -173,7 +174,7 @@ def NEXAFS_fly_scan_core(scan_params, openshutter=False, m3_pitch=np.nan, diode_
                          grating='best', exp_time=.5, enscan_type=None, master_plan=None,
                          md={'plan_history': []}):
     # grab locals
-    arguments = dict(locals())
+    arguments = deepcopy(dict(locals()))
     del arguments['md'] # no recursion here!
     md.get('plan_history', []).append({'plan_name': 'NEXAFS_fly_scan_core',
                                        'arguments': arguments})
