@@ -37,16 +37,16 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
              read_attrs=[],
              root='/areadata/images/')
     stats1 = C(StatsPlugin, 'Stats1:')
-    stats2 = C(StatsPlugin, 'Stats2:')
-    stats3 = C(StatsPlugin, 'Stats3:')
-    stats4 = C(StatsPlugin, 'Stats4:')
-    stats5 = C(StatsPlugin, 'Stats5:')
+    #stats2 = C(StatsPlugin, 'Stats2:')
+    #stats3 = C(StatsPlugin, 'Stats3:')
+    #stats4 = C(StatsPlugin, 'Stats4:')
+    #stats5 = C(StatsPlugin, 'Stats5:')
     trans1 = C(GreateyesTransform, 'Trans1:')
-    roi1 = C(ROIPlugin, 'ROI1:')
-    roi2 = C(ROIPlugin, 'ROI2:')
-    roi3 = C(ROIPlugin, 'ROI3:')
-    roi4 = C(ROIPlugin, 'ROI4:')
-    proc1 = C(ProcessPlugin, 'Proc1:')
+    #roi1 = C(ROIPlugin, 'ROI1:')
+    #roi2 = C(ROIPlugin, 'ROI2:')
+    #roi3 = C(ROIPlugin, 'ROI3:')
+    #roi4 = C(ROIPlugin, 'ROI4:')
+    #proc1 = C(ProcessPlugin, 'Proc1:')
     binvalue = 4
 
     def stage(self, *args, **kwargs):
