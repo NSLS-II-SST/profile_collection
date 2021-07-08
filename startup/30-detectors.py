@@ -3,11 +3,12 @@ run_report(__file__)
 import time
 from ophyd import Component as C
 from ophyd import EpicsSignalRO, Device, EpicsSignal
-from ophyd.areadetector.trigger_mixins import SingleTrigger
+#from ophyd.areadetector.trigger_mixins import SingleTrigger
 from ophyd.areadetector import (GreatEyesDetector, GreatEyesDetectorCam,
                                 ImagePlugin, TIFFPlugin, StatsPlugin,
                                 ProcessPlugin, ROIPlugin, TransformPlugin)
 from ophyd.areadetector.filestore_mixins import FileStoreTIFFIterativeWrite
+from nslsii.ad33 import SingleTriggerV33,  StatsPluginV33
 
 
 class TIFFPluginWithFileStore(TIFFPlugin, FileStoreTIFFIterativeWrite):
@@ -19,6 +20,20 @@ class TIFFPluginWithFileStore(TIFFPlugin, FileStoreTIFFIterativeWrite):
 class GreatEyesDetCamWithVersions(GreatEyesDetectorCam):
     adcore_version = C(EpicsSignalRO, 'ADCoreVersion_RBV')
     driver_version = C(EpicsSignalRO, 'DriverVersion_RBV')
+    wait_for_plugins = Cpt(EpicsSignal, 'WaitForPlugins',
+                           string=True, kind='config')
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.stage_sigs['wait_for_plugins'] = 'Yes'
+
+    def ensure_nonblocking(self):
+        self.stage_sigs['wait_for_plugins'] = 'Yes'
+        for c in self.parent.component_names:
+            cpt = getattr(self.parent, c)
+            if cpt is self:
+                continue
+            if hasattr(cpt, 'ensure_nonblocking'):
+                cpt.ensure_nonblocking()
 
 
 class GreateyesTransform(TransformPlugin):
@@ -27,7 +42,7 @@ class GreateyesTransform(TransformPlugin):
     type = C(EpicsSignal,'Type')
 
 
-class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
+class RSOXSGreatEyesDetector(SingleTriggerV33, GreatEyesDetector):
     image = C(ImagePlugin, 'image1:')
     cam = C(GreatEyesDetCamWithVersions, 'cam1:')
     transform_type = 0
@@ -36,7 +51,9 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
              read_path_template='/areadata/images/data/%Y/%m/%d/',
              read_attrs=[],
              root='/areadata/images/')
-    stats1 = C(StatsPlugin, 'Stats1:')
+
+
+    stats1 = C(StatsPluginV33, 'Stats1:')
     #stats2 = C(StatsPlugin, 'Stats2:')
     #stats3 = C(StatsPlugin, 'Stats3:')
     #stats4 = C(StatsPlugin, 'Stats4:')
@@ -180,6 +197,7 @@ class RSOXSGreatEyesDetector(SingleTrigger, GreatEyesDetector):
 saxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:1}', name='Small Angle CCD Detector',
                                   read_attrs=['tiff', 'stats1.total'])
 saxs_det.transform_type = 3
+saxs_det.cam.ensure_nonblocking()
 #
 #
 #
@@ -187,6 +205,7 @@ waxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:2}', name='Wide Angle CCD De
                                    read_attrs=['tiff', 'stats1.total'])
 
 waxs_det.transform_type = 1
+waxs_det.cam.ensure_nonblocking()
 
 
 class SyncedDetectors(Device):
