@@ -13,7 +13,7 @@ import IPython
 
 class UndulatorMotor(EpicsMotor):
     user_setpoint = Cpt(EpicsSignal, '-SP', limits=True)
-    done = Cpt(EpicsSignalRO, ':MOVN')
+    done = Cpt(EpicsSignalRO, '.MOVN')
     done_value = 0
 
 #epu_gap = UndulatorMotor('SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr', name='EPU 60 Gap',kind='normal')
