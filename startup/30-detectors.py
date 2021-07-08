@@ -90,10 +90,10 @@ class RSOXSGreatEyesDetector(SingleTriggerV33, GreatEyesDetector):
     def trigger(self,*args,**kwargs):
         #if(self.cam.sync.get() != 1):
         #    print(f'Warning: It looks like the {self.name} restarted, putting in default values again')
-        self.cam.temperature.set(-80)
-        self.cam.enable_cooling.set(1)
-        self.cam.bin_x.set(self.binvalue)
-        self.cam.bin_y.set(self.binvalue)
+        yield from bps.mv(self.temperature.set,-80,
+                          self.cam.enable_cooling.set,1,
+                          self.cam.bin_x.set,self.binvalue,
+                          self.cam.bin_y.set,self.binvalue)
 
         return super().trigger(*args, **kwargs)
 
