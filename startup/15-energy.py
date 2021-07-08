@@ -13,6 +13,8 @@ import IPython
 
 class UndulatorMotor(EpicsMotor):
     user_setpoint = Cpt(EpicsSignal, '-SP', limits=True)
+    done = Cpt(EpicsSignalRO, ':MOVN')
+    done_value = 0
 
 #epu_gap = UndulatorMotor('SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr', name='EPU 60 Gap',kind='normal')
 #epu_phase = UndulatorMotor('SR:C07-ID:G1A{SST1:1-Ax:Phase}-Mtr', name='EPU 60 Phase',kind='normal')
@@ -51,18 +53,18 @@ class Monochromator(PVPositioner):
     done_value = 1
     stop_signal = Cpt(EpicsSignal, ':ENERGY_ST_CMD')
 
-    def set(self, *args, **kwargs):
-        "Temporary: Extend just to add debuging log messages."
-        status = super().set(*args, **kwargs)
-        # Temporarily using loud (ERROR-level) log messages for debugging purposes
-
-        def notify(status):
-            self.log.error("Status is done")
-
-        status.add_callback(notify)
-
-        self.log.error("Returning status object")
-        return status
+    # def set(self, *args, **kwargs):
+    #     "Temporary: Extend just to add debuging log messages."
+    #     status = super().set(*args, **kwargs)
+    #     # Temporarily using loud (ERROR-level) log messages for debugging purposes
+    #
+    #     def notify(status):
+    #         self.log.error("Status is done")
+    #
+    #     status.add_callback(notify)
+    #
+    #     self.log.error("Returning status object")
+    #     return status
 
 # mono_en= Monochromator('XF:07ID1-OP{Mono:PGM1-Ax:', name='Monochromator Energy',kind='normal')
 
@@ -152,9 +154,9 @@ class EnPos(PseudoPositioner):
     def _sequential_move(self, real_pos, timeout=None, **kwargs):
         raise Exception('nope')
     # end class methods, begin internal methods
-    
+
     # begin LUT functions
-    
+
     def __init__(self, a, configpath=pathlib.Path(get_ipython().profile_dir.startup_dir) / 'config', **kwargs):
         super().__init__(a,**kwargs)
         self.C250_gap = xr.load_dataarray(configpath/'EPU_C_250_gap.nc')
@@ -167,7 +169,7 @@ class EnPos(PseudoPositioner):
         self.L1200_intens = xr.load_dataarray(configpath/'EPU_L_1200_intens.nc')
         self.polphase = xr.load_dataarray(configpath/'polphase.nc')
         self.phasepol = xr.DataArray(data=self.polphase.pol,coords={'phase':self.polphase.values},dims={'phase'})
-        
+
     def gap(self,energy,pol,grating='best',harmonic='best',en_cutoff=1100,verbose=False):
         if (energy>en_cutoff and harmonic != '1') or harmonic == '3':
             energy = energy/3
@@ -185,7 +187,7 @@ class EnPos(PseudoPositioner):
             g1200_intens = float(self.L1200_intens.interp(Energies=energy,phase=phase))
         else:
             return np.nan
-        
+
         if verbose:
             print(f'For pol {pol}, energy {energy} phase {phase}: ')
             print(f'  . 250 l/mm grating: gap = {g250_gap}, intensity {g250_intens}')
@@ -229,7 +231,7 @@ class EnPos(PseudoPositioner):
         th = rotation_motor.user_setpoint.get()
         return np.arccos(np.cos(pol*np.pi/180)*np.sin(th*np.pi/180))*180/np.pi
 
-    
+
 
 
 
@@ -418,7 +420,7 @@ def grating_to_1200():
     print('the grating is now at 1200 l/mm')
 
 
-#sd.monitors.extend([mono_en.readback])
+sd.monitors.extend([mono_en.readback])
 
 # XF:07ID1-OP{Mono:PGM1-Ax::EVSTART_SP # start energy
 # XF:07ID1-OP{Mono:PGM1-Ax::EVSTOP_SP # stop energy
