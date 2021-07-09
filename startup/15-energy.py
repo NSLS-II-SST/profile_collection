@@ -310,7 +310,7 @@ en.epuphase.kind = 'normal'
 en.polarization.kind = 'normal'
 en.sample_polarization.kind = 'normal'
 en.read_attrs = ['energy',
-                 'polarization'
+                 'polarization',
                  'sample_polarization']
 en.epugap.read_attrs = ['user_readback', 'user_setpoint']
 en.monoen.read_attrs = ['readback',
