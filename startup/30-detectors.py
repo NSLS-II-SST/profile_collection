@@ -4,9 +4,9 @@ import time
 from ophyd import Component as C
 from ophyd import EpicsSignalRO, Device, EpicsSignal
 #from ophyd.areadetector.trigger_mixins import SingleTrigger
-from ophyd.areadetector import (GreatEyesDetector, GreatEyesDetectorCam,
+from ophyd.areadetector import  (GreatEyesDetector, GreatEyesDetectorCam,
                                 ImagePlugin, TIFFPlugin, StatsPlugin,
-                                ProcessPlugin, ROIPlugin, TransformPlugin)
+                                ProcessPlugin, ROIPlugin, TransformPlugin,)
 from ophyd.areadetector.filestore_mixins import FileStoreTIFFIterativeWrite
 from nslsii.ad33 import SingleTriggerV33,  StatsPluginV33
 
@@ -54,12 +54,12 @@ class RSOXSGreatEyesDetector(SingleTriggerV33, GreatEyesDetector):
 
 
     stats1 = C(StatsPluginV33, 'Stats1:')
-    #stats2 = C(StatsPlugin, 'Stats2:')
+    stats2 = C(StatsPlugin, 'Stats2:')
     #stats3 = C(StatsPlugin, 'Stats3:')
     #stats4 = C(StatsPlugin, 'Stats4:')
     #stats5 = C(StatsPlugin, 'Stats5:')
     trans1 = C(GreateyesTransform, 'Trans1:')
-    #roi1 = C(ROIPlugin, 'ROI1:')
+    roi1 = C(ROIPlugin, 'ROI1:')
     #roi2 = C(ROIPlugin, 'ROI2:')
     #roi3 = C(ROIPlugin, 'ROI3:')
     #roi4 = C(ROIPlugin, 'ROI4:')
@@ -300,8 +300,8 @@ class SyncedDetectors(Device):
 # #
 for det in [saxs_det,waxs_det]:#, waxs_det,sw_det.waxs,sw_det.saxs]:
      det.kind = 'hinted'
-     det.stats1.kind = 'normal'
-     det.stats1.total.kind = 'normal'
+     det.stats1.kind = 'hinted'
+     det.stats1.total.kind = 'hinted'
      det.cam.kind = 'hinted'
      det.cam.temperature_actual.kind = 'normal'
      det.cam.hot_side_temp.kind = 'normal'

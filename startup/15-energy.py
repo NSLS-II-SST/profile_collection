@@ -309,21 +309,22 @@ en.epugap.kind = 'normal'
 en.epuphase.kind = 'normal'
 en.polarization.kind = 'normal'
 en.sample_polarization.kind = 'normal'
-# en.read_attrs = ['energy',
-#                  'energy.readback',
-#                  'energy.setpoint',
-#                  'monoen',
-#                  'epugap']
-# en.epugap.read_attrs = ['user_readback', 'user_setpoint']
-# en.monoen.read_attrs = ['grating',
-#                         'grating.user_readback',
-#                         'grating.user_setpoint',
-#                         'grating.user_offset',
-#                         'mirror2',
-#                         'mirror2.user_readback',
-#                         'mirror2.user_offset',
-#                         'mirror2.user_setpoint',
-#                         'cff']
+en.read_attrs = ['energy',
+                 'energy.readback',
+                 'energy.setpoint',
+                 'monoen',
+                 'epugap']
+en.epugap.read_attrs = ['user_readback', 'user_setpoint']
+en.monoen.read_attrs = ['readback',
+                        'grating',
+                        'grating.user_readback',
+                        'grating.user_setpoint',
+                        'grating.user_offset',
+                        'mirror2',
+                        'mirror2.user_readback',
+                        'mirror2.user_offset',
+                        'mirror2.user_setpoint',
+                        'cff']
 
 #enold = EnPosold('', name='enold',concurrent=1)
 #enold.energy.kind = 'hinted'
