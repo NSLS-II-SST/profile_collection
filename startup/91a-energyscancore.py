@@ -87,6 +87,7 @@ def en_scan_core(signals=[],
                  pol=0,
                  grating='no change',
                  master_plan=None,
+                 angle=None,
                  md={}):
     # grab locals
     arguments = dict(locals())
@@ -96,6 +97,8 @@ def en_scan_core(signals=[],
     arguments['energy'] = arguments['energy'].name
     if md is None:
         md = {}
+    if angle is not None:
+        rotate_now(angle)
     md.setdefault('plan_history', [])
     md['plan_history'].append({'plan_name': 'en_scan_core','arguments': arguments})
     md.update({'plan_name': enscan_type, 'master_plan': master_plan})
