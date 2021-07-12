@@ -289,6 +289,7 @@ def normal_incidence_rotate_pol_nexafs(nexafs_plan=fly_Carbon_NEXAFS,
     plan_name = 'normal_incidence_rotate_pol_nexafs'
     # grab locals
     arguments = dict(locals())
+    arguments['nexafs_plan']=nexafs_plan.__name__
     clean_up_md(arguments,md,**kwargs)
     yield from rotate_now(90)
     for pol in polarizations:
@@ -306,6 +307,7 @@ def fixed_pol_rotate_sample_nexafs(nexafs_plan=fly_Carbon_NEXAFS,
     plan_name = 'fixed_pol_rotate_sample_nexafs'
     # grab locals
     arguments = dict(locals())
+    arguments['nexafs_plan']=nexafs_plan.__name__
     clean_up_md(arguments,md,**kwargs)
     for angle in angles:
         yield from rotate_now(angle)
@@ -330,6 +332,7 @@ def fixed_sample_rotate_pol_nexafs(nexafs_plan=fly_Carbon_NEXAFS,
     plan_name = 'fixed_sample_rotate_pol_nexafs'
     # grab locals
     arguments = dict(locals())
+    arguments['nexafs_plan']=nexafs_plan.__name__
     clean_up_md(arguments,md,**kwargs)
     yield from rotate_now(grazing_angle)
     for angle in angles:
