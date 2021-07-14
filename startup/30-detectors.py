@@ -289,12 +289,12 @@ saxs_det.stats1.kind = 'hinted'
 waxs_det.stats1.kind = 'hinted'
 saxs_det.stats1.total.kind = 'hinted'
 waxs_det.stats1.total.kind = 'hinted'
-saxs_det.stats2.name = "SAXS ROI"
-waxs_det.stats2.name = "WAXS ROI"
-saxs_det.stats2.kind = 'hinted'
-waxs_det.stats2.kind = 'hinted'
-saxs_det.stats2.total.kind = 'hinted'
-waxs_det.stats2.total.kind = 'hinted'
+#saxs_det.stats2.name = "SAXS ROI"
+#waxs_det.stats2.name = "WAXS ROI"
+#saxs_det.stats2.kind = 'hinted'
+#waxs_det.stats2.kind = 'hinted'
+#saxs_det.stats2.total.kind = 'hinted'
+#waxs_det.stats2.total.kind = 'hinted'
 # sw_det.saxs.cam.sync.set(1)
 # sw_det.waxs.cam.sync.set(1)
 #
