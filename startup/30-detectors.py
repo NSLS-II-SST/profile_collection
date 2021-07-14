@@ -47,14 +47,14 @@ class RSOXSGreatEyesDetector(SingleTriggerV33, GreatEyesDetector):
     cam = C(GreatEyesDetCamWithVersions, 'cam1:')
     transform_type = 0
     tiff = C(TIFFPluginWithFileStore, 'TIFF1:',
-             write_path_template='/areadata/images/data/%Y/%m/%d/',
-             read_path_template='/areadata/images/data/%Y/%m/%d/',
+             write_path_template='/nsls2/data/sst1/assets/%Y/%m/%d/',
+             read_path_template='/nsls2/data/sst1/assets/%Y/%m/%d/',
              read_attrs=[],
-             root='/areadata/images/')
+             root='/nsls2/data/sst1/assets/')
 
 
     stats1 = C(StatsPluginV33, 'Stats1:')
-    stats2 = C(StatsPlugin, 'Stats2:')
+    stats2 = C(StatsPluginv33, 'Stats2:')
     #stats3 = C(StatsPlugin, 'Stats3:')
     #stats4 = C(StatsPlugin, 'Stats4:')
     #stats5 = C(StatsPlugin, 'Stats5:')
