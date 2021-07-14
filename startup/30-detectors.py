@@ -54,7 +54,7 @@ class RSOXSGreatEyesDetector(SingleTriggerV33, GreatEyesDetector):
 
 
     stats1 = C(StatsPluginV33, 'Stats1:')
-    stats2 = C(StatsPluginv33, 'Stats2:')
+    #stats2 = C(StatsPluginv33, 'Stats2:')
     #stats3 = C(StatsPlugin, 'Stats3:')
     #stats4 = C(StatsPlugin, 'Stats4:')
     #stats5 = C(StatsPlugin, 'Stats5:')
