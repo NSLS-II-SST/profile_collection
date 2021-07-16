@@ -23,7 +23,7 @@ def clean_up_md(arguments={},md = {},**kwargs):
     md.update({'plan_name': arguments['enscan_type'], 'master_plan': arguments['master_plan']})
 
 
-def full_oxygen_scan_nd(multiple=1, diode_range=6, m3_pitch=7.99, grating='1200', master_plan=None,
+def full_oxygen_scan_nd(multiple=1, diode_range=7, m3_pitch=7.99, grating='1200', master_plan=None,
                         md = {}, enscan_type = 'full_oxygen_scan_nd', **kwargs):
     '''
     full_oxygen_scan_nd
@@ -61,7 +61,7 @@ def full_oxygen_scan_nd(multiple=1, diode_range=6, m3_pitch=7.99, grating='1200'
                             diode_range=diode_range, m3_pitch=m3_pitch, grating=grating, **kwargs)
 
 
-def short_oxygen_scan_nd(multiple=1, diode_range=6, m3_pitch=7.98, grating='1200', master_plan=None,
+def short_oxygen_scan_nd(multiple=1, diode_range=7, m3_pitch=7.98, grating='1200', master_plan=None,
                          md = {}, enscan_type = 'short_oxygen_scan_nd', **kwargs):
     '''
     short_oxygen_scan_nd
