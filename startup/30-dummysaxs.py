@@ -83,6 +83,9 @@ class SimGreatEyes(Device):
     def set_exptime(self, secs):
         self.image.exposure_time = secs
 
+    def set_exptime_detonly(self, secs):
+        self.image.exposure_time = secs
+
     def exptime(self):
         return ("{} has an exposure time of {} seconds".format(
             colored(self.name, 'lightblue'),
