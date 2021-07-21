@@ -140,4 +140,4 @@ class SimGreatEyes(Device):
         self.set_exptime(seconds)
 
 
-saxs_dummy = SimGreatEyes(name="Simulated SAXS camera")
+saxs_det = SimGreatEyes(name="Simulated SAXS camera")

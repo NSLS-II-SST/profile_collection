@@ -196,10 +196,10 @@ class RSOXSGreatEyesDetector(SingleTriggerV33, GreatEyesDetector):
     #needs to be run on the server
     # sudo mount -t cifs //10.7.0.217/data/ /mnt/zdrive -o user=linuxuser,pass=greateyes
 
-saxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:1}', name='Small Angle CCD Detector',
-                                  read_attrs=['tiff', 'stats1.total'])
-saxs_det.transform_type = 3
-saxs_det.cam.ensure_nonblocking()
+#saxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:1}', name='Small Angle CCD Detector',
+#                                  read_attrs=['tiff', 'stats1.total'])
+#saxs_det.transform_type = 3
+#saxs_det.cam.ensure_nonblocking()
 #
 #
 #
@@ -283,11 +283,11 @@ class SyncedDetectors(Device):
 # sw_det = SyncedDetectors('', name='Synced')
 # sw_det.saxs.name = "SAXS"
 # sw_det.waxs.name = "WAXS"
-saxs_det.stats1.name = "SAXS fullframe"
+#saxs_det.stats1.name = "SAXS fullframe"
 waxs_det.stats1.name = "WAXS fullframe"
-saxs_det.stats1.kind = 'hinted'
+#saxs_det.stats1.kind = 'hinted'
 waxs_det.stats1.kind = 'hinted'
-saxs_det.stats1.total.kind = 'hinted'
+#saxs_det.stats1.total.kind = 'hinted'
 waxs_det.stats1.total.kind = 'hinted'
 #saxs_det.stats2.name = "SAXS ROI"
 #waxs_det.stats2.name = "WAXS ROI"
