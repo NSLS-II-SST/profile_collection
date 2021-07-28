@@ -30,7 +30,7 @@ epu_mode = EpicsSignal('SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP',
 
 
 class Monochromator(PVPositioner):
-    setpoint = Cpt(EpicsSignal,':ENERGY_SP', kind='normal', write_timeout=180.)
+    setpoint = Cpt(EpicsSignal,':ENERGY_SP', kind='normal')
     #value = Cpt(EpicsSignalRO, ':ENERGY_MON',kind='hinted')
     readback = Cpt(EpicsSignalRO, ':ENERGY_MON',kind='hinted')
 
@@ -53,6 +53,15 @@ class Monochromator(PVPositioner):
     done_value = 1
     stop_signal = Cpt(EpicsSignal, ':ENERGY_ST_CMD')
 
+    def _setup_move(self, position):
+        '''Move and do not wait until motion is complete (asynchronous)'''
+        self.log.debug('%s.setpoint = %s', self.name, position)
+        # copy from pv_positioner, with wait changed to false
+        # possible problem with IOC not returning from a set
+        self.setpoint.put(position, wait=False)
+        if self.actuate is not None:
+            self.log.debug('%s.actuate = %s', self.name, self.actuate_value)
+            self.actuate.put(self.actuate_value, wait=False)
     # def set(self, *args, **kwargs):
     #     "Temporary: Extend just to add debuging log messages."
     #     status = super().set(*args, **kwargs)
