@@ -233,7 +233,7 @@ def fly_Fluorine_NEXAFS(speed=.3, pol=0, diode_range=7, m3_pitch=7.98, grating='
                                     master_plan=master_plan,**kwargs)
 
 
-def fly_Boron_NEXAFS(speed=.1, pol=0, diode_range=6, m3_pitch=8.0, grating='250',
+def fly_Boron_NEXAFS(speed=.05, pol=0, diode_range=6, m3_pitch=8.0, grating='250',
                      master_plan=None, md={}, enscan_type = 'fly_Boron_NEXAFS',**kwargs):
     """
 
@@ -252,7 +252,7 @@ def fly_Boron_NEXAFS(speed=.1, pol=0, diode_range=6, m3_pitch=8.0, grating='250'
     if len(read_input("Starting a Fluorine NEXAFS fly scan hit enter in the next 3 seconds to abort", "abort", "",
                       3)) > 0:
         return
-    yield from NEXAFS_fly_scan_core([(190, 215, speed)], enscan_type=enscan_type, openshutter=True, exp_time=.5,
+    yield from NEXAFS_fly_scan_core([(180, 220, speed)], enscan_type=enscan_type, openshutter=True, exp_time=.5,
                                     diode_range=diode_range, m3_pitch=m3_pitch, pol=pol, grating=grating,
                                     master_plan=master_plan,**kwargs)
 
