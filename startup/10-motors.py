@@ -2,7 +2,7 @@ from IPython.core.magic import register_line_magic
 from ophyd import EpicsMotor, EpicsSignal
 from ophyd.sim import motor1
 from ophyd import Component as Cpt
-
+from ophyd.sim import motor1
 
 run_report(__file__)
 
@@ -170,7 +170,8 @@ sam_Th = prettymotor('XF:07ID2-ES1{Stg-Ax:Yaw}Mtr', name='RSoXS Sample Rotation'
 BeamStopW = prettymotor('XF:07ID2-ES1{BS-Ax:1}Mtr', name='Beam Stop WAXS',kind='hinted')
 BeamStopS = prettymotor('XF:07ID2-ES1{BS-Ax:2}Mtr', name='Beam Stop SAXS',kind='hinted')
 Det_W = prettymotor('XF:07ID2-ES1{Det-Ax:2}Mtr', name='Detector WAXS Translation',kind='hinted')
-Det_S = prettymotor('XF:07ID2-ES1{Det-Ax:1}Mtr', name='Detector SAXS Translation',kind='hinted')
+#Det_S = prettymotor('XF:07ID2-ES1{Det-Ax:1}Mtr', name='Detector SAXS Translation',kind='hinted')
+Det_S = motor1
 Shutter_Y = prettymotor('XF:07ID2-ES1{FSh-Ax:1}Mtr', name='Shutter Vertical Translation',kind='hinted')
 Izero_Y = prettymotor('XF:07ID2-ES1{Scr-Ax:1}Mtr', name='Izero Assembly Vertical Translation',kind='hinted')
 Izero_ds = prettymotor('XF:07ID2-BI{Diag:07-Ax:Y}Mtr', name='Downstream Izero DM7 Vertical Translation',kind='hinted')
