@@ -630,7 +630,8 @@ def run_bar(bar, sort_by=['sample_num'], dryrun=0, rev=[False], delete_as_comple
                                    f'time remaining approx {time_sec(time_remaining)}')
             yield from load_configuration(step[2])  # move to configuration
             yield from load_sample(step[5])  # move to sample / load sample metadata
-            uid = yield from do_acquisitions([step[6]])  # run acquisition (will load configuration again)
+            yield from do_acquisitions([step[6]])  # run acquisition (will load configuration again)
+            uid = db[1].uid
             print(f'acq uid = {uid}')
             scan_id = db[uid].start['scan_id']
             timestamp = db[uid].start['time']
