@@ -631,6 +631,7 @@ def run_bar(bar, sort_by=['sample_num'], dryrun=0, rev=[False], delete_as_comple
             yield from load_configuration(step[2])  # move to configuration
             yield from load_sample(step[5])  # move to sample / load sample metadata
             uid = yield from do_acquisitions([step[6]])  # run acquisition (will load configuration again)
+            print(f'uid = {uid}')
             scan_id = db[uid].start['scan_id']
             timestamp = db[uid].start['time']
             success = db[uid].stop['exit_status']
