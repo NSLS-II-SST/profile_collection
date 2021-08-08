@@ -238,8 +238,8 @@ def load_configuration(config):
 def do_acquisitions(acq_list):
     for acq in acq_list:
         yield from load_configuration(acq['configuration'])
-        yield from eval(acq['plan_name'] + '(' + acq['arguments'] + ')')
-
+        uid = yield from eval(acq['plan_name'] + '(' + acq['arguments'] + ')')
+    return uid
 
 def get_sample_dict(acq=[], locations=None):
     if locations is None:
@@ -267,10 +267,12 @@ def get_sample_dict(acq=[], locations=None):
     thickness = RE.md['thickness']
     sample_state = RE.md['sample_state']
     notes = RE.md['notes']
+    history = RE.md['acq_history']
 
     return {'sample_name': sample_name,
             'sample_desc': sample_desc,
             'sample_id': sample_id,
+            'sample_priority': sample_priority,
             'proposal_id': proposal_id,
             'saf_id': saf_id,
             'sample_set': sample_set,
@@ -291,7 +293,8 @@ def get_sample_dict(acq=[], locations=None):
             'sample_state': sample_state,
             'notes': notes,
             'location': locations,
-            'acquisitions': acq}
+            'acquisitions': acq,
+            'acq_history':history}
 
 
 def user_dict(user_id=RE.md['user_id'],
@@ -531,6 +534,7 @@ def run_bar(bar, sort_by=['sample_num'], dryrun=0, rev=[False], delete_as_comple
         pass
     else:
         save_to_file = True
+
     list_out = []
     for samp_num, s in enumerate(bar):
         sample = s
@@ -626,13 +630,21 @@ def run_bar(bar, sort_by=['sample_num'], dryrun=0, rev=[False], delete_as_comple
                                    f'time remaining approx {time_sec(time_remaining)}')
             yield from load_configuration(step[2])  # move to configuration
             yield from load_sample(step[5])  # move to sample / load sample metadata
-            yield from do_acquisitions([step[6]])  # run acquisition (will load configuration again)
+            uid = yield from do_acquisitions([step[6]])  # run acquisition (will load configuration again)
+            scan_id = db[uid].start['scan_id']
+            timestamp = db[uid].start['time']
+            success = db[uid].stop['exit_status']
+            bar[step[7]].setdefault(acq_history, []).append({'uid': uid,
+                                                             'scan_id': scan_id,
+                                                             'acq': step[6],
+                                                             'time': timestamp,
+                                                             'status': success})
             if delete_as_complete:
                 bar[step[7]]['acquisitions'].remove(step[6])
             if save_to_file:
                 save_samplesxls(bar, save_as_complete)
             elapsed_time = datetime.datetime.now() - start_time
-            rsoxs_bot.send_message(f'Acquisition complete. Actual time : {str(elapsed_time)},')
+            rsoxs_bot.send_message(f'Acquisition {scan_id} complete. Actual time : {str(elapsed_time)},')
         rsoxs_bot.send_message('All scans complete!')
         if retract_when_done:
             yield from all_out()
