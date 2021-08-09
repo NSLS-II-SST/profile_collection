@@ -636,7 +636,7 @@ def run_bar(bar, sort_by=['sample_num'], dryrun=0, rev=[False], delete_as_comple
             scan_id = db[uid].start['scan_id']
             timestamp = db[uid].start['time']
             success = db[uid].stop['exit_status']
-            bar[step[7]].setdefault(acq_history, []).append({'uid': uid,
+            bar[step[7]].setdefault('acq_history', []).append({'uid': uid,
                                                              'scan_id': scan_id,
                                                              'acq': step[6],
                                                              'time': timestamp,
