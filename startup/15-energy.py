@@ -196,10 +196,10 @@ class EnPos(PseudoPositioner):
             g1200_intens = float(self.L1200_intens.interp(Energies=energy,phase=phase))
         elif pol>90 and pol<=180:
             phase = self.phase(energy,pol)/1000
-            g250_gap = float(self.L250_gap.interp(Energies=energy,phase=phase))
-            g250_intens = float(self.L250_intens.interp(Energies=energy,phase=phase))
-            g1200_gap = float(self.L1200_gap.interp(Energies=energy,phase=phase))
-            g1200_intens = float(self.L1200_intens.interp(Energies=energy,phase=phase))
+            g250_gap = float(self.L250_gap_mrg.interp(Energies=energy,phase=phase))
+            g250_intens = float(self.L250_intens_mrg.interp(Energies=energy,phase=phase))
+            g1200_gap = float(self.L1200_gap_mrg.interp(Energies=energy,phase=phase))
+            g1200_intens = float(self.L1200_intens_mrg.interp(Energies=energy,phase=phase))
         else:
             return np.nan
 
