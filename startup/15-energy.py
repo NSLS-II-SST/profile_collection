@@ -105,7 +105,7 @@ class EnPos(PseudoPositioner):
         #print('In forward')
         ret = self.RealPosition(epugap=self.gap(pseudo_pos.energy, pseudo_pos.polarization),
                                  monoen=pseudo_pos.energy,
-                                 epuphase=self.phase(pseudo_pos.energy, pseudo_pos.polarization),
+                                 epuphase=abs(self.phase(pseudo_pos.energy, pseudo_pos.polarization)),
                                  #epumode=self.mode(pseudo_pos.polarization)
                                  )
         #print('finished forward')
@@ -243,7 +243,7 @@ class EnPos(PseudoPositioner):
         elif mode == 2 :
             return float(self.phasepol.interp(phase=np.abs(phase),method='cubic'))
         elif mode == 3 :
-            return 180-float(self.phasepol.interp(phase=np.abs(phase),method='cubic'))
+            return 180-float(self.phasepol.interp(phase=-np.abs(phase),method='cubic'))
     def mode(self,pol):
         if pol == -1:
             return 0
