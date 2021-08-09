@@ -194,6 +194,12 @@ class EnPos(PseudoPositioner):
             g250_intens = float(self.L250_intens.interp(Energies=energy,phase=phase))
             g1200_gap = float(self.L1200_gap.interp(Energies=energy,phase=phase))
             g1200_intens = float(self.L1200_intens.interp(Energies=energy,phase=phase))
+        elif pol>90 and pol<=180:
+            phase = self.phase(energy,pol)/1000
+            g250_gap = float(self.L250_gap.interp(Energies=energy,phase=phase))
+            g250_intens = float(self.L250_intens.interp(Energies=energy,phase=phase))
+            g1200_gap = float(self.L1200_gap.interp(Energies=energy,phase=phase))
+            g1200_intens = float(self.L1200_intens.interp(Energies=energy,phase=phase))
         else:
             return np.nan
 
@@ -223,18 +229,24 @@ class EnPos(PseudoPositioner):
     def phase(self,en,pol):
         if(pol==-1):
             return 15000
+        elif 90>pol>=180:
+            return min(29500,max(0,float(self.polphase.interp(pol=180-pol,method='cubic'))))
         else:
             return min(29500,max(0,float(self.polphase.interp(pol=pol,method='cubic'))))
     def pol(self,phase,mode):
         if mode == 0:
             return -1
-        else:
+        elif mode == 2 :
             return float(self.phasepol.interp(phase=np.abs(phase),method='cubic'))
+        elif mode == 3 :
+            return 180-float(self.phasepol.interp(phase=np.abs(phase),method='cubic'))
     def mode(self,pol):
         if pol == -1:
-            return 2
-        else:
             return 0
+        elif 90<pol<=180:
+            return 3
+        else:
+            return 2
 
     def sample_pol(self,pol,rotation_motor=sam_Th):
         th = rotation_motor.user_setpoint.get()
@@ -427,7 +439,7 @@ def grating_to_1200():
     yield from bps.abs_set(mono_en.gratingtype_proc, 1,wait=True)
     yield from bps.sleep(60)
     yield from bps.mv(mirror2.user_offset,8.1264)
-    yield from bps.mv(grating.user_offset,7.2964)#7.2948)
+    yield from bps.mv(grating.user_offset,7.2964)#7.2948)#7.2956
     yield from bps.mv(mono_en.cff,1.7)
     yield from bps.mv(en,270)
     yield from psh4.open()
