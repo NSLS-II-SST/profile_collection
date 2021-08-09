@@ -176,6 +176,10 @@ class EnPos(PseudoPositioner):
         self.L250_intens = xr.load_dataarray(configpath/'EPU_L_250_intens.nc')
         self.L1200_gap = xr.load_dataarray(configpath/'EPU_L_1200_gap.nc')
         self.L1200_intens = xr.load_dataarray(configpath/'EPU_L_1200_intens.nc')
+        self.L250_gap_mrg = xr.load_dataarray(configpath/'EPU_L_250_gap_mrg.nc')
+        self.L250_intens_mrg = xr.load_dataarray(configpath/'EPU_L_250_intens_mrg.nc')
+        self.L1200_gap_mrg = xr.load_dataarray(configpath/'EPU_L_1200_gap_mrg.nc')
+        self.L1200_intens_mrg = xr.load_dataarray(configpath/'EPU_L_1200_intens_mrg.nc')
         self.polphase = xr.load_dataarray(configpath/'polphase.nc')
         self.phasepol = xr.DataArray(data=self.polphase.pol,coords={'phase':self.polphase.values},dims={'phase'})
 
