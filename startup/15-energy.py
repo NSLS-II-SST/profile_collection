@@ -234,7 +234,7 @@ class EnPos(PseudoPositioner):
         if(pol==-1):
             return 15000
         elif 90<pol<=180:
-            return min(29500,max(0,float(self.polphase.interp(pol=180-pol,method='cubic'))))
+            return -min(29500,max(0,float(self.polphase.interp(pol=180-pol,method='cubic'))))
         else:
             return min(29500,max(0,float(self.polphase.interp(pol=pol,method='cubic'))))
     def pol(self,phase,mode):
