@@ -369,6 +369,10 @@ def set_polarization(pol):
         if (epu_mode.get() != 2):
             yield from bps.mv(epu_mode, 2)
             yield from bps.sleep(1)
+    elif 90 < pol <= 180 :
+        if (epu_mode.get() != 3):
+            yield from bps.mv(epu_mode, 3)
+            yield from bps.sleep(1)
     else:
         print('need a valid polarization')
         return 1
