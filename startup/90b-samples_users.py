@@ -686,7 +686,7 @@ def save_samplesxls(bar, filename):
     for i, sam in enumerate(testdict):
         testdict[i]['location'] = eval(sam['location'])
         testdict[i]['acquisitions'] = eval(sam['acquisitions'])
-        if 'acq_history' not in testdict[i].keys()
+        if 'acq_history' not in testdict[i].keys():
             testdict[i]['acq_history']=[]
         elif testdict[i]['acq_history'] is '':
             testdict[i]['acq_history'] = []
