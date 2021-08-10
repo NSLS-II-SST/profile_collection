@@ -96,8 +96,8 @@ class EnPos(PseudoPositioner):
     monoen = Cpt(Monochromator, 'XF:07ID1-OP{Mono:PGM1-Ax:',kind='hinted',name='Mono Energy')
     epugap = Cpt(UndulatorMotor, 'SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr',kind='normal',name='EPU Gap')
     epuphase = Cpt(UndulatorMotor, 'SR:C07-ID:G1A{SST1:1-Ax:Phase}-Mtr',kind='normal',name='EPU Phase')
-   # epumode = Cpt(EpicsSignal,'SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP',
-   #                        name='EPU Mode', kind='normal')
+    #epumode = Cpt(EpicsSignal,'SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP',
+    #                       name='EPU Mode', kind='normal')
 
     @pseudo_position_argument
     def forward(self, pseudo_pos):
@@ -194,10 +194,10 @@ class EnPos(PseudoPositioner):
             g1200_intens = float(self.C1200_intens.interp(Energies=energy))
         elif pol>=0 and pol<=90:
             phase = self.phase(energy,pol)/1000
-            g250_gap = float(self.L250_gap.interp(Energies=energy,phase=phase))
-            g250_intens = float(self.L250_intens.interp(Energies=energy,phase=phase))
-            g1200_gap = float(self.L1200_gap.interp(Energies=energy,phase=phase))
-            g1200_intens = float(self.L1200_intens.interp(Energies=energy,phase=phase))
+            g250_gap = float(self.L250_gap_mrg.interp(Energies=energy,phase=phase))
+            g250_intens = float(self.L250_intens_mrg.interp(Energies=energy,phase=phase))
+            g1200_gap = float(self.L1200_gap_mrg.interp(Energies=energy,phase=phase))
+            g1200_intens = float(self.L1200_intens_mrg.interp(Energies=energy,phase=phase))
         elif pol>90 and pol<=180:
             phase = self.phase(energy,pol)/1000
             g250_gap = float(self.L250_gap_mrg.interp(Energies=energy,phase=phase))
@@ -243,7 +243,7 @@ class EnPos(PseudoPositioner):
         elif mode == 2 :
             return float(self.phasepol.interp(phase=np.abs(phase),method='cubic'))
         elif mode == 3 :
-            return 180-float(self.phasepol.interp(phase=-np.abs(phase),method='cubic'))
+            return 180-float(self.phasepol.interp(phase=np.abs(phase),method='cubic'))
     def mode(self,pol):
         if pol == -1:
             return 0
@@ -328,6 +328,7 @@ mono_en = en.monoen
 epu_gap = en.epugap
 epu_phase = en.epuphase
 #epu_mode = en.epumode
+#epu_mode = en.epumode
 #mono_en.read_attrs = ['readback']
 mono_en.readback.kind='normal'
 en.epugap.kind = 'normal'
@@ -382,13 +383,13 @@ def set_polarization(pol):
         return 1
     en.read();
     enval = en.energy.readback.get()
-    phaseval = en.phase(enval,pol)
-    gapval = en.gap(enval,pol)
+    #phaseval = en.phase(enval,pol)
+    #gapval = en.gap(enval,pol)
     #print(enval)
     #print(pol)
     #print(phaseval)
     #print(gapval)
-    yield from bps.mv(epu_phase, phaseval,epu_gap,gapval)
+    #yield from bps.mv(epu_phase, phaseval,epu_gap,gapval)
     yield from bps.mv(en.polarization, pol)
     en.read();
     return 0
