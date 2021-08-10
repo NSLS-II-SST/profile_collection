@@ -631,7 +631,7 @@ def run_bar(bar, sort_by=['sample_num'], dryrun=0, rev=[False], delete_as_comple
             yield from load_configuration(step[2])  # move to configuration
             yield from load_sample(step[5])  # move to sample / load sample metadata
             yield from do_acquisitions([step[6]])  # run acquisition (will load configuration again)
-            uid = db[1].uid
+            uid = db[-1].uid
             print(f'acq uid = {uid}')
             scan_id = db[uid].start['scan_id']
             timestamp = db[uid].start['time']
@@ -686,6 +686,12 @@ def save_samplesxls(bar, filename):
     for i, sam in enumerate(testdict):
         testdict[i]['location'] = eval(sam['location'])
         testdict[i]['acquisitions'] = eval(sam['acquisitions'])
+        if 'acq_history' not in testdict[i].keys()
+            testdict[i]['acq_history']=[]
+        elif testdict[i]['acq_history'] is '':
+            testdict[i]['acq_history'] = []
+        else:
+            testdict[i]['acq_history'] = eval(sam['acq_history'])
         testdict[i]['bar_loc'] = eval(sam['bar_loc'])
         testdict[i]['bar_loc']['spot'] = sam['bar_spot']
     acqlist = []
@@ -791,6 +797,8 @@ def load_samplesxls(filename):
         samplenew[i]['bar_loc'] = eval(sam['bar_loc'])
         if 'acq_history' in sam.keys():
             samplenew[i]['acq_history'] = eval(sam['acq_history'])
+        else:
+            samplenew[i]['acq_history'] = []
         samplenew[i]['bar_loc']['spot'] = sam['bar_spot']
         for key in [key for key, value in sam.items() if 'named' in key.lower()]:
             del samplenew[i][key]
