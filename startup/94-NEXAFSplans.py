@@ -340,3 +340,24 @@ def fixed_sample_rotate_pol_nexafs(nexafs_plan=fly_Carbon_NEXAFS,
             continue
         yield from nexafs_plan(pol=epu_angle_from_grazing(angle, grazing_angle), master_plan=master_plan, md=md,
                                **kwargs)
+
+
+def fixed_sample_rotate_pol_list_nexafs(nexafs_plan=fly_Carbon_NEXAFS,
+                                   grazing_angle=20,
+                                   master_plan='fixed_sample_rotate_pol_nexafs',
+                                   pols=[0, 40, 55, 70, 90],
+                                   md={}, enscan_type = 'fixed_sample_rotate_pol_nexafs',**kwargs):
+    """
+    At fixed incident angle, rotate the polarization angle of the X-rays and take NEXAFS at each step
+    polarization is calculated relative to the sample normal
+    angles less than the grazing angle are not allowed and are ignored
+    """
+    plan_name = 'fixed_sample_rotate_pol_nexafs'
+    # grab locals
+    arguments = dict(locals())
+    arguments['nexafs_plan']=nexafs_plan.__name__
+    clean_up_md(arguments,md,**kwargs)
+    yield from rotate_now(grazing_angle)
+    for pol in pols:
+        yield from nexafs_plan(pol=pol, master_plan=master_plan, md=md,
+                               **kwargs)
