@@ -789,8 +789,6 @@ def load_samplesxls(filename):
     for i, sam in enumerate(samplenew):
         samplenew[i]['location'] = eval(sam['location'])
         samplenew[i]['bar_loc'] = eval(sam['bar_loc'])
-        if 'acq_history' in sam.keys():
-            samplenew[i]['acq_history'] = eval(sam['acq_history'])
         samplenew[i]['bar_loc'] = eval(sam['bar_loc'])
         samplenew[i]['bar_loc']['spot'] = sam['bar_spot']
         for key in [key for key, value in sam.items() if 'named' in key.lower()]:
