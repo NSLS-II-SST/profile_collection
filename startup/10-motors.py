@@ -114,7 +114,7 @@ class FMBOEpicsMotor(EpicsMotor):
 
 class prettymotorgeneric(EpicsMotor):
     def __init__(self,*args,**kwargs):
-        super(prettymotor, self).__init__(*args,**kwargs)
+        super(prettymotorgeneric, self).__init__(*args,**kwargs)
         self.read_attrs = ['user_readback', 'user_setpoint']
     def where(self):
         return ('{} : {}').format(
