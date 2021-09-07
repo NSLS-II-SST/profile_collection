@@ -112,7 +112,7 @@ class FMBOEpicsMotor(EpicsMotor):
                 whisper(suffix))
         boxed_text('%s status signals' % self.name, text, 'green',shrink=True)
 
-class prettymotor(FMBOEpicsMotor):
+class prettymotorgeneric(EpicsMotor):
     def __init__(self,*args,**kwargs):
         super(prettymotor, self).__init__(*args,**kwargs)
         self.read_attrs = ['user_readback', 'user_setpoint']
@@ -160,6 +160,10 @@ class prettymotor(FMBOEpicsMotor):
             boxed_text(self.name, self.where(), 'lightgray', shrink=True)
 
 
+class prettymotor(FMBOEpicsMotor,prettymotorgeneric):
+    pass
+
+
 
 
 sam_viewer = prettymotor('XF:07ID2-ES1{ImgY-Ax:1}Mtr', name='RSoXS Sample Imager',kind='hinted')
@@ -182,6 +186,9 @@ mirror2 = prettymotor('XF:07ID1-OP{Mono:PGM1-Ax:MirP}Mtr',name="Mono Mirror",kin
 gratingx = prettymotor('XF:07ID1-OP{Mono:PGM1-Ax:GrtX}Mtr',name="Mono Grating",kind='hinted')
 mirror2x = prettymotor('XF:07ID1-OP{Mono:PGM1-Ax:MirX}Mtr',name="Mono Mirror",kind='hinted')
 
+TEMX = prettymotorgeneric('XF:07ID1-ES:1{Smpl-Ax:X}Mtr',name="RSoXS TEM Upstream-Downstream",kind='hinted')
+TEMY = prettymotorgeneric('XF:07ID1-ES:1{Smpl-Ax:Y}Mtr',name="RSoXS TEM Up-Down",kind='hinted')
+TEMZ = prettymotorgeneric('XF:07ID1-ES:1{Smpl-Ax:Z}Mtr',name="RSoXS TEM Inboard-Outboard",kind='hinted')
 
 
 
