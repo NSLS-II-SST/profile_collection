@@ -1,4 +1,4 @@
-
+run_report(__file__)
 # load RSoXS stuff into the monitors
 
 sd.monitors.extend([Shutter_control,

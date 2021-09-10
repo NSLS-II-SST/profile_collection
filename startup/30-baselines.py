@@ -1,4 +1,4 @@
-
+run_report(__file__)
 # load RSoXS stuff into the baseline
 
 sd.baseline.extend([sam_viewer,
@@ -27,4 +27,29 @@ sd.baseline.extend([sam_viewer,
                     Slit1_Top_I,
                     Slit1_IB_I,
                     DM4_PD,
-                    mir1_pressure])
+                    mir1_pressure,
+                    ccg_izero,
+                    pg_izero,
+                    ccg_main,
+                    pg_main,
+                    ccg_ll,
+                    pg_ll,
+                    ll_gpwr,
+                    psh1,
+                    psh4,
+                    psh10,
+                    psh7,
+                    gv14,
+                    gv14a,
+                    gv15,
+                    gv26,
+                    gv27,
+                    gv27a,
+                    gv28,
+                    gvTEM,
+                    gvll,
+                    gvturbo,
+                    mir1,
+                    mir3,
+                    mir4,
+                    mir2_type])

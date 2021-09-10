@@ -1,9 +1,10 @@
+run_report(__file__)
+
 import bluesky.plan_stubs as bps
 from bluesky.suspenders import SuspendBoolHigh, SuspendFloor, SuspendBoolLow
 import logging
 import datetime
 
-run_report(__file__)
 
 bls_email = 'egann@bnl.gov'
 global no_notifications_until
