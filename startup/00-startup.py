@@ -2,7 +2,7 @@
 from .CommonFunctions.functions import *
 run_report(__file__)
 
-# SST devices
+# SST devices  These all reference the base classes and instantiate the objects themselves into the current namespace (I hope)
 from .SSTObjects.gatevalves import *
 from .SSTObjects.shutters import *
 from .SSTObjects.vacuum import *
@@ -13,7 +13,7 @@ from .SSTObjects.mirrors import *
 sd.baseline.extend([mir1,mir3,mir4,mir2_type])
 from .SSTObjects.diode import *
 
-# SST code
+# SST code  # Common code
 from .SSTBase.archiver import *
 
 # RSoXS startup - bluesky RE / db / md definitions

@@ -221,15 +221,11 @@ def md(line):
 @register_line_magic
 def u(line):
     user()
-
-
 del md, u
 
 
 @register_line_magic
 def status(line):
     beamline_status()
-
-
 del status
 
