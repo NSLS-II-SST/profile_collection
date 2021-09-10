@@ -1,4 +1,30 @@
-run_report(__file__)
+from slack import WebClient
+
+class RSoXSBot:
+    # The constructor for the class. It takes the channel name as the a
+    # parameter and then sets it as an instance variable
+    def __init__(self,token,proxy,channel):
+        self.channel = channel
+        self.webclient = WebClient(token=token, proxy=proxy)
+
+    # Craft and return the entire message payload as a dictionary.
+    def send_message(self, message):
+        composed_message =  {
+            "channel": self.channel,
+            "blocks": [
+                {"type": "section", "text": {"type": "mrkdwn", "text": message}},
+            ],
+        }
+        try:
+            self.webclient.chat_postMessage(**composed_message)
+        except Exception:
+            pass
+
+slack_token = os.environ.get("SLACK_API_TOKEN", None)
+rsoxs_bot = RSoXSBot(token=slack_token,
+                     proxy=None,
+                     channel="#sst-1-rsoxs-station")
+
 
 from IPython.terminal.prompts import Prompts, Token
 import datetime
@@ -39,7 +65,3 @@ def beamline_status():
                '\n   WAXS ' + waxs_det.shutter()+
                '\n   SAXS ' + saxs_det.shutter(),
                'lightblue', 80, shrink=False)
-
-
-user()
-beamline_status()

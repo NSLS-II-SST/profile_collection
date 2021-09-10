@@ -82,27 +82,6 @@ def sample():
     boxed_text(title, text, 'red', 80, shrink=False)
 
 
-@register_line_magic
-def md(line):
-    sample()
-
-
-@register_line_magic
-def u(line):
-    user()
-
-
-del md, u
-
-
-@register_line_magic
-def status(line):
-    beamline_status()
-
-
-del status
-
-
 def newuser():
     print("This information will tag future data until this changes, please be as thorough as possible\n"
           "current values in parentheses, leave blank for no change")
@@ -236,6 +215,7 @@ def load_configuration(config):
 
 
 def do_acquisitions(acq_list):
+    uid=none
     for acq in acq_list:
         yield from load_configuration(acq['configuration'])
         uid = yield from eval(acq['plan_name'] + '(' + acq['arguments'] + ')')

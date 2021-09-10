@@ -80,3 +80,4 @@ class EPS_Shutter(Device):
             print(' Closed {}'.format(self.name))
         else:
             print('{} is closed'.format(self.name))
+

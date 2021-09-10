@@ -2,197 +2,12 @@ import numpy as np
 import bluesky.plans as bp
 import bluesky.plan_stubs as bps
 import pandas as pd
-import bluesky_darkframes
-from IPython.core.magic import register_line_magic
 from suitcase import tiff_series, csv
 import datetime
-from bluesky.preprocessors import make_decorator
 import queue
 from PIL import Image
 from bluesky.callbacks.fitting import PeakStats
 from bluesky.preprocessors import subs_wrapper
-
-run_report(__file__)
-
-
-def set_exposure(exposure):
-    if exposure > 0.001 and exposure < 1000 :
-        saxs_det.set_exptime_detonly(exposure)
-        waxs_det.set_exptime(exposure)
-    else:
-        print('Invalid time, exposure time not set')
-
-
-def exposure():
-    return ('   '+saxs_det.exposure()+'\n   '+waxs_det.exposure())
-
-
-@register_line_magic
-def exp(line):
-    try:
-        secs = float(line)
-    except:
-        boxed_text('Exposure times',exposure(),'lightgreen',shrink=True)
-    else:
-        if secs > 0.001 and secs < 1000:
-            set_exposure(secs)
-del exp
-
-
-@register_line_magic
-def binning(line):
-    try:
-        bins = int(line)
-    except:
-        boxed_text('Pixel Binning','   ' + saxs_det.binning()+'\n   '+waxs_det.binning(),'lightpurple',shrink=True)
-    else:
-        if bins > 0 and bins < 100:
-            saxs_det.set_binning(bins,bins)
-            waxs_det.set_binning(bins,bins)
-del binning
-
-
-@register_line_magic
-def temp(line):
-    boxed_text('Detector cooling','   ' + saxs_det.cooling_state()+'\n   '+waxs_det.cooling_state(),'blue',shrink=True,width=95)
-del temp
-
-
-@register_line_magic
-def cool(line):
-    saxs_det.cooling_on()
-    waxs_det.cooling_on()
-del cool
-
-
-@register_line_magic
-def warm(line):
-    saxs_det.cooling_off()
-    waxs_det.cooling_off()
-del warm
-
-
-@register_line_magic
-def dark(line):
-    saxs_det.shutter_off()
-    waxs_det.shutter_off()
-del dark
-
-
-@register_line_magic
-def darkoff(line):
-    saxs_det.shutter_on()
-    waxs_det.shutter_on()
-del darkoff
-
-#
-# def dark_plan():
-#     shutterstates = saxs_det.cam.shutter_mode.get()
-#     shutterstatew = waxs_det.cam.shutter_mode.get()
-#     yield from bps.mv(saxs_det.cam.shutter_mode, 0)
-#     yield from bps.mv(waxs_det.cam.shutter_mode, 0)
-#     yield from bps.trigger(sw_det, group='darkframe-trigger')
-#     yield from bps.wait('darkframe-trigger')
-#     snapshot = bluesky_darkframes.SnapshotDevice(sw_det)
-#     yield from bps.mv(saxs_det.cam.shutter_mode, shutterstates)
-#     yield from bps.mv(waxs_det.cam.shutter_mode, shutterstatew)
-#     return snapshot
-
-
-
-def dark_plan_saxs():
-    yield from saxs_det.skinnyunstage()
-    yield from saxs_det.skinnystage()
-    yield from bps.mv(saxs_det.cam.sync,0)
-    yield from bps.trigger(saxs_det, group='darkframe-trigger')
-    yield from bps.wait('darkframe-trigger')
-    print('dark_plan_saxs assets: ',saxs_det.tiff._asset_docs_cache)
-    snapshot = bluesky_darkframes.SnapshotDevice(saxs_det)
-    yield from bps.mv(saxs_det.cam.sync,1)
-    yield from saxs_det.skinnyunstage()
-    yield from saxs_det.skinnystage()
-    return snapshot
-
-
-def dark_plan_waxs():
-    yield from waxs_det.skinnyunstage()
-    yield from waxs_det.skinnystage()
-    yield from bps.mv(waxs_det.cam.sync,0)
-    yield from bps.trigger(waxs_det, group='darkframe-trigger')
-    yield from bps.wait('darkframe-trigger')
-    print('dark_plan_saxs assets: ',waxs_det.tiff._asset_docs_cache)
-    snapshot = bluesky_darkframes.SnapshotDevice(waxs_det)
-    yield from bps.mv(waxs_det.cam.sync,1)
-    yield from waxs_det.skinnyunstage()
-    yield from waxs_det.skinnystage()
-    return snapshot
-
-#
-# def dark_plan_waxs():
-#      shutterstate = waxs_det.cam.shutter_mode.get()
-#      yield from bps.mv(waxs_det.cam.shutter_mode, 0)
-#      yield from bps.trigger(waxs_det, group='darkframe-trigger')
-#      yield from bps.wait('darkframe-trigger')
-#      snapshot = bluesky_darkframes.SnapshotDevice(waxs_det)
-#      yield from bps.mv(waxs_det.cam.shutter_mode, shutterstate)
-#      return snapshot
-
-# dark_frame_preprocessor_synced = bluesky_darkframes.DarkFramePreprocessor(
-#     dark_plan=dark_plan,
-#     detector=sw_det,
-#     max_age=120,
-#     locked_signals=[sw_det.saxs.cam.acquire_time,
-#                     Det_S.user_setpoint,
-#                     Det_W.user_setpoint,
-#                     sw_det.saxs.cam.bin_x,
-#                     sw_det.saxs.cam.bin_y,
-#                     sw_det.waxs.cam.bin_x,
-#                     sw_det.waxs.cam.bin_y,
-#                     sam_X.user_setpoint,
-#                     sam_Y.user_setpoint,
-#                     ],
-#     limit=10)
-#
-
-dark_frame_preprocessor_saxs = bluesky_darkframes.DarkFramePreprocessor(
-    dark_plan=dark_plan_saxs,
-    detector=saxs_det,
-    max_age=300,
-    locked_signals=[saxs_det.cam.acquire_time,
-                    Det_S.user_setpoint,
-                    saxs_det.cam.bin_x,
-                    saxs_det.cam.bin_y,
-                    ],
-    limit=20)
-
-#
-dark_frame_preprocessor_waxs = bluesky_darkframes.DarkFramePreprocessor(
-    dark_plan=dark_plan_waxs,
-    detector=waxs_det,
-    max_age=60,
-    locked_signals=[waxs_det.cam.acquire_time,
-                    Det_W.user_setpoint,
-                    waxs_det.cam.bin_x,
-                    waxs_det.cam.bin_y,
-                    #sam_X.user_setpoint,
-                    sam_Th.user_setpoint,
-                    #sam_Y.user_setpoint,
-                    ],
-    limit=20)
-#
-
-# possibly add a exposure time preprocessor to check beam exposure on CCD over exposure
-
-# if some number of pixels are over exposured, repeat acquisition at .3 exposure time
-
-# if there is no scatter, pause
-# dark_frames_enable_synced = make_decorator(dark_frame_preprocessor_synced)()
-dark_frames_enable_waxs = make_decorator(dark_frame_preprocessor_waxs)()
-dark_frames_enable_saxs = make_decorator(dark_frame_preprocessor_saxs)()
-# RE.preprocessors.append(dark_frame_preprocessor_synced)
-RE.preprocessors.append(dark_frame_preprocessor_waxs)
-RE.preprocessors.append(dark_frame_preprocessor_saxs)
-
 
 
 def buildeputable(start, stop, step, widfract, startinggap=14000, phase=0, mode='L' ,grat='1200',name='test'):
@@ -582,98 +397,7 @@ def quicksnap():
 
 
 # @dark_frames_enable
-def snapshot(secs=0, count=1, name=None, energy = None, det= saxs_det):
-    '''
-    snap of detectors to clear any charge from light hitting them - needed before starting scans or snapping images
-    :return:
-    '''
 
-    if count==1:
-        counts = ''
-    elif count <=0 :
-        count = 1
-        counts = ''
-    else:
-        count = round(count)
-        counts = 's'
-    if secs <= 0:
-        secs = det.cam.acquire_time.get()
-
-    if secs == 1:
-        secss = ''
-    else:
-        secss = 's'
-
-
-
-    if isinstance(energy, float):
-        yield from bps.mv(en,energy)
-
-    boxed_text('Snapshot','Taking {} snapshot{} of {} second{} with {} named {} at {} eV'.format(count,
-                                                                                                 counts,
-                                                                                                 secs,
-                                                                                                 secss,det.name,
-                                                                                                 name,
-                                                                                                 energy),'red')
-    samsave = RE.md['sample_name']
-    if secs:
-        set_exposure(secs)
-    if name is not None:
-        RE.md['sample_name'] = name
-
-    yield from bp.count([det,
-                         en.energy],
-                        num=count)
-
-    if name is not None:
-        RE.md['sample_name'] = samsave
-
-
-@register_line_magic
-def snap(line):
-    try:
-        secs = float(line)
-    except:
-        RE(snapshot())
-    else:
-        if secs > 0 and secs < 100:
-            RE(snapshot(secs))
-del snap
-
-
-@register_line_magic
-def snapsaxs(line):
-    try:
-        secs = float(line)
-    except:
-        RE(snapshot(det=saxs_det))
-    else:
-        if secs > 0 and secs < 100:
-            RE(snapshot(secs,det=saxs_det))
-del snapsaxs
-
-
-@register_line_magic
-def snapwaxs(line):
-    try:
-        secs = float(line)
-    except:
-        RE(snapshot(det=waxs_det))
-    else:
-        if secs > 0 and secs < 100:
-            RE(snapshot(secs,det=waxs_det))
-del snapwaxs
-
-@register_line_magic
-def snaps(line):
-    try:
-        num = int(line)
-    except:
-        RE(snapshot())
-    else:
-        if num > 0 and num < 100:
-            RE(snapshot(count=num))
-del snaps
 
 def stability_scans(num):
     scans = np.arange(num)
@@ -682,21 +406,7 @@ def stability_scans(num):
         yield from bp.scan([Izero_Mesh],en,200,1400,1201)
 
 
-def vent():
-    yield from psh10.close()
-    yield from gv28.close()
-    yield from gv27a.close()
-    yield from bps.mv(sam_Y,349)
 
-    print('waiting for you to close the load lock gate valve')
-    print('Please also close the small manual black valve on the back of the load lock now')
-    while gvll.state.get() is 1:
-        gvll.read() # attempt at a fix for problem where macro hangs here.
-        bps.sleep(1)
-    print('TEM load lock closed - turning off loadlock gauge')
-    yield from bps.mv(ll_gpwr,0)
-    print('Should be safe to begin vent by pressing right most button of BOTTOM turbo controller once')
-    print('')
 
 # settings for 285.3 eV 1.6 C 1200l/mm gold Aug 1, 2020
 # e 285.3
@@ -721,29 +431,21 @@ def isvar_scan():
             yield from bps.mv(en.polarization,polarization)
             yield from bp.scan([waxs_det],en,270,670,5)
 
-from slack import WebClient
 
-class RSoXSBot:
-    # The constructor for the class. It takes the channel name as the a
-    # parameter and then sets it as an instance variable
-    def __init__(self,token,proxy,channel):
-        self.channel = channel
-        self.webclient = WebClient(token=token, proxy=proxy)
 
-    # Craft and return the entire message payload as a dictionary.
-    def send_message(self, message):
-        composed_message =  {
-            "channel": self.channel,
-            "blocks": [
-                {"type": "section", "text": {"type": "mrkdwn", "text": message}},
-            ],
-        }
-        try:
-            self.webclient.chat_postMessage(**composed_message)
-        except Exception:
-            pass
+def vent():
+    yield from psh10.close()
+    yield from gv28.close()
+    yield from gv27a.close()
+    yield from bps.mv(sam_Y,349)
 
-slack_token = os.environ.get("SLACK_API_TOKEN", None)
-rsoxs_bot = RSoXSBot(token=slack_token,
-                     proxy=None,
-                     channel="#sst-1-rsoxs-station")
+    print('waiting for you to close the load lock gate valve')
+    print('Please also close the small manual black valve on the back of the load lock now')
+    while gvll.state.get() is 1:
+        gvll.read() # attempt at a fix for problem where macro hangs here.
+        bps.sleep(1)
+    print('TEM load lock closed - turning off loadlock gauge')
+    yield from bps.mv(ll_gpwr,0)
+    print('Should be safe to begin vent by pressing right most button of BOTTOM turbo controller once')
+    print('')
+

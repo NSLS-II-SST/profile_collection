@@ -1,4 +1,3 @@
-from IPython.core.magic import register_line_magic
 from ophyd import EpicsMotor, EpicsSignal
 from ophyd.sim import motor1
 from ophyd import Component as Cpt

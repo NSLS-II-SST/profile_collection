@@ -4,8 +4,6 @@ import bluesky.plan_stubs as bps
 import queue
 from PIL import Image
 
-run_report(__file__)
-
 
 def default_sample(name):
     return {'proposal_id': 'C-308244', # we set the default folder here - most data shouldn't be taken

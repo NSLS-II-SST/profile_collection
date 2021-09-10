@@ -1,0 +1,4 @@
+
+
+RE.preprocessors.append(dark_frame_preprocessor_waxs)
+RE.preprocessors.append(dark_frame_preprocessor_saxs)
