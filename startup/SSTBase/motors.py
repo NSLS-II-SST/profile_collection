@@ -5,6 +5,8 @@ from ophyd.sim import motor1
 from ..CommonFunctions.functions import boxed_text
 
 
+from ..CommonFunctions.functions import boxed_text
+
 class FMBOEpicsMotor(EpicsMotor):
     resolution = Cpt(EpicsSignal, '.MRES')
     encoder = Cpt(EpicsSignal, '.REP')

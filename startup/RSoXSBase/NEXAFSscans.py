@@ -2,6 +2,8 @@ run_report(__file__)
 
 import numpy as np
 
+from startup.RSoXSObjects.energy import en
+from ..RSoXSObjects.signals import Sample_TEY,Izero_Mesh,Beamstop_SAXS,Beamstop_WAXS
 
 def full_Carbon_NEXAFS(sigs=[],
                        dets=[Sample_TEY, Izero_Mesh, Beamstop_WAXS], energy=en, pol=0, diode_range=7, m3_pitch=7.98,

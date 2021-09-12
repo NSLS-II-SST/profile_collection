@@ -11,6 +11,14 @@ from nslsii.ad33 import SingleTriggerV33,  StatsPluginV33
 from bluesky.preprocessors import make_decorator
 import bluesky_darkframes
 
+from startup.RSoXSObjects.energy import en
+from ..CommonFunctions.functions import boxed_text
+from startup.RSoXSObjects.energy import en, mono_en, epu_gap, grating_to_250, grating_to_1200, set_polarization, \
+    Mono_Scan_Speed_ev, Mono_Scan_Start, Mono_Scan_Start_ev, Mono_Scan_Stop, Mono_Scan_Stop_ev
+from ..RSoXSObjects.detectors import waxs_det
+from ..RSoXSObjects.signals import DiodeRange
+from ..SSTObjects.diode import Shutter_open_time, Shutter_control, Shutter_enable, Shutter_delay
+
 class TIFFPluginWithFileStore(TIFFPlugin, FileStoreTIFFIterativeWrite):
     """Add this as a component to detectors that write TIFFs."""
     def __init__(self, *args, **kwargs):
@@ -255,13 +263,13 @@ class SyncedDetectors(Device):
         self.cooling_state()
 
     def open_shutter(self):
-        shutter_control.set(1)
+        Shutter_control.set(1)
 
     def close_shutter(self):
-        shutter_control.set(0)
+        Shutter_control.set(0)
 
     def shutter(self):
-        shutter_control.get()
+        Shutter_control.get()
 
 
 
@@ -407,32 +415,3 @@ class SimGreatEyes(Device):
 
     def set_exposure(self, seconds):
         self.set_exptime(seconds)
-
-dark_frame_preprocessor_saxs = bluesky_darkframes.DarkFramePreprocessor(
-    dark_plan=dark_plan_saxs,
-    detector=saxs_det,
-    max_age=300,
-    locked_signals=[saxs_det.cam.acquire_time,
-                    Det_S.user_setpoint,
-                    saxs_det.cam.bin_x,
-                    saxs_det.cam.bin_y,
-                    ],
-    limit=20)
-
-#
-dark_frame_preprocessor_waxs = bluesky_darkframes.DarkFramePreprocessor(
-    dark_plan=dark_plan_waxs,
-    detector=waxs_det,
-    max_age=60,
-    locked_signals=[waxs_det.cam.acquire_time,
-                    Det_W.user_setpoint,
-                    waxs_det.cam.bin_x,
-                    waxs_det.cam.bin_y,
-                    #sam_X.user_setpoint,
-                    sam_Th.user_setpoint,
-                    #sam_Y.user_setpoint,
-                    ],
-    limit=20)
-
-dark_frames_enable_waxs = make_decorator(dark_frame_preprocessor_waxs)()
-dark_frames_enable_saxs = make_decorator(dark_frame_preprocessor_saxs)()

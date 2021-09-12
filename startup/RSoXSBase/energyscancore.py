@@ -7,6 +7,12 @@ from collections import defaultdict
 from bluesky import preprocessors as bpp
 import numpy as np
 from copy import deepcopy
+from startup.RSoXSObjects.energy import en, mono_en, epu_gap, grating_to_250, grating_to_1200, set_polarization, \
+    Mono_Scan_Speed_ev, Mono_Scan_Start, Mono_Scan_Start_ev, Mono_Scan_Stop, Mono_Scan_Stop_ev
+from ..SSTObjects.mirrors import mir3
+from ..RSoXSObjects.detectors import waxs_det
+from ..RSoXSObjects.signals import DiodeRange
+from ..SSTObjects.diode import Shutter_open_time, Shutter_control, Shutter_enable
 
 run_report(__file__)
 
@@ -77,7 +83,7 @@ def one_trigger_nd_step(detectors, step, pos_cache):
 
 # @dark_frames_enable
 def en_scan_core(signals=[],
-                 dets=[saxs_det],
+                 dets=[waxs_det],
                  energy=en,
                  energies=[],
                  times=[],

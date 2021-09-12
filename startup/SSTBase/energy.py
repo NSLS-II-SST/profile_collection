@@ -11,6 +11,7 @@ import IPython
 from scipy import interpolate
 import xarray as xr
 
+from ..CommonFunctions.functions import boxed_text
 
 class UndulatorMotor(EpicsMotor):
     user_setpoint = Cpt(EpicsSignal, '-SP', limits=True)
@@ -73,6 +74,7 @@ class EnPos(PseudoPositioner):
     Parameters:
     -----------
 
+
     """
     # synthetic axis
     energy = Cpt(PseudoSingle, kind='hinted', limits=(71,2250),name="Beamline Energy")
@@ -86,6 +88,7 @@ class EnPos(PseudoPositioner):
     #epumode = Cpt(EpicsSignal,'SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP',
     #                       name='EPU Mode', kind='normal')
 
+    rotation_motor = None
     @pseudo_position_argument
     def forward(self, pseudo_pos):
         '''Run a forward (pseudo -> real) calculation'''
@@ -153,7 +156,8 @@ class EnPos(PseudoPositioner):
 
     # begin LUT functions
 
-    def __init__(self, a, configpath=pathlib.Path(get_ipython().profile_dir.startup_dir) / 'config', **kwargs):
+    def __init__(self, a, rotation_motor=None,
+                 configpath=pathlib.Path(get_ipython().profile_dir.startup_dir) / 'config', **kwargs):
         super().__init__(a,**kwargs)
         self.C250_gap = xr.load_dataarray(configpath/'EPU_C_250_gap.nc')
         self.C250_intens = xr.load_dataarray(configpath/'EPU_C_250_intens.nc')
@@ -169,6 +173,7 @@ class EnPos(PseudoPositioner):
         self.L1200_intens_mrg = xr.load_dataarray(configpath/'EPU_L_1200_intens_mrg.nc')
         self.polphase = xr.load_dataarray(configpath/'polphase.nc')
         self.phasepol = xr.DataArray(data=self.polphase.pol,coords={'phase':self.polphase.values},dims={'phase'})
+        self.rotation_motor =rotation_motor
 
     def gap(self,energy,pol,grating='best',harmonic='best',en_cutoff=1100,verbose=False):
         if (energy>en_cutoff and harmonic != '1') or harmonic == '3':
@@ -239,8 +244,8 @@ class EnPos(PseudoPositioner):
         else:
             return 2
 
-    def sample_pol(self,pol,rotation_motor=sam_Th):
-        th = rotation_motor.user_setpoint.get()
+    def sample_pol(self,pol):
+        th = self.rotation_motor.user_setpoint.get()
         return np.arccos(np.cos(pol*np.pi/180)*np.sin(th*np.pi/180))*180/np.pi
 
 

@@ -1,4 +1,5 @@
-from ..SSTBase.energy import *
+from startup.SSTBase.energy import *
+from ..RSoXSObjects.motors import sam_Th
 
 epu_mode = EpicsSignal('SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP',
                         name='EPU 60 Mode',kind='normal')
@@ -17,7 +18,7 @@ epu_mode = EpicsSignal('SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP',
 #enold.epugap.kind = 'normal'
 
 
-en = EnPos('', name='en')
+en = EnPos('', rotation_motor=sam_Th, name='en')
 en.energy.kind = 'hinted'
 en.monoen.kind = 'normal'
 #en.monoen.readback.kind = 'hinted'

@@ -6,7 +6,7 @@ run_report(__file__)
 from .SSTObjects.gatevalves import *
 from .SSTObjects.shutters import *
 from .SSTObjects.vacuum import *
-from .SSTObjects.energy import *
+from startup.RSoXSObjects.energy import *
 from .SSTObjects.motors import *
 from .SSTObjects.mirrors import *
 from .SSTObjects.diode import *

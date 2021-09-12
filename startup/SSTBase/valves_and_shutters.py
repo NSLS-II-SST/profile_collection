@@ -1,8 +1,6 @@
 
 from ophyd import (SingleTrigger, Component as Cpt, Device, PVPositioner, EpicsSignal, EpicsSignalRO)
 import time
-from ..CommonFunctions.functions import boxed_text
-
 
 class EPS_Shutter(Device):
     state = Cpt(EpicsSignal, 'Pos-Sts')
