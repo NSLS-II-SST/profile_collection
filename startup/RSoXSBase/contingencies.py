@@ -1,11 +1,17 @@
-
 import bluesky.plan_stubs as bps
-import logging
 import datetime
-
+import logging
 
 bls_email = 'egann@bnl.gov'
 global no_notifications_until
+
+from ..RSoXSBase.startup import RE, db, bec
+from ..RSoXSObjects.slackbot import rsoxs_bot
+from ..RSoXSObjects.motors import sam_X, sam_Y, sam_Th, sam_Z, sam_viewer
+from ..RSoXSObjects.cameras import SampleViewer_cam
+from ..SSTObjects.diode import Shutter_enable, Shutter_control
+from ..RSoXSObjects.signals import Beamstop_SAXS, Beamstop_WAXS, DiodeRange
+from ..SSTObjects.motors import gratingx, mirror2x, mirror2, grating
 
 
 def pause_notices(until=None, **kwargs):
@@ -58,7 +64,6 @@ def enc_clr_gx():
     send_notice('egann@bnl.gov', 'SST had a small problem', 'the encoder loss has happened on the RSoXS beamline'
                                                             '\rEverything is probably just fine')
 
-
     yield from gratingx.clear_encoder_loss()
     yield from gratingx.enable()
     yield from mirror2x.enable()
@@ -85,7 +90,6 @@ def beamup_notice():
     yield from bps.null()
 
 
-
 class OSEmailHandler(logging.Handler):
     def emit(self, record):
         user_email = RE.md['user_email']
@@ -95,5 +99,7 @@ class OSEmailHandler(logging.Handler):
 
 class MakeSafeHandler(logging.Handler):
     def emit(self, record):
-        print('close the shutter here')
+        ...
+        # print('close the shutter here')
+        # NOTE: this seems to get run anytime there is any problem with bluesky whatso ever, so nothing dramatic should really be done here
         # @TODO insert code to make instrument 'safe', e.g. close shutter

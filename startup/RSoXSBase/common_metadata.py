@@ -10,6 +10,16 @@ from ophyd import Device
 
 #TODO: RE probably can't be referenced as it is here ....
 from .configurations import *
+from .startup import RE,db,bec,db0
+from ..RSoXSObjects.slackbot import rsoxs_bot
+from ..RSoXSObjects.motors import sam_X,sam_Y,sam_Th,sam_Z,Shutter_Y,Izero_Y,Det_S,Det_W,BeamStopW,BeamStopS
+from ..RSoXSObjects.slits import slits1,slits2,slits3
+from ..RSoXSObjects.cameras import SampleViewer_cam
+from ..SSTObjects.diode import Shutter_enable,Shutter_control
+from ..SSTObjects.motors import Exit_Slit
+from ..RSoXSObjects.signals import Beamstop_SAXS,Beamstop_WAXS,DiodeRange
+from ..CommonFunctions.functions import boxed_text,colored
+
 
 def user():
     title = "User metadata - stored in every scan:"
