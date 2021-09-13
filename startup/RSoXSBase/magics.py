@@ -6,6 +6,13 @@ from IPython.core.magic import register_line_magic
 
 # motors
 
+from ..RSoXSObjects.motors import sam_Y,sam_Th,sam_Z,sam_X,BeamStopS,BeamStopW,Det_W,Det_S,Shutter_Y,Izero_ds,Izero_Y,sam_viewer
+from ..SSTObjects.motors import Exit_Slit
+from .configurations import all_out, WAXSmode, SAXSmode
+from ..RSoXSObjects.detectors import set_exposure,saxs_det,waxs_det,snapshot
+from ..RSoXSBase.common_metadata import sample,user
+from ..RSoXSBase.startup import RE
+
 @register_line_magic
 def x(line):
     sam_X.status_or_rel_move(line)
@@ -223,9 +230,48 @@ def u(line):
     user()
 del md, u
 
+from IPython.terminal.prompts import Prompts, Token
+import datetime
+
+
+class RSoXSPrompt(Prompts):
+    def in_prompt_tokens(self, cli=None):
+        dt = datetime.datetime.now()
+        formatted_date = dt.strftime('%Y-%m-%d')
+
+        if len(RE.md['proposal_id']) > 0 and len(RE.md['project_name']) > 0 and len(RE.md['cycle']) > 0:
+            RSoXStoken = (Token.Prompt, 'RSoXS ' + '{}/{}/{}/auto/{}/ '.format(RE.md['cycle'],
+                                                                               RE.md['proposal_id'],
+                                                                               RE.md['project_name'],
+                                                                               formatted_date)
+                          )
+        else:
+            RSoXStoken = (Token.OutPrompt, 'RSoXS (define metadata before scanning)')
+        return [RSoXStoken,
+                (Token.Prompt, ' ['),
+                (Token.PromptNum, str(self.shell.execution_count)),
+                (Token.Prompt, ']: ')]
+
+
+ip = get_ipython()
+ip.prompts = RSoXSPrompt(ip)
+
+
+def beamline_status():
+    # user()
+    sample()
+    boxed_text('Detector status',
+               exposure() +
+               '\n   ' + saxs_det.binning() +
+               '\n   ' + waxs_det.binning() +
+               '\n   ' + saxs_det.cooling_state()+
+               '\n   ' + waxs_det.cooling_state()+
+               '\n   WAXS ' + waxs_det.shutter()+
+               '\n   SAXS ' + saxs_det.shutter(),
+               'lightblue', 80, shrink=False)
 
 @register_line_magic
 def status(line):
     beamline_status()
-del status
 
+del status

@@ -1,7 +1,4 @@
-from IPython.utils.coloransi import TermColors as color
-
 import os
-
 import nslsii
 
 from pathlib import Path
@@ -12,34 +9,30 @@ import appdirs
 # os.environ['OPHYD_CONTROL_LAYER'] = 'pyepics'
 
 
+## stole below from BMM, but changed it around so it made sense to Eliot
 
+try:
+    from bluesky_queueserver import is_re_worker_active
+except ImportError:
+    # TODO: delete this when 'bluesky_queueserver' is distributed as part of collection environment
+    def is_re_worker_active():
+        return False
 
-# Very important, the databroker config lives in C:\Users\greateyes\AppData\Roaming\databroker\rsoxs.yml,
-# not in ~/.config/databroker/rsoxs.yml
-nslsii.configure_base(
-    get_ipython().user_ns,
-    'rsoxs',
-    publish_documents_to_kafka=False
-)
-
-# After the above call, you will now have the following in your namespace:
-#
-#	RE : RunEngine
-#	db : databroker
-#	sd : SupplementalData
-#	pbar_manager : ProgressBarManager
-#	bec : BestEffortCallback
-#	peaks : bec.peaks
-#	plt : matplotlib.pyplot
-#	np : numpy
-#	bc : bluesky.callbacks
-#	bp : bluesky.plans
-#	bps : bluesky.plan_stubs
-#	mv : bluesky.plan_stubs.mv
-#	mvr : bluesky.plan_stubs.mvr
-#	mov : bluesky.plan_stubs.mov
-#	movr : bluesky.plan_stubs.movr
-#	bpp : bluesky.preprocessors
+if not is_re_worker_active():
+    ns = get_ipython().user_ns
+    nslsii.configure_base(ns, 'rsoxs', configure_logging=True, publish_documents_to_kafka=False)
+    ip.log.setLevel('ERROR')
+    RE  = ip.user_ns['RE']
+    db  = ip.user_ns['db']
+    sd  = ip.user_ns['sd']
+    bec = ip.user_ns['bec']
+else:
+    ns = {}
+    nslsii.configure_base(ns, 'rsoxs', configure_logging=True, publish_documents_to_kafka=False)
+    RE  = uns_dict['RE']
+    db  = uns_dict['db']
+    sd  = uns_dict['sd']
+    bec = uns_dict['bec']
 
 
 # === START PERSISTENT DICT CODE ===
@@ -263,15 +256,6 @@ logger.setLevel('DEBUG')  # change DEBUG to INFO later on
 
 from databroker.v0 import Broker
 db0 = Broker.named('rsoxs')
-
-
-try:
-    from bluesky_queueserver import is_re_worker_active
-except ImportError:
-    # TODO: delete this when 'bluesky_queueserver' is distributed as part of collection environment
-    def is_re_worker_active():
-        return False
-
 
 bec.disable_table()
 bec.disable_plots()

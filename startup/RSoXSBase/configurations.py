@@ -2,6 +2,13 @@ import bluesky.plans as bp
 import bluesky.plan_stubs as bps
 import time
 from IPython.core.magic import register_line_magic
+from ..RSoXSObjects.motors import *
+from ..SSTObjects.mirrors import *
+from ..SSTObjects.motors import *
+from ..RSoXSObjects.slits import *
+
+
+#TODO lots of metadata manipulation here, and
 
 def Shutter_in():
     yield from bps.mv(Shutter_Y, 2.2)

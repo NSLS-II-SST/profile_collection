@@ -8,6 +8,8 @@ from math import floor
 import datetime
 from ophyd import Device
 
+#TODO: RE probably can't be referenced as it is here ....
+from .configurations import *
 
 def user():
     title = "User metadata - stored in every scan:"

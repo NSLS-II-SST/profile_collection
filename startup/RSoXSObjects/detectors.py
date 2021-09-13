@@ -85,6 +85,33 @@ def snapshot(secs=0, count=1, name=None, energy = None, det= saxs_det):
     if name is not None:
         RE.md['sample_name'] = samsave
 
+def dark_plan_saxs():
+    yield from saxs_det.skinnyunstage()
+    yield from saxs_det.skinnystage()
+    yield from bps.mv(saxs_det.cam.sync,0)
+    yield from bps.trigger(saxs_det, group='darkframe-trigger')
+    yield from bps.wait('darkframe-trigger')
+    print('dark_plan_saxs assets: ',saxs_det.tiff._asset_docs_cache)
+    snapshot = bluesky_darkframes.SnapshotDevice(saxs_det)
+    yield from bps.mv(saxs_det.cam.sync,1)
+    yield from saxs_det.skinnyunstage()
+    yield from saxs_det.skinnystage()
+    return snapshot
+
+
+def dark_plan_waxs():
+    yield from waxs_det.skinnyunstage()
+    yield from waxs_det.skinnystage()
+    yield from bps.mv(waxs_det.cam.sync,0)
+    yield from bps.trigger(waxs_det, group='darkframe-trigger')
+    yield from bps.wait('darkframe-trigger')
+    print('dark_plan_saxs assets: ',waxs_det.tiff._asset_docs_cache)
+    snapshot = bluesky_darkframes.SnapshotDevice(waxs_det)
+    yield from bps.mv(waxs_det.cam.sync,1)
+    yield from waxs_det.skinnyunstage()
+    yield from waxs_det.skinnystage()
+    return snapshot
+
 
 dark_frame_preprocessor_saxs = bluesky_darkframes.DarkFramePreprocessor(
     dark_plan=dark_plan_saxs,

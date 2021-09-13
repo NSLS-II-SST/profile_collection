@@ -8,6 +8,16 @@ import queue
 from PIL import Image
 from bluesky.callbacks.fitting import PeakStats
 from bluesky.preprocessors import subs_wrapper
+from ..RSoXSObjects.signals import Izero_Mesh,Beamstop_WAXS,Beamstop_SAXS
+from ..RSoXSObjects.energy import en,mono_en,epu_gap,epu_mode,epu_phase,grating_to_1200,grating_to_250,set_polarization
+from..SSTObjects.diode import Shutter_control,Shutter_enable
+from ..RSoXSObjects.slits import slits1, slits2
+from ..RSoXSBase.common_metadata import load_configuration
+from ..RSoXSObjects.detectors import set_exposure, waxs_det, saxs_det
+from ..RSoXSObjects.motors import sam_Th, sam_Y
+from ..SSTObjects.gatevalves import gv28, gv27a, gvll
+from ..SSTObjects.shutters import psh10
+from ..SSTObjects.vacuum import rsoxs_ll_gpwr
 
 
 def buildeputable(start, stop, step, widfract, startinggap=14000, phase=0, mode='L' ,grat='1200',name='test'):
@@ -192,7 +202,7 @@ def do_2021_eputables3():
     mono_en.readback.kind = 'hinted'
     mono_en.kind = 'hinted'
     mono_en.read_attrs = ['readback']
-    bec.enable_plots()
+    bec.enable_plots()  #TODO: this will probably not work, need @dallan to make this work
     yield from load_configuration('WAXSNEXAFS')
     yield from bps.mv(slits1.hsize,1)
     yield from bps.mv(slits2.hsize,1)
@@ -374,31 +384,6 @@ def tune_max(
 
     return (yield from _tune_core(start, stop, num, signal, peaklist))
 
-
-def quicksnap():
-    '''
-    snap of detectors to clear any charge from light hitting them - needed before starting scans or snapping images
-    :return:
-    '''
-    set_exposure(1)
-    binsave = sw_det.saxs.cam.bin_x.get()
-    sw_det.saxs.cam.bin_x.set(16)
-    sw_det.saxs.cam.bin_y.set(16)
-    sw_det.waxs.cam.bin_x.set(16)
-    sw_det.waxs.cam.bin_y.set(16)
-    samsave = RE.md['sample_name']
-    samidsave = RE.md['sample_id']
-    RE.md['sample_name'] = 'CCDClear'
-    RE.md['sample_id'] = '000'
-    yield from bp.count([saxs_det, en.energy], num=2)
-    RE.md['sample_name'] = samsave
-    RE.md['sample_id'] = samidsave
-    saxs_det.set_binning(binsave)
-
-
-# @dark_frames_enable
-
-
 def stability_scans(num):
     scans = np.arange(num)
     for scan in scans:
@@ -445,7 +430,7 @@ def vent():
         gvll.read() # attempt at a fix for problem where macro hangs here.
         bps.sleep(1)
     print('TEM load lock closed - turning off loadlock gauge')
-    yield from bps.mv(ll_gpwr,0)
+    yield from bps.mv(rsoxs_ll_gpwr,0)
     print('Should be safe to begin vent by pressing right most button of BOTTOM turbo controller once')
     print('')
 
