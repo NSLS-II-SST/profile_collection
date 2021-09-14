@@ -1,4 +1,4 @@
-from ..SSTBase.energy import *
+from ..SSTObjects.energy import *
 from ..RSoXSObjects.motors import sam_Th
 
 
