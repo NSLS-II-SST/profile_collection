@@ -11,7 +11,8 @@ import IPython
 from scipy import interpolate
 import xarray as xr
 
-from startup.RSoXS.CommonFunctions.functions import boxed_text
+from ..CommonFunctions.functions import boxed_text
+from ..SSTBase.motors import prettymotor
 
 class UndulatorMotor(EpicsMotor):
     user_setpoint = Cpt(EpicsSignal, '-SP', limits=True)
