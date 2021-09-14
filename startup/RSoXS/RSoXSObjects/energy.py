@@ -1,8 +1,7 @@
 from ..SSTBase.energy import *
 from ..RSoXSObjects.motors import sam_Th
 
-epu_mode = EpicsSignal('SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP',
-                        name='EPU 60 Mode',kind='normal')
+
 
 
 # epu_mode = EpicsSignal('SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-RB',

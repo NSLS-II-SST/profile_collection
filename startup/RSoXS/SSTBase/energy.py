@@ -19,6 +19,9 @@ class UndulatorMotor(EpicsMotor):
     done = Cpt(EpicsSignalRO, '.MOVN')
     done_value = 0
 
+#TODO: Dan, I have to define this here because the class definition needs it....
+epu_mode = EpicsSignal('SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP',
+                        name='EPU 60 Mode',kind='normal')
 
 class Monochromator(PVPositioner):
     setpoint = Cpt(EpicsSignal,':ENERGY_SP', kind='normal')
