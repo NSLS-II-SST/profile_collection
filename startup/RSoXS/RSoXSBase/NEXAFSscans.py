@@ -2,7 +2,7 @@ run_report(__file__)
 
 import numpy as np
 
-from startup.RSoXSObjects.energy import en
+from startup.RSoXS.RSoXSObjects import en
 from ..RSoXSObjects.signals import Sample_TEY,Izero_Mesh,Beamstop_SAXS,Beamstop_WAXS
 
 def full_Carbon_NEXAFS(sigs=[],
