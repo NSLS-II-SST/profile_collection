@@ -1,4 +1,4 @@
-
+from IPython.utils.coloransi import TermColors as color
 import sys, ansiwrap
 from select import select
 
