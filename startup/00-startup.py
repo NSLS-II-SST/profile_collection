@@ -48,8 +48,8 @@ if not is_re_worker_active():
     from .RSoXSBase.magics import *
 
 
-user() # print out the current user metadata
-beamline_status() # print out the current sample metadata, motor position and detector status
+    user() # print out the current user metadata
+    beamline_status() # print out the current sample metadata, motor position and detector status
 
 
 #from .RSoXSBase.startup import sd
