@@ -1,3 +1,6 @@
+from ..CommonFunctions.functions import run_report
+run_report(__file__)
+
 from ophyd import (EpicsMotor, Device, Component as Cpt, EpicsSignal,PVPositioner,EpicsSignalRO)
 from ophyd import FormattedComponent as FmtCpt
 

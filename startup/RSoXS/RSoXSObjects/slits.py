@@ -1,3 +1,5 @@
+from ..CommonFunctions.functions import run_report
+run_report(__file__)
 from ..SSTBase.slits import *
 
 slits1 = Slits('XF:07ID2-ES1{Slt1-Ax:',  name='Upstream Scatter Slits', kind='hinted',concurrent=1)

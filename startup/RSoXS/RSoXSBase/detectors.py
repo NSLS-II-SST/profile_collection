@@ -1,3 +1,6 @@
+from ..CommonFunctions.functions import run_report
+run_report(__file__)
+
 import time
 from ophyd import Component as C
 from ophyd import EpicsSignalRO, Device, EpicsSignal

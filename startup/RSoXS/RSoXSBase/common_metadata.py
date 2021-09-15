@@ -7,8 +7,9 @@ import numpy as np
 from math import floor
 import datetime
 from ophyd import Device
+from ..CommonFunctions.functions import run_report
+run_report(__file__)
 
-#TODO: RE probably can't be referenced as it is here ....
 from .configurations import *
 from .startup import RE,db,bec,db0
 from ..RSoXSObjects.slackbot import rsoxs_bot

@@ -1,3 +1,5 @@
+from ..CommonFunctions.functions import run_report
+run_report(__file__)
 from ..RSoXSBase.slack import RSoXSBot
 import os
 

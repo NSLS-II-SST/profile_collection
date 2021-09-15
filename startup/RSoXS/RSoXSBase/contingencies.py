@@ -1,3 +1,6 @@
+from ..CommonFunctions.functions import run_report
+run_report(__file__)
+
 import bluesky.plan_stubs as bps
 import datetime
 import logging

@@ -1,3 +1,6 @@
+from ..CommonFunctions.functions import run_report
+run_report(__file__)
+
 from ..RSoXSBase.contingencies import *
 from ..SSTObjects.gatevalves import gvll
 from ..SSTObjects.shutters import psh4,psh1

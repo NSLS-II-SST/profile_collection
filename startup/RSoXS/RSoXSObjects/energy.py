@@ -1,3 +1,6 @@
+from ..CommonFunctions.functions import run_report
+run_report(__file__)
+
 from ophyd import PVPositioner, EpicsSignalRO, PseudoPositioner, PseudoSingle, EpicsMotor, EpicsSignal
 from ophyd import Component as Cpt
 from ophyd.pseudopos import (pseudo_position_argument,

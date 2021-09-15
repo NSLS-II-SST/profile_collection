@@ -1,3 +1,5 @@
+from ..CommonFunctions.functions import run_report
+run_report(__file__)
 
 import pytz
 from datetime import datetime as datet, timedelta

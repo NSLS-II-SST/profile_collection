@@ -1,3 +1,6 @@
+from ..CommonFunctions.functions import run_report
+run_report(__file__)
+
 import bluesky.plans as bp
 import bluesky.plan_stubs as bps
 from bluesky.plan_stubs import checkpoint, abs_set, sleep, trigger, read, wait, create, save
@@ -14,7 +17,6 @@ from ..RSoXSObjects.detectors import waxs_det
 from ..RSoXSObjects.signals import DiodeRange
 from ..SSTObjects.diode import Shutter_open_time, Shutter_control, Shutter_enable
 
-run_report(__file__)
 
 SLEEP_FOR_SHUTTER = 1
 

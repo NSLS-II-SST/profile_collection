@@ -1,3 +1,5 @@
+from ..CommonFunctions.functions import run_report
+run_report(__file__)
 from ophyd import EpicsSignalRO, EpicsSignal
 
 # These might need/make more sense to be split up into separate files later on.

@@ -1,3 +1,5 @@
+from ..CommonFunctions.functions import run_report
+run_report(__file__)
 
 import time as ttime  # tea time
 from types import SimpleNamespace
