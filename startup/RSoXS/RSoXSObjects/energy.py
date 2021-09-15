@@ -111,7 +111,7 @@ class EnPos(PseudoPositioner):
         #print('in Inverse')
         ret =  self.PseudoPosition( energy=real_pos.monoen,
                                     polarization=self.pol(real_pos.epuphase,epu_mode.get()),
-                                    sample_polarization = self.sample_pol(self.pol(real_pos.epuphase,epu_mode.get()),sam_Th))
+                                    sample_polarization = self.sample_pol(self.pol(real_pos.epuphase,epu_mode.get())))
         #print('Finished inverse')
         return ret
 
