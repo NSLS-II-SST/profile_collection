@@ -1,4 +1,4 @@
-from ophyd import (EpicsMotor, Device, Component as Cpt, EpicsSignal)
+from ophyd import (EpicsMotor, Device, Component as Cpt, EpicsSignal,PVPositioner)
 from ophyd import FormattedComponent as FmtCpt
 
 class HexapodMirror(Device):
