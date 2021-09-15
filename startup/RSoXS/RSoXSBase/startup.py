@@ -19,6 +19,7 @@ except ImportError:
         return False
 
 if not is_re_worker_active():
+    ip=get_ipython()
     ns = get_ipython().user_ns
     nslsii.configure_base(ns, 'rsoxs', configure_logging=True, publish_documents_to_kafka=False)
     ip.log.setLevel('ERROR')
