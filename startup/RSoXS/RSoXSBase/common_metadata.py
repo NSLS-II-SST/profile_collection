@@ -19,7 +19,7 @@ from ..RSoXSObjects.cameras import SampleViewer_cam
 from ..SSTObjects.diode import Shutter_enable,Shutter_control
 from ..SSTObjects.motors import Exit_Slit
 from ..RSoXSObjects.signals import Beamstop_SAXS,Beamstop_WAXS,DiodeRange
-from .CommonFunctions.functions import boxed_text,colored
+from ..CommonFunctions.functions import boxed_text,colored
 
 
 def user():
