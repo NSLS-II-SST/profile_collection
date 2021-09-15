@@ -1,4 +1,4 @@
-from ..CommonFunctions.functions import run_report
+from RSoXS.CommonFunctions.functions import run_report
 run_report(__file__)
 
 # SST devices  These all reference the base classes and instantiate the objects themselves into the current namespace (I hope)
