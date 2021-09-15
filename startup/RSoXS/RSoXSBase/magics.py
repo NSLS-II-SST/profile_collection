@@ -1,4 +1,4 @@
-from ..CommonFunctions.functions import run_report
+from ..CommonFunctions.functions import run_report,boxed_text,colored
 run_report(__file__)
 
 # This file should only be run if ipython is being used ... put that check here!
