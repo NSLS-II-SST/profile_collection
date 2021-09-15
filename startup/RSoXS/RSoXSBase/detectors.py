@@ -15,7 +15,6 @@ from ..RSoXSObjects.energy import en
 from ..CommonFunctions.functions import boxed_text
 from ..RSoXSObjects.energy import en, mono_en, epu_gap, grating_to_250, grating_to_1200, set_polarization, \
     Mono_Scan_Speed_ev, Mono_Scan_Start, Mono_Scan_Start_ev, Mono_Scan_Stop, Mono_Scan_Stop_ev
-from ..RSoXSObjects.detectors import waxs_det
 from ..RSoXSObjects.signals import DiodeRange
 from ..SSTObjects.diode import Shutter_open_time, Shutter_control, Shutter_enable, Shutter_delay
 
