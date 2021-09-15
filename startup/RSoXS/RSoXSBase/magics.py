@@ -10,7 +10,7 @@ from IPython.core.magic import register_line_magic
 from ..RSoXSObjects.motors import sam_Y,sam_Th,sam_Z,sam_X,BeamStopS,BeamStopW,Det_W,Det_S,Shutter_Y,Izero_ds,Izero_Y,sam_viewer
 from ..SSTObjects.motors import Exit_Slit
 from .configurations import all_out, WAXSmode, SAXSmode
-from ..RSoXSObjects.detectors import set_exposure,saxs_det,waxs_det,snapshot
+from ..RSoXSObjects.detectors import set_exposure,saxs_det,waxs_det,snapshot,exposure
 from ..RSoXSBase.common_metadata import sample,user
 from ..RSoXSBase.startup import RE
 
