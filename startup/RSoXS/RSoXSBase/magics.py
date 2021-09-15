@@ -1,4 +1,4 @@
-from ..CommonFunctions.functions import run_report,boxed_text,colored
+from ..CommonFunctions.functions import run_report,boxed_text
 run_report(__file__)
 
 # This file should only be run if ipython is being used ... put that check here!
@@ -6,13 +6,14 @@ run_report(__file__)
 from IPython.core.magic import register_line_magic
 
 # motors
-
+from bluesky.plans import bps
 from ..RSoXSObjects.motors import sam_Y,sam_Th,sam_Z,sam_X,BeamStopS,BeamStopW,Det_W,Det_S,Shutter_Y,Izero_ds,Izero_Y,sam_viewer
 from ..SSTObjects.motors import Exit_Slit
 from .configurations import all_out, WAXSmode, SAXSmode
 from ..RSoXSObjects.detectors import set_exposure,saxs_det,waxs_det,snapshot,exposure
 from ..RSoXSBase.common_metadata import sample,user
 from ..RSoXSBase.startup import RE
+from ..RSoXSObjects.energy import en,set_polarization
 
 @register_line_magic
 def x(line):

@@ -4,6 +4,7 @@ run_report(__file__)
 
 from ophyd import (SingleTrigger, Component as Cpt, Device, PVPositioner, EpicsSignal, EpicsSignalRO)
 import time
+import bluesky.plan_stubs as bps
 
 class EPS_Shutter(Device):
     state = Cpt(EpicsSignal, 'Pos-Sts')

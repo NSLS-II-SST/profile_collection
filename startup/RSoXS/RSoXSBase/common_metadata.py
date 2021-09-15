@@ -10,6 +10,8 @@ from ophyd import Device
 from ..CommonFunctions.functions import run_report
 run_report(__file__)
 
+import bluesky.plan_stubs as bps
+
 from .configurations import *
 from .startup import RE,db,bec,db0
 from ..RSoXSObjects.slackbot import rsoxs_bot

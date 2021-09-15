@@ -7,6 +7,7 @@ from ophyd import Component as Cpt
 from ophyd.sim import motor1
 from ..CommonFunctions.functions import boxed_text
 
+import bluesky.plan_stubs as bps
 
 class FMBOEpicsMotor(EpicsMotor):
     resolution = Cpt(EpicsSignal, '.MRES')

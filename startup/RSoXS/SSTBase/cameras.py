@@ -22,7 +22,7 @@ from ophyd.utils import set_and_wait
 from pathlib import PurePath
 from bluesky.plan_stubs import stage, unstage, open_run, close_run, trigger_and_read, pause
 from collections import OrderedDict
-
+import bluesky.plan_stubs as bps
 from nslsii.ad33 import SingleTriggerV33, StatsPluginV33, CamV33Mixin
 
 class TIFFPluginWithFileStore(TIFFPlugin, FileStoreTIFFIterativeWrite):
