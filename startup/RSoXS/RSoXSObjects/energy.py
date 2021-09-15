@@ -15,7 +15,7 @@ import IPython
 from scipy import interpolate
 import xarray as xr
 
-from ..CommonFunctions.functions import boxed_text
+from ..CommonFunctions.functions import boxed_text,colored
 from ..SSTBase.motors import prettymotor
 from ..RSoXSObjects.motors import sam_Th
 

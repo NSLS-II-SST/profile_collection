@@ -15,7 +15,7 @@ from bluesky.preprocessors import make_decorator
 import bluesky_darkframes
 
 from ..RSoXSObjects.energy import en
-from ..CommonFunctions.functions import boxed_text
+from ..CommonFunctions.functions import boxed_text,colored
 from ..RSoXSObjects.energy import en, mono_en, epu_gap, grating_to_250, grating_to_1200, set_polarization, \
     Mono_Scan_Speed_ev, Mono_Scan_Start, Mono_Scan_Start_ev, Mono_Scan_Stop, Mono_Scan_Stop_ev
 from ..RSoXSObjects.signals import DiodeRange

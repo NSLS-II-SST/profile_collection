@@ -5,7 +5,7 @@ from ophyd import EpicsMotor, EpicsSignal
 from ophyd.sim import motor1
 from ophyd import Component as Cpt
 from ophyd.sim import motor1
-from ..CommonFunctions.functions import boxed_text
+from ..CommonFunctions.functions import boxed_text,colored
 
 import bluesky.plan_stubs as bps
 
