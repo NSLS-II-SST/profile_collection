@@ -6,7 +6,6 @@ run_report(__file__)
 from RSoXS.SSTObjects.gatevalves import *
 from RSoXS.SSTObjects.shutters import *
 from RSoXS.SSTObjects.vacuum import *
-from RSoXS.RSoXSObjects.energy import *
 from RSoXS.SSTObjects.motors import *
 from RSoXS.SSTObjects.mirrors import *
 from RSoXS.SSTObjects.diode import *
@@ -24,6 +23,7 @@ from RSoXS.RSoXSObjects.signals import *
 from RSoXS.RSoXSObjects.detectors import *
 from RSoXS.RSoXSObjects.slits import *
 from RSoXS.RSoXSObjects.syringepump import *
+from RSoXS.RSoXSObjects.energy import *
 
 # RSoXS specific code
 from RSoXS.RSoXSBase.configurations import *
