@@ -15,6 +15,7 @@ from ..RSoXSObjects.cameras import SampleViewer_cam
 from ..SSTObjects.diode import Shutter_enable,Shutter_control
 from ..RSoXSBase.common_metadata import load_configuration,get_sample_dict,sanatize_angle
 from ..RSoXSObjects.signals import Beamstop_SAXS,Beamstop_WAXS,DiodeRange
+from ..RSoXSObjects.detectors import saxs_det,waxs_det
 
 
 def default_sample(name):
