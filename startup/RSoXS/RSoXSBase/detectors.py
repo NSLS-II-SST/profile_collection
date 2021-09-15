@@ -27,7 +27,7 @@ class TIFFPluginWithFileStore(TIFFPlugin, FileStoreTIFFIterativeWrite):
 class GreatEyesDetCamWithVersions(GreatEyesDetectorCam):
     adcore_version = C(EpicsSignalRO, 'ADCoreVersion_RBV')
     driver_version = C(EpicsSignalRO, 'DriverVersion_RBV')
-    wait_for_plugins = Cpt(EpicsSignal, 'WaitForPlugins',
+    wait_for_plugins = C(EpicsSignal, 'WaitForPlugins',
                            string=True, kind='config')
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
