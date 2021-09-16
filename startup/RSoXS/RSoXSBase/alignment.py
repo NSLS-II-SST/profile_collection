@@ -7,7 +7,7 @@ from matplotlib import pyplot as plt
 import queue
 from PIL import Image
 import datetime
-from ..RSoXSBase.startup import RE, db, bec,db0
+from ..RSoXSBase.startup import RE, db, bec, db0
 from ..RSoXSObjects.slackbot import rsoxs_bot
 from ..RSoXSObjects.motors import sam_X, sam_Y, sam_Th, sam_Z, sam_viewer
 from ..RSoXSObjects.cameras import SampleViewer_cam
@@ -15,13 +15,14 @@ from ..SSTObjects.diode import Shutter_enable, Shutter_control
 from ..RSoXSBase.common_metadata import (
     load_configuration,
     get_sample_dict,
-    sanatize_angle,load_sample,sample_by_name
+    sanatize_angle,
+    load_sample,
+    sample_by_name,
 )
 from ..RSoXSObjects.signals import Beamstop_SAXS, Beamstop_WAXS, DiodeRange
-from ..RSoXSObjects.detectors import saxs_det, waxs_det,set_exposure
+from ..RSoXSObjects.detectors import saxs_det, waxs_det, set_exposure
 from ..SSTObjects.shutters import psh10
 from ..RSoXSObjects.energy import en, set_polarization
-
 
 
 run_report(__file__)

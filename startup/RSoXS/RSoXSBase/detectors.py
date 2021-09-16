@@ -24,7 +24,6 @@ from bluesky.run_engine import Msg
 run_report(__file__)
 
 
-
 class TIFFPluginWithFileStore(TIFFPlugin, FileStoreTIFFIterativeWrite):
     """Add this as a component to detectors that write TIFFs."""
 

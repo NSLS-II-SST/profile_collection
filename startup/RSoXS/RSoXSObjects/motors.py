@@ -1,5 +1,5 @@
 from ..CommonFunctions.functions import run_report
-from ..SSTBase.motors import prettymotor,prettymotorgeneric
+from ..SSTBase.motors import prettymotor, prettymotorgeneric
 from ophyd.sim import motor1
 
 

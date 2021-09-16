@@ -5,6 +5,7 @@ from ..CommonFunctions.functions import boxed_text
 
 run_report(__file__)
 
+
 class Slits(PseudoPositioner):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

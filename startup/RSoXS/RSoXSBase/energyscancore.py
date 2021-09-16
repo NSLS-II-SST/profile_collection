@@ -40,7 +40,12 @@ from ..RSoXSObjects.signals import DiodeRange
 from ..RSoXSBase.common_metadata import sample
 from ..RSoXSBase.alignment import rotate_now
 from ..RSoXSBase.common_procedures import set_exposure
-from ..SSTObjects.diode import Shutter_open_time, Shutter_control, Shutter_enable,Shutter_trigger
+from ..SSTObjects.diode import (
+    Shutter_open_time,
+    Shutter_control,
+    Shutter_enable,
+    Shutter_trigger,
+)
 
 
 run_report(__file__)
@@ -363,8 +368,6 @@ def rd(obj, *, default_value=0):
         raise ValueError(msg) from er
     else:
         return data["value"]
-
-
 
 
 # monkey batch bluesky.plans_stubs to fix bug.

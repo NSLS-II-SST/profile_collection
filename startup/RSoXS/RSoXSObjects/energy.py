@@ -24,6 +24,7 @@ from ..RSoXSObjects.motors import sam_Th
 
 run_report(__file__)
 
+
 class UndulatorMotor(EpicsMotor):
     user_setpoint = Cpt(EpicsSignal, "-SP", limits=True)
     done = Cpt(EpicsSignalRO, ".MOVN")
@@ -429,7 +430,6 @@ class EnPos(PseudoPositioner):
         )
 
 
-
 def set_polarization(pol):
     if pol == -1:
         if epu_mode.get() != 0:
@@ -459,8 +459,10 @@ def set_polarization(pol):
     en.read()
     return 0
 
+
 from ..SSTObjects.shutters import psh4
-from ..SSTObjects.motors import grating,mirror2
+from ..SSTObjects.motors import grating, mirror2
+
 
 def grating_to_250():
     type = mono_en.gratingtype.enum_strs.index(mono_en.gratingtype.get())
