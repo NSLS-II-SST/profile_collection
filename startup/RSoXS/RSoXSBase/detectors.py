@@ -20,6 +20,7 @@ from ..RSoXSObjects.energy import en, mono_en, epu_gap, grating_to_250, grating_
     Mono_Scan_Speed_ev, Mono_Scan_Start, Mono_Scan_Start_ev, Mono_Scan_Stop, Mono_Scan_Stop_ev
 from ..RSoXSObjects.signals import DiodeRange
 from ..SSTObjects.diode import Shutter_open_time, Shutter_control, Shutter_enable, Shutter_delay
+from ..RSoXSBase.startup import RE
 
 class TIFFPluginWithFileStore(TIFFPlugin, FileStoreTIFFIterativeWrite):
     """Add this as a component to detectors that write TIFFs."""
