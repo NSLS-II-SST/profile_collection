@@ -21,7 +21,7 @@ from ..RSoXSObjects.energy import en, mono_en, epu_gap, grating_to_250, grating_
 from ..RSoXSObjects.signals import DiodeRange
 from ..SSTObjects.diode import Shutter_open_time, Shutter_control, Shutter_enable, Shutter_delay
 from ..RSoXSBase.startup import RE
-from bluesky.runengine import Msg
+from bluesky.run_engine import Msg
 
 import bluesky.plans as bp
 
