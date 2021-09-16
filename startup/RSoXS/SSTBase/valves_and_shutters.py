@@ -1,18 +1,15 @@
 from ..CommonFunctions.functions import run_report
 
-run_report(__file__)
-
 
 from ophyd import (
-    SingleTrigger,
     Component as Cpt,
     Device,
-    PVPositioner,
     EpicsSignal,
-    EpicsSignalRO,
 )
 import time
 import bluesky.plan_stubs as bps
+
+run_report(__file__)
 
 
 class EPS_Shutter(Device):
@@ -43,7 +40,7 @@ class EPS_Shutter(Device):
                 print(
                     "tried %d times and failed to open %s %s" % (count, self.name, ":(")
                 )  # u'\u2639'  unicode frown
-                return (yield from null())
+                return (yield from bps.null())
             time.sleep(1.5)
         print("Opened {}".format(self.name))
 
@@ -58,7 +55,7 @@ class EPS_Shutter(Device):
                     "tried %d times and failed to close %s %s"
                     % (count, self.name, ":(")
                 )
-                return (yield from null())
+                return (yield from bps.null())
             time.sleep(1.5)
         print("Closed {}".format(self.name))
 

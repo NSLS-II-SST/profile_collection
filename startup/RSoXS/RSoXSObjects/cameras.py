@@ -1,9 +1,7 @@
 from ..CommonFunctions.functions import run_report
+from ..SSTBase.cameras import StandardProsilica, StandardProsilicaWithTIFFV33
 
 run_report(__file__)
-
-from ..SSTBase.cameras import *
-
 
 Side_cam = StandardProsilica("XF:07ID1-ES:1{Scr:2}", name="RSoXS Sample Area Camera")
 DetS_cam = StandardProsilica("XF:07ID1-ES:1{Scr:3}", name="WAXS Detector Area Camera")
@@ -66,5 +64,6 @@ for camera in all_standard_pros:
     #     #The following line should only be used when running AD V33
     #   camera.cam.ensure_nonblocking()
     camera.stage_sigs[camera.cam.trigger_mode] = "Fixed Rate"
+
 
 SampleViewer_cam.tiff.kind = "normal"

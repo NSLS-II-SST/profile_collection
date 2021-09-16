@@ -1,21 +1,15 @@
-from IPython.core.magic import register_line_magic
 from operator import itemgetter
-import collections, json
+import collections
 import pandas as pd
-from copy import deepcopy
 import numpy as np
-from math import floor
 import datetime
 from ophyd import Device
 from ..CommonFunctions.functions import run_report
-
-run_report(__file__)
-
 import bluesky.plan_stubs as bps
-
-from .configurations import *
-from .startup import RE, db, bec, db0
+from .configurations import all_out
+from .startup import RE, db, db0
 from ..RSoXSObjects.slackbot import rsoxs_bot
+from ..RSoXSBase.alignment import sample_recenter_sample
 from ..RSoXSObjects.motors import (
     sam_X,
     sam_Y,
@@ -29,11 +23,11 @@ from ..RSoXSObjects.motors import (
     BeamStopS,
 )
 from ..RSoXSObjects.slits import slits1, slits2, slits3
-from ..RSoXSObjects.cameras import SampleViewer_cam
-from ..SSTObjects.diode import Shutter_enable, Shutter_control
 from ..SSTObjects.motors import Exit_Slit
-from ..RSoXSObjects.signals import Beamstop_SAXS, Beamstop_WAXS, DiodeRange
 from ..CommonFunctions.functions import boxed_text, colored
+
+
+run_report(__file__)
 
 
 def user():
@@ -321,7 +315,7 @@ def load_configuration(config):
 
 
 def do_acquisitions(acq_list):
-    uid = none
+    uid = None
     for acq in acq_list:
         yield from load_configuration(acq["configuration"])
         uid = yield from eval(acq["plan_name"] + "(" + acq["arguments"] + ")")

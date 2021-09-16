@@ -2,7 +2,7 @@ from RSoXS.CommonFunctions.functions import run_report
 
 run_report(__file__)
 
-# SST devices  These all reference the base classes and instantiate the objects themselves into the current namespace (I hope)
+# SST devices  These all reference the base classes and instantiate the objects themselves into the current namespace
 from RSoXS.SSTObjects.gatevalves import *
 from RSoXS.SSTObjects.shutters import *
 from RSoXS.SSTObjects.vacuum import *

@@ -1,21 +1,16 @@
 from ..CommonFunctions.functions import run_report
-
-run_report(__file__)
-
 import bluesky.plan_stubs as bps
 import datetime
 import logging
-
-bls_email = "egann@bnl.gov"
 global no_notifications_until
-
-from ..RSoXSBase.startup import RE, db, bec
+from ..RSoXSBase.startup import RE
 from ..RSoXSObjects.slackbot import rsoxs_bot
-from ..RSoXSObjects.motors import sam_X, sam_Y, sam_Th, sam_Z, sam_viewer
-from ..RSoXSObjects.cameras import SampleViewer_cam
-from ..SSTObjects.diode import Shutter_enable, Shutter_control
-from ..RSoXSObjects.signals import Beamstop_SAXS, Beamstop_WAXS, DiodeRange
+from ..RSoXSObjects.motors import sam_X
 from ..SSTObjects.motors import gratingx, mirror2x, mirror2, grating
+
+
+run_report(__file__)
+bls_email = "egann@bnl.gov"
 
 
 def pause_notices(until=None, **kwargs):

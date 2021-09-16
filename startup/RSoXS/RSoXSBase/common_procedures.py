@@ -1,17 +1,13 @@
 from ..CommonFunctions.functions import run_report
-
-run_report(__file__)
-
+from matplotlib import pyplot as plt
 import numpy as np
 import bluesky.plans as bp
 import bluesky.plan_stubs as bps
 import pandas as pd
-from suitcase import tiff_series, csv
-import datetime
-import queue
-from PIL import Image
 from bluesky.callbacks.fitting import PeakStats
 from bluesky.preprocessors import subs_wrapper
+from bluesky import preprocessors as bpp
+from bluesky.run_engine import Msg
 from ..RSoXSObjects.signals import Izero_Mesh, Beamstop_WAXS, Beamstop_SAXS
 from ..RSoXSObjects.energy import (
     en,
@@ -31,6 +27,10 @@ from ..RSoXSObjects.motors import sam_Th, sam_Y
 from ..SSTObjects.gatevalves import gv28, gv27a, gvll
 from ..SSTObjects.shutters import psh10
 from ..SSTObjects.vacuum import rsoxs_ll_gpwr
+from ..RSoXSBase.startup import bec
+
+
+run_report(__file__)
 
 
 def buildeputable(
@@ -271,7 +271,7 @@ def do_2021_eputables3():
     mono_en.readback.kind = "hinted"
     mono_en.kind = "hinted"
     mono_en.read_attrs = ["readback"]
-    bec.enable_plots()  # TODO: this will probably not work, need @dallan to make this work
+    bec.enable_plots()  # TODO: this will work, but not needed - need to move all plotting to a seperate app
     yield from load_configuration("WAXSNEXAFS")
     yield from bps.mv(slits1.hsize, 1)
     yield from bps.mv(slits2.hsize, 1)

@@ -1,15 +1,13 @@
 from ..CommonFunctions.functions import run_report
+import bluesky.plan_stubs as bps
+from ..RSoXSObjects.motors import Shutter_Y,Izero_Y,Det_W,Det_S,BeamStopS,BeamStopW,sam_Th,sam_viewer,sam_Z,sam_Y,sam_X
+from ..SSTObjects.mirrors import mir1,mir3
+from ..SSTObjects.motors import Exit_Slit
+from ..SSTObjects.shutters import psh10
+from ..RSoXSObjects.energy import en,mono_en,grating_to_1200
+from ..RSoXSObjects.slits import slits1,slits2,slits3
 
 run_report(__file__)
-
-import bluesky.plans as bp
-import bluesky.plan_stubs as bps
-import time
-from IPython.core.magic import register_line_magic
-from ..RSoXSObjects.motors import *
-from ..SSTObjects.mirrors import *
-from ..SSTObjects.motors import *
-from ..RSoXSObjects.slits import *
 
 
 # TODO lots of metadata manipulation here, and
@@ -88,7 +86,7 @@ def Detectors_edge():
 
 
 def BS_out():
-    yield from bps.mv(BSw, 3, BSs, 3)
+    yield from bps.mv(BeamStopW, 3, BeamStopS, 3)
 
 
 def slits_in_SAXS():

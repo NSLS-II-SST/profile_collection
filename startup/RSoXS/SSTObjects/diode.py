@@ -1,8 +1,8 @@
 from ..CommonFunctions.functions import run_report
+from ophyd import EpicsSignal
 
 run_report(__file__)
 
-from ophyd import EpicsSignal
 
 Shutter_enable = EpicsSignal(
     "XF:07IDB-CT{DIODE-MTO:1}OutMaskBit:2-Sel",

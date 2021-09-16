@@ -1,15 +1,13 @@
 from ..CommonFunctions.functions import run_report
 
-run_report(__file__)
-
 import numpy as np
 import bluesky.plans as bp
 import bluesky.plan_stubs as bps
 from matplotlib import pyplot as plt
 import queue
 from PIL import Image
-
-from ..RSoXSBase.startup import RE, db, bec
+import datetime
+from ..RSoXSBase.startup import RE, db, bec,db0
 from ..RSoXSObjects.slackbot import rsoxs_bot
 from ..RSoXSObjects.motors import sam_X, sam_Y, sam_Th, sam_Z, sam_viewer
 from ..RSoXSObjects.cameras import SampleViewer_cam
@@ -17,10 +15,16 @@ from ..SSTObjects.diode import Shutter_enable, Shutter_control
 from ..RSoXSBase.common_metadata import (
     load_configuration,
     get_sample_dict,
-    sanatize_angle,
+    sanatize_angle,load_sample,sample_by_name
 )
 from ..RSoXSObjects.signals import Beamstop_SAXS, Beamstop_WAXS, DiodeRange
-from ..RSoXSObjects.detectors import saxs_det, waxs_det
+from ..RSoXSObjects.detectors import saxs_det, waxs_det,set_exposure
+from ..SSTObjects.shutters import psh10
+from ..RSoXSObjects.energy import en, set_polarization
+
+
+
+run_report(__file__)
 
 
 def default_sample(name):
@@ -100,7 +104,7 @@ def spiralsearch(
     x_center = sam_X.user_setpoint.get()
     y_center = sam_Y.user_setpoint.get()
     num = round(diameter / stepsize) + 1
-    yield from spiral_square(
+    yield from bp.spiral_square(
         dets,
         sam_X,
         sam_Y,
@@ -126,7 +130,7 @@ def spiraldata(
     x_center = sam_X.user_setpoint.get()
     y_center = sam_Y.user_setpoint.get()
     num = round(diameter / stepsize) + 1
-    yield from spiral_square(
+    yield from bp.spiral_square(
         [saxs_det],
         sam_X,
         sam_Y,
@@ -158,7 +162,7 @@ def spiralsearchwaxs(diameter=0.6, stepsize=0.2, energy=None, master_plan=None):
     x_center = sam_X.user_setpoint.get()
     y_center = sam_Y.user_setpoint.get()
     num = round(diameter / stepsize) + 1
-    yield from spiral_square(
+    yield from bp.spiral_square(
         [waxs_det],
         sam_X,
         sam_Y,
@@ -214,13 +218,13 @@ def map_bar_from_spirals(bar, num_previous_scans=150):
             "Enter good point number from spiral scan or anything non-numeric to skip:"
         )
         good_point = input()
-        if isnumeric(good_point):
+        if good_point.isnumeric():
             sam_x = data[good_point]["RSoXS Sample Outboard-Inboard"]
             sam_y = data[good_point]["RSoXS Sample Up-Down"]
-            for mot in bar[pos]["location"]:
-                if mot["motor"] is "x":
+            for mot in samp["location"]:
+                if mot["motor"] == "x":
                     mot["position"] = sam_x
-                if mot["motor"] is "y":
+                if mot["motor"] == "y":
                     mot["position"] = sam_y
         else:
             print("Non-numeric, not touching this sample")
@@ -374,7 +378,7 @@ def update_bar(bar, loc_Q, front):
             elif item is "escape":
                 print("aborting")
                 break
-            elif item is "enter" or item is "n":
+            elif item == "enter" or item == "n":
                 print(f'leaving this {sample["sample_name"]} unchanged')
                 lastclicked = samplenum
                 samplenum += 1
@@ -486,13 +490,13 @@ def plot_key_press(event):
 def offset_bar(bar, xoff, yoff, zoff, thoff):
     for samp in bar:
         for mot in samp["location"]:
-            if mot["motor"] is "x":
+            if mot["motor"] == "x":
                 mot["position"] += xoff
-            if mot["motor"] is "y":
+            if mot["motor"] == "y":
                 mot["position"] += yoff
-            if mot["motor"] is "z":
+            if mot["motor"] == "z":
                 mot["position"] += zoff
-            if mot["motor"] is "th":
+            if mot["motor"] == "th":
                 mot["position"] += thoff
 
 
@@ -766,11 +770,11 @@ def rotate_sample(samp, force=False):
 
     newx = rotatedx(x0, theta_new, zoff, xoff=xoff)
     for motor in samp["location"]:
-        if motor["motor"] is "x":
+        if motor["motor"] == "x":
             motor["position"] = newx
-        if motor["motor"] is "th":
+        if motor["motor"] == "th":
             motor["position"] = theta_new
-        if motor["motor"] is "y":
+        if motor["motor"] == "y":
             motor["position"] = y0
 
     # in future, updating y (if the rotation axis is not perfectly along y
@@ -785,11 +789,11 @@ def sample_recenter_sample(samp):
     # assume the center of rotation for the sample is already calculated correctly (otherwise correct bar is needed)
     # first record the location
     for loc in samp["location"]:
-        if loc["motor"] is "x":
+        if loc["motor"] == "x":
             newrotatedx = loc["position"]
-        if loc["motor"] is "y":
+        if loc["motor"] == "y":
             newy = loc["position"]
-        if loc["motor"] is "th":
+        if loc["motor"] == "th":
             newangle = loc["position"]
     # get the rotation parameters from the metadata
     xoff = samp["bar_loc"]["xoff"]

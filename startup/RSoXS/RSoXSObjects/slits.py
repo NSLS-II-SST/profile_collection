@@ -1,9 +1,9 @@
 from ..CommonFunctions.functions import run_report
+from ..SSTBase.slits import Slits
+import bluesky.plan_stubs as bps
 
 run_report(__file__)
-from ..SSTBase.slits import *
 
-import bluesky.plan_stubs as bps
 
 slits1 = Slits(
     "XF:07ID2-ES1{Slt1-Ax:", name="Upstream Scatter Slits", kind="hinted", concurrent=1

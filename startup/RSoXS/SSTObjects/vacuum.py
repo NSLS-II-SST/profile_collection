@@ -1,8 +1,8 @@
 from ..CommonFunctions.functions import run_report
+from ophyd import EpicsSignalRO, EpicsSignal
 
 run_report(__file__)
 
-from ophyd import EpicsSignalRO, EpicsSignal
 
 rsoxs_ccg_izero = EpicsSignalRO(
     "XF:07IDB-VA:2{RSoXS:DM-CCG:1}P:Raw-I",

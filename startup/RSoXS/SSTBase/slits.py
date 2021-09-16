@@ -1,12 +1,9 @@
 from ..CommonFunctions.functions import run_report
-
-run_report(__file__)
-
-
 from ophyd import EpicsMotor, PseudoPositioner, PseudoSingle, Component as Cpt
 from ophyd.pseudopos import pseudo_position_argument, real_position_argument
 from ..CommonFunctions.functions import boxed_text
 
+run_report(__file__)
 
 class Slits(PseudoPositioner):
     def __init__(self, *args, **kwargs):

@@ -1,11 +1,10 @@
-from ..CommonFunctions.functions import run_report
+from ..CommonFunctions.functions import run_report,read_input
+import numpy as np
+import bluesky.plan_stubs as bps
+from .energyscancore import en_scan_core
+from ..RSoXSBase.alignment import rotate_now
 
 run_report(__file__)
-
-import numpy as np
-import bluesky.plans as bp
-import bluesky.plan_stubs as bps
-from copy import deepcopy
 
 
 def clean_up_md(arguments={}, md={}, **kwargs):
@@ -326,7 +325,6 @@ def short_fluorine_scan_nd(
     ):
         return
 
-    # mir3.Pitch.put(7.89)
     # create a list of energies
     energies = np.arange(670, 710, 1)
     # energies = np.append(energies,np.arange(525,540,0.5))
@@ -1114,7 +1112,6 @@ def picky_carbon_scan_nd(
         > 0
     ):
         return
-    yield from bps.abs_set(mir3.Pitch, 7.96, wait=True)
     # create a list of energies
     energies = np.arange(270, 285, 1)
     times = energies.copy()

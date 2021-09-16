@@ -6,8 +6,9 @@ run_report(__file__)
 
 from IPython.core.magic import register_line_magic
 
+import bluesky.plan_stubs as bps
 # motors
-from bluesky.plans import bps
+
 from ..RSoXSObjects.motors import (
     sam_Y,
     sam_Th,

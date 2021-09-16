@@ -1,11 +1,13 @@
-from ..CommonFunctions.functions import run_report
-
-run_report(__file__)
-
+from ..CommonFunctions.functions import run_report,read_input
 import numpy as np
-
 from ..RSoXSObjects.energy import en
 from ..RSoXSObjects.signals import Sample_TEY, Izero_Mesh, Beamstop_SAXS, Beamstop_WAXS
+from ..RSoXSBase.common_metadata import sample,load_sample
+from ..RSoXSBase.alignment import rotate_now
+from .energyscancore import NEXAFS_fly_scan_core,NEXAFS_scan_core
+from .energyscans import clean_up_md
+
+run_report(__file__)
 
 
 def full_Carbon_NEXAFS(
@@ -541,26 +543,26 @@ def fly_Boron_NEXAFS(
     )
 
 
-def do_HOPGscans_epu():
+def do_HOPGscans_epu(hopggrazing,hopgnormal):
     pols = [0, 20, 40, 55, 70, 90, -1]
     yield from load_sample(hopggrazing)
     for polarization in pols:
-        yield from full_Carbon_NEXAFS(dets=[Sample_TEY, IzeroMesh], pol=polarization)
+        yield from full_Carbon_NEXAFS(dets=[Sample_TEY, Izero_Mesh], pol=polarization)
     yield from load_sample(hopgnormal)
     for polarization in pols:
-        yield from full_Carbon_NEXAFS(dets=[Sample_TEY, IzeroMesh], pol=polarization)
+        yield from full_Carbon_NEXAFS(dets=[Sample_TEY, Izero_Mesh], pol=polarization)
     yield from load_sample(hopggrazing)
     for polarization in pols:
-        yield from full_Carbon_NEXAFS(dets=[Sample_TEY, IzeroMesh], pol=polarization)
+        yield from full_Carbon_NEXAFS(dets=[Sample_TEY, Izero_Mesh], pol=polarization)
     yield from load_sample(hopgnormal)
     for polarization in pols:
-        yield from full_Carbon_NEXAFS(dets=[Sample_TEY, IzeroMesh], pol=polarization)
+        yield from full_Carbon_NEXAFS(dets=[Sample_TEY, Izero_Mesh], pol=polarization)
     yield from load_sample(hopggrazing)
     for polarization in pols:
-        yield from full_Carbon_NEXAFS(dets=[Sample_TEY, IzeroMesh], pol=polarization)
+        yield from full_Carbon_NEXAFS(dets=[Sample_TEY, Izero_Mesh], pol=polarization)
     yield from load_sample(hopgnormal)
     for polarization in pols:
-        yield from full_Carbon_NEXAFS(dets=[Sample_TEY, IzeroMesh], pol=polarization)
+        yield from full_Carbon_NEXAFS(dets=[Sample_TEY, Izero_Mesh], pol=polarization)
 
 
 def normal_incidence_rotate_pol_nexafs(

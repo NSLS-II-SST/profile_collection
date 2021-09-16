@@ -1,54 +1,28 @@
 from ..CommonFunctions.functions import run_report
-
-run_report(__file__)
-
 import time
 from ophyd import Component as C
 from ophyd import EpicsSignalRO, Device, EpicsSignal
-
-# from ophyd.areadetector.trigger_mixins import SingleTrigger
 from ophyd.areadetector import (
     GreatEyesDetector,
     GreatEyesDetectorCam,
     ImagePlugin,
     TIFFPlugin,
-    StatsPlugin,
-    ProcessPlugin,
     ROIPlugin,
     TransformPlugin,
 )
 from ophyd.areadetector.filestore_mixins import FileStoreTIFFIterativeWrite
 from nslsii.ad33 import SingleTriggerV33, StatsPluginV33
-
-from bluesky.preprocessors import make_decorator
-import bluesky_darkframes
-
-from ..RSoXSObjects.energy import en
 from ..CommonFunctions.functions import boxed_text, colored
-from ..RSoXSObjects.energy import (
-    en,
-    mono_en,
-    epu_gap,
-    grating_to_250,
-    grating_to_1200,
-    set_polarization,
-    Mono_Scan_Speed_ev,
-    Mono_Scan_Start,
-    Mono_Scan_Start_ev,
-    Mono_Scan_Stop,
-    Mono_Scan_Stop_ev,
-)
-from ..RSoXSObjects.signals import DiodeRange
 from ..SSTObjects.diode import (
     Shutter_open_time,
     Shutter_control,
     Shutter_enable,
     Shutter_delay,
 )
-from ..RSoXSBase.startup import RE
 from bluesky.run_engine import Msg
 
-import bluesky.plans as bp
+run_report(__file__)
+
 
 
 class TIFFPluginWithFileStore(TIFFPlugin, FileStoreTIFFIterativeWrite):

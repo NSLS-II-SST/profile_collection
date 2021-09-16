@@ -1,8 +1,8 @@
 from ..CommonFunctions.functions import run_report
+from ..SSTBase.valves_and_shutters import EPS_Shutter
 
 run_report(__file__)
 
-from ..SSTBase.valves_and_shutters import EPS_Shutter
 
 gv14 = EPS_Shutter(
     "XF:07IDA-VA:2{FS:6-GV:1}", name="Pre Mono Gate Valve", kind="hinted"

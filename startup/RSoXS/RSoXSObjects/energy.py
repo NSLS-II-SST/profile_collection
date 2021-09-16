@@ -1,6 +1,5 @@
 from ..CommonFunctions.functions import run_report
 
-run_report(__file__)
 
 from ophyd import (
     PVPositioner,
@@ -16,16 +15,14 @@ import bluesky.plan_stubs as bps
 from ophyd.pseudopos import pseudo_position_argument, real_position_argument
 
 import pathlib
-import xarray as xr
 import numpy as np
-import IPython
-from scipy import interpolate
 import xarray as xr
 
 from ..CommonFunctions.functions import boxed_text, colored
 from ..SSTBase.motors import prettymotor
 from ..RSoXSObjects.motors import sam_Th
 
+run_report(__file__)
 
 class UndulatorMotor(EpicsMotor):
     user_setpoint = Cpt(EpicsSignal, "-SP", limits=True)
@@ -432,124 +429,6 @@ class EnPos(PseudoPositioner):
         )
 
 
-class EnPosold(PseudoPositioner):
-    """Energy pseudopositioner class.
-
-    Parameters:
-    -----------
-
-    """
-
-    # synthetic axis
-    energy = Cpt(
-        PseudoSingle, kind="hinted", limits=(150, 2500), name="Beamline Energy"
-    )
-
-    # real motors
-
-    monoen = Cpt(
-        Monochromator, "XF:07ID1-OP{Mono:PGM1-Ax:", kind="hinted", name="Mono Energy"
-    )
-    epugap = Cpt(
-        UndulatorMotor,
-        "SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr",
-        kind="normal",
-        name="EPU Gap",
-    )
-
-    @pseudo_position_argument
-    def forward(self, pseudo_pos):
-        """Run a forward (pseudo -> real) calculation"""
-        return self.RealPosition(
-            epugap=epugap_from_energy_old(pseudo_pos.energy),
-            monoen=pseudo_pos.energy,
-        )
-
-    @real_position_argument
-    def inverse(self, real_pos):
-        """Run an inverse (real -> pseudo) calculation"""
-        return self.PseudoPosition(energy=real_pos.monoen)
-
-    def where_sp(self):
-        return (
-            "Beamline Energy Setpoint : {}"
-            "\nMonochromator Readback : {}"
-            "\nEPU Gap Setpoint : {}"
-            "\nEPU Gap Readback : {}"
-            "\nGrating Setpoint : {}"
-            "\nGrating Readback : {}"
-            "\nMirror2 Setpoint : {}"
-            "\nMirror2 Readback : {}"
-            "\nCFF : {}"
-            "\nVLS : {}"
-        ).format(
-            colored(
-                "{:.2f}".format(self.monoen.setpoint.get()).rstrip("0").rstrip("."),
-                "yellow",
-            ),
-            colored(
-                "{:.2f}".format(self.monoen.readback.get()).rstrip("0").rstrip("."),
-                "yellow",
-            ),
-            colored(
-                "{:.2f}".format(self.epugap.user_setpoint.get())
-                .rstrip("0")
-                .rstrip("."),
-                "yellow",
-            ),
-            colored(
-                "{:.2f}".format(self.epugap.user_readback.get())
-                .rstrip("0")
-                .rstrip("."),
-                "yellow",
-            ),
-            colored(
-                "{:.2f}".format(self.monoen.grating.user_setpoint.get())
-                .rstrip("0")
-                .rstrip("."),
-                "yellow",
-            ),
-            colored(
-                "{:.2f}".format(self.monoen.grating.user_readback.get())
-                .rstrip("0")
-                .rstrip("."),
-                "yellow",
-            ),
-            colored(
-                "{:.2f}".format(self.monoen.mirror2.user_setpoint.get())
-                .rstrip("0")
-                .rstrip("."),
-                "yellow",
-            ),
-            colored(
-                "{:.2f}".format(self.monoen.mirror2.user_readback.get())
-                .rstrip("0")
-                .rstrip("."),
-                "yellow",
-            ),
-            colored(
-                "{:.2f}".format(self.monoen.cff.get()).rstrip("0").rstrip("."), "yellow"
-            ),
-            colored(
-                "{:.2f}".format(self.monoen.vls.get()).rstrip("0").rstrip("."), "yellow"
-            ),
-        )
-
-    def where(self):
-        return ("Beamline Energy : {}").format(
-            colored(
-                "{:.2f}".format(self.monoen.readback.get()).rstrip("0").rstrip("."),
-                "yellow",
-            )
-        )
-
-    def wh(self):
-        boxed_text(self.name + " location", self.where_sp(), "green", shrink=True)
-
-    def set_mirror_grating_manually(self, eV, m, k, c):
-        [grating, mirror] = get_mirror_grating_angles(eV, c, m, k)
-        yield from bps.mv(self.monoen.mirror2, mirror, self.monoen.grating, grating)
-
 
 def set_polarization(pol):
     if pol == -1:
@@ -580,6 +459,8 @@ def set_polarization(pol):
     en.read()
     return 0
 
+from ..SSTObjects.shutters import psh4
+from ..SSTObjects.motors import grating,mirror2
 
 def grating_to_250():
     type = mono_en.gratingtype.enum_strs.index(mono_en.gratingtype.get())

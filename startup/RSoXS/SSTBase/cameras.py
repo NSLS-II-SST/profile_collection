@@ -1,9 +1,4 @@
 from ..CommonFunctions.functions import run_report
-
-run_report(__file__)
-
-import time as ttime  # tea time
-from types import SimpleNamespace
 from ophyd import (
     ProsilicaDetector,
     SingleTrigger,
@@ -24,11 +19,6 @@ from ophyd import (
     ProsilicaDetectorCam,
     ColorConvPlugin,
 )
-
-from ophyd.status import StatusBase
-from ophyd.device import Staged
-from ophyd.areadetector.cam import AreaDetectorCam
-from ophyd.areadetector.base import ADComponent, EpicsSignalWithRBV
 from ophyd.areadetector.filestore_mixins import (
     FileStoreTIFFIterativeWrite,
     FileStoreHDF5IterativeWrite,
@@ -37,20 +27,9 @@ from ophyd.areadetector.filestore_mixins import (
     FileStoreIterativeWrite,
 )
 from ophyd import Component as Cpt, Signal
-from ophyd.utils import set_and_wait
-from pathlib import PurePath
-from bluesky.plan_stubs import (
-    stage,
-    unstage,
-    open_run,
-    close_run,
-    trigger_and_read,
-    pause,
-)
-from collections import OrderedDict
-import bluesky.plan_stubs as bps
 from nslsii.ad33 import SingleTriggerV33, StatsPluginV33, CamV33Mixin
 
+run_report(__file__)
 
 class TIFFPluginWithFileStore(TIFFPlugin, FileStoreTIFFIterativeWrite):
     """Add this as a component to detectors that write TIFFs."""

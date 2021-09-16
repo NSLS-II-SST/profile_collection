@@ -1,9 +1,8 @@
 from ..CommonFunctions.functions import run_report
-
-run_report(__file__)
-
 from ophyd import EpicsSignal
 from ..SSTBase.mirrors import HexapodMirror, FMBHexapodMirror
+
+run_report(__file__)
 
 mir2_type = EpicsSignal(
     "XF:07ID1-OP{Mono:PGM1-Ax:MirX}Mtr_TYPE_MON", name="SST 1 Mirror 2 Stripe"

@@ -1,8 +1,8 @@
 from ..CommonFunctions.functions import run_report
+from ..SSTBase.motors import prettymotor
 
 run_report(__file__)
 
-from ..SSTBase.motors import *
 
 Exit_Slit = prettymotor(
     "XF:07ID2-BI{Slt:11-Ax:YGap}Mtr",

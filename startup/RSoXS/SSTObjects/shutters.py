@@ -1,8 +1,7 @@
 from ..CommonFunctions.functions import run_report
+from ..SSTBase.valves_and_shutters import EPS_Shutter
 
 run_report(__file__)
-
-from ..SSTBase.valves_and_shutters import EPS_Shutter
 
 psh1 = EPS_Shutter("XF:07ID-PPS{Sh:FE}", name="Front-End Shutter", kind="hinted")
 psh1.shutter_type = "FE"

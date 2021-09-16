@@ -1,7 +1,8 @@
 from ..CommonFunctions.functions import run_report
-
-run_report(__file__)
-
+from cycler import cycler
+from bluesky.utils import Msg, short_uid as _short_uid
+import bluesky.utils as utils
+from bluesky.plan_stubs import trigger_and_read
 import bluesky.plans as bp
 import bluesky.plan_stubs as bps
 from bluesky.plan_stubs import (
@@ -36,7 +37,13 @@ from ..RSoXSObjects.energy import (
 from ..SSTObjects.mirrors import mir3
 from ..RSoXSObjects.detectors import waxs_det
 from ..RSoXSObjects.signals import DiodeRange
-from ..SSTObjects.diode import Shutter_open_time, Shutter_control, Shutter_enable
+from ..RSoXSBase.common_metadata import sample
+from ..RSoXSBase.alignment import rotate_now
+from ..RSoXSBase.common_procedures import set_exposure
+from ..SSTObjects.diode import Shutter_open_time, Shutter_control, Shutter_enable,Shutter_trigger
+
+
+run_report(__file__)
 
 
 SLEEP_FOR_SHUTTER = 1
@@ -358,10 +365,7 @@ def rd(obj, *, default_value=0):
         return data["value"]
 
 
-from cycler import cycler
-from bluesky.utils import Msg, short_uid as _short_uid
-import bluesky.utils as utils
-from bluesky.plan_stubs import trigger_and_read
+
 
 # monkey batch bluesky.plans_stubs to fix bug.
 bps.rd = rd

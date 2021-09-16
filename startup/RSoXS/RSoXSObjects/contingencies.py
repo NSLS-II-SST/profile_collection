@@ -1,8 +1,5 @@
 from ..CommonFunctions.functions import run_report
-
-run_report(__file__)
-
-from ..RSoXSBase.contingencies import *
+from ..RSoXSBase.contingencies import beamdown_notice,beamup_notice,enc_clr_gx,enc_clr_x,OSEmailHandler,MakeSafeHandler
 from ..SSTObjects.gatevalves import gvll
 from ..SSTObjects.shutters import psh4, psh1
 from ..RSoXSObjects.signals import ring_current
@@ -10,6 +7,8 @@ from ..RSoXSObjects.motors import sam_X
 from ..RSoXSBase.startup import RE
 import logging
 from bluesky.suspenders import SuspendBoolHigh, SuspendFloor, SuspendBoolLow
+
+run_report(__file__)
 
 suspend_gvll = SuspendBoolLow(
     gvll.state,

@@ -1,15 +1,11 @@
 from ..CommonFunctions.functions import run_report
-
-run_report(__file__)
-
 from ophyd import EpicsMotor, EpicsSignal
-from ophyd.sim import motor1
 from ophyd import Component as Cpt
-from ophyd.sim import motor1
-from ..CommonFunctions.functions import boxed_text, colored
-
+from ..CommonFunctions.functions import boxed_text, colored,whisper
 import bluesky.plan_stubs as bps
 from ..RSoXSBase.startup import RE
+
+run_report(__file__)
 
 
 class FMBOEpicsMotor(EpicsMotor):
@@ -186,9 +182,9 @@ class prettymotorgeneric(EpicsMotor):
             loc = float(line)
         except:
             if len(line) > 0:
-                if line[0] is "s":
+                if line[0] == "s":
                     self.status()  # followed by an s, display status
-                elif line[0] is "a":
+                elif line[0] == "a":
                     try:
                         loc = float(line[1:])
                     except:

@@ -1,13 +1,9 @@
 from ..CommonFunctions.functions import run_report
-
 run_report(__file__)
-
 import os
 import nslsii
-
 import time
 from pathlib import Path
-
 import appdirs
 
 # Use caproto not pyepics.
@@ -40,10 +36,10 @@ else:
     nslsii.configure_base(
         ns, "rsoxs", configure_logging=True, publish_documents_to_kafka=False
     )
-    RE = uns_dict["RE"]
-    db = uns_dict["db"]
-    sd = uns_dict["sd"]
-    bec = uns_dict["bec"]
+    RE = ns["RE"]
+    db = ns["db"]
+    sd = ns["sd"]
+    bec = ns["bec"]
 
 
 # === START PERSISTENT DICT CODE ===

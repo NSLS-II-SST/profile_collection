@@ -1,7 +1,8 @@
 from ..CommonFunctions.functions import run_report
+from ophyd import EpicsSignalRO, EpicsSignal
+
 
 run_report(__file__)
-from ophyd import EpicsSignalRO, EpicsSignal
 
 # These might need/make more sense to be split up into separate files later on.
 # But while we have so few, I'm just putting them in this single file.
@@ -30,7 +31,7 @@ mir1_pressure = EpicsSignalRO(
 
 # IzeroMesh    = EpicsSignalRO('XF:07ID-ES1{Slt1:I400-1}:IC4_MON',name = 'Izero Mesh I400', kind='normal')
 # Sample_EY = EpicsSignalRO('XF:07ID-ES1{Slt1:I400-1}:IC1_MON',name = 'RSoXS Drain', kind='normal')
-# SlitBottom_I = EpicsSignalRO('XF:07ID-ES1{Slt1:I400-1}:IC2_MON',name = 'RSoXS Slit 1 Bottom Current', kind='normal')
+# SlitBottom_I = EpicsSignalRO('XF:07ID-ES1{Slt1:I400-1}:IC2_MON',name = 'Slit 1 Bottom Current', kind='normal')
 # SlitTop_I    = EpicsSignalRO('XF:07ID-ES1{Slt1:I400-1}:IC3_MON',name = 'Slit Top', kind='normal')
 
 

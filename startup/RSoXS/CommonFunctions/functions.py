@@ -1,5 +1,6 @@
 from IPython.utils.coloransi import TermColors as color
-import sys, ansiwrap
+import sys
+import ansiwrap
 from select import select
 
 

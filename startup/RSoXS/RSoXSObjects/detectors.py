@@ -1,11 +1,16 @@
 from ..CommonFunctions.functions import run_report
+import bluesky.plan_stubs as bps
+import bluesky.plans as bp
+from ..RSoXSBase.detectors import RSOXSGreatEyesDetector,SimGreatEyes
+from ..RSoXSObjects.motors import Det_S, Det_W, sam_Th, sam_X, sam_Y, sam_Z
+from ..CommonFunctions.functions import boxed_text
+from ..RSoXSObjects.energy import en
+from ..RSoXSBase.startup import RE
+from bluesky.preprocessors import make_decorator
+import bluesky_darkframes
 
 run_report(__file__)
 
-import bluesky.plan_stubs as bps
-import bluesky.plans as bp
-from ..RSoXSBase.detectors import *
-from ..RSoXSObjects.motors import Det_S, Det_W, sam_Th, sam_X, sam_Y, sam_Z
 
 
 # saxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:1}', name='Small Angle CCD Detector',
