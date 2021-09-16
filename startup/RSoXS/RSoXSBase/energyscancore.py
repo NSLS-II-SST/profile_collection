@@ -1,17 +1,38 @@
 from ..CommonFunctions.functions import run_report
+
 run_report(__file__)
 
 import bluesky.plans as bp
 import bluesky.plan_stubs as bps
-from bluesky.plan_stubs import checkpoint, abs_set, sleep, trigger, read, wait, create, save
+from bluesky.plan_stubs import (
+    checkpoint,
+    abs_set,
+    sleep,
+    trigger,
+    read,
+    wait,
+    create,
+    save,
+)
 from bluesky.preprocessors import rewindable_wrapper
 from bluesky.utils import short_uid, separate_devices, all_safe_rewind
 from collections import defaultdict
 from bluesky import preprocessors as bpp
 import numpy as np
 from copy import deepcopy
-from ..RSoXSObjects.energy import en, mono_en, epu_gap, grating_to_250, grating_to_1200, set_polarization, \
-    Mono_Scan_Speed_ev, Mono_Scan_Start, Mono_Scan_Start_ev, Mono_Scan_Stop, Mono_Scan_Stop_ev
+from ..RSoXSObjects.energy import (
+    en,
+    mono_en,
+    epu_gap,
+    grating_to_250,
+    grating_to_1200,
+    set_polarization,
+    Mono_Scan_Speed_ev,
+    Mono_Scan_Start,
+    Mono_Scan_Start_ev,
+    Mono_Scan_Stop,
+    Mono_Scan_Stop_ev,
+)
 from ..SSTObjects.mirrors import mir3
 from ..RSoXSObjects.detectors import waxs_det
 from ..RSoXSObjects.signals import DiodeRange
@@ -39,7 +60,7 @@ def one_trigger_nd_step(detectors, step, pos_cache):
 
     def move():
         yield from checkpoint()
-        grp = short_uid('set')
+        grp = short_uid("set")
         for motor, pos in step.items():
             if pos == pos_cache[motor]:
                 # This step does not move this motor.
@@ -53,7 +74,7 @@ def one_trigger_nd_step(detectors, step, pos_cache):
     detectors = separate_devices(detectors)  # remove redundant entries
     rewindable = all_safe_rewind(detectors)  # if devices can be re-triggered
     detector_with_shutter, *other_detectors = detectors
-    grp = short_uid('trigger')
+    grp = short_uid("trigger")
 
     def inner_trigger_and_read():
         """
@@ -62,16 +83,16 @@ def one_trigger_nd_step(detectors, step, pos_cache):
         """
         no_wait = True
         for obj in other_detectors:
-            if hasattr(obj, 'trigger'):
+            if hasattr(obj, "trigger"):
                 no_wait = False
                 yield from trigger(obj, group=grp)
         # Skip 'wait' if none of the devices implemented a trigger method.
         if not no_wait:
             yield from wait(group=grp)
-        yield from create('primary')
+        yield from create("primary")
         ret = {}  # collect and return readings to give plan access to them
         for obj in detectors:
-            reading = (yield from read(obj))
+            reading = yield from read(obj)
             if reading is not None:
                 ret.update(reading)
         yield from save()
@@ -79,50 +100,51 @@ def one_trigger_nd_step(detectors, step, pos_cache):
 
     yield from trigger(detector_with_shutter, group=grp)
     yield from sleep(SLEEP_FOR_SHUTTER)
-    return (yield from rewindable_wrapper(inner_trigger_and_read(),
-                                          rewindable))
+    return (yield from rewindable_wrapper(inner_trigger_and_read(), rewindable))
 
 
 # @dark_frames_enable
-def en_scan_core(signals=[],
-                 dets=[waxs_det],
-                 energy=en,
-                 energies=[],
-                 times=[],
-                 enscan_type=None,
-                 m3_pitch=7.94,
-                 diode_range=6,
-                 pol=0,
-                 grating='no change',
-                 master_plan=None,
-                 angle=None,
-                 md={}):
+def en_scan_core(
+    signals=[],
+    dets=[waxs_det],
+    energy=en,
+    energies=[],
+    times=[],
+    enscan_type=None,
+    m3_pitch=7.94,
+    diode_range=6,
+    pol=0,
+    grating="no change",
+    master_plan=None,
+    angle=None,
+    md={},
+):
     # grab locals
     arguments = dict(locals())
-    del arguments['md']  # no recursion here!
-    arguments['dets'] = [det.name for det in arguments['dets']]
-    arguments['signals'] = [signal.name for signal in arguments['signals']]
-    arguments['energy'] = arguments['energy'].name
+    del arguments["md"]  # no recursion here!
+    arguments["dets"] = [det.name for det in arguments["dets"]]
+    arguments["signals"] = [signal.name for signal in arguments["signals"]]
+    arguments["energy"] = arguments["energy"].name
     if md is None:
         md = {}
     if angle is not None:
         rotate_now(angle)
-    md.setdefault('plan_history', [])
-    md['plan_history'].append({'plan_name': 'en_scan_core','arguments': arguments})
-    md.update({'plan_name': enscan_type, 'master_plan': master_plan})
+    md.setdefault("plan_history", [])
+    md["plan_history"].append({"plan_name": "en_scan_core", "arguments": arguments})
+    md.update({"plan_name": enscan_type, "master_plan": master_plan})
     # print the current sample information
     sample()  # print the sample information
     # set the exposure times to be hinted for the detector which will be used
     for det in dets:
-        det.cam.acquire_time.kind = 'hinted'
+        det.cam.acquire_time.kind = "hinted"
     # set the M3 pitch
     yield from bps.abs_set(mir3.Pitch, m3_pitch, wait=True)
     # set the photodiode gain setting
     yield from bps.mv(DiodeRange, diode_range)
     # set the grating
-    if grating == '1200':
+    if grating == "1200":
         yield from grating_to_1200()
-    elif grating == '250':
+    elif grating == "250":
         yield from grating_to_250()
     # set the polarization
     yield from set_polarization(pol)
@@ -136,9 +158,23 @@ def en_scan_core(signals=[],
     yield from scan_eliot(dets + signals, sigcycler, Shutter_open_time, md=md)
 
 
-def NEXAFS_scan_core(signals, dets, energy, energies, enscan_type=None, master_plan=None,
-                     openshutter=False, open_each_step=False, m3_pitch=7.94, diode_range=6, pol=0,
-                     exp_time=1, grating='no change', motorname='None', offset=0):
+def NEXAFS_scan_core(
+    signals,
+    dets,
+    energy,
+    energies,
+    enscan_type=None,
+    master_plan=None,
+    openshutter=False,
+    open_each_step=False,
+    m3_pitch=7.94,
+    diode_range=6,
+    pol=0,
+    exp_time=1,
+    grating="no change",
+    motorname="None",
+    offset=0,
+):
     # set mirror 3 pitch
     yield from bps.abs_set(mir3.Pitch, m3_pitch, wait=True)
     # set the diode range
@@ -146,12 +182,12 @@ def NEXAFS_scan_core(signals, dets, energy, energies, enscan_type=None, master_p
     # set exposure
     set_exposure(exp_time)
     # set grating
-    if grating == '1200':
+    if grating == "1200":
         yield from grating_to_1200()
-    elif grating == '250':
+    elif grating == "250":
         yield from grating_to_250()
     # set motor offset if it's set
-    if motorname is not 'None':
+    if motorname is not "None":
         yield from bps.rel_set(eval(motorname), offset, wait=True)
     # set polarization
     yield from set_polarization(pol)
@@ -163,44 +199,61 @@ def NEXAFS_scan_core(signals, dets, energy, energies, enscan_type=None, master_p
     yield from bps.mv(en, energies[0])  # move to the initial energy
 
     for signal in signals:
-        signal.kind = 'normal'
+        signal.kind = "normal"
     if openshutter and not open_each_step:
         yield from bps.mv(Shutter_enable, 0)
         yield from bps.mv(Shutter_control, 1)
-        yield from bp.scan_nd(dets + signals + [en.energy],
-                              sigcycler,
-                              md={'plan_name': enscan_type, 'master_plan': master_plan})
+        yield from bp.scan_nd(
+            dets + signals + [en.energy],
+            sigcycler,
+            md={"plan_name": enscan_type, "master_plan": master_plan},
+        )
         yield from bps.mv(Shutter_control, 0)
     elif open_each_step:
         yield from bps.mv(Shutter_enable, 1)
-        yield from bp.scan_nd(dets + signals + [en.energy],
-                              sigcycler,
-                              md={'plan_name': enscan_type, 'master_plan': master_plan},
-                              per_step=one_shuttered_step)
+        yield from bp.scan_nd(
+            dets + signals + [en.energy],
+            sigcycler,
+            md={"plan_name": enscan_type, "master_plan": master_plan},
+            per_step=one_shuttered_step,
+        )
     else:
-        yield from bp.scan_nd(dets + signals + [en.energy],
-                              sigcycler,
-                              md={'plan_name': enscan_type, 'master_plan': master_plan})
+        yield from bp.scan_nd(
+            dets + signals + [en.energy],
+            sigcycler,
+            md={"plan_name": enscan_type, "master_plan": master_plan},
+        )
 
 
-def NEXAFS_fly_scan_core(scan_params, openshutter=False, m3_pitch=np.nan, diode_range=np.nan, pol=np.nan,
-                         grating='best', exp_time=.5, enscan_type=None, master_plan=None,
-                         md={}):
+def NEXAFS_fly_scan_core(
+    scan_params,
+    openshutter=False,
+    m3_pitch=np.nan,
+    diode_range=np.nan,
+    pol=np.nan,
+    grating="best",
+    exp_time=0.5,
+    enscan_type=None,
+    master_plan=None,
+    md={},
+):
     # grab locals
     arguments = dict(locals())
-    del arguments['md']  # no recursion here!
+    del arguments["md"]  # no recursion here!
     if md is None:
         md = {}
-    md.setdefault('plan_history', [])
-    md['plan_history'].append({'plan_name': 'NEXAFS_fly_scan_core','arguments': arguments})
-    md.update({'plan_name': enscan_type, 'master_plan': master_plan})
+    md.setdefault("plan_history", [])
+    md["plan_history"].append(
+        {"plan_name": "NEXAFS_fly_scan_core", "arguments": arguments}
+    )
+    md.update({"plan_name": enscan_type, "master_plan": master_plan})
     if not np.isnan(m3_pitch):
         yield from bps.abs_set(mir3.Pitch, m3_pitch, wait=True)
     if not np.isnan(diode_range):
         yield from bps.mv(DiodeRange, diode_range)
-    if grating == '1200':
+    if grating == "1200":
         yield from grating_to_1200()
-    elif grating == '250':
+    elif grating == "250":
         yield from grating_to_250()
 
     if np.isnan(pol):
@@ -211,22 +264,19 @@ def NEXAFS_fly_scan_core(scan_params, openshutter=False, m3_pitch=np.nan, diode_
     samplepol = en.sample_polarization.setpoint.get()
     (en_start, en_stop, en_speed) = scan_params[0]
     yield from bps.mv(en, en_start)  # move to the initial energy
-    print(f'Effective sample polarization is {samplepol}')
+    print(f"Effective sample polarization is {samplepol}")
     if openshutter:
         yield from bps.mv(Shutter_enable, 0)
         yield from bps.mv(Shutter_control, 1)
-        yield from fly_scan_eliot(scan_params,
-                                  md=md,
-                                  grating=grating, polarization=pol)
+        yield from fly_scan_eliot(scan_params, md=md, grating=grating, polarization=pol)
         yield from bps.mv(Shutter_control, 0)
 
     else:
-        yield from fly_scan_eliot(scan_params,
-                                  md=md,
-                                  grating=grating, polarization=pol)
+        yield from fly_scan_eliot(scan_params, md=md, grating=grating, polarization=pol)
 
 
 ## HACK HACK
+
 
 def rd(obj, *, default_value=0):
     """Reads a single-value non-triggered object
@@ -257,7 +307,7 @@ def rd(obj, *, default_value=0):
     val : Any or None
         The "single" value of the device
     """
-    hints = getattr(obj, 'hints', {}).get("fields", [])
+    hints = getattr(obj, "hints", {}).get("fields", [])
     if len(hints) > 1:
         msg = (
             f"Your object {obj} ({obj.name}.{getattr(obj, 'dotted_name', '')}) "
@@ -309,7 +359,7 @@ def rd(obj, *, default_value=0):
 
 
 from cycler import cycler
-from bluesky.utils import (Msg, short_uid as _short_uid)
+from bluesky.utils import Msg, short_uid as _short_uid
 import bluesky.utils as utils
 from bluesky.plan_stubs import trigger_and_read
 
@@ -333,13 +383,13 @@ def one_shuttered_step(detectors, step, pos_cache):
         mapping motors to their last-set positions
     """
 
-    yield Msg('checkpoint')
-    grp = _short_uid('set')  # stolen from move per_step to break out the wait
+    yield Msg("checkpoint")
+    grp = _short_uid("set")  # stolen from move per_step to break out the wait
     for motor, pos in step.items():
         if pos == pos_cache[motor]:
             # This step does not move this motor.
             continue
-        yield Msg('set', motor, pos, group=grp)
+        yield Msg("set", motor, pos, group=grp)
         pos_cache[motor] = pos
 
     motors = step.keys()  # start the acquisition now
@@ -347,7 +397,9 @@ def one_shuttered_step(detectors, step, pos_cache):
     yield from trigger_and_read(list(detectors) + list(motors))
     t = yield from bps.rd(Shutter_open_time)
     yield from bps.sleep((t / 1000) + 0.5)
-    yield Msg('wait', None, group=grp)  # now wait for motors, before moving on to next step
+    yield Msg(
+        "wait", None, group=grp
+    )  # now wait for motors, before moving on to next step
 
 
 def scan_eliot(detectors, cycler, exp_time, *, md={}):
@@ -375,24 +427,23 @@ def scan_eliot(detectors, cycler, exp_time, *, md={}):
         metadata
 
     """
-    _md = {'detectors': [det.name for det in detectors],
-           'motors': [motor.name for motor in cycler.keys],
-           'num_points': len(cycler),
-           'num_intervals': len(cycler) - 1,
-           'plan_args': {'detectors': list(map(repr, detectors)),
-                         'cycler': repr(cycler)},
-           'plan_name': 'scan_eliot',
-           'hints': {},
-           }
+    _md = {
+        "detectors": [det.name for det in detectors],
+        "motors": [motor.name for motor in cycler.keys],
+        "num_points": len(cycler),
+        "num_intervals": len(cycler) - 1,
+        "plan_args": {"detectors": list(map(repr, detectors)), "cycler": repr(cycler)},
+        "plan_name": "scan_eliot",
+        "hints": {},
+    }
     _md.update(md or {})
     try:
-        dimensions = [(motor.hints['fields'], 'primary')
-                      for motor in cycler.keys]
+        dimensions = [(motor.hints["fields"], "primary") for motor in cycler.keys]
     except (AttributeError, KeyError):
         # Not all motors provide a 'fields' hint, so we have to skip it.
         pass
     else:
-        _md['hints'].setdefault('dimensions', dimensions)
+        _md["hints"].setdefault("dimensions", dimensions)
 
     pos_cache = defaultdict(lambda: None)  # where last position is stashed
     cycler = utils.merge_cycler(cycler)
@@ -405,39 +456,45 @@ def scan_eliot(detectors, cycler, exp_time, *, md={}):
         devices = separate_devices(list(detectors) + motors)  # remove redundant entries
 
         # go to first motor position
-        yield Msg('checkpoint')
-        motorgrp = _short_uid('set')  # stolen from move per_step to break out the wait
+        yield Msg("checkpoint")
+        motorgrp = _short_uid("set")  # stolen from move per_step to break out the wait
         for motor, pos in list(cycler)[0].items():
             if pos == pos_cache[motor]:
                 # This step does not move this motor.
                 continue
-            yield Msg('set', motor, pos, group=motorgrp)
+            yield Msg("set", motor, pos, group=motorgrp)
             pos_cache[motor] = pos
         # wait for motors this time
-        yield Msg('wait', None, group=motorgrp)  # now wait for motors, before moving on to next step
+        yield Msg(
+            "wait", None, group=motorgrp
+        )  # now wait for motors, before moving on to next step
 
         # trigger detectors
-        detgrp = _short_uid('trigger')
+        detgrp = _short_uid("trigger")
         no_wait = True
         for obj in devices:
-            if hasattr(obj, 'trigger'):
+            if hasattr(obj, "trigger"):
                 no_wait = False
                 yield from trigger(obj, group=detgrp)
 
         # step through the list
         for step in list(cycler):  # this is repeating the first step
             # wait for motor movement to end
-            yield Msg('wait', None, group=motorgrp)  # now wait for motors, before moving on to next step
+            yield Msg(
+                "wait", None, group=motorgrp
+            )  # now wait for motors, before moving on to next step
             # do we need to wait at all? - I guess the previous set might be active?
 
             # move to next position - detectors might still be triggering at this point
-            yield Msg('checkpoint')
-            motorgrp = _short_uid('set')  # stolen from move per_step to break out the wait
+            yield Msg("checkpoint")
+            motorgrp = _short_uid(
+                "set"
+            )  # stolen from move per_step to break out the wait
             for motor, pos in step.items():
                 if pos == pos_cache[motor]:
                     # This step does not move this motor.
                     continue
-                yield Msg('set', motor, pos, group=motorgrp)
+                yield Msg("set", motor, pos, group=motorgrp)
                 pos_cache[motor] = pos
 
             # wait for detector trigger from last step to finish
@@ -445,17 +502,19 @@ def scan_eliot(detectors, cycler, exp_time, *, md={}):
                 yield from wait(group=detgrp)
 
             # read detectors
-            yield from create('primary')
+            yield from create("primary")
             for obj in devices:
                 yield from read(obj)
             yield from save()
 
             # trigger next detector step
-            detgrp = _short_uid('trigger')
+            detgrp = _short_uid("trigger")
             no_wait = True
-            for obj in list(detectors):  # changing this from devices, I don't want to trigger motors while they
+            for obj in list(
+                detectors
+            ):  # changing this from devices, I don't want to trigger motors while they
                 # may still be in a set() - I will just read them without a trigger
-                if hasattr(obj, 'trigger'):
+                if hasattr(obj, "trigger"):
                     no_wait = False
                     yield from trigger(obj, group=detgrp)
 
@@ -475,18 +534,18 @@ def scan_eliot(detectors, cycler, exp_time, *, md={}):
             yield from wait(group=detgrp)
 
         # read detectors the final time
-        yield from create('primary')
+        yield from create("primary")
         for obj in devices:
             yield from read(obj)
         yield from save()
 
         # wait for the final motor movement
-        yield Msg('wait', None, group=motorgrp)
+        yield Msg("wait", None, group=motorgrp)
 
     return (yield from inner_scan_eliot())
 
 
-def fly_scan_eliot(scan_params, polarization=np.nan, grating='best', *, md={}):
+def fly_scan_eliot(scan_params, polarization=np.nan, grating="best", *, md={}):
     """
     Specific scan for SST-1 monochromator fly scan, while catching up with the undulator
 
@@ -514,11 +573,12 @@ def fly_scan_eliot(scan_params, polarization=np.nan, grating='best', *, md={}):
         metadata
 
     """
-    _md = {'detectors': [mono_en.name],
-           'motors': [mono_en.name],
-           'plan_name': 'fly_scan_eliot',
-           'hints': {},
-           }
+    _md = {
+        "detectors": [mono_en.name],
+        "motors": [mono_en.name],
+        "plan_name": "fly_scan_eliot",
+        "hints": {},
+    }
     _md.update(md or {})
     devices = [mono_en]
 
@@ -527,7 +587,7 @@ def fly_scan_eliot(scan_params, polarization=np.nan, grating='best', *, md={}):
     @bpp.run_decorator(md=_md)
     def inner_scan_eliot():
         # start the scan parameters to the monoscan PVs
-        yield Msg('checkpoint')
+        yield Msg("checkpoint")
         if np.isnan(polarization):
             pol = en.polarization.setpoint.get()
         else:
@@ -535,34 +595,49 @@ def fly_scan_eliot(scan_params, polarization=np.nan, grating='best', *, md={}):
             pol = polarization
         step = 0
         for (start_en, end_en, speed_en) in scan_params:
-            print(f'starting fly from {start_en} to {end_en} at {speed_en} eV/second')
-            yield Msg('checkpoint')
-            print('Preparing mono for fly')
-            yield from bps.mv(Mono_Scan_Start_ev, start_en,
-                              Mono_Scan_Stop_ev, end_en,
-                              Mono_Scan_Speed_ev, speed_en)
+            print(f"starting fly from {start_en} to {end_en} at {speed_en} eV/second")
+            yield Msg("checkpoint")
+            print("Preparing mono for fly")
+            yield from bps.mv(
+                Mono_Scan_Start_ev,
+                start_en,
+                Mono_Scan_Stop_ev,
+                end_en,
+                Mono_Scan_Speed_ev,
+                speed_en,
+            )
             # move to the initial position
             if step > 0:
-                yield from wait(group='EPU')
-            yield from bps.abs_set(mono_en, start_en, group='EPU')
-            print('moving to starting position')
-            yield from wait(group='EPU')
-            print('Mono in start position')
+                yield from wait(group="EPU")
+            yield from bps.abs_set(mono_en, start_en, group="EPU")
+            print("moving to starting position")
+            yield from wait(group="EPU")
+            print("Mono in start position")
             yield from bps.mv(epu_gap, en.gap(start_en, pol))
-            print('EPU in start position')
+            print("EPU in start position")
             if step == 0:
                 monopos = mono_en.readback.get()
-                yield from bps.abs_set(epu_gap, en.gap(monopos, pol, grating=grating), wait=False, group='EPU')
-                yield from wait(group='EPU')
+                yield from bps.abs_set(
+                    epu_gap,
+                    en.gap(monopos, pol, grating=grating),
+                    wait=False,
+                    group="EPU",
+                )
+                yield from wait(group="EPU")
             # start the mono scan
-            print('starting the fly')
+            print("starting the fly")
             yield from bps.mv(Mono_Scan_Start, 1)
             monopos = mono_en.readback.get()
             while np.abs(monopos < end_en) > 0.1:
-                yield from wait(group='EPU')
+                yield from wait(group="EPU")
                 monopos = mono_en.readback.get()
-                yield from bps.abs_set(epu_gap, en.gap(monopos, pol, grating=grating), wait=False, group='EPU')
-                yield from create('primary')
+                yield from bps.abs_set(
+                    epu_gap,
+                    en.gap(monopos, pol, grating=grating),
+                    wait=False,
+                    group="EPU",
+                )
+                yield from create("primary")
                 for obj in devices:
                     yield from read(obj)
                 yield from save()

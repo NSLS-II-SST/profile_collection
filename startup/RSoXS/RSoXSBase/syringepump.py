@@ -1,47 +1,104 @@
 from ..CommonFunctions.functions import run_report
+
 run_report(__file__)
 
-from ophyd import (EpicsMotor, PVPositioner, Device, EpicsSignal,
-                   EpicsSignalRO, PVPositionerPC)
-from ophyd import (Component as Cpt, FormattedComponent,
-                   DynamicDeviceComponent as DDC)
+from ophyd import (
+    EpicsMotor,
+    PVPositioner,
+    Device,
+    EpicsSignal,
+    EpicsSignalRO,
+    PVPositionerPC,
+)
+from ophyd import Component as Cpt, FormattedComponent, DynamicDeviceComponent as DDC
+
 
 class Syringe_Pump(Device):
     "Syringe pump controller"
 
-    vol_sp = DDC({'p%d' % i: (EpicsSignal, '{Pmp:%s}Val:Vol-SP' % i, {}) for i in range(1, 3)})
-    vol_rb = DDC({'p%d' % i: (EpicsSignalRO, '{Pmp:%s}Val:Vol-RB' % i, {}) for i in range(1, 3)})
+    vol_sp = DDC(
+        {"p%d" % i: (EpicsSignal, "{Pmp:%s}Val:Vol-SP" % i, {}) for i in range(1, 3)}
+    )
+    vol_rb = DDC(
+        {"p%d" % i: (EpicsSignalRO, "{Pmp:%s}Val:Vol-RB" % i, {}) for i in range(1, 3)}
+    )
 
-    rate_sp = DDC({'p%d' % i: (EpicsSignal, '{Pmp:%s}Val:Rate-SP' % i, {}) for i in range(1, 3)})
-    rate_rb = DDC({'p%d' % i: (EpicsSignalRO, '{Pmp:%s}Val:Rate-RB' % i, {}) for i in range(1, 3)})
+    rate_sp = DDC(
+        {"p%d" % i: (EpicsSignal, "{Pmp:%s}Val:Rate-SP" % i, {}) for i in range(1, 3)}
+    )
+    rate_rb = DDC(
+        {"p%d" % i: (EpicsSignalRO, "{Pmp:%s}Val:Rate-RB" % i, {}) for i in range(1, 3)}
+    )
 
-    dia_sp = DDC({'p%d' % i: (EpicsSignal, '{Pmp:%s}Val:Dia-SP' % i, {}) for i in range(1, 3)})
-    dia_rb = DDC({'p%d' % i: (EpicsSignalRO, '{Pmp:%s}Val:Dia-RB' % i, {}) for i in range(1, 3)})
+    dia_sp = DDC(
+        {"p%d" % i: (EpicsSignal, "{Pmp:%s}Val:Dia-SP" % i, {}) for i in range(1, 3)}
+    )
+    dia_rb = DDC(
+        {"p%d" % i: (EpicsSignalRO, "{Pmp:%s}Val:Dia-RB" % i, {}) for i in range(1, 3)}
+    )
 
-    dir_sp = DDC({'p%d' % i: (EpicsSignal, '{Pmp:%s}Val:Dir-Sel' % i, {}) for i in range(1, 3)})
-    dir_rb = DDC({'p%d' % i: (EpicsSignal, '{Pmp:%s}Val:Dir-Sts' % i, {}) for i in range(1, 3)})
+    dir_sp = DDC(
+        {"p%d" % i: (EpicsSignal, "{Pmp:%s}Val:Dir-Sel" % i, {}) for i in range(1, 3)}
+    )
+    dir_rb = DDC(
+        {"p%d" % i: (EpicsSignal, "{Pmp:%s}Val:Dir-Sts" % i, {}) for i in range(1, 3)}
+    )
 
-    vol_unit_sp = DDC({'p%d' % i: (EpicsSignal, '{Pmp:%s}Unit:Vol-Sel' % i, {}) for i in range(1, 3)})
-    rate_unit_sp = DDC({'p%d' % i: (EpicsSignal, '{Pmp:%s}Unit:Rate-Sel' % i, {}) for i in range(1, 3)})
-    vol_unit_rb = DDC({'p%d' % i: (EpicsSignalRO, '{Pmp:%s}Unit:Vol-Sel' % i, {}) for i in range(1, 3)})
-    rate_unit_rb = DDC({'p%d' % i: (EpicsSignalRO, '{Pmp:%s}Unit:Rate-Sel' % i, {}) for i in range(1, 3)})
+    vol_unit_sp = DDC(
+        {"p%d" % i: (EpicsSignal, "{Pmp:%s}Unit:Vol-Sel" % i, {}) for i in range(1, 3)}
+    )
+    rate_unit_sp = DDC(
+        {"p%d" % i: (EpicsSignal, "{Pmp:%s}Unit:Rate-Sel" % i, {}) for i in range(1, 3)}
+    )
+    vol_unit_rb = DDC(
+        {
+            "p%d" % i: (EpicsSignalRO, "{Pmp:%s}Unit:Vol-Sel" % i, {})
+            for i in range(1, 3)
+        }
+    )
+    rate_unit_rb = DDC(
+        {
+            "p%d" % i: (EpicsSignalRO, "{Pmp:%s}Unit:Rate-Sel" % i, {})
+            for i in range(1, 3)
+        }
+    )
 
-    Run = DDC({'p%s' % i: (EpicsSignal, '{Pmp:%s}Cmd:Run-Cmd' % i, {}) for i in [1, 2, 'All']})
-    Stop = DDC({'p%s' % i: (EpicsSignal, '{Pmp:%s}Cmd:Stop-Cmd' % i, {}) for i in [1, 2, 'All']})
-    Purge = DDC({'p%s' % i: (EpicsSignal, '{Pmp:%s}Cmd:Purge-Cmd' % i, {}) for i in [1, 2, 'All']})
+    Run = DDC(
+        {"p%s" % i: (EpicsSignal, "{Pmp:%s}Cmd:Run-Cmd" % i, {}) for i in [1, 2, "All"]}
+    )
+    Stop = DDC(
+        {
+            "p%s" % i: (EpicsSignal, "{Pmp:%s}Cmd:Stop-Cmd" % i, {})
+            for i in [1, 2, "All"]
+        }
+    )
+    Purge = DDC(
+        {
+            "p%s" % i: (EpicsSignal, "{Pmp:%s}Cmd:Purge-Cmd" % i, {})
+            for i in [1, 2, "All"]
+        }
+    )
 
-    disI_vol_rb = DDC({'p%d' % i: (EpicsSignal, '{Pmp:%s}Val:InfDisp-I' % i, {}) for i in [1, 2]})
-    disI_unit_rb = DDC({'p%d' % i: (EpicsSignal, '{Pmp:%s}Val:InfDisp-I.EGU' % i, {}) for i in [1, 2]})
+    disI_vol_rb = DDC(
+        {"p%d" % i: (EpicsSignal, "{Pmp:%s}Val:InfDisp-I" % i, {}) for i in [1, 2]}
+    )
+    disI_unit_rb = DDC(
+        {"p%d" % i: (EpicsSignal, "{Pmp:%s}Val:InfDisp-I.EGU" % i, {}) for i in [1, 2]}
+    )
 
-    disW_vol_rb = DDC({'p%d' % i: (EpicsSignal, '{Pmp:%s}Val:WdlDisp-I' % i, {}) for i in [1, 2]})
-    disW_unit_rb = DDC({'p%d' % i: (EpicsSignal, '{Pmp:%s}Val:WdlDisp-I.EGU' % i, {}) for i in [1, 2]})
+    disW_vol_rb = DDC(
+        {"p%d" % i: (EpicsSignal, "{Pmp:%s}Val:WdlDisp-I" % i, {}) for i in [1, 2]}
+    )
+    disW_unit_rb = DDC(
+        {"p%d" % i: (EpicsSignal, "{Pmp:%s}Val:WdlDisp-I.EGU" % i, {}) for i in [1, 2]}
+    )
 
-    Clr = DDC({'p%d' % i: (EpicsSignal, '{Pmp:%s}Cmd:Clr-Cmd' % i, {}) for i in [1, 2]})
+    Clr = DDC({"p%d" % i: (EpicsSignal, "{Pmp:%s}Cmd:Clr-Cmd" % i, {}) for i in [1, 2]})
 
-    p = 'All'
-    run_all = Cpt(EpicsSignal, '{Pmp:%s}Cmd:Run-Cmd' % p)
-    purge_all = Cpt(EpicsSignal, '{Pmp:%s}Cmd:Purge-Cmd' % p)
-    stop_all = Cpt(EpicsSignal, '{Pmp:%s}Cmd:Stop-Cmd' % p)
+    p = "All"
+    run_all = Cpt(EpicsSignal, "{Pmp:%s}Cmd:Run-Cmd" % p)
+    purge_all = Cpt(EpicsSignal, "{Pmp:%s}Cmd:Purge-Cmd" % p)
+    stop_all = Cpt(EpicsSignal, "{Pmp:%s}Cmd:Stop-Cmd" % p)
 
     def get_vol(self, pump=1):
         if pump == 1:
@@ -131,8 +188,12 @@ class Syringe_Pump(Device):
         else:
             return self.Stop.pAll.set(1)
 
-    def get_disvol(self, pump=1, Dir=None, ):
-        '''dir: 0 for infusion, 1 for withdraw '''
+    def get_disvol(
+        self,
+        pump=1,
+        Dir=None,
+    ):
+        """dir: 0 for infusion, 1 for withdraw"""
         if Dir is None:
             Dir = self.get_dir(pump)
         if Dir == 0:
@@ -146,8 +207,12 @@ class Syringe_Pump(Device):
             else:
                 return self.disW_vol_rb.p2.get()
 
-    def clr(self, pump=1, Dir=None, ):
-        '''dir: 0 for infusion, 1 for withdraw '''
+    def clr(
+        self,
+        pump=1,
+        Dir=None,
+    ):
+        """dir: 0 for infusion, 1 for withdraw"""
         if Dir is None:
             Dir = self.get_dir(pump)
         if pump == 1:
@@ -160,6 +225,5 @@ class Syringe_Pump(Device):
         fields = []
         for name in self.component_names:
             motor = getattr(self, name)
-            fields.extend(motor.hints['fields'])
-        return {'fields': fields}
-
+            fields.extend(motor.hints["fields"])
+        return {"fields": fields}

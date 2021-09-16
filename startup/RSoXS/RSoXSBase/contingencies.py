@@ -1,11 +1,12 @@
 from ..CommonFunctions.functions import run_report
+
 run_report(__file__)
 
 import bluesky.plan_stubs as bps
 import datetime
 import logging
 
-bls_email = 'egann@bnl.gov'
+bls_email = "egann@bnl.gov"
 global no_notifications_until
 
 from ..RSoXSBase.startup import RE, db, bec
@@ -26,11 +27,11 @@ def pause_notices(until=None, **kwargs):
     #
 
     global no_notifications_until
-    if (until is None and len(kwargs) is 0):
+    if until is None and len(kwargs) is 0:
         print("You need to specify either a duration or a timeout.")
-    elif (until is None):
+    elif until is None:
         no_notifications_until = datetime.datetime.now() + datetime.timedelta(**kwargs)
-    elif (until is not None):
+    elif until is not None:
         no_notifications_until = datetime.datetime.strptime(until)
 
 
@@ -43,19 +44,23 @@ def resume_notices():
 def send_notice(email, subject, msg):
     # os.system('echo '+msg+' | mail -s "'+subject+'" '+email)
     try:
-        rsoxs_bot.send_message(subject + '\n' + msg)
+        rsoxs_bot.send_message(subject + "\n" + msg)
     except Exception:
         pass
 
 
 def send_notice_plan(email, subject, msg):
     send_notice(email, subject, msg)
-    yield from bps.sleep(.1)
+    yield from bps.sleep(0.1)
 
 
 def enc_clr_x():
-    send_notice('egann@bnl.gov', 'SST had a small problem', 'the encoder loss has happened on the RSoXS beamline'
-                                                            '\rEverything is probably just fine')
+    send_notice(
+        "egann@bnl.gov",
+        "SST had a small problem",
+        "the encoder loss has happened on the RSoXS beamline"
+        "\rEverything is probably just fine",
+    )
     xpos = sam_X.user_readback.get()
     yield from sam_X.clear_encoder_loss()
     yield from sam_X.home()
@@ -64,8 +69,12 @@ def enc_clr_x():
 
 
 def enc_clr_gx():
-    send_notice('egann@bnl.gov', 'SST had a small problem', 'the encoder loss has happened on the RSoXS beamline'
-                                                            '\rEverything is probably just fine')
+    send_notice(
+        "egann@bnl.gov",
+        "SST had a small problem",
+        "the encoder loss has happened on the RSoXS beamline"
+        "\rEverything is probably just fine",
+    )
 
     yield from gratingx.clear_encoder_loss()
     yield from gratingx.enable()
@@ -75,29 +84,40 @@ def enc_clr_gx():
 
 
 def beamdown_notice():
-    user_email = RE.md['user_email']
-    send_notice(bls_email + ',' + user_email, 'SST-1 has lost beam', 'Beam to RSoXS has been lost.'
-                                                                     '\rYour scan has been paused automatically.'
-                                                                     '\rNo intervention needed, but thought you might '
-                                                                     'like to know.')
+    user_email = RE.md["user_email"]
+    send_notice(
+        bls_email + "," + user_email,
+        "SST-1 has lost beam",
+        "Beam to RSoXS has been lost."
+        "\rYour scan has been paused automatically."
+        "\rNo intervention needed, but thought you might "
+        "like to know.",
+    )
     yield from bps.null()
 
 
 def beamup_notice():
-    user_email = RE.md['user_email']
-    send_notice(bls_email + ',' + user_email, 'SST-1 beam restored', 'Beam to RSoXS has been restored.'
-                                                                     '\rYour scan has resumed running.'
-                                                                     '\rIf able, you may want to check the data and '
-                                                                     'make sure intensity is still OK. '
-                                                                     '\rOne exposure may have been affected')
+    user_email = RE.md["user_email"]
+    send_notice(
+        bls_email + "," + user_email,
+        "SST-1 beam restored",
+        "Beam to RSoXS has been restored."
+        "\rYour scan has resumed running."
+        "\rIf able, you may want to check the data and "
+        "make sure intensity is still OK. "
+        "\rOne exposure may have been affected",
+    )
     yield from bps.null()
 
 
 class OSEmailHandler(logging.Handler):
     def emit(self, record):
-        user_email = RE.md['user_email']
-        send_notice(bls_email + ',' + user_email, '<@U016YV35UAJ> SST has thrown an exception',
-                    record.getMessage())  # record.stack_info
+        user_email = RE.md["user_email"]
+        send_notice(
+            bls_email + "," + user_email,
+            "<@U016YV35UAJ> SST has thrown an exception",
+            record.getMessage(),
+        )  # record.stack_info
 
 
 class MakeSafeHandler(logging.Handler):

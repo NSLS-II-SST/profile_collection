@@ -1,4 +1,5 @@
 from ..CommonFunctions.functions import run_report
+
 run_report(__file__)
 
 import os
@@ -22,22 +23,27 @@ except ImportError:
     def is_re_worker_active():
         return False
 
+
 if not is_re_worker_active():
-    ip=get_ipython()
+    ip = get_ipython()
     ns = get_ipython().user_ns
-    nslsii.configure_base(ns, 'rsoxs', configure_logging=True, publish_documents_to_kafka=False)
-    ip.log.setLevel('ERROR')
-    RE  = ip.user_ns['RE']
-    db  = ip.user_ns['db']
-    sd  = ip.user_ns['sd']
-    bec = ip.user_ns['bec']
+    nslsii.configure_base(
+        ns, "rsoxs", configure_logging=True, publish_documents_to_kafka=False
+    )
+    ip.log.setLevel("ERROR")
+    RE = ip.user_ns["RE"]
+    db = ip.user_ns["db"]
+    sd = ip.user_ns["sd"]
+    bec = ip.user_ns["bec"]
 else:
     ns = {}
-    nslsii.configure_base(ns, 'rsoxs', configure_logging=True, publish_documents_to_kafka=False)
-    RE  = uns_dict['RE']
-    db  = uns_dict['db']
-    sd  = uns_dict['sd']
-    bec = uns_dict['bec']
+    nslsii.configure_base(
+        ns, "rsoxs", configure_logging=True, publish_documents_to_kafka=False
+    )
+    RE = uns_dict["RE"]
+    db = uns_dict["db"]
+    sd = uns_dict["sd"]
+    bec = uns_dict["bec"]
 
 
 # === START PERSISTENT DICT CODE ===
@@ -60,6 +66,7 @@ except ImportError:
         but that the full contents are synced to disk when the PersistentDict
         instance is garbage collected.
         """
+
         def __init__(self, directory):
             self._directory = directory
             self._file = zict.File(directory)
@@ -75,8 +82,10 @@ except ImportError:
                 zfile.update((k, dump(v)) for k, v in cache.items())
 
             import weakref
+
             self._finalizer = weakref.finalize(
-                self, finalize, self._file, self._cache, PersistentDict._dump)
+                self, finalize, self._file, self._cache, PersistentDict._dump
+            )
 
         @property
         def directory(self):
@@ -101,17 +110,11 @@ except ImportError:
             "Encode as msgpack using numpy-aware encoder."
             # See https://github.com/msgpack/msgpack-python#string-and-binary-type
             # for more on use_bin_type.
-            return msgpack.packb(
-                obj,
-                default=msgpack_numpy.encode,
-                use_bin_type=True)
+            return msgpack.packb(obj, default=msgpack_numpy.encode, use_bin_type=True)
 
         @staticmethod
         def _load(file):
-            return msgpack.unpackb(
-                file,
-                object_hook=msgpack_numpy.decode,
-                raw=False)
+            return msgpack.unpackb(file, object_hook=msgpack_numpy.decode, raw=False)
 
         def flush(self):
             """Force a write of the current state to disk"""
@@ -121,6 +124,7 @@ except ImportError:
         def reload(self):
             """Force a reload from disk, overwriting current cache"""
             self._cache = dict(super().items())
+
 
 # runengine_metadata_dir = appdirs.user_data_dir(appname="bluesky") / Path("runengine-metadata")
 # Updated on 2021-04-28 by DSSI/@mrakitin to have a shared location for
@@ -145,6 +149,7 @@ class PersistentDict(collections.abc.MutableMapping):
     but that the full contents are synced to disk when the PersistentDict
     instance is garbage collected.
     """
+
     def __init__(self, directory):
         self._directory = directory
         self._file = zict.File(directory)
@@ -160,8 +165,10 @@ class PersistentDict(collections.abc.MutableMapping):
             zfile.update((k, dump(v)) for k, v in cache.items())
 
         import weakref
+
         self._finalizer = weakref.finalize(
-            self, finalize, self._file, self._cache, PersistentDict._dump)
+            self, finalize, self._file, self._cache, PersistentDict._dump
+        )
 
     @property
     def directory(self):
@@ -196,17 +203,11 @@ class PersistentDict(collections.abc.MutableMapping):
         "Encode as msgpack using numpy-aware encoder."
         # See https://github.com/msgpack/msgpack-python#string-and-binary-type
         # for more on use_bin_type.
-        return msgpack.packb(
-            obj,
-            default=msgpack_numpy.encode,
-            use_bin_type=True)
+        return msgpack.packb(obj, default=msgpack_numpy.encode, use_bin_type=True)
 
     @staticmethod
     def _load(file):
-        return msgpack.unpackb(
-            file,
-            object_hook=msgpack_numpy.decode,
-            raw=False)
+        return msgpack.unpackb(file, object_hook=msgpack_numpy.decode, raw=False)
 
     def flush(self):
         """Force a write of the current state to disk"""
@@ -218,8 +219,9 @@ class PersistentDict(collections.abc.MutableMapping):
         self._cache = dict(self._func.items())
 
 
-
-RE.md = PersistentDict(RE.md.directory)  # Use fixed PersistentDict. aimed at same directory as built-in one
+RE.md = PersistentDict(
+    RE.md.directory
+)  # Use fixed PersistentDict. aimed at same directory as built-in one
 
 # end temporary fix
 
@@ -228,39 +230,48 @@ RE.md = PersistentDict(RE.md.directory)  # Use fixed PersistentDict. aimed at sa
 
 
 # Optional: set any metadata that rarely changes.
-RE.md['beamline_id'] = 'SST-1 RSoXS'
+RE.md["beamline_id"] = "SST-1 RSoXS"
 
 # Add a callback that prints scan IDs at the start of each scan.
 def print_scan_ids(name, start_doc):
-    print("Transient Scan ID: {0} @ {1}".format(start_doc['scan_id'],time.strftime("%Y/%m/%d %H:%M:%S")))
-    print("Persistent Unique Scan ID: '{0}'".format(start_doc['uid']))
+    print(
+        "Transient Scan ID: {0} @ {1}".format(
+            start_doc["scan_id"], time.strftime("%Y/%m/%d %H:%M:%S")
+        )
+    )
+    print("Persistent Unique Scan ID: '{0}'".format(start_doc["uid"]))
 
-RE.subscribe(print_scan_ids, 'start')
 
-control_layer = os.getenv('OPHYD_CONTROL_LAYER')
+RE.subscribe(print_scan_ids, "start")
 
-#print(f'You are using the "{control_layer}" control layer')
+control_layer = os.getenv("OPHYD_CONTROL_LAYER")
+
+# print(f'You are using the "{control_layer}" control layer')
 
 # getting rid of the warnings
 import logging
-logging.getLogger('caproto').setLevel('ERROR')
+
+logging.getLogger("caproto").setLevel("ERROR")
 bec.disable_baseline()
 
 from bluesky.callbacks.zmq import Publisher
-publisher = Publisher('localhost:5577')
+
+publisher = Publisher("localhost:5577")
 RE.subscribe(publisher)
 
 import logging
 import bluesky.log
-logger = logging.getLogger('bluesky_darkframes')
+
+logger = logging.getLogger("bluesky_darkframes")
 handler = logging.StreamHandler()
-handler.setLevel('DEBUG')
+handler.setLevel("DEBUG")
 logger.addHandler(handler)
 logger.getEffectiveLevel()
-logger.setLevel('DEBUG')  # change DEBUG to INFO later on
+logger.setLevel("DEBUG")  # change DEBUG to INFO later on
 
 from databroker.v0 import Broker
-db0 = Broker.named('rsoxs')
+
+db0 = Broker.named("rsoxs")
 
 bec.disable_table()
 bec.disable_plots()
