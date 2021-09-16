@@ -1,0 +1,1066 @@
+./startup/00-startup.py:5:116: E501 line too long (126 > 115 characters)
+./startup/00-startup.py:6:1: E402 module level import not at top of file
+./startup/00-startup.py:6:1: F403 'from RSoXS.SSTObjects.gatevalves import *' used; unable to detect undefined names
+./startup/00-startup.py:7:1: E402 module level import not at top of file
+./startup/00-startup.py:7:1: F403 'from RSoXS.SSTObjects.shutters import *' used; unable to detect undefined names
+./startup/00-startup.py:8:1: E402 module level import not at top of file
+./startup/00-startup.py:8:1: F403 'from RSoXS.SSTObjects.vacuum import *' used; unable to detect undefined names
+./startup/00-startup.py:9:1: E402 module level import not at top of file
+./startup/00-startup.py:9:1: F403 'from RSoXS.SSTObjects.motors import *' used; unable to detect undefined names
+./startup/00-startup.py:10:1: E402 module level import not at top of file
+./startup/00-startup.py:10:1: F403 'from RSoXS.SSTObjects.mirrors import *' used; unable to detect undefined names
+./startup/00-startup.py:11:1: E402 module level import not at top of file
+./startup/00-startup.py:11:1: F403 'from RSoXS.SSTObjects.diode import *' used; unable to detect undefined names
+./startup/00-startup.py:14:1: E402 module level import not at top of file
+./startup/00-startup.py:14:1: F403 'from RSoXS.SSTBase.archiver import *' used; unable to detect undefined names
+./startup/00-startup.py:17:1: E402 module level import not at top of file
+./startup/00-startup.py:17:1: F403 'from RSoXS.RSoXSBase.startup import *' used; unable to detect undefined names
+./startup/00-startup.py:20:1: E402 module level import not at top of file
+./startup/00-startup.py:20:1: F403 'from RSoXS.RSoXSObjects.motors import *' used; unable to detect undefined names
+./startup/00-startup.py:21:1: E402 module level import not at top of file
+./startup/00-startup.py:21:1: F403 'from RSoXS.RSoXSObjects.cameras import *' used; unable to detect undefined names
+./startup/00-startup.py:22:1: E402 module level import not at top of file
+./startup/00-startup.py:22:1: F403 'from RSoXS.RSoXSObjects.signals import *' used; unable to detect undefined names
+./startup/00-startup.py:23:1: E402 module level import not at top of file
+./startup/00-startup.py:23:1: F403 'from RSoXS.RSoXSObjects.detectors import *' used; unable to detect undefined names
+./startup/00-startup.py:24:1: E402 module level import not at top of file
+./startup/00-startup.py:24:1: F403 'from RSoXS.RSoXSObjects.slits import *' used; unable to detect undefined names
+./startup/00-startup.py:25:1: E402 module level import not at top of file
+./startup/00-startup.py:25:1: F403 'from RSoXS.RSoXSObjects.syringepump import *' used; unable to detect undefined names
+./startup/00-startup.py:26:1: E402 module level import not at top of file
+./startup/00-startup.py:26:1: F403 'from RSoXS.RSoXSObjects.energy import *' used; unable to detect undefined names
+./startup/00-startup.py:29:1: E402 module level import not at top of file
+./startup/00-startup.py:29:1: F403 'from RSoXS.RSoXSBase.configurations import *' used; unable to detect undefined names
+./startup/00-startup.py:30:1: E402 module level import not at top of file
+./startup/00-startup.py:30:1: F403 'from RSoXS.RSoXSBase.schemas import *' used; unable to detect undefined names
+./startup/00-startup.py:31:1: E402 module level import not at top of file
+./startup/00-startup.py:31:1: F403 'from RSoXS.RSoXSBase.PVdictionary import *' used; unable to detect undefined names
+./startup/00-startup.py:32:1: E402 module level import not at top of file
+./startup/00-startup.py:32:1: F403 'from RSoXS.RSoXSBase.common_procedures import *' used; unable to detect undefined names
+./startup/00-startup.py:33:1: E402 module level import not at top of file
+./startup/00-startup.py:33:1: F403 'from RSoXS.RSoXSBase.common_metadata import *' used; unable to detect undefined names
+./startup/00-startup.py:34:1: E402 module level import not at top of file
+./startup/00-startup.py:34:1: F403 'from RSoXS.RSoXSBase.energyscancore import *' used; unable to detect undefined names
+./startup/00-startup.py:35:1: E402 module level import not at top of file
+./startup/00-startup.py:35:1: F403 'from RSoXS.RSoXSBase.energyscans import *' used; unable to detect undefined names
+./startup/00-startup.py:36:1: E402 module level import not at top of file
+./startup/00-startup.py:36:1: F403 'from RSoXS.RSoXSBase.NEXAFSscans import *' used; unable to detect undefined names
+./startup/00-startup.py:37:1: E402 module level import not at top of file
+./startup/00-startup.py:37:1: F403 'from RSoXS.RSoXSBase.alignment import *' used; unable to detect undefined names
+./startup/00-startup.py:38:1: E402 module level import not at top of file
+./startup/00-startup.py:38:1: F401 'RSoXS.RSoXSObjects.slackbot.rsoxs_bot' imported but unused
+./startup/00-startup.py:49:5: F403 'from RSoXS.RSoXSBase.magics import *' used; unable to detect undefined names
+./startup/00-startup.py:51:5: F405 'user' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:52:5: F405 'beamline_status' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:57:1: F405 'sd' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:59:9: F405 'sam_viewer' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:60:9: F405 'sam_X' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:61:9: F405 'sam_Y' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:62:9: F405 'sam_Z' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:63:9: F405 'sam_Th' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:64:9: F405 'BeamStopS' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:65:9: F405 'BeamStopW' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:66:9: F405 'Det_S' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:67:9: F405 'Det_W' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:68:9: F405 'Shutter_Y' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:69:9: F405 'Izero_Y' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:70:9: F405 'Izero_ds' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:71:9: F405 'grating' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:72:9: F405 'mirror2' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:73:9: F405 'slits1' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:74:9: F405 'slits2' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:75:9: F405 'slits3' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:76:9: F405 'en' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:77:9: F405 'ring_current' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:78:9: F405 'Beamstop_WAXS' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:79:9: F405 'Beamstop_SAXS' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:80:9: F405 'Izero_Diode' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:81:9: F405 'Izero_Mesh' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:82:9: F405 'Slit1_Top_I' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:83:9: F405 'Slit1_IB_I' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:84:9: F405 'DM4_PD' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:85:9: F405 'mir1_pressure' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:86:9: F405 'rsoxs_ccg_izero' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:87:9: F405 'rsoxs_pg_izero' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:88:9: F405 'rsoxs_ccg_main' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:89:9: F405 'rsoxs_pg_main' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:90:9: F405 'rsoxs_ccg_ll' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:91:9: F405 'rsoxs_pg_ll' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:92:9: F405 'rsoxs_ll_gpwr' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:93:9: F405 'psh1' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:94:9: F405 'psh4' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:95:9: F405 'psh10' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:96:9: F405 'psh7' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:97:9: F405 'gv14' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:98:9: F405 'gv14a' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:99:9: F405 'gv15' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:100:9: F405 'gv26' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:101:9: F405 'gv27' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:102:9: F405 'gv27a' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:103:9: F405 'gv28' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:104:9: F405 'gvTEM' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:105:9: F405 'gvll' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:106:9: F405 'gvturbo' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:107:9: F405 'mir1' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:108:9: F405 'mir3' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:109:9: F405 'mir4' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:110:9: F405 'mir2_type' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:116:1: F405 'sd' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:118:9: F405 'Shutter_control' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:119:9: F405 'mono_en' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:120:9: F405 'ring_current' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:121:9: F405 'Beamstop_WAXS' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:122:9: F405 'Beamstop_SAXS' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:123:9: F405 'Izero_Mesh' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:124:9: F405 'Sample_TEY' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:129:1: F405 'RE' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:129:25: F405 'dark_frame_preprocessor_waxs' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:130:1: F405 'RE' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/00-startup.py:130:25: F405 'dark_frame_preprocessor_saxs' may be undefined, or defined from star imports: RSoXS.RSoXSBase.NEXAFSscans, RSoXS.RSoXSBase.PVdictionary, RSoXS.RSoXSBase.alignment, RSoXS.RSoXSBase.common_metadata, RSoXS.RSoXSBase.common_procedures, RSoXS.RSoXSBase.configurations, RSoXS.RSoXSBase.energyscancore, RSoXS.RSoXSBase.energyscans, RSoXS.RSoXSBase.magics, RSoXS.RSoXSBase.schemas, RSoXS.RSoXSBase.startup, RSoXS.RSoXSObjects.cameras, RSoXS.RSoXSObjects.detectors, RSoXS.RSoXSObjects.energy, RSoXS.RSoXSObjects.motors, RSoXS.RSoXSObjects.signals, RSoXS.RSoXSObjects.slits, RSoXS.RSoXSObjects.syringepump, RSoXS.SSTBase.archiver, RSoXS.SSTObjects.diode, RSoXS.SSTObjects.gatevalves, RSoXS.SSTObjects.mirrors, RSoXS.SSTObjects.motors, RSoXS.SSTObjects.shutters, RSoXS.SSTObjects.vacuum
+./startup/RSoXS/SSTBase/mirrors.py:5:1: E402 module level import not at top of file
+./startup/RSoXS/SSTBase/mirrors.py:5:1: F401 'ophyd.EpicsMotor' imported but unused
+./startup/RSoXS/SSTBase/mirrors.py:13:1: E402 module level import not at top of file
+./startup/RSoXS/SSTBase/archiver.py:5:1: E402 module level import not at top of file
+./startup/RSoXS/SSTBase/archiver.py:6:1: E402 module level import not at top of file
+./startup/RSoXS/SSTBase/archiver.py:7:1: E402 module level import not at top of file
+./startup/RSoXS/SSTBase/archiver.py:8:1: E402 module level import not at top of file
+./startup/RSoXS/SSTBase/archiver.py:9:1: E402 module level import not at top of file
+./startup/RSoXS/SSTBase/archiver.py:10:1: E402 module level import not at top of file
+./startup/RSoXS/SSTBase/cameras.py:5:1: E402 module level import not at top of file
+./startup/RSoXS/SSTBase/cameras.py:5:1: F401 'time as ttime' imported but unused
+./startup/RSoXS/SSTBase/cameras.py:6:1: E402 module level import not at top of file
+./startup/RSoXS/SSTBase/cameras.py:6:1: F401 'types.SimpleNamespace' imported but unused
+./startup/RSoXS/SSTBase/cameras.py:7:1: E402 module level import not at top of file
+./startup/RSoXS/SSTBase/cameras.py:7:1: F401 'ophyd.DetectorBase' imported but unused
+./startup/RSoXS/SSTBase/cameras.py:7:1: F401 'ophyd.HDF5Plugin' imported but unused
+./startup/RSoXS/SSTBase/cameras.py:7:1: F401 'ophyd.AreaDetector' imported but unused
+./startup/RSoXS/SSTBase/cameras.py:7:1: F401 'ophyd.EpicsSignalRO' imported but unused
+./startup/RSoXS/SSTBase/cameras.py:7:1: F401 'ophyd.Device' imported but unused
+./startup/RSoXS/SSTBase/cameras.py:7:1: F401 'ophyd.DeviceStatus' imported but unused
+./startup/RSoXS/SSTBase/cameras.py:28:1: E402 module level import not at top of file
+./startup/RSoXS/SSTBase/cameras.py:28:1: F401 'ophyd.status.StatusBase' imported but unused
+./startup/RSoXS/SSTBase/cameras.py:29:1: E402 module level import not at top of file
+./startup/RSoXS/SSTBase/cameras.py:29:1: F401 'ophyd.device.Staged' imported but unused
+./startup/RSoXS/SSTBase/cameras.py:30:1: E402 module level import not at top of file
+./startup/RSoXS/SSTBase/cameras.py:30:1: F401 'ophyd.areadetector.cam.AreaDetectorCam' imported but unused
+./startup/RSoXS/SSTBase/cameras.py:31:1: E402 module level import not at top of file
+./startup/RSoXS/SSTBase/cameras.py:31:1: F401 'ophyd.areadetector.base.ADComponent' imported but unused
+./startup/RSoXS/SSTBase/cameras.py:31:1: F401 'ophyd.areadetector.base.EpicsSignalWithRBV' imported but unused
+./startup/RSoXS/SSTBase/cameras.py:32:1: E402 module level import not at top of file
+./startup/RSoXS/SSTBase/cameras.py:32:1: F401 'ophyd.areadetector.filestore_mixins.FileStoreHDF5IterativeWrite' imported but unused
+./startup/RSoXS/SSTBase/cameras.py:32:1: F401 'ophyd.areadetector.filestore_mixins.FileStoreBase' imported but unused
+./startup/RSoXS/SSTBase/cameras.py:32:1: F401 'ophyd.areadetector.filestore_mixins.new_short_uid' imported but unused
+./startup/RSoXS/SSTBase/cameras.py:32:1: F401 'ophyd.areadetector.filestore_mixins.FileStoreIterativeWrite' imported but unused
+./startup/RSoXS/SSTBase/cameras.py:39:1: E402 module level import not at top of file
+./startup/RSoXS/SSTBase/cameras.py:39:1: F401 'ophyd.Signal' imported but unused
+./startup/RSoXS/SSTBase/cameras.py:40:1: E402 module level import not at top of file
+./startup/RSoXS/SSTBase/cameras.py:40:1: F401 'ophyd.utils.set_and_wait' imported but unused
+./startup/RSoXS/SSTBase/cameras.py:41:1: E402 module level import not at top of file
+./startup/RSoXS/SSTBase/cameras.py:41:1: F401 'pathlib.PurePath' imported but unused
+./startup/RSoXS/SSTBase/cameras.py:42:1: E402 module level import not at top of file
+./startup/RSoXS/SSTBase/cameras.py:42:1: F401 'bluesky.plan_stubs.stage' imported but unused
+./startup/RSoXS/SSTBase/cameras.py:42:1: F401 'bluesky.plan_stubs.unstage' imported but unused
+./startup/RSoXS/SSTBase/cameras.py:42:1: F401 'bluesky.plan_stubs.open_run' imported but unused
+./startup/RSoXS/SSTBase/cameras.py:42:1: F401 'bluesky.plan_stubs.close_run' imported but unused
+./startup/RSoXS/SSTBase/cameras.py:42:1: F401 'bluesky.plan_stubs.trigger_and_read' imported but unused
+./startup/RSoXS/SSTBase/cameras.py:42:1: F401 'bluesky.plan_stubs.pause' imported but unused
+./startup/RSoXS/SSTBase/cameras.py:50:1: E402 module level import not at top of file
+./startup/RSoXS/SSTBase/cameras.py:50:1: F401 'collections.OrderedDict' imported but unused
+./startup/RSoXS/SSTBase/cameras.py:51:1: E402 module level import not at top of file
+./startup/RSoXS/SSTBase/cameras.py:51:1: F401 'bluesky.plan_stubs as bps' imported but unused
+./startup/RSoXS/SSTBase/cameras.py:52:1: E402 module level import not at top of file
+./startup/RSoXS/SSTBase/cameras.py:52:1: F401 'nslsii.ad33.CamV33Mixin' imported but unused
+./startup/RSoXS/SSTBase/motors.py:5:1: E402 module level import not at top of file
+./startup/RSoXS/SSTBase/motors.py:6:1: E402 module level import not at top of file
+./startup/RSoXS/SSTBase/motors.py:7:1: E402 module level import not at top of file
+./startup/RSoXS/SSTBase/motors.py:8:1: E402 module level import not at top of file
+./startup/RSoXS/SSTBase/motors.py:8:1: F811 redefinition of unused 'motor1' from line 6
+./startup/RSoXS/SSTBase/motors.py:8:1: F401 'ophyd.sim.motor1' imported but unused
+./startup/RSoXS/SSTBase/motors.py:9:1: E402 module level import not at top of file
+./startup/RSoXS/SSTBase/motors.py:11:1: E402 module level import not at top of file
+./startup/RSoXS/SSTBase/motors.py:12:1: E402 module level import not at top of file
+./startup/RSoXS/SSTBase/motors.py:148:17: F821 undefined name 'whisper'
+./startup/RSoXS/SSTBase/motors.py:187:9: E722 do not use bare 'except'
+./startup/RSoXS/SSTBase/motors.py:189:20: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/SSTBase/motors.py:191:22: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/SSTBase/motors.py:194:21: E722 do not use bare 'except'
+./startup/RSoXS/SSTBase/valves_and_shutters.py:6:1: E402 module level import not at top of file
+./startup/RSoXS/SSTBase/valves_and_shutters.py:6:1: F401 'ophyd.SingleTrigger' imported but unused
+./startup/RSoXS/SSTBase/valves_and_shutters.py:6:1: F401 'ophyd.PVPositioner' imported but unused
+./startup/RSoXS/SSTBase/valves_and_shutters.py:6:1: F401 'ophyd.EpicsSignalRO' imported but unused
+./startup/RSoXS/SSTBase/valves_and_shutters.py:14:1: E402 module level import not at top of file
+./startup/RSoXS/SSTBase/valves_and_shutters.py:15:1: E402 module level import not at top of file
+./startup/RSoXS/SSTBase/valves_and_shutters.py:46:36: F821 undefined name 'null'
+./startup/RSoXS/SSTBase/valves_and_shutters.py:61:36: F821 undefined name 'null'
+./startup/RSoXS/SSTBase/slits.py:6:1: E402 module level import not at top of file
+./startup/RSoXS/SSTBase/slits.py:7:1: E402 module level import not at top of file
+./startup/RSoXS/SSTBase/slits.py:8:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSObjects/slackbot.py:4:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSObjects/slackbot.py:5:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSObjects/signals.py:4:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSObjects/signals.py:33:116: E501 line too long (118 > 115 characters)
+./startup/RSoXS/RSoXSObjects/cameras.py:5:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSObjects/cameras.py:5:1: F403 'from ..SSTBase.cameras import *' used; unable to detect undefined names
+./startup/RSoXS/RSoXSObjects/cameras.py:8:12: F405 'StandardProsilica' may be undefined, or defined from star imports: ..SSTBase.cameras
+./startup/RSoXS/RSoXSObjects/cameras.py:9:12: F405 'StandardProsilica' may be undefined, or defined from star imports: ..SSTBase.cameras
+./startup/RSoXS/RSoXSObjects/cameras.py:10:13: F405 'StandardProsilica' may be undefined, or defined from star imports: ..SSTBase.cameras
+./startup/RSoXS/RSoXSObjects/cameras.py:11:14: F405 'StandardProsilica' may be undefined, or defined from star imports: ..SSTBase.cameras
+./startup/RSoXS/RSoXSObjects/cameras.py:12:20: F405 'StandardProsilicaWithTIFFV33' may be undefined, or defined from star imports: ..SSTBase.cameras
+./startup/RSoXS/RSoXSObjects/cameras.py:37:1: E302 expected 2 blank lines, found 0
+./startup/RSoXS/RSoXSObjects/energy.py:5:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSObjects/energy.py:13:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSObjects/energy.py:15:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSObjects/energy.py:16:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSObjects/energy.py:18:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSObjects/energy.py:19:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSObjects/energy.py:20:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSObjects/energy.py:21:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSObjects/energy.py:21:1: F401 'IPython' imported but unused
+./startup/RSoXS/RSoXSObjects/energy.py:22:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSObjects/energy.py:22:1: F401 'scipy.interpolate' imported but unused
+./startup/RSoXS/RSoXSObjects/energy.py:23:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSObjects/energy.py:23:1: F811 redefinition of unused 'xr' from line 19
+./startup/RSoXS/RSoXSObjects/energy.py:25:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSObjects/energy.py:26:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSObjects/energy.py:27:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSObjects/energy.py:306:33: F821 undefined name 'get_ipython'
+./startup/RSoXS/RSoXSObjects/energy.py:464:20: F821 undefined name 'epugap_from_energy_old'
+./startup/RSoXS/RSoXSObjects/energy.py:550:29: F821 undefined name 'get_mirror_grating_angles'
+./startup/RSoXS/RSoXSObjects/energy.py:571:5: F841 local variable 'enval' is assigned to but never used
+./startup/RSoXS/RSoXSObjects/energy.py:590:16: F821 undefined name 'psh4'
+./startup/RSoXS/RSoXSObjects/energy.py:594:23: F821 undefined name 'mirror2'
+./startup/RSoXS/RSoXSObjects/energy.py:595:23: F821 undefined name 'grating'
+./startup/RSoXS/RSoXSObjects/energy.py:598:16: F821 undefined name 'psh4'
+./startup/RSoXS/RSoXSObjects/energy.py:608:16: F821 undefined name 'psh4'
+./startup/RSoXS/RSoXSObjects/energy.py:612:23: F821 undefined name 'mirror2'
+./startup/RSoXS/RSoXSObjects/energy.py:613:23: F821 undefined name 'grating'
+./startup/RSoXS/RSoXSObjects/energy.py:616:16: F821 undefined name 'psh4'
+./startup/RSoXS/RSoXSObjects/contingencies.py:5:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSObjects/contingencies.py:5:1: F403 'from ..RSoXSBase.contingencies import *' used; unable to detect undefined names
+./startup/RSoXS/RSoXSObjects/contingencies.py:6:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSObjects/contingencies.py:7:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSObjects/contingencies.py:8:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSObjects/contingencies.py:9:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSObjects/contingencies.py:10:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSObjects/contingencies.py:11:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSObjects/contingencies.py:12:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSObjects/contingencies.py:24:14: F405 'beamdown_notice' may be undefined, or defined from star imports: ..RSoXSBase.contingencies
+./startup/RSoXS/RSoXSObjects/contingencies.py:25:15: F405 'beamup_notice' may be undefined, or defined from star imports: ..RSoXSBase.contingencies
+./startup/RSoXS/RSoXSObjects/contingencies.py:32:14: F405 'beamdown_notice' may be undefined, or defined from star imports: ..RSoXSBase.contingencies
+./startup/RSoXS/RSoXSObjects/contingencies.py:33:15: F405 'beamup_notice' may be undefined, or defined from star imports: ..RSoXSBase.contingencies
+./startup/RSoXS/RSoXSObjects/contingencies.py:46:14: F405 'beamdown_notice' may be undefined, or defined from star imports: ..RSoXSBase.contingencies
+./startup/RSoXS/RSoXSObjects/contingencies.py:47:15: F405 'beamup_notice' may be undefined, or defined from star imports: ..RSoXSBase.contingencies
+./startup/RSoXS/RSoXSObjects/contingencies.py:57:14: F405 'enc_clr_x' may be undefined, or defined from star imports: ..RSoXSBase.contingencies
+./startup/RSoXS/RSoXSObjects/contingencies.py:64:14: F405 'enc_clr_gx' may be undefined, or defined from star imports: ..RSoXSBase.contingencies
+./startup/RSoXS/RSoXSObjects/contingencies.py:73:16: F405 'OSEmailHandler' may be undefined, or defined from star imports: ..RSoXSBase.contingencies
+./startup/RSoXS/RSoXSObjects/contingencies.py:79:16: F405 'MakeSafeHandler' may be undefined, or defined from star imports: ..RSoXSBase.contingencies
+./startup/RSoXS/RSoXSObjects/motors.py:4:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSObjects/motors.py:4:1: F403 'from ..SSTBase.motors import *' used; unable to detect undefined names
+./startup/RSoXS/RSoXSObjects/motors.py:7:14: F405 'prettymotor' may be undefined, or defined from star imports: ..SSTBase.motors
+./startup/RSoXS/RSoXSObjects/motors.py:10:9: F405 'prettymotor' may be undefined, or defined from star imports: ..SSTBase.motors
+./startup/RSoXS/RSoXSObjects/motors.py:13:9: F405 'prettymotor' may be undefined, or defined from star imports: ..SSTBase.motors
+./startup/RSoXS/RSoXSObjects/motors.py:16:9: F405 'prettymotor' may be undefined, or defined from star imports: ..SSTBase.motors
+./startup/RSoXS/RSoXSObjects/motors.py:19:10: F405 'prettymotor' may be undefined, or defined from star imports: ..SSTBase.motors
+./startup/RSoXS/RSoXSObjects/motors.py:22:13: F405 'prettymotor' may be undefined, or defined from star imports: ..SSTBase.motors
+./startup/RSoXS/RSoXSObjects/motors.py:25:13: F405 'prettymotor' may be undefined, or defined from star imports: ..SSTBase.motors
+./startup/RSoXS/RSoXSObjects/motors.py:28:9: F405 'prettymotor' may be undefined, or defined from star imports: ..SSTBase.motors
+./startup/RSoXS/RSoXSObjects/motors.py:32:9: F405 'motor1' may be undefined, or defined from star imports: ..SSTBase.motors
+./startup/RSoXS/RSoXSObjects/motors.py:34:13: F405 'prettymotor' may be undefined, or defined from star imports: ..SSTBase.motors
+./startup/RSoXS/RSoXSObjects/motors.py:37:11: F405 'prettymotor' may be undefined, or defined from star imports: ..SSTBase.motors
+./startup/RSoXS/RSoXSObjects/motors.py:42:12: F405 'prettymotor' may be undefined, or defined from star imports: ..SSTBase.motors
+./startup/RSoXS/RSoXSObjects/motors.py:48:8: F405 'prettymotorgeneric' may be undefined, or defined from star imports: ..SSTBase.motors
+./startup/RSoXS/RSoXSObjects/motors.py:51:8: F405 'prettymotorgeneric' may be undefined, or defined from star imports: ..SSTBase.motors
+./startup/RSoXS/RSoXSObjects/motors.py:54:8: F405 'prettymotorgeneric' may be undefined, or defined from star imports: ..SSTBase.motors
+./startup/RSoXS/RSoXSObjects/syringepump.py:4:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSObjects/syringepump.py:4:1: F403 'from ..RSoXSBase.syringepump import *' used; unable to detect undefined names
+./startup/RSoXS/RSoXSObjects/syringepump.py:6:6: F405 'Syringe_Pump' may be undefined, or defined from star imports: ..RSoXSBase.syringepump
+./startup/RSoXS/RSoXSObjects/detectors.py:5:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSObjects/detectors.py:6:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSObjects/detectors.py:7:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSObjects/detectors.py:7:1: F403 'from ..RSoXSBase.detectors import *' used; unable to detect undefined names
+./startup/RSoXS/RSoXSObjects/detectors.py:8:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSObjects/detectors.py:8:1: F401 '..RSoXSObjects.motors.sam_X' imported but unused
+./startup/RSoXS/RSoXSObjects/detectors.py:8:1: F401 '..RSoXSObjects.motors.sam_Y' imported but unused
+./startup/RSoXS/RSoXSObjects/detectors.py:8:1: F401 '..RSoXSObjects.motors.sam_Z' imported but unused
+./startup/RSoXS/RSoXSObjects/detectors.py:16:12: F405 'RSOXSGreatEyesDetector' may be undefined, or defined from star imports: ..RSoXSBase.detectors
+./startup/RSoXS/RSoXSObjects/detectors.py:34:12: F405 'SimGreatEyes' may be undefined, or defined from star imports: ..RSoXSBase.detectors
+./startup/RSoXS/RSoXSObjects/detectors.py:72:27: F405 'en' may be undefined, or defined from star imports: ..RSoXSBase.detectors
+./startup/RSoXS/RSoXSObjects/detectors.py:74:5: F405 'boxed_text' may be undefined, or defined from star imports: ..RSoXSBase.detectors
+./startup/RSoXS/RSoXSObjects/detectors.py:81:15: F405 'RE' may be undefined, or defined from star imports: ..RSoXSBase.detectors
+./startup/RSoXS/RSoXSObjects/detectors.py:85:9: F405 'RE' may be undefined, or defined from star imports: ..RSoXSBase.detectors
+./startup/RSoXS/RSoXSObjects/detectors.py:87:31: F405 'en' may be undefined, or defined from star imports: ..RSoXSBase.detectors
+./startup/RSoXS/RSoXSObjects/detectors.py:90:9: F405 'RE' may be undefined, or defined from star imports: ..RSoXSBase.detectors
+./startup/RSoXS/RSoXSObjects/detectors.py:100:16: F405 'bluesky_darkframes' may be undefined, or defined from star imports: ..RSoXSBase.detectors
+./startup/RSoXS/RSoXSObjects/detectors.py:114:16: F405 'bluesky_darkframes' may be undefined, or defined from star imports: ..RSoXSBase.detectors
+./startup/RSoXS/RSoXSObjects/detectors.py:121:32: F405 'bluesky_darkframes' may be undefined, or defined from star imports: ..RSoXSBase.detectors
+./startup/RSoXS/RSoXSObjects/detectors.py:135:32: F405 'bluesky_darkframes' may be undefined, or defined from star imports: ..RSoXSBase.detectors
+./startup/RSoXS/RSoXSObjects/detectors.py:151:27: F405 'make_decorator' may be undefined, or defined from star imports: ..RSoXSBase.detectors
+./startup/RSoXS/RSoXSObjects/detectors.py:152:27: F405 'make_decorator' may be undefined, or defined from star imports: ..RSoXSBase.detectors
+./startup/RSoXS/RSoXSObjects/slits.py:4:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSObjects/slits.py:4:1: F403 'from ..SSTBase.slits import *' used; unable to detect undefined names
+./startup/RSoXS/RSoXSObjects/slits.py:6:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSObjects/slits.py:8:10: F405 'Slits' may be undefined, or defined from star imports: ..SSTBase.slits
+./startup/RSoXS/RSoXSObjects/slits.py:11:10: F405 'Slits' may be undefined, or defined from star imports: ..SSTBase.slits
+./startup/RSoXS/RSoXSObjects/slits.py:14:10: F405 'Slits' may be undefined, or defined from star imports: ..SSTBase.slits
+./startup/RSoXS/SSTObjects/mirrors.py:5:1: E402 module level import not at top of file
+./startup/RSoXS/SSTObjects/mirrors.py:6:1: E402 module level import not at top of file
+./startup/RSoXS/SSTObjects/diode.py:5:1: E402 module level import not at top of file
+./startup/RSoXS/SSTObjects/vacuum.py:5:1: E402 module level import not at top of file
+./startup/RSoXS/SSTObjects/motors.py:5:1: E402 module level import not at top of file
+./startup/RSoXS/SSTObjects/motors.py:5:1: F403 'from ..SSTBase.motors import *' used; unable to detect undefined names
+./startup/RSoXS/SSTObjects/motors.py:7:13: F405 'prettymotor' may be undefined, or defined from star imports: ..SSTBase.motors
+./startup/RSoXS/SSTObjects/motors.py:12:11: F405 'prettymotor' may be undefined, or defined from star imports: ..SSTBase.motors
+./startup/RSoXS/SSTObjects/motors.py:15:11: F405 'prettymotor' may be undefined, or defined from star imports: ..SSTBase.motors
+./startup/RSoXS/SSTObjects/motors.py:18:12: F405 'prettymotor' may be undefined, or defined from star imports: ..SSTBase.motors
+./startup/RSoXS/SSTObjects/motors.py:21:12: F405 'prettymotor' may be undefined, or defined from star imports: ..SSTBase.motors
+./startup/RSoXS/SSTObjects/shutters.py:5:1: E402 module level import not at top of file
+./startup/RSoXS/SSTObjects/gatevalves.py:5:1: E402 module level import not at top of file
+./startup/RSoXS/CommonFunctions/functions.py:2:11: E401 multiple imports on one line
+./startup/RSoXS/CommonFunctions/gGrEqns.py:5:1: E265 block comment should start with '# '
+./startup/RSoXS/CommonFunctions/gGrEqns.py:10:31: W291 trailing whitespace
+./startup/RSoXS/CommonFunctions/gGrEqns.py:14:1: E402 module level import not at top of file
+./startup/RSoXS/CommonFunctions/gGrEqns.py:15:1: E402 module level import not at top of file
+./startup/RSoXS/CommonFunctions/gGrEqns.py:134:5: E722 do not use bare 'except'
+./startup/RSoXS/CommonFunctions/gGrEqns.py:157:5: E722 do not use bare 'except'
+./startup/RSoXS/CommonFunctions/gGrEqns.py:298:5: E266 too many leading '#' for block comment
+./startup/RSoXS/CommonFunctions/gGrEqns.py:299:5: E266 too many leading '#' for block comment
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:5:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:7:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:8:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:8:1: F401 '..RSoXSObjects.signals.Beamstop_SAXS' imported but unused
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:29:116: E501 line too long (117 > 115 characters)
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:41:5: F821 undefined name 'sample'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:44:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:63:16: F821 undefined name 'NEXAFS_scan_core'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:107:5: F821 undefined name 'clean_up_md'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:108:5: F821 undefined name 'sample'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:111:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:121:16: F821 undefined name 'NEXAFS_fly_scan_core'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:159:5: F821 undefined name 'clean_up_md'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:160:5: F821 undefined name 'sample'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:163:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:173:16: F821 undefined name 'NEXAFS_fly_scan_core'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:211:5: F821 undefined name 'clean_up_md'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:212:5: F821 undefined name 'sample'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:215:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:225:16: F821 undefined name 'NEXAFS_fly_scan_core'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:262:5: F821 undefined name 'clean_up_md'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:263:5: F821 undefined name 'sample'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:266:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:276:16: F821 undefined name 'NEXAFS_fly_scan_core'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:313:5: F821 undefined name 'clean_up_md'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:314:5: F821 undefined name 'sample'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:317:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:327:16: F821 undefined name 'NEXAFS_fly_scan_core'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:364:5: F821 undefined name 'clean_up_md'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:365:5: F821 undefined name 'sample'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:368:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:378:16: F821 undefined name 'NEXAFS_fly_scan_core'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:415:5: F821 undefined name 'clean_up_md'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:416:5: F821 undefined name 'sample'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:419:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:429:16: F821 undefined name 'NEXAFS_fly_scan_core'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:465:5: F821 undefined name 'clean_up_md'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:466:5: F821 undefined name 'sample'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:469:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:479:16: F821 undefined name 'NEXAFS_fly_scan_core'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:516:5: F821 undefined name 'clean_up_md'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:517:5: F821 undefined name 'sample'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:520:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:530:16: F821 undefined name 'NEXAFS_fly_scan_core'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:546:16: F821 undefined name 'load_sample'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:546:28: F821 undefined name 'hopggrazing'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:548:57: F821 undefined name 'IzeroMesh'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:549:16: F821 undefined name 'load_sample'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:549:28: F821 undefined name 'hopgnormal'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:551:57: F821 undefined name 'IzeroMesh'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:552:16: F821 undefined name 'load_sample'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:552:28: F821 undefined name 'hopggrazing'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:554:57: F821 undefined name 'IzeroMesh'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:555:16: F821 undefined name 'load_sample'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:555:28: F821 undefined name 'hopgnormal'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:557:57: F821 undefined name 'IzeroMesh'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:558:16: F821 undefined name 'load_sample'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:558:28: F821 undefined name 'hopggrazing'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:560:57: F821 undefined name 'IzeroMesh'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:561:16: F821 undefined name 'load_sample'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:561:28: F821 undefined name 'hopgnormal'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:563:57: F821 undefined name 'IzeroMesh'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:581:5: F821 undefined name 'clean_up_md'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:582:16: F821 undefined name 'rotate_now'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:603:5: F821 undefined name 'clean_up_md'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:605:20: F821 undefined name 'rotate_now'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:641:5: F821 undefined name 'clean_up_md'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:642:16: F821 undefined name 'rotate_now'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:672:5: F821 undefined name 'clean_up_md'
+./startup/RSoXS/RSoXSBase/NEXAFSscans.py:673:16: F821 undefined name 'rotate_now'
+./startup/RSoXS/RSoXSBase/energyscancore.py:5:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/energyscancore.py:6:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/energyscancore.py:7:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/energyscancore.py:17:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/energyscancore.py:18:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/energyscancore.py:19:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/energyscancore.py:20:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/energyscancore.py:21:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/energyscancore.py:22:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/energyscancore.py:22:1: F401 'copy.deepcopy' imported but unused
+./startup/RSoXS/RSoXSBase/energyscancore.py:23:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/energyscancore.py:23:1: F401 '..RSoXSObjects.energy.Mono_Scan_Stop' imported but unused
+./startup/RSoXS/RSoXSBase/energyscancore.py:36:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/energyscancore.py:37:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/energyscancore.py:38:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/energyscancore.py:39:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/energyscancore.py:72:5: F841 local variable 'motors' is assigned to but never used
+./startup/RSoXS/RSoXSBase/energyscancore.py:131:9: F821 undefined name 'rotate_now'
+./startup/RSoXS/RSoXSBase/energyscancore.py:136:5: F821 undefined name 'sample'
+./startup/RSoXS/RSoXSBase/energyscancore.py:183:5: F821 undefined name 'set_exposure'
+./startup/RSoXS/RSoXSBase/energyscancore.py:190:8: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/energyscancore.py:278:1: E266 too many leading '#' for block comment
+./startup/RSoXS/RSoXSBase/energyscancore.py:361:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/energyscancore.py:362:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/energyscancore.py:363:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/energyscancore.py:364:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/energyscancore.py:396:23: F821 undefined name 'Shutter_trigger'
+./startup/RSoXS/RSoXSBase/alignment.py:5:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/alignment.py:6:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/alignment.py:7:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/alignment.py:8:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/alignment.py:9:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/alignment.py:10:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/alignment.py:12:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/alignment.py:13:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/alignment.py:14:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/alignment.py:15:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/alignment.py:16:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/alignment.py:17:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/alignment.py:22:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/alignment.py:23:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/alignment.py:83:16: F821 undefined name 'psh10'
+./startup/RSoXS/RSoXSBase/alignment.py:85:16: F821 undefined name 'psh10'
+./startup/RSoXS/RSoXSBase/alignment.py:97:23: F821 undefined name 'en'
+./startup/RSoXS/RSoXSBase/alignment.py:98:16: F821 undefined name 'set_polarization'
+./startup/RSoXS/RSoXSBase/alignment.py:99:5: F821 undefined name 'set_exposure'
+./startup/RSoXS/RSoXSBase/alignment.py:103:16: F821 undefined name 'spiral_square'
+./startup/RSoXS/RSoXSBase/alignment.py:122:31: F821 undefined name 'en'
+./startup/RSoXS/RSoXSBase/alignment.py:125:13: F821 undefined name 'set_exposure'
+./startup/RSoXS/RSoXSBase/alignment.py:129:16: F821 undefined name 'spiral_square'
+./startup/RSoXS/RSoXSBase/alignment.py:145:20: F821 undefined name 'load_sample'
+./startup/RSoXS/RSoXSBase/alignment.py:147:9: F821 undefined name 'sample'
+./startup/RSoXS/RSoXSBase/alignment.py:157:31: F821 undefined name 'en'
+./startup/RSoXS/RSoXSBase/alignment.py:161:16: F821 undefined name 'spiral_square'
+./startup/RSoXS/RSoXSBase/alignment.py:177:20: F821 undefined name 'load_sample'
+./startup/RSoXS/RSoXSBase/alignment.py:195:13: F821 undefined name 'db0'
+./startup/RSoXS/RSoXSBase/alignment.py:209:15: F821 undefined name 'datetime'
+./startup/RSoXS/RSoXSBase/alignment.py:217:12: F821 undefined name 'isnumeric'
+./startup/RSoXS/RSoXSBase/alignment.py:220:28: F821 undefined name 'pos'
+./startup/RSoXS/RSoXSBase/alignment.py:221:20: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/alignment.py:223:20: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/alignment.py:275:9: F841 local variable 'image' is assigned to but never used
+./startup/RSoXS/RSoXSBase/alignment.py:276:116: E501 line too long (117 > 115 characters)
+./startup/RSoXS/RSoXSBase/alignment.py:299:16: F821 undefined name 'sample_by_name'
+./startup/RSoXS/RSoXSBase/alignment.py:300:28: F821 undefined name 'sample_by_name'
+./startup/RSoXS/RSoXSBase/alignment.py:301:16: F821 undefined name 'sample_by_name'
+./startup/RSoXS/RSoXSBase/alignment.py:302:28: F821 undefined name 'sample_by_name'
+./startup/RSoXS/RSoXSBase/alignment.py:307:16: F821 undefined name 'sample_by_name'
+./startup/RSoXS/RSoXSBase/alignment.py:308:28: F821 undefined name 'sample_by_name'
+./startup/RSoXS/RSoXSBase/alignment.py:313:16: F821 undefined name 'sample_by_name'
+./startup/RSoXS/RSoXSBase/alignment.py:316:16: F821 undefined name 'sample_by_name'
+./startup/RSoXS/RSoXSBase/alignment.py:322:16: F821 undefined name 'sample_by_name'
+./startup/RSoXS/RSoXSBase/alignment.py:323:28: F821 undefined name 'sample_by_name'
+./startup/RSoXS/RSoXSBase/alignment.py:324:16: F821 undefined name 'sample_by_name'
+./startup/RSoXS/RSoXSBase/alignment.py:325:28: F821 undefined name 'sample_by_name'
+./startup/RSoXS/RSoXSBase/alignment.py:346:116: E501 line too long (120 > 115 characters)
+./startup/RSoXS/RSoXSBase/alignment.py:374:18: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/alignment.py:377:18: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/alignment.py:377:37: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/alignment.py:381:18: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/alignment.py:430:39: E203 whitespace before ':'
+./startup/RSoXS/RSoXSBase/alignment.py:459:9: F821 undefined name 'loc'
+./startup/RSoXS/RSoXSBase/alignment.py:489:16: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/alignment.py:491:16: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/alignment.py:493:16: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/alignment.py:495:16: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/alignment.py:520:17: F821 undefined name 'sample_by_name'
+./startup/RSoXS/RSoXSBase/alignment.py:521:17: F821 undefined name 'sample_by_name'
+./startup/RSoXS/RSoXSBase/alignment.py:522:16: F821 undefined name 'sample_by_name'
+./startup/RSoXS/RSoXSBase/alignment.py:523:16: F821 undefined name 'sample_by_name'
+./startup/RSoXS/RSoXSBase/alignment.py:560:9: F841 local variable 'y_image_offset_back' is assigned to but never used
+./startup/RSoXS/RSoXSBase/alignment.py:750:20: F821 undefined name 'load_sample'
+./startup/RSoXS/RSoXSBase/alignment.py:769:12: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/alignment.py:771:12: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/alignment.py:773:12: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/alignment.py:783:116: E501 line too long (116 > 115 characters)
+./startup/RSoXS/RSoXSBase/alignment.py:785:116: E501 line too long (116 > 115 characters)
+./startup/RSoXS/RSoXSBase/alignment.py:788:12: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/alignment.py:790:12: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/alignment.py:792:12: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/configurations.py:5:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/configurations.py:5:1: F401 'bluesky.plans as bp' imported but unused
+./startup/RSoXS/RSoXSBase/configurations.py:6:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/configurations.py:7:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/configurations.py:7:1: F401 'time' imported but unused
+./startup/RSoXS/RSoXSBase/configurations.py:8:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/configurations.py:8:1: F401 'IPython.core.magic.register_line_magic' imported but unused
+./startup/RSoXS/RSoXSBase/configurations.py:9:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/configurations.py:9:1: F403 'from ..RSoXSObjects.motors import *' used; unable to detect undefined names
+./startup/RSoXS/RSoXSBase/configurations.py:10:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/configurations.py:10:1: F403 'from ..SSTObjects.mirrors import *' used; unable to detect undefined names
+./startup/RSoXS/RSoXSBase/configurations.py:11:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/configurations.py:11:1: F403 'from ..SSTObjects.motors import *' used; unable to detect undefined names
+./startup/RSoXS/RSoXSBase/configurations.py:12:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/configurations.py:12:1: F403 'from ..RSoXSObjects.slits import *' used; unable to detect undefined names
+./startup/RSoXS/RSoXSBase/configurations.py:19:23: F405 'Shutter_Y' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:23:23: F405 'Shutter_Y' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:27:23: F405 'Izero_Y' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:31:23: F405 'Izero_Y' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:35:23: F405 'Izero_Y' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:39:23: F405 'Izero_Y' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:43:23: F405 'Det_S' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:47:23: F405 'Det_S' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:51:23: F405 'Det_S' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:55:23: F405 'Det_W' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:59:23: F405 'Det_W' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:63:23: F405 'Det_W' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:67:23: F405 'BeamStopW' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:71:23: F405 'BeamStopW' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:75:23: F405 'BeamStopS' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:79:23: F405 'BeamStopS' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:83:23: F405 'Det_S' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:83:35: F405 'Det_W' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:87:23: F405 'Det_S' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:87:35: F405 'Det_W' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:91:23: F405 'BSw' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:91:31: F405 'BSs' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:96:9: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:98:9: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:100:9: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:102:9: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:104:9: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:106:9: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:108:9: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:110:9: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:112:9: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:114:9: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:116:9: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:118:9: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:125:9: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:127:9: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:129:9: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:131:9: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:133:9: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:135:9: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:142:9: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:144:9: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:146:9: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:148:9: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:150:9: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:152:9: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:154:9: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:156:9: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:158:9: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:160:9: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:162:9: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:164:9: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:170:23: F405 'mir3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:172:23: F405 'mir3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:174:23: F405 'mir3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:176:23: F405 'mir3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:178:23: F405 'mir3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:180:23: F405 'mir3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:185:23: F405 'mir1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:186:23: F405 'mir1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:187:23: F405 'mir1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:188:23: F405 'mir1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:189:23: F405 'mir1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:190:23: F405 'mir1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:194:23: F405 'mir3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:195:23: F405 'mir3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:196:23: F405 'mir3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:197:23: F405 'mir3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:198:23: F405 'mir3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:199:23: F405 'mir3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:203:23: F405 'mir1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:205:23: F405 'mir1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:207:23: F405 'mir1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:209:23: F405 'mir1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:211:23: F405 'mir1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:213:23: F405 'mir1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:217:16: F405 'psh10' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:220:9: F405 'Shutter_Y' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:220:25: F405 'Izero_Y' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:220:39: F405 'Det_S' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:220:49: F405 'Det_W' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:220:61: F405 'BeamStopW' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:220:75: F405 'BeamStopS' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:227:23: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:228:23: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:229:23: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:230:23: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:231:23: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:232:23: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:233:23: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:234:23: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:235:23: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:236:23: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:237:23: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:238:23: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:239:23: F405 'Shutter_Y' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:240:23: F405 'Izero_Y' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:241:23: F405 'Det_W' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:242:23: F405 'Det_S' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:243:23: F405 'BeamStopS' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:244:23: F405 'BeamStopW' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:245:23: F405 'Exit_Slit' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:263:23: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:264:23: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:265:23: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:266:23: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:267:23: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:268:23: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:269:23: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:270:23: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:271:23: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:272:23: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:273:23: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:274:23: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:275:23: F405 'Shutter_Y' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:276:23: F405 'Izero_Y' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:277:23: F405 'Det_W' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:278:23: F405 'Det_S' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:279:23: F405 'BeamStopS' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:280:23: F405 'BeamStopW' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:281:23: F405 'Exit_Slit' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:299:23: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:300:23: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:301:23: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:302:23: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:303:23: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:304:23: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:305:23: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:306:23: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:307:23: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:308:23: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:309:23: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:310:23: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:311:23: F405 'Shutter_Y' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:312:23: F405 'Izero_Y' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:313:23: F405 'Det_W' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:314:23: F405 'Det_S' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:315:23: F405 'BeamStopS' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:316:23: F405 'BeamStopW' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:317:23: F405 'Exit_Slit' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:333:16: F405 'psh10' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:336:9: F405 'Shutter_Y' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:336:25: F405 'Izero_Y' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:336:39: F405 'Det_W' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:336:51: F405 'BeamStopW' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:336:68: F405 'sam_Y' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:343:23: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:344:23: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:345:23: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:346:23: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:347:23: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:348:23: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:349:23: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:350:23: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:351:23: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:352:23: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:353:23: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:354:23: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:355:23: F405 'Shutter_Y' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:356:23: F405 'Izero_Y' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:357:23: F405 'Det_W' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:358:23: F405 'BeamStopW' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:359:23: F405 'Exit_Slit' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:377:23: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:378:23: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:379:23: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:380:23: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:381:23: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:382:23: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:383:23: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:384:23: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:385:23: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:386:23: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:387:23: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:388:23: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:389:23: F405 'Shutter_Y' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:390:23: F405 'Izero_Y' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:391:23: F405 'Det_W' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:392:23: F405 'Det_S' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:393:23: F405 'BeamStopW' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:394:23: F405 'Exit_Slit' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:412:23: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:413:23: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:414:23: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:415:23: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:416:23: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:417:23: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:418:23: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:419:23: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:420:23: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:421:23: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:422:23: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:423:23: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:424:23: F405 'Shutter_Y' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:425:23: F405 'Izero_Y' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:426:23: F405 'Det_W' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:427:23: F405 'BeamStopW' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:428:23: F405 'Exit_Slit' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:446:23: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:447:23: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:448:23: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:449:23: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:450:23: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:451:23: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:452:23: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:453:23: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:454:23: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:455:23: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:456:23: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:457:23: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:458:23: F405 'Shutter_Y' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:459:23: F405 'Izero_Y' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:460:23: F405 'Det_W' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:461:23: F405 'Det_S' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:462:23: F405 'BeamStopW' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:463:23: F405 'Exit_Slit' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:481:23: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:482:23: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:483:23: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:484:23: F405 'slits1' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:485:23: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:486:23: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:487:23: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:488:23: F405 'slits2' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:489:23: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:490:23: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:491:23: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:492:23: F405 'slits3' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:493:23: F405 'Shutter_Y' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:494:23: F405 'Izero_Y' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:495:23: F405 'Det_W' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:496:23: F405 'Det_S' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:497:23: F405 'BeamStopW' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:498:23: F405 'BeamStopS' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:514:16: F405 'psh10' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:519:9: F405 'Shutter_Y' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:521:9: F405 'Izero_Y' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:523:9: F405 'Det_W' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:525:9: F405 'Det_S' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:527:9: F405 'BeamStopW' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:529:9: F405 'BeamStopS' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:531:9: F405 'sam_Y' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:533:9: F405 'sam_X' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:535:9: F405 'sam_Z' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:537:9: F405 'sam_Th' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:539:9: F405 'en' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:541:9: F405 'Exit_Slit' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:545:16: F405 'grating_to_1200' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:547:23: F405 'mono_en' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:549:23: F405 'en' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/configurations.py:550:5: F405 'RE' may be undefined, or defined from star imports: ..RSoXSObjects.motors, ..RSoXSObjects.slits, ..SSTObjects.mirrors, ..SSTObjects.motors
+./startup/RSoXS/RSoXSBase/common_metadata.py:1:1: F401 'IPython.core.magic.register_line_magic' imported but unused
+./startup/RSoXS/RSoXSBase/common_metadata.py:3:1: F401 'json' imported but unused
+./startup/RSoXS/RSoXSBase/common_metadata.py:3:19: E401 multiple imports on one line
+./startup/RSoXS/RSoXSBase/common_metadata.py:5:1: F401 'copy.deepcopy' imported but unused
+./startup/RSoXS/RSoXSBase/common_metadata.py:7:1: F401 'math.floor' imported but unused
+./startup/RSoXS/RSoXSBase/common_metadata.py:14:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/common_metadata.py:16:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/common_metadata.py:16:1: F403 'from .configurations import *' used; unable to detect undefined names
+./startup/RSoXS/RSoXSBase/common_metadata.py:17:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/common_metadata.py:17:1: F401 '.startup.bec' imported but unused
+./startup/RSoXS/RSoXSBase/common_metadata.py:18:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/common_metadata.py:19:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/common_metadata.py:31:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/common_metadata.py:32:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/common_metadata.py:32:1: F401 '..RSoXSObjects.cameras.SampleViewer_cam' imported but unused
+./startup/RSoXS/RSoXSBase/common_metadata.py:33:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/common_metadata.py:33:1: F401 '..SSTObjects.diode.Shutter_enable' imported but unused
+./startup/RSoXS/RSoXSBase/common_metadata.py:33:1: F401 '..SSTObjects.diode.Shutter_control' imported but unused
+./startup/RSoXS/RSoXSBase/common_metadata.py:34:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/common_metadata.py:35:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/common_metadata.py:35:1: F401 '..RSoXSObjects.signals.Beamstop_SAXS' imported but unused
+./startup/RSoXS/RSoXSBase/common_metadata.py:35:1: F401 '..RSoXSObjects.signals.Beamstop_WAXS' imported but unused
+./startup/RSoXS/RSoXSBase/common_metadata.py:35:1: F401 '..RSoXSObjects.signals.DiodeRange' imported but unused
+./startup/RSoXS/RSoXSBase/common_metadata.py:36:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/common_metadata.py:178:8: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:182:8: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:186:8: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:190:8: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:198:8: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:202:8: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:208:8: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:244:5: F405 'sample_recenter_sample' may be undefined, or defined from star imports: .configurations
+./startup/RSoXS/RSoXSBase/common_metadata.py:324:11: F405 'none' may be undefined, or defined from star imports: .configurations
+./startup/RSoXS/RSoXSBase/common_metadata.py:445:8: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:453:8: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:459:8: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:465:8: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:471:8: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:475:8: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:481:8: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:485:8: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:491:8: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:495:8: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:499:8: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:503:8: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:512:8: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:519:8: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:523:8: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:527:8: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:531:8: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:537:8: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:541:8: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:547:8: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:552:8: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:555:8: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:560:8: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:573:8: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:576:12: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:583:12: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:591:12: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:599:12: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:611:8: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:615:9: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:616:12: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:824:24: F405 'all_out' may be undefined, or defined from star imports: .configurations
+./startup/RSoXS/RSoXSBase/common_metadata.py:871:14: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:896:116: E501 line too long (118 > 115 characters)
+./startup/RSoXS/RSoXSBase/common_metadata.py:1026:16: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:1028:16: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:1030:16: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:1032:16: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/common_metadata.py:1034:9: F405 'sample_recenter_sample' may be undefined, or defined from star imports: .configurations
+./startup/RSoXS/RSoXSBase/contingencies.py:5:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/contingencies.py:6:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/contingencies.py:7:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/contingencies.py:12:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/contingencies.py:12:1: F401 '..RSoXSBase.startup.db' imported but unused
+./startup/RSoXS/RSoXSBase/contingencies.py:12:1: F401 '..RSoXSBase.startup.bec' imported but unused
+./startup/RSoXS/RSoXSBase/contingencies.py:13:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/contingencies.py:14:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/contingencies.py:14:1: F401 '..RSoXSObjects.motors.sam_Y' imported but unused
+./startup/RSoXS/RSoXSBase/contingencies.py:14:1: F401 '..RSoXSObjects.motors.sam_Th' imported but unused
+./startup/RSoXS/RSoXSBase/contingencies.py:14:1: F401 '..RSoXSObjects.motors.sam_Z' imported but unused
+./startup/RSoXS/RSoXSBase/contingencies.py:14:1: F401 '..RSoXSObjects.motors.sam_viewer' imported but unused
+./startup/RSoXS/RSoXSBase/contingencies.py:15:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/contingencies.py:15:1: F401 '..RSoXSObjects.cameras.SampleViewer_cam' imported but unused
+./startup/RSoXS/RSoXSBase/contingencies.py:16:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/contingencies.py:16:1: F401 '..SSTObjects.diode.Shutter_enable' imported but unused
+./startup/RSoXS/RSoXSBase/contingencies.py:16:1: F401 '..SSTObjects.diode.Shutter_control' imported but unused
+./startup/RSoXS/RSoXSBase/contingencies.py:17:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/contingencies.py:17:1: F401 '..RSoXSObjects.signals.Beamstop_SAXS' imported but unused
+./startup/RSoXS/RSoXSBase/contingencies.py:17:1: F401 '..RSoXSObjects.signals.Beamstop_WAXS' imported but unused
+./startup/RSoXS/RSoXSBase/contingencies.py:17:1: F401 '..RSoXSObjects.signals.DiodeRange' imported but unused
+./startup/RSoXS/RSoXSBase/contingencies.py:18:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/contingencies.py:30:26: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/contingencies.py:127:116: E501 line too long (139 > 115 characters)
+./startup/RSoXS/RSoXSBase/slack.py:5:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/energyscans.py:5:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/energyscans.py:6:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/energyscans.py:6:1: F401 'bluesky.plans as bp' imported but unused
+./startup/RSoXS/RSoXSBase/energyscans.py:7:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/energyscans.py:8:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/energyscans.py:8:1: F401 'copy.deepcopy' imported but unused
+./startup/RSoXS/RSoXSBase/energyscans.py:17:14: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/energyscans.py:62:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/energyscans.py:85:16: F821 undefined name 'en_scan_core'
+./startup/RSoXS/RSoXSBase/energyscans.py:126:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/energyscans.py:150:16: F821 undefined name 'en_scan_core'
+./startup/RSoXS/RSoXSBase/energyscans.py:191:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/energyscans.py:211:16: F821 undefined name 'en_scan_core'
+./startup/RSoXS/RSoXSBase/energyscans.py:252:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/energyscans.py:277:16: F821 undefined name 'en_scan_core'
+./startup/RSoXS/RSoXSBase/energyscans.py:318:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/energyscans.py:343:16: F821 undefined name 'en_scan_core'
+./startup/RSoXS/RSoXSBase/energyscans.py:384:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/energyscans.py:407:16: F821 undefined name 'en_scan_core'
+./startup/RSoXS/RSoXSBase/energyscans.py:448:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/energyscans.py:474:16: F821 undefined name 'en_scan_core'
+./startup/RSoXS/RSoXSBase/energyscans.py:515:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/energyscans.py:543:16: F821 undefined name 'en_scan_core'
+./startup/RSoXS/RSoXSBase/energyscans.py:584:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/energyscans.py:612:16: F821 undefined name 'en_scan_core'
+./startup/RSoXS/RSoXSBase/energyscans.py:653:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/energyscans.py:682:16: F821 undefined name 'en_scan_core'
+./startup/RSoXS/RSoXSBase/energyscans.py:725:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/energyscans.py:743:16: F821 undefined name 'en_scan_core'
+./startup/RSoXS/RSoXSBase/energyscans.py:784:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/energyscans.py:810:16: F821 undefined name 'en_scan_core'
+./startup/RSoXS/RSoXSBase/energyscans.py:851:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/energyscans.py:879:16: F821 undefined name 'en_scan_core'
+./startup/RSoXS/RSoXSBase/energyscans.py:920:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/energyscans.py:939:16: F821 undefined name 'en_scan_core'
+./startup/RSoXS/RSoXSBase/energyscans.py:980:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/energyscans.py:999:16: F821 undefined name 'en_scan_core'
+./startup/RSoXS/RSoXSBase/energyscans.py:1040:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/energyscans.py:1066:16: F821 undefined name 'en_scan_core'
+./startup/RSoXS/RSoXSBase/energyscans.py:1107:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/energyscans.py:1117:28: F821 undefined name 'mir3'
+./startup/RSoXS/RSoXSBase/energyscans.py:1127:16: F821 undefined name 'en_scan_core'
+./startup/RSoXS/RSoXSBase/energyscans.py:1168:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/energyscans.py:1194:16: F821 undefined name 'en_scan_core'
+./startup/RSoXS/RSoXSBase/energyscans.py:1235:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/energyscans.py:1261:16: F821 undefined name 'en_scan_core'
+./startup/RSoXS/RSoXSBase/energyscans.py:1302:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/energyscans.py:1323:16: F821 undefined name 'en_scan_core'
+./startup/RSoXS/RSoXSBase/energyscans.py:1364:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/energyscans.py:1386:16: F821 undefined name 'en_scan_core'
+./startup/RSoXS/RSoXSBase/energyscans.py:1427:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/energyscans.py:1449:16: F821 undefined name 'en_scan_core'
+./startup/RSoXS/RSoXSBase/energyscans.py:1490:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/energyscans.py:1511:16: F821 undefined name 'en_scan_core'
+./startup/RSoXS/RSoXSBase/energyscans.py:1552:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/energyscans.py:1583:16: F821 undefined name 'en_scan_core'
+./startup/RSoXS/RSoXSBase/energyscans.py:1624:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/energyscans.py:1643:16: F821 undefined name 'en_scan_core'
+./startup/RSoXS/RSoXSBase/energyscans.py:1684:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/energyscans.py:1703:16: F821 undefined name 'en_scan_core'
+./startup/RSoXS/RSoXSBase/energyscans.py:1746:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/energyscans.py:1765:16: F821 undefined name 'en_scan_core'
+./startup/RSoXS/RSoXSBase/energyscans.py:1806:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/energyscans.py:1825:16: F821 undefined name 'en_scan_core'
+./startup/RSoXS/RSoXSBase/energyscans.py:1871:13: F821 undefined name 'read_input'
+./startup/RSoXS/RSoXSBase/energyscans.py:1887:20: F821 undefined name 'rotate_now'
+./startup/RSoXS/RSoXSBase/energyscans.py:1888:20: F821 undefined name 'en_scan_core'
+./startup/RSoXS/RSoXSBase/syringepump.py:5:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/syringepump.py:5:1: F401 'ophyd.EpicsMotor' imported but unused
+./startup/RSoXS/RSoXSBase/syringepump.py:5:1: F401 'ophyd.PVPositioner' imported but unused
+./startup/RSoXS/RSoXSBase/syringepump.py:5:1: F401 'ophyd.PVPositionerPC' imported but unused
+./startup/RSoXS/RSoXSBase/syringepump.py:13:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/syringepump.py:13:1: F401 'ophyd.FormattedComponent' imported but unused
+./startup/RSoXS/RSoXSBase/detectors.py:5:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/detectors.py:6:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/detectors.py:7:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/detectors.py:10:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/detectors.py:10:1: F401 'ophyd.areadetector.StatsPlugin' imported but unused
+./startup/RSoXS/RSoXSBase/detectors.py:10:1: F401 'ophyd.areadetector.ProcessPlugin' imported but unused
+./startup/RSoXS/RSoXSBase/detectors.py:20:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/detectors.py:21:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/detectors.py:23:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/detectors.py:23:1: F401 'bluesky.preprocessors.make_decorator' imported but unused
+./startup/RSoXS/RSoXSBase/detectors.py:24:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/detectors.py:24:1: F401 'bluesky_darkframes' imported but unused
+./startup/RSoXS/RSoXSBase/detectors.py:26:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/detectors.py:27:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/detectors.py:28:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/detectors.py:28:1: F811 redefinition of unused 'en' from line 26
+./startup/RSoXS/RSoXSBase/detectors.py:28:1: F401 '..RSoXSObjects.energy.en' imported but unused
+./startup/RSoXS/RSoXSBase/detectors.py:28:1: F401 '..RSoXSObjects.energy.mono_en' imported but unused
+./startup/RSoXS/RSoXSBase/detectors.py:28:1: F401 '..RSoXSObjects.energy.epu_gap' imported but unused
+./startup/RSoXS/RSoXSBase/detectors.py:28:1: F401 '..RSoXSObjects.energy.grating_to_250' imported but unused
+./startup/RSoXS/RSoXSBase/detectors.py:28:1: F401 '..RSoXSObjects.energy.grating_to_1200' imported but unused
+./startup/RSoXS/RSoXSBase/detectors.py:28:1: F401 '..RSoXSObjects.energy.set_polarization' imported but unused
+./startup/RSoXS/RSoXSBase/detectors.py:28:1: F401 '..RSoXSObjects.energy.Mono_Scan_Speed_ev' imported but unused
+./startup/RSoXS/RSoXSBase/detectors.py:28:1: F401 '..RSoXSObjects.energy.Mono_Scan_Start' imported but unused
+./startup/RSoXS/RSoXSBase/detectors.py:28:1: F401 '..RSoXSObjects.energy.Mono_Scan_Start_ev' imported but unused
+./startup/RSoXS/RSoXSBase/detectors.py:28:1: F401 '..RSoXSObjects.energy.Mono_Scan_Stop' imported but unused
+./startup/RSoXS/RSoXSBase/detectors.py:28:1: F401 '..RSoXSObjects.energy.Mono_Scan_Stop_ev' imported but unused
+./startup/RSoXS/RSoXSBase/detectors.py:41:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/detectors.py:41:1: F401 '..RSoXSObjects.signals.DiodeRange' imported but unused
+./startup/RSoXS/RSoXSBase/detectors.py:42:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/detectors.py:48:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/detectors.py:48:1: F401 '..RSoXSBase.startup.RE' imported but unused
+./startup/RSoXS/RSoXSBase/detectors.py:49:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/detectors.py:51:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/detectors.py:51:1: F401 'bluesky.plans as bp' imported but unused
+./startup/RSoXS/RSoXSBase/detectors.py:324:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/detectors.py:325:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/detectors.py:326:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/detectors.py:327:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/common_procedures.py:5:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/common_procedures.py:6:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/common_procedures.py:7:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/common_procedures.py:8:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/common_procedures.py:9:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/common_procedures.py:9:1: F401 'suitcase.tiff_series' imported but unused
+./startup/RSoXS/RSoXSBase/common_procedures.py:9:1: F401 'suitcase.csv' imported but unused
+./startup/RSoXS/RSoXSBase/common_procedures.py:10:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/common_procedures.py:10:1: F401 'datetime' imported but unused
+./startup/RSoXS/RSoXSBase/common_procedures.py:11:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/common_procedures.py:11:1: F401 'queue' imported but unused
+./startup/RSoXS/RSoXSBase/common_procedures.py:12:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/common_procedures.py:12:1: F401 'PIL.Image' imported but unused
+./startup/RSoXS/RSoXSBase/common_procedures.py:13:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/common_procedures.py:14:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/common_procedures.py:15:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/common_procedures.py:15:1: F401 '..RSoXSObjects.signals.Beamstop_SAXS' imported but unused
+./startup/RSoXS/RSoXSBase/common_procedures.py:16:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/common_procedures.py:26:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/common_procedures.py:27:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/common_procedures.py:28:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/common_procedures.py:29:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/common_procedures.py:29:1: F401 '..RSoXSObjects.detectors.saxs_det' imported but unused
+./startup/RSoXS/RSoXSBase/common_procedures.py:30:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/common_procedures.py:31:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/common_procedures.py:32:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/common_procedures.py:33:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/common_procedures.py:90:34: F821 undefined name 'bec'
+./startup/RSoXS/RSoXSBase/common_procedures.py:91:23: F821 undefined name 'bec'
+./startup/RSoXS/RSoXSBase/common_procedures.py:92:18: F821 undefined name 'bec'
+./startup/RSoXS/RSoXSBase/common_procedures.py:102:13: F821 undefined name 'plt'
+./startup/RSoXS/RSoXSBase/common_procedures.py:103:13: F821 undefined name 'plt'
+./startup/RSoXS/RSoXSBase/common_procedures.py:104:13: F821 undefined name 'plt'
+./startup/RSoXS/RSoXSBase/common_procedures.py:105:13: F821 undefined name 'plt'
+./startup/RSoXS/RSoXSBase/common_procedures.py:106:5: F821 undefined name 'plt'
+./startup/RSoXS/RSoXSBase/common_procedures.py:107:5: F821 undefined name 'plt'
+./startup/RSoXS/RSoXSBase/common_procedures.py:108:5: F821 undefined name 'plt'
+./startup/RSoXS/RSoXSBase/common_procedures.py:109:5: F821 undefined name 'plt'
+./startup/RSoXS/RSoXSBase/common_procedures.py:117:5: F821 undefined name 'bec'
+./startup/RSoXS/RSoXSBase/common_procedures.py:238:13: F821 undefined name 'plt'
+./startup/RSoXS/RSoXSBase/common_procedures.py:239:13: F821 undefined name 'plt'
+./startup/RSoXS/RSoXSBase/common_procedures.py:240:13: F821 undefined name 'plt'
+./startup/RSoXS/RSoXSBase/common_procedures.py:241:5: F821 undefined name 'plt'
+./startup/RSoXS/RSoXSBase/common_procedures.py:242:5: F821 undefined name 'plt'
+./startup/RSoXS/RSoXSBase/common_procedures.py:243:5: F821 undefined name 'plt'
+./startup/RSoXS/RSoXSBase/common_procedures.py:274:5: F821 undefined name 'bec'
+./startup/RSoXS/RSoXSBase/common_procedures.py:445:6: F821 undefined name 'bpp'
+./startup/RSoXS/RSoXSBase/common_procedures.py:446:6: F821 undefined name 'bpp'
+./startup/RSoXS/RSoXSBase/common_procedures.py:456:19: F821 undefined name 'Msg'
+./startup/RSoXS/RSoXSBase/common_procedures.py:540:11: F632 use ==/!= to compare str, bytes, and int literals
+./startup/RSoXS/RSoXSBase/startup.py:5:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/startup.py:6:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/startup.py:8:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/startup.py:9:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/startup.py:11:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/startup.py:11:1: F401 'appdirs' imported but unused
+./startup/RSoXS/RSoXSBase/startup.py:17:1: E266 too many leading '#' for block comment
+./startup/RSoXS/RSoXSBase/startup.py:28:10: F821 undefined name 'get_ipython'
+./startup/RSoXS/RSoXSBase/startup.py:29:10: F821 undefined name 'get_ipython'
+./startup/RSoXS/RSoXSBase/startup.py:43:10: F821 undefined name 'uns_dict'
+./startup/RSoXS/RSoXSBase/startup.py:44:10: F821 undefined name 'uns_dict'
+./startup/RSoXS/RSoXSBase/startup.py:45:10: F821 undefined name 'uns_dict'
+./startup/RSoXS/RSoXSBase/startup.py:46:11: F821 undefined name 'uns_dict'
+./startup/RSoXS/RSoXSBase/startup.py:138:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/startup.py:138:1: F811 redefinition of unused 'msgpack' from line 54
+./startup/RSoXS/RSoXSBase/startup.py:138:1: F811 redefinition of unused 'msgpack_numpy' from line 55
+./startup/RSoXS/RSoXSBase/startup.py:138:23: E401 multiple imports on one line
+./startup/RSoXS/RSoXSBase/startup.py:236:1: E302 expected 2 blank lines, found 1
+./startup/RSoXS/RSoXSBase/startup.py:252:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/startup.py:257:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/startup.py:262:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/startup.py:263:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/startup.py:263:1: F401 'bluesky.log' imported but unused
+./startup/RSoXS/RSoXSBase/startup.py:272:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/magics.py:7:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/magics.py:10:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/magics.py:11:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/magics.py:25:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/magics.py:26:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/magics.py:27:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/magics.py:34:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/magics.py:35:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/magics.py:36:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/magics.py:134:5: E722 do not use bare 'except'
+./startup/RSoXS/RSoXSBase/magics.py:148:5: E722 do not use bare 'except'
+./startup/RSoXS/RSoXSBase/magics.py:158:1: E266 too many leading '#' for block comment
+./startup/RSoXS/RSoXSBase/magics.py:191:5: E722 do not use bare 'except'
+./startup/RSoXS/RSoXSBase/magics.py:205:5: E722 do not use bare 'except'
+./startup/RSoXS/RSoXSBase/magics.py:260:5: E722 do not use bare 'except'
+./startup/RSoXS/RSoXSBase/magics.py:274:5: E722 do not use bare 'except'
+./startup/RSoXS/RSoXSBase/magics.py:288:5: E722 do not use bare 'except'
+./startup/RSoXS/RSoXSBase/magics.py:302:5: E722 do not use bare 'except'
+./startup/RSoXS/RSoXSBase/magics.py:327:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/magics.py:328:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/magics.py:361:6: F821 undefined name 'get_ipython'
