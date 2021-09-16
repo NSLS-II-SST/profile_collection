@@ -1,6 +1,3 @@
-from ..CommonFunctions.functions import run_report
-
-
 from ophyd import (
     Component as Cpt,
     Device,
@@ -8,6 +5,8 @@ from ophyd import (
 )
 import time
 import bluesky.plan_stubs as bps
+from ..CommonFunctions.functions import run_report
+
 
 run_report(__file__)
 

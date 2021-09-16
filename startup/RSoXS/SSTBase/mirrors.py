@@ -1,4 +1,3 @@
-from ..CommonFunctions.functions import run_report
 from ophyd import (
     Device,
     Component as Cpt,
@@ -7,6 +6,8 @@ from ophyd import (
     EpicsSignalRO,
 )
 from ophyd import FormattedComponent as FmtCpt
+from ..CommonFunctions.functions import run_report
+
 
 run_report(__file__)
 

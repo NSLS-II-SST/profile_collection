@@ -1,6 +1,8 @@
-from ..CommonFunctions.functions import run_report
 from ophyd import EpicsSignal
+
+from ..CommonFunctions.functions import run_report
 from ..SSTBase.mirrors import HexapodMirror, FMBHexapodMirror
+
 
 run_report(__file__)
 

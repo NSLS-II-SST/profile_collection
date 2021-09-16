@@ -1,4 +1,3 @@
-from ..CommonFunctions.functions import run_report
 from cycler import cycler
 from bluesky.utils import Msg, short_uid as _short_uid
 import bluesky.utils as utils
@@ -46,6 +45,7 @@ from ..SSTObjects.diode import (
     Shutter_enable,
     Shutter_trigger,
 )
+from ..CommonFunctions.functions import run_report
 
 
 run_report(__file__)

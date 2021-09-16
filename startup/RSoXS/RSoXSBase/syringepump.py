@@ -1,11 +1,11 @@
-from ..CommonFunctions.functions import run_report
-
 from ophyd import (
     Device,
     EpicsSignal,
     EpicsSignalRO,
 )
 from ophyd import Component as Cpt, DynamicDeviceComponent as DDC
+from ..CommonFunctions.functions import run_report
+
 
 run_report(__file__)
 

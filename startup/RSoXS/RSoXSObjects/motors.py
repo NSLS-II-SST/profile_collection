@@ -1,6 +1,7 @@
+from ophyd.sim import motor1
+
 from ..CommonFunctions.functions import run_report
 from ..SSTBase.motors import prettymotor, prettymotorgeneric
-from ophyd.sim import motor1
 
 
 run_report(__file__)

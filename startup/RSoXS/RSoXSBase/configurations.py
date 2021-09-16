@@ -1,5 +1,5 @@
-from ..CommonFunctions.functions import run_report
 import bluesky.plan_stubs as bps
+from ..CommonFunctions.functions import run_report
 from ..RSoXSObjects.motors import (
     Shutter_Y,
     Izero_Y,

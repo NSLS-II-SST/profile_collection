@@ -1,4 +1,3 @@
-from ..CommonFunctions.functions import run_report
 from matplotlib import pyplot as plt
 import numpy as np
 import bluesky.plans as bp
@@ -28,7 +27,7 @@ from ..SSTObjects.gatevalves import gv28, gv27a, gvll
 from ..SSTObjects.shutters import psh10
 from ..SSTObjects.vacuum import rsoxs_ll_gpwr
 from ..RSoXSBase.startup import bec
-
+from ..CommonFunctions.functions import run_report
 
 run_report(__file__)
 

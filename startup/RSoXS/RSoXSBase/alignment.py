@@ -1,5 +1,3 @@
-from ..CommonFunctions.functions import run_report
-
 import numpy as np
 import bluesky.plans as bp
 import bluesky.plan_stubs as bps
@@ -24,6 +22,7 @@ from ..RSoXSObjects.detectors import saxs_det, waxs_det, set_exposure
 from ..SSTObjects.shutters import psh10
 from ..RSoXSObjects.energy import en, set_polarization
 from ..RSoXSBase.common_metadata import sample
+from ..CommonFunctions.functions import run_report
 
 
 run_report(__file__)

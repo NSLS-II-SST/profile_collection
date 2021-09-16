@@ -1,9 +1,10 @@
-from ..CommonFunctions.functions import run_report
 from ophyd import EpicsMotor, EpicsSignal
 from ophyd import Component as Cpt
-from ..CommonFunctions.functions import boxed_text, colored, whisper
 import bluesky.plan_stubs as bps
+from ..CommonFunctions.functions import boxed_text, colored, whisper
 from ..RSoXSBase.startup import RE
+from ..CommonFunctions.functions import run_report
+
 
 run_report(__file__)
 

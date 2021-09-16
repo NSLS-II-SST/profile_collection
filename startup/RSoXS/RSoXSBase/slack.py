@@ -1,8 +1,8 @@
+from slack import WebClient
 from ..CommonFunctions.functions import run_report
 
-run_report(__file__)
 
-from slack import WebClient
+run_report(__file__)
 
 
 class RSoXSBot:

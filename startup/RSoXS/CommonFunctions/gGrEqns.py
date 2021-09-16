@@ -1,3 +1,5 @@
+import numpy as np
+import scipy.optimize as opt
 from ..CommonFunctions.functions import run_report
 
 run_report(__file__)
@@ -10,10 +12,6 @@ assumes all angular arguments are passed as degrees
 assumes length units are in mm 
 @author: dvorak
 """
-
-import numpy as np
-import scipy.optimize as opt
-
 
 def getAlphaDeg(eV, beta_deg, k_invmm, m):
     # calculate alpha in deg

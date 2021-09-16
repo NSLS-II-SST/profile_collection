@@ -1,11 +1,12 @@
-from ..CommonFunctions.functions import run_report
-
-run_report(__file__)
 import os
 import nslsii
 import time
 from pathlib import Path
 import appdirs
+
+from ..CommonFunctions.functions import run_report
+
+run_report(__file__)
 
 # Use caproto not pyepics.
 # os.environ['OPHYD_CONTROL_LAYER'] = 'pyepics'

@@ -1,13 +1,12 @@
-from ..CommonFunctions.functions import run_report
 import bluesky.plan_stubs as bps
 import datetime
 import logging
-
 global no_notifications_until
 from ..RSoXSBase.startup import RE
 from ..RSoXSObjects.slackbot import rsoxs_bot
 from ..RSoXSObjects.motors import sam_X
 from ..SSTObjects.motors import gratingx, mirror2x, mirror2, grating
+from ..CommonFunctions.functions import run_report
 
 
 run_report(__file__)

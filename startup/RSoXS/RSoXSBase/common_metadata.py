@@ -4,8 +4,8 @@ import pandas as pd
 import numpy as np
 import datetime
 from ophyd import Device
-from ..CommonFunctions.functions import run_report
 import bluesky.plan_stubs as bps
+from ..CommonFunctions.functions import run_report
 from .configurations import all_out
 from .startup import RE, db, db0
 from ..RSoXSObjects.slackbot import rsoxs_bot

@@ -1,7 +1,7 @@
-from ..CommonFunctions.functions import run_report
 from ophyd import EpicsMotor, PseudoPositioner, PseudoSingle, Component as Cpt
 from ophyd.pseudopos import pseudo_position_argument, real_position_argument
-from ..CommonFunctions.functions import boxed_text
+from ..CommonFunctions.functions import boxed_text,run_report
+
 
 run_report(__file__)
 

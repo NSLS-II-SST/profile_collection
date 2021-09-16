@@ -1,6 +1,7 @@
+import bluesky.plan_stubs as bps
 from ..CommonFunctions.functions import run_report
 from ..SSTBase.slits import Slits
-import bluesky.plan_stubs as bps
+
 
 run_report(__file__)
 

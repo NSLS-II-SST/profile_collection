@@ -1,8 +1,8 @@
-from ..CommonFunctions.functions import run_report, read_input
 import numpy as np
 import bluesky.plan_stubs as bps
 from .energyscancore import en_scan_core
 from ..RSoXSBase.alignment import rotate_now
+from ..CommonFunctions.functions import run_report, read_input
 
 run_report(__file__)
 

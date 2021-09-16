@@ -1,4 +1,3 @@
-from ..CommonFunctions.functions import run_report
 from ophyd import (
     ProsilicaDetector,
     SingleTrigger,
@@ -18,6 +17,8 @@ from ophyd.areadetector.filestore_mixins import (
 )
 from ophyd import Component as Cpt
 from nslsii.ad33 import SingleTriggerV33, StatsPluginV33
+from ..CommonFunctions.functions import run_report
+
 
 run_report(__file__)
 

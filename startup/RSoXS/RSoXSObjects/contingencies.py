@@ -15,7 +15,9 @@ from ..RSoXSObjects.signals import ring_current
 from ..RSoXSObjects.motors import sam_X
 from ..RSoXSBase.startup import RE
 
+
 run_report(__file__)
+
 
 suspend_gvll = SuspendBoolLow(
     gvll.state,

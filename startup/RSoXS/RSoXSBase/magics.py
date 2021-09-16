@@ -1,14 +1,14 @@
+# This file should only be run if ipython is being used ... put that check here!
+from IPython.core.magic import register_line_magic
+import bluesky.plan_stubs as bps
+
 from ..CommonFunctions.functions import run_report, boxed_text
+
 
 run_report(__file__)
 
-# This file should only be run if ipython is being used ... put that check here!
 
-from IPython.core.magic import register_line_magic
-
-import bluesky.plan_stubs as bps
-
-# motors
+# Motors
 
 from ..RSoXSObjects.motors import (
     sam_Y,

@@ -1,10 +1,10 @@
-from ..CommonFunctions.functions import run_report
 import pytz
 from datetime import datetime as datet, timedelta
 import numpy as np
 import pandas as pd
 import requests
 import matplotlib.pyplot as plt
+from ..CommonFunctions.functions import run_report
 
 
 run_report(__file__)

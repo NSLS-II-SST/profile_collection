@@ -1,6 +1,3 @@
-from ..CommonFunctions.functions import run_report
-
-
 from ophyd import (
     PVPositioner,
     EpicsSignalRO,
@@ -10,17 +7,18 @@ from ophyd import (
     EpicsSignal,
 )
 from ophyd import Component as Cpt
-
 import bluesky.plan_stubs as bps
 from ophyd.pseudopos import pseudo_position_argument, real_position_argument
-
 import pathlib
 import numpy as np
 import xarray as xr
 
-from ..CommonFunctions.functions import boxed_text, colored
+from ..CommonFunctions.functions import boxed_text, colored,run_report
 from ..SSTBase.motors import prettymotor
 from ..RSoXSObjects.motors import sam_Th
+from ..SSTObjects.shutters import psh4
+from ..SSTObjects.motors import grating, mirror2
+
 
 run_report(__file__)
 
@@ -460,8 +458,6 @@ def set_polarization(pol):
     return 0
 
 
-from ..SSTObjects.shutters import psh4
-from ..SSTObjects.motors import grating, mirror2
 
 
 def grating_to_250():
