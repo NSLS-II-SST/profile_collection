@@ -22,6 +22,8 @@ from ..RSoXSObjects.signals import DiodeRange
 from ..SSTObjects.diode import Shutter_open_time, Shutter_control, Shutter_enable, Shutter_delay
 from ..RSoXSBase.startup import RE
 
+import bluesky.plans as bp
+
 class TIFFPluginWithFileStore(TIFFPlugin, FileStoreTIFFIterativeWrite):
     """Add this as a component to detectors that write TIFFs."""
     def __init__(self, *args, **kwargs):

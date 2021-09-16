@@ -2,6 +2,7 @@ from ..CommonFunctions.functions import run_report
 run_report(__file__)
 
 import bluesky.plan_stubs as bps
+import bluesky.plans as bp
 from ..RSoXSBase.detectors import *
 from ..RSoXSObjects.motors import Det_S, Det_W, sam_Th, sam_X, sam_Y, sam_Z
 
