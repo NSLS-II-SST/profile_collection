@@ -8,6 +8,7 @@ from ophyd.sim import motor1
 from ..CommonFunctions.functions import boxed_text,colored
 
 import bluesky.plan_stubs as bps
+from ..RSoXSBase.startup import RE
 
 class FMBOEpicsMotor(EpicsMotor):
     resolution = Cpt(EpicsSignal, '.MRES')
