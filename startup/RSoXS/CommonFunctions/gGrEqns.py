@@ -13,6 +13,7 @@ assumes length units are in mm
 @author: dvorak
 """
 
+
 def getAlphaDeg(eV, beta_deg, k_invmm, m):
     # calculate alpha in deg
     # eV: energy

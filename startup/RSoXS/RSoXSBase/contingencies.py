@@ -1,6 +1,7 @@
 import bluesky.plan_stubs as bps
 import datetime
 import logging
+
 global no_notifications_until
 from ..RSoXSBase.startup import RE
 from ..RSoXSObjects.slackbot import rsoxs_bot

@@ -13,7 +13,7 @@ import pathlib
 import numpy as np
 import xarray as xr
 
-from ..CommonFunctions.functions import boxed_text, colored,run_report
+from ..CommonFunctions.functions import boxed_text, colored, run_report
 from ..SSTBase.motors import prettymotor
 from ..RSoXSObjects.motors import sam_Th
 from ..SSTObjects.shutters import psh4
@@ -456,8 +456,6 @@ def set_polarization(pol):
     yield from bps.mv(en.polarization, pol)
     en.read()
     return 0
-
-
 
 
 def grating_to_250():
