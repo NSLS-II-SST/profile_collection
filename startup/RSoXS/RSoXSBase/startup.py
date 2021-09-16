@@ -4,6 +4,7 @@ run_report(__file__)
 import os
 import nslsii
 
+import time
 from pathlib import Path
 
 import appdirs
