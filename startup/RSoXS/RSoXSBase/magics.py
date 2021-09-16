@@ -1,15 +1,6 @@
 # This file should only be run if ipython is being used ... put that check here!
 from IPython.core.magic import register_line_magic
 import bluesky.plan_stubs as bps
-
-from ..CommonFunctions.functions import run_report, boxed_text
-
-
-run_report(__file__)
-
-
-# Motors
-
 from ..RSoXSObjects.motors import (
     sam_Y,
     sam_Th,
@@ -36,6 +27,10 @@ from ..RSoXSObjects.detectors import (
 from ..RSoXSBase.common_metadata import sample, user
 from ..RSoXSBase.startup import RE
 from ..RSoXSObjects.energy import en, set_polarization
+from ..CommonFunctions.functions import run_report, boxed_text
+
+
+run_report(__file__)
 
 
 @register_line_magic

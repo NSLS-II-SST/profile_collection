@@ -178,8 +178,8 @@ def spiralsearchwaxs(diameter=0.6, stepsize=0.2, energy=None, master_plan=None):
 
 
 def spiralsearchwaxs_all(barin=[], diameter=0.5, stepsize=0.2):
-    for sample in barin:
-        yield from load_sample(sample)
+    for samp in barin:
+        yield from load_sample(samp)
         RE.md["project_name"] = "spiral_searches"
         yield from spiralsearchwaxs(
             diameter, stepsize, master_plan="spiralsearchwaxs_all"

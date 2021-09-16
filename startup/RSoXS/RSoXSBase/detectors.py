@@ -1,4 +1,5 @@
 import time
+from bluesky.run_engine import Msg
 from ophyd import Component as C
 from ophyd import EpicsSignalRO, Device, EpicsSignal
 from ophyd.areadetector import (
@@ -18,7 +19,6 @@ from ..SSTObjects.diode import (
     Shutter_enable,
     Shutter_delay,
 )
-from bluesky.run_engine import Msg
 from ..CommonFunctions.functions import run_report
 
 
