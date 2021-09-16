@@ -23,6 +23,7 @@ from ..RSoXSObjects.signals import Beamstop_SAXS, Beamstop_WAXS, DiodeRange
 from ..RSoXSObjects.detectors import saxs_det, waxs_det, set_exposure
 from ..SSTObjects.shutters import psh10
 from ..RSoXSObjects.energy import en, set_polarization
+from ..RSoXSBase.common_metadata import sample
 
 
 run_report(__file__)
@@ -461,7 +462,7 @@ def print_click(event):
     item.append({"motor": "y", "position": event.xdata})
     item.append({"motor": "z", "position": 0})
     item.append({"motor": "th", "position": 180})
-    bar[loc]["location"] = item
+    bar[barloc]["location"] = item
     print(f"Setting location {barloc} on bar to clicked position")
 
 

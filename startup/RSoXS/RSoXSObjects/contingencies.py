@@ -1,3 +1,5 @@
+import logging
+from bluesky.suspenders import SuspendBoolHigh, SuspendFloor, SuspendBoolLow
 from ..CommonFunctions.functions import run_report
 from ..RSoXSBase.contingencies import (
     beamdown_notice,
@@ -12,8 +14,6 @@ from ..SSTObjects.shutters import psh4, psh1
 from ..RSoXSObjects.signals import ring_current
 from ..RSoXSObjects.motors import sam_X
 from ..RSoXSBase.startup import RE
-import logging
-from bluesky.suspenders import SuspendBoolHigh, SuspendFloor, SuspendBoolLow
 
 run_report(__file__)
 

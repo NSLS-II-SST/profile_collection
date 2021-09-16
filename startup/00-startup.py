@@ -1,41 +1,41 @@
-from RSoXS.CommonFunctions.functions import run_report
+from .RSoXS.CommonFunctions.functions import run_report
 
 run_report(__file__)
 
 # SST devices  These all reference the base classes and instantiate the objects themselves into the current namespace
-from RSoXS.SSTObjects.gatevalves import *
-from RSoXS.SSTObjects.shutters import *
-from RSoXS.SSTObjects.vacuum import *
-from RSoXS.SSTObjects.motors import *
-from RSoXS.SSTObjects.mirrors import *
-from RSoXS.SSTObjects.diode import *
+from .RSoXS.SSTObjects.gatevalves import *
+from .RSoXS.SSTObjects.shutters import *
+from .RSoXS.SSTObjects.vacuum import *
+from .RSoXS.SSTObjects.motors import *
+from .RSoXS.SSTObjects.mirrors import *
+from .RSoXS.SSTObjects.diode import *
 
 # SST code  # Common code
-from RSoXS.SSTBase.archiver import *
+from .RSoXS.SSTBase.archiver import *
 
 # RSoXS startup - bluesky RE / db / md definitions
-from RSoXS.RSoXSBase.startup import *
+from .RSoXS.RSoXSBase.startup import *
 
 # RSoXS specific devices
-from RSoXS.RSoXSObjects.motors import *
-from RSoXS.RSoXSObjects.cameras import *
-from RSoXS.RSoXSObjects.signals import *
-from RSoXS.RSoXSObjects.detectors import *
-from RSoXS.RSoXSObjects.slits import *
-from RSoXS.RSoXSObjects.syringepump import *
-from RSoXS.RSoXSObjects.energy import *
+from .RSoXS.RSoXSObjects.motors import *
+from .RSoXS.RSoXSObjects.cameras import *
+from .RSoXS.RSoXSObjects.signals import *
+from .RSoXS.RSoXSObjects.detectors import *
+from .RSoXS.RSoXSObjects.slits import *
+from .RSoXS.RSoXSObjects.syringepump import *
+from .RSoXS.RSoXSObjects.energy import *
 
 # RSoXS specific code
-from RSoXS.RSoXSBase.configurations import *
-from RSoXS.RSoXSBase.schemas import *
-from RSoXS.RSoXSBase.PVdictionary import *
-from RSoXS.RSoXSBase.common_procedures import *
-from RSoXS.RSoXSBase.common_metadata import *
-from RSoXS.RSoXSBase.energyscancore import *
-from RSoXS.RSoXSBase.energyscans import *
-from RSoXS.RSoXSBase.NEXAFSscans import *
-from RSoXS.RSoXSBase.alignment import *
-from RSoXS.RSoXSObjects.slackbot import rsoxs_bot
+from .RSoXS.RSoXSBase.configurations import *
+from .RSoXS.RSoXSBase.schemas import *
+from .RSoXS.RSoXSBase.PVdictionary import *
+from .RSoXS.RSoXSBase.common_procedures import *
+from .RSoXS.RSoXSBase.common_metadata import *
+from .RSoXS.RSoXSBase.energyscancore import *
+from .RSoXS.RSoXSBase.energyscans import *
+from .RSoXS.RSoXSBase.NEXAFSscans import *
+from .RSoXS.RSoXSBase.alignment import *
+from .RSoXS.RSoXSObjects.slackbot import rsoxs_bot
 
 try:
     from bluesky_queueserver import is_re_worker_active
@@ -125,6 +125,11 @@ sd.monitors.extend(
     ]
 )
 
+# setup the preprocessors
 
 RE.preprocessors.append(dark_frame_preprocessor_waxs)
 RE.preprocessors.append(dark_frame_preprocessor_saxs)
+
+# setup the contingencies
+
+from .RSoXS.RSoXSObjects.contingencies import *

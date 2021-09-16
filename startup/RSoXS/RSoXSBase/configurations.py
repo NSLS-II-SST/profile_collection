@@ -18,6 +18,7 @@ from ..SSTObjects.motors import Exit_Slit
 from ..SSTObjects.shutters import psh10
 from ..RSoXSObjects.energy import en, mono_en, grating_to_1200
 from ..RSoXSObjects.slits import slits1, slits2, slits3
+from ..RSoXSBase.startup import RE
 
 run_report(__file__)
 

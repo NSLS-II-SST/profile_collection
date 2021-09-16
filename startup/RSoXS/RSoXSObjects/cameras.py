@@ -32,12 +32,16 @@ crosshair_saxs.x.kind = "hinted"
 crosshair_saxs.y.kind = "hinted"
 #
 #
+
+
 def crosshair_on():
     crosshair.use.set(1)
 
 
 #
 #
+
+
 def crosshair_off():
     crosshair.use.set(0)
 
