@@ -100,7 +100,7 @@ sd.baseline.extend(
         gv26,
         gv27,
         gv27a,
-        gv28,lo
+        gv28,
         gvTEM,
         gvll,
         gvturbo,
