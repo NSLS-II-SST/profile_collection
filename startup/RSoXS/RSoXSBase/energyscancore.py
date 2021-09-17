@@ -244,7 +244,7 @@ def NEXAFS_fly_scan_core(
     openshutter=False,
     m3_pitch=7.9,
     diode_range=7,
-    pol=np.nan,
+    pol=0,
     grating="best",
     exp_time=0.5,
     enscan_type=None,
