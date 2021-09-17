@@ -26,15 +26,15 @@ from RSoXS.RSoXSObjects.syringepump import *
 from RSoXS.RSoXSObjects.energy import *
 
 # RSoXS specific code
+from RSoXS.RSoXSBase.common_metadata import *
+from RSoXS.RSoXSBase.common_procedures import *
+from RSoXS.RSoXSBase.alignment import *
 from RSoXS.RSoXSBase.configurations import *
 from RSoXS.RSoXSBase.schemas import *
 from RSoXS.RSoXSBase.PVdictionary import *
-from RSoXS.RSoXSBase.common_metadata import *
-from RSoXS.RSoXSBase.common_procedures import *
 from RSoXS.RSoXSBase.energyscancore import *
 from RSoXS.RSoXSBase.energyscans import *
 from RSoXS.RSoXSBase.NEXAFSscans import *
-from RSoXS.RSoXSBase.alignment import *
 from RSoXS.RSoXSObjects.slackbot import rsoxs_bot
 
 try:

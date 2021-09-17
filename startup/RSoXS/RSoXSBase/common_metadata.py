@@ -306,7 +306,6 @@ def get_md_from_config(config):
 
 def load_configuration(config):
     """
-
     :param config: string containing a name of a configuration
     :return:
     """
