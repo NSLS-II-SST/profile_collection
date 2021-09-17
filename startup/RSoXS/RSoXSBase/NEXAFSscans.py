@@ -1,7 +1,7 @@
 import numpy as np
 from ..RSoXSObjects.energy import en
 from ..RSoXSObjects.signals import Sample_TEY, Izero_Mesh, Beamstop_SAXS, Beamstop_WAXS
-from ..RSoXSBase.common_metadata import sample, load_sample
+from ..RSoXSBase.alignment import sample, load_sample
 from ..RSoXSBase.alignment import rotate_now
 from .energyscancore import NEXAFS_fly_scan_core, NEXAFS_scan_core
 from .energyscans import clean_up_md

@@ -20,7 +20,7 @@ from ..RSoXSObjects.energy import (
 )
 from ..SSTObjects.diode import Shutter_control, Shutter_enable
 from ..RSoXSObjects.slits import slits1, slits2
-from ..RSoXSBase.common_metadata import load_configuration
+from ..RSoXSBase.alignment import load_configuration
 from ..RSoXSObjects.detectors import set_exposure, waxs_det, saxs_det
 from ..RSoXSObjects.motors import sam_Th, sam_Y
 from ..SSTObjects.gatevalves import gv28, gv27a, gvll

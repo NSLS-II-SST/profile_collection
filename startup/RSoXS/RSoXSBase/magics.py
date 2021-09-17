@@ -26,7 +26,7 @@ from ..RSoXSObjects.detectors import (
     snapshot,
     exposure,
 )
-from ..RSoXSBase.common_metadata import sample, user
+from ..RSoXSBase.alignment import sample, user
 from ..RSoXSBase.startup import RE
 from ..RSoXSObjects.energy import en, set_polarization
 from ..CommonFunctions.functions import run_report, boxed_text

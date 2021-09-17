@@ -36,7 +36,7 @@ from ..RSoXSObjects.energy import (
 from ..SSTObjects.mirrors import mir3
 from ..RSoXSObjects.detectors import waxs_det
 from ..RSoXSObjects.signals import DiodeRange
-from ..RSoXSBase.common_metadata import sample
+from ..RSoXSBase.alignment import sample
 from ..RSoXSBase.alignment import rotate_now
 from ..RSoXSBase.common_procedures import set_exposure
 from ..SSTObjects.diode import (
