@@ -21,7 +21,6 @@ from ..SSTObjects.motors import grating, mirror2
 
 
 run_report(__file__)
-startup_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
 class UndulatorMotor(EpicsMotor):
     user_setpoint = Cpt(EpicsSignal, "-SP", limits=True)
