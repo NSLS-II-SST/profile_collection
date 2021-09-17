@@ -119,7 +119,7 @@ def one_trigger_nd_step(detectors, step, pos_cache):
 def en_scan_core(
     signals=[],
     dets=[],
-    energy=en,
+    energy=None,
     energies=[],
     times=[],
     enscan_type=None,
@@ -132,6 +132,8 @@ def en_scan_core(
     md={},
 ):
     # grab locals
+    if energy is None:
+        energy = en
     arguments = dict(locals())
     del arguments["md"]  # no recursion here!
     arguments["dets"] = [det.name for det in arguments["dets"]]
