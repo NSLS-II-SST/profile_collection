@@ -1,6 +1,4 @@
-import numpy as np
 import bluesky.plans as bp
-import bluesky.plan_stubs as bps
 from matplotlib import pyplot as plt
 import queue
 from PIL import Image
@@ -12,7 +10,6 @@ import datetime
 from ophyd import Device
 import bluesky.plan_stubs as bps
 from .startup import RE, db, bec, db0
-from ..RSoXSObjects.slackbot import rsoxs_bot
 from ..RSoXSObjects.motors import sam_X, sam_Y, sam_Th, sam_Z, sam_viewer
 from ..RSoXSObjects.cameras import SampleViewer_cam
 from ..SSTObjects.diode import Shutter_enable, Shutter_control
@@ -21,10 +18,7 @@ from ..RSoXSObjects.detectors import saxs_det, waxs_det, set_exposure
 from ..SSTObjects.shutters import psh10
 from ..RSoXSObjects.energy import en, set_polarization
 from ..CommonFunctions.functions import run_report
-
-from ..CommonFunctions.functions import run_report
 from .configurations import all_out
-from .startup import RE, db, db0
 from ..RSoXSObjects.slackbot import rsoxs_bot
 from ..RSoXSObjects.motors import (
     sam_X,
@@ -1112,7 +1106,7 @@ def spiralsearch(
     pol=0,
     exposure=1,
     master_plan=None,
-    dets=[saxs_det],
+    dets=[],
 ):
     yield from bps.mv(en, energy)
     yield from set_polarization(pol)

@@ -118,7 +118,7 @@ def one_trigger_nd_step(detectors, step, pos_cache):
 # @dark_frames_enable
 def en_scan_core(
     signals=[],
-    dets=[waxs_det],
+    dets=[],
     energy=en,
     energies=[],
     times=[],

@@ -271,10 +271,10 @@ def snapsaxs(line):
     try:
         secs = float(line)
     except:
-        RE(snapshot(det=saxs_det))
+        RE(snapshot(detn='saxs'))
     else:
         if secs > 0 and secs < 100:
-            RE(snapshot(secs, det=saxs_det))
+            RE(snapshot(secs, detn='saxs'))
 
 
 del snapsaxs
@@ -285,10 +285,10 @@ def snapwaxs(line):
     try:
         secs = float(line)
     except:
-        RE(snapshot(det=waxs_det))
+        RE(snapshot(detn='waxs'))
     else:
         if secs > 0 and secs < 100:
-            RE(snapshot(secs, det=waxs_det))
+            RE(snapshot(secs, detn='waxs'))
 
 
 del snapwaxs
