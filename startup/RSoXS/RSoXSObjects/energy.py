@@ -21,7 +21,7 @@ from ..SSTObjects.motors import grating, mirror2
 
 
 run_report(__file__)
-
+startup_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
 class UndulatorMotor(EpicsMotor):
     user_setpoint = Cpt(EpicsSignal, "-SP", limits=True)
@@ -299,7 +299,7 @@ class EnPos(PseudoPositioner):
         self,
         a,
         rotation_motor=None,
-        configpath=pathlib.Path(get_ipython().profile_dir.startup_dir) / "config",
+        configpath=pathlib.Path(__file__).parent.absolute() / "config",
         **kwargs,
     ):
         super().__init__(a, **kwargs)
