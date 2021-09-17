@@ -554,7 +554,7 @@ def scan_eliot(detectors, cycler, exp_time, *, md={}):
     return (yield from inner_scan_eliot())
 
 
-def fly_scan_eliot(scan_params, polarization=np.nan, grating="best", *, md={}):
+def fly_scan_eliot(scan_params, polarization=0, grating="best", *, md={}):
     """
     Specific scan for SST-1 monochromator fly scan, while catching up with the undulator
 
