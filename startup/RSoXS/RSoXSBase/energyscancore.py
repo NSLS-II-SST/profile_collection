@@ -242,8 +242,8 @@ def NEXAFS_scan_core(
 def NEXAFS_fly_scan_core(
     scan_params,
     openshutter=False,
-    m3_pitch=np.nan,
-    diode_range=np.nan,
+    m3_pitch=7.9,
+    diode_range=7,
     pol=np.nan,
     grating="best",
     exp_time=0.5,
