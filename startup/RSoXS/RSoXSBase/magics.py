@@ -1,6 +1,8 @@
 # This file should only be run if ipython is being used ... put that check here!
 from IPython.core.magic import register_line_magic
 import bluesky.plan_stubs as bps
+from IPython.terminal.prompts import Prompts, Token
+import datetime
 from ..RSoXSObjects.motors import (
     sam_Y,
     sam_Th,
@@ -321,8 +323,7 @@ def u(line):
 
 del md, u
 
-from IPython.terminal.prompts import Prompts, Token
-import datetime
+
 
 
 class RSoXSPrompt(Prompts):

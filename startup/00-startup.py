@@ -29,8 +29,8 @@ from RSoXS.RSoXSObjects.energy import *
 from RSoXS.RSoXSBase.configurations import *
 from RSoXS.RSoXSBase.schemas import *
 from RSoXS.RSoXSBase.PVdictionary import *
-from RSoXS.RSoXSBase.common_procedures import *
 from RSoXS.RSoXSBase.common_metadata import *
+from RSoXS.RSoXSBase.common_procedures import *
 from RSoXS.RSoXSBase.energyscancore import *
 from RSoXS.RSoXSBase.energyscans import *
 from RSoXS.RSoXSBase.NEXAFSscans import *
@@ -100,7 +100,7 @@ sd.baseline.extend(
         gv26,
         gv27,
         gv27a,
-        gv28,
+        gv28,lo
         gvTEM,
         gvll,
         gvturbo,
