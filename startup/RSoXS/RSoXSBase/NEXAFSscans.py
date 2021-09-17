@@ -13,8 +13,6 @@ run_report(__file__)
 
 def full_Carbon_NEXAFS(
     sigs=[],
-    dets=[Sample_TEY, Izero_Mesh, Beamstop_WAXS],
-    energy=en,
     pol=0,
     diode_range=7,
     m3_pitch=7.98,
@@ -65,8 +63,6 @@ def full_Carbon_NEXAFS(
 
     yield from NEXAFS_scan_core(
         sigs,
-        dets,
-        energy,
         energies,
         enscan_type=enscan_type,
         master_plan=master_plan,
