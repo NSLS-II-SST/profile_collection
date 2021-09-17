@@ -333,15 +333,17 @@ class RSoXSPrompt(Prompts):
 
         if (
             len(RE.md["proposal_id"]) > 0
+            and len(RE.md["institution"]) > 0
             and len(RE.md["project_name"]) > 0
             and len(RE.md["cycle"]) > 0
         ):
             RSoXStoken = (
                 Token.Prompt,
                 "RSoXS "
-                + "{}/{}/{}/auto/{}/ ".format(
+                + "{}/{}-{}/{}/auto/{}/ ".format(
                     RE.md["cycle"],
                     RE.md["proposal_id"],
+                    RE.md["institution"],
                     RE.md["project_name"],
                     formatted_date,
                 ),
