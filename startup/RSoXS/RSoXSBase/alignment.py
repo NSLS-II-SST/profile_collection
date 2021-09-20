@@ -1258,8 +1258,8 @@ def map_bar_from_spirals(bar, num_previous_scans=150):
 # correct_bar(bar,af1x,af1y,af2x,af2y)
 
 
-def image_bar(path=None, front=True):
-    global loc_Q,bar
+def image_bar(bar,path=None, front=True):
+    global loc_Q
     loc_Q = queue.Queue(1)
     ypos = np.arange(-100, 110, 25)
     images = []
@@ -1270,17 +1270,17 @@ def image_bar(path=None, front=True):
     image = stitch_sample(
         images, 25, -6
     )  # this will start the interactive pointing of samples
-    update_bar(loc_Q, front)
+    update_bar(bar,loc_Q, front)
     if isinstance(path, str):
         im = Image.fromarray(image)
         im.save(path)
 
 
-def locate_samples_from_image(impath, front=True):
+def locate_samples_from_image(bar,impath, front=True):
     # if the image was just taken itself, before a bar was compiled, then this can be run to just load that image
     # and then interactively place the elements of bar
     global loc_Q
-    global bar # user needs to define the 'bar' in their namespace
+    # user needs to define the 'bar' in their namespace
     loc_Q = queue.Queue(1)
     if front:
         image = stitch_sample(
@@ -1289,10 +1289,10 @@ def locate_samples_from_image(impath, front=True):
     else:
         image = stitch_sample(False, False, False, from_image=impath, flip_file=False)
     # stitch samples will be sending signals, update bar will catch those signals and assign the positions to the bar
-    update_bar(loc_Q, front)
+    update_bar(bar,loc_Q, front)
 
 
-def update_bar(loc_Q, front):
+def update_bar(bar,loc_Q, front):
     """
     updated with whether we are pointing at the front or the back of the bar
     """
@@ -1302,9 +1302,8 @@ def update_bar(loc_Q, front):
         loc_Q.get_nowait()
     except Exception:
         ...
-    global bar
-    def worker():
-        global bar, sample_image_axes
+    def worker(bar):
+        global sample_image_axes
         samplenum = 0
         lastclicked = 0
         if front:
@@ -1313,8 +1312,8 @@ def update_bar(loc_Q, front):
             AF2 = default_sample("AF2_front")
             if sample_by_name(bar, "AF1_front") is not None:
                 bar.remove(sample_by_name(bar, "AF1_front"))
-            if sample_by_name(gbar, "AF2_front") is not None:
-                bar.remove(sample_by_name(gbar, "AF2_front"))
+            if sample_by_name(bar, "AF2_front") is not None:
+                bar.remove(sample_by_name(bar, "AF2_front"))
             bar.insert(0, AF1)
             bar.append(AF2)
             # add in a diode position as well
