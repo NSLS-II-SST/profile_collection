@@ -1301,7 +1301,7 @@ def update_bar(bar, loc_Q, front):
         loc_Q.get_nowait()
     except Exception:
         ...
-
+    global bar
     def worker():
         global bar, sample_image_axes
         samplenum = 0

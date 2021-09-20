@@ -140,7 +140,6 @@
 ./startup/RSoXS/RSoXSBase/energyscancore.py:84:5: F841 local variable 'motors' is assigned to but never used
 ./startup/RSoXS/RSoXSBase/energyscancore.py:202:8: F632 use ==/!= to compare str, bytes, and int literals
 ./startup/RSoXS/RSoXSBase/energyscancore.py:290:1: E266 too many leading '#' for block comment
-./startup/RSoXS/RSoXSBase/alignment.py:181:9: F402 import 'sample' from line 24 shadowed by loop variable
 ./startup/RSoXS/RSoXSBase/alignment.py:280:9: F841 local variable 'image' is assigned to but never used
 ./startup/RSoXS/RSoXSBase/alignment.py:281:116: E501 line too long (117 > 115 characters)
 ./startup/RSoXS/RSoXSBase/alignment.py:351:116: E501 line too long (120 > 115 characters)
@@ -226,22 +225,15 @@
 ./startup/RSoXS/RSoXSBase/startup.py:261:1: E402 module level import not at top of file
 ./startup/RSoXS/RSoXSBase/startup.py:261:1: F401 'bluesky.log' imported but unused
 ./startup/RSoXS/RSoXSBase/startup.py:270:1: E402 module level import not at top of file
-./startup/RSoXS/RSoXSBase/magics.py:13:1: E402 module level import not at top of file
-./startup/RSoXS/RSoXSBase/magics.py:27:1: E402 module level import not at top of file
-./startup/RSoXS/RSoXSBase/magics.py:28:1: E402 module level import not at top of file
-./startup/RSoXS/RSoXSBase/magics.py:29:1: E402 module level import not at top of file
-./startup/RSoXS/RSoXSBase/magics.py:36:1: E402 module level import not at top of file
-./startup/RSoXS/RSoXSBase/magics.py:37:1: E402 module level import not at top of file
-./startup/RSoXS/RSoXSBase/magics.py:38:1: E402 module level import not at top of file
-./startup/RSoXS/RSoXSBase/magics.py:136:5: E722 do not use bare 'except'
-./startup/RSoXS/RSoXSBase/magics.py:150:5: E722 do not use bare 'except'
-./startup/RSoXS/RSoXSBase/magics.py:160:1: E266 too many leading '#' for block comment
-./startup/RSoXS/RSoXSBase/magics.py:193:5: E722 do not use bare 'except'
-./startup/RSoXS/RSoXSBase/magics.py:207:5: E722 do not use bare 'except'
-./startup/RSoXS/RSoXSBase/magics.py:262:5: E722 do not use bare 'except'
-./startup/RSoXS/RSoXSBase/magics.py:276:5: E722 do not use bare 'except'
-./startup/RSoXS/RSoXSBase/magics.py:290:5: E722 do not use bare 'except'
-./startup/RSoXS/RSoXSBase/magics.py:304:5: E722 do not use bare 'except'
-./startup/RSoXS/RSoXSBase/magics.py:329:1: E402 module level import not at top of file
-./startup/RSoXS/RSoXSBase/magics.py:330:1: E402 module level import not at top of file
-./startup/RSoXS/RSoXSBase/magics.py:363:6: F821 undefined name 'get_ipython'
+./startup/RSoXS/RSoXSBase/magics.py:131:5: E722 do not use bare 'except'
+./startup/RSoXS/RSoXSBase/magics.py:145:5: E722 do not use bare 'except'
+./startup/RSoXS/RSoXSBase/magics.py:155:1: E266 too many leading '#' for block comment
+./startup/RSoXS/RSoXSBase/magics.py:188:5: E722 do not use bare 'except'
+./startup/RSoXS/RSoXSBase/magics.py:202:5: E722 do not use bare 'except'
+./startup/RSoXS/RSoXSBase/magics.py:257:5: E722 do not use bare 'except'
+./startup/RSoXS/RSoXSBase/magics.py:271:5: E722 do not use bare 'except'
+./startup/RSoXS/RSoXSBase/magics.py:285:5: E722 do not use bare 'except'
+./startup/RSoXS/RSoXSBase/magics.py:299:5: E722 do not use bare 'except'
+./startup/RSoXS/RSoXSBase/magics.py:324:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/magics.py:325:1: E402 module level import not at top of file
+./startup/RSoXS/RSoXSBase/magics.py:358:6: F821 undefined name 'get_ipython'
