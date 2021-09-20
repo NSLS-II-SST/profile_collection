@@ -1258,8 +1258,8 @@ def map_bar_from_spirals(bar, num_previous_scans=150):
 # correct_bar(bar,af1x,af1y,af2x,af2y)
 
 
-def image_bar(bar,path=None, front=True):
-    global loc_Q
+def image_bar(path=None, front=True):
+    global loc_Q,bar
     loc_Q = queue.Queue(1)
     ypos = np.arange(-100, 110, 25)
     images = []
@@ -1276,10 +1276,10 @@ def image_bar(bar,path=None, front=True):
         im.save(path)
 
 
-def locate_samples_from_image(bar,impath, front=True):
+def locate_samples_from_image(impath, front=True):
     # if the image was just taken itself, before a bar was compiled, then this can be run to just load that image
     # and then interactively place the elements of bar
-    global loc_Q
+    global loc_Q,bar
     # user needs to define the 'bar' in their namespace
     loc_Q = queue.Queue(1)
     if front:
@@ -1289,20 +1289,21 @@ def locate_samples_from_image(bar,impath, front=True):
     else:
         image = stitch_sample(False, False, False, from_image=impath, flip_file=False)
     # stitch samples will be sending signals, update bar will catch those signals and assign the positions to the bar
-    update_bar(bar,loc_Q, front)
+    update_bar(loc_Q, front)
 
 
-def update_bar(bar,loc_Q, front):
+def update_bar(loc_Q, front):
     """
     updated with whether we are pointing at the front or the back of the bar
     """
     from threading import Thread
-
+    global bar
     try:
         loc_Q.get_nowait()
     except Exception:
         ...
-    def worker(bar):
+    def worker():
+        global bar
         global sample_image_axes
         samplenum = 0
         lastclicked = 0
