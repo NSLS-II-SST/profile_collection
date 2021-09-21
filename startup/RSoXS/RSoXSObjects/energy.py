@@ -467,8 +467,8 @@ def grating_to_250():
     yield from bps.abs_set(mono_en.gratingtype, 2, wait=False)
     yield from bps.abs_set(mono_en.gratingtype_proc, 1, wait=True)
     yield from bps.sleep(60)
-    yield from bps.mv(mirror2.user_offset, 8.1388)
-    yield from bps.mv(grating.user_offset, 7.2788)  # 7.30525 (from limit)
+    yield from bps.mv(mirror2.user_offset, 0.1745) #8.1388)
+    yield from bps.mv(grating.user_offset, 0.047) #7.2788)  # 7.30525 (from limit)
     yield from bps.mv(mono_en.cff, 1.385)
     yield from bps.mv(en, 270)
     yield from psh4.open()
@@ -485,8 +485,8 @@ def grating_to_1200():
     yield from bps.abs_set(mono_en.gratingtype, 9, wait=False)
     yield from bps.abs_set(mono_en.gratingtype_proc, 1, wait=True)
     yield from bps.sleep(60)
-    yield from bps.mv(mirror2.user_offset, 8.1264)
-    yield from bps.mv(grating.user_offset, 7.2964)  # 7.2948)#7.2956
+    yield from bps.mv(mirror2.user_offset, 0.1745)#8.1264)
+    yield from bps.mv(grating.user_offset, 0.047)#7.2964)  # 7.2948)#7.2956
     yield from bps.mv(mono_en.cff, 1.7)
     yield from bps.mv(en, 270)
     yield from psh4.open()
