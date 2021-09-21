@@ -18,7 +18,7 @@ from ..RSoXSObjects.detectors import saxs_det, waxs_det, set_exposure
 from ..SSTObjects.shutters import psh10
 from ..RSoXSObjects.energy import en, set_polarization
 from ..CommonFunctions.functions import run_report
-from .configurations import all_out
+from .configurations import all_out, WAXS_SAXSslits,WAXS,SAXS,WAXSNEXAFS,SAXSNEXAFS,WAXSNEXAFS_SAXSslits,TEYNEXAFS
 from ..RSoXSObjects.slackbot import rsoxs_bot
 from ..RSoXSObjects.motors import (
     sam_X,
@@ -1276,10 +1276,10 @@ def image_bar(path=None, front=True):
         im.save(path)
 
 
-def locate_samples_from_image(impath, front=True):
+def locate_samples_from_image(bar,impath, front=True):
     # if the image was just taken itself, before a bar was compiled, then this can be run to just load that image
     # and then interactively place the elements of bar
-    global loc_Q,bar
+    global loc_Q
     # user needs to define the 'bar' in their namespace
     loc_Q = queue.Queue(1)
     if front:
@@ -1289,15 +1289,16 @@ def locate_samples_from_image(impath, front=True):
     else:
         image = stitch_sample(False, False, False, from_image=impath, flip_file=False)
     # stitch samples will be sending signals, update bar will catch those signals and assign the positions to the bar
-    update_bar(loc_Q, front)
+    update_bar(bar,loc_Q, front)
 
 
-def update_bar(loc_Q, front):
+def update_bar(inbar,loc_Q, front):
     """
     updated with whether we are pointing at the front or the back of the bar
     """
     from threading import Thread
     global bar
+    bar = inbar
     try:
         loc_Q.get_nowait()
     except Exception:
