@@ -35,6 +35,8 @@ from ..RSoXSObjects.motors import (
 from ..RSoXSObjects.slits import slits1, slits2, slits3
 from ..SSTObjects.motors import Exit_Slit
 from ..CommonFunctions.functions import boxed_text, colored
+from .NEXAFSscans import *
+from .energyscans import *
 
 run_report(__file__)
 
