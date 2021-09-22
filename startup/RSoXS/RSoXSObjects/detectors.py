@@ -148,9 +148,9 @@ dark_frame_preprocessor_waxs = bluesky_darkframes.DarkFramePreprocessor(
         Det_W.user_setpoint,
         waxs_det.cam.bin_x,
         waxs_det.cam.bin_y,
-        # sam_X.user_setpoint,
+        sam_X.user_setpoint,
         sam_Th.user_setpoint,
-        # sam_Y.user_setpoint,
+        sam_Y.user_setpoint,
     ],
     limit=20,
 )
