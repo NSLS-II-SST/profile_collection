@@ -637,6 +637,109 @@ def fly_scan_eliot(scan_params, polarization=0, grating="best", *, md={}):
             print("starting the fly")
             yield from bps.mv(Mono_Scan_Start, 1)
             monopos = mono_en.readback.get()
+            while np.abs(monopos - end_en) > 0.1:
+                yield from wait(group="EPU")
+                monopos = mono_en.readback.get()
+                yield from bps.abs_set(
+                    epu_gap,
+                    en.gap(monopos, pol, grating=grating),
+                    wait=False,
+                    group="EPU",
+                )
+                yield from create("primary")
+                for obj in devices:
+                    yield from read(obj)
+                yield from save()
+            print(f"Mono reached {monopos} which appears to be near {end_en}")
+            step += 1
+
+    return (yield from inner_scan_eliot())
+
+
+
+def fly_scan_mono_epu(scan_params, polarization=0, grating="best", *, md={}):
+    """
+    Specific scan for SST-1 monochromator fly scan, while catching up with the undulator
+
+    scan proceeds as:
+    1.) set up the flying parameters in the monochromator
+    2.) move to the starting position in both undulator and monochromator
+    3.) begin the scan (take baseline, begin monitors)
+    4.) read the current mono readback
+    5.) set the undulator to move to the corresponding position
+    6.) if the mono is still running (not at end position), return to step 4
+    7.) if the mono is done, load the next parameters and start at step 1
+    8.) if no more parameters, end the scan
+
+    Parameters
+    ----------
+    scan_params : a list of tuples consisting of:
+        (start_en : eV to begin the scan,
+        stop_en : eV to stop the scan,
+        speed_en : eV / second to move the monochromator)
+        the stop energy of each tuple should match the start of the next to make a continuous scan
+            although this is not strictly enforced to allow for flexibility
+    pol : polarization to run the scan
+    grating : grating to run the scan
+    md : dict, optional
+        metadata
+
+    """
+    _md = {
+        "detectors": [mono_en.name],
+        "motors": [mono_en.name],
+        "plan_name": "fly_scan_eliot",
+        "hints": {},
+    }
+    _md.update(md or {})
+    devices = [mono_en]
+
+    @bpp.monitor_during_decorator([mono_en])
+    @bpp.stage_decorator(list(devices))
+    @bpp.run_decorator(md=_md)
+    def inner_scan_eliot():
+        # start the scan parameters to the monoscan PVs
+        yield Msg("checkpoint")
+        if np.isnan(polarization):
+            pol = en.polarization.setpoint.get()
+        else:
+            yield from set_polarization(polarization)
+            pol = polarization
+        step = 0
+        for (start_en, end_en, speed_en) in scan_params:
+            print(f"starting fly from {start_en} to {end_en} at {speed_en} eV/second")
+            yield Msg("checkpoint")
+            print("Preparing mono for fly")
+            yield from bps.mv(
+                Mono_Scan_Start_ev,
+                start_en,
+                Mono_Scan_Stop_ev,
+                end_en,
+                Mono_Scan_Speed_ev,
+                speed_en,
+            )
+            # move to the initial position
+            if step > 0:
+                yield from wait(group="EPU")
+            yield from bps.abs_set(mono_en, start_en, group="EPU")
+            print("moving to starting position")
+            yield from wait(group="EPU")
+            print("Mono in start position")
+            yield from bps.mv(epu_gap, en.gap(start_en, pol))
+            print("EPU in start position")
+            if step == 0:
+                monopos = mono_en.readback.get()
+                yield from bps.abs_set(
+                    epu_gap,
+                    en.gap(monopos, pol, grating=grating),
+                    wait=False,
+                    group="EPU",
+                )
+                yield from wait(group="EPU")
+            # start the mono scan
+            print("starting the fly")
+            yield from bps.mv(Mono_Scan_Start, 1)
+            monopos = mono_en.readback.get()
             while np.abs(monopos < end_en) > 0.1:
                 yield from wait(group="EPU")
                 monopos = mono_en.readback.get()
