@@ -343,6 +343,7 @@ def get_sample_dict(acq=[], locations=None):
     project_name = RE.md["project_name"]
     proposal_id = RE.md["proposal_id"]
     saf_id = RE.md["saf_id"]
+    institution = RE.md['institution']
     project_desc = RE.md["project_desc"]
     samp_user_id = RE.md["samp_user_id"]
     composition = RE.md["composition"]
@@ -366,6 +367,7 @@ def get_sample_dict(acq=[], locations=None):
         "sample_priority": sample_priority,
         "proposal_id": proposal_id,
         "saf_id": saf_id,
+        "institution": institution,
         "sample_set": sample_set,
         "sample_date": sample_date,
         "project_name": project_name,
@@ -473,6 +475,12 @@ def newsample():
     )
     if proposal_id is not "":
         RE.md["proposal_id"] = proposal_id
+
+    institution = input(
+        "Your Institution ({}): ".format(RE.md["institution"])
+    )
+    if institution is not "":
+        RE.md["institution"] = institution
 
     saf_id = input("Your SAF ID number from PASS ({}): ".format(RE.md["saf_id"]))
     if saf_id is not "":
@@ -1041,6 +1049,7 @@ def default_sample(name):
     return {
         "proposal_id": "C-308244",  # we set the default folder here - most data shouldn't be taken
         "saf_id": 306821,
+        "institution":"NIST",
         "acquisitions": [],
         "components": "",
         "composition": "",

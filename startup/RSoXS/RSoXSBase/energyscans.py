@@ -623,7 +623,7 @@ def short_carbon_scan_nd(
 def short_carbon_scan_nonaromatic(
     multiple=1,
     diode_range=6,
-    m3_pitch=8.00,
+    m3_pitch=7.98,
     grating="1200",
     master_plan=None,
     md={},
