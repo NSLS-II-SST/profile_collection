@@ -30,7 +30,7 @@ def clean_up_md(arguments={}, md={}, **kwargs):
 
 
 def full_oxygen_scan_nd(
-    multiple=1,
+    multiple=1.0,
     diode_range=7,
     m3_pitch=7.99,
     grating="1200",
@@ -95,7 +95,7 @@ def full_oxygen_scan_nd(
 
 
 def short_oxygen_scan_nd(
-    multiple=1,
+    multiple=1.0,
     diode_range=7,
     m3_pitch=7.98,
     grating="1200",
@@ -142,7 +142,7 @@ def short_oxygen_scan_nd(
     # times[energies<525] = 2
     # times[(energies < 540) & (energies >= 525)] = 5
     # times[energies >= 540] = 2
-    times[:] = 2
+    times[:] = 2.0
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
@@ -160,7 +160,7 @@ def short_oxygen_scan_nd(
 
 
 def short_zincl_scan_nd(
-    multiple=1,
+    multiple=1.0,
     diode_range=6,
     m3_pitch=7.98,
     grating="1200",
@@ -203,7 +203,7 @@ def short_zincl_scan_nd(
     energies = np.append(energies, np.arange(1027, 1035, 1))
     times = energies.copy()
 
-    times[:] = 2
+    times[:] = 2.0
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
@@ -221,7 +221,7 @@ def short_zincl_scan_nd(
 
 
 def very_short_oxygen_scan_nd(
-    multiple=1,
+    multiple=1.0,
     diode_range=6,
     m3_pitch=7.97,
     grating="1200",
@@ -269,7 +269,7 @@ def very_short_oxygen_scan_nd(
     # times[energies<525] = 2
     # times[(energies < 540) & (energies >= 525)] = 5
     # times[energies >= 540] = 2
-    times[:] = 2
+    times[:] = 2.0
     times *= multiple
 
     # use these energies and exposure times to scan energy and record detectors and signals
@@ -287,7 +287,7 @@ def very_short_oxygen_scan_nd(
 
 
 def short_fluorine_scan_nd(
-    multiple=1,
+    multiple=1.0,
     diode_range=7,
     m3_pitch=7.98,
     grating="1200",
@@ -326,7 +326,7 @@ def short_fluorine_scan_nd(
         return
 
     # create a list of energies
-    energies = np.arange(670, 710, 1)
+    energies = np.arange(670.0, 710.0, 1.0)
     # energies = np.append(energies,np.arange(525,540,0.5))
     # energies = np.append(energies,np.arange(540,560,2))
     times = energies.copy()
@@ -335,7 +335,7 @@ def short_fluorine_scan_nd(
     # times[energies<525] = 2
     # times[(energies < 540) & (energies >= 525)] = 5
     # times[energies >= 540] = 2
-    times[:] = 2
+    times[:] = 2.0
     times *= multiple
     # use these energies and exposure times to scan energy and record detectors and signals
     yield from en_scan_core(
@@ -352,7 +352,7 @@ def short_fluorine_scan_nd(
 
 
 def full_nitrogen_scan_nd(
-    multiple=1,
+    multiple=1.0,
     diode_range=6,
     m3_pitch=7.93,
     grating="1200",
@@ -416,7 +416,7 @@ def full_nitrogen_scan_nd(
 
 
 def short_nitrogen_scan_nd(
-    multiple=1,
+    multiple=1.0,
     diode_range=6,
     m3_pitch=8.00,
     grating="1200",
@@ -483,7 +483,7 @@ def short_nitrogen_scan_nd(
 
 
 def very_short_carbon_scan_nd(
-    multiple=1,
+    multiple=1.0,
     diode_range=6,
     m3_pitch=8.01,
     grating="1200",
@@ -552,7 +552,7 @@ def very_short_carbon_scan_nd(
 
 
 def short_carbon_scan_nd(
-    multiple=1,
+    multiple=1.0,
     diode_range=6,
     m3_pitch=8.00,
     grating="1200",
@@ -621,7 +621,7 @@ def short_carbon_scan_nd(
 
 
 def short_carbon_scan_nonaromatic(
-    multiple=1,
+    multiple=1.0,
     diode_range=6,
     m3_pitch=7.98,
     grating="1200",
@@ -752,7 +752,7 @@ def custom_rsoxs_scan(
 
 
 def short_sulfurl_scan_nd(
-    multiple=1,
+    multiple=1.0,
     diode_range=6,
     m3_pitch=8.02,
     grating="1200",
@@ -819,7 +819,7 @@ def short_sulfurl_scan_nd(
 
 
 def focused_carbon_scan_nd(
-    multiple=1,
+    multiple=1.0,
     diode_range=6,
     m3_pitch=7.93,
     grating="1200",
@@ -888,7 +888,7 @@ def focused_carbon_scan_nd(
 
 
 def g_carbon_scan_nd(
-    multiple=1,
+    multiple=1.0,
     diode_range=6,
     m3_pitch=7.93,
     grating="1200",
@@ -948,7 +948,7 @@ def g_carbon_scan_nd(
 
 
 def t_carbon_scan_nd(
-    multiple=1,
+    multiple=1.0,
     diode_range=6,
     m3_pitch=7.93,
     grating="1200",
@@ -1008,7 +1008,7 @@ def t_carbon_scan_nd(
 
 
 def sufficient_carbon_scan_nd(
-    multiple=1,
+    multiple=1.0,
     diode_range=6,
     m3_pitch=7.96,
     grating="1200",
@@ -1075,7 +1075,7 @@ def sufficient_carbon_scan_nd(
 
 
 def picky_carbon_scan_nd(
-    multiple=1,
+    multiple=1.0,
     diode_range=6,
     m3_pitch=7.93,
     grating="1200",
@@ -1135,7 +1135,7 @@ def picky_carbon_scan_nd(
 
 
 def full_carbon_scan_nd(
-    multiple=1,
+    multiple=1.0,
     diode_range=6,
     m3_pitch=8.00,
     grating="1200",
@@ -1202,7 +1202,7 @@ def full_carbon_scan_nd(
 
 
 def full_carbon_scan_nonaromatic(
-    multiple=1,
+    multiple=1.0,
     diode_range=6,
     m3_pitch=7.97,
     grating="1200",
@@ -1269,7 +1269,7 @@ def full_carbon_scan_nonaromatic(
 
 
 def full_fluorine_scan_nd(
-    multiple=1,
+    multiple=1.0,
     diode_range=7,
     m3_pitch=7.89,
     grating="1200",
@@ -1331,7 +1331,7 @@ def full_fluorine_scan_nd(
 
 
 def veryshort_fluorine_scan_nd(
-    multiple=1,
+    multiple=1.0,
     diode_range=7,
     m3_pitch=7.99,
     grating="1200",
@@ -1394,7 +1394,7 @@ def veryshort_fluorine_scan_nd(
 
 
 def full_ca_scan_nd(
-    multiple=1,
+    multiple=1.0,
     diode_range=6,
     m3_pitch=8.00,
     grating="1200",
@@ -1457,7 +1457,7 @@ def full_ca_scan_nd(
 
 
 def short_calcium_scan_nd(
-    multiple=1,
+    multiple=1.0,
     diode_range=6,
     m3_pitch=8.00,
     grating="1200",
@@ -1519,7 +1519,7 @@ def short_calcium_scan_nd(
 
 
 def full_carbon_calcium_scan_nd(
-    multiple=1,
+    multiple=1.0,
     diode_range=6,
     m3_pitch=7.96,
     grating="1200",
@@ -1591,7 +1591,7 @@ def full_carbon_calcium_scan_nd(
 
 
 def survey_scan_verylowenergy(
-    multiple=1,
+    multiple=1.0,
     diode_range=7,
     m3_pitch=7.93,
     grating="250",
@@ -1651,7 +1651,7 @@ def survey_scan_verylowenergy(
 
 
 def survey_scan_lowenergy(
-    multiple=1,
+    multiple=1.0,
     diode_range=7,
     m3_pitch=7.91,
     grating="1200",
@@ -1711,7 +1711,7 @@ def survey_scan_lowenergy(
 
 
 def survey_scan_highenergy(
-    multiple=1,
+    multiple=1.0,
     diode_range=7,
     m3_pitch=7.89,
     grating="1200",
@@ -1773,7 +1773,7 @@ def survey_scan_highenergy(
 
 
 def survey_scan_veryhighenergy(
-    multiple=1,
+    multiple=1.0,
     diode_range=7,
     m3_pitch=7.89,
     grating="1200",
