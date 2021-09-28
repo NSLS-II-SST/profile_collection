@@ -2,7 +2,6 @@ from ophyd import EpicsMotor, EpicsSignal
 from ophyd import Component as Cpt
 import bluesky.plan_stubs as bps
 from ..CommonFunctions.functions import boxed_text, colored, whisper
-from ..RSoXSBase.startup import RE
 from ..CommonFunctions.functions import run_report
 
 
@@ -147,9 +146,9 @@ class FMBOEpicsMotor(EpicsMotor):
         boxed_text("%s status signals" % self.name, text, "green", shrink=True)
 
 
-class prettymotorgeneric(EpicsMotor):
+class PrettyMotor(EpicsMotor):
     def __init__(self, *args, **kwargs):
-        super(prettymotorgeneric, self).__init__(*args, **kwargs)
+        super(PrettyMotor, self).__init__(*args, **kwargs)
         self.read_attrs = ["user_readback", "user_setpoint"]
 
     def where(self):
@@ -193,7 +192,7 @@ class prettymotorgeneric(EpicsMotor):
                         boxed_text(self.name, self.where_sp(), "lightgray", shrink=True)
                     else:
                         # followed by an a and a number, do absolute move
-                        RE(bps.mv(self, loc))
+                        yield from bps.mv(self, loc)
                         boxed_text(self.name, self.where_sp(), "lightgray", shrink=True)
                 else:
                     # followed by something besides a number, a or s, just show location
@@ -203,9 +202,9 @@ class prettymotorgeneric(EpicsMotor):
                 boxed_text(self.name, self.where_sp(), "lightgray", shrink=True)
         else:
             # followed by a number - relative move
-            RE(bps.mvr(self, loc))
+            yield from bps.mvr(self, loc)
             boxed_text(self.name, self.where(), "lightgray", shrink=True)
 
 
-class prettymotor(FMBOEpicsMotor, prettymotorgeneric):
+class PrettyMotorFMBO(FMBOEpicsMotor, PrettyMotor):
     pass

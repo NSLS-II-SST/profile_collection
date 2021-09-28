@@ -37,42 +37,42 @@ run_report(__file__)
 
 @register_line_magic
 def x(line):
-    sam_X.status_or_rel_move(line)
+    RE(sam_X.status_or_rel_move(line))
 
 
 @register_line_magic
 def y(line):
-    sam_Y.status_or_rel_move(line)
+    RE(sam_Y.status_or_rel_move(line))
 
 
 @register_line_magic
 def z(line):
-    sam_Z.status_or_rel_move(line)
+    RE(sam_Z.status_or_rel_move(line))
 
 
 @register_line_magic
 def th(line):
-    sam_Th.status_or_rel_move(line)
+    RE(sam_Th.status_or_rel_move(line))
 
 
 @register_line_magic
 def bsw(line):
-    BeamStopW.status_or_rel_move(line)
+    RE(BeamStopW.status_or_rel_move(line))
 
 
 @register_line_magic
 def bss(line):
-    BeamStopS.status_or_rel_move(line)
+    RE(BeamStopS.status_or_rel_move(line))
 
 
 @register_line_magic
 def dw(line):
-    Det_W.status_or_rel_move(line)
+    RE(Det_W.status_or_rel_move(line))
 
 
 @register_line_magic
 def ds(line):
-    Det_S.status_or_rel_move(line)
+    RE(Det_S.status_or_rel_move(line))
 
 
 @register_line_magic
