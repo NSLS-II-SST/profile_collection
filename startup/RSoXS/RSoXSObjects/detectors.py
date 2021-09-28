@@ -105,7 +105,8 @@ def dark_plan_saxs():
     yield from bps.wait("darkframe-trigger")
     print("dark_plan_saxs assets: ", saxs_det.tiff._asset_docs_cache)
     snapshot = bluesky_darkframes.SnapshotDevice(saxs_det)
-    yield from bps.mv(saxs_det.cam.sync, 1)
+    if saxs_det.useshutter:
+        yield from bps.mv(saxs_det.cam.sync, 1)
     yield from saxs_det.skinnyunstage()
     yield from saxs_det.skinnystage()
     return snapshot
@@ -119,7 +120,8 @@ def dark_plan_waxs():
     yield from bps.wait("darkframe-trigger")
     print("dark_plan_saxs assets: ", waxs_det.tiff._asset_docs_cache)
     snapshot = bluesky_darkframes.SnapshotDevice(waxs_det)
-    yield from bps.mv(waxs_det.cam.sync, 1)
+    if waxs_det.useshutter:
+        yield from bps.mv(waxs_det.cam.sync, 1)
     yield from waxs_det.skinnyunstage()
     yield from waxs_det.skinnystage()
     return snapshot

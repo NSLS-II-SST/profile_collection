@@ -83,6 +83,17 @@ class RSOXSGreatEyesDetector(SingleTriggerV33, GreatEyesDetector):
     # roi4 = C(ROIPlugin, 'ROI4:')
     # proc1 = C(ProcessPlugin, 'Proc1:')
     binvalue = 4
+    useshutter = True
+
+    def sim_mode_on(self):
+        self.useshutter=False
+        self.cam.sync.set(0)
+
+
+    def sim_mode_off(self):
+        self.useshutter=True
+        self.cam.sync.set(1)
+
 
     def stage(self, *args, **kwargs):
         self.cam.temperature_actual.read()
@@ -91,8 +102,9 @@ class RSOXSGreatEyesDetector(SingleTriggerV33, GreatEyesDetector):
         # self.cam.temperature.set(-80)
         # self.cam.enable_cooling.set(1)
         # print('staging the detector')
-        Shutter_enable.set(1)
-        Shutter_delay.set(0)
+        if(self.useshutter):
+            Shutter_enable.set(1)
+            Shutter_delay.set(0)
         if abs(self.cam.temperature_actual.get() - self.cam.temperature.get()) > 2.0:
 
             boxed_text(
@@ -133,14 +145,20 @@ class RSOXSGreatEyesDetector(SingleTriggerV33, GreatEyesDetector):
 
     def shutter_on(self):
         # self.cam.sync.set(1)
-        self.cam.sync.set(1)
+        if(self.useshutter):
+            self.cam.sync.set(1)
+        else:
+            print('not turning on shutter because detector is in simulation mode')
 
     def shutter_off(self):
         # self.cam.sync.set(0)
         self.cam.sync.set(0)
 
     def unstage(self, *args, **kwargs):
-        Shutter_enable.set(0)
+        if(self.useshutter):
+            Shutter_enable.set(0)
+        else:
+            print('not turning on shutter because detector is in simulation mode')
         return [self].append(super().unstage(*args, **kwargs))
 
     def skinnyunstage(self, *args, **kwargs):
@@ -148,7 +166,8 @@ class RSOXSGreatEyesDetector(SingleTriggerV33, GreatEyesDetector):
 
     def set_exptime(self, secs):
         self.cam.acquire_time.set(secs)
-        Shutter_open_time.set(secs * 1000)
+        if(self.useshutter):
+            Shutter_open_time.set(secs * 1000)
 
     def set_exptime_detonly(self, secs):
         self.cam.acquire_time.set(secs)
@@ -337,6 +356,8 @@ class PatchedSynSignalWithRegistry(SynSignalWithRegistry, Device):
 
 
 class SimGreatEyes(Device):
+    useshutter = True
+
     image = Component(
         PatchedSynSignalWithRegistry,
         func=make_random_array,
@@ -344,6 +365,13 @@ class SimGreatEyes(Device):
         exposure_time=2,
     )
     cam = Component(SimGreatEyesCam)
+
+    def sim_mode_on(self):
+        self.useshutter=False
+
+
+    def sim_mode_off(self):
+        self.useshutter=True
 
     def stage(self):
         print("staging")
