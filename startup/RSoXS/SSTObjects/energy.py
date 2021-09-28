@@ -14,7 +14,7 @@ import numpy as np
 import xarray as xr
 
 from ..CommonFunctions.functions import boxed_text, colored, run_report
-from ..SSTBase.motors import prettymotor
+from ..SSTBase.motors import PrettyMotorFMBO
 from ..SSTObjects.shutters import psh4
 from ..SSTObjects.motors import grating, mirror2
 
@@ -37,8 +37,8 @@ class Monochromator(PVPositioner):
     # value = Cpt(EpicsSignalRO, ':ENERGY_MON',kind='hinted')
     readback = Cpt(EpicsSignalRO, ":ENERGY_MON", kind="hinted")
 
-    grating = Cpt(prettymotor, "GrtP}Mtr", name="Mono Grating", kind="normal")
-    mirror2 = Cpt(prettymotor, "MirP}Mtr", name="Mono Mirror", kind="normal")
+    grating = Cpt(PrettyMotorFMBO, "GrtP}Mtr", name="Mono Grating", kind="normal")
+    mirror2 = Cpt(PrettyMotorFMBO, "MirP}Mtr", name="Mono Mirror", kind="normal")
     cff = Cpt(EpicsSignal, ":CFF_SP", name="Mono CFF", kind="normal", auto_monitor=True)
     vls = Cpt(
         EpicsSignal, ":VLS_B2.A", name="Mono CFF", kind="normal", auto_monitor=True
@@ -67,8 +67,8 @@ class Monochromator(PVPositioner):
         kind="normal",
         auto_monitor=True,
     )
-    gratingx = Cpt(prettymotor, "GrtX}Mtr", name="Mono Grating X motor", kind="normal")
-    mirror2x = Cpt(prettymotor, "MirX}Mtr", name="Mono Mirror X motor", kind="normal")
+    gratingx = Cpt(PrettyMotorFMBO, "GrtX}Mtr", name="Mono Grating X motor", kind="normal")
+    mirror2x = Cpt(PrettyMotorFMBO, "MirX}Mtr", name="Mono Mirror X motor", kind="normal")
 
     done = Cpt(EpicsSignalRO, ":ERDY_STS")
     done_value = 1
@@ -425,7 +425,7 @@ class EnPos(PseudoPositioner):
         )
 
 
-def set_polarization(pol):
+def base_set_polarization(pol,en):
     if pol == -1:
         if epu_mode.get() != 0:
             yield from bps.mv(epu_mode, 0)
@@ -455,7 +455,7 @@ def set_polarization(pol):
     return 0
 
 
-def grating_to_250():
+def base_grating_to_250(mono_en,en):
     type = mono_en.gratingtype.enum_strs.index(mono_en.gratingtype.get())
     if type == 2:
         print("the grating is already at 250 l/mm")
@@ -465,15 +465,15 @@ def grating_to_250():
     yield from bps.abs_set(mono_en.gratingtype, 2, wait=False)
     yield from bps.abs_set(mono_en.gratingtype_proc, 1, wait=True)
     yield from bps.sleep(60)
-    yield from bps.mv(mirror2.user_offset, 0.0315) #8.1388)
-    yield from bps.mv(grating.user_offset, -0.0959) #7.2788)  # 7.30525 (from limit)
+    yield from bps.mv(mirror2.user_offset, 0.0315)
+    yield from bps.mv(grating.user_offset, -0.0959)
     yield from bps.mv(mono_en.cff, 1.385)
     yield from bps.mv(en, 270)
     yield from psh4.open()
     print("the grating is now at 250 l/mm")
 
 
-def grating_to_1200():
+def base_grating_to_1200(mono_en,en):
     type = mono_en.gratingtype.enum_strs.index(mono_en.gratingtype.get())
     if type == 9:
         print("the grating is already at 1200 l/mm")

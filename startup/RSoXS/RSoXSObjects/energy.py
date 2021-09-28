@@ -1,4 +1,4 @@
-from ..SSTObjects.energy import EnPos
+from ..SSTObjects.energy import EnPos,base_grating_to_250,base_grating_to_1200,base_set_polarization
 from ..RSoXSObjects.motors import sam_Th
 
 # epu_mode = EpicsSignal('SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-RB',
@@ -49,3 +49,14 @@ en.monoen.mirror2x.kind = "normal"
 en.epugap.kind = "normal"
 en.epugap.kind = "normal"
 
+
+def set_polarization(pol):
+    base_set_polarization(pol,en)
+
+
+def grating_to_1200():
+    base_grating_to_1200(mono_en,en)
+
+
+def grating_to_250():
+    base_grating_to_250(mono_en,en)
