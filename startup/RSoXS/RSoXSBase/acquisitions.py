@@ -1,5 +1,5 @@
 import datetime
-from .alignment import load_sample, load_configuration, avg_scan_time,save_samplesxls
+from .alignment import load_sample, load_configuration, avg_scan_time,save_samplesxls,spiralsearch,spiraldata,spiralsearchwaxs
 from .configurations import all_out
 from operator import itemgetter
 from ..RSoXSObjects.slackbot import rsoxs_bot
@@ -17,6 +17,7 @@ from .NEXAFSscans import (fly_Oxygen_NEXAFS,fly_Nitrogen_NEXAFS,fly_Fluorine_NEX
                           fixed_pol_rotate_sample_nexafs,fixed_sample_rotate_pol_list_nexafs,
                           fixed_sample_rotate_pol_nexafs,fly_Calcium_NEXAFS,fly_Carbon_NEXAFS,fly_SiliconK_NEXAFS,
                           fly_SiliconL_NEXAFS,fly_SulfurL_NEXAFS,full_Carbon_NEXAFS,normal_incidence_rotate_pol_nexafs)
+from ..RSoXSObjects.detectors import saxs_det,waxs_det
 
 run_report(__file__)
 

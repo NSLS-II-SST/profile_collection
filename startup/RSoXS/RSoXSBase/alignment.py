@@ -1073,8 +1073,8 @@ def map_bar_from_spirals(bar, num_previous_scans=150):
 # correct_bar(bar,af1x,af1y,af2x,af2y)
 
 
-def image_bar(path=None, front=True):
-    global loc_Q,bar
+def image_bar(bar,path=None, front=True):
+    global loc_Q
     loc_Q = queue.Queue(1)
     ypos = np.arange(-100, 110, 25)
     images = []
@@ -1085,10 +1085,10 @@ def image_bar(path=None, front=True):
     image = stitch_sample(
         images, 25, -6
     )  # this will start the interactive pointing of samples
-    update_bar(bar,loc_Q, front)
     if isinstance(path, str):
         im = Image.fromarray(image)
         im.save(path)
+    update_bar(bar,loc_Q, front)
 
 
 def locate_samples_from_image(bar,impath, front=True):
