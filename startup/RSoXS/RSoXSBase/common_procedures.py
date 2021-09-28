@@ -8,16 +8,15 @@ from bluesky.preprocessors import subs_wrapper
 from bluesky import preprocessors as bpp
 from bluesky.run_engine import Msg
 from ..RSoXSObjects.signals import Izero_Mesh, Beamstop_WAXS, Beamstop_SAXS
-from ..RSoXSObjects.energy import (
-    en,
+from ..RSoXSObjects.energy import (en,
     mono_en,
-    epu_gap,
-    epu_mode,
-    epu_phase,
     grating_to_1200,
     grating_to_250,
     set_polarization,
+    epu_gap,
+    epu_phase
 )
+from ..SSTObjects.energy import epu_mode
 from ..SSTObjects.diode import Shutter_control, Shutter_enable
 from ..RSoXSObjects.slits import slits1, slits2
 from ..RSoXSBase.alignment import load_configuration

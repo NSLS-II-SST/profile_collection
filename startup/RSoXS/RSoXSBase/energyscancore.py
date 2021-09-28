@@ -26,7 +26,9 @@ from ..RSoXSObjects.energy import (
     epu_gap,
     grating_to_250,
     grating_to_1200,
-    set_polarization,
+    set_polarization
+)
+from ..SSTObjects.energy import (
     Mono_Scan_Speed_ev,
     Mono_Scan_Start,
     Mono_Scan_Start_ev,

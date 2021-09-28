@@ -7,8 +7,8 @@ from ..CommonFunctions.functions import boxed_text,run_report,colored
 from .startup import db
 from .energyscans import (full_ca_scan_nd,full_carbon_calcium_scan_nd,full_carbon_scan_nd,full_carbon_scan_nonaromatic,
                           full_fluorine_scan_nd,full_nitrogen_scan_nd,full_oxygen_scan_nd,short_calcium_scan_nd,
-                          short_carbon_scan_nd,short_carbon_scan_nonaromatic,short_fluorine_scan_nd,
                           short_nitrogen_scan_nd,short_oxygen_scan_nd,short_sulfurl_scan_nd,short_zincl_scan_nd,
+                          short_carbon_scan_nd,short_carbon_scan_nonaromatic,short_fluorine_scan_nd,
                           survey_scan_highenergy,very_short_carbon_scan_nd,very_short_oxygen_scan_nd,
                           veryshort_fluorine_scan_nd,survey_scan_lowenergy,survey_scan_veryhighenergy,
                           survey_scan_verylowenergy,sufficient_carbon_scan_nd,picky_carbon_scan_nd,t_carbon_scan_nd,
