@@ -12,7 +12,6 @@ from ophyd.pseudopos import pseudo_position_argument, real_position_argument
 import pathlib
 import numpy as np
 import xarray as xr
-
 from ..CommonFunctions.functions import boxed_text, colored, run_report
 from ..SSTBase.motors import PrettyMotorFMBO
 from ..SSTObjects.shutters import psh4

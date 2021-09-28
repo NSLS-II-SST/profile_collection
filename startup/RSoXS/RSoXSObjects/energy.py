@@ -1,5 +1,10 @@
 from ..SSTObjects.energy import EnPos,base_grating_to_250,base_grating_to_1200,base_set_polarization
 from ..RSoXSObjects.motors import sam_Th
+from ..CommonFunctions.functions import run_report
+
+
+run_report(__file__)
+
 
 # epu_mode = EpicsSignal('SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-RB',
 #                        write_pv='SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP',

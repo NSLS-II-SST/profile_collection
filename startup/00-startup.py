@@ -9,6 +9,7 @@ from RSoXS.SSTObjects.vacuum import *
 from RSoXS.SSTObjects.motors import *
 from RSoXS.SSTObjects.mirrors import *
 from RSoXS.SSTObjects.diode import *
+from RSoXS.SSTObjects.energy import *
 
 # SST code  # Common code
 from RSoXS.SSTBase.archiver import *
