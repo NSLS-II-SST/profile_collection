@@ -34,6 +34,7 @@ from ..RSoXSObjects.motors import (
 from ..RSoXSObjects.slits import slits1, slits2, slits3
 from ..SSTObjects.motors import Exit_Slit
 from ..CommonFunctions.functions import boxed_text, colored
+from .sample_spreadsheets import args_to_string
 
 run_report(__file__)
 
@@ -642,7 +643,7 @@ def list_samples(bar):
         for acq in acqs:
             text += "\n   {}({}) in {} config, priority {}".format(
                 acq["plan_name"],
-                *acq["kwargs"],
+                args_to_string(**acq["kwargs"]),
                 acq["configuration"],
                 acq["priority"],
             )
