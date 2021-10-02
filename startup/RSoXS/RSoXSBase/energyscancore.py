@@ -19,6 +19,7 @@ from bluesky.utils import short_uid, separate_devices, all_safe_rewind
 from collections import defaultdict
 from bluesky import preprocessors as bpp
 import numpy as np
+from ophyd import Device
 from copy import deepcopy
 from ..RSoXSObjects.energy import (
     en,
@@ -119,21 +120,32 @@ def one_trigger_nd_step(detectors, step, pos_cache):
 
 # @dark_frames_enable
 def en_scan_core(
-    signals=[],
-    dets=[],
-    energy=None,
-    energies=[],
-    times=[],
-    enscan_type=None,
-    m3_pitch=7.94,
-    diode_range=6,
-    pol=0,
-    grating="no change",
-    master_plan=None,
-    angle=None,
-    md={},
+        signals=None,
+        dets=None,
+        energy=None,
+        energies=None,
+        times=None,
+        enscan_type=None,
+        m3_pitch=7.94,
+        diode_range=6,
+        pol=0,
+        grating="no change",
+        master_plan=None,
+        angle=None,
+        sim_mode=False,
+        md=None,
 ):
     # grab locals
+    if signals is None:
+        signals = []
+    if dets is None:
+        dets = []
+    if energies is None:
+        energies = []
+    if times is None:
+        times = []
+    if md is None:
+        md = {}
     if energy is None:
         energy = en
     arguments = dict(locals())
@@ -143,14 +155,69 @@ def en_scan_core(
     arguments["energy"] = arguments["energy"].name
     if md is None:
         md = {}
-    if angle is not None:
-        rotate_now(angle)
     md.setdefault("plan_history", [])
     md["plan_history"].append({"plan_name": "en_scan_core", "arguments": arguments})
     md.update({"plan_name": enscan_type, "master_plan": master_plan})
     # print the current sample information
-    sample()  # print the sample information
+    # sample()  # print the sample information  Removing this because RE will no longer be loaded with sample data
     # set the exposure times to be hinted for the detector which will be used
+
+    # validate inputs
+    valid = True
+    validation = ''
+    for det in dets:
+        if not isinstance(det, Device):
+            valid = False
+            validation += f'detector {det} is not an ophyd device\n'
+    if len(dets) < 1:
+        valid = False
+        validation += 'No detectors are given\n'
+    if min(energies) < 70 or max(energies) > 2200:
+        valid = False
+        validation += 'energy input is out of range for SST 1\n'
+    if grating == '1200':
+        if min(energies) < 150:
+            valid = False
+            validation += 'energy is to low for the 1200 l/mm grating\n'
+    elif grating == '250':
+        if max(energies) > 1000:
+            valid = False
+            validation += 'energy is too high for 250 l/mm grating\n'
+    else:
+        valid = False
+        validation += 'invalid grating was chosen'
+    if max(times) > 20:
+        valid = False
+        validation += 'exposure times greater than 20 seconds are not valid\n'
+    if pol != -1 or 0 < pol < 180:
+        valid = False
+        validation += f'polarization of {pol} is not valid\n'
+    if 4 < diode_range < 10:
+        valid = False
+        validation += f'diode range of {diode_range} is not valid\n'
+    if not isinstance(energy, Device):
+        valid = False
+        validation += f'energy object {energy} is not a valid ophyd device\n'
+    if 7.8 < m3_pitch < 8.2:
+        valid = False
+        validation += f'Mirror 3 pitch value of {m3_pitch} is not valid\n'
+    if -190 < angle < 150 and angle is not None:
+        valid = False
+        validation += f'angle of {angle} is out of range\n'
+
+    if sim_mode:
+        return validation
+    if not valid:
+        raise ValueError(validation)
+
+
+
+
+
+
+
+    if angle is not None:
+        rotate_now(angle)
     for det in dets:
         det.cam.acquire_time.kind = "hinted"
     # set the M3 pitch
@@ -191,6 +258,7 @@ def NEXAFS_scan_core(
     motorname="None",
     offset=0,
 ):
+
     # set mirror 3 pitch
     yield from bps.abs_set(mir3.Pitch, m3_pitch, wait=True)
     # set the diode range
@@ -242,18 +310,20 @@ def NEXAFS_scan_core(
 
 
 def NEXAFS_fly_scan_core(
-    scan_params,
-    openshutter=False,
-    m3_pitch=7.9,
-    diode_range=7,
-    pol=0,
-    grating="best",
-    exp_time=0.5,
-    enscan_type=None,
-    master_plan=None,
-    md={},
+        scan_params,
+        openshutter=False,
+        m3_pitch=7.9,
+        diode_range=7,
+        pol=0,
+        grating="best",
+        enscan_type=None,
+        master_plan=None,
+        md=None,
+        sim_mode=False
 ):
     # grab locals
+    if md is None:
+        md = {}
     arguments = dict(locals())
     del arguments["md"]  # no recursion here!
     if md is None:
@@ -263,6 +333,49 @@ def NEXAFS_fly_scan_core(
         {"plan_name": "NEXAFS_fly_scan_core", "arguments": arguments}
     )
     md.update({"plan_name": enscan_type, "master_plan": master_plan})
+
+    # validate inputs
+    valid = True
+    validation = ''
+    energies = np.empty(0)
+    for scanparam in scan_params:
+        (sten, enden, speed) = scanparam
+        energies = np.append(energies, np.linspace(sten, enden, 10))
+    if len(energies) < 10:
+        valid = False
+        validation += f'scan parameters {scan_params} could not be parsed\n'
+    if min(energies) < 70 or max(energies) > 2200:
+        valid = False
+        validation += 'energy input is out of range for SST 1\n'
+    if grating == '1200':
+        if min(energies) < 150:
+            valid = False
+            validation += 'energy is to low for the 1200 l/mm grating\n'
+    elif grating == '250':
+        if max(energies) > 1000:
+            valid = False
+            validation += 'energy is too high for 250 l/mm grating\n'
+    else:
+        valid = False
+        validation += 'invalid grating was chosen'
+    if pol != -1 or 0 < pol < 180:
+        valid = False
+        validation += f'polarization of {pol} is not valid\n'
+    if 4 < diode_range < 10:
+        valid = False
+        validation += f'diode range of {diode_range} is not valid\n'
+    if 7.8 < m3_pitch < 8.2:
+        valid = False
+        validation += f'Mirror 3 pitch value of {m3_pitch} is not valid\n'
+
+    if sim_mode:
+        return validation
+    if not valid:
+        raise ValueError(validation)
+
+
+
+
     if not np.isnan(m3_pitch):
         yield from bps.abs_set(mir3.Pitch, m3_pitch, wait=True)
     if not np.isnan(diode_range):

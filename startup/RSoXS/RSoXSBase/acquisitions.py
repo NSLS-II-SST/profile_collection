@@ -1,5 +1,12 @@
 import datetime
-from .alignment import load_sample, load_configuration, avg_scan_time,spiralsearch,spiraldata,spiralsearchwaxs,move_to_location
+from .alignment import (load_sample,
+                        load_configuration,
+                        avg_scan_time,
+                        spiralsearch,
+                        spiraldata,
+                        spiralsearchwaxs,
+                        move_to_location
+                        )
 from .configurations import all_out
 from .sample_spreadsheets import save_samplesxls
 from operator import itemgetter
@@ -38,7 +45,10 @@ def run_acquisition(acq):
     uid = yield from plan(*acq["args"],**acq['kwargs'])
     return uid
 
-def run_queue_plan(acquisition_plan_name,configuration, sample_md,**kwargs):
+def run_queue_plan(acquisition_plan_name,configuration, sample_md,simulation=False,**kwargs):
+    if simulation:
+        return avg_scan_time(acquisition_plan_name)
+
     if(acquisition_plan_name == 'all_out'):
         yield from all_out()
         uid=0
