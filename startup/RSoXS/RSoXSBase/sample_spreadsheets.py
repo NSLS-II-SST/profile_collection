@@ -234,9 +234,9 @@ def load_xlsx_to_plan_list(filename,sort_by=["sample_num"],rev=[False],retract_w
         return
     plan_list = []
     for step in list_out:
-        kwargs = copy.deepcopy(step[6]['kwargs'])
-        sample_md = copy.deepcopy(step[5])
-        del sample_md['acquisitions']
+        kwargs = step[6]['kwargs']
+        sample_md = step[5]
+        #del sample_md['acquisitions']
         kwargs.update({'configuration':step[2],
                        'sample_md': sample_md,
                        'acquisition_plan_name':step[3],
