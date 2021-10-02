@@ -642,7 +642,7 @@ def list_samples(bar):
         for acq in acqs:
             text += "\n   {}({}) in {} config, priority {}".format(
                 acq["plan_name"],
-                acq["args"],
+                *acq["kwargs"],
                 acq["configuration"],
                 acq["priority"],
             )
