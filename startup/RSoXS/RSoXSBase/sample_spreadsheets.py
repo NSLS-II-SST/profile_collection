@@ -248,3 +248,4 @@ def load_xlsx_to_plan_list(filename,sort_by=["sample_num"],rev=[False],retract_w
             'name': 'all_out',
             'item_type':'plan'
         })
+    return plan_list
