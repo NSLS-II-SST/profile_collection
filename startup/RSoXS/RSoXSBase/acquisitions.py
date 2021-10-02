@@ -1,22 +1,13 @@
 import datetime
-from .alignment import load_sample, load_configuration, avg_scan_time,save_samplesxls,spiralsearch,spiraldata,spiralsearchwaxs
+from .alignment import load_sample, load_configuration, avg_scan_time,spiralsearch,spiraldata,spiralsearchwaxs,move_to_location
 from .configurations import all_out
+from .sample_spreadsheets import save_samplesxls
 from operator import itemgetter
 from ..RSoXSObjects.slackbot import rsoxs_bot
 from ..CommonFunctions.functions import boxed_text,run_report,colored
 from .startup import db
-from .energyscans import (full_ca_scan_nd,full_carbon_calcium_scan_nd,full_carbon_scan_nd,full_carbon_scan_nonaromatic,
-                          full_fluorine_scan_nd,full_nitrogen_scan_nd,full_oxygen_scan_nd,short_calcium_scan_nd,
-                          short_nitrogen_scan_nd,short_oxygen_scan_nd,short_sulfurl_scan_nd,short_zincl_scan_nd,
-                          short_carbon_scan_nd,short_carbon_scan_nonaromatic,short_fluorine_scan_nd,
-                          survey_scan_highenergy,very_short_carbon_scan_nd,very_short_oxygen_scan_nd,
-                          veryshort_fluorine_scan_nd,survey_scan_lowenergy,survey_scan_veryhighenergy,
-                          survey_scan_verylowenergy,sufficient_carbon_scan_nd,picky_carbon_scan_nd,t_carbon_scan_nd,
-                          cdsaxs_scan,custom_rsoxs_scan,focused_carbon_scan_nd,g_carbon_scan_nd)
-from .NEXAFSscans import (fly_Oxygen_NEXAFS,fly_Nitrogen_NEXAFS,fly_Fluorine_NEXAFS,fly_Boron_NEXAFS,
-                          fixed_pol_rotate_sample_nexafs,fixed_sample_rotate_pol_list_nexafs,
-                          fixed_sample_rotate_pol_nexafs,fly_Calcium_NEXAFS,fly_Carbon_NEXAFS,fly_SiliconK_NEXAFS,
-                          fly_SiliconL_NEXAFS,fly_SulfurL_NEXAFS,full_Carbon_NEXAFS,normal_incidence_rotate_pol_nexafs)
+from ..RSoXSBase import rsoxs_queue_plans
+
 from ..RSoXSObjects.detectors import saxs_det,waxs_det
 
 run_report(__file__)
@@ -29,12 +20,29 @@ def run_sample(sam_dict):
 
 
 def do_acquisitions(acq_list):
-    uid = None
+    uids = []
     for acq in acq_list:
-        yield from load_configuration(acq["configuration"])
-        uid = yield from eval(acq["plan_name"] + "(" + acq["arguments"] + ")")
+        uid = run_acquisition(acq)
+        uids.append(uid)
+    return uids
+
+
+def run_acquisition(acq):
+    # runs an acquisition the old way (from run_bar or from the bar directly)
+    yield from load_configuration(acq["configuration"])
+    try:
+        plan = getattr(rsoxs_queue_plans,acq["plan_name"])
+    except Exception:
+        print('Invalid Plan Name')
+        return -1
+    uid = yield from plan(*acq["args"],**acq['kwargs'])
     return uid
 
+def run_queue_plan(acquisition_plan_name,configuration, sample_md,**kwargs):
+    yield from load_configuration(configuration)
+    yield from move_to_location(sample_md['location'])
+    planref = getattr(rsoxs_queue_plans, acquisition_plan_name)
+    yield from planref(md=sample_md,**kwargs)
 
 
 def run_bar(
@@ -89,7 +97,7 @@ def run_bar(
                     a,  # 6 full acquisition dict
                     samp_num,  # 7 sample index
                     acq_num,  # 8 acq index
-                    a["arguments"],  # 9  X
+                    a["args"],  # 9  X
                     s["density"],  # 10
                     s["proposal_id"],  # 11 X
                     s["sample_priority"],  # 12 X
@@ -219,3 +227,8 @@ def run_bar(
 def time_sec(seconds):
     dt = datetime.timedelta(seconds=seconds)
     return str(dt).split(".")[0]
+
+
+# function to take in excel sheet and perhaps some other sorting options, and produce a list of dictionaries with
+# plan_name, arguments
+# include in this list all of the metadata about the sample.

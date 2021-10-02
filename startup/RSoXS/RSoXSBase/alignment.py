@@ -7,7 +7,6 @@ import collections
 import pandas as pd
 import numpy as np
 import datetime
-from ophyd import Device
 import bluesky.plan_stubs as bps
 from .startup import RE, db, bec, db0
 from ..RSoXSObjects.motors import sam_X, sam_Y, sam_Th, sam_Z, sam_viewer
@@ -221,19 +220,6 @@ def newuser():
     user()
     return user_dict()
 
-
-def add_acq(
-    sample_dict, plan_name="full_carbon_scan", arguments="", config="WAXS", priority=50
-):
-    sample_dict["acquisitions"].append(
-        {
-            "plan_name": plan_name,
-            "arguments": arguments,
-            "configuration": config,
-            "priority": priority,
-        }
-    )
-    return sample_dict
 
 
 def get_location(motor_list):
@@ -559,7 +545,7 @@ def newsample():
     add_default_acq = input("add acquisition (full_carbon_scan - WAXS)? : ")
     if add_default_acq is "":
         acquisitions.append(
-            {"plan_name": "full_carbon_scan", "arguments": "", "configuration": "WAXS"}
+            {"plan_name": "full_carbon_scan", "args": (),"kwargs": {} , "configuration": "WAXS"}
         )
 
     loc = input(
@@ -656,57 +642,12 @@ def list_samples(bar):
         for acq in acqs:
             text += "\n   {}({}) in {} config, priority {}".format(
                 acq["plan_name"],
-                acq["arguments"],
+                acq["args"],
                 acq["configuration"],
                 acq["priority"],
             )
     boxed_text("Samples on bar", text, "lightblue", shrink=False)
 
-
-def save_samplesxls(bar, filename):
-    switch = {
-        sam_X.name: "x",
-        sam_Y.name: "y",
-        sam_Z.name: "z",
-        sam_Th.name: "th",
-        "x": "x",
-        "y": "y",
-        "z": "z",
-        "th": "th",
-    }
-    sampledf = pd.DataFrame.from_dict(bar, orient="columns")
-    sampledf.to_excel("temp.xls", index=False)
-
-    df = pd.read_excel("temp.xls", na_values="")
-    df.replace(np.nan, "", regex=True, inplace=True)
-    testdict = df.to_dict(orient="records")
-    for i, sam in enumerate(testdict):
-        testdict[i]["location"] = eval(sam["location"])
-        testdict[i]["acquisitions"] = eval(sam["acquisitions"])
-        if "acq_history" not in testdict[i].keys():
-            testdict[i]["acq_history"] = []
-        elif testdict[i]["acq_history"] is "":
-            testdict[i]["acq_history"] = []
-        else:
-            testdict[i]["acq_history"] = eval(sam["acq_history"])
-        testdict[i]["bar_loc"] = eval(sam["bar_loc"])
-        testdict[i]["bar_loc"]["spot"] = sam["bar_spot"]
-    acqlist = []
-    for i, sam in enumerate(testdict):
-        for j, loc in enumerate(sam["location"]):
-            if isinstance(loc["motor"], Device):
-                testdict[i]["location"][j]["motor"] = switch[loc["motor"].name]
-        for acq in sam["acquisitions"]:
-            acq.update({"sample_id": sam["sample_id"]})
-            acqlist.append(acq)
-
-    sampledf = pd.DataFrame.from_dict(testdict, orient="columns")
-    sampledf = sampledf.loc[:, df.columns != "acquisitions"]
-    acqdf = pd.DataFrame.from_dict(acqlist, orient="columns")
-    writer = pd.ExcelWriter(filename)
-    sampledf.to_excel(writer, index=False, sheet_name="Samples")
-    acqdf.to_excel(writer, index=False, sheet_name="Acquisitions")
-    writer.close()
 
 
 def sanatize_angle(samp, force=False):
@@ -761,64 +702,6 @@ def sanatize_angle(samp, force=False):
             else:
                 samp["bar_loc"]["th"] = 0
                 samp["angle"] = 0
-
-
-def load_samplesxls(filename):
-    df = pd.read_excel(
-        filename,
-        na_values="",
-        engine="openpyxl",
-        keep_default_na=True,
-        converters={"sample_date": str},
-        sheet_name="Samples",
-        verbose=True,
-    )
-    df.replace(np.nan, "", regex=True, inplace=True)
-    samplenew = df.to_dict(orient="records")
-    if not isinstance(samplenew, list):
-        samplenew = [samplenew]
-    if "acquisitions" not in samplenew[0].keys():
-        for samp in samplenew:
-            samp["acquisitions"] = []
-        acqsdf = pd.read_excel(
-            filename,
-            na_values="",
-            engine="openpyxl",
-            keep_default_na=True,
-            sheet_name="Acquisitions",
-            usecols="A:E",
-            verbose=True,
-        )
-        acqs = acqsdf.to_dict(orient="records")
-        if not isinstance(acqs, list):
-            acqs = [acqs]
-        for acq in acqs:
-            if np.isnan(acq["priority"]):
-                break
-            samp = next(
-                dict for dict in samplenew if dict["sample_id"] == acq["sample_id"]
-            )
-            add_acq(
-                samp,
-                acq["plan_name"],
-                acq["arguments"],
-                acq["configuration"],
-                acq["priority"],
-            )
-    else:
-        for i, sam in enumerate(samplenew):
-            samplenew[i]["acquisitions"] = eval(sam["acquisitions"])
-    for i, sam in enumerate(samplenew):
-        samplenew[i]["location"] = eval(sam["location"])
-        samplenew[i]["bar_loc"] = eval(sam["bar_loc"])
-        if "acq_history" in sam.keys():
-            samplenew[i]["acq_history"] = eval(sam["acq_history"])
-        else:
-            samplenew[i]["acq_history"] = []
-        samplenew[i]["bar_loc"]["spot"] = sam["bar_spot"]
-        for key in [key for key, value in sam.items() if "named" in key.lower()]:
-            del samplenew[i][key]
-    return samplenew
 
 
 def sample_by_value_match(bar, key, string):

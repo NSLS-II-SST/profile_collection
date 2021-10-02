@@ -37,6 +37,8 @@ from RSoXS.RSoXSBase.energyscans import *
 from RSoXS.RSoXSBase.NEXAFSscans import *
 from RSoXS.RSoXSObjects.slackbot import rsoxs_bot
 from RSoXS.RSoXSBase.acquisitions import *
+from .RSoXS.RSoXSBase.sample_spreadsheets import *
+
 
 try:
     from bluesky_queueserver import is_re_worker_active
