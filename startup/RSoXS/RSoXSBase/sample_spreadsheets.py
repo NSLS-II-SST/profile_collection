@@ -6,6 +6,7 @@ import copy
 from ..RSoXSObjects.motors import sam_X, sam_Y, sam_Th, sam_Z
 from ..RSoXSObjects.detectors import waxs_det,saxs_det
 from ..RSoXSBase.acquisitions import avg_scan_time
+from ..RSoXSBase import rsoxs_queue_plans
 
 def giveme_inputs(*args, **kwargs):
     return args, kwargs
@@ -237,15 +238,17 @@ def load_xlsx_to_plan_list(filename,sort_by=["sample_num"],rev=[False],retract_w
         kwargs = step[6]['kwargs']
         sample_md = step[5]
         #del sample_md['acquisitions']
-        kwargs.update({'configuration':step[2],
+        if hasattr(rsoxs_queue_plans , step[3] ) :
+            kwargs.update({'configuration':step[2],
                        'sample_md': sample_md,
                        'acquisition_plan_name':step[3],
                     })
-        plan = {'name':'run_queue_plan',
+            plan = {'name':'run_queue_plan',
                 'kwargs':kwargs,
                 'item_type':'plan'}
-        plan_list.append(plan)
-
+            plan_list.append(plan)
+        else:
+            print(f'Invalid acquisition:{step[3]}, skipping')
     if retract_when_done:
         plan_list.append({
             'name': 'all_out',

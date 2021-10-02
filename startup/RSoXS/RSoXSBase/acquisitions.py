@@ -39,10 +39,15 @@ def run_acquisition(acq):
     return uid
 
 def run_queue_plan(acquisition_plan_name,configuration, sample_md,**kwargs):
-    yield from load_configuration(configuration)
-    yield from move_to_location(sample_md['location'])
-    planref = getattr(rsoxs_queue_plans, acquisition_plan_name)
-    yield from planref(md=sample_md,**kwargs)
+    if(acquisition_plan_name == 'all_out'):
+        yield from all_out()
+        uid=0
+    else:
+        yield from load_configuration(configuration)
+        yield from move_to_location(sample_md['location'])
+        planref = getattr(rsoxs_queue_plans, acquisition_plan_name)
+        uid = yield from planref(md=sample_md,**kwargs)
+    return uid
 
 
 def run_bar(
