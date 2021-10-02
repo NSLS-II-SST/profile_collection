@@ -4,6 +4,7 @@ from ophyd import Device
 from operator import itemgetter
 import copy
 from ..RSoXSObjects.motors import sam_X, sam_Y, sam_Th, sam_Z
+from ..RSoXSObjects.detectors import waxs_det,saxs_det
 from ..RSoXSBase.acquisitions import avg_scan_time
 
 def giveme_inputs(*args, **kwargs):
