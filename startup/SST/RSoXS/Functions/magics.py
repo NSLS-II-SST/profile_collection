@@ -101,9 +101,9 @@ def motors(line):
             + Det_W.where()
             + "  dw"
             + "\n"
-            + Det_S.where()
-            + "  ds"
-            + "\n"
+            #+ Det_S.where()
+            #+ "  ds"
+            #+ "\n"
             + Shutter_Y.where()
             + "\n"
             + Izero_Y.where()
