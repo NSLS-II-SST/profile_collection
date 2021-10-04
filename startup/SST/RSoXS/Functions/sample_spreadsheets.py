@@ -8,6 +8,7 @@ from ..Functions import rsoxs_queue_plans
 
 from .common_functions import args_to_string, string_to_inputs
 
+
 def add_acq(
     sample_dict, plan_name="full_carbon_scan", arguments="", config="WAXS", priority=50
 ):
@@ -81,7 +82,6 @@ def load_samplesxls(filename):
     return samplenew
 
 
-
 def save_samplesxls(bar, filename):
     switch = {
         sam_X.name: "x",
@@ -103,11 +103,11 @@ def save_samplesxls(bar, filename):
         testdict[i]["location"] = eval(sam["location"])
         testdict[i]["acquisitions"] = eval(sam["acquisitions"])
         for acq in testdict[i]["acquisitions"]:
-            args = acq['args']
-            kwargs = acq['kwargs']
-            acq['acquisitions']=args_to_string(*args, **kwargs)
-            del acq['args']
-            del acq['kwargs']
+            args = acq["args"]
+            kwargs = acq["kwargs"]
+            acq["acquisitions"] = args_to_string(*args, **kwargs)
+            del acq["args"]
+            del acq["kwargs"]
         if "acq_history" not in testdict[i].keys():
             testdict[i]["acq_history"] = []
         elif testdict[i]["acq_history"] is "":
@@ -134,7 +134,9 @@ def save_samplesxls(bar, filename):
     writer.close()
 
 
-def load_xlsx_to_plan_list(filename,sort_by=["sample_num"],rev=[False],retract_when_done=False):
+def load_xlsx_to_plan_list(
+    filename, sort_by=["sample_num"], rev=[False], retract_when_done=False
+):
     """
     run all sample dictionaries stored in the list bar
     @param bar: a list of sample dictionaries
@@ -212,23 +214,21 @@ def load_xlsx_to_plan_list(filename,sort_by=["sample_num"],rev=[False],retract_w
         return
     plan_list = []
     for step in list_out:
-        kwargs = step[6]['kwargs']
+        kwargs = step[6]["kwargs"]
         sample_md = step[5]
-        #del sample_md['acquisitions']
-        if hasattr(rsoxs_queue_plans, step[3]) :
-            kwargs.update({'configuration':step[2],
-                       'sample_md': sample_md,
-                       'acquisition_plan_name':step[3],
-                    })
-            plan = {'name':'run_queue_plan',
-                'kwargs':kwargs,
-                'item_type':'plan'}
+        # del sample_md['acquisitions']
+        if hasattr(rsoxs_queue_plans, step[3]):
+            kwargs.update(
+                {
+                    "configuration": step[2],
+                    "sample_md": sample_md,
+                    "acquisition_plan_name": step[3],
+                }
+            )
+            plan = {"name": "run_queue_plan", "kwargs": kwargs, "item_type": "plan"}
             plan_list.append(plan)
         else:
-            print(f'Invalid acquisition:{step[3]}, skipping')
+            print(f"Invalid acquisition:{step[3]}, skipping")
     if retract_when_done:
-        plan_list.append({
-            'name': 'all_out',
-            'item_type':'plan'
-        })
+        plan_list.append({"name": "all_out", "item_type": "plan"})
     return plan_list

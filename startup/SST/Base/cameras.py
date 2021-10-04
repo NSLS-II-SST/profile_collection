@@ -12,9 +12,7 @@ from ophyd import (
     ProsilicaDetectorCam,
     ColorConvPlugin,
 )
-from ophyd.areadetector.filestore_mixins import (
-    FileStoreTIFFIterativeWrite,
-)
+from ophyd.areadetector.filestore_mixins import FileStoreTIFFIterativeWrite
 from ophyd import Component as Cpt
 from nslsii.ad33 import SingleTriggerV33, StatsPluginV33
 from ..CommonFunctions.functions import run_report

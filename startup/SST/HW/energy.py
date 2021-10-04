@@ -20,6 +20,7 @@ from ..HW.motors import grating, mirror2
 
 run_report(__file__)
 
+
 class UndulatorMotor(EpicsMotor):
     user_setpoint = Cpt(EpicsSignal, "-SP", limits=True)
     done = Cpt(EpicsSignalRO, ".MOVN")
@@ -66,8 +67,12 @@ class Monochromator(PVPositioner):
         kind="normal",
         auto_monitor=True,
     )
-    gratingx = Cpt(PrettyMotorFMBO, "GrtX}Mtr", name="Mono Grating X motor", kind="normal")
-    mirror2x = Cpt(PrettyMotorFMBO, "MirX}Mtr", name="Mono Mirror X motor", kind="normal")
+    gratingx = Cpt(
+        PrettyMotorFMBO, "GrtX}Mtr", name="Mono Grating X motor", kind="normal"
+    )
+    mirror2x = Cpt(
+        PrettyMotorFMBO, "MirX}Mtr", name="Mono Mirror X motor", kind="normal"
+    )
 
     done = Cpt(EpicsSignalRO, ":ERDY_STS")
     done_value = 1
@@ -424,7 +429,7 @@ class EnPos(PseudoPositioner):
         )
 
 
-def base_set_polarization(pol,en):
+def base_set_polarization(pol, en):
     if pol == -1:
         if epu_mode.get() != 0:
             yield from bps.mv(epu_mode, 0)
@@ -454,7 +459,7 @@ def base_set_polarization(pol,en):
     return 0
 
 
-def base_grating_to_250(mono_en,en):
+def base_grating_to_250(mono_en, en):
     type = mono_en.gratingtype.enum_strs.index(mono_en.gratingtype.get())
     if type == 2:
         print("the grating is already at 250 l/mm")
@@ -472,7 +477,7 @@ def base_grating_to_250(mono_en,en):
     print("the grating is now at 250 l/mm")
 
 
-def base_grating_to_1200(mono_en,en):
+def base_grating_to_1200(mono_en, en):
     type = mono_en.gratingtype.enum_strs.index(mono_en.gratingtype.get())
     if type == 9:
         print("the grating is already at 1200 l/mm")
@@ -482,8 +487,8 @@ def base_grating_to_1200(mono_en,en):
     yield from bps.abs_set(mono_en.gratingtype, 9, wait=False)
     yield from bps.abs_set(mono_en.gratingtype_proc, 1, wait=True)
     yield from bps.sleep(60)
-    yield from bps.mv(mirror2.user_offset, 0.1745)#8.1264)
-    yield from bps.mv(grating.user_offset, 0.047)#7.2964)  # 7.2948)#7.2956
+    yield from bps.mv(mirror2.user_offset, 0.1745)  # 8.1264)
+    yield from bps.mv(grating.user_offset, 0.047)  # 7.2964)  # 7.2948)#7.2956
     yield from bps.mv(mono_en.cff, 1.7)
     yield from bps.mv(en, 270)
     yield from psh4.open()
@@ -827,7 +832,6 @@ def epugap_from_en_pol(energy, polarization):
         else:
             gap = None
     return gap
-
 
 
 Mono_Scan_Start_ev = EpicsSignal(

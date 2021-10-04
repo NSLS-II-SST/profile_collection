@@ -186,9 +186,7 @@ class Syringe_Pump(Device):
             return self.Stop.pAll.set(1)
 
     def get_disvol(
-        self,
-        pump=1,
-        Dir=None,
+        self, pump=1, Dir=None,
     ):
         """dir: 0 for infusion, 1 for withdraw"""
         if Dir is None:
@@ -205,9 +203,7 @@ class Syringe_Pump(Device):
                 return self.disW_vol_rb.p2.get()
 
     def clr(
-        self,
-        pump=1,
-        Dir=None,
+        self, pump=1, Dir=None,
     ):
         """dir: 0 for infusion, 1 for withdraw"""
         if Dir is None:

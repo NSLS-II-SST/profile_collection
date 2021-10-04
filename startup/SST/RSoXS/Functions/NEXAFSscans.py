@@ -563,7 +563,7 @@ def do_HOPGscans_epu(hopggrazing, hopgnormal):
 
 
 def normal_incidence_rotate_pol_nexafs(
-    nexafs_plan='fly_Carbon_NEXAFS',
+    nexafs_plan="fly_Carbon_NEXAFS",
     polarizations=[0, 20, 45, 70, 90],
     master_plan="normal_incidence_rotate_pol_nexafs",
     md={},
@@ -584,7 +584,7 @@ def normal_incidence_rotate_pol_nexafs(
 
 
 def fixed_pol_rotate_sample_nexafs(
-    nexafs_plan='fly_Carbon_NEXAFS',
+    nexafs_plan="fly_Carbon_NEXAFS",
     angles=[20, 40, 55, 70, 90],
     polarization=0,
     master_plan="fixed_pol_rotate_sample_nexafs",
@@ -620,7 +620,7 @@ def epu_angle_from_grazing(real_incident_angle, grazing_angle=20):
 
 
 def fixed_sample_rotate_pol_nexafs(
-    nexafs_plan='fly_Carbon_NEXAFS',
+    nexafs_plan="fly_Carbon_NEXAFS",
     grazing_angle=20,
     master_plan="fixed_sample_rotate_pol_nexafs",
     angles=[20, 40, 55, 70, 90],
@@ -651,7 +651,7 @@ def fixed_sample_rotate_pol_nexafs(
 
 
 def fixed_sample_rotate_pol_list_nexafs(
-    nexafs_plan='fly_Carbon_NEXAFS',
+    nexafs_plan="fly_Carbon_NEXAFS",
     grazing_angle=20,
     master_plan="fixed_sample_rotate_pol_list_nexafs",
     pols=[0, 40, 55, 70, 90],

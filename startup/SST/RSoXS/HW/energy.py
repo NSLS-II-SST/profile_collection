@@ -1,4 +1,9 @@
-from ...HW.energy import EnPos,base_grating_to_250,base_grating_to_1200,base_set_polarization
+from ...HW.energy import (
+    EnPos,
+    base_grating_to_250,
+    base_grating_to_1200,
+    base_set_polarization,
+)
 from ..HW.motors import sam_Th
 from ...CommonFunctions.functions import run_report
 
@@ -56,12 +61,12 @@ en.epugap.kind = "normal"
 
 
 def set_polarization(pol):
-    base_set_polarization(pol,en)
+    base_set_polarization(pol, en)
 
 
 def grating_to_1200():
-    base_grating_to_1200(mono_en,en)
+    base_grating_to_1200(mono_en, en)
 
 
 def grating_to_250():
-    base_grating_to_250(mono_en,en)
+    base_grating_to_250(mono_en, en)
