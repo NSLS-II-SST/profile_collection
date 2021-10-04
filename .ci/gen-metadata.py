@@ -10,7 +10,7 @@ if not md_path:
 
 # Get all keys based on the RE.md occurrences in the module.
 md_keys = set()
-with open("startup/RSoXSBase/alignment.py") as f:
+with open("startup/SST/RSoXS/Functions/alignment.py") as f:
     lines = f.readlines()
 
 for line in lines:
