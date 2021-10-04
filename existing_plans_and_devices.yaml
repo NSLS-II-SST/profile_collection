@@ -5,13 +5,13 @@ existing_devices:
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: RSoXS.SSTBase.motors
+    module: RSoXS.Base.motors
   BeamStopW:
     classname: PrettyMotorFMBO
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: RSoXS.SSTBase.motors
+    module: RSoXS.Base.motors
   Beamstop_SAXS:
     classname: EpicsSignalRO
     is_flyable: false
@@ -35,7 +35,7 @@ existing_devices:
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: RSoXS.SSTBase.cameras
+    module: RSoXS.Base.cameras
   Det_S:
     classname: SynAxis
     is_flyable: false
@@ -47,7 +47,7 @@ existing_devices:
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: RSoXS.SSTBase.motors
+    module: RSoXS.Base.motors
   Device:
     classname: type
     is_flyable: false
@@ -95,7 +95,7 @@ existing_devices:
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: RSoXS.SSTBase.motors
+    module: RSoXS.Base.motors
   FMBHexapodMirror:
     classname: type
     is_flyable: false
@@ -125,19 +125,19 @@ existing_devices:
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: RSoXS.SSTBase.motors
+    module: RSoXS.Base.motors
   Izero_cam:
     classname: StandardProsilica
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: RSoXS.SSTBase.cameras
+    module: RSoXS.Base.cameras
   Izero_ds:
     classname: PrettyMotorFMBO
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: RSoXS.SSTBase.motors
+    module: RSoXS.Base.motors
   Light_control:
     classname: EpicsSignal
     is_flyable: false
@@ -221,13 +221,13 @@ existing_devices:
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: RSoXS.RSoXSBase.syringepump
+    module: RSoXS.Functions.syringepump
   SampleViewer_cam:
     classname: StandardProsilicaWithTIFFV33
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: RSoXS.SSTBase.cameras
+    module: RSoXS.Base.cameras
   Sample_TEY:
     classname: EpicsSignalRO
     is_flyable: false
@@ -239,13 +239,13 @@ existing_devices:
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: RSoXS.SSTBase.cameras
+    module: RSoXS.Base.cameras
   Shutter_Y:
     classname: PrettyMotorFMBO
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: RSoXS.SSTBase.motors
+    module: RSoXS.Base.motors
   Shutter_control:
     classname: EpicsSignal
     is_flyable: false
@@ -299,7 +299,7 @@ existing_devices:
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: RSoXS.SSTBase.cameras
+    module: RSoXS.Base.cameras
   SimGreatEyes:
     classname: type
     is_flyable: false
@@ -347,19 +347,19 @@ existing_devices:
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: RSoXS.SSTBase.motors
+    module: RSoXS.Base.motors
   TEMY:
     classname: PrettyMotor
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: RSoXS.SSTBase.motors
+    module: RSoXS.Base.motors
   TEMZ:
     classname: PrettyMotor
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: RSoXS.SSTBase.motors
+    module: RSoXS.Base.motors
   UndulatorMotor:
     classname: type
     is_flyable: false
@@ -377,7 +377,7 @@ existing_devices:
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: RSoXS.SSTBase.cameras
+    module: RSoXS.Base.cameras
   crosshair:
     classname: Overlay
     is_flyable: false
@@ -401,13 +401,13 @@ existing_devices:
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: RSoXS.SSTObjects.energy
+    module: RSoXS.Base.energy
   epu_gap:
     classname: UndulatorMotor
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: RSoXS.SSTObjects.energy
+    module: RSoXS.Base.energy
   epu_mode:
     classname: EpicsSignal
     is_flyable: false
@@ -419,91 +419,91 @@ existing_devices:
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: RSoXS.SSTObjects.energy
+    module: RSoXS.Base.energy
   grating:
     classname: PrettyMotorFMBO
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: RSoXS.SSTBase.motors
+    module: RSoXS.Base.motors
   gratingx:
     classname: PrettyMotorFMBO
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: RSoXS.SSTBase.motors
+    module: RSoXS.Base.motors
   gv14:
     classname: EPS_Shutter
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: RSoXS.SSTBase.valves_and_shutters
+    module: RSoXS.Base.valves_and_shutters
   gv14a:
     classname: EPS_Shutter
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: RSoXS.SSTBase.valves_and_shutters
+    module: RSoXS.Base.valves_and_shutters
   gv15:
     classname: EPS_Shutter
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: RSoXS.SSTBase.valves_and_shutters
+    module: RSoXS.Base.valves_and_shutters
   gv26:
     classname: EPS_Shutter
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: RSoXS.SSTBase.valves_and_shutters
+    module: RSoXS.Base.valves_and_shutters
   gv27:
     classname: EPS_Shutter
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: RSoXS.SSTBase.valves_and_shutters
+    module: RSoXS.Base.valves_and_shutters
   gv27a:
     classname: EPS_Shutter
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: RSoXS.SSTBase.valves_and_shutters
+    module: RSoXS.Base.valves_and_shutters
   gv28:
     classname: EPS_Shutter
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: RSoXS.SSTBase.valves_and_shutters
+    module: RSoXS.Base.valves_and_shutters
   gvTEM:
     classname: EPS_Shutter
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: RSoXS.SSTBase.valves_and_shutters
+    module: RSoXS.Base.valves_and_shutters
   gvll:
     classname: EPS_Shutter
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: RSoXS.SSTBase.valves_and_shutters
+    module: RSoXS.Base.valves_and_shutters
   gvturbo:
     classname: EPS_Shutter
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: RSoXS.SSTBase.valves_and_shutters
+    module: RSoXS.Base.valves_and_shutters
   mir1:
     classname: FMBHexapodMirror
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: RSoXS.SSTBase.mirrors
+    module: RSoXS.Base.mirrors
   mir1OLD:
     classname: HexapodMirror
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: RSoXS.SSTBase.mirrors
+    module: RSoXS.Base.mirrors
   mir1_pressure:
     classname: EpicsSignalRO
     is_flyable: false
@@ -521,43 +521,43 @@ existing_devices:
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: RSoXS.SSTBase.mirrors
+    module: RSoXS.Base.mirrors
   mir3OLD:
     classname: HexapodMirror
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: RSoXS.SSTBase.mirrors
+    module: RSoXS.Base.mirrors
   mir4:
     classname: FMBHexapodMirror
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: RSoXS.SSTBase.mirrors
+    module: RSoXS.Base.mirrors
   mir4OLD:
     classname: HexapodMirror
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: RSoXS.SSTBase.mirrors
+    module: RSoXS.Base.mirrors
   mirror2:
     classname: PrettyMotorFMBO
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: RSoXS.SSTBase.motors
+    module: RSoXS.Base.motors
   mirror2x:
     classname: PrettyMotorFMBO
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: RSoXS.SSTBase.motors
+    module: RSoXS.Base.motors
   mono_en:
     classname: Monochromator
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: RSoXS.SSTObjects.energy
+    module: RSoXS.Base.energy
   motor1:
     classname: SynAxis
     is_flyable: false
@@ -569,25 +569,25 @@ existing_devices:
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: RSoXS.SSTBase.valves_and_shutters
+    module: RSoXS.Base.valves_and_shutters
   psh10:
     classname: EPS_Shutter
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: RSoXS.SSTBase.valves_and_shutters
+    module: RSoXS.Base.valves_and_shutters
   psh4:
     classname: EPS_Shutter
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: RSoXS.SSTBase.valves_and_shutters
+    module: RSoXS.Base.valves_and_shutters
   psh7:
     classname: EPS_Shutter
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: RSoXS.SSTBase.valves_and_shutters
+    module: RSoXS.Base.valves_and_shutters
   ring_current:
     classname: EpicsSignalRO
     is_flyable: false
@@ -641,55 +641,55 @@ existing_devices:
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: RSoXS.SSTBase.motors
+    module: RSoXS.Base.motors
   sam_X:
     classname: PrettyMotorFMBO
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: RSoXS.SSTBase.motors
+    module: RSoXS.Base.motors
   sam_Y:
     classname: PrettyMotorFMBO
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: RSoXS.SSTBase.motors
+    module: RSoXS.Base.motors
   sam_Z:
     classname: PrettyMotorFMBO
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: RSoXS.SSTBase.motors
+    module: RSoXS.Base.motors
   sam_viewer:
     classname: PrettyMotorFMBO
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: RSoXS.SSTBase.motors
+    module: RSoXS.Base.motors
   saxs_det:
     classname: SimGreatEyes
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: RSoXS.RSoXSBase.detectors
+    module: RSoXS.Functions.detectors
   slits1:
     classname: Slits
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: RSoXS.SSTBase.slits
+    module: RSoXS.Base.slits
   slits2:
     classname: Slits
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: RSoXS.SSTBase.slits
+    module: RSoXS.Base.slits
   slits3:
     classname: Slits
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: RSoXS.SSTBase.slits
+    module: RSoXS.Base.slits
   stats_plugin:
     classname: StatsPlugin
     is_flyable: false
@@ -701,112 +701,112 @@ existing_devices:
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: RSoXS.RSoXSBase.detectors
+    module: RSoXS.Functions.detectors
 existing_plans:
   BS_out:
-    module: RSoXS.RSoXSBase.configurations
+    module: RSoXS.Functions.configurations
     name: BS_out
     parameters: []
     properties:
       is_generator: true
   BSs_in:
-    module: RSoXS.RSoXSBase.configurations
+    module: RSoXS.Functions.configurations
     name: BSs_in
     parameters: []
     properties:
       is_generator: true
   BSs_out:
-    module: RSoXS.RSoXSBase.configurations
+    module: RSoXS.Functions.configurations
     name: BSs_out
     parameters: []
     properties:
       is_generator: true
   BSw_in:
-    module: RSoXS.RSoXSBase.configurations
+    module: RSoXS.Functions.configurations
     name: BSw_in
     parameters: []
     properties:
       is_generator: true
   BSw_out:
-    module: RSoXS.RSoXSBase.configurations
+    module: RSoXS.Functions.configurations
     name: BSw_out
     parameters: []
     properties:
       is_generator: true
   DetS_edge:
-    module: RSoXS.RSoXSBase.configurations
+    module: RSoXS.Functions.configurations
     name: DetS_edge
     parameters: []
     properties:
       is_generator: true
   DetS_in:
-    module: RSoXS.RSoXSBase.configurations
+    module: RSoXS.Functions.configurations
     name: DetS_in
     parameters: []
     properties:
       is_generator: true
   DetS_out:
-    module: RSoXS.RSoXSBase.configurations
+    module: RSoXS.Functions.configurations
     name: DetS_out
     parameters: []
     properties:
       is_generator: true
   DetW_edge:
-    module: RSoXS.RSoXSBase.configurations
+    module: RSoXS.Functions.configurations
     name: DetW_edge
     parameters: []
     properties:
       is_generator: true
   DetW_in:
-    module: RSoXS.RSoXSBase.configurations
+    module: RSoXS.Functions.configurations
     name: DetW_in
     parameters: []
     properties:
       is_generator: true
   DetW_out:
-    module: RSoXS.RSoXSBase.configurations
+    module: RSoXS.Functions.configurations
     name: DetW_out
     parameters: []
     properties:
       is_generator: true
   Detectors_edge:
-    module: RSoXS.RSoXSBase.configurations
+    module: RSoXS.Functions.configurations
     name: Detectors_edge
     parameters: []
     properties:
       is_generator: true
   Detectors_out:
-    module: RSoXS.RSoXSBase.configurations
+    module: RSoXS.Functions.configurations
     name: Detectors_out
     parameters: []
     properties:
       is_generator: true
   Izero_diode:
-    module: RSoXS.RSoXSBase.configurations
+    module: RSoXS.Functions.configurations
     name: Izero_diode
     parameters: []
     properties:
       is_generator: true
   Izero_mesh:
-    module: RSoXS.RSoXSBase.configurations
+    module: RSoXS.Functions.configurations
     name: Izero_mesh
     parameters: []
     properties:
       is_generator: true
   Izero_out:
-    module: RSoXS.RSoXSBase.configurations
+    module: RSoXS.Functions.configurations
     name: Izero_out
     parameters: []
     properties:
       is_generator: true
   Izero_screen:
-    module: RSoXS.RSoXSBase.configurations
+    module: RSoXS.Functions.configurations
     name: Izero_screen
     parameters: []
     properties:
       is_generator: true
   NEXAFS_fly_scan_core:
-    module: RSoXS.RSoXSBase.energyscancore
+    module: RSoXS.Functions.energyscancore
     name: NEXAFS_fly_scan_core
     parameters:
     - kind:
@@ -861,7 +861,7 @@ existing_plans:
     properties:
       is_generator: true
   NEXAFS_scan_core:
-    module: RSoXS.RSoXSBase.energyscancore
+    module: RSoXS.Functions.energyscancore
     name: NEXAFS_scan_core
     parameters:
     - kind:
@@ -938,13 +938,13 @@ existing_plans:
     properties:
       is_generator: true
   SAXSmode:
-    module: RSoXS.RSoXSBase.configurations
+    module: RSoXS.Functions.configurations
     name: SAXSmode
     parameters: []
     properties:
       is_generator: true
   Scan_izero_peak:
-    module: RSoXS.RSoXSBase.common_procedures
+    module: RSoXS.Functions.common_procedures
     name: Scan_izero_peak
     parameters:
     - kind:
@@ -958,19 +958,19 @@ existing_plans:
     properties:
       is_generator: true
   Shutter_in:
-    module: RSoXS.RSoXSBase.configurations
+    module: RSoXS.Functions.configurations
     name: Shutter_in
     parameters: []
     properties:
       is_generator: true
   Shutter_out:
-    module: RSoXS.RSoXSBase.configurations
+    module: RSoXS.Functions.configurations
     name: Shutter_out
     parameters: []
     properties:
       is_generator: true
   WAXSmode:
-    module: RSoXS.RSoXSBase.configurations
+    module: RSoXS.Functions.configurations
     name: WAXSmode
     parameters: []
     properties:
@@ -1011,13 +1011,13 @@ existing_plans:
     properties:
       is_generator: true
   all_out:
-    module: RSoXS.RSoXSBase.configurations
+    module: RSoXS.Functions.configurations
     name: all_out
     parameters: []
     properties:
       is_generator: true
   base_grating_to_1200:
-    module: RSoXS.SSTObjects.energy
+    module: RSoXS.Base.energy
     name: base_grating_to_1200
     parameters:
     - kind:
@@ -1031,7 +1031,7 @@ existing_plans:
     properties:
       is_generator: true
   base_grating_to_250:
-    module: RSoXS.SSTObjects.energy
+    module: RSoXS.Base.energy
     name: base_grating_to_250
     parameters:
     - kind:
@@ -1045,7 +1045,7 @@ existing_plans:
     properties:
       is_generator: true
   base_set_polarization:
-    module: RSoXS.SSTObjects.energy
+    module: RSoXS.Base.energy
     name: base_set_polarization
     parameters:
     - kind:
@@ -1059,19 +1059,19 @@ existing_plans:
     properties:
       is_generator: true
   beamdown_notice:
-    module: RSoXS.RSoXSBase.contingencies
+    module: RSoXS.Functions.contingencies
     name: beamdown_notice
     parameters: []
     properties:
       is_generator: true
   beamup_notice:
-    module: RSoXS.RSoXSBase.contingencies
+    module: RSoXS.Functions.contingencies
     name: beamup_notice
     parameters: []
     properties:
       is_generator: true
   buildeputable:
-    module: RSoXS.RSoXSBase.common_procedures
+    module: RSoXS.Functions.common_procedures
     name: buildeputable
     parameters:
     - kind:
@@ -1118,7 +1118,7 @@ existing_plans:
     properties:
       is_generator: true
   buildeputablegaps:
-    module: RSoXS.RSoXSBase.common_procedures
+    module: RSoXS.Functions.common_procedures
     name: buildeputablegaps
     parameters:
     - kind:
@@ -1182,7 +1182,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: RSoXS.RSoXSBase.energyscans
+    module: RSoXS.Functions.energyscans
     name: cdsaxs_scan
     parameters:
     - default: '[(250, 2), (270, 2), (280, 2), (285, 2), (300, 2)]'
@@ -1276,7 +1276,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: RSoXS.RSoXSBase.energyscans
+    module: RSoXS.Functions.energyscans
     name: custom_rsoxs_scan
     parameters:
     - default: '[((270, 340, 1), 2)]'
@@ -1321,31 +1321,31 @@ existing_plans:
     properties:
       is_generator: true
   dark_plan_saxs:
-    module: RSoXS.RSoXSObjects.detectors
+    module: RSoXS.HW.detectors
     name: dark_plan_saxs
     parameters: []
     properties:
       is_generator: true
   dark_plan_waxs:
-    module: RSoXS.RSoXSObjects.detectors
+    module: RSoXS.HW.detectors
     name: dark_plan_waxs
     parameters: []
     properties:
       is_generator: true
   do_2020_eputables:
-    module: RSoXS.RSoXSBase.common_procedures
+    module: RSoXS.Functions.common_procedures
     name: do_2020_eputables
     parameters: []
     properties:
       is_generator: true
   do_2021_eputables3:
-    module: RSoXS.RSoXSBase.common_procedures
+    module: RSoXS.Functions.common_procedures
     name: do_2021_eputables3
     parameters: []
     properties:
       is_generator: true
   do_HOPGscans_epu:
-    module: RSoXS.RSoXSBase.NEXAFSscans
+    module: RSoXS.Functions.NEXAFSscans
     name: do_HOPGscans_epu
     parameters:
     - kind:
@@ -1359,7 +1359,7 @@ existing_plans:
     properties:
       is_generator: true
   do_acquisitions:
-    module: RSoXS.RSoXSBase.acquisitions
+    module: RSoXS.Functions.acquisitions
     name: do_acquisitions
     parameters:
     - kind:
@@ -1369,13 +1369,13 @@ existing_plans:
     properties:
       is_generator: true
   do_some_eputables_2021_en:
-    module: RSoXS.RSoXSBase.common_procedures
+    module: RSoXS.Functions.common_procedures
     name: do_some_eputables_2021_en
     parameters: []
     properties:
       is_generator: true
   en_scan_core:
-    module: RSoXS.RSoXSBase.energyscancore
+    module: RSoXS.Functions.energyscancore
     name: en_scan_core
     parameters:
     - default: '[]'
@@ -1446,19 +1446,19 @@ existing_plans:
     properties:
       is_generator: true
   enc_clr_gx:
-    module: RSoXS.RSoXSBase.contingencies
+    module: RSoXS.Functions.contingencies
     name: enc_clr_gx
     parameters: []
     properties:
       is_generator: true
   enc_clr_x:
-    module: RSoXS.RSoXSBase.contingencies
+    module: RSoXS.Functions.contingencies
     name: enc_clr_x
     parameters: []
     properties:
       is_generator: true
   find_fiducials:
-    module: RSoXS.RSoXSBase.alignment
+    module: RSoXS.Functions.alignment
     name: find_fiducials
     parameters:
     - default: '[6, 3.5, -3, 1.1]'
@@ -1471,7 +1471,7 @@ existing_plans:
   fixed_pol_rotate_sample_nexafs:
     description: At fixed polarization, rotate the sample to do a traditional angle
       dependant NEXAFS measurement
-    module: RSoXS.RSoXSBase.NEXAFSscans
+    module: RSoXS.Functions.NEXAFSscans
     name: fixed_pol_rotate_sample_nexafs
     parameters:
     - default: '''fly_Carbon_NEXAFS'''
@@ -1517,7 +1517,7 @@ existing_plans:
       polarization is calculated relative to the sample normal
 
       angles less than the grazing angle are not allowed and are ignored'
-    module: RSoXS.RSoXSBase.NEXAFSscans
+    module: RSoXS.Functions.NEXAFSscans
     name: fixed_sample_rotate_pol_list_nexafs
     parameters:
     - default: '''fly_Carbon_NEXAFS'''
@@ -1563,7 +1563,7 @@ existing_plans:
       polarization is calculated relative to the sample normal
 
       angles less than the grazing angle are not allowed and are ignored'
-    module: RSoXS.RSoXSBase.NEXAFSscans
+    module: RSoXS.Functions.NEXAFSscans
     name: fixed_sample_rotate_pol_nexafs
     parameters:
     - default: '''fly_Carbon_NEXAFS'''
@@ -1616,7 +1616,7 @@ existing_plans:
       and "250" are only valid choices)
 
       @return: perform a flying NEXAFS scan'
-    module: RSoXS.RSoXSBase.NEXAFSscans
+    module: RSoXS.Functions.NEXAFSscans
     name: fly_Boron_NEXAFS
     parameters:
     - default: '0.05'
@@ -1679,7 +1679,7 @@ existing_plans:
       and "250" are only valid choices)
 
       @return: perform a flying NEXAFS scan'
-    module: RSoXS.RSoXSBase.NEXAFSscans
+    module: RSoXS.Functions.NEXAFSscans
     name: fly_Calcium_NEXAFS
     parameters:
     - default: '0.15'
@@ -1742,7 +1742,7 @@ existing_plans:
       and "250" are only valid choices)
 
       @return: perform a flying NEXAFS scan'
-    module: RSoXS.RSoXSBase.NEXAFSscans
+    module: RSoXS.Functions.NEXAFSscans
     name: fly_Carbon_NEXAFS
     parameters:
     - default: '0.1'
@@ -1805,7 +1805,7 @@ existing_plans:
       and "250" are only valid choices)
 
       @return: perform a flying NEXAFS scan'
-    module: RSoXS.RSoXSBase.NEXAFSscans
+    module: RSoXS.Functions.NEXAFSscans
     name: fly_Fluorine_NEXAFS
     parameters:
     - default: '0.3'
@@ -1868,7 +1868,7 @@ existing_plans:
       and "250" are only valid choices)
 
       @return: perform a flying NEXAFS scan'
-    module: RSoXS.RSoXSBase.NEXAFSscans
+    module: RSoXS.Functions.NEXAFSscans
     name: fly_Nitrogen_NEXAFS
     parameters:
     - default: '0.1'
@@ -1931,7 +1931,7 @@ existing_plans:
       and "250" are only valid choices)
 
       @return: perform a flying NEXAFS scan'
-    module: RSoXS.RSoXSBase.NEXAFSscans
+    module: RSoXS.Functions.NEXAFSscans
     name: fly_Oxygen_NEXAFS
     parameters:
     - default: '0.1'
@@ -1994,7 +1994,7 @@ existing_plans:
       and "250" are only valid choices)
 
       @return: perform a flying NEXAFS scan'
-    module: RSoXS.RSoXSBase.NEXAFSscans
+    module: RSoXS.Functions.NEXAFSscans
     name: fly_SiliconK_NEXAFS
     parameters:
     - default: '0.2'
@@ -2057,7 +2057,7 @@ existing_plans:
       and "250" are only valid choices)
 
       @return: perform a flying NEXAFS scan'
-    module: RSoXS.RSoXSBase.NEXAFSscans
+    module: RSoXS.Functions.NEXAFSscans
     name: fly_SiliconL_NEXAFS
     parameters:
     - default: '0.1'
@@ -2120,7 +2120,7 @@ existing_plans:
       and "250" are only valid choices)
 
       @return: perform a flying NEXAFS scan'
-    module: RSoXS.RSoXSBase.NEXAFSscans
+    module: RSoXS.Functions.NEXAFSscans
     name: fly_SulfurL_NEXAFS
     parameters:
     - default: '0.1'
@@ -2172,7 +2172,7 @@ existing_plans:
   fly_scan_eliot:
     description: Specific scan for SST-1 monochromator fly scan, while catching up
       with the undulator
-    module: RSoXS.RSoXSBase.energyscancore
+    module: RSoXS.Functions.energyscancore
     name: fly_scan_eliot
     parameters:
     - description: "(start_en : eV to begin the scan,\nstop_en : eV to stop the scan,\n\
@@ -2204,7 +2204,7 @@ existing_plans:
   fly_scan_mono_epu:
     description: Specific scan for SST-1 monochromator fly scan, while catching up
       with the undulator
-    module: RSoXS.RSoXSBase.energyscancore
+    module: RSoXS.Functions.energyscancore
     name: fly_scan_mono_epu
     parameters:
     - description: "(start_en : eV to begin the scan,\nstop_en : eV to stop the scan,\n\
@@ -2256,7 +2256,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: RSoXS.RSoXSBase.energyscans
+    module: RSoXS.Functions.energyscans
     name: focused_carbon_scan_nd
     parameters:
     - default: '1.0'
@@ -2309,7 +2309,7 @@ existing_plans:
 
       I''m keeping this here just as a historical record / fallback in case flying
       stops working'
-    module: RSoXS.RSoXSBase.NEXAFSscans
+    module: RSoXS.Functions.NEXAFSscans
     name: full_Carbon_NEXAFS
     parameters:
     - default: '[]'
@@ -2401,7 +2401,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: RSoXS.RSoXSBase.energyscans
+    module: RSoXS.Functions.energyscans
     name: full_ca_scan_nd
     parameters:
     - default: '1.0'
@@ -2468,7 +2468,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: RSoXS.RSoXSBase.energyscans
+    module: RSoXS.Functions.energyscans
     name: full_carbon_calcium_scan_nd
     parameters:
     - default: '1.0'
@@ -2535,7 +2535,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: RSoXS.RSoXSBase.energyscans
+    module: RSoXS.Functions.energyscans
     name: full_carbon_scan_nd
     parameters:
     - default: '1.0'
@@ -2602,7 +2602,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: RSoXS.RSoXSBase.energyscans
+    module: RSoXS.Functions.energyscans
     name: full_carbon_scan_nonaromatic
     parameters:
     - default: '1.0'
@@ -2669,7 +2669,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: RSoXS.RSoXSBase.energyscans
+    module: RSoXS.Functions.energyscans
     name: full_fluorine_scan_nd
     parameters:
     - default: '1.0'
@@ -2736,7 +2736,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: RSoXS.RSoXSBase.energyscans
+    module: RSoXS.Functions.energyscans
     name: full_nitrogen_scan_nd
     parameters:
     - default: '1.0'
@@ -2803,7 +2803,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: RSoXS.RSoXSBase.energyscans
+    module: RSoXS.Functions.energyscans
     name: full_oxygen_scan_nd
     parameters:
     - default: '1.0'
@@ -2870,7 +2870,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: RSoXS.RSoXSBase.energyscans
+    module: RSoXS.Functions.energyscans
     name: g_carbon_scan_nd
     parameters:
     - default: '1.0'
@@ -2915,7 +2915,7 @@ existing_plans:
     properties:
       is_generator: true
   image_bar:
-    module: RSoXS.RSoXSBase.alignment
+    module: RSoXS.Functions.alignment
     name: image_bar
     parameters:
     - kind:
@@ -2935,7 +2935,7 @@ existing_plans:
     properties:
       is_generator: true
   isvar_scan:
-    module: RSoXS.RSoXSBase.common_procedures
+    module: RSoXS.Functions.common_procedures
     name: isvar_scan
     parameters: []
     properties:
@@ -2944,7 +2944,7 @@ existing_plans:
     description: ':param config: string containing a name of a configuration
 
       :return:'
-    module: RSoXS.RSoXSBase.alignment
+    module: RSoXS.Functions.alignment
     name: load_configuration
     parameters:
     - kind:
@@ -2955,7 +2955,7 @@ existing_plans:
       is_generator: true
   load_sample:
     description: move to a sample location and load the metadata with the sample information
-    module: RSoXS.RSoXSBase.alignment
+    module: RSoXS.Functions.alignment
     name: load_sample
     parameters:
     - kind:
@@ -2965,31 +2965,31 @@ existing_plans:
     properties:
       is_generator: true
   mirror1_NEXAFSpos:
-    module: RSoXS.RSoXSBase.configurations
+    module: RSoXS.Functions.configurations
     name: mirror1_NEXAFSpos
     parameters: []
     properties:
       is_generator: true
   mirror1_pos:
-    module: RSoXS.RSoXSBase.configurations
+    module: RSoXS.Functions.configurations
     name: mirror1_pos
     parameters: []
     properties:
       is_generator: true
   mirror3_NEXAFSpos:
-    module: RSoXS.RSoXSBase.configurations
+    module: RSoXS.Functions.configurations
     name: mirror3_NEXAFSpos
     parameters: []
     properties:
       is_generator: true
   mirror3_pos:
-    module: RSoXS.RSoXSBase.configurations
+    module: RSoXS.Functions.configurations
     name: mirror3_pos
     parameters: []
     properties:
       is_generator: true
   move_to_location:
-    module: RSoXS.RSoXSBase.alignment
+    module: RSoXS.Functions.alignment
     name: move_to_location
     parameters:
     - default: '[{''motor'': ''x'', ''position'': -0.0007999999999999119, ''order'':
@@ -3005,7 +3005,7 @@ existing_plans:
   normal_incidence_rotate_pol_nexafs:
     description: At normal incidence, rotate the polarization of the X-ray beam and
       conduct a NEXAFS scan at each polarization
-    module: RSoXS.RSoXSBase.NEXAFSscans
+    module: RSoXS.Functions.NEXAFSscans
     name: normal_incidence_rotate_pol_nexafs
     parameters:
     - default: '''fly_Carbon_NEXAFS'''
@@ -3041,7 +3041,7 @@ existing_plans:
       is_generator: true
   one_shuttered_step:
     description: Inner loop of an N-dimensional step scan
-    module: RSoXS.RSoXSBase.energyscancore
+    module: RSoXS.Functions.energyscancore
     name: one_shuttered_step
     parameters:
     - description: devices to read
@@ -3063,7 +3063,7 @@ existing_plans:
       is_generator: true
   one_trigger_nd_step:
     description: Inner loop of an N-dimensional step scan
-    module: RSoXS.RSoXSBase.energyscancore
+    module: RSoXS.Functions.energyscancore
     name: one_trigger_nd_step
     parameters:
     - description: devices to read
@@ -3106,7 +3106,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: RSoXS.RSoXSBase.energyscans
+    module: RSoXS.Functions.energyscans
     name: picky_carbon_scan_nd
     parameters:
     - default: '1.0'
@@ -3165,7 +3165,7 @@ existing_plans:
       \       assert ret is None\n    the plan is passed to `list` or some other iterator\
       \ that\n    repeatedly sends `None` into the plan to advance the\n    generator.\n\
       Returns\n-------\nval : Any or None\n    The \"single\" value of the device"
-    module: RSoXS.RSoXSBase.energyscancore
+    module: RSoXS.Functions.energyscancore
     name: rd
     parameters:
     - kind:
@@ -3207,7 +3207,7 @@ existing_plans:
     properties:
       is_generator: true
   rotate_now:
-    module: RSoXS.RSoXSBase.alignment
+    module: RSoXS.Functions.alignment
     name: rotate_now
     parameters:
     - kind:
@@ -3233,7 +3233,7 @@ existing_plans:
       \ automatically start back up\n@param retract_when_done: go to throughstation\
       \ mode at the end of all runs.\n@param save_as_complete: if a valid path, will\
       \ save the running bar to this position in case of failure\n@return:"
-    module: RSoXS.RSoXSBase.acquisitions
+    module: RSoXS.Functions.acquisitions
     name: run_bar
     parameters:
     - kind:
@@ -3273,7 +3273,7 @@ existing_plans:
     properties:
       is_generator: true
   run_sample:
-    module: RSoXS.RSoXSBase.acquisitions
+    module: RSoXS.Functions.acquisitions
     name: run_sample
     parameters:
     - kind:
@@ -3283,7 +3283,7 @@ existing_plans:
     properties:
       is_generator: true
   samxscan:
-    module: RSoXS.RSoXSBase.alignment
+    module: RSoXS.Functions.alignment
     name: samxscan
     parameters: []
     properties:
@@ -3300,7 +3300,7 @@ existing_plans:
       \ as soon as photon part of detection ends\n        wait for shutter to close,\
       \ not for detector readout\n2.) do not wait for motor movement to finish before\
       \ beginnning detection step"
-    module: RSoXS.RSoXSBase.energyscancore
+    module: RSoXS.Functions.energyscancore
     name: scan_eliot
     parameters:
     - kind:
@@ -3326,7 +3326,7 @@ existing_plans:
     properties:
       is_generator: true
   set_slit_offsets:
-    module: RSoXS.RSoXSObjects.slits
+    module: RSoXS.HW.slits
     name: set_slit_offsets
     parameters: []
     properties:
@@ -3354,7 +3354,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: RSoXS.RSoXSBase.energyscans
+    module: RSoXS.Functions.energyscans
     name: short_calcium_scan_nd
     parameters:
     - default: '1.0'
@@ -3421,7 +3421,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: RSoXS.RSoXSBase.energyscans
+    module: RSoXS.Functions.energyscans
     name: short_carbon_scan_nd
     parameters:
     - default: '1.0'
@@ -3488,7 +3488,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: RSoXS.RSoXSBase.energyscans
+    module: RSoXS.Functions.energyscans
     name: short_carbon_scan_nonaromatic
     parameters:
     - default: '1.0'
@@ -3555,7 +3555,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: RSoXS.RSoXSBase.energyscans
+    module: RSoXS.Functions.energyscans
     name: short_fluorine_scan_nd
     parameters:
     - default: '1.0'
@@ -3622,7 +3622,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: RSoXS.RSoXSBase.energyscans
+    module: RSoXS.Functions.energyscans
     name: short_nitrogen_scan_nd
     parameters:
     - default: '1.0'
@@ -3689,7 +3689,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: RSoXS.RSoXSBase.energyscans
+    module: RSoXS.Functions.energyscans
     name: short_oxygen_scan_nd
     parameters:
     - default: '1.0'
@@ -3756,7 +3756,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: RSoXS.RSoXSBase.energyscans
+    module: RSoXS.Functions.energyscans
     name: short_sulfurl_scan_nd
     parameters:
     - default: '1.0'
@@ -3823,7 +3823,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: RSoXS.RSoXSBase.energyscans
+    module: RSoXS.Functions.energyscans
     name: short_zincl_scan_nd
     parameters:
     - default: '1.0'
@@ -3880,19 +3880,19 @@ existing_plans:
     properties:
       is_generator: true
   slits_in_SAXS:
-    module: RSoXS.RSoXSBase.configurations
+    module: RSoXS.Functions.configurations
     name: slits_in_SAXS
     parameters: []
     properties:
       is_generator: true
   slits_in_WAXS:
-    module: RSoXS.RSoXSBase.configurations
+    module: RSoXS.Functions.configurations
     name: slits_in_WAXS
     parameters: []
     properties:
       is_generator: true
   slits_out:
-    module: RSoXS.RSoXSBase.configurations
+    module: RSoXS.Functions.configurations
     name: slits_out
     parameters: []
     properties:
@@ -3902,7 +3902,7 @@ existing_plans:
       needed before starting scans or snapping images
 
       :return:'
-    module: RSoXS.RSoXSObjects.detectors
+    module: RSoXS.HW.detectors
     name: snapshot
     parameters:
     - default: '0'
@@ -3933,7 +3933,7 @@ existing_plans:
     properties:
       is_generator: true
   spiraldata:
-    module: RSoXS.RSoXSBase.alignment
+    module: RSoXS.Functions.alignment
     name: spiraldata
     parameters:
     - default: '0.6'
@@ -3964,7 +3964,7 @@ existing_plans:
     properties:
       is_generator: true
   spiralsearch:
-    module: RSoXS.RSoXSBase.alignment
+    module: RSoXS.Functions.alignment
     name: spiralsearch
     parameters:
     - default: '0.6'
@@ -4005,7 +4005,7 @@ existing_plans:
     properties:
       is_generator: true
   spiralsearch_all:
-    module: RSoXS.RSoXSBase.alignment
+    module: RSoXS.Functions.alignment
     name: spiralsearch_all
     parameters:
     - default: '[]'
@@ -4026,7 +4026,7 @@ existing_plans:
     properties:
       is_generator: true
   spiralsearchwaxs:
-    module: RSoXS.RSoXSBase.alignment
+    module: RSoXS.Functions.alignment
     name: spiralsearchwaxs
     parameters:
     - default: '0.6'
@@ -4052,7 +4052,7 @@ existing_plans:
     properties:
       is_generator: true
   spiralsearchwaxs_all:
-    module: RSoXS.RSoXSBase.alignment
+    module: RSoXS.Functions.alignment
     name: spiralsearchwaxs_all
     parameters:
     - default: '[]'
@@ -4073,7 +4073,7 @@ existing_plans:
     properties:
       is_generator: true
   stability_scans:
-    module: RSoXS.RSoXSBase.common_procedures
+    module: RSoXS.Functions.common_procedures
     name: stability_scans
     parameters:
     - kind:
@@ -4092,14 +4092,14 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: plan
-    - description: "Documents of each type are routed to a list of functions.\nInput\
-        \ is normalized to a dict of lists of functions, like so:\n\nNone -> {'all':\
+    - description: "Documents of each type are routed to a list of Functions.\nInput\
+        \ is normalized to a dict of lists of Functions, like so:\n\nNone -> {'all':\
         \ [], 'start': [], 'stop': [], 'event': [],\n         'descriptor': []}\n\n\
         func -> {'all': [func], 'start': [], 'stop': [], 'event': [],\n         'descriptor':\
         \ []}\n\n[f1, f2] -> {'all': [f1, f2], 'start': [], 'stop': [], 'event': [],\n\
         \             'descriptor': []}\n\n{'event': [func]} ->  {'all': [], 'start':\
         \ [], 'stop': [],\n                       'event': [func], 'descriptor': []}\n\
-        \nSignature of functions must conform to `f(name, doc)` where\nname is one\
+        \nSignature of Functions must conform to `f(name, doc)` where\nname is one\
         \ of {'all', 'start', 'stop', 'event', 'descriptor'} and\ndoc is a dictionary."
       kind:
         name: POSITIONAL_OR_KEYWORD
@@ -4130,7 +4130,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: RSoXS.RSoXSBase.energyscans
+    module: RSoXS.Functions.energyscans
     name: sufficient_carbon_scan_nd
     parameters:
     - default: '1.0'
@@ -4201,7 +4201,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: RSoXS.RSoXSBase.energyscans
+    module: RSoXS.Functions.energyscans
     name: survey_scan_highenergy
     parameters:
     - default: '1.0'
@@ -4268,7 +4268,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: RSoXS.RSoXSBase.energyscans
+    module: RSoXS.Functions.energyscans
     name: survey_scan_lowenergy
     parameters:
     - default: '1.0'
@@ -4335,7 +4335,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: RSoXS.RSoXSBase.energyscans
+    module: RSoXS.Functions.energyscans
     name: survey_scan_veryhighenergy
     parameters:
     - default: '1.0'
@@ -4402,7 +4402,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: RSoXS.RSoXSBase.energyscans
+    module: RSoXS.Functions.energyscans
     name: survey_scan_verylowenergy
     parameters:
     - default: '1.0'
@@ -4469,7 +4469,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: RSoXS.RSoXSBase.energyscans
+    module: RSoXS.Functions.energyscans
     name: t_carbon_scan_nd
     parameters:
     - default: '1.0'
@@ -4561,7 +4561,7 @@ existing_plans:
       is_generator: true
   tune_max:
     description: 'plan: tune a motor to the maximum of signal(motor)'
-    module: RSoXS.RSoXSBase.common_procedures
+    module: RSoXS.Functions.common_procedures
     name: tune_max
     parameters:
     - description: list of 'readable' objects
@@ -4629,7 +4629,7 @@ existing_plans:
     properties:
       is_generator: true
   vent:
-    module: RSoXS.RSoXSBase.common_procedures
+    module: RSoXS.Functions.common_procedures
     name: vent
     parameters: []
     properties:
@@ -4657,7 +4657,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: RSoXS.RSoXSBase.energyscans
+    module: RSoXS.Functions.energyscans
     name: very_short_carbon_scan_nd
     parameters:
     - default: '1.0'
@@ -4724,7 +4724,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: RSoXS.RSoXSBase.energyscans
+    module: RSoXS.Functions.energyscans
     name: very_short_oxygen_scan_nd
     parameters:
     - default: '1.0'
@@ -4791,7 +4791,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: RSoXS.RSoXSBase.energyscans
+    module: RSoXS.Functions.energyscans
     name: veryshort_fluorine_scan_nd
     parameters:
     - default: '1.0'
