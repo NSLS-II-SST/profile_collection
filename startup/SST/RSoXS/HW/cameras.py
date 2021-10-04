@@ -1,5 +1,5 @@
-from startup.SST.CommonFunctions.functions import run_report
-from startup.SST.Base.cameras import StandardProsilica, StandardProsilicaWithTIFFV33
+from ...CommonFunctions.functions import run_report
+from ...Base.cameras import StandardProsilica, StandardProsilicaWithTIFFV33
 
 run_report(__file__)
 

@@ -1,5 +1,5 @@
 import os
-from startup.SST.CommonFunctions.functions import run_report
+from ...CommonFunctions.functions import run_report
 from ..Functions.slack import RSoXSBot
 
 

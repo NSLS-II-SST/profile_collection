@@ -16,17 +16,17 @@ from ..HW.energy import (en,
                          epu_gap,
                          epu_phase
                          )
-from startup.SST.HW.energy import epu_mode
-from startup.SST.HW.diode import Shutter_control, Shutter_enable
+from ...HW.energy import epu_mode
+from ...HW.diode import Shutter_control, Shutter_enable
 from ..HW.slits import slits1, slits2
 from ..Functions.alignment import load_configuration
 from ..HW.detectors import set_exposure, waxs_det
 from ..HW.motors import sam_Th, sam_Y
-from startup.SST.HW.gatevalves import gv28, gv27a, gvll
-from startup.SST.HW.shutters import psh10
-from startup.SST.HW.vacuum import rsoxs_ll_gpwr
-from startup.SST.RSoXS.startup import bec
-from startup.SST.CommonFunctions.functions import run_report
+from ...HW.gatevalves import gv28, gv27a, gvll
+from ...HW.shutters import psh10
+from ...HW.vacuum import rsoxs_ll_gpwr
+from ..startup import bec
+from ...CommonFunctions.functions import run_report
 
 run_report(__file__)
 

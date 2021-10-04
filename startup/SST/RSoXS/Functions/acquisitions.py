@@ -8,8 +8,8 @@ from .configurations import all_out
 from .sample_spreadsheets import save_samplesxls
 from operator import itemgetter
 from ..HW.slackbot import rsoxs_bot
-from startup.SST.CommonFunctions.functions import boxed_text,run_report,colored
-from startup.SST.RSoXS.startup import db
+from ...CommonFunctions.functions import boxed_text,run_report,colored
+from ..startup import db
 from ..Functions import rsoxs_queue_plans
 
 run_report(__file__)

@@ -10,12 +10,12 @@ import bluesky.plan_stubs as bps
 from ..startup import RE, db, bec, db0
 from ..HW.motors import sam_viewer
 from ..HW.cameras import SampleViewer_cam
-from startup.SST.HW.diode import Shutter_enable, Shutter_control
+from ...HW.diode import Shutter_enable, Shutter_control
 from ..HW.signals import Beamstop_SAXS, Beamstop_WAXS, DiodeRange
 from ..HW.detectors import saxs_det, waxs_det, set_exposure
-from startup.SST.HW.shutters import psh10
+from ...HW.shutters import psh10
 from ..HW.energy import en, set_polarization
-from startup.SST.CommonFunctions.functions import run_report
+from ...CommonFunctions.functions import run_report
 from ..HW.slackbot import rsoxs_bot
 from ..HW.motors import (
     sam_X,
@@ -30,8 +30,8 @@ from ..HW.motors import (
     BeamStopS,
 )
 from ..HW.slits import slits1, slits2, slits3
-from startup.SST.HW.motors import Exit_Slit
-from startup.SST.CommonFunctions.functions import boxed_text, colored
+from ...HW.motors import Exit_Slit
+from ...CommonFunctions.functions import boxed_text, colored
 from .sample_spreadsheets import args_to_string
 
 run_report(__file__)

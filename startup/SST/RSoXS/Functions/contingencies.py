@@ -3,11 +3,11 @@ import datetime
 import logging
 
 global no_notifications_until
-from startup.SST.RSoXS.startup import RE
+from ..startup import RE
 from ..HW.slackbot import rsoxs_bot
 from ..HW.motors import sam_X
-from startup.SST.HW.motors import gratingx, mirror2x, mirror2, grating
-from startup.SST.CommonFunctions.functions import run_report
+from ...HW.motors import gratingx, mirror2x, mirror2, grating
+from ...CommonFunctions.functions import run_report
 
 
 run_report(__file__)

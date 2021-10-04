@@ -1,6 +1,6 @@
 import logging
 from bluesky.suspenders import SuspendBoolHigh, SuspendFloor, SuspendBoolLow
-from startup.SST.CommonFunctions.functions import run_report
+from ...CommonFunctions.functions import run_report
 from ..Functions.contingencies import (
     beamdown_notice,
     beamup_notice,
@@ -9,11 +9,11 @@ from ..Functions.contingencies import (
     OSEmailHandler,
     MakeSafeHandler,
 )
-from startup.SST.HW.gatevalves import gvll
-from startup.SST.HW.shutters import psh4, psh1
+from ...HW.gatevalves import gvll
+from ...HW.shutters import psh4, psh1
 from ..HW.signals import ring_current
 from ..HW.motors import sam_X
-from startup.SST.RSoXS.startup import RE
+from ..startup import RE
 
 
 run_report(__file__)

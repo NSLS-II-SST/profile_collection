@@ -1,5 +1,5 @@
-from startup.SST.CommonFunctions.functions import run_report
-from startup.SST.RSoXS.Base.syringepump import Syringe_Pump
+from ...CommonFunctions.functions import run_report
+from ..Base.syringepump import Syringe_Pump
 
 run_report(__file__)
 

@@ -29,26 +29,26 @@ from ..HW.energy import (
     grating_to_1200,
     set_polarization
 )
-from startup.SST.HW.energy import (
+from ...HW.energy import (
     Mono_Scan_Speed_ev,
     Mono_Scan_Start,
     Mono_Scan_Start_ev,
     Mono_Scan_Stop,
     Mono_Scan_Stop_ev,
 )
-from startup.SST.HW.mirrors import mir3
+from ...HW.mirrors import mir3
 from ..HW.detectors import waxs_det
 from ..HW.signals import DiodeRange
 from ..Functions.alignment import sample
 from ..Functions.alignment import rotate_now
 from ..Functions.common_procedures import set_exposure
-from startup.SST.HW.diode import (
+from ...HW.diode import (
     Shutter_open_time,
     Shutter_control,
     Shutter_enable,
     Shutter_trigger,
 )
-from startup.SST.CommonFunctions.functions import run_report
+from ...CommonFunctions.functions import run_report
 
 
 run_report(__file__)

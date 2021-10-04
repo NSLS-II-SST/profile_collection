@@ -1,7 +1,7 @@
 from ophyd.sim import motor1
 
-from startup.SST.CommonFunctions.functions import run_report
-from startup.SST.Base.motors import PrettyMotorFMBO, PrettyMotor
+from ...CommonFunctions.functions import run_report
+from ...Base.motors import PrettyMotorFMBO, PrettyMotor
 
 
 run_report(__file__)

@@ -3,12 +3,12 @@ import bluesky.plans as bp
 from bluesky.preprocessors import make_decorator
 import bluesky_darkframes
 
-from startup.SST.RSoXS.Base.detectors import RSOXSGreatEyesDetector, SimGreatEyes
+from ..Base.detectors import RSOXSGreatEyesDetector, SimGreatEyes
 from ..HW.motors import Det_S, Det_W, sam_Th, sam_X, sam_Y
-from startup.SST.CommonFunctions.functions import boxed_text
+from ...CommonFunctions.functions import boxed_text
 from ..HW.energy import en
-from startup.SST.RSoXS.startup import RE
-from startup.SST.CommonFunctions.functions import run_report
+from ..startup import RE
+from ...CommonFunctions.functions import run_report
 
 
 run_report(__file__)

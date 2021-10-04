@@ -1,5 +1,5 @@
 import bluesky.plan_stubs as bps
-from startup.SST.CommonFunctions.functions import run_report
+from ...CommonFunctions.functions import run_report
 from ..HW.motors import (
     Shutter_Y,
     Izero_Y,
@@ -12,12 +12,12 @@ from ..HW.motors import (
     sam_Y,
     sam_X,
 )
-from startup.SST.HW.mirrors import mir1, mir3
-from startup.SST.HW.motors import Exit_Slit
-from startup.SST.HW.shutters import psh10
+from ...HW.mirrors import mir1, mir3
+from ...HW.motors import Exit_Slit
+from ...HW.shutters import psh10
 from ..HW.energy import en, mono_en, grating_to_1200
 from ..HW.slits import slits1, slits2, slits3
-from startup.SST.RSoXS.startup import RE
+from ...RSoXS.startup import RE
 
 run_report(__file__)
 

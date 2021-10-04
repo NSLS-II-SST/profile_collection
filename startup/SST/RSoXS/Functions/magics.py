@@ -17,7 +17,7 @@ from ..HW.motors import (
     Izero_Y,
     sam_viewer,
 )
-from startup.SST.HW.motors import Exit_Slit
+from ...HW.motors import Exit_Slit
 from .configurations import all_out, WAXSmode, SAXSmode
 from ..HW.detectors import (
     set_exposure,
@@ -27,9 +27,9 @@ from ..HW.detectors import (
     exposure,
 )
 from ..Functions.alignment import sample, user
-from startup.SST.RSoXS.startup import RE
+from ..startup import RE
 from ..HW.energy import en,set_polarization
-from startup.SST.CommonFunctions.functions import run_report, boxed_text
+from ...CommonFunctions.functions import run_report, boxed_text
 
 
 run_report(__file__)

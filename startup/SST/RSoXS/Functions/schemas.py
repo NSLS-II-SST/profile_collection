@@ -1,4 +1,4 @@
-from startup.SST.CommonFunctions.functions import run_report
+from ...CommonFunctions.functions import run_report
 
 
 run_report(__file__)

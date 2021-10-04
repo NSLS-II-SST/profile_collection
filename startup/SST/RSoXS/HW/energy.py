@@ -1,6 +1,6 @@
-from startup.SST.HW.energy import EnPos,base_grating_to_250,base_grating_to_1200,base_set_polarization
+from ...HW.energy import EnPos,base_grating_to_250,base_grating_to_1200,base_set_polarization
 from ..HW.motors import sam_Th
-from startup.SST.CommonFunctions.functions import run_report
+from ...CommonFunctions.functions import run_report
 
 
 run_report(__file__)
