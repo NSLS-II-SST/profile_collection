@@ -158,6 +158,9 @@ def run_bar(
         text = ""
         total_time = 0
         for i, step in enumerate(list_out):
+            # check configuration
+            # check sample position
+            # check acquisition
             text += "load {} from {}, config {}, run {} (p {} a {}), starts @ {} takes {}\n".format(
                 step[5]["sample_name"],
                 step[1],

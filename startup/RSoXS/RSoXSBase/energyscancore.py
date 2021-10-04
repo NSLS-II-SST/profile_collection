@@ -206,7 +206,13 @@ def en_scan_core(
         validation += f'angle of {angle} is out of range\n'
 
     if sim_mode:
-        return validation
+        if valid:
+            retstr = f'scanning {dets} from {min(energies)} eV to {max(energies)} eV on the {grating} l/mm grating\n'
+            retstr +=f'    in {len(times)} steps with exposure times from {min(times)} to {max(times)} seconds\n'
+            return retstr
+        else:
+            return validation
+
     if not valid:
         raise ValueError(validation)
 
@@ -257,8 +263,10 @@ def NEXAFS_scan_core(
     grating="no change",
     motorname="None",
     offset=0,
+    sim_mode=False
 ):
-
+    if sim_mode:
+        return f'NEXAFS scan from {min(energies)} eV to {max(energies)} eV'
     # set mirror 3 pitch
     yield from bps.abs_set(mir3.Pitch, m3_pitch, wait=True)
     # set the diode range
@@ -338,9 +346,11 @@ def NEXAFS_fly_scan_core(
     valid = True
     validation = ''
     energies = np.empty(0)
+    speeds = []
     for scanparam in scan_params:
         (sten, enden, speed) = scanparam
         energies = np.append(energies, np.linspace(sten, enden, 10))
+        speeds.append(speed)
     if len(energies) < 10:
         valid = False
         validation += f'scan parameters {scan_params} could not be parsed\n'
@@ -369,7 +379,12 @@ def NEXAFS_fly_scan_core(
         validation += f'Mirror 3 pitch value of {m3_pitch} is not valid\n'
 
     if sim_mode:
-        return validation
+        if valid:
+            retstr = f'fly scanning from {min(energies)} eV to {max(energies)} eV on the {grating} l/mm grating\n'
+            retstr += f'    at speeds from {max(speeds)} to {max(speeds)} ev/second\n'
+            return retstr
+        else:
+            return validation
     if not valid:
         raise ValueError(validation)
 
