@@ -6,28 +6,7 @@ from ..HW.motors import sam_X, sam_Y, sam_Th, sam_Z
 from ..Functions.acquisitions import avg_scan_time
 from ..Functions import rsoxs_queue_plans
 
-def giveme_inputs(*args, **kwargs):
-    return args, kwargs
-
-
-def string_to_inputs(string):
-    return eval('giveme_inputs(' + string + ')')
-
-
-def args_to_string(*args, **kwargs):
-    outstr = ''
-    for arg in args:
-        if isinstance(arg,str):
-            outstr += f'"{arg}",'
-        else:
-            outstr += f'{arg},'
-    for key in kwargs.keys():
-        if isinstance(kwargs[key],str):
-            outstr += f'{key} = "{kwargs[key]}", '
-        else:
-            outstr += f'{key} = {kwargs[key]}, '
-    return outstr.rstrip(', ')
-
+from .common_functions import args_to_string, string_to_inputs
 
 def add_acq(
     sample_dict, plan_name="full_carbon_scan", arguments="", config="WAXS", priority=50

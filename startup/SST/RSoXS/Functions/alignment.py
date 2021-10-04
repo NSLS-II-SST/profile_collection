@@ -32,7 +32,7 @@ from ..HW.motors import (
 from ..HW.slits import slits1, slits2, slits3
 from ...HW.motors import Exit_Slit
 from ...CommonFunctions.functions import boxed_text, colored
-from .sample_spreadsheets import args_to_string
+from .common_functions import args_to_string
 
 run_report(__file__)
 
