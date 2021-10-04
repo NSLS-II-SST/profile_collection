@@ -7,7 +7,7 @@ import collections
 import numpy as np
 import datetime
 import bluesky.plan_stubs as bps
-from startup.SST.RSoXS.startup import RE, db, bec, db0
+from ..startup import RE, db, bec, db0
 from ..HW.motors import sam_viewer
 from ..HW.cameras import SampleViewer_cam
 from startup.SST.HW.diode import Shutter_enable, Shutter_control
