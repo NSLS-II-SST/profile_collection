@@ -39,7 +39,6 @@ from ...HW.energy import (
 from ...HW.mirrors import mir3
 from ..HW.detectors import waxs_det
 from ..HW.signals import DiodeRange
-from ..Functions.alignment import sample
 from ..Functions.alignment import rotate_now
 from ..Functions.common_procedures import set_exposure
 from ...HW.diode import (
