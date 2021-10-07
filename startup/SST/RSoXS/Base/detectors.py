@@ -425,13 +425,13 @@ class SimGreatEyes(Device):
         if self.cam.enable_cooling.get():
             self.cam.temperature_actual.read()
             if self.cam.temperature_actual.get() - self.cam.temperature.get() > 1.0:
-                return "\nTemperature of {} ({} °C) is not at setpoint ({} °C) but cooling is on".format(
+                return "\n{} ({} °C) is not at setpoint ({} °C) but cooling is on".format(
                     colored(self.name, "lightblue"),
                     colored(self.cam.temperature_actual.get(), "red"),
                     colored(self.cam.temperature.get(), "blue"),
                 )
             else:
-                return "\nTemperature of {} ({} °C) is at setpoint ({} °C) and cooling is on".format(
+                return "\n{} ({} °C) is at setpoint ({} °C) and cooling is on".format(
                     colored(self.name, "lightblue"),
                     colored(self.cam.temperature_actual.get(), "green"),
                     colored(self.cam.temperature.get(), "blue"),

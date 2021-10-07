@@ -19,7 +19,7 @@ def run_sample(sam_dict):
 def do_acquisitions(acq_list):
     uids = []
     for acq in acq_list:
-        uid = run_acquisition(acq)
+        uid = yield from run_acquisition(acq)
         uids.append(uid)
     return uids
 

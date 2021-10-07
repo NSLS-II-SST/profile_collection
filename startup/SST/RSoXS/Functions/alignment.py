@@ -7,6 +7,7 @@ import collections
 import numpy as np
 import datetime
 import bluesky.plan_stubs as bps
+from ophyd import Device
 from ..startup import RE, db, bec, db0
 from ..HW.motors import sam_viewer
 from ..HW.cameras import SampleViewer_cam
@@ -813,20 +814,21 @@ def spiralsearch(
 
     valid = True
     validation = ""
+    newdets = []
     for det in dets:
         if not isinstance(det, Device):
             try:
-                det = eval('det')
+                newdets.append(eval(det))
             except Exception:
                 valid = False
                 validation += f"detector {det} is not an ophyd device\n"
-    if len(dets) < 1:
+    if len(newdets) < 1:
         valid = False
         validation += "No detectors are given\n"
 
     if sim_mode:
         if valid:
-            retstr = f"scanning {dets} from {min(energies)} eV to {max(energies)} eV on the {grating} l/mm grating\n"
+            retstr = f"scanning {newdets} from {min(energies)} eV to {max(energies)} eV on the {grating} l/mm grating\n"
             retstr += f"    in {len(times)} steps with exposure times from {min(times)} to {max(times)} seconds\n"
             return retstr
         else:
@@ -834,7 +836,7 @@ def spiralsearch(
 
     if not valid:
         raise ValueError(validation)
-    
+
     yield from bps.mv(en, energy)
     yield from set_polarization(pol)
     set_exposure(exposure)
@@ -845,7 +847,7 @@ def spiralsearch(
 
 
     yield from bp.spiral_square(
-        dets,
+        newdets,
         sam_X,
         sam_Y,
         x_center=x_center,
