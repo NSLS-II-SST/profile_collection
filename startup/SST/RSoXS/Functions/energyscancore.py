@@ -166,8 +166,11 @@ def en_scan_core(
     validation = ""
     for det in dets:
         if not isinstance(det, Device):
-            valid = False
-            validation += f"detector {det} is not an ophyd device\n"
+            try:
+                det = eval('det')
+            except Exception:
+                valid = False
+                validation += f"detector {det} is not an ophyd device\n"
     if len(dets) < 1:
         valid = False
         validation += "No detectors are given\n"
@@ -188,19 +191,19 @@ def en_scan_core(
     if max(times) > 20:
         valid = False
         validation += "exposure times greater than 20 seconds are not valid\n"
-    if pol != -1 or 0 < pol < 180:
+    if pol != -1 or 0 > pol or pol > 180:
         valid = False
         validation += f"polarization of {pol} is not valid\n"
-    if 4 < diode_range < 10:
+    if 4 > diode_range or diode_range > 10:
         valid = False
         validation += f"diode range of {diode_range} is not valid\n"
+    if 7.8 > m3_pitch or m3_pitch > 8.2:
+        valid = False
+        validation += f"Mirror 3 pitch value of {m3_pitch} is not valid\n"
     if not isinstance(energy, Device):
         valid = False
         validation += f"energy object {energy} is not a valid ophyd device\n"
-    if 7.8 < m3_pitch < 8.2:
-        valid = False
-        validation += f"Mirror 3 pitch value of {m3_pitch} is not valid\n"
-    if -190 < angle < 150 and angle is not None:
+    if -190 > angle or angle > 150 and angle is not None:
         valid = False
         validation += f"angle of {angle} is out of range\n"
 
@@ -361,13 +364,13 @@ def NEXAFS_fly_scan_core(
     else:
         valid = False
         validation += "invalid grating was chosen"
-    if pol != -1 or 0 < pol < 180:
+    if pol < -1 or pol > 180:
         valid = False
         validation += f"polarization of {pol} is not valid\n"
-    if 4 < diode_range < 10:
+    if 4 > diode_range or diode_range > 10:
         valid = False
         validation += f"diode range of {diode_range} is not valid\n"
-    if 7.8 < m3_pitch < 8.2:
+    if 7.8 > m3_pitch or m3_pitch > 8.2:
         valid = False
         validation += f"Mirror 3 pitch value of {m3_pitch} is not valid\n"
 

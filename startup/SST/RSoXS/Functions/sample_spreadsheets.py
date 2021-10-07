@@ -5,6 +5,7 @@ from operator import itemgetter
 from ..HW.motors import sam_X, sam_Y, sam_Th, sam_Z
 from ..Functions.acquisitions import avg_scan_time
 from ..Functions import rsoxs_queue_plans
+from ..HW.detectors import waxs_det
 
 
 from .energyscans import (
@@ -169,7 +170,7 @@ def save_samplesxls(bar, filename):
         for acq in testdict[i]["acquisitions"]:
             args = acq["args"]
             kwargs = acq["kwargs"]
-            acq["acquisitions"] = args_to_string(*args, **kwargs)
+            acq["arguments"] = args_to_string(*args, **kwargs)
             del acq["args"]
             del acq["kwargs"]
         if "acq_history" not in testdict[i].keys():

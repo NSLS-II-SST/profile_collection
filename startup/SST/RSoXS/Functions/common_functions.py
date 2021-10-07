@@ -1,3 +1,4 @@
+from ..HW.detectors import waxs_det
 
 def giveme_inputs(*args, **kwargs):
     return args, kwargs

@@ -33,6 +33,13 @@ from ..HW.slits import slits1, slits2, slits3
 from ...HW.motors import Exit_Slit
 from ...CommonFunctions.functions import boxed_text, colored
 from .common_functions import args_to_string
+from .configurations import (WAXSNEXAFS,
+        WAXS,
+        SAXS,
+        SAXSNEXAFS,
+        WAXSNEXAFS_SAXSslits,
+        WAXS_SAXSslits,
+        TEYNEXAFS)
 
 run_report(__file__)
 
@@ -801,13 +808,42 @@ def spiralsearch(
     exposure=1,
     master_plan=None,
     dets=[],
+    sim_mode=False
 ):
+
+    valid = True
+    validation = ""
+    for det in dets:
+        if not isinstance(det, Device):
+            try:
+                det = eval('det')
+            except Exception:
+                valid = False
+                validation += f"detector {det} is not an ophyd device\n"
+    if len(dets) < 1:
+        valid = False
+        validation += "No detectors are given\n"
+
+    if sim_mode:
+        if valid:
+            retstr = f"scanning {dets} from {min(energies)} eV to {max(energies)} eV on the {grating} l/mm grating\n"
+            retstr += f"    in {len(times)} steps with exposure times from {min(times)} to {max(times)} seconds\n"
+            return retstr
+        else:
+            return validation
+
+    if not valid:
+        raise ValueError(validation)
+    
     yield from bps.mv(en, energy)
     yield from set_polarization(pol)
     set_exposure(exposure)
     x_center = sam_X.user_setpoint.get()
     y_center = sam_Y.user_setpoint.get()
     num = round(diameter / stepsize) + 1
+
+
+
     yield from bp.spiral_square(
         dets,
         sam_X,

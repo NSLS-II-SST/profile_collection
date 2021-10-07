@@ -61,12 +61,12 @@ en.epugap.kind = "normal"
 
 
 def set_polarization(pol):
-    base_set_polarization(pol, en)
+    yield from base_set_polarization(pol, en)
 
 
 def grating_to_1200():
-    base_grating_to_1200(mono_en, en)
+    yield from base_grating_to_1200(mono_en, en)
 
 
 def grating_to_250():
-    base_grating_to_250(mono_en, en)
+    yield from base_grating_to_250(mono_en, en)
