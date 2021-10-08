@@ -12,7 +12,6 @@ def clean_up_md(arguments={}, md={}, **kwargs):
     del arguments["kwargs"]
     for key in kwargs:
         if type(kwargs[key]) == list:  # dets, signals
-            arguments[key] = [object.name for object in kwargs[key]]
             for object in kwargs[key]:
                 try:
                     newobject = object.name
