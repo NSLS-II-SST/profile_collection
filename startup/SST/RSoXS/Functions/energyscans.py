@@ -13,6 +13,12 @@ def clean_up_md(arguments={}, md={}, **kwargs):
     for key in kwargs:
         if type(kwargs[key]) == list:  # dets, signals
             arguments[key] = [object.name for object in kwargs[key]]
+            for object in kwargs[key]:
+                try:
+                    newobject = object.name
+                except Exception:
+                    newobject = object
+                arguments[key] = newobject
         elif key is "energy":
             arguments[key] = kwargs[key].name
         else:
