@@ -102,7 +102,7 @@ def run_bar(
                     sample_project,  # 1  X
                     a["configuration"],  # 2  X
                     a["plan_name"],  # 3
-                    avg_scan_time(a["plan_name"], 50),  # 4 calculated plan time
+                    avg_scan_time(a["plan_name"], 2),  # 4 calculated plan time
                     sample,  # 5 full sample dict
                     a,  # 6 full acquisition dict
                     samp_num,  # 7 sample index
@@ -176,8 +176,8 @@ def run_bar(
     else:
         run_start_time = datetime.datetime.now()
         for i, step in enumerate(list_out):
-            time_remaining = sum([avg_scan_time(row[3]) for row in list_out[i:]])
-            this_step_time = avg_scan_time(step[3])
+            time_remaining = sum([avg_scan_time(row[3],nscans=2) for row in list_out[i:]])
+            this_step_time = avg_scan_time(step[3],nscans=2)
             start_time = datetime.datetime.now()
             total_time = datetime.datetime.now() - run_start_time
             boxed_text(
