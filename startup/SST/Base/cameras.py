@@ -12,9 +12,7 @@ from ophyd import (
     ProsilicaDetectorCam,
     ColorConvPlugin,
 )
-from ophyd.areadetector.filestore_mixins import (
-    FileStoreTIFFIterativeWrite,
-)
+from ophyd.areadetector.filestore_mixins import FileStoreTIFFIterativeWrite
 from ophyd import Component as Cpt
 from nslsii.ad33 import SingleTriggerV33, StatsPluginV33
 from ..CommonFunctions.functions import run_report
@@ -112,8 +110,8 @@ class StandardProsilicaWithTIFF(StandardProsilica):
     tiff = Cpt(
         TIFFPluginWithFileStore,
         suffix="TIFF1:",
-        write_path_template="/nsls2/data/sst1/assets/%Y/%m/%d/",
-        root="/nsls2/data/sst1/assets/",
+        write_path_template="/areadata/images/data/%Y/%m/%d/",
+        root="/areadata/images/data/",
     )
 
 
@@ -121,6 +119,6 @@ class StandardProsilicaWithTIFFV33(StandardProsilicaV33):
     tiff = Cpt(
         TIFFPluginWithFileStore,
         suffix="TIFF1:",
-        write_path_template="/nsls2/data/sst1/assets/%Y/%m/%d/",
-        root="/nsls2/data/sst1/assets/",
+        write_path_template="/areadata/images/data/%Y/%m/%d/",
+        root="/areadata/images/data/",
     )

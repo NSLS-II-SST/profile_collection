@@ -130,8 +130,10 @@ except ImportError:
 runengine_metadata_dir = Path("/nsls2/data/sst1/legacy/RSoXS/config/runengine-metadata")
 
 # PersistentDict will create the directory if it does not exist
+print('before persistent dict loading')
 RE.md = PersistentDict(runengine_metadata_dir)
 
+print('after persistent dict loading')
 # Temporary fix from Dan Allan Feb 2, 2021
 import collections.abc, zict, msgpack, msgpack_numpy
 

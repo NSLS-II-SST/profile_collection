@@ -27,7 +27,7 @@ from ..HW.energy import (
     epu_gap,
     grating_to_250,
     grating_to_1200,
-    set_polarization
+    set_polarization,
 )
 from ...HW.energy import (
     Mono_Scan_Speed_ev,
@@ -39,7 +39,6 @@ from ...HW.energy import (
 from ...HW.mirrors import mir3
 from ..HW.detectors import waxs_det
 from ..HW.signals import DiodeRange
-from ..Functions.alignment import sample
 from ..Functions.alignment import rotate_now
 from ..Functions.common_procedures import set_exposure
 from ...HW.diode import (
@@ -120,20 +119,20 @@ def one_trigger_nd_step(detectors, step, pos_cache):
 
 # @dark_frames_enable
 def en_scan_core(
-        signals=None,
-        dets=None,
-        energy=None,
-        energies=None,
-        times=None,
-        enscan_type=None,
-        m3_pitch=7.94,
-        diode_range=6,
-        pol=0,
-        grating="no change",
-        master_plan=None,
-        angle=None,
-        sim_mode=False,
-        md=None,
+    signals=None,
+    dets=None,
+    energy=None,
+    energies=None,
+    times=None,
+    enscan_type=None,
+    m3_pitch=7.94,
+    diode_range=6,
+    pol=0,
+    grating="no change",
+    master_plan=None,
+    angle=None,
+    sim_mode=False,
+    md=None,
 ):
     # grab locals
     if signals is None:
@@ -164,63 +163,60 @@ def en_scan_core(
 
     # validate inputs
     valid = True
-    validation = ''
+    validation = ""
     for det in dets:
         if not isinstance(det, Device):
-            valid = False
-            validation += f'detector {det} is not an ophyd device\n'
+            try:
+                det = eval('det')
+            except Exception:
+                valid = False
+                validation += f"detector {det} is not an ophyd device\n"
     if len(dets) < 1:
         valid = False
-        validation += 'No detectors are given\n'
+        validation += "No detectors are given\n"
     if min(energies) < 70 or max(energies) > 2200:
         valid = False
-        validation += 'energy input is out of range for SST 1\n'
-    if grating == '1200':
+        validation += "energy input is out of range for SST 1\n"
+    if grating == "1200":
         if min(energies) < 150:
             valid = False
-            validation += 'energy is to low for the 1200 l/mm grating\n'
-    elif grating == '250':
+            validation += "energy is to low for the 1200 l/mm grating\n"
+    elif grating == "250":
         if max(energies) > 1000:
             valid = False
-            validation += 'energy is too high for 250 l/mm grating\n'
+            validation += "energy is too high for 250 l/mm grating\n"
     else:
         valid = False
-        validation += 'invalid grating was chosen'
+        validation += "invalid grating was chosen"
     if max(times) > 20:
         valid = False
-        validation += 'exposure times greater than 20 seconds are not valid\n'
-    if pol != -1 or 0 < pol < 180:
+        validation += "exposure times greater than 20 seconds are not valid\n"
+    if pol != -1 or 0 > pol or pol > 180:
         valid = False
-        validation += f'polarization of {pol} is not valid\n'
-    if 4 < diode_range < 10:
+        validation += f"polarization of {pol} is not valid\n"
+    if 4 > diode_range or diode_range > 10:
         valid = False
-        validation += f'diode range of {diode_range} is not valid\n'
+        validation += f"diode range of {diode_range} is not valid\n"
+    if 7.8 > m3_pitch or m3_pitch > 8.2:
+        valid = False
+        validation += f"Mirror 3 pitch value of {m3_pitch} is not valid\n"
     if not isinstance(energy, Device):
         valid = False
-        validation += f'energy object {energy} is not a valid ophyd device\n'
-    if 7.8 < m3_pitch < 8.2:
+        validation += f"energy object {energy} is not a valid ophyd device\n"
+    if -190 > angle or angle > 150 and angle is not None:
         valid = False
-        validation += f'Mirror 3 pitch value of {m3_pitch} is not valid\n'
-    if -190 < angle < 150 and angle is not None:
-        valid = False
-        validation += f'angle of {angle} is out of range\n'
+        validation += f"angle of {angle} is out of range\n"
 
     if sim_mode:
         if valid:
-            retstr = f'scanning {dets} from {min(energies)} eV to {max(energies)} eV on the {grating} l/mm grating\n'
-            retstr +=f'    in {len(times)} steps with exposure times from {min(times)} to {max(times)} seconds\n'
+            retstr = f"scanning {dets} from {min(energies)} eV to {max(energies)} eV on the {grating} l/mm grating\n"
+            retstr += f"    in {len(times)} steps with exposure times from {min(times)} to {max(times)} seconds\n"
             return retstr
         else:
             return validation
 
     if not valid:
         raise ValueError(validation)
-
-
-
-
-
-
 
     if angle is not None:
         rotate_now(angle)
@@ -263,10 +259,10 @@ def NEXAFS_scan_core(
     grating="no change",
     motorname="None",
     offset=0,
-    sim_mode=False
+    sim_mode=False,
 ):
     if sim_mode:
-        return f'NEXAFS scan from {min(energies)} eV to {max(energies)} eV'
+        return f"NEXAFS scan from {min(energies)} eV to {max(energies)} eV"
     # set mirror 3 pitch
     yield from bps.abs_set(mir3.Pitch, m3_pitch, wait=True)
     # set the diode range
@@ -318,16 +314,16 @@ def NEXAFS_scan_core(
 
 
 def NEXAFS_fly_scan_core(
-        scan_params,
-        openshutter=False,
-        m3_pitch=7.9,
-        diode_range=7,
-        pol=0,
-        grating="best",
-        enscan_type=None,
-        master_plan=None,
-        md=None,
-        sim_mode=False
+    scan_params,
+    openshutter=False,
+    m3_pitch=7.9,
+    diode_range=7,
+    pol=0,
+    grating="best",
+    enscan_type=None,
+    master_plan=None,
+    md=None,
+    sim_mode=False,
 ):
     # grab locals
     if md is None:
@@ -344,7 +340,7 @@ def NEXAFS_fly_scan_core(
 
     # validate inputs
     valid = True
-    validation = ''
+    validation = ""
     energies = np.empty(0)
     speeds = []
     for scanparam in scan_params:
@@ -353,43 +349,40 @@ def NEXAFS_fly_scan_core(
         speeds.append(speed)
     if len(energies) < 10:
         valid = False
-        validation += f'scan parameters {scan_params} could not be parsed\n'
+        validation += f"scan parameters {scan_params} could not be parsed\n"
     if min(energies) < 70 or max(energies) > 2200:
         valid = False
-        validation += 'energy input is out of range for SST 1\n'
-    if grating == '1200':
+        validation += "energy input is out of range for SST 1\n"
+    if grating == "1200":
         if min(energies) < 150:
             valid = False
-            validation += 'energy is to low for the 1200 l/mm grating\n'
-    elif grating == '250':
+            validation += "energy is to low for the 1200 l/mm grating\n"
+    elif grating == "250":
         if max(energies) > 1000:
             valid = False
-            validation += 'energy is too high for 250 l/mm grating\n'
+            validation += "energy is too high for 250 l/mm grating\n"
     else:
         valid = False
-        validation += 'invalid grating was chosen'
-    if pol != -1 or 0 < pol < 180:
+        validation += "invalid grating was chosen"
+    if pol < -1 or pol > 180:
         valid = False
-        validation += f'polarization of {pol} is not valid\n'
-    if 4 < diode_range < 10:
+        validation += f"polarization of {pol} is not valid\n"
+    if 4 > diode_range or diode_range > 10:
         valid = False
-        validation += f'diode range of {diode_range} is not valid\n'
-    if 7.8 < m3_pitch < 8.2:
+        validation += f"diode range of {diode_range} is not valid\n"
+    if 7.8 > m3_pitch or m3_pitch > 8.2:
         valid = False
-        validation += f'Mirror 3 pitch value of {m3_pitch} is not valid\n'
+        validation += f"Mirror 3 pitch value of {m3_pitch} is not valid\n"
 
     if sim_mode:
         if valid:
-            retstr = f'fly scanning from {min(energies)} eV to {max(energies)} eV on the {grating} l/mm grating\n'
-            retstr += f'    at speeds from {max(speeds)} to {max(speeds)} ev/second\n'
+            retstr = f"fly scanning from {min(energies)} eV to {max(energies)} eV on the {grating} l/mm grating\n"
+            retstr += f"    at speeds from {max(speeds)} to {max(speeds)} ev/second\n"
             return retstr
         else:
             return validation
     if not valid:
         raise ValueError(validation)
-
-
-
 
     if not np.isnan(m3_pitch):
         yield from bps.abs_set(mir3.Pitch, m3_pitch, wait=True)
@@ -784,7 +777,6 @@ def fly_scan_eliot(scan_params, polarization=0, grating="best", *, md={}):
             step += 1
 
     return (yield from inner_scan_eliot())
-
 
 
 def fly_scan_mono_epu(scan_params, polarization=0, grating="best", *, md={}):

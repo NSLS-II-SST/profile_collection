@@ -7,6 +7,7 @@ import collections
 import numpy as np
 import datetime
 import bluesky.plan_stubs as bps
+from ophyd import Device
 from ..startup import RE, db, bec, db0
 from ..HW.motors import sam_viewer
 from ..HW.cameras import SampleViewer_cam
@@ -33,9 +34,15 @@ from ..HW.slits import slits1, slits2, slits3
 from ...HW.motors import Exit_Slit
 from ...CommonFunctions.functions import boxed_text, colored
 from .common_functions import args_to_string
+from .configurations import (WAXSNEXAFS,
+        WAXS,
+        SAXS,
+        SAXSNEXAFS,
+        WAXSNEXAFS_SAXSslits,
+        WAXS_SAXSslits,
+        TEYNEXAFS)
 
 run_report(__file__)
-
 
 
 def user():
@@ -220,7 +227,6 @@ def newuser():
     return user_dict()
 
 
-
 def get_location(motor_list):
     locs = []
     for motor in motor_list:
@@ -308,7 +314,6 @@ def load_configuration(config):
     RE.md.update(get_md_from_config(config))
 
 
-
 def get_sample_dict(acq=[], locations=None):
     if locations is None:
         locations = get_sample_location()
@@ -321,7 +326,7 @@ def get_sample_dict(acq=[], locations=None):
     project_name = RE.md["project_name"]
     proposal_id = RE.md["proposal_id"]
     saf_id = RE.md["saf_id"]
-    institution = RE.md['institution']
+    institution = RE.md["institution"]
     project_desc = RE.md["project_desc"]
     samp_user_id = RE.md["samp_user_id"]
     composition = RE.md["composition"]
@@ -403,7 +408,6 @@ def load_sample(sam_dict):
     # sample()
 
 
-
 def load_user_dict_to_md(user_dict):
     RE.md.update(user_dict)
 
@@ -450,9 +454,7 @@ def newsample():
     if proposal_id is not "":
         RE.md["proposal_id"] = proposal_id
 
-    institution = input(
-        "Your Institution ({}): ".format(RE.md["institution"])
-    )
+    institution = input("Your Institution ({}): ".format(RE.md["institution"]))
     if institution is not "":
         RE.md["institution"] = institution
 
@@ -544,7 +546,12 @@ def newsample():
     add_default_acq = input("add acquisition (full_carbon_scan - WAXS)? : ")
     if add_default_acq is "":
         acquisitions.append(
-            {"plan_name": "full_carbon_scan", "args": (),"kwargs": {} , "configuration": "WAXS"}
+            {
+                "plan_name": "full_carbon_scan",
+                "args": (),
+                "kwargs": {},
+                "configuration": "WAXS",
+            }
         )
 
     loc = input(
@@ -630,7 +637,6 @@ def avg_scan_time(plan_name, nscans=50, new_scan_duration=600):
             return new_scan_duration
 
 
-
 def list_samples(bar):
     text = "  i   priority  Sample Name"
     for index, sample in enumerate(bar):
@@ -646,7 +652,6 @@ def list_samples(bar):
                 acq["priority"],
             )
     boxed_text("Samples on bar", text, "lightblue", shrink=False)
-
 
 
 def sanatize_angle(samp, force=False):
@@ -737,7 +742,7 @@ def default_sample(name):
     return {
         "proposal_id": "C-308244",  # we set the default folder here - most data shouldn't be taken
         "saf_id": 306821,
-        "institution":"NIST",
+        "institution": "NIST",
         "acquisitions": [],
         "components": "",
         "composition": "",
@@ -804,15 +809,45 @@ def spiralsearch(
     exposure=1,
     master_plan=None,
     dets=[],
+    sim_mode=False
 ):
+
+    valid = True
+    validation = ""
+    newdets = []
+    for det in dets:
+        if not isinstance(det, Device):
+            try:
+                newdets.append(eval(det))
+            except Exception:
+                valid = False
+                validation += f"detector {det} is not an ophyd device\n"
+    if len(newdets) < 1:
+        valid = False
+        validation += "No detectors are given\n"
+
+    if sim_mode:
+        if valid:
+            retstr = f"scanning {newdets} from {min(energies)} eV to {max(energies)} eV on the {grating} l/mm grating\n"
+            retstr += f"    in {len(times)} steps with exposure times from {min(times)} to {max(times)} seconds\n"
+            return retstr
+        else:
+            return validation
+
+    if not valid:
+        raise ValueError(validation)
+
     yield from bps.mv(en, energy)
     yield from set_polarization(pol)
     set_exposure(exposure)
     x_center = sam_X.user_setpoint.get()
     y_center = sam_Y.user_setpoint.get()
     num = round(diameter / stepsize) + 1
+
+
+
     yield from bp.spiral_square(
-        dets,
+        newdets,
         sam_X,
         sam_Y,
         x_center=x_center,
@@ -955,7 +990,7 @@ def map_bar_from_spirals(bar, num_previous_scans=150):
 # correct_bar(bar,af1x,af1y,af2x,af2y)
 
 
-def image_bar(bar,path=None, front=True):
+def image_bar(bar, path=None, front=True):
     global loc_Q
     loc_Q = queue.Queue(1)
     ypos = np.arange(-100, 110, 25)
@@ -970,10 +1005,10 @@ def image_bar(bar,path=None, front=True):
     if isinstance(path, str):
         im = Image.fromarray(image)
         im.save(path)
-    update_bar(bar,loc_Q, front)
+    update_bar(bar, loc_Q, front)
 
 
-def locate_samples_from_image(bar,impath, front=True):
+def locate_samples_from_image(bar, impath, front=True):
     # if the image was just taken itself, before a bar was compiled, then this can be run to just load that image
     # and then interactively place the elements of bar
     global loc_Q
@@ -986,20 +1021,22 @@ def locate_samples_from_image(bar,impath, front=True):
     else:
         image = stitch_sample(False, False, False, from_image=impath, flip_file=False)
     # stitch samples will be sending signals, update bar will catch those signals and assign the positions to the bar
-    update_bar(bar,loc_Q, front)
+    update_bar(bar, loc_Q, front)
 
 
-def update_bar(inbar,loc_Q, front):
+def update_bar(inbar, loc_Q, front):
     """
     updated with whether we are pointing at the front or the back of the bar
     """
     from threading import Thread
+
     global bar
     bar = inbar
     try:
         loc_Q.get_nowait()
     except Exception:
         ...
+
     def worker():
         global bar
         global sample_image_axes

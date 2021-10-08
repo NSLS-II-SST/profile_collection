@@ -5,8 +5,74 @@ from operator import itemgetter
 from ..HW.motors import sam_X, sam_Y, sam_Th, sam_Z
 from ..Functions.acquisitions import avg_scan_time
 from ..Functions import rsoxs_queue_plans
+from ..HW.detectors import waxs_det
+
+
+from .energyscans import (
+    full_ca_scan_nd,
+    full_carbon_calcium_scan_nd,
+    full_carbon_scan_nd,
+    full_carbon_scan_nonaromatic,
+    full_fluorine_scan_nd,
+    full_nitrogen_scan_nd,
+    full_oxygen_scan_nd,
+    short_calcium_scan_nd,
+    short_nitrogen_scan_nd,
+    short_oxygen_scan_nd,
+    short_sulfurl_scan_nd,
+    short_zincl_scan_nd,
+    short_carbon_scan_nd,
+    short_carbon_scan_nonaromatic,
+    short_fluorine_scan_nd,
+    survey_scan_highenergy,
+    very_short_carbon_scan_nd,
+    very_short_oxygen_scan_nd,
+    veryshort_fluorine_scan_nd,
+    survey_scan_lowenergy,
+    survey_scan_veryhighenergy,
+    survey_scan_verylowenergy,
+    sufficient_carbon_scan_nd,
+    picky_carbon_scan_nd,
+    t_carbon_scan_nd,
+    cdsaxs_scan,
+    custom_rsoxs_scan,
+    focused_carbon_scan_nd,
+    g_carbon_scan_nd,
+)
+from .NEXAFSscans import (
+    fly_Oxygen_NEXAFS,
+    fly_Nitrogen_NEXAFS,
+    fly_Fluorine_NEXAFS,
+    fly_Boron_NEXAFS,
+    fixed_pol_rotate_sample_nexafs,
+    fixed_sample_rotate_pol_list_nexafs,
+    fixed_sample_rotate_pol_nexafs,
+    fly_Calcium_NEXAFS,
+    fly_Carbon_NEXAFS,
+    fly_SiliconK_NEXAFS,
+    fly_SiliconL_NEXAFS,
+    fly_SulfurL_NEXAFS,
+    full_Carbon_NEXAFS,
+    normal_incidence_rotate_pol_nexafs,
+)
+from .alignment import (
+    load_sample,
+    load_configuration,
+    spiralsearch,
+    spiraldata,
+    spiralsearchwaxs,
+)
+
+
+
+
+
+
+
+
 
 from .common_functions import args_to_string, string_to_inputs
+
 
 def add_acq(
     sample_dict, plan_name="full_carbon_scan", arguments="", config="WAXS", priority=50
@@ -81,7 +147,6 @@ def load_samplesxls(filename):
     return samplenew
 
 
-
 def save_samplesxls(bar, filename):
     switch = {
         sam_X.name: "x",
@@ -103,11 +168,11 @@ def save_samplesxls(bar, filename):
         testdict[i]["location"] = eval(sam["location"])
         testdict[i]["acquisitions"] = eval(sam["acquisitions"])
         for acq in testdict[i]["acquisitions"]:
-            args = acq['args']
-            kwargs = acq['kwargs']
-            acq['acquisitions']=args_to_string(*args, **kwargs)
-            del acq['args']
-            del acq['kwargs']
+            args = acq["args"]
+            kwargs = acq["kwargs"]
+            acq["arguments"] = args_to_string(*args, **kwargs)
+            del acq["args"]
+            del acq["kwargs"]
         if "acq_history" not in testdict[i].keys():
             testdict[i]["acq_history"] = []
         elif testdict[i]["acq_history"] is "":
@@ -134,7 +199,9 @@ def save_samplesxls(bar, filename):
     writer.close()
 
 
-def load_xlsx_to_plan_list(filename,sort_by=["sample_num"],rev=[False],retract_when_done=False):
+def load_xlsx_to_plan_list(
+    filename, sort_by=["sample_num"], rev=[False], retract_when_done=False
+):
     """
     run all sample dictionaries stored in the list bar
     @param bar: a list of sample dictionaries
@@ -212,23 +279,21 @@ def load_xlsx_to_plan_list(filename,sort_by=["sample_num"],rev=[False],retract_w
         return
     plan_list = []
     for step in list_out:
-        kwargs = step[6]['kwargs']
+        kwargs = step[6]["kwargs"]
         sample_md = step[5]
-        #del sample_md['acquisitions']
-        if hasattr(rsoxs_queue_plans, step[3]) :
-            kwargs.update({'configuration':step[2],
-                       'sample_md': sample_md,
-                       'acquisition_plan_name':step[3],
-                    })
-            plan = {'name':'run_queue_plan',
-                'kwargs':kwargs,
-                'item_type':'plan'}
+        # del sample_md['acquisitions']
+        if hasattr(rsoxs_queue_plans, step[3]):
+            kwargs.update(
+                {
+                    "configuration": step[2],
+                    "sample_md": sample_md,
+                    "acquisition_plan_name": step[3],
+                }
+            )
+            plan = {"name": "run_queue_plan", "kwargs": kwargs, "item_type": "plan"}
             plan_list.append(plan)
         else:
-            print(f'Invalid acquisition:{step[3]}, skipping')
+            print(f"Invalid acquisition:{step[3]}, skipping")
     if retract_when_done:
-        plan_list.append({
-            'name': 'all_out',
-            'item_type':'plan'
-        })
+        plan_list.append({"name": "all_out", "item_type": "plan"})
     return plan_list

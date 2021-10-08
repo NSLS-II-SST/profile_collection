@@ -1,14 +1,10 @@
 import datetime
-from .alignment import (load_sample,
-                        load_configuration,
-                        avg_scan_time,
-                        move_to_location
-                        )
+from .alignment import load_sample, load_configuration, avg_scan_time, move_to_location
 from .configurations import all_out
 from .sample_spreadsheets import save_samplesxls
 from operator import itemgetter
 from ..HW.slackbot import rsoxs_bot
-from ...CommonFunctions.functions import boxed_text,run_report,colored
+from ...CommonFunctions.functions import boxed_text, run_report, colored
 from ..startup import db
 from ..Functions import rsoxs_queue_plans
 
@@ -20,11 +16,10 @@ def run_sample(sam_dict):
     yield from do_acquisitions(sam_dict["acquisitions"])
 
 
-
 def do_acquisitions(acq_list):
     uids = []
     for acq in acq_list:
-        uid = run_acquisition(acq)
+        uid = yield from run_acquisition(acq)
         uids.append(uid)
     return uids
 
@@ -35,23 +30,26 @@ def run_acquisition(acq):
     try:
         plan = getattr(rsoxs_queue_plans, acq["plan_name"])
     except Exception:
-        print('Invalid Plan Name')
+        print("Invalid Plan Name")
         return -1
-    uid = yield from plan(*acq["args"],**acq['kwargs'])
+    uid = yield from plan(*acq["args"], **acq["kwargs"])
     return uid
 
-def run_queue_plan(acquisition_plan_name,configuration, sample_md,simulation=False,**kwargs):
+
+def run_queue_plan(
+    acquisition_plan_name, configuration, sample_md, simulation=False, **kwargs
+):
     if simulation:
         return avg_scan_time(acquisition_plan_name)
 
-    if(acquisition_plan_name == 'all_out'):
+    if acquisition_plan_name == "all_out":
         yield from all_out()
-        uid=0
+        uid = 0
     else:
         yield from load_configuration(configuration)
-        yield from move_to_location(sample_md['location'])
+        yield from move_to_location(sample_md["location"])
         planref = getattr(rsoxs_queue_plans, acquisition_plan_name)
-        uid = yield from planref(md=sample_md,**kwargs)
+        uid = yield from planref(md=sample_md, **kwargs)
     return uid
 
 

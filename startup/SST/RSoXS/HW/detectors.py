@@ -52,12 +52,12 @@ def exposure():
     return "   " + saxs_det.exposure() + "\n   " + waxs_det.exposure()
 
 
-def snapshot(secs=0, count=1, name=None, energy=None, detn='saxs'):
+def snapshot(secs=0, count=1, name=None, energy=None, detn="saxs"):
     """
     snap of detectors to clear any charge from light hitting them - needed before starting scans or snapping images
     :return:
     """
-    sw = {'saxs':saxs_det,'waxs':waxs_det}
+    sw = {"saxs": saxs_det, "waxs": waxs_det}
     det = sw[detn]
     if count == 1:
         counts = ""
@@ -150,9 +150,9 @@ dark_frame_preprocessor_waxs = bluesky_darkframes.DarkFramePreprocessor(
         Det_W.user_setpoint,
         waxs_det.cam.bin_x,
         waxs_det.cam.bin_y,
-        sam_X.user_setpoint,
+        #sam_X.user_setpoint,
         sam_Th.user_setpoint,
-        sam_Y.user_setpoint,
+        #sam_Y.user_setpoint,
     ],
     limit=20,
 )

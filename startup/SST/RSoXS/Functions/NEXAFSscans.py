@@ -121,7 +121,7 @@ def fly_Carbon_NEXAFS(
         [(270, 282, speed * 3), (282, 297, speed), (297, 340, speed * 5)],
         enscan_type=enscan_type,
         openshutter=True,
-        exp_time=0.5,
+
         master_plan=master_plan,
         md=md,
         diode_range=diode_range,
@@ -173,7 +173,7 @@ def fly_Calcium_NEXAFS(
         [(320, 340, speed * 3), (340, 355, speed)],
         enscan_type=enscan_type,
         openshutter=True,
-        exp_time=0.5,
+        
         master_plan=master_plan,
         md=md,
         diode_range=diode_range,
@@ -225,7 +225,7 @@ def fly_SulfurL_NEXAFS(
         [(180, 225, speed)],
         enscan_type=enscan_type,
         openshutter=True,
-        exp_time=0.5,
+
         diode_range=diode_range,
         m3_pitch=m3_pitch,
         pol=pol,
@@ -276,7 +276,7 @@ def fly_SiliconL_NEXAFS(
         [(100, 140, speed)],
         enscan_type=enscan_type,
         openshutter=True,
-        exp_time=0.5,
+
         diode_range=diode_range,
         m3_pitch=m3_pitch,
         pol=pol,
@@ -327,7 +327,7 @@ def fly_SiliconK_NEXAFS(
         [(1830, 1870, speed)],
         enscan_type=enscan_type,
         openshutter=True,
-        exp_time=0.5,
+
         diode_range=diode_range,
         m3_pitch=m3_pitch,
         pol=pol,
@@ -378,7 +378,7 @@ def fly_Nitrogen_NEXAFS(
         [(385, 397, speed * 3), (397, 407, speed), (407, 440, speed * 5)],
         enscan_type=enscan_type,
         openshutter=True,
-        exp_time=0.5,
+
         diode_range=diode_range,
         m3_pitch=m3_pitch,
         pol=pol,
@@ -429,7 +429,7 @@ def fly_Oxygen_NEXAFS(
         [(510, 525, speed * 3), (525, 540, speed), (540, 560, speed * 5)],
         enscan_type=enscan_type,
         openshutter=True,
-        exp_time=0.5,
+
         diode_range=diode_range,
         m3_pitch=m3_pitch,
         pol=pol,
@@ -479,7 +479,7 @@ def fly_Fluorine_NEXAFS(
         [(670, 685, 3 * speed), (685, 700, speed), (700, 740, 3 * speed)],
         enscan_type=enscan_type,
         openshutter=True,
-        exp_time=0.5,
+
         diode_range=diode_range,
         m3_pitch=m3_pitch,
         pol=pol,
@@ -530,7 +530,7 @@ def fly_Boron_NEXAFS(
         [(180, 220, speed)],
         enscan_type=enscan_type,
         openshutter=True,
-        exp_time=0.5,
+
         diode_range=diode_range,
         m3_pitch=m3_pitch,
         pol=pol,
@@ -563,7 +563,7 @@ def do_HOPGscans_epu(hopggrazing, hopgnormal):
 
 
 def normal_incidence_rotate_pol_nexafs(
-    nexafs_plan='fly_Carbon_NEXAFS',
+    nexafs_plan="fly_Carbon_NEXAFS",
     polarizations=[0, 20, 45, 70, 90],
     master_plan="normal_incidence_rotate_pol_nexafs",
     md={},
@@ -584,7 +584,7 @@ def normal_incidence_rotate_pol_nexafs(
 
 
 def fixed_pol_rotate_sample_nexafs(
-    nexafs_plan='fly_Carbon_NEXAFS',
+    nexafs_plan="fly_Carbon_NEXAFS",
     angles=[20, 40, 55, 70, 90],
     polarization=0,
     master_plan="fixed_pol_rotate_sample_nexafs",
@@ -620,7 +620,7 @@ def epu_angle_from_grazing(real_incident_angle, grazing_angle=20):
 
 
 def fixed_sample_rotate_pol_nexafs(
-    nexafs_plan='fly_Carbon_NEXAFS',
+    nexafs_plan="fly_Carbon_NEXAFS",
     grazing_angle=20,
     master_plan="fixed_sample_rotate_pol_nexafs",
     angles=[20, 40, 55, 70, 90],
@@ -651,7 +651,7 @@ def fixed_sample_rotate_pol_nexafs(
 
 
 def fixed_sample_rotate_pol_list_nexafs(
-    nexafs_plan='fly_Carbon_NEXAFS',
+    nexafs_plan="fly_Carbon_NEXAFS",
     grazing_angle=20,
     master_plan="fixed_sample_rotate_pol_list_nexafs",
     pols=[0, 40, 55, 70, 90],

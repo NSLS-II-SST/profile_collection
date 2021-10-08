@@ -28,7 +28,7 @@ from ..HW.detectors import (
 )
 from ..Functions.alignment import sample, user
 from ..startup import RE
-from ..HW.energy import en,set_polarization
+from ..HW.energy import en, set_polarization
 from ...CommonFunctions.functions import run_report, boxed_text
 
 
@@ -101,9 +101,9 @@ def motors(line):
             + Det_W.where()
             + "  dw"
             + "\n"
-            #+ Det_S.where()
-            #+ "  ds"
-            #+ "\n"
+            # + Det_S.where()
+            # + "  ds"
+            # + "\n"
             + Shutter_Y.where()
             + "\n"
             + Izero_Y.where()
@@ -271,10 +271,10 @@ def snapsaxs(line):
     try:
         secs = float(line)
     except:
-        RE(snapshot(detn='saxs'))
+        RE(snapshot(detn="saxs"))
     else:
         if secs > 0 and secs < 100:
-            RE(snapshot(secs, detn='saxs'))
+            RE(snapshot(secs, detn="saxs"))
 
 
 del snapsaxs
@@ -285,10 +285,10 @@ def snapwaxs(line):
     try:
         secs = float(line)
     except:
-        RE(snapshot(detn='waxs'))
+        RE(snapshot(detn="waxs"))
     else:
         if secs > 0 and secs < 100:
-            RE(snapshot(secs, detn='waxs'))
+            RE(snapshot(secs, detn="waxs"))
 
 
 del snapwaxs
@@ -322,8 +322,6 @@ def u(line):
 
 
 del md, u
-
-
 
 
 class RSoXSPrompt(Prompts):

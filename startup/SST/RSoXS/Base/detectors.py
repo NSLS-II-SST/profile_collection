@@ -86,14 +86,12 @@ class RSOXSGreatEyesDetector(SingleTriggerV33, GreatEyesDetector):
     useshutter = True
 
     def sim_mode_on(self):
-        self.useshutter=False
+        self.useshutter = False
         self.cam.sync.set(0)
 
-
     def sim_mode_off(self):
-        self.useshutter=True
+        self.useshutter = True
         self.cam.sync.set(1)
-
 
     def stage(self, *args, **kwargs):
         self.cam.temperature_actual.read()
@@ -102,7 +100,7 @@ class RSOXSGreatEyesDetector(SingleTriggerV33, GreatEyesDetector):
         # self.cam.temperature.set(-80)
         # self.cam.enable_cooling.set(1)
         # print('staging the detector')
-        if(self.useshutter):
+        if self.useshutter:
             Shutter_enable.set(1)
             Shutter_delay.set(0)
         if abs(self.cam.temperature_actual.get() - self.cam.temperature.get()) > 2.0:
@@ -145,20 +143,20 @@ class RSOXSGreatEyesDetector(SingleTriggerV33, GreatEyesDetector):
 
     def shutter_on(self):
         # self.cam.sync.set(1)
-        if(self.useshutter):
+        if self.useshutter:
             self.cam.sync.set(1)
         else:
-            print('not turning on shutter because detector is in simulation mode')
+            print("not turning on shutter because detector is in simulation mode")
 
     def shutter_off(self):
         # self.cam.sync.set(0)
         self.cam.sync.set(0)
 
     def unstage(self, *args, **kwargs):
-        if(self.useshutter):
+        if self.useshutter:
             Shutter_enable.set(0)
         else:
-            print('not turning on shutter because detector is in simulation mode')
+            print("not turning on shutter because detector is in simulation mode")
         return [self].append(super().unstage(*args, **kwargs))
 
     def skinnyunstage(self, *args, **kwargs):
@@ -166,7 +164,7 @@ class RSOXSGreatEyesDetector(SingleTriggerV33, GreatEyesDetector):
 
     def set_exptime(self, secs):
         self.cam.acquire_time.set(secs)
-        if(self.useshutter):
+        if self.useshutter:
             Shutter_open_time.set(secs * 1000)
 
     def set_exptime_detonly(self, secs):
@@ -367,11 +365,10 @@ class SimGreatEyes(Device):
     cam = Component(SimGreatEyesCam)
 
     def sim_mode_on(self):
-        self.useshutter=False
-
+        self.useshutter = False
 
     def sim_mode_off(self):
-        self.useshutter=True
+        self.useshutter = True
 
     def stage(self):
         print("staging")
@@ -428,13 +425,13 @@ class SimGreatEyes(Device):
         if self.cam.enable_cooling.get():
             self.cam.temperature_actual.read()
             if self.cam.temperature_actual.get() - self.cam.temperature.get() > 1.0:
-                return "\nTemperature of {} ({} °C) is not at setpoint ({} °C) but cooling is on".format(
+                return "\n{} ({} °C) is not at setpoint ({} °C) but cooling is on".format(
                     colored(self.name, "lightblue"),
                     colored(self.cam.temperature_actual.get(), "red"),
                     colored(self.cam.temperature.get(), "blue"),
                 )
             else:
-                return "\nTemperature of {} ({} °C) is at setpoint ({} °C) and cooling is on".format(
+                return "\n{} ({} °C) is at setpoint ({} °C) and cooling is on".format(
                     colored(self.name, "lightblue"),
                     colored(self.cam.temperature_actual.get(), "green"),
                     colored(self.cam.temperature.get(), "blue"),
