@@ -205,10 +205,9 @@ def en_scan_core(
         valid = False
         validation += f"energy object {energy} is not a valid ophyd device\n"
     if angle is not None:
-        if -190 > angle or angle > 150:
+        if -155 > angle or angle > 195:
             valid = False
             validation += f"angle of {angle} is out of range\n"
-
     if sim_mode:
         if valid:
             retstr = f"scanning {newdets} from {min(energies)} eV to {max(energies)} eV on the {grating} l/mm grating\n"
