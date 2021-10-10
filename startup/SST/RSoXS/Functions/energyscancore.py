@@ -203,7 +203,7 @@ def en_scan_core(
     if not isinstance(energy, Device):
         valid = False
         validation += f"energy object {energy} is not a valid ophyd device\n"
-    if -190 > angle or angle > 150 and angle is not None:
+    if -155 > angle or angle > 195 and angle is not None:
         valid = False
         validation += f"angle of {angle} is out of range\n"
 
