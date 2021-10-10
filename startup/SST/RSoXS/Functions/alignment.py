@@ -660,7 +660,7 @@ def sanatize_angle(samp, force=False):
         goodnumber = True  # make the number fall in the necessary range
     else:
         goodnumber = False  # make all transmission 90 degrees from the back, and all grading 20 deg
-    if force and -95 < samp["angle"] < 185:
+    if force and -155 < samp["angle"] < 195:
         samp["bar_loc"]["th"] = samp["angle"]
         return
     if samp["grazing"]:
@@ -684,7 +684,7 @@ def sanatize_angle(samp, force=False):
         if samp["front"]:
             if goodnumber:
                 samp["bar_loc"]["th"] = (
-                    90 + np.round(np.mod(100 * samp["angle"] - 9000.01, 9000.01)) / 100
+                    90 + np.round(np.mod(100 * samp["angle"] - 18000.01, 18000.01)) / 100
                 )
                 if samp["bar_loc"]["x0"] < -1.8 and samp["bar_loc"]["th"] < 155:
                     # transmission from the left side of the bar at a incident angle more than 20 degrees,
@@ -693,6 +693,10 @@ def sanatize_angle(samp, force=False):
                         -90
                         - np.round(np.mod(100 * samp["angle"] - 9000.01, 9000.01)) / 100
                     )
+                if samp["bar_loc"]["th"] >=195:
+                    samp["bar_loc"]["th"] = 180
+                if samp["bar_loc"]["th"] <=-155:
+                    samp["bar_loc"]["th"] = -150
             else:
                 samp["bar_loc"]["th"] = 180
                 samp["angle"] = 180
@@ -706,6 +710,11 @@ def sanatize_angle(samp, force=False):
             else:
                 samp["bar_loc"]["th"] = 0
                 samp["angle"] = 0
+
+    if samp["bar_loc"]["th"] >= 195:
+        samp["bar_loc"]["th"] = 195
+    if samp["bar_loc"]["th"] <= -155:
+        samp["bar_loc"]["th"] = -155
 
 
 def sample_by_value_match(bar, key, string):
