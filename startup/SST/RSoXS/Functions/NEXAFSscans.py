@@ -173,7 +173,7 @@ def fly_Calcium_NEXAFS(
         [(320, 340, speed * 3), (340, 355, speed)],
         enscan_type=enscan_type,
         openshutter=True,
-        
+
         master_plan=master_plan,
         md=md,
         diode_range=diode_range,
@@ -600,9 +600,10 @@ def fixed_pol_rotate_sample_nexafs(
     arguments = dict(locals())
     arguments["nexafs_plan"] = eval(nexafs_plan).__name__
     clean_up_md(arguments, md, **kwargs)
+    nexafs_plan_plan = eval(nexafs_plan)
     for angle in angles:
         yield from rotate_now(angle)
-        yield from nexafs_plan(
+        yield from nexafs_plan_plan(
             pol=polarization, master_plan=master_plan, md=md, **kwargs
         )
 
@@ -639,10 +640,11 @@ def fixed_sample_rotate_pol_nexafs(
     arguments["nexafs_plan"] = eval(nexafs_plan).__name__
     clean_up_md(arguments, md, **kwargs)
     yield from rotate_now(grazing_angle)
+    nexafs_plan_plan = eval(nexafs_plan)
     for angle in angles:
         if angle < grazing_angle:
             continue
-        yield from nexafs_plan(
+        yield from nexafs_plan_plan(
             pol=epu_angle_from_grazing(angle, grazing_angle),
             master_plan=master_plan,
             md=md,
@@ -670,5 +672,6 @@ def fixed_sample_rotate_pol_list_nexafs(
     arguments["nexafs_plan"] = eval(nexafs_plan).__name__
     clean_up_md(arguments, md, **kwargs)
     yield from rotate_now(grazing_angle)
+    nexafs_plan_plan = eval(nexafs_plan)
     for pol in pols:
-        yield from nexafs_plan(pol=pol, master_plan=master_plan, md=md, **kwargs)
+        yield from nexafs_plan_plan(pol=pol, master_plan=master_plan, md=md, **kwargs)

@@ -133,6 +133,7 @@ def en_scan_core(
     angle=None,
     sim_mode=False,
     md=None,
+    **kwargs #extraneous settings from higher level plans are ignored
 ):
     # grab locals
     if signals is None:
@@ -149,7 +150,6 @@ def en_scan_core(
         energy = en
     arguments = dict(locals())
     del arguments["md"]  # no recursion here!
-    arguments["dets"] = [det.name for det in arguments["dets"]]
     arguments["signals"] = [signal.name for signal in arguments["signals"]]
     arguments["energy"] = arguments["energy"].name
     if md is None:
@@ -164,14 +164,15 @@ def en_scan_core(
     # validate inputs
     valid = True
     validation = ""
+    newdets = []
     for det in dets:
         if not isinstance(det, Device):
             try:
-                det = eval('det')
+                newdets.append(eval(det))
             except Exception:
                 valid = False
                 validation += f"detector {det} is not an ophyd device\n"
-    if len(dets) < 1:
+    if len(newdets) < 1:
         valid = False
         validation += "No detectors are given\n"
     if min(energies) < 70 or max(energies) > 2200:
@@ -191,7 +192,7 @@ def en_scan_core(
     if max(times) > 20:
         valid = False
         validation += "exposure times greater than 20 seconds are not valid\n"
-    if pol != -1 or 0 > pol or pol > 180:
+    if pol < -1 or pol > 180:
         valid = False
         validation += f"polarization of {pol} is not valid\n"
     if 4 > diode_range or diode_range > 10:
@@ -203,13 +204,14 @@ def en_scan_core(
     if not isinstance(energy, Device):
         valid = False
         validation += f"energy object {energy} is not a valid ophyd device\n"
-    if -190 > angle or angle > 150 and angle is not None:
-        valid = False
-        validation += f"angle of {angle} is out of range\n"
+    if angle is not None:
+        if -190 > angle or angle > 150:
+            valid = False
+            validation += f"angle of {angle} is out of range\n"
 
     if sim_mode:
         if valid:
-            retstr = f"scanning {dets} from {min(energies)} eV to {max(energies)} eV on the {grating} l/mm grating\n"
+            retstr = f"scanning {newdets} from {min(energies)} eV to {max(energies)} eV on the {grating} l/mm grating\n"
             retstr += f"    in {len(times)} steps with exposure times from {min(times)} to {max(times)} seconds\n"
             return retstr
         else:
@@ -220,7 +222,7 @@ def en_scan_core(
 
     if angle is not None:
         rotate_now(angle)
-    for det in dets:
+    for det in newdets:
         det.cam.acquire_time.kind = "hinted"
     # set the M3 pitch
     yield from bps.abs_set(mir3.Pitch, m3_pitch, wait=True)
@@ -236,11 +238,12 @@ def en_scan_core(
     # set up the scan cycler
     sigcycler = cycler(energy, energies)
     shutter_times = [i * 1000 for i in times]
-    for det in dets:
+    for det in newdets:
         sigcycler += cycler(det.cam.acquire_time, times.copy())
     sigcycler += cycler(Shutter_open_time, shutter_times)
-    # print(sigcycler)
-    yield from scan_eliot(dets + signals, sigcycler, Shutter_open_time, md=md)
+    print(newdets)
+    print(signals)
+    yield from scan_eliot(newdets + signals, sigcycler, Shutter_open_time, md=md)
 
 
 def NEXAFS_scan_core(
@@ -260,6 +263,7 @@ def NEXAFS_scan_core(
     motorname="None",
     offset=0,
     sim_mode=False,
+    **kwargs #extraneous settings from higher level plans are ignored
 ):
     if sim_mode:
         return f"NEXAFS scan from {min(energies)} eV to {max(energies)} eV"
@@ -324,6 +328,7 @@ def NEXAFS_fly_scan_core(
     master_plan=None,
     md=None,
     sim_mode=False,
+    **kwargs #extraneous settings from higher level plans are ignored
 ):
     # grab locals
     if md is None:
