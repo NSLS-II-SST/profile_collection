@@ -37,7 +37,7 @@ def clean_up_md(arguments={}, md={}, **kwargs):
 def full_oxygen_scan_nd(
     multiple=1.0,
     diode_range=7,
-    m3_pitch=8.0,
+    m3_pitch=7.98,
     grating="1200",
     master_plan=None,
     md={},
@@ -102,7 +102,7 @@ def full_oxygen_scan_nd(
 def short_oxygen_scan_nd(
     multiple=1.0,
     diode_range=7,
-    m3_pitch=8.0,
+    m3_pitch=7.98,
     grating="1200",
     master_plan=None,
     md={},
@@ -166,8 +166,8 @@ def short_oxygen_scan_nd(
 
 def short_zincl_scan_nd(
     multiple=1.0,
-    diode_range=6,
-    m3_pitch=7.98,
+    diode_range=8,
+    m3_pitch=7.96,
     grating="1200",
     master_plan=None,
     md={},
@@ -203,9 +203,9 @@ def short_zincl_scan_nd(
     ):
         return
     # create a list of energies
-    energies = np.arange(1015, 1020, 1)
-    energies = np.append(energies, np.arange(1020, 1027, 0.5))
-    energies = np.append(energies, np.arange(1027, 1035, 1))
+    energies = np.arange(1000, 1015, 2)
+    energies = np.append(energies, np.arange(1015, 1035, 1))
+    energies = np.append(energies, np.arange(1035, 1085, 3))
     times = energies.copy()
 
     times[:] = 2.0
@@ -228,7 +228,7 @@ def short_zincl_scan_nd(
 def very_short_oxygen_scan_nd(
     multiple=1.0,
     diode_range=6,
-    m3_pitch=8.0,
+    m3_pitch=7.98,
     grating="1200",
     master_plan=None,
     md={},
@@ -358,7 +358,7 @@ def short_fluorine_scan_nd(
 def short_aluminum_scan_nd(
     multiple=1.0,
     diode_range=7,
-    m3_pitch=7.98,
+    m3_pitch=7.96,
     grating="1200",
     master_plan=None,
     md={},
