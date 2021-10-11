@@ -37,7 +37,7 @@ def clean_up_md(arguments={}, md={}, **kwargs):
 def full_oxygen_scan_nd(
     multiple=1.0,
     diode_range=7,
-    m3_pitch=7.99,
+    m3_pitch=8.0,
     grating="1200",
     master_plan=None,
     md={},
@@ -102,7 +102,7 @@ def full_oxygen_scan_nd(
 def short_oxygen_scan_nd(
     multiple=1.0,
     diode_range=7,
-    m3_pitch=7.98,
+    m3_pitch=8.0,
     grating="1200",
     master_plan=None,
     md={},
@@ -228,7 +228,7 @@ def short_zincl_scan_nd(
 def very_short_oxygen_scan_nd(
     multiple=1.0,
     diode_range=6,
-    m3_pitch=7.97,
+    m3_pitch=8.0,
     grating="1200",
     master_plan=None,
     md={},
@@ -332,6 +332,70 @@ def short_fluorine_scan_nd(
 
     # create a list of energies
     energies = np.arange(670.0, 710.0, 1.0)
+    # energies = np.append(energies,np.arange(525,540,0.5))
+    # energies = np.append(energies,np.arange(540,560,2))
+    times = energies.copy()
+
+    # Define exposures times for different energy ranges
+    # times[energies<525] = 2
+    # times[(energies < 540) & (energies >= 525)] = 5
+    # times[energies >= 540] = 2
+    times[:] = 2.0
+    times *= multiple
+    # use these energies and exposure times to scan energy and record detectors and signals
+    yield from en_scan_core(
+        energies=energies,
+        times=times,
+        enscan_type=enscan_type,
+        md=md,
+        master_plan=master_plan,
+        diode_range=diode_range,
+        m3_pitch=m3_pitch,
+        grating=grating,
+        **kwargs
+    )
+
+def short_aluminum_scan_nd(
+    multiple=1.0,
+    diode_range=7,
+    m3_pitch=7.98,
+    grating="1200",
+    master_plan=None,
+    md={},
+    enscan_type="short_aluminum_scan_nd",
+    **kwargs
+):
+    """
+    short_aluminum_scan_nd
+    @param master_plan: a category of higher level plan which you might want to sort by
+    @param enscan_type: the granular level plan you might want to sort by - generally for timing or data lookup
+    @param md: metadata to push through to lower level plans and eventually a bluesky document
+    @param multiple: default exposure times is multipled by this
+    @param diode_range: integer range for the dilde
+    @param m3_pitch: pitch value for M3 for this energy range - check before scans
+    @param grating: '1200' high energy or '250' low energy
+    @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
+    @return: Do a step scan and take images
+    """
+    plan_name = "short_aluminum_scan_nd"
+    # grab locals
+    arguments = dict(locals())
+    clean_up_md(arguments, md, **kwargs)
+    if (
+        len(
+            read_input(
+                "Starting an Aluminum energy scan hit enter in the next 3 seconds to abort",
+                "abort",
+                "",
+                3,
+            )
+        )
+        > 0
+    ):
+        return
+
+    # create a list of energies
+    energies = np.arange(1540, 1640, 2.0)
     # energies = np.append(energies,np.arange(525,540,0.5))
     # energies = np.append(energies,np.arange(540,560,2))
     times = energies.copy()
@@ -489,8 +553,8 @@ def short_nitrogen_scan_nd(
 
 def very_short_carbon_scan_nd(
     multiple=1.0,
-    diode_range=6,
-    m3_pitch=8.01,
+    diode_range=7,
+    m3_pitch=8.00,
     grating="1200",
     master_plan=None,
     md={},
@@ -558,7 +622,7 @@ def very_short_carbon_scan_nd(
 
 def short_carbon_scan_nd(
     multiple=1.0,
-    diode_range=6,
+    diode_range=7,
     m3_pitch=8.00,
     grating="1200",
     master_plan=None,
@@ -627,8 +691,8 @@ def short_carbon_scan_nd(
 
 def short_carbon_scan_nonaromatic(
     multiple=1.0,
-    diode_range=6,
-    m3_pitch=7.98,
+    diode_range=7,
+    m3_pitch=8.00,
     grating="1200",
     master_plan=None,
     md={},
@@ -825,8 +889,8 @@ def short_sulfurl_scan_nd(
 
 def focused_carbon_scan_nd(
     multiple=1.0,
-    diode_range=6,
-    m3_pitch=7.93,
+    diode_range=7,
+    m3_pitch=8.0,
     grating="1200",
     master_plan=None,
     md={},
@@ -894,8 +958,8 @@ def focused_carbon_scan_nd(
 
 def g_carbon_scan_nd(
     multiple=1.0,
-    diode_range=6,
-    m3_pitch=7.93,
+    diode_range=7,
+    m3_pitch=8.0,
     grating="1200",
     master_plan=None,
     md={},
@@ -954,8 +1018,8 @@ def g_carbon_scan_nd(
 
 def t_carbon_scan_nd(
     multiple=1.0,
-    diode_range=6,
-    m3_pitch=7.93,
+    diode_range=7,
+    m3_pitch=8.0,
     grating="1200",
     master_plan=None,
     md={},
@@ -1014,8 +1078,8 @@ def t_carbon_scan_nd(
 
 def sufficient_carbon_scan_nd(
     multiple=1.0,
-    diode_range=6,
-    m3_pitch=7.96,
+    diode_range=7,
+    m3_pitch=8.0,
     grating="1200",
     master_plan=None,
     md={},
@@ -1081,8 +1145,8 @@ def sufficient_carbon_scan_nd(
 
 def picky_carbon_scan_nd(
     multiple=1.0,
-    diode_range=6,
-    m3_pitch=7.93,
+    diode_range=7,
+    m3_pitch=8.0,
     grating="1200",
     master_plan=None,
     md={},
@@ -1141,7 +1205,7 @@ def picky_carbon_scan_nd(
 
 def full_carbon_scan_nd(
     multiple=1.0,
-    diode_range=6,
+    diode_range=7,
     m3_pitch=8.00,
     grating="1200",
     master_plan=None,
@@ -1208,8 +1272,8 @@ def full_carbon_scan_nd(
 
 def full_carbon_scan_nonaromatic(
     multiple=1.0,
-    diode_range=6,
-    m3_pitch=7.97,
+    diode_range=7,
+    m3_pitch=8.0,
     grating="1200",
     master_plan=None,
     md={},
@@ -1525,8 +1589,8 @@ def short_calcium_scan_nd(
 
 def full_carbon_calcium_scan_nd(
     multiple=1.0,
-    diode_range=6,
-    m3_pitch=7.96,
+    diode_range=7,
+    m3_pitch=8.0,
     grating="1200",
     master_plan=None,
     md={},
@@ -1845,7 +1909,7 @@ def cdsaxs_scan(
     m3_pitch=8.00,
     grating="1200",
     md={},
-    enscan_type="full_oxygen_scan_nd",
+    enscan_type="cdsaxs_scan",
     **kwargs
 ):
     """
