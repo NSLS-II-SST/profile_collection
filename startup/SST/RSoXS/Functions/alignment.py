@@ -1483,6 +1483,7 @@ def find_fiducials(f2=[6, 3.5, -3, 1.1]):
         yield from bp.rel_scan([Beamstop_WAXS], sam_Y, -1, 0.5, 16)
         yield from bps.mv(Shutter_control, 0)
         maxlocs.append(bec.peaks.max["WAXS Beamstop"][0])
+        yield from bps.mv(sam_Y,bec.peaks.max["WAXS Beamstop"][0])
         for startx, angle in zip(startxs, angles):
             yield from bps.mv(sam_X, startx, sam_Th, angle)
             yield from bps.mv(Shutter_control, 1)
