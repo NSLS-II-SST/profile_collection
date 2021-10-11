@@ -218,9 +218,10 @@ def en_scan_core(
 
     if not valid:
         raise ValueError(validation)
-
+    #print(f'angle is {angle}')
     if angle is not None:
-        rotate_now(angle)
+        print(f'moving angle to {angle}')
+        yield from rotate_now(angle)
     for det in newdets:
         det.cam.acquire_time.kind = "hinted"
     # set the M3 pitch
