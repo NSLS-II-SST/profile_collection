@@ -203,9 +203,9 @@ def short_zincl_scan_nd(
     ):
         return
     # create a list of energies
-    energies = np.arange(1000, 1015, 2)
-    energies = np.append(energies, np.arange(1015, 1035, 1))
-    energies = np.append(energies, np.arange(1035, 1085, 3))
+    energies = np.arange(1000.0, 1015.0, 2.0)
+    energies = np.append(energies, np.arange(1015.0, 1035.0, 1.0))
+    energies = np.append(energies, np.arange(1035.0, 1085.0, 3.0))
     times = energies.copy()
 
     times[:] = 2.0
@@ -395,7 +395,7 @@ def short_aluminum_scan_nd(
         return
 
     # create a list of energies
-    energies = np.arange(1540, 1640, 2.0)
+    energies = np.arange(1540.0, 1640.0, 2.0)
     # energies = np.append(energies,np.arange(525,540,0.5))
     # energies = np.append(energies,np.arange(540,560,2))
     times = energies.copy()
