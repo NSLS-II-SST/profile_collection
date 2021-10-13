@@ -1,11 +1,18 @@
+import bluesky.plan_stubs as bps
+import bluesky.plans as bp
 from ...HW.energy import (
     EnPos,
     base_grating_to_250,
     base_grating_to_1200,
     base_set_polarization,
+    grating,
+    mirror2
 )
-from ..HW.motors import sam_Th
+from ..HW.motors import sam_Th, sam_X, sam_Y
 from ...CommonFunctions.functions import run_report
+from ...HW.diode import Shutter_control
+from .signals import Sample_TEY
+from ..startup import bec
 
 
 run_report(__file__)
@@ -64,9 +71,43 @@ def set_polarization(pol):
     yield from base_set_polarization(pol, en)
 
 
-def grating_to_1200():
-    yield from base_grating_to_1200(mono_en, en)
+def grating_to_1200(hopgx=None,hopgy=None,hopgtheta=None):
+    moved = yield from base_grating_to_1200(mono_en, en)
+    if moved and isinstance(hopgx,float) and isinstance(hopgy,float) and isinstance(hopgtheta,float):
+        ensave = en.energy.setpoint.get()
+        xsave = sam_X.user_setpoint.get()
+        ysave = sam_Y.user_setpoint.get()
+        thsave = sam_Th.user_setpoint.get()
+        yield from bps.mv(sam_X,hopgx,sam_Y,hopgy,sam_Th,hopgtheta)
+        yield from bps.mv(en, 291.65)
+        yield from bps.mv(en, 291.65)
+        yield from bps.mv(Shutter_control,1)
+        yield from bp.rel_scan([Sample_TEY],grating,-0.025,.025,mirror2,-0.025,.025,100)
+        yield from bps.mv(Shutter_control,0)
+        yield from bps.mv(sam_X,xsave,sam_Y,ysave,sam_Th,thsave)
+        yield from bps.sleep(5)
+        newoffset = en.monoen.grating.get()[0] - bec.peaks.max['RSoXS Sample Current'][0]
+        if -0.02 < newoffset < 0.02 :
+            yield from bps.mvr(grating.user_offset,newoffset,mirror2.user_offset,newoffset)
+        yield from bps.mv(en, ensave)
 
 
-def grating_to_250():
-    yield from base_grating_to_250(mono_en, en)
+def grating_to_250(hopgx=None,hopgy=None,hopgtheta=None):
+    moved = yield from base_grating_to_250(mono_en, en)
+    if moved and isinstance(hopgx,float) and isinstance(hopgy,float) and isinstance(hopgtheta,float):
+        ensave = en.energy.setpoint.get()
+        xsave = sam_X.user_setpoint.get()
+        ysave = sam_Y.user_setpoint.get()
+        thsave = sam_Th.user_setpoint.get()
+        yield from bps.mv(sam_X,hopgx,sam_Y,hopgy,sam_Th,hopgtheta)
+        yield from bps.mv(en, 291.65)
+        yield from bps.mv(en, 291.65)
+        yield from bps.mv(Shutter_control,1)
+        yield from bp.rel_scan([Sample_TEY],grating,-0.025,.025,mirror2,-0.025,.025,100)
+        yield from bps.mv(Shutter_control,0)
+        yield from bps.mv(sam_X,xsave,sam_Y,ysave,sam_Th,thsave)
+        yield from bps.sleep(5)
+        newoffset = en.monoen.grating.get()[0] - bec.peaks.max['RSoXS Sample Current'][0]
+        if -0.02 < newoffset < 0.02 :
+            yield from bps.mvr(grating.user_offset,newoffset,mirror2.user_offset,newoffset)
+        yield from bps.mv(en, ensave)
