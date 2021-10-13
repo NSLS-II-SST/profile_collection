@@ -475,6 +475,7 @@ def base_grating_to_250(mono_en, en):
     yield from bps.mv(en, 270)
     yield from psh4.open()
     print("the grating is now at 250 l/mm")
+    return 1
 
 
 def base_grating_to_1200(mono_en, en):
@@ -490,9 +491,11 @@ def base_grating_to_1200(mono_en, en):
     yield from bps.mv(mirror2.user_offset, 0.2044) #0.1962) #0.2052) # 0.1745)  # 8.1264)
     yield from bps.mv(grating.user_offset, 0.0769) #0.0687) # 0.0777) # 0.047)  # 7.2964)  # 7.2948)#7.2956
     yield from bps.mv(mono_en.cff, 1.7)
+
     yield from bps.mv(en, 270)
     yield from psh4.open()
     print("the grating is now at 1200 l/mm")
+    return 1
 
 
 def epugap_from_en_pol(energy, polarization):

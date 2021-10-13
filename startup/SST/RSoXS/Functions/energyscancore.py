@@ -229,10 +229,14 @@ def en_scan_core(
     # set the photodiode gain setting
     yield from bps.mv(DiodeRange, diode_range)
     # set the grating
+    if 'hopg_loc' in md.keys():
+        hopgx = md['hopg_loc']['x']
+        hopgy = md['hopg_loc']['y']
+        hopgth = md['hopg_loc']['th']
     if grating == "1200":
-        yield from grating_to_1200()
+        yield from grating_to_1200(hopgx=hopgx,hopgy=hopgy,hopgtheta=hopgth)
     elif grating == "250":
-        yield from grating_to_250()
+        yield from grating_to_250(hopgx=hopgx,hopgy=hopgy,hopgtheta=hopgth)
     # set the polarization
     yield from set_polarization(pol)
     # set up the scan cycler
@@ -274,10 +278,14 @@ def NEXAFS_scan_core(
     # set exposure
     set_exposure(exp_time)
     # set grating
+    if 'hopg_loc' in md.keys():
+        hopgx = md['hopg_loc']['x']
+        hopgy = md['hopg_loc']['y']
+        hopgth = md['hopg_loc']['th']
     if grating == "1200":
-        yield from grating_to_1200()
+        yield from grating_to_1200(hopgx=hopgx,hopgy=hopgy,hopgtheta=hopgth)
     elif grating == "250":
-        yield from grating_to_250()
+        yield from grating_to_250(hopgx=hopgx,hopgy=hopgy,hopgtheta=hopgth)
     # set motor offset if it's set
     if motorname is not "None":
         yield from bps.rel_set(eval(motorname), offset, wait=True)
@@ -393,10 +401,14 @@ def NEXAFS_fly_scan_core(
         yield from bps.abs_set(mir3.Pitch, m3_pitch, wait=True)
     if not np.isnan(diode_range):
         yield from bps.mv(DiodeRange, diode_range)
+    if 'hopg_loc' in md.keys():
+        hopgx = md['hopg_loc']['x']
+        hopgy = md['hopg_loc']['y']
+        hopgth = md['hopg_loc']['th']
     if grating == "1200":
-        yield from grating_to_1200()
+        yield from grating_to_1200(hopgx=hopgx,hopgy=hopgy,hopgtheta=hopgth)
     elif grating == "250":
-        yield from grating_to_250()
+        yield from grating_to_250(hopgx=hopgx,hopgy=hopgy,hopgtheta=hopgth)
 
     if np.isnan(pol):
         pol = en.polarization.setpoint.get()
