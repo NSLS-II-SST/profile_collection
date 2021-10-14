@@ -805,9 +805,9 @@ def default_sample(name):
 
 
 def samxscan():
-    yield from psh10.open()
+    yield from psh10.open_plan()
     yield from bp.rel_scan([Beamstop_SAXS], sam_X, -2, 2, 41)
-    yield from psh10.close()
+    yield from psh10.close_plan()
 
 
 def spiralsearch(

@@ -5,6 +5,7 @@ from ophyd import (
 )
 import time
 import bluesky.plan_stubs as bps
+import bluesky.plans as bp
 from ..CommonFunctions.functions import run_report
 
 
@@ -40,7 +41,7 @@ class EPS_Shutter(Device):
                     "tried %d times and failed to open %s %s" % (count, self.name, ":(")
                 )  # u'\u2639'  unicode frown
                 return (yield from bps.null())
-            time.sleep(1.5)
+            bps.sleep(1.5)
         print("Opened {}".format(self.name))
 
     def close_plan(self):
@@ -55,7 +56,7 @@ class EPS_Shutter(Device):
                     % (count, self.name, ":(")
                 )
                 return (yield from bps.null())
-            time.sleep(1.5)
+            bps.sleep(1.5)
         print("Closed {}".format(self.name))
 
     def open(self):
@@ -65,7 +66,7 @@ class EPS_Shutter(Device):
             while self.state.get() != self.openval:
                 count += 1
                 print(u"\u231b", end=" ", flush=True)
-                yield from bps.mv(self.opn, 1)
+                self.opn.set(1)
                 if count >= self.maxcount:
                     print(
                         "tried %d times and failed to open %s %s"
@@ -85,7 +86,7 @@ class EPS_Shutter(Device):
             while self.state.get() != self.closeval:
                 count += 1
                 print(u"\u231b", end=" ", flush=True)
-                yield from bps.mv(self.cls, 1)
+                self.cls.set(1)
                 if count >= self.maxcount:
                     print(
                         "tried %d times and failed to close %s %s"
