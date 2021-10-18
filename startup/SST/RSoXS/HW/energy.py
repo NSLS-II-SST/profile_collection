@@ -78,6 +78,8 @@ def grating_to_1200(hopgx=None,hopgy=None,hopgtheta=None):
         xsave = sam_X.user_setpoint.get()
         ysave = sam_Y.user_setpoint.get()
         thsave = sam_Th.user_setpoint.get()
+        bec.enable_plots()
+        Sample_TEY.kind='hinted'
         yield from bps.mv(sam_X,hopgx,sam_Y,hopgy,sam_Th,hopgtheta)
         yield from bps.mv(en, 291.65)
         yield from bps.mv(en, 291.65)
@@ -90,6 +92,8 @@ def grating_to_1200(hopgx=None,hopgy=None,hopgtheta=None):
         if -0.02 < newoffset < 0.02 :
             yield from bps.mvr(grating.user_offset,newoffset,mirror2.user_offset,newoffset)
         yield from bps.mv(en, ensave)
+        bec.disable_plots()
+        Sample_TEY.kind='normal'
 
 
 def grating_to_250(hopgx=None,hopgy=None,hopgtheta=None):
@@ -99,6 +103,8 @@ def grating_to_250(hopgx=None,hopgy=None,hopgtheta=None):
         xsave = sam_X.user_setpoint.get()
         ysave = sam_Y.user_setpoint.get()
         thsave = sam_Th.user_setpoint.get()
+        bec.enable_plots()
+        Sample_TEY.kind='hinted'
         yield from bps.mv(sam_X,hopgx,sam_Y,hopgy,sam_Th,hopgtheta)
         yield from bps.mv(en, 291.65)
         yield from bps.mv(en, 291.65)
@@ -111,3 +117,5 @@ def grating_to_250(hopgx=None,hopgy=None,hopgtheta=None):
         if -0.02 < newoffset < 0.02 :
             yield from bps.mvr(grating.user_offset,newoffset,mirror2.user_offset,newoffset)
         yield from bps.mv(en, ensave)
+        bec.disable_plots()
+        Sample_TEY.kind='normal'

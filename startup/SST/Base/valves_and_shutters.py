@@ -32,7 +32,7 @@ class EPS_Shutter(Device):
 
     def open_plan(self):
         count = 0
-        while self.state.get() == self.openval:
+        while self.state.get() != self.openval:
             count += 1
             print(u"\u231b", end=" ", flush=True)
             yield from bps.mv(self.opn, 1)
