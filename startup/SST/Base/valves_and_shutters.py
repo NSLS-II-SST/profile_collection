@@ -41,7 +41,7 @@ class EPS_Shutter(Device):
                     "tried %d times and failed to open %s %s" % (count, self.name, ":(")
                 )  # u'\u2639'  unicode frown
                 return (yield from bps.null())
-            bps.sleep(1.5)
+            yield from bps.sleep(1.5)
         print("Opened {}".format(self.name))
 
     def close_plan(self):
@@ -56,7 +56,7 @@ class EPS_Shutter(Device):
                     % (count, self.name, ":(")
                 )
                 return (yield from bps.null())
-            bps.sleep(1.5)
+            yield from bps.sleep(1.5)
         print("Closed {}".format(self.name))
 
     def open(self):
