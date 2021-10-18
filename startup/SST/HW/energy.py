@@ -465,7 +465,7 @@ def base_grating_to_250(mono_en, en):
         print("the grating is already at 250 l/mm")
         return 0  # the grating is already here
     print("Moving the grating to 250 l/mm.  This will take a minute...")
-    yield from psh4.close()
+    yield from psh4.close_plan()
     yield from bps.abs_set(mono_en.gratingtype, 2, wait=False)
     yield from bps.abs_set(mono_en.gratingtype_proc, 1, wait=True)
     yield from bps.sleep(60)
@@ -484,7 +484,7 @@ def base_grating_to_1200(mono_en, en):
         print("the grating is already at 1200 l/mm")
         return 0  # the grating is already here
     print("Moving the grating to 1200 l/mm.  This will take a minute...")
-    yield from psh4.close()
+    yield from psh4.close_plan()
     yield from bps.abs_set(mono_en.gratingtype, 9, wait=False)
     yield from bps.abs_set(mono_en.gratingtype_proc, 1, wait=True)
     yield from bps.sleep(60)

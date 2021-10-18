@@ -527,9 +527,9 @@ def isvar_scan():
 
 
 def vent():
-    yield from psh10.close()
-    yield from gv28.close()
-    yield from gv27a.close()
+    yield from psh10.close_plan()
+    yield from gv28.close_plan()
+    yield from gv27a.close_plan()
     yield from bps.mv(sam_Y, 349)
 
     print("waiting for you to close the load lock gate valve")

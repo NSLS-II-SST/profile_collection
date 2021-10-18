@@ -224,7 +224,7 @@ def mirror1_NEXAFSpos():
 
 
 def SAXSmode():
-    yield from psh10.close()
+    yield from psh10.close_plan()
     yield from slits_in_SAXS()
     yield from bps.mv(
         Shutter_Y, 2.2, Izero_Y, -29, Det_S, 0, Det_W, -94, BeamStopW, 3, BeamStopS, 67
@@ -340,7 +340,7 @@ def TEYNEXAFS():
 
 
 def WAXSmode():
-    yield from psh10.close()
+    yield from psh10.close_plan()
     yield from slits_in_WAXS()
     yield from bps.mv(
         Shutter_Y, 2.2, Izero_Y, -29, Det_W, -10, BeamStopW, 71.4, sam_Y, -125
@@ -521,7 +521,7 @@ def oldTEYNEXAFS():
 
 
 def all_out():
-    yield from psh10.close()
+    yield from psh10.close_plan()
     print("Retracting Slits to 1 cm gap")
     yield from slits_out()
     print("Moving the rest of RSoXS components")
