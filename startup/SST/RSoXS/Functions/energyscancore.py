@@ -405,6 +405,10 @@ def NEXAFS_fly_scan_core(
         hopgx = md['hopg_loc']['x']
         hopgy = md['hopg_loc']['y']
         hopgth = md['hopg_loc']['th']
+    else:
+        hopgx = None
+        hopgy = None
+        hopgth = None
     if grating == "1200":
         yield from grating_to_1200(hopgx=hopgx,hopgy=hopgy,hopgtheta=hopgth)
     elif grating == "250":
