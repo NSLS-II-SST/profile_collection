@@ -84,7 +84,7 @@ def fly_Carbon_NEXAFS(
     speed=0.1,
     pol=0,
     diode_range=7,
-    m3_pitch=7.98,
+    m3_pitch=7.94,
     grating="250",
     master_plan=None,
     md={},
