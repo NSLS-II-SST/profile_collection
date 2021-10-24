@@ -121,7 +121,6 @@ def fly_Carbon_NEXAFS(
         [(270, 282, speed * 3), (282, 297, speed), (297, 340, speed * 5)],
         enscan_type=enscan_type,
         openshutter=True,
-
         master_plan=master_plan,
         md=md,
         diode_range=diode_range,
@@ -656,7 +655,7 @@ def fixed_sample_rotate_pol_list_nexafs(
     nexafs_plan="fly_Carbon_NEXAFS",
     grazing_angle=20,
     master_plan="fixed_sample_rotate_pol_list_nexafs",
-    pols=[0, 40, 55, 70, 90],
+    polarizations=[0, 40, 55, 70, 90],
     md={},
     enscan_type="fixed_sample_rotate_pol_list_nexafs",
     **kwargs

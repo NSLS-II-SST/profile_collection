@@ -760,7 +760,7 @@ def short_carbon_scan_nonaromatic(
 
 
 def custom_rsoxs_scan(
-    energies=[((270, 340, 1), 2)],
+    energies=[((270, 340, 1.0), 2.0)],
     master_plan=None,
     diode_range=6,
     m3_pitch=8.00,
