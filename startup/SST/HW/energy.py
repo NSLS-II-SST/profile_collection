@@ -337,7 +337,7 @@ class EnPos(PseudoPositioner):
     ):
         if (energy > en_cutoff and harmonic != "1") or harmonic == "3":
             energy = energy / 3
-        if pol == -1:
+        if pol == -1 or pol == -0.5:
             phase = 15000
             g250_gap = float(self.C250_gap.interp(Energies=energy))
             g250_intens = float(self.C250_intens.interp(Energies=energy))
@@ -392,6 +392,8 @@ class EnPos(PseudoPositioner):
     def phase(self, en, pol):
         if pol == -1:
             return 15000
+        if pol == -0.5:
+            return 15000
         elif 90 < pol <= 180:
             return -min(
                 29500,
@@ -405,6 +407,8 @@ class EnPos(PseudoPositioner):
     def pol(self, phase, mode):
         if mode == 0:
             return -1
+        if mode == 1:
+            return -0.5
         elif mode == 2:
             return float(self.phasepol.interp(phase=np.abs(phase), method="cubic"))
         elif mode == 3:
@@ -414,6 +418,8 @@ class EnPos(PseudoPositioner):
 
     def mode(self, pol):
         if pol == -1:
+            return 0
+        if pol == -0.5:
             return 0
         elif 90 < pol <= 180:
             return 3
@@ -433,6 +439,10 @@ def base_set_polarization(pol, en):
     if pol == -1:
         if epu_mode.get() != 0:
             yield from bps.mv(epu_mode, 0)
+            yield from bps.sleep(1)
+    if pol == -0.5:
+        if epu_mode.get() != 1:
+            yield from bps.mv(epu_mode, 1)
             yield from bps.sleep(1)
     elif 0 <= pol <= 90:
         if epu_mode.get() != 2:

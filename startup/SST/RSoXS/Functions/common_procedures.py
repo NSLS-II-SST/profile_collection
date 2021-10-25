@@ -7,7 +7,14 @@ from bluesky.callbacks.fitting import PeakStats
 from bluesky.preprocessors import subs_wrapper
 from bluesky import preprocessors as bpp
 from bluesky.run_engine import Msg
-from ..HW.signals import Izero_Mesh, Beamstop_WAXS
+from ..HW.signals import (
+    Izero_Mesh,
+    Beamstop_WAXS,
+    Slit1_Current_Top,
+    Slit1_Current_Bottom,
+    Slit1_Current_Inboard,
+    Slit1_Current_Outboard
+    )
 from ..HW.energy import (
     en,
     mono_en,
@@ -16,7 +23,7 @@ from ..HW.energy import (
     set_polarization,
     epu_gap,
     epu_phase,
-)
+    )
 from ...HW.energy import epu_mode
 from ...HW.diode import Shutter_control, Shutter_enable
 from ..HW.slits import slits1, slits2
@@ -45,10 +52,24 @@ def buildeputable(
 ):
     ens = np.arange(start, stop, step)
     gaps = []
+    gapsbs = []
+    gapsst = []
+    gapssb = []
+    gapssi = []
+    gapsso = []
     ensout = []
     heights = []
+    heightsbs = []
+    heightsst = []
+    heightssb = []
+    heightssi = []
+    heightsso = []
     Izero_Mesh.kind = "hinted"
     Beamstop_WAXS.kind = "hinted"
+    Slit1_Current_Top.kind = "normal"
+    Slit1_Current_Bottom.kind = "normal"
+    Slit1_Current_Inboard.kind = "normal"
+    Slit1_Current_Outboard.kind = "normal"
     mono_en.kind = "hinted"
     # startinggap = epugap_from_energy(ens[0]) #get starting position from existing table
 
@@ -73,9 +94,14 @@ def buildeputable(
         yield from bps.mv(epu_gap, max(14000, startinggap - 500 * widfract))
         yield from bps.mv(Shutter_enable, 0)
         yield from bps.mv(Shutter_control, 1)
-        max_positions = yield from tune_max(
+        maxread, max_xI_signals, max_I_signals  = yield from tune_max(
             [Izero_Mesh, Beamstop_WAXS],
-            "RSoXS Au Mesh Current",
+            ["RSoXS Au Mesh Current",
+            "WAXS Beamstop",
+            "RSoXS Slit 1 Bottom Current",
+            "RSoXS Slit 1 Top Current",
+            "RSoXS Slit 1 In Board Current",
+            "RSoXS Slit 1 Out Board Current",]
             epu_gap,
             min(99500, max(14000, startinggap - 500 * widfract)),
             min(100000, max(15000, startinggap + 1000 * widfract)),
@@ -85,17 +111,25 @@ def buildeputable(
             True,
             peaklist
         )
-
-        print(f"bec peaks max : {bec.peaks.max}")
-        startinggap = bec.peaks.max["RSoXS Au Mesh Current"][0]
-        height = bec.peaks.max["RSoXS Au Mesh Current"][1]
-
-        startinggap = bec.peaks.max["RSoXS Au Mesh Current"][0]
-        height = bec.peaks.max["RSoXS Au Mesh Current"][1]
+        startinggap = max_xI_signals["RSoXS Au Mesh Current"]
+        height = max_I_signals["RSoXS Au Mesh Current"]
         gaps.append(startinggap)
         heights.append(height)
         ensout.append(mono_en.position)
-        data = {"Energies": ensout, "EPUGaps": gaps, "PeakCurrent": heights}
+        data = {"Energies": ensout,
+                "EPUGaps": gaps,
+                "PeakCurrent": heights,
+                "EPUGapsBS": gapsbs,
+                "PeakCurrentBS": heightsbs,
+                "EPUGapsST": gapsst,
+                "PeakCurrentST": heightsst,
+                "EPUGapsSB": gapssb,
+                "PeakCurrentSB": heightssb,
+                "EPUGapsSI": gapssi,
+                "PeakCurrentSI": heightssi,
+                "EPUGapsSO": gapsso,
+                "PeakCurrentSO": heightsso,
+                }
         dataframe = pd.DataFrame(data=data)
         dataframe.to_csv("/nsls2/data/sst/legacy/RSoXS/EPUdata_2021oct_" + name + ".csv")
         count += 1
@@ -121,9 +155,11 @@ def do_some_eputables_2021_en():
     slits_width = slits1.hsize.get()
     yield from bps.mv(slits1.hsize, 5)
 
-    yield from bps.mv(epu_mode, 3)
+    yield from set_polarization(-1)
+    yield from buildeputable(200, 700, 5, 2, 14000, 15000,'C','250','C_250')
+    yield from set_polarization(-2)
+    yield from buildeputable(200, 700, 5, 2, 14000, 15000,'C','250','C_250')
 
-    # yield from buildeputable(200, 700, 5, 2, 14000, 15000,'C','250','C_250')
     yield from buildeputable(80, 700, 5, 2, 14000, 0, "L3", "250", "m3L0_250")
     yield from buildeputable(90, 700, 5, 2, 14000, 4000, "L3", "250", "m3L4_250")
     yield from buildeputable(105, 700, 5, 2, 14000, 8000, "L3", "250", "m3L8_250")
@@ -213,7 +249,7 @@ def buildeputablegaps(start, stop, step, widfract, startingen, name, phase, grat
         yield from bps.mv(epu_gap, gap)
         yield from bps.mv(mono_en, max(72, startingen - 10 * widfract))
         peaklist = []
-        maxread = yield from tune_max(
+        maxread, max_xI_signals, max_I_signals = yield from tune_max(
             [Izero_Mesh, Beamstop_WAXS],
             "RSoXS Au Mesh Current",
             mono_en,
@@ -344,6 +380,7 @@ def do_2021_eputables3():
 def tune_max(
     detectors,
     signal,
+    signals,
     motor,
     start,
     stop,
@@ -380,8 +417,9 @@ def tune_max(
     ----------
     detectors : Signal
         list of 'readable' objects
-    signal : string
-        detector field whose output is to maximize
+    signals : string
+        detector fields whose output is to maximize
+        (the first will be the primary, but secondardy maxes will be recorded)
     motor : object
         any 'settable' object (motor, temp controller, etc.)
     start : float
@@ -411,6 +449,7 @@ def tune_max(
                     center=-1.3, Imax=1e5, sigma=0.05)
      RE(tune_max([det], "det", motor, -1.5, -0.5, 0.01, 10))
     """
+    signal = signals[0]
     if min_step <= 0:
         raise ValueError("min_step must be positive")
     if step_factor <= 1.0:
@@ -453,18 +492,24 @@ def tune_max(
         cur_I = None
         max_I = -1e50  # for peak maximum finding (allow for negative values)
         max_xI = 0
-
+        cur_sigI
+        max_I_signals={}
+        max_xI_signals={}
         while abs(step) >= min_step and low_limit <= next_pos <= high_limit:
             yield Msg("checkpoint")
             yield from bps.mv(motor, next_pos)
             ret = yield from bps.trigger_and_read(detectors + [motor])
             cur_I = ret[signal]["value"]
             position = ret[motor_name]["value"]
-
             if cur_I > max_I:
                 max_I = cur_I
                 max_xI = position
                 max_ret = ret
+            for sig in signals:
+                cur_sigI=ret[sig]["value"]
+                if(cur_sigI>max_signals[sig]):
+                    max_I_signals[sig]=cur_sigI
+                    max_xI_signals[sig]=position
 
             next_pos += step
             in_range = min(start, stop) <= next_pos <= max(start, stop)
@@ -472,7 +517,7 @@ def tune_max(
             if not in_range:
                 if max_I == -1e50:
                     return
-                peak_position = max_xI  # centroid
+                peak_position = max_xI  # maxiumum
                 max_xI, max_I = 0, 0  # reset for next pass
                 new_scan_range = (stop - start) / step_factor
                 start = np.clip(
@@ -495,7 +540,7 @@ def tune_max(
             # print("final position = {}".format(peak_position))
             yield from bps.mv(motor, peak_position)
         peaklist += [peak_position, max_I]
-        return max_ret
+        return max_ret, max_xI_signals, max_I_signals
 
     return (yield from _tune_core(start, stop, num, signal, peaklist))
 
