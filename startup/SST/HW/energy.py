@@ -427,7 +427,7 @@ class EnPos(PseudoPositioner):
     def mode(self, pol):
         if pol == -1:
             return 0
-        if pol == -0.5:
+        elif pol == -0.5:
             return 1
         elif 90 < pol <= 180:
             return 3
@@ -455,7 +455,7 @@ def base_set_polarization(pol, en):
         if epu_mode.get() != 0:
             yield from bps.mv(epu_mode, 0)
             yield from bps.sleep(1)
-    if pol == -0.5:
+    elif pol == -0.5:
         if epu_mode.get() != 1:
             yield from bps.mv(epu_mode, 1)
             yield from bps.sleep(1)
