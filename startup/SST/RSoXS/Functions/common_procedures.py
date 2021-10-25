@@ -58,11 +58,8 @@ def buildeputable(
     heightsbs = []
     Izero_Mesh.kind = "hinted"
     Beamstop_WAXS.kind = "hinted"
-    Slit1_Current_Top.kind = "normal"
-    Slit1_Current_Bottom.kind = "normal"
-    Slit1_Current_Inboard.kind = "normal"
-    Slit1_Current_Outboard.kind = "normal"
     mono_en.kind = "hinted"
+    epu_gap.kind = 'hinted'
     # startinggap = epugap_from_energy(ens[0]) #get starting position from existing table
     yield from set_polarization(0)
     if grat == "1200":
@@ -89,7 +86,7 @@ def buildeputable(
         yield from bps.mv(epu_gap, max(14000, startinggap - 500 * widfract))
         yield from bps.mv(Shutter_enable, 0)
         yield from bps.mv(Shutter_control, 1)
-        maxread, max_xI_signals, max_I_signals  = yield from tune_max(
+        [maxread, max_xI_signals, max_I_signals]  = yield from tune_max(
             [Izero_Mesh, Beamstop_WAXS],
             ["RSoXS Au Mesh Current",
             "WAXS Beamstop",],
@@ -175,8 +172,9 @@ def buildeputablegaps(start, stop, step, widfract, startingen, name, phase, grat
     ens = []
     gapsout = []
     heights = []
-    # Beamstop_SAXS.kind= 'hinted'
-    # Izero_Mesh.kind= 'hinted'
+    Beamstop_WAXS.kind= 'hinted'
+    Izero_Mesh.kind= 'hinted'
+    epu_gap.kind = 'hinted'
     # startinggap = epugap_from_energy(ens[0]) #get starting position from existing table
 
     count = 0
@@ -193,7 +191,7 @@ def buildeputablegaps(start, stop, step, widfract, startingen, name, phase, grat
         yield from bps.mv(epu_gap, gap)
         yield from bps.mv(mono_en, max(72, startingen - 10 * widfract))
         peaklist = []
-        maxread, max_xI_signals, max_I_signals = yield from tune_max(
+        yield from tune_max(
             [Izero_Mesh, Beamstop_WAXS],
             "RSoXS Au Mesh Current",
             mono_en,
