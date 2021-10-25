@@ -14,7 +14,7 @@ import numpy as np
 import xarray as xr
 from ..CommonFunctions.functions import boxed_text, colored, run_report
 from ..Base.motors import PrettyMotorFMBO
-from ..Base.mirrors import FMBHexapodMirrorAxis
+from ..Base.mirrors import FMBHexapodMirrorAxisStandAlonePitch
 from ..HW.shutters import psh4
 from ..HW.motors import grating, mirror2
 from ..HW.mirrors import mir3
@@ -141,9 +141,9 @@ class EnPos(PseudoPositioner):
         kind="normal",
         name="EPU Phase",
     )
-    mir3pitch = Cpt(
-        FMBHexapodMirrorAxis,
-        "XF:07ID1-OP{Mir:M3ABC-Ax:P}",
+    mir3Pitch = Cpt(
+        FMBHexapodMirrorAxisStandAlonePitch,
+        "XF:07ID1-OP{Mir:M3ABC",
         kind="normal",
         name="M3Pitch",
     )
@@ -160,7 +160,7 @@ class EnPos(PseudoPositioner):
             epugap=self.gap(pseudo_pos.energy, pseudo_pos.polarization),
             monoen=pseudo_pos.energy,
             epuphase=abs(self.phase(pseudo_pos.energy, pseudo_pos.polarization)),
-            mir3pitch=self.m3pitchcalc(pseudo_pos.energy)
+            mir3Pitch=self.m3pitchcalc(pseudo_pos.energy)
         )
         # print('finished forward')
         return ret

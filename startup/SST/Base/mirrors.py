@@ -32,6 +32,18 @@ class FMBHexapodMirrorAxis(PVPositioner):
     done_value = 0
 
 
+class FMBHexapodMirrorAxisStandAlonePitch(PVPositioner):
+    readback = Cpt(EpicsSignalRO, "-Ax:P}Mtr_MON")
+    setpoint = Cpt(EpicsSignal, "-Ax:P}Mtr_POS_SP")
+    actuate = FmtCpt(EpicsSignal, "}}MOVE_CMD.PROC")
+    actual_value = 1
+    stop_signal = FmtCpt(EpicsSignal, "}}STOP_CMD.PROC")
+    stop_value = 1
+    done = FmtCpt(EpicsSignalRO, "}}BUSY_STS")
+    done_value = 0
+
+
+
 class FMBHexapodMirror(Device):
     Z = Cpt(FMBHexapodMirrorAxis, "-Ax:Z}")
     Y = Cpt(FMBHexapodMirrorAxis, "-Ax:Y}")
