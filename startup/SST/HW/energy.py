@@ -428,7 +428,7 @@ class EnPos(PseudoPositioner):
         if pol == -1:
             return 0
         if pol == -0.5:
-            return 0
+            return 1
         elif 90 < pol <= 180:
             return 3
         else:

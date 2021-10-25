@@ -91,6 +91,7 @@ def buildeputable(
     peaklist=[]
     for energy in ens:
         yield from bps.mv(mono_en, energy)
+        yield from bps.mv(en.mir3Pitch,en.m3pitchcalc(energy))
         yield from bps.mv(epu_gap, max(14000, startinggap - 500 * widfract))
         yield from bps.mv(Shutter_enable, 0)
         yield from bps.mv(Shutter_control, 1)
@@ -152,13 +153,11 @@ def do_some_eputables_2021_en():
 
     bec.enable_plots()
     yield from load_configuration("WAXSNEXAFS")
-    slits_width = slits1.hsize.get()
-    yield from bps.mv(slits1.hsize, 5)
 
     yield from set_polarization(-1)
-    yield from buildeputable(200, 700, 5, 2, 14000, 15000,'C','250','C_250')
-    yield from set_polarization(-2)
-    yield from buildeputable(200, 700, 5, 2, 14000, 15000,'C','250','C_250')
+    yield from buildeputable(70, 1200, 5, 2, 14000, 15000,'C','250','C_250')
+    yield from set_polarization(-.5)
+    yield from buildeputable(70, 1200, 5, 2, 14000, 15000,'C','250','C_250')
 
     yield from buildeputable(80, 700, 5, 2, 14000, 0, "L3", "250", "m3L0_250")
     yield from buildeputable(90, 700, 5, 2, 14000, 4000, "L3", "250", "m3L4_250")
