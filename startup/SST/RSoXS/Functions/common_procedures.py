@@ -90,7 +90,7 @@ def buildeputable(
         yield from bps.mv(Shutter_enable, 0)
         yield from bps.mv(Shutter_control, 1)
         maxread, max_xI_signals, max_I_signals  = yield from tune_max(
-            Izero_Mesh, Beamstop_WAXS,
+            [Izero_Mesh, Beamstop_WAXS],
             ["RSoXS Au Mesh Current",
             "WAXS Beamstop",],
             epu_gap,
@@ -130,8 +130,6 @@ def buildeputable(
 
 
 def do_some_eputables_2021_en():
-
-    yield from bps.mv(slits1.hsize, 5)
 
     bec.enable_plots()
     yield from load_configuration("WAXSNEXAFS")
