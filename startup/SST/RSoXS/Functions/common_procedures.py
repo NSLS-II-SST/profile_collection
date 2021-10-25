@@ -483,14 +483,14 @@ def tune_max(
             # improvement: report final peak_position
             # print("final position = {}".format(peak_position))
             yield from bps.mv(motor, peak_position)
-        peaklist += [max_ret, max_xI_signals, max_I_signals]
+        peaklist.append([[max_ret, max_xI_signals, max_I_signals]])
         print('max_ret')
         print(max_ret)
         print('max_xI_signals')
         print(max_xI_signals)
         print('max_I_signals')
         print(max_I_signals)
-        return [max_ret, max_xI_signals, max_I_signals]
+        return [[max_ret, max_xI_signals, max_I_signals]]
 
     return (yield from _tune_core(start, stop, num, signal, peaklist))
 
