@@ -14,8 +14,10 @@ import numpy as np
 import xarray as xr
 from ..CommonFunctions.functions import boxed_text, colored, run_report
 from ..Base.motors import PrettyMotorFMBO
+from ..Base.mirrors import FMBHexapodMirrorAxis
 from ..HW.shutters import psh4
 from ..HW.motors import grating, mirror2
+from ..HW.mirrors import mir3
 
 
 run_report(__file__)
@@ -139,6 +141,12 @@ class EnPos(PseudoPositioner):
         kind="normal",
         name="EPU Phase",
     )
+    mir3pitch = Cpt(
+        FMBHexapodMirrorAxis,
+        "XF:07ID1-OP{Mir:M3ABC-Ax:P}",
+        kind="normal",
+        name="M3Pitch",
+    )
     # epumode = Cpt(EpicsSignal,'SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP',
     #                       name='EPU Mode', kind='normal')
 
@@ -152,7 +160,7 @@ class EnPos(PseudoPositioner):
             epugap=self.gap(pseudo_pos.energy, pseudo_pos.polarization),
             monoen=pseudo_pos.energy,
             epuphase=abs(self.phase(pseudo_pos.energy, pseudo_pos.polarization)),
-            # epumode=self.mode(pseudo_pos.polarization)
+            m3pitch=self.m3pitchcalc(pseudo_pos.energy)
         )
         # print('finished forward')
         return ret
@@ -434,6 +442,13 @@ class EnPos(PseudoPositioner):
             / np.pi
         )
 
+    def m3pitchcalc(self,energy):
+        if "1200" in self.monoen.gratingtype.get():
+            return 7.8951+0.038807*np.exp(-(energy-100)/91.942)+0.050123*np.exp(-(energy-100)/1188.9)
+        elif "250" in self.monoen.gratingtype.get():
+            return 7.8956+0.022665*np.exp(-(energy-90)/37.746)+0.024897*np.exp(-(energy-90)/450.9)
+        else:
+            return 7.95
 
 def base_set_polarization(pol, en):
     if pol == -1:
