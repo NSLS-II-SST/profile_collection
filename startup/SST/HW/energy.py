@@ -160,7 +160,7 @@ class EnPos(PseudoPositioner):
             epugap=self.gap(pseudo_pos.energy, pseudo_pos.polarization),
             monoen=pseudo_pos.energy,
             epuphase=abs(self.phase(pseudo_pos.energy, pseudo_pos.polarization)),
-            m3pitch=self.m3pitchcalc(pseudo_pos.energy)
+            mir3pitch=self.m3pitchcalc(pseudo_pos.energy)
         )
         # print('finished forward')
         return ret
