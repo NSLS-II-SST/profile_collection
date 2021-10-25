@@ -400,7 +400,7 @@ class EnPos(PseudoPositioner):
     def phase(self, en, pol):
         if pol == -1:
             return 15000
-        if pol == -0.5:
+        elif pol == -0.5:
             return 15000
         elif 90 < pol <= 180:
             return -min(
@@ -415,7 +415,7 @@ class EnPos(PseudoPositioner):
     def pol(self, phase, mode):
         if mode == 0:
             return -1
-        if mode == 1:
+        elif mode == 1:
             return -0.5
         elif mode == 2:
             return float(self.phasepol.interp(phase=np.abs(phase), method="cubic"))
