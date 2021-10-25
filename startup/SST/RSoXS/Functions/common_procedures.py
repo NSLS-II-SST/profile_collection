@@ -53,17 +53,9 @@ def buildeputable(
     ens = np.arange(start, stop, step)
     gaps = []
     gapsbs = []
-    gapsst = []
-    gapssb = []
-    gapssi = []
-    gapsso = []
     ensout = []
     heights = []
     heightsbs = []
-    heightsst = []
-    heightssb = []
-    heightssi = []
-    heightsso = []
     Izero_Mesh.kind = "hinted"
     Beamstop_WAXS.kind = "hinted"
     Slit1_Current_Top.kind = "normal"
@@ -72,14 +64,16 @@ def buildeputable(
     Slit1_Current_Outboard.kind = "normal"
     mono_en.kind = "hinted"
     # startinggap = epugap_from_energy(ens[0]) #get starting position from existing table
-
+    yield from set_polarization(0)
     if grat == "1200":
-        yield from grating_to_1200()
+        yield from grating_to_1200(2.0,-6.3,0.0)
     elif grat == "250":
-        yield from grating_to_250()
-
+        yield from grating_to_250(2.0,-6.3,0.0)
+    yield from bps.mv(sam_Y,30)
     if mode == "C":
         yield from set_polarization(-1)
+    if mode == "CW":
+        yield from set_polarization(-.5)
 
     elif mode == "L3":
         yield from bps.mv(epu_mode, 3)
@@ -98,16 +92,12 @@ def buildeputable(
         maxread, max_xI_signals, max_I_signals  = yield from tune_max(
             Izero_Mesh, Beamstop_WAXS,
             ["RSoXS Au Mesh Current",
-            "WAXS Beamstop",
-            "RSoXS Slit 1 Bottom Current",
-            "RSoXS Slit 1 Top Current",
-            "RSoXS Slit 1 In Board Current",
-            "RSoXS Slit 1 Out Board Current",],
+            "WAXS Beamstop",],
             epu_gap,
             min(99500, max(14000, startinggap - 500 * widfract)),
             min(100000, max(15000, startinggap + 1000 * widfract)),
-            10 * widfract,
-            7,
+            3 * widfract,
+            20,
             3,
             True,
             peaklist
@@ -122,14 +112,6 @@ def buildeputable(
                 "PeakCurrent": heights,
                 "EPUGapsBS": gapsbs,
                 "PeakCurrentBS": heightsbs,
-                "EPUGapsST": gapsst,
-                "PeakCurrentST": heightsst,
-                "EPUGapsSB": gapssb,
-                "PeakCurrentSB": heightssb,
-                "EPUGapsSI": gapssi,
-                "PeakCurrentSI": heightssi,
-                "EPUGapsSO": gapsso,
-                "PeakCurrentSO": heightsso,
                 }
         dataframe = pd.DataFrame(data=data)
         dataframe.to_csv("/nsls2/data/sst/legacy/RSoXS/EPUdata_2021oct_" + name + ".csv")
@@ -154,10 +136,8 @@ def do_some_eputables_2021_en():
     bec.enable_plots()
     yield from load_configuration("WAXSNEXAFS")
 
-    yield from set_polarization(-1)
     yield from buildeputable(70, 1200, 5, 2, 14000, 15000,'C','250','C_250')
-    yield from set_polarization(-.5)
-    yield from buildeputable(70, 1200, 5, 2, 14000, 15000,'C','250','C_250')
+    yield from buildeputable(70, 1200, 5, 2, 14000, 15000,'CW','250','CW_250')
 
     yield from buildeputable(80, 1200, 5, 2, 14000, 0, "L3", "250", "m3L0_250")
     yield from buildeputable(90, 1200, 5, 2, 14000, 4000, "L3", "250", "m3L4_250")
@@ -169,39 +149,6 @@ def do_some_eputables_2021_en():
     yield from buildeputable(185, 1200, 10, 2, 14000, 23000, "L3", "250", "m3L23_250")
     yield from buildeputable(165, 1200, 10, 2, 14000, 26000, "L3", "250", "m3L26_250")
     yield from buildeputable(145, 1200, 10, 2, 14000, 29500, "L3", "250", "m3L29p5_250")
-
-    yield from buildeputable(
-        280, 1300, 20, 3, 27645.673509277673, 0, "L3", "1200", "m3L0_1200"
-    )
-    yield from buildeputable(
-        280, 1300, 20, 3, 27065.89305265014, 4000, "L3", "1200", "m3L4_1200"
-    )
-    yield from buildeputable(
-        280, 1300, 20, 3, 24945.690795653547, 8000, "L3", "1200", "m3L8_1200"
-    )
-    yield from buildeputable(
-        280, 1300, 20, 3, 21163.356009915613, 12000, "L3", "1200", "m3L12_1200"
-    )
-    yield from buildeputable(
-        280, 1300, 20, 3, 18460.988780996147, 15000, "L3", "1200", "m3L15_1200"
-    )
-    yield from buildeputable(
-        280, 1300, 20, 3, 16794.337054167583, 18000, "L3", "1200", "m3L18_1200"
-    )
-    yield from buildeputable(
-        280, 1300, 20, 3, 16835.389909644993, 21000, "L3", "1200", "m3L21_1200"
-    )
-    yield from buildeputable(
-        280, 1300, 20, 3, 17512.80501268945, 23000, "L3", "1200", "m3L23_1200"
-    )
-    yield from buildeputable(
-        280, 1300, 20, 3, 18514.896600341806, 26000, "L3", "1200", "m3L26_1200"
-    )
-    yield from buildeputable(
-        280, 1300, 20, 3, 19248.140428175113, 29500, "L3", "1200", "m3L29p5_1200"
-    )
-
-    yield from bps.mv(slits1.hsize, slits_width)
 
 
 def Scan_izero_peak(startingen, widfract):

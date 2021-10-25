@@ -89,7 +89,7 @@ def grating_to_1200(hopgx=None,hopgy=None,hopgtheta=None):
         yield from bps.mv(sam_X,xsave,sam_Y,ysave,sam_Th,thsave)
         yield from bps.sleep(5)
         newoffset = en.monoen.grating.get()[0] - bec.peaks.max['RSoXS Sample Current'][0]
-        if -0.04 < newoffset < 0.04 :
+        if -0.05 < newoffset < 0.05 :
             yield from bps.mvr(grating.user_offset,newoffset,mirror2.user_offset,newoffset)
         yield from bps.mv(en, ensave)
         bec.disable_plots()
@@ -109,12 +109,12 @@ def grating_to_250(hopgx=None,hopgy=None,hopgtheta=None):
         yield from bps.mv(en, 291.65)
         yield from bps.mv(en, 291.65)
         yield from bps.mv(Shutter_control,1)
-        yield from bp.rel_scan([Sample_TEY],grating,-0.025,.025,mirror2,-0.025,.025,100)
+        yield from bp.rel_scan([Sample_TEY],grating,-0.05,.05,mirror2,-0.05,.05,100)
         yield from bps.mv(Shutter_control,0)
         yield from bps.mv(sam_X,xsave,sam_Y,ysave,sam_Th,thsave)
         yield from bps.sleep(5)
         newoffset = en.monoen.grating.get()[0] - bec.peaks.max['RSoXS Sample Current'][0]
-        if -0.02 < newoffset < 0.02 :
+        if -0.05 < newoffset < 0.05 :
             yield from bps.mvr(grating.user_offset,newoffset,mirror2.user_offset,newoffset)
         yield from bps.mv(en, ensave)
         bec.disable_plots()
