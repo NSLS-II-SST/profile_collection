@@ -86,7 +86,7 @@ def buildeputable(
         yield from bps.mv(epu_gap, max(14000, startinggap - 500 * widfract))
         yield from bps.mv(Shutter_enable, 0)
         yield from bps.mv(Shutter_control, 1)
-        [maxread, max_xI_signals, max_I_signals]  = yield from tune_max(
+        yield from tune_max(
             [Izero_Mesh, Beamstop_WAXS],
             ["RSoXS Au Mesh Current",
             "WAXS Beamstop",],
@@ -99,6 +99,7 @@ def buildeputable(
             True,
             peaklist
         )
+        [maxread, max_xI_signals, max_I_signals] = peaklist[-1]
         startinggap = max_xI_signals["RSoXS Au Mesh Current"]
         height = max_I_signals["RSoXS Au Mesh Current"]
         gaps.append(startinggap)
