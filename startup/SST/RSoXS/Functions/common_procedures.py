@@ -159,16 +159,16 @@ def do_some_eputables_2021_en():
     yield from set_polarization(-.5)
     yield from buildeputable(70, 1200, 5, 2, 14000, 15000,'C','250','C_250')
 
-    yield from buildeputable(80, 700, 5, 2, 14000, 0, "L3", "250", "m3L0_250")
-    yield from buildeputable(90, 700, 5, 2, 14000, 4000, "L3", "250", "m3L4_250")
-    yield from buildeputable(105, 700, 5, 2, 14000, 8000, "L3", "250", "m3L8_250")
-    yield from buildeputable(135, 700, 5, 2, 14000, 12000, "L3", "250", "m3L12_250")
-    yield from buildeputable(185, 700, 5, 2, 14000, 15000, "L3", "250", "m3L15_250")
-    yield from buildeputable(210, 700, 5, 2, 14000, 18000, "L3", "250", "m3L18_250")
-    yield from buildeputable(200, 700, 5, 2, 14000, 21000, "L3", "250", "m3L21_250")
-    yield from buildeputable(185, 400, 10, 2, 14000, 23000, "L3", "250", "m3L23_250")
-    yield from buildeputable(165, 400, 10, 2, 14000, 26000, "L3", "250", "m3L26_250")
-    yield from buildeputable(145, 400, 10, 2, 14000, 29500, "L3", "250", "m3L29p5_250")
+    yield from buildeputable(80, 1200, 5, 2, 14000, 0, "L3", "250", "m3L0_250")
+    yield from buildeputable(90, 1200, 5, 2, 14000, 4000, "L3", "250", "m3L4_250")
+    yield from buildeputable(105, 1200, 5, 2, 14000, 8000, "L3", "250", "m3L8_250")
+    yield from buildeputable(135, 1200, 5, 2, 14000, 12000, "L3", "250", "m3L12_250")
+    yield from buildeputable(185, 1200, 5, 2, 14000, 15000, "L3", "250", "m3L15_250")
+    yield from buildeputable(210, 1200, 5, 2, 14000, 18000, "L3", "250", "m3L18_250")
+    yield from buildeputable(200, 1200, 5, 2, 14000, 21000, "L3", "250", "m3L21_250")
+    yield from buildeputable(185, 1200, 10, 2, 14000, 23000, "L3", "250", "m3L23_250")
+    yield from buildeputable(165, 1200, 10, 2, 14000, 26000, "L3", "250", "m3L26_250")
+    yield from buildeputable(145, 1200, 10, 2, 14000, 29500, "L3", "250", "m3L29p5_250")
 
     yield from buildeputable(
         280, 1300, 20, 3, 27645.673509277673, 0, "L3", "1200", "m3L0_1200"
