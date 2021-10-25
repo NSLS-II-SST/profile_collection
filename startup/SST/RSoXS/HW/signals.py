@@ -25,16 +25,16 @@ Izero_Diode = EpicsSignalRO(
 )
 
 Slit1_Current_Bottom = EpicsSignalRO(
-    "XF:07ID-ES1{DMR:I400-1}:IC1_MON", name="RSoXS Slit 1 Bottom Current", kind="normal"
+    "XF:07ID-ES1{Slt1:I400-1}:IC1_MON", name="RSoXS Slit 1 Bottom Current", kind="normal"
 )
 Slit1_Current_Top = EpicsSignalRO(
-    "XF:07ID-ES1{DMR:I400-1}:IC2_MON", name="RSoXS Slit 1 Top Current", kind="normal"
+    "XF:07ID-ES1{Slt1:I400-1}:IC2_MON", name="RSoXS Slit 1 Top Current", kind="normal"
 )
 Slit1_Current_Inboard = EpicsSignalRO(
-    "XF:07ID-ES1{DMR:I400-1}:IC3_MON", name="RSoXS Slit 1 In Board Current", kind="normal"
+    "XF:07ID-ES1{Slt1:I400-1}:IC3_MON", name="RSoXS Slit 1 In Board Current", kind="normal"
 )
 Slit1_Current_Outboard = EpicsSignalRO(
-    "XF:07ID-ES1{DMR:I400-1}:IC3_MON", name="RSoXS Slit 1 Out Board Current", kind="normal"
+    "XF:07ID-ES1{Slt1:I400-1}:IC4_MON", name="RSoXS Slit 1 Out Board Current", kind="normal"
 )
 
 mir1_pressure = EpicsSignalRO(
@@ -60,16 +60,7 @@ Sample_TEY = EpicsSignalRO(
     name="RSoXS Sample Current",
     kind="normal",
 )
-Slit1_Top_I = EpicsSignalRO(
-    "XF:07ID1-BI{EM:1}EM180:Current3:MeanValue_RBV",
-    name="RSoXS Slit 1 Top Current",
-    kind="normal",
-)
-Slit1_IB_I = EpicsSignalRO(
-    "XF:07ID1-BI{EM:1}EM180:Current4:MeanValue_RBV",
-    name="RSoXS Slit 1 Inbound Current",
-    kind="normal",
-)
+
 
 DiodeRange = EpicsSignal("XF:07ID-ES1{DMR:I400-1}:RANGE_BP")
 

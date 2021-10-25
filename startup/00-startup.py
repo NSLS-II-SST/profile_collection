@@ -86,8 +86,6 @@ sd.baseline.extend(
         Slit1_Current_Outboard,
         Izero_Diode,
         Izero_Mesh,
-        Slit1_Top_I,
-        Slit1_IB_I,
         DM4_PD,
         mir1_pressure,
         rsoxs_ccg_izero,

@@ -95,13 +95,13 @@ def buildeputable(
         yield from bps.mv(Shutter_enable, 0)
         yield from bps.mv(Shutter_control, 1)
         maxread, max_xI_signals, max_I_signals  = yield from tune_max(
-            [Izero_Mesh, Beamstop_WAXS],
+            Izero_Mesh, Beamstop_WAXS,
             ["RSoXS Au Mesh Current",
             "WAXS Beamstop",
             "RSoXS Slit 1 Bottom Current",
             "RSoXS Slit 1 Top Current",
             "RSoXS Slit 1 In Board Current",
-            "RSoXS Slit 1 Out Board Current",]
+            "RSoXS Slit 1 Out Board Current",],
             epu_gap,
             min(99500, max(14000, startinggap - 500 * widfract)),
             min(100000, max(15000, startinggap + 1000 * widfract)),
@@ -379,7 +379,6 @@ def do_2021_eputables3():
 
 def tune_max(
     detectors,
-    signal,
     signals,
     motor,
     start,
@@ -492,9 +491,11 @@ def tune_max(
         cur_I = None
         max_I = -1e50  # for peak maximum finding (allow for negative values)
         max_xI = 0
-        cur_sigI
+        cur_sigI = None
         max_I_signals={}
         max_xI_signals={}
+        for sig in signals:
+            max_I_signals[sig] = -1e50
         while abs(step) >= min_step and low_limit <= next_pos <= high_limit:
             yield Msg("checkpoint")
             yield from bps.mv(motor, next_pos)
@@ -507,7 +508,7 @@ def tune_max(
                 max_ret = ret
             for sig in signals:
                 cur_sigI=ret[sig]["value"]
-                if(cur_sigI>max_signals[sig]):
+                if(cur_sigI>max_I_signals[sig]):
                     max_I_signals[sig]=cur_sigI
                     max_xI_signals[sig]=position
 
@@ -539,8 +540,8 @@ def tune_max(
             # improvement: report final peak_position
             # print("final position = {}".format(peak_position))
             yield from bps.mv(motor, peak_position)
-        peaklist += [peak_position, max_I]
-        return max_ret, max_xI_signals, max_I_signals
+        peaklist += [max_ret, max_xI_signals, max_I_signals]
+        return [max_ret, max_xI_signals, max_I_signals]
 
     return (yield from _tune_core(start, stop, num, signal, peaklist))
 
