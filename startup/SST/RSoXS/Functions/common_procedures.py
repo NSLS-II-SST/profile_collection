@@ -67,13 +67,13 @@ def buildeputable(
     yield from bps.mv(epu_phase, phase)
 
     count = 0
-
+    peaklist=[]
     for energy in ens:
         yield from bps.mv(mono_en, energy)
         yield from bps.mv(epu_gap, max(14000, startinggap - 500 * widfract))
         yield from bps.mv(Shutter_enable, 0)
         yield from bps.mv(Shutter_control, 1)
-        yield from tune_max(
+        max_positions = yield from tune_max(
             [Izero_Mesh, Beamstop_WAXS],
             "RSoXS Au Mesh Current",
             epu_gap,
@@ -83,10 +83,13 @@ def buildeputable(
             7,
             3,
             True,
+            peaklist
         )
-        yield from bps.mv(Shutter_control, 0)
-        yield from bps.sleep(3)
+
         print(f"bec peaks max : {bec.peaks.max}")
+        startinggap = bec.peaks.max["RSoXS Au Mesh Current"][0]
+        height = bec.peaks.max["RSoXS Au Mesh Current"][1]
+
         startinggap = bec.peaks.max["RSoXS Au Mesh Current"][0]
         height = bec.peaks.max["RSoXS Au Mesh Current"][1]
         gaps.append(startinggap)
@@ -94,7 +97,7 @@ def buildeputable(
         ensout.append(mono_en.position)
         data = {"Energies": ensout, "EPUGaps": gaps, "PeakCurrent": heights}
         dataframe = pd.DataFrame(data=data)
-        dataframe.to_csv("/mnt/zdrive/EPUdata_2021m3en_" + name + ".csv")
+        dataframe.to_csv("/nsls2/data/sst/legacy/RSoXS/EPUdata_2021oct_" + name + ".csv")
         count += 1
         if count > 20:
             count = 0
@@ -210,7 +213,7 @@ def buildeputablegaps(start, stop, step, widfract, startingen, name, phase, grat
         yield from bps.mv(epu_gap, gap)
         yield from bps.mv(mono_en, max(72, startingen - 10 * widfract))
         peaklist = []
-        yield from tune_max(
+        maxread = yield from tune_max(
             [Izero_Mesh, Beamstop_WAXS],
             "RSoXS Au Mesh Current",
             mono_en,
@@ -427,7 +430,7 @@ def tune_max(
             "num": num,
             "min_step": min_step,
         },
-        "plan_name": "tune_centroid",
+        "plan_name": "tune_max",
         "hints": {},
     }
     _md.update(md or {})
@@ -461,6 +464,7 @@ def tune_max(
             if cur_I > max_I:
                 max_I = cur_I
                 max_xI = position
+                max_ret = ret
 
             next_pos += step
             in_range = min(start, stop) <= next_pos <= max(start, stop)
@@ -491,6 +495,7 @@ def tune_max(
             # print("final position = {}".format(peak_position))
             yield from bps.mv(motor, peak_position)
         peaklist += [peak_position, max_I]
+        return max_ret
 
     return (yield from _tune_core(start, stop, num, signal, peaklist))
 
