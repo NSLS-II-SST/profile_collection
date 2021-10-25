@@ -24,6 +24,19 @@ Izero_Diode = EpicsSignalRO(
     "XF:07ID-ES1{DMR:I400-1}:IC3_MON", name="Izero Photodiode", kind="normal"
 )
 
+Slit1_Current_Bottom = EpicsSignalRO(
+    "XF:07ID-ES1{DMR:I400-1}:IC1_MON", name="RSoXS Slit 1 Bottom Current", kind="normal"
+)
+Slit1_Current_Top = EpicsSignalRO(
+    "XF:07ID-ES1{DMR:I400-1}:IC2_MON", name="RSoXS Slit 1 Top Current", kind="normal"
+)
+Slit1_Current_Inboard = EpicsSignalRO(
+    "XF:07ID-ES1{DMR:I400-1}:IC3_MON", name="RSoXS Slit 1 In Board Current", kind="normal"
+)
+Slit1_Current_Outboard = EpicsSignalRO(
+    "XF:07ID-ES1{DMR:I400-1}:IC3_MON", name="RSoXS Slit 1 Out Board Current", kind="normal"
+)
+
 mir1_pressure = EpicsSignalRO(
     "XF:07IDA-VA:0{Mir:M1-CCG:1}P:Raw-I", name="Mirror 1 Vacuum Pressure", kind="normal"
 )
