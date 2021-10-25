@@ -81,7 +81,7 @@ def grating_to_1200(hopgx=None,hopgy=None,hopgtheta=None):
         bec.enable_plots()
         Sample_TEY.kind='hinted'
         yield from bps.mv(sam_X,hopgx,sam_Y,hopgy,sam_Th,hopgtheta)
-        yield from bps.mv(en, 291.65)
+        yield from bps.mv(en.polarization, 0)
         yield from bps.mv(en, 291.65)
         yield from bps.mv(Shutter_control,1)
         yield from bp.rel_scan([Sample_TEY],grating,-0.05,.05,mirror2,-0.05,.05,200)
@@ -106,7 +106,7 @@ def grating_to_250(hopgx=None,hopgy=None,hopgtheta=None):
         bec.enable_plots()
         Sample_TEY.kind='hinted'
         yield from bps.mv(sam_X,hopgx,sam_Y,hopgy,sam_Th,hopgtheta)
-        yield from bps.mv(en, 291.65)
+        yield from bps.mv(en.polarization, 0)
         yield from bps.mv(en, 291.65)
         yield from bps.mv(Shutter_control,1)
         yield from bp.rel_scan([Sample_TEY],grating,-0.05,.05,mirror2,-0.05,.05,100)

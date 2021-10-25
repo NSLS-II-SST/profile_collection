@@ -61,7 +61,6 @@ def buildeputable(
     mono_en.kind = "hinted"
     epu_gap.kind = 'hinted'
     # startinggap = epugap_from_energy(ens[0]) #get starting position from existing table
-    yield from set_polarization(0)
     if grat == "1200":
         yield from grating_to_1200(2.0,-6.3,0.0)
     elif grat == "250":
@@ -101,9 +100,13 @@ def buildeputable(
         )
         [maxread, max_xI_signals, max_I_signals] = peaklist[-1]
         startinggap = max_xI_signals["RSoXS Au Mesh Current"]
+        gapbs = max_xI_signals["WAXS Beamstop"]
         height = max_I_signals["RSoXS Au Mesh Current"]
+        heightbs = max_I_signals["WAXS Beamstop"]
         gaps.append(startinggap)
+        gapsbs.append(gapbs)
         heights.append(height)
+        heightsbs.append(heightbs)
         ensout.append(mono_en.position)
         data = {"Energies": ensout,
                 "EPUGaps": gaps,
