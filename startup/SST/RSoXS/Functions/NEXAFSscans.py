@@ -14,7 +14,7 @@ run_report(__file__)
 def full_Carbon_NEXAFS(
     sigs=[],
     pol=0,
-    diode_range=7,
+    diode_range=8,
     m3_pitch=7.98,
     open_each_step=True,
     exp_time=1,
@@ -83,7 +83,7 @@ def full_Carbon_NEXAFS(
 def fly_Carbon_NEXAFS(
     speed=0.1,
     pol=0,
-    diode_range=7,
+    diode_range=8,
     m3_pitch=7.94,
     grating="250",
     master_plan=None,
@@ -134,7 +134,7 @@ def fly_Carbon_NEXAFS(
 def fly_Calcium_NEXAFS(
     speed=0.15,
     pol=0,
-    diode_range=7,
+    diode_range=8,
     m3_pitch=7.99,
     grating="250",
     master_plan=None,
@@ -186,7 +186,7 @@ def fly_Calcium_NEXAFS(
 def fly_SulfurL_NEXAFS(
     speed=0.1,
     pol=0,
-    diode_range=7,
+    diode_range=8,
     m3_pitch=7.97,
     grating="250",
     master_plan=None,
@@ -237,7 +237,7 @@ def fly_SulfurL_NEXAFS(
 def fly_SiliconL_NEXAFS(
     speed=0.1,
     pol=0,
-    diode_range=6,
+    diode_range=8,
     m3_pitch=8.01,
     grating="250",
     master_plan=None,
@@ -288,7 +288,7 @@ def fly_SiliconL_NEXAFS(
 def fly_SiliconK_NEXAFS(
     speed=0.2,
     pol=0,
-    diode_range=6,
+    diode_range=8,
     m3_pitch=7.97,
     grating="1200",
     master_plan=None,
@@ -339,7 +339,7 @@ def fly_SiliconK_NEXAFS(
 def fly_Nitrogen_NEXAFS(
     speed=0.1,
     pol=0,
-    diode_range=7,
+    diode_range=8,
     m3_pitch=7.96,
     grating="250",
     master_plan=None,
@@ -390,7 +390,7 @@ def fly_Nitrogen_NEXAFS(
 def fly_Oxygen_NEXAFS(
     speed=0.1,
     pol=0,
-    diode_range=7,
+    diode_range=8,
     m3_pitch=7.96,
     grating="250",
     master_plan=None,
@@ -441,7 +441,7 @@ def fly_Oxygen_NEXAFS(
 def fly_Fluorine_NEXAFS(
     speed=0.3,
     pol=0,
-    diode_range=7,
+    diode_range=8,
     m3_pitch=7.98,
     grating="1200",
     master_plan=None,
@@ -491,7 +491,7 @@ def fly_Fluorine_NEXAFS(
 def fly_Boron_NEXAFS(
     speed=0.05,
     pol=0,
-    diode_range=6,
+    diode_range=8,
     m3_pitch=8.0,
     grating="250",
     master_plan=None,

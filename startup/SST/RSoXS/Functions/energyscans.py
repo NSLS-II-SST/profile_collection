@@ -36,7 +36,7 @@ def clean_up_md(arguments={}, md={}, **kwargs):
 
 def full_oxygen_scan_nd(
     multiple=1.0,
-    diode_range=7,
+    diode_range=8,
     m3_pitch=7.98,
     grating="1200",
     master_plan=None,
@@ -101,7 +101,7 @@ def full_oxygen_scan_nd(
 
 def short_oxygen_scan_nd(
     multiple=1.0,
-    diode_range=7,
+    diode_range=8,
     m3_pitch=7.98,
     grating="1200",
     master_plan=None,
@@ -227,7 +227,7 @@ def short_zincl_scan_nd(
 
 def very_short_oxygen_scan_nd(
     multiple=1.0,
-    diode_range=6,
+    diode_range=8,
     m3_pitch=7.98,
     grating="1200",
     master_plan=None,
@@ -293,7 +293,7 @@ def very_short_oxygen_scan_nd(
 
 def short_fluorine_scan_nd(
     multiple=1.0,
-    diode_range=7,
+    diode_range=8,
     m3_pitch=7.98,
     grating="1200",
     master_plan=None,
@@ -357,7 +357,7 @@ def short_fluorine_scan_nd(
 
 def short_aluminum_scan_nd(
     multiple=1.0,
-    diode_range=7,
+    diode_range=8,
     m3_pitch=7.96,
     grating="1200",
     master_plan=None,
@@ -422,7 +422,7 @@ def short_aluminum_scan_nd(
 
 def full_nitrogen_scan_nd(
     multiple=1.0,
-    diode_range=6,
+    diode_range=8,
     m3_pitch=7.93,
     grating="1200",
     master_plan=None,
@@ -486,7 +486,7 @@ def full_nitrogen_scan_nd(
 
 def short_nitrogen_scan_nd(
     multiple=1.0,
-    diode_range=6,
+    diode_range=8,
     m3_pitch=8.00,
     grating="1200",
     master_plan=None,
@@ -553,7 +553,7 @@ def short_nitrogen_scan_nd(
 
 def very_short_carbon_scan_nd(
     multiple=1.0,
-    diode_range=7,
+    diode_range=8,
     m3_pitch=8.00,
     grating="1200",
     master_plan=None,
@@ -622,7 +622,7 @@ def very_short_carbon_scan_nd(
 
 def short_carbon_scan_nd(
     multiple=1.0,
-    diode_range=7,
+    diode_range=8,
     m3_pitch=8.00,
     grating="1200",
     master_plan=None,
@@ -691,7 +691,7 @@ def short_carbon_scan_nd(
 
 def short_carbon_scan_nonaromatic(
     multiple=1.0,
-    diode_range=7,
+    diode_range=8,
     m3_pitch=8.00,
     grating="1200",
     master_plan=None,
@@ -762,7 +762,7 @@ def short_carbon_scan_nonaromatic(
 def custom_rsoxs_scan(
     energies=[((270, 340, 1.0), 2.0)],
     master_plan=None,
-    diode_range=6,
+    diode_range=8,
     m3_pitch=8.00,
     grating="1200",
     md={},
@@ -822,7 +822,7 @@ def custom_rsoxs_scan(
 
 def short_sulfurl_scan_nd(
     multiple=1.0,
-    diode_range=6,
+    diode_range=8,
     m3_pitch=8.02,
     grating="1200",
     master_plan=None,
@@ -889,7 +889,7 @@ def short_sulfurl_scan_nd(
 
 def focused_carbon_scan_nd(
     multiple=1.0,
-    diode_range=7,
+    diode_range=8,
     m3_pitch=8.0,
     grating="1200",
     master_plan=None,
@@ -958,7 +958,7 @@ def focused_carbon_scan_nd(
 
 def g_carbon_scan_nd(
     multiple=1.0,
-    diode_range=7,
+    diode_range=8,
     m3_pitch=8.0,
     grating="1200",
     master_plan=None,
@@ -1018,7 +1018,7 @@ def g_carbon_scan_nd(
 
 def t_carbon_scan_nd(
     multiple=1.0,
-    diode_range=7,
+    diode_range=8,
     m3_pitch=8.0,
     grating="1200",
     master_plan=None,
@@ -1078,7 +1078,7 @@ def t_carbon_scan_nd(
 
 def sufficient_carbon_scan_nd(
     multiple=1.0,
-    diode_range=7,
+    diode_range=8,
     m3_pitch=8.0,
     grating="1200",
     master_plan=None,
@@ -1145,7 +1145,7 @@ def sufficient_carbon_scan_nd(
 
 def picky_carbon_scan_nd(
     multiple=1.0,
-    diode_range=7,
+    diode_range=8,
     m3_pitch=8.0,
     grating="1200",
     master_plan=None,
@@ -1205,7 +1205,7 @@ def picky_carbon_scan_nd(
 
 def full_carbon_scan_nd(
     multiple=1.0,
-    diode_range=7,
+    diode_range=8,
     m3_pitch=8.00,
     grating="1200",
     master_plan=None,
@@ -1272,7 +1272,7 @@ def full_carbon_scan_nd(
 
 def full_carbon_scan_nonaromatic(
     multiple=1.0,
-    diode_range=7,
+    diode_range=8,
     m3_pitch=8.0,
     grating="1200",
     master_plan=None,
@@ -1339,7 +1339,7 @@ def full_carbon_scan_nonaromatic(
 
 def full_fluorine_scan_nd(
     multiple=1.0,
-    diode_range=7,
+    diode_range=8,
     m3_pitch=7.89,
     grating="1200",
     master_plan=None,
@@ -1401,7 +1401,7 @@ def full_fluorine_scan_nd(
 
 def veryshort_fluorine_scan_nd(
     multiple=1.0,
-    diode_range=7,
+    diode_range=8,
     m3_pitch=7.99,
     grating="1200",
     master_plan=None,
@@ -1464,7 +1464,7 @@ def veryshort_fluorine_scan_nd(
 
 def full_ca_scan_nd(
     multiple=1.0,
-    diode_range=6,
+    diode_range=8,
     m3_pitch=8.00,
     grating="1200",
     master_plan=None,
@@ -1527,7 +1527,7 @@ def full_ca_scan_nd(
 
 def short_calcium_scan_nd(
     multiple=1.0,
-    diode_range=6,
+    diode_range=8,
     m3_pitch=8.00,
     grating="1200",
     master_plan=None,
@@ -1589,7 +1589,7 @@ def short_calcium_scan_nd(
 
 def full_carbon_calcium_scan_nd(
     multiple=1.0,
-    diode_range=7,
+    diode_range=8,
     m3_pitch=8.0,
     grating="1200",
     master_plan=None,
@@ -1661,7 +1661,7 @@ def full_carbon_calcium_scan_nd(
 
 def survey_scan_verylowenergy(
     multiple=1.0,
-    diode_range=7,
+    diode_range=8,
     m3_pitch=7.93,
     grating="250",
     master_plan=None,
@@ -1721,7 +1721,7 @@ def survey_scan_verylowenergy(
 
 def survey_scan_lowenergy(
     multiple=1.0,
-    diode_range=7,
+    diode_range=8,
     m3_pitch=7.91,
     grating="1200",
     master_plan=None,
@@ -1781,7 +1781,7 @@ def survey_scan_lowenergy(
 
 def survey_scan_highenergy(
     multiple=1.0,
-    diode_range=7,
+    diode_range=8,
     m3_pitch=7.89,
     grating="1200",
     master_plan=None,
@@ -1843,7 +1843,7 @@ def survey_scan_highenergy(
 
 def survey_scan_veryhighenergy(
     multiple=1.0,
-    diode_range=7,
+    diode_range=8,
     m3_pitch=7.89,
     grating="1200",
     master_plan=None,
@@ -1905,7 +1905,7 @@ def cdsaxs_scan(
     energies=[(250, 2), (270, 2), (280, 2), (285, 2), (300, 2)],
     angles=(-60, 61, 2),
     master_plan="cdsaxs_scan",
-    diode_range=6,
+    diode_range=8,
     m3_pitch=8.00,
     grating="1200",
     md={},
