@@ -345,12 +345,26 @@ class EnPos(PseudoPositioner):
     ):
         if (energy > en_cutoff and harmonic != "1") or harmonic == "3":
             energy = energy / 3
-        if pol == -1 or pol == -0.5:
+            
+        if (pol == -1 or pol == -0.5) and 70 < energy < 1200:
             phase = 15000
-            g250_gap = float(self.C250_gap.interp(Energies=energy))
-            g250_intens = float(self.C250_intens.interp(Energies=energy))
-            g1200_gap = float(self.C1200_gap.interp(Energies=energy))
-            g1200_intens = float(self.C1200_intens.interp(Energies=energy))
+            #g250_gap = float(self.C250_gap.interp(Energies=energy))
+            #g250_intens = float(self.C250_intens.interp(Energies=energy))
+            #g1200_gap = float(self.C1200_gap.interp(Energies=energy))
+            #g1200_intens = float(self.C1200_intens.interp(Energies=energy))
+            encalc = energy - 175.005
+            gap = 13757
+            gap += 40.689 * encalc ** 1
+            gap += 0.11073 * encalc ** 2
+            gap += -0.0013212 * encalc ** 3
+            gap += 5.9596e-06 * encalc ** 4
+            gap += -1.5051e-08 * encalc ** 5
+            gap += 2.2802e-11 * encalc ** 6
+            gap += -2.0515e-14 * encalc ** 7
+            gap += 1.01e-17 * encalc ** 8
+            gap += -2.0938e-21 * encalc ** 9
+            return gap
+
         elif pol >= 0 and pol <= 90:
             phase = self.phase(energy, pol) / 1000
             g250_gap = float(self.L250_gap_mrg.interp(Energies=energy, phase=phase))
