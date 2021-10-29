@@ -93,7 +93,7 @@ def buildeputable(
             min(99500, max(14000, startinggap - 500 * widfract)),
             min(100000, max(15000, startinggap + 1000 * widfract)),
             3 * widfract,
-            20,
+            10,
             3,
             True,
             peaklist
@@ -135,8 +135,8 @@ def do_some_eputables_2021_en():
     bec.enable_plots()
     yield from load_configuration("WAXSNEXAFS")
 
-    yield from buildeputable(175, 1200, 5, 2, 14000, 15000,'C','250','C_250')
-    yield from buildeputable(175, 1200, 5, 2, 14000, 15000,'CW','250','CW_250')
+    yield from buildeputable(100, 1200, 10, 2, 14000, 15000,'C','250','C_250')
+    yield from buildeputable(100, 1200, 10, 2, 14000, 15000,'CW','250','CW_250')
 
     yield from buildeputable(80, 1200, 5, 2, 14000, 0, "L3", "250", "m3L0_250")
     yield from buildeputable(90, 1200, 5, 2, 14000, 4000, "L3", "250", "m3L4_250")
