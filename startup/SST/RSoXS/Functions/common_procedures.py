@@ -92,8 +92,8 @@ def buildeputable(
             min(99500, max(14000, startinggap - 500 * widfract)),
             min(100000, max(15000, startinggap + 1500 * widfract)),
             3 * widfract,
-            15,
-            3,
+            10,
+            5,
             True,
             peaklist
         )
