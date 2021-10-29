@@ -578,8 +578,9 @@ def normal_incidence_rotate_pol_nexafs(
     arguments["nexafs_plan"] = eval(nexafs_plan).__name__
     clean_up_md(arguments, md, **kwargs)
     yield from rotate_now(90)
+    nexafs_plan_plan = eval(nexafs_plan)
     for pol in polarizations:
-        yield from nexafs_plan(pol=pol, master_plan=master_plan, md=md, **kwargs)
+        yield from nexafs_plan_plan(pol=pol, master_plan=master_plan, md=md, **kwargs)
 
 
 def fixed_pol_rotate_sample_nexafs(
