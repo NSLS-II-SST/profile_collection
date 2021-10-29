@@ -135,9 +135,9 @@ def do_some_eputables_2021_en():
     yield from load_configuration("WAXSNEXAFS")
 
     #yield from buildeputable(105, 850, 10, 2, 14000, 15000,'C','250','C_250')
-    yield from buildeputable(105, 850, 10, 2, 14000, 15000,'CW','250','CW_250')
-    yield from buildeputable(200, 1800, 10, 2, 20000, 15000, 'C', '1200', 'C_1200')
-    yield from buildeputable(200, 1800, 10, 2, 20000, 15000, 'CW', '1200', 'CW_1200')
+    #yield from buildeputable(105, 850, 10, 2, 14000, 15000,'CW','250','CW_250')
+    #yield from buildeputable(200, 1200, 10, 2, 20000, 15000, 'C', '1200', 'C_1200')
+    yield from buildeputable(200, 1200, 10, 2, 20000, 15000, 'CW', '1200', 'CW_1200')
 
     yield from buildeputable(200, 1300, 10, 2, 23704, 0, "L", "1200", "mL0_1200")
     yield from buildeputable(200, 1300, 10, 2, 23148, 4000, "L", "1200", "mL4_1200")
