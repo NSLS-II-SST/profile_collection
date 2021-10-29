@@ -67,10 +67,9 @@ def buildeputable(
         yield from grating_to_250(2.0,-6.3,0.0)
     yield from bps.mv(sam_Y,30)
     if mode == "C":
-        yield from set_polarization(-1)
-    if mode == "CW":
-        yield from set_polarization(-.5)
-
+        yield from bps.mv(epu_mode, 0)
+    elif mode == "CW":
+        yield from bps.mv(epu_mode, 1)
     elif mode == "L3":
         yield from bps.mv(epu_mode, 3)
     else:
@@ -91,9 +90,9 @@ def buildeputable(
             "WAXS Beamstop",],
             epu_gap,
             min(99500, max(14000, startinggap - 500 * widfract)),
-            min(100000, max(15000, startinggap + 1000 * widfract)),
+            min(100000, max(15000, startinggap + 1500 * widfract)),
             3 * widfract,
-            10,
+            15,
             3,
             True,
             peaklist
@@ -135,8 +134,8 @@ def do_some_eputables_2021_en():
     bec.enable_plots()
     yield from load_configuration("WAXSNEXAFS")
 
-    yield from buildeputable(100, 1200, 10, 2, 14000, 15000,'C','250','C_250')
-    yield from buildeputable(100, 1200, 10, 2, 14000, 15000,'CW','250','CW_250')
+    yield from buildeputable(105, 850, 10, 2, 14000, 15000,'C','250','C_250')
+    yield from buildeputable(105, 850, 10, 2, 14000, 15000,'CW','250','CW_250')
 
     yield from buildeputable(80, 1200, 10, 2, 14000, 0, "L3", "250", "m3L0_250")
     yield from buildeputable(90, 1200, 10, 2, 14000, 4000, "L3", "250", "m3L4_250")
