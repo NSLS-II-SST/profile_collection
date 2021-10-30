@@ -346,26 +346,43 @@ class EnPos(PseudoPositioner):
         if (energy > en_cutoff and harmonic != "1") or harmonic == "3":
             energy = energy / 3
             
-        if (pol == -1 or pol == -0.5) and 70 < energy < 1200:
+        if (pol == -1) and 105 < energy < 1200:
             phase = 15000
             #g250_gap = float(self.C250_gap.interp(Energies=energy))
             #g250_intens = float(self.C250_intens.interp(Energies=energy))
             #g1200_gap = float(self.C1200_gap.interp(Energies=energy))
             #g1200_intens = float(self.C1200_intens.interp(Energies=energy))
-            encalc = energy - 175.005
-            gap = 13757
-            gap += 40.689 * encalc ** 1
-            gap += 0.11073 * encalc ** 2
-            gap += -0.0013212 * encalc ** 3
-            gap += 5.9596e-06 * encalc ** 4
-            gap += -1.5051e-08 * encalc ** 5
-            gap += 2.2802e-11 * encalc ** 6
-            gap += -2.0515e-14 * encalc ** 7
-            gap += 1.01e-17 * encalc ** 8
-            gap += -2.0938e-21 * encalc ** 9
-            return gap
-
-        elif pol >= 0 and pol <= 90:
+            encalc = energy - 105.002
+            gap = 13979
+            gap += 82.857 * encalc ** 1
+            gap += -0.26294 * encalc ** 2
+            gap += 0.00090199 * encalc ** 3
+            gap += -2.3176e-06 * encalc ** 4
+            gap += 4.205e-09 * encalc ** 5
+            gap += -5.139e-12 * encalc ** 6
+            gap += 4.0034e-15 * encalc ** 7
+            gap += -1.7862e-18 * encalc ** 8
+            gap += 3.4687e-22 * encalc ** 9
+            return max(14000, gap)
+        elif (pol == -0.5) and 105 < energy < 1200:
+            phase = 15000
+            #g250_gap = float(self.C250_gap.interp(Energies=energy))
+            #g250_intens = float(self.C250_intens.interp(Energies=energy))
+            #g1200_gap = float(self.C1200_gap.interp(Energies=energy))
+            #g1200_intens = float(self.C1200_intens.interp(Energies=energy))
+            encalc = energy - 104.996
+            gap = 14013
+            gap += 82.76 * encalc ** 1
+            gap += -0.26128 * encalc ** 2
+            gap += 0.00088353 * encalc ** 3
+            gap += -2.2149e-06 * encalc ** 4
+            gap += 3.8919e-09 * encalc ** 5
+            gap += -4.5887e-12 * encalc ** 6
+            gap += 3.4467e-15 * encalc ** 7
+            gap += -1.4851e-18 * encalc ** 8
+            gap += 2.795e-22 * encalc ** 9
+            return max(14000, gap)
+        elif 0 <= pol <= 90:
             phase = self.phase(energy, pol) / 1000
             g250_gap = float(self.L250_gap_mrg.interp(Energies=energy, phase=phase))
             g250_intens = float(
@@ -375,7 +392,7 @@ class EnPos(PseudoPositioner):
             g1200_intens = float(
                 self.L1200_intens_mrg.interp(Energies=energy, phase=phase)
             )
-        elif pol > 90 and pol <= 180:
+        elif 90 < pol <= 180:
             phase = self.phase(energy, pol) / 1000
             g250_gap = float(self.L250_gap_mrg.interp(Energies=energy, phase=phase))
             g250_intens = float(
