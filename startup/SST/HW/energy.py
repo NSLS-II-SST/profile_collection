@@ -29,9 +29,9 @@ class UndulatorMotor(EpicsMotor):
     done_value = 0
 
 
-epu_mode = EpicsSignal(
-    "SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP", name="EPU 60 Mode", kind="normal"
-)
+#epu_mode = EpicsSignal(
+#    "SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP", name="EPU 60 Mode", kind="normal"
+#)
 
 
 class Monochromator(PVPositioner):
@@ -147,8 +147,8 @@ class EnPos(PseudoPositioner):
         kind="normal",
         name="M3Pitch",
     )
-    # epumode = Cpt(EpicsSignal,'SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP',
-    #                       name='EPU Mode', kind='normal')
+    epumode = Cpt(PVPositioner,'SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP',
+                          name='EPU Mode', kind='normal')
 
     rotation_motor = None
 
@@ -160,7 +160,8 @@ class EnPos(PseudoPositioner):
             epugap=self.gap(pseudo_pos.energy, pseudo_pos.polarization),
             monoen=pseudo_pos.energy,
             epuphase=abs(self.phase(pseudo_pos.energy, pseudo_pos.polarization)),
-            mir3Pitch=self.m3pitchcalc(pseudo_pos.energy)
+            mir3Pitch=self.m3pitchcalc(pseudo_pos.energy),
+            epumode=self.mode(pseudo_pos.polarization)
         )
         # print('finished forward')
         return ret
@@ -482,27 +483,27 @@ class EnPos(PseudoPositioner):
             return 7.95
 
 def base_set_polarization(pol, en):
-    if pol == -1:
-        if epu_mode.get() != 0:
-            yield from bps.mv(epu_mode, 0)
-            yield from bps.sleep(1)
-    elif pol == -0.5:
-        if epu_mode.get() != 1:
-            yield from bps.mv(epu_mode, 1)
-            yield from bps.sleep(1)
-    elif 0 <= pol <= 90:
-        if epu_mode.get() != 2:
-            yield from bps.mv(epu_mode, 2)
-            yield from bps.sleep(1)
-    elif 90 < pol <= 180:
-        if epu_mode.get() != 3:
-            yield from bps.mv(epu_mode, 3)
-            yield from bps.sleep(1)
-    else:
-        print("need a valid polarization")
-        return 1
-    en.read()
-    enval = en.energy.readback.get()
+    # if pol == -1:
+    #     if epu_mode.get() != 0:
+    #         yield from bps.mv(epu_mode, 0)
+    #         yield from bps.sleep(1)
+    # elif pol == -0.5:
+    #     if epu_mode.get() != 1:
+    #         yield from bps.mv(epu_mode, 1)
+    #         yield from bps.sleep(1)
+    # elif 0 <= pol <= 90:
+    #     if epu_mode.get() != 2:
+    #         yield from bps.mv(epu_mode, 2)
+    #         yield from bps.sleep(1)
+    # elif 90 < pol <= 180:
+    #     if epu_mode.get() != 3:
+    #         yield from bps.mv(epu_mode, 3)
+    #         yield from bps.sleep(1)
+    # else:
+    #     print("need a valid polarization")
+    #     return 1
+    # en.read()
+    # enval = en.energy.readback.get()
     # phaseval = en.phase(enval,pol)
     # gapval = en.gap(enval,pol)
     # print(enval)
@@ -511,7 +512,7 @@ def base_set_polarization(pol, en):
     # print(gapval)
     # yield from bps.mv(epu_phase, phaseval,epu_gap,gapval)
     yield from bps.mv(en.polarization, pol)
-    en.read()
+    #en.read()
     return 0
 
 

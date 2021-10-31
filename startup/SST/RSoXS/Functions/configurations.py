@@ -191,7 +191,7 @@ def mirror3_NEXAFSpos():
     yield from bps.sleep(3)
 
 
-def mirror1_pos():
+def mirror_pos_NEXAFS():
     yield from bps.mv(mir1.Pitch, 0.66)
     yield from bps.mv(mir1.X, 0)
     yield from bps.mv(mir1.Y, -18)
@@ -200,27 +200,34 @@ def mirror1_pos():
     yield from bps.mv(mir1.Yaw, 0)
 
 
-def mirror3_pos():
-    yield from bps.mv(mir3.Pitch, 8)
-    yield from bps.mv(mir3.X, 26.7)
-    yield from bps.mv(mir3.Y, 18)
-    yield from bps.mv(mir3.Z, 0)
-    yield from bps.mv(mir3.Roll, 0)
-    yield from bps.mv(mir3.Yaw, 1)
+def mirror_pos_rsoxs():
+    yield from bps.mv(mir3.Pitch, 7.92,
+                      mir3.X, 26.5,
+                      mir3.Y, 18,
+                      mir3.Z, 0,
+                      mir3.Roll, 0,
+                      mir3.Yaw, 1,
+                      mir1.Pitch, 0.7,
+                      mir1.X, 0,
+                      mir1.Y, -18,
+                      mir1.Z, 0,
+                      mir1.Roll, 0,
+                      mir1.Yaw, 0)
 
 
 def mirror1_NEXAFSpos():
-    yield from bps.mv(mir1.Pitch, 0.8)
-    yield from bps.sleep(3)
-    yield from bps.mv(mir1.X, 0)
-    yield from bps.sleep(3)
-    yield from bps.mv(mir1.Y, -18)
-    yield from bps.sleep(3)
-    yield from bps.mv(mir1.Z, 0)
-    yield from bps.sleep(3)
-    yield from bps.mv(mir1.Roll, 0)
-    yield from bps.sleep(3)
-    yield from bps.mv(mir1.Yaw, 0)
+    yield from bps.mv(mir3.Pitch, 7.94,
+                      mir3.X, 26.5,
+                      mir3.Y, 18,
+                      mir3.Z, 0,
+                      mir3.Roll, 0,
+                      mir3.Yaw, 1,
+                      mir1.Pitch, 0.68,
+                      mir1.X, 0,
+                      mir1.Y, -18,
+                      mir1.Z, 0,
+                      mir1.Roll, 0,
+                      mir1.Yaw, 0)
 
 
 def SAXSmode():
