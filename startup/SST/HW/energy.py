@@ -236,13 +236,13 @@ class EnPos(PseudoPositioner):
                 "yellow",
             ),
             colored(
-                "{:.2f}".format(self.epumode.user_setpoint.get())
+                "{:.2f}".format(self.epumode.setpoint.get())
                 .rstrip("0")
                 .rstrip("."),
                 "yellow",
             ),
             colored(
-                "{:.2f}".format(self.epumode.user_readback.get())
+                "{:.2f}".format(self.epumode.readback.get())
                 .rstrip("0")
                 .rstrip("."),
                 "yellow",
