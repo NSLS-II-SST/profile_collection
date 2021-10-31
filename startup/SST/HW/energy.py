@@ -153,7 +153,7 @@ class EnPos(PseudoPositioner):
         kind="normal",
         name="M3Pitch",
     )
-    epumode = Cpt(EpuMode,'SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP',
+    epumode = Cpt(EpuMode,'SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode',
                           name='EPU Mode', kind='normal')
 
     rotation_motor = None
