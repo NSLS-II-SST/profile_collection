@@ -2,6 +2,7 @@ from ophyd import (
     PVPositioner,
     EpicsSignalRO,
     PseudoPositioner,
+    PVPositionerPC,
     PseudoSingle,
     EpicsMotor,
     EpicsSignal,
@@ -27,6 +28,11 @@ class UndulatorMotor(EpicsMotor):
     user_setpoint = Cpt(EpicsSignal, "-SP", limits=True)
     done = Cpt(EpicsSignalRO, ".MOVN")
     done_value = 0
+
+
+class EpuMode(PVPositionerPC):
+    setpoint = Cpt(EpicsSignal,"-SP", kind="normal")
+    readback = Cpt(EpicsSignal,"-RB", kind="normal")
 
 
 #epu_mode = EpicsSignal(
@@ -147,7 +153,7 @@ class EnPos(PseudoPositioner):
         kind="normal",
         name="M3Pitch",
     )
-    epumode = Cpt(PVPositioner,'SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP',
+    epumode = Cpt(EpuMode,'SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP',
                           name='EPU Mode', kind='normal')
 
     rotation_motor = None
@@ -172,9 +178,9 @@ class EnPos(PseudoPositioner):
         # print('in Inverse')
         ret = self.PseudoPosition(
             energy=real_pos.monoen,
-            polarization=self.pol(real_pos.epuphase, epu_mode.get()),
+            polarization=self.pol(real_pos.epuphase, self.epumode.get()),
             sample_polarization=self.sample_pol(
-                self.pol(real_pos.epuphase, epu_mode.get())
+                self.pol(real_pos.epuphase, self.epumode.get())
             ),
         )
         # print('Finished inverse')
