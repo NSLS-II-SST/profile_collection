@@ -24,7 +24,7 @@ from ..HW.energy import (
     epu_gap,
     epu_phase,
     )
-from ...HW.energy import epu_mode
+from ..HW.energy import epu_mode
 from ...HW.diode import Shutter_control, Shutter_enable
 from ..HW.slits import slits1, slits2
 from ..Functions.alignment import load_configuration
