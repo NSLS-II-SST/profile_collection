@@ -38,49 +38,32 @@ class EpuMode(PVPositionerPC):
 #epu_mode = EpicsSignal(
 #    "SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP", name="EPU 60 Mode", kind="normal"
 #)
-
+class FMB_Mono_Grating_Type(PVPositioner):
+    setpoint = Cpt(EpicsSignal,'_TYPE_SP',string=True)
+    readback = Cpt(EpicsSignal,'_TYPE_MON',string=True)
+    actuate = Cpt(EpicsSignal,'_DCPL_CALC.PROC')
+    enable = Cpt(EpicsSignal,'_ENA_CMD.PROC')
+    kill = Cpt(EpicsSignal,'_KILL_CMD.PROC')
+    home = Cpt(EpicsSignal,'_HOME_CMD.PROC')
+    clear_encoder_loss = Cpt(EpicsSignal,'_ENC_LSS_CLR_CMD.PROC')
+    done = Cpt(EpicsSignal,'_AXIS_STS')
 
 class Monochromator(PVPositioner):
     setpoint = Cpt(EpicsSignal, ":ENERGY_SP", kind="normal")
-    # value = Cpt(EpicsSignalRO, ':ENERGY_MON',kind='hinted')
     readback = Cpt(EpicsSignalRO, ":ENERGY_MON", kind="hinted")
 
     grating = Cpt(PrettyMotorFMBO, "GrtP}Mtr", name="Mono Grating", kind="normal")
     mirror2 = Cpt(PrettyMotorFMBO, "MirP}Mtr", name="Mono Mirror", kind="normal")
     cff = Cpt(EpicsSignal, ":CFF_SP", name="Mono CFF", kind="normal", auto_monitor=True)
-    vls = Cpt(
-        EpicsSignal, ":VLS_B2.A", name="Mono CFF", kind="normal", auto_monitor=True
-    )
-    gratingtype = Cpt(
-        EpicsSignal,
-        "GrtX}Mtr_TYPE_MON",
-        string=True,
-        write_pv="GrtX}Mtr_TYPE_SP",
-        name="Mono Grating Type",
-        kind="normal",
-        auto_monitor=True,
-    )
+    vls = Cpt(EpicsSignal, ":VLS_B2.A", name="Mono VLS", kind="normal", auto_monitor=True)
+    gratingx = Cpt(FMB_Mono_Grating_Type,"GrtX}Mtr",string=True,kind="normal",auto_monitor=True)
+    mirror2x = Cpt(FMB_Mono_Grating_Type,"MirX}Mtr",string=True,kind="normal",auto_monitor=True)
 
-    gratingtype_proc = Cpt(
-        EpicsSignal,
-        "GrtX}Mtr_DCPL_CALC.PROC",
-        name="Mono Grating Type_proc",
-        kind="omitted",
-    )
-    mirror2type = Cpt(
-        EpicsSignal,
-        "MirX}Mtr_TYPE_MON",
-        write_pv="MirX}Mtr_TYPE_SP",
-        name="Mono Mirror Type",
-        kind="normal",
-        auto_monitor=True,
-    )
-    gratingx = Cpt(
-        PrettyMotorFMBO, "GrtX}Mtr", name="Mono Grating X motor", kind="normal"
-    )
-    mirror2x = Cpt(
-        PrettyMotorFMBO, "MirX}Mtr", name="Mono Mirror X motor", kind="normal"
-    )
+    Scan_Start_ev = Cpt(EpicsSignal,":EVSTART_SP", name="MONO scan start energy", kind="normal")
+    Scan_Stop_ev = Cpt(EpicsSignal,":EVSTOP_SP", name="MONO scan stop energy", kind="normal")
+    Scan_Speed_ev = Cpt(EpicsSignal,":EVVELO_SP", name="MONO scan speed", kind="normal")
+    Scan_Start = Cpt(EpicsSignal,":START_CMD.PROC",name="MONO scan start command",kind="normal")
+    Scan_Stop = Cpt(EpicsSignal,":ENERGY_ST_CMD.PROC",name="MONO scan start command",kind="normal")
 
     done = Cpt(EpicsSignalRO, ":ERDY_STS")
     done_value = 1
@@ -95,19 +78,6 @@ class Monochromator(PVPositioner):
         if self.actuate is not None:
             self.log.debug("%s.actuate = %s", self.name, self.actuate_value)
             self.actuate.put(self.actuate_value, wait=False)
-
-    # def set(self, *args, **kwargs):
-    #     "Temporary: Extend just to add debuging log messages."
-    #     status = super().set(*args, **kwargs)
-    #     # Temporarily using loud (ERROR-level) log messages for debugging purposes
-    #
-    #     def notify(status):
-    #         self.log.error("Status is done")
-    #
-    #     status.add_callback(notify)
-    #
-    #     self.log.error("Returning status object")
-    #     return status
 
 
 # mono_en= Monochromator('XF:07ID1-OP{Mono:PGM1-Ax:', name='Monochromator Energy',kind='normal')
@@ -417,23 +387,14 @@ class EnPos(PseudoPositioner):
             print(f"  . 250 l/mm grating: gap = {g250_gap}, intensity {g250_intens}")
             print(f"  . 1200 l/mm grating: gap = {g1200_gap}, intensity {g1200_intens}")
 
-        if grating == "250" or np.isnan(g1200_gap):
-            if np.isnan(g250_gap):
-                if pol == 0:
-                    return epugap_from_en_pol(energy, 100)
-                if pol == 90:
-                    return epugap_from_en_pol(energy, 190)
-                else:
-                    return min(100000, max(14000, g1200_gap))
-            else:
-                return min(100000, max(14000, g250_gap))
-        elif grating == "1200" or np.isnan(g250_gap):
+        if grating == "250" and np.isnan(g250_gap):
+            return min(100000, max(14000, g1200_gap))
+        elif grating == "1200" and np.isnan(g1200_gap):
+            return min(100000, max(14000, g250_gap))
+        elif np.isnan(g250_gap):
             return min(100000, max(14000, g1200_gap))
         else:
-            if "250" in self.monoen.gratingtype.get():
-                return min(100000, max(14000, g250_gap))
-            else:
-                return min(100000, max(14000, g1200_gap))
+            return min(100000, max(14000, g250_gap))
 
     def phase(self, en, pol):
         if pol == -1:
@@ -489,36 +450,7 @@ class EnPos(PseudoPositioner):
             return 7.95
 
 def base_set_polarization(pol, en):
-    # if pol == -1:
-    #     if epu_mode.get() != 0:
-    #         yield from bps.mv(epu_mode, 0)
-    #         yield from bps.sleep(1)
-    # elif pol == -0.5:
-    #     if epu_mode.get() != 1:
-    #         yield from bps.mv(epu_mode, 1)
-    #         yield from bps.sleep(1)
-    # elif 0 <= pol <= 90:
-    #     if epu_mode.get() != 2:
-    #         yield from bps.mv(epu_mode, 2)
-    #         yield from bps.sleep(1)
-    # elif 90 < pol <= 180:
-    #     if epu_mode.get() != 3:
-    #         yield from bps.mv(epu_mode, 3)
-    #         yield from bps.sleep(1)
-    # else:
-    #     print("need a valid polarization")
-    #     return 1
-    # en.read()
-    # enval = en.energy.readback.get()
-    # phaseval = en.phase(enval,pol)
-    # gapval = en.gap(enval,pol)
-    # print(enval)
-    # print(pol)
-    # print(phaseval)
-    # print(gapval)
-    # yield from bps.mv(epu_phase, phaseval,epu_gap,gapval)
     yield from bps.mv(en.polarization, pol)
-    #en.read()
     return 0
 
 
@@ -529,9 +461,8 @@ def base_grating_to_250(mono_en, en):
         return 0  # the grating is already here
     print("Moving the grating to 250 l/mm.  This will take a minute...")
     yield from psh4.close_plan()
-    yield from bps.abs_set(mono_en.gratingtype, 2, wait=False)
-    yield from bps.abs_set(mono_en.gratingtype_proc, 1, wait=True)
-    yield from bps.sleep(60)
+    yield from bps.abs_set(mono_en.gratingx, 2, wait=True)
+    #yield from bps.sleep(60)
     yield from bps.mv(mirror2.user_offset, 0.04) #0.0315)
     yield from bps.mv(grating.user_offset, -0.0874)#-0.0959)
     yield from bps.mv(mono_en.cff, 1.385)
@@ -548,9 +479,8 @@ def base_grating_to_1200(mono_en, en):
         return 0  # the grating is already here
     print("Moving the grating to 1200 l/mm.  This will take a minute...")
     yield from psh4.close_plan()
-    yield from bps.abs_set(mono_en.gratingtype, 9, wait=False)
-    yield from bps.abs_set(mono_en.gratingtype_proc, 1, wait=True)
-    yield from bps.sleep(60)
+    yield from bps.abs_set(mono_en.gratingx, 9, wait=True)
+    #yield from bps.sleep(60)
     yield from bps.mv(mirror2.user_offset, 0.2044) #0.1962) #0.2052) # 0.1745)  # 8.1264)
     yield from bps.mv(grating.user_offset, 0.0769) #0.0687) # 0.0777) # 0.047)  # 7.2964)  # 7.2948)#7.2956
     yield from bps.mv(mono_en.cff, 1.7)
@@ -900,22 +830,4 @@ def epugap_from_en_pol(energy, polarization):
     return gap
 
 
-Mono_Scan_Start_ev = EpicsSignal(
-    "XF:07ID1-OP{Mono:PGM1-Ax::EVSTART_SP", name="MONO scan start energy", kind="normal"
-)
-Mono_Scan_Stop_ev = EpicsSignal(
-    "XF:07ID1-OP{Mono:PGM1-Ax::EVSTOP_SP", name="MONO scan stop energy", kind="normal"
-)
-Mono_Scan_Speed_ev = EpicsSignal(
-    "XF:07ID1-OP{Mono:PGM1-Ax::EVVELO_SP", name="MONO scan speed", kind="normal"
-)
-Mono_Scan_Start = EpicsSignal(
-    "XF:07ID1-OP{Mono:PGM1-Ax::START_CMD.PROC",
-    name="MONO scan start command",
-    kind="normal",
-)
-Mono_Scan_Stop = EpicsSignal(
-    "XF:07ID1-OP{Mono:PGM1-Ax::ENERGY_ST_CMD.PROC",
-    name="MONO scan start command",
-    kind="normal",
-)
+

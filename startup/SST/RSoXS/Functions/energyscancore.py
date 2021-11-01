@@ -29,7 +29,7 @@ from ..HW.energy import (
     grating_to_1200,
     set_polarization,
 )
-from ...HW.energy import (
+from ..HW.energy import (
     Mono_Scan_Speed_ev,
     Mono_Scan_Start,
     Mono_Scan_Start_ev,

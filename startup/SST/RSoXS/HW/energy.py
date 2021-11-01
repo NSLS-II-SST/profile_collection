@@ -17,29 +17,13 @@ from ..startup import bec
 
 run_report(__file__)
 
-
-# epu_mode = EpicsSignal('SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-RB',
-#                        write_pv='SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode-SP',
-#                        name='EPU 60 Mode',kind='normal')
-
-
-# enold = EnPosold('', name='enold',concurrent=1)
-# enold.energy.kind = 'hinted'
-# enold.monoen.kind = 'normal'
-# enold.monoen.readback.kind = 'normal'
-# enold.epugap.kind = 'normal'
-
-
 en = EnPos("", rotation_motor=sam_Th, name="en")
 en.energy.kind = "hinted"
 en.monoen.kind = "normal"
-# en.monoen.readback.kind = 'hinted'
 mono_en = en.monoen
 epu_gap = en.epugap
 epu_phase = en.epuphase
 epu_mode = en.epumode
-# epu_mode = en.epumode
-# mono_en.read_attrs = ['readback']
 mono_en.readback.kind = "normal"
 en.epugap.kind = "normal"
 en.epuphase.kind = "normal"
@@ -66,6 +50,11 @@ en.monoen.mirror2x.kind = "normal"
 en.epugap.kind = "normal"
 en.epugap.kind = "normal"
 
+Mono_Scan_Start_ev = en.monoen.Scan_Start_ev
+Mono_Scan_Stop_ev = en.monoen.Scan_Stop_ev
+Mono_Scan_Speed_ev = en.monoen.Scan_Speed_ev
+Mono_Scan_Start = en.monoen.Scan_Start
+Mono_Scan_Stop = en.monoen.Scan_Stop
 
 def set_polarization(pol):
     yield from base_set_polarization(pol, en)
