@@ -233,16 +233,10 @@ class EnPos(PseudoPositioner):
                 .rstrip("."),
                 "yellow",
             ),
-            colored(
-                "{:.2f}".format(self.monoen.gratingx.setpoint.get())
-                .rstrip("0")
-                .rstrip("."),
+            colored(self.monoen.gratingx.setpoint.get(),
                 "yellow",
             ),
-            colored(
-                "{:.2f}".format(self.monoen.gratingx.readback.get())
-                .rstrip("0")
-                .rstrip("."),
+            colored(self.monoen.gratingx.readback.get(),
                 "yellow",
             ),
             colored(
@@ -257,16 +251,10 @@ class EnPos(PseudoPositioner):
                 .rstrip("."),
                 "yellow",
             ),
-            colored(
-                "{:.2f}".format(self.monoen.mirror2x.setpoint.get())
-                .rstrip("0")
-                .rstrip("."),
+            colored(self.monoen.mirror2x.setpoint.get(),
                 "yellow",
             ),
-            colored(
-                "{:.2f}".format(self.monoen.mirror2x.readback.get())
-                .rstrip("0")
-                .rstrip("."),
+            colored(self.monoen.mirror2x.readback.get(),
                 "yellow",
             ),
             colored(
