@@ -168,8 +168,12 @@ class EnPos(PseudoPositioner):
             "\nEPU Mode Readback : {}"
             "\nGrating Setpoint : {}"
             "\nGrating Readback : {}"
+            "\nGratingx Setpoint : {}"
+            "\nGratingx Readback : {}"
             "\nMirror2 Setpoint : {}"
             "\nMirror2 Readback : {}"
+            "\nMirror2x Setpoint : {}"
+            "\nMirror2x Readback : {}"
             "\nCFF : {}"
             "\nVLS : {}"
         ).format(
@@ -230,6 +234,18 @@ class EnPos(PseudoPositioner):
                 "yellow",
             ),
             colored(
+                "{:.2f}".format(self.monoen.gratingx.setpoint.get())
+                .rstrip("0")
+                .rstrip("."),
+                "yellow",
+            ),
+            colored(
+                "{:.2f}".format(self.monoen.gratingx.readback.get())
+                .rstrip("0")
+                .rstrip("."),
+                "yellow",
+            ),
+            colored(
                 "{:.2f}".format(self.monoen.mirror2.user_setpoint.get())
                 .rstrip("0")
                 .rstrip("."),
@@ -237,6 +253,18 @@ class EnPos(PseudoPositioner):
             ),
             colored(
                 "{:.2f}".format(self.monoen.mirror2.user_readback.get())
+                .rstrip("0")
+                .rstrip("."),
+                "yellow",
+            ),
+            colored(
+                "{:.2f}".format(self.monoen.mirror2x.setpoint.get())
+                .rstrip("0")
+                .rstrip("."),
+                "yellow",
+            ),
+            colored(
+                "{:.2f}".format(self.monoen.mirror2x.readback.get())
                 .rstrip("0")
                 .rstrip("."),
                 "yellow",
