@@ -56,8 +56,8 @@ class Monochromator(PVPositioner):
     mirror2 = Cpt(PrettyMotorFMBO, "MirP}Mtr", name="Mono Mirror", kind="normal")
     cff = Cpt(EpicsSignal, ":CFF_SP", name="Mono CFF", kind="normal", auto_monitor=True)
     vls = Cpt(EpicsSignal, ":VLS_B2.A", name="Mono VLS", kind="normal", auto_monitor=True)
-    gratingx = Cpt(FMB_Mono_Grating_Type,"GrtX}Mtr",kind="normal",auto_monitor=True)
-    mirror2x = Cpt(FMB_Mono_Grating_Type,"MirX}Mtr",kind="normal",auto_monitor=True)
+    gratingx = Cpt(FMB_Mono_Grating_Type,"GrtX}Mtr",kind="normal")
+    mirror2x = Cpt(FMB_Mono_Grating_Type,"MirX}Mtr",kind="normal")
 
     Scan_Start_ev = Cpt(EpicsSignal,":EVSTART_SP", name="MONO scan start energy", kind="normal")
     Scan_Stop_ev = Cpt(EpicsSignal,":EVSTOP_SP", name="MONO scan stop energy", kind="normal")
