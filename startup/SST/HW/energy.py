@@ -458,9 +458,9 @@ class EnPos(PseudoPositioner):
         )
 
     def m3pitchcalc(self,energy):
-        if "1200" in self.monoen.gratingtype.get():
+        if "1200" in self.monoen.gratingx.get():
             return 7.8951+0.038807*np.exp(-(energy-100)/91.942)+0.050123*np.exp(-(energy-100)/1188.9)
-        elif "250" in self.monoen.gratingtype.get():
+        elif "250" in self.monoen.gratingx.get():
             return 7.8956+0.022665*np.exp(-(energy-90)/37.746)+0.024897*np.exp(-(energy-90)/450.9)
         else:
             return 7.95
@@ -471,8 +471,8 @@ def base_set_polarization(pol, en):
 
 
 def base_grating_to_250(mono_en, en):
-    type = mono_en.gratingtype.enum_strs.index(mono_en.gratingtype.get())
-    if type == 2:
+    type = mono_en.gratingx.readback.get()
+    if '250' in type:
         print("the grating is already at 250 l/mm")
         return 0  # the grating is already here
     print("Moving the grating to 250 l/mm.  This will take a minute...")
@@ -489,8 +489,8 @@ def base_grating_to_250(mono_en, en):
 
 
 def base_grating_to_1200(mono_en, en):
-    type = mono_en.gratingtype.enum_strs.index(mono_en.gratingtype.get())
-    if type == 9:
+    type = mono_en.gratingx.readback.get()
+    if '1200' in type:
         print("the grating is already at 1200 l/mm")
         return 0  # the grating is already here
     print("Moving the grating to 1200 l/mm.  This will take a minute...")
