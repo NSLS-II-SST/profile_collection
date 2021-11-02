@@ -65,6 +65,13 @@ def buildeputable(
         yield from grating_to_1200(2.0,-6.3,0.0)
     elif grat == "250":
         yield from grating_to_250(2.0,-6.3,0.0)
+    bec.enable_plots()
+
+    plt.close()
+    plt.close()
+    plt.close()
+    plt.close()
+
     yield from bps.mv(sam_Y,30)
     if mode == "C":
         yield from bps.mv(epu_mode, 0)
@@ -131,7 +138,7 @@ def buildeputable(
 
 def do_some_eputables_2021_en():
 
-    bec.enable_plots()
+
     yield from load_configuration("WAXSNEXAFS")
 
     #yield from buildeputable(105, 850, 10, 2, 14000, 15000,'C','250','C_250')
@@ -141,48 +148,33 @@ def do_some_eputables_2021_en():
 
     #yield from buildeputable(200, 1300, 10, 2, 23704, 0, "L", "1200", "mL0_1200")
     #yield from buildeputable(200, 1300, 10, 2, 23148, 4000, "L", "1200", "mL4_1200")
+    angles = [10,20,30,40,50,60,70,80]
+    phases = [6688.9843608114115,
+              10781.54138668513,
+              13440.927684320242,
+              15705.851176691127,
+              17575.669146953864,
+              19598.02761805813,
+              21948.115314738126,
+              24889.02500863509]
 
-    yield from buildeputable(200, 1300, 10, 2, 20922, 8000, "L", "1200", "mL8_1200")
-    yield from buildeputable(200, 1300, 10, 2, 17383, 12000, "L", "1200", "mL12_1200")
-    yield from buildeputable(250, 1300, 10, 2, 17150, 15000, "L", "1200", "mL15_1200")
-    yield from buildeputable(250, 1300, 10, 2, 15684, 18000, "L", "1200", "mL18_1200")
-    yield from buildeputable(250, 1300, 10, 2, 15805, 21000, "L", "1200", "mL21_1200")
-    yield from buildeputable(250, 1300, 10, 2, 16434, 23000, "L", "1200", "mL23_1200")
-    yield from buildeputable(250, 1300, 10, 2, 17470, 26000, "L", "1200", "mL26_1200")
-    #yield from buildeputable(200, 1300, 10, 2, 16373, 29500, "L", "1200", "mL29p5_1200")
+    startingens = [105,135,185,205,205,205,195,180]
+    for angle,ph,sten in zip(angles,phases,startingens):
+        yield from buildeputable(sten, 500, 20, 2, 14000, ph, "L", "250", f'linear{angle}deg_250')
+    for angle,ph,sten in zip(angles,phases,startingens):
+        yield from buildeputable(sten, 500, 20, 2, 14000, ph, "L3", "250", f'linear{180-angle}deg_250')
 
-    yield from buildeputable(200, 1300, 10, 2, 23704, 0, "L3", "1200", "m3L0_1200")
-    yield from buildeputable(200, 1300, 10, 2, 23148, 4000, "L3", "1200", "m3L4_1200")
-    yield from buildeputable(200, 1300, 10, 2, 20922, 8000, "L3", "1200", "m3L8_1200")
-    yield from buildeputable(200, 1300, 10, 2, 17383, 12000, "L3", "1200", "m3L12_1200")
-    yield from buildeputable(250, 1300, 10, 2, 17150, 15000, "L3", "1200", "m3L15_1200")
-    yield from buildeputable(250, 1300, 10, 2, 15684, 18000, "L3", "1200", "m3L18_1200")
-    yield from buildeputable(250, 1300, 10, 2, 15805, 21000, "L3", "1200", "m3L21_1200")
-    yield from buildeputable(250, 1300, 10, 2, 16434, 23000, "L3", "1200", "m3L23_1200")
-    yield from buildeputable(250, 1300, 10, 2, 17470, 26000, "L3", "1200", "m3L26_1200")
-    yield from buildeputable(200, 1300, 10, 2, 16373, 29500, "L3", "1200", "m3L29p5_1200")
+    # 1200l/pp from 400 to 1400 eV
+    # then third harmonic from 1000 to 2200 eV
+
+#    yield from buildeputable(200, 1300, 10, 2, 20922, 8000, "L", "1200", "mL8_1200")
+
+#    yield from buildeputable(200, 1300, 10, 2, 23704, 0, "L3", "1200", "m3L0_1200")
 
     #yield from buildeputable(80, 500, 10, 2, 14000, 0, "L", "250", "mL0_250")
-    yield from buildeputable(90, 500, 10, 2, 14000, 4000, "L", "250", "mL4_250")
-    yield from buildeputable(105, 500, 10, 2, 14000, 8000, "L", "250", "mL8_250")
-    yield from buildeputable(135, 500, 10, 2, 14000, 12000, "L", "250", "mL12_250")
-    yield from buildeputable(185, 500, 10, 2, 14000, 15000, "L", "250", "mL15_250")
-    yield from buildeputable(210, 500, 10, 2, 14000, 18000, "L", "250", "mL18_250")
-    yield from buildeputable(200, 500, 10, 2, 14000, 21000, "L", "250", "mL21_250")
-    yield from buildeputable(185, 500, 10, 2, 14000, 23000, "L", "250", "mL23_250")
-    yield from buildeputable(165, 500, 10, 2, 14000, 26000, "L", "250", "mL26_250")
     #yield from buildeputable(145, 500, 10, 2, 14000, 29500, "L", "250", "mL29p5_250")
 
     #yield from buildeputable(80, 500, 10, 2, 14000, 0, "L3", "250", "m3L0_250")
-    yield from buildeputable(90, 500, 10, 2, 14000, 4000, "L3", "250", "m3L4_250")
-    yield from buildeputable(105, 500, 10, 2, 14000, 8000, "L3", "250", "m3L8_250")
-    yield from buildeputable(135, 500, 10, 2, 14000, 12000, "L3", "250", "m3L12_250")
-    yield from buildeputable(185, 500, 10, 2, 14000, 15000, "L3", "250", "m3L15_250")
-    yield from buildeputable(210, 500, 10, 2, 14000, 18000, "L3", "250", "m3L18_250")
-    yield from buildeputable(200, 500, 10, 2, 14000, 21000, "L3", "250", "m3L21_250")
-    yield from buildeputable(185, 500, 10, 2, 14000, 23000, "L3", "250", "m3L23_250")
-    yield from buildeputable(165, 500, 10, 2, 14000, 26000, "L3", "250", "m3L26_250")
-    yield from buildeputable(145, 500, 10, 2, 14000, 29500, "L3", "250", "m3L29p5_250")
 
 
 def Scan_izero_peak(startingen, widfract):
