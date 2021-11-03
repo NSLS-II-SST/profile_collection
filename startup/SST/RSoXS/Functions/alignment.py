@@ -815,6 +815,7 @@ def spiralsearch(
     stepsize=0.2,
     energy=270,
     pol=0,
+    angle=None,
     exposure=1,
     master_plan=None,
     dets=[],
@@ -835,6 +836,10 @@ def spiralsearch(
         valid = False
         validation += "No detectors are given\n"
 
+    if angle is not None:
+            if -155 > angle or angle > 195:
+                valid = False
+                validation += f"angle of {angle} is out of range\n"
     if sim_mode:
         if valid:
             retstr = f"scanning {newdets} from {min(energies)} eV to {max(energies)} eV on the {grating} l/mm grating\n"
@@ -848,11 +853,14 @@ def spiralsearch(
 
     yield from bps.mv(en, energy)
     yield from set_polarization(pol)
-    set_exposure(exposure)
+    set_exposure(exposure) # TODO: make this yield from ...
     x_center = sam_X.user_setpoint.get()
     y_center = sam_Y.user_setpoint.get()
     num = round(diameter / stepsize) + 1
 
+    if angle is not None:
+        print(f'moving angle to {angle}')
+        yield from rotate_now(angle)
 
 
     yield from bp.spiral_square(
