@@ -403,7 +403,7 @@ def NEXAFS_fly_scan_core(
 
     if not np.isnan(m3_pitch):
         yield from bps.abs_set(mir3.Pitch, m3_pitch, wait=True)
-    if not np.isnan(diode_range):
+    #if not np.isnan(diode_range):
         #yield from bps.mv(DiodeRange, diode_range)
     if 'hopg_loc' in md.keys():
         hopgx = md['hopg_loc']['x']
