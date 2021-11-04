@@ -227,7 +227,7 @@ def en_scan_core(
     # set the M3 pitch
     yield from bps.abs_set(mir3.Pitch, m3_pitch, wait=True)
     # set the photodiode gain setting
-    yield from bps.mv(DiodeRange, diode_range)
+    #yield from bps.mv(DiodeRange, diode_range)
     # set the grating
     if 'hopg_loc' in md.keys():
         hopgx = md['hopg_loc']['x']
@@ -278,7 +278,7 @@ def NEXAFS_scan_core(
     # set mirror 3 pitch
     yield from bps.abs_set(mir3.Pitch, m3_pitch, wait=True)
     # set the diode range
-    yield from bps.mv(DiodeRange, diode_range)
+    #yield from bps.mv(DiodeRange, diode_range)
     # set exposure
     set_exposure(exp_time)
     # set grating
@@ -404,7 +404,7 @@ def NEXAFS_fly_scan_core(
     if not np.isnan(m3_pitch):
         yield from bps.abs_set(mir3.Pitch, m3_pitch, wait=True)
     if not np.isnan(diode_range):
-        yield from bps.mv(DiodeRange, diode_range)
+        #yield from bps.mv(DiodeRange, diode_range)
     if 'hopg_loc' in md.keys():
         hopgx = md['hopg_loc']['x']
         hopgy = md['hopg_loc']['y']

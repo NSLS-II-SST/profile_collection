@@ -1481,7 +1481,7 @@ def find_fiducials(f2=[6, 3.5, -3, 1.1]):
     yield from bps.mv(Shutter_control, 0)
     yield from load_configuration("WAXSNEXAFS")
     Beamstop_WAXS.kind = "hinted"
-    yield from bps.mv(DiodeRange, 7)
+    #yield from bps.mv(DiodeRange, 7)
     bec.enable_plots()
     startys = [2, -188.0]  # af2 first because it is a safer location
     maxlocs = []
