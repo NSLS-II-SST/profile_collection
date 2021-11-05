@@ -664,18 +664,26 @@ def sanatize_angle(samp, force=False):
         samp["bar_loc"]["th"] = samp["angle"]
         return
     if samp["grazing"]:
+        # the sample is intended for grazing incidence, so angles should be interpreted to mean
+        # 0 - parallel with the face of the sample
+        # 90 - normal to the sample
+        # 110 - 20 degrees from normal in one direction
+        # 70 - 20 degrees from normal in the other direction
+        # valid input angles are 0 - 180
         if samp["front"]:
+            # sample is on the front of the bar, so valid outputs are between -90 and 90
             if goodnumber:
-                samp["bar_loc"]["th"] = np.mod(np.abs(90 - samp["angle"]), 180)
+                samp["bar_loc"]["th"] = 90-np.mod(samp['angle']+3600,180)
             else:
-                samp["bar_loc"]["th"] = 70
+                samp["bar_loc"]["th"] = 70 # default grazing incidence samples to 20 degrees incidence angle
                 samp["angle"] = 70
                 # front grazing sample angle is interpreted as grazing angle
         else:
             if goodnumber:
-                samp["bar_loc"]["th"] = (
-                    90 + np.round(np.mod(100 * samp["angle"] - 9000.01, 9000.01)) / 100
-                )
+                angle = np.mod(435-np.mod(-samp['angle']+3600,180),360)-165
+                if(angle < -155):
+                    angle = np.mod(435 - np.mod(samp['angle'] + 3600, 180), 360) - 165
+                samp["bar_loc"]["th"] = angle
             else:
                 samp["bar_loc"]["th"] = 110
                 samp["angle"] = 110
@@ -684,14 +692,13 @@ def sanatize_angle(samp, force=False):
         if samp["front"]:
             if goodnumber:
                 samp["bar_loc"]["th"] = (
-                    90 + np.round(np.mod(100 * samp["angle"] - 18000.01, 18000.01)) / 100
+                    np.mod(345-np.mod(90+samp["angle"]+3600,180)+90,360)-165
                 )
-                if samp["bar_loc"]["x0"] < -1.8 and samp["bar_loc"]["th"] < 155:
+                if samp["bar_loc"]["x0"] < -1.8 and np.abs(samp['angle']) > 30:
                     # transmission from the left side of the bar at a incident angle more than 20 degrees,
                     # flip sample around to come from the other side - this can take a minute or two
                     samp["bar_loc"]["th"] = (
-                        -90
-                        - np.round(np.mod(100 * samp["angle"] - 9000.01, 9000.01)) / 100
+                        np.mod(345-np.mod(90-samp['angle']+3600,180)+90,360)-165
                     )
                 if samp["bar_loc"]["th"] >=195:
                     samp["bar_loc"]["th"] = 180
@@ -702,11 +709,11 @@ def sanatize_angle(samp, force=False):
                 samp["angle"] = 180
         else:
             if goodnumber:
-                samp["bar_loc"]["th"] = np.mod(np.abs(90 - samp["angle"]), 180)
-                if samp["bar_loc"]["x0"] > -1.8 and samp["bar_loc"]["th"] < 160:
+                samp["bar_loc"]["th"] = np.mod(90+samp['angle']+3600,180)-90
+                if samp["bar_loc"]["x0"] > -1.8 and np.abs(samp['angle']) > 30:
                     # transmission from the right side of the bar at a incident angle more than 20 degrees,
                     # flip to come from the left side
-                    samp["bar_loc"]["th"] = -np.mod(np.abs(90 - samp["angle"]), 180)
+                    samp["bar_loc"]["th"] = np.mod(90-samp['angle']+3600,180)-90
             else:
                 samp["bar_loc"]["th"] = 0
                 samp["angle"] = 0
@@ -1322,7 +1329,7 @@ def correct_bar(bar, fiduciallist, include_back, training_wheels=True):
         af1y_img - af2y_img
     )  # distance between fiducial y positions (should be ~ -190)
     if back:
-        x_offset_back = af1xback - af1xback_img  # offset from X-rays to image in x
+        x_offset_back = af1xback - af1xback_img  # offset from X-rays to image in x on the back
         y_offset_back = af1y - af1yback_img  # offset from X-rays to image in x
         y_image_offset_back = (
             af1yback_img - af2yback_img
@@ -1340,17 +1347,24 @@ def correct_bar(bar, fiduciallist, include_back, training_wheels=True):
     dx = (
         af2x - af2x_img - x_offset
     )  # offset of Af2 X-rays to image in x relative to Af1 (mostly rotating)
+    # dx is the total offset needed for a position in the image to be located with X-rays at the bottom of the bar
+    # the
     dy = (
         af2y - af2y_img - y_offset
     )  # offset of Af2 X-rays to image in y relative to Af1 (mostly stretching)
     if back:
         dxb = (
-            af2xback - af2xback_img - x_offset_back
+            af2xback - af1xback + af1xback_img - af2xback_img
         )  # offset of Af2 X-rays to image in x relative to Af1 (mostly rotating)
+        # offset from the top of the bar to the bottom of the bar with X-rays  minus
+        # offset of the top of the bar to the bottom in the image
+        # dxb is the extra bit needed to move the bottom of the bar to correct for this rotation
         dyb = (
-            af2y - af2yback_img - y_offset_back
-        )  # offset of Af2 X-rays to image in y relative to Af1 (mostly stretching)
-
+            (af2y - af1y)  - (af2yback_img - af1yback_img)
+        )  # offset of Af2 X-rays to image in y relative to Af1 (this is scaling the image - should be 0)
+        # dyb is the extra bit needed to scale the bottom of the bar to correct for this scaling
+    # dx, dy, dyb, and dxb are all relative correction factors, which are from the top of the bar to the bottom,
+    # we use run_y to translate this to a offset per mm
     run_y = (
         af2y - af1y
     )  # (distance between the fiducial markers) (above are the total delta over this run,
@@ -1364,10 +1378,12 @@ def correct_bar(bar, fiduciallist, include_back, training_wheels=True):
             "xoff"
         ] = xoff  # this should pretty much be the same for both fiducials,
         # but just in case there is a tilt,
-        # we account for that here
+        # we account for that here, taking af1soff if the sample is towards the top and af2soff as it is lower
 
         if samp["front"]:
             newx = xpos + x_offset + (ypos - af1y) * dx / run_y
+            # new position is the image position, plus the offset from the image to the x-rays, plus a linear correction
+            # from the top of the bar to the bottom
             newy = ypos + y_offset + (ypos - af1y) * dy / run_y
             samp["bar_loc"][
                 "x0"
@@ -1416,14 +1432,14 @@ def zoffset(af1zoff, af2zoff, y, front=True, height=0.25, af1y=-186.3, af2y=4):
     the fiducials.
     """
 
-    m = (af1zoff - af2zoff) / (af1y - af2y)
-    z0 = af1zoff - m * af1y
+    m = (af2zoff - af1zoff) / (af2y - af1y) # slope of bar
+    z0 = af1zoff + m * (y-af1y)
 
     # offset the line by the front/back offset + height
     if front:
-        return z0 - 3.5 - height + y * m
+        return z0 - 3.5 - height
     else:
-        return z0 + height + y * m
+        return z0 + height
     # return the offset intersect
 
 
