@@ -81,7 +81,7 @@ def full_Carbon_NEXAFS(
 
 
 def fly_Carbon_NEXAFS(
-    speed=0.1,
+    speed=0.2,
     pol=0,
     diode_range=8,
     m3_pitch=7.94,
@@ -132,7 +132,7 @@ def fly_Carbon_NEXAFS(
 
 
 def fly_Calcium_NEXAFS(
-    speed=0.15,
+    speed=0.2,
     pol=0,
     diode_range=8,
     m3_pitch=7.99,
@@ -184,7 +184,7 @@ def fly_Calcium_NEXAFS(
 
 
 def fly_SulfurL_NEXAFS(
-    speed=0.1,
+    speed=0.2,
     pol=0,
     diode_range=8,
     m3_pitch=7.97,
@@ -235,7 +235,7 @@ def fly_SulfurL_NEXAFS(
 
 
 def fly_SiliconL_NEXAFS(
-    speed=0.1,
+    speed=0.2,
     pol=0,
     diode_range=8,
     m3_pitch=8.01,
@@ -286,7 +286,7 @@ def fly_SiliconL_NEXAFS(
 
 
 def fly_SiliconK_NEXAFS(
-    speed=0.2,
+    speed=0.4,
     pol=0,
     diode_range=8,
     m3_pitch=7.97,
@@ -337,7 +337,7 @@ def fly_SiliconK_NEXAFS(
 
 
 def fly_Nitrogen_NEXAFS(
-    speed=0.1,
+    speed=0.2,
     pol=0,
     diode_range=8,
     m3_pitch=7.96,
@@ -388,7 +388,7 @@ def fly_Nitrogen_NEXAFS(
 
 
 def fly_Oxygen_NEXAFS(
-    speed=0.1,
+    speed=0.2,
     pol=0,
     diode_range=8,
     m3_pitch=7.96,
@@ -439,7 +439,7 @@ def fly_Oxygen_NEXAFS(
 
 
 def fly_Fluorine_NEXAFS(
-    speed=0.3,
+    speed=0.4,
     pol=0,
     diode_range=8,
     m3_pitch=7.98,
@@ -489,7 +489,7 @@ def fly_Fluorine_NEXAFS(
 
 
 def fly_Boron_NEXAFS(
-    speed=0.05,
+    speed=0.2,
     pol=0,
     diode_range=8,
     m3_pitch=8.0,
