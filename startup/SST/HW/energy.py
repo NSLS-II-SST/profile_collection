@@ -458,12 +458,12 @@ class EnPos(PseudoPositioner):
         )
 
     def m3pitchcalc(self,energy):
-        if "1200" in self.monoen.gratingx.get():
+        if "1200" in self.monoen.gratingx.readback.get():
             return 7.8951+0.038807*np.exp(-(energy-100)/91.942)+0.050123*np.exp(-(energy-100)/1188.9)
-        elif "250" in self.monoen.gratingx.get():
+        elif "250" in self.monoen.gratingx.readback.get():
             return 7.8956+0.022665*np.exp(-(energy-90)/37.746)+0.024897*np.exp(-(energy-90)/450.9)
         else:
-            return 7.95
+            return 7.93
 
 def base_set_polarization(pol, en):
     yield from bps.mv(en.polarization, pol)
