@@ -1,3 +1,4 @@
+import json
 from ..HW.detectors import waxs_det
 
 def giveme_inputs(*args, **kwargs):
@@ -18,6 +19,16 @@ def args_to_string(*args, **kwargs):
     for key in kwargs.keys():
         if isinstance(kwargs[key], str):
             outstr += f'{key} = "{kwargs[key]}", '
+        elif is_jsonable(kwargs[key]):
+            outstr += f"{key} = {json.dumps(kwargs[key])}, "
         else:
-            outstr += f"{key} = {kwargs[key]}, "
+            outstr += f"{key} = 'not seralizable', "
     return outstr.rstrip(", ")
+
+
+def is_jsonable(x):
+    try:
+        json.dumps(x)
+        return True
+    except:
+        return False
