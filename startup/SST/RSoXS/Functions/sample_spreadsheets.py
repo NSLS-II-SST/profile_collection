@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 from ophyd import Device
 from operator import itemgetter
+from numpy import array
 from ..HW.motors import sam_X, sam_Y, sam_Th, sam_Z
 from ..Functions.acquisitions import avg_scan_time
 from ..Functions import rsoxs_queue_plans
