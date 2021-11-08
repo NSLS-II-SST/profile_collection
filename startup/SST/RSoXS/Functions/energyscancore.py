@@ -225,18 +225,21 @@ def en_scan_core(
     for det in newdets:
         det.cam.acquire_time.kind = "hinted"
     # set the M3 pitch
-    yield from bps.abs_set(mir3.Pitch, m3_pitch, wait=True)
+    # yield from bps.abs_set(mir3.Pitch, m3_pitch, wait=True)
     # set the photodiode gain setting
     #yield from bps.mv(DiodeRange, diode_range)
     # set the grating
     if 'hopg_loc' in md.keys():
+        print('hopg location found')
         hopgx = md['hopg_loc']['x']
         hopgy = md['hopg_loc']['y']
         hopgth = md['hopg_loc']['th']
     else:
+        print('no hopg location found')
         hopgx = None
         hopgy = None
         hopgth = None
+    print(f'checking grating is {grating}')
     if grating == "1200":
         yield from grating_to_1200(hopgx=hopgx,hopgy=hopgy,hopgtheta=hopgth)
     elif grating == "250":
