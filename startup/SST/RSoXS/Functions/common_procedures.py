@@ -159,8 +159,8 @@ def do_some_eputables_2021_en():
               24889.02500863509]
 
     startingens = [95,125,155,185,200,200,185,160]
-    #for angle,ph,sten in zip(angles,phases,startingens):
-    #    yield from buildeputable(sten, 500, 20, 2, 14000, ph, "L", "250", f'linear{angle}deg_250')
+    for angle,ph,sten in zip(angles[3:],phases[3:],startingens[3:]):
+        yield from buildeputable(sten, 500, 10, 2, 14000, ph, "L", "250", f'linear{angle}deg_250')
     for angle,ph,sten in zip(angles,phases,startingens):
         yield from buildeputable(sten, 500, 10, 2, 14000, ph, "L3", "250", f'linear{180-angle}deg_250')
 
