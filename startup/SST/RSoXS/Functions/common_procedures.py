@@ -158,11 +158,26 @@ def do_some_eputables_2021_en():
               21948.115314738126,
               24889.02500863509]
 
-    startingens = [105,135,185,205,205,205,195,180]
+    startingens = [95,125,155,185,200,200,185,160]
+    #for angle,ph,sten in zip(angles,phases,startingens):
+    #    yield from buildeputable(sten, 500, 20, 2, 14000, ph, "L", "250", f'linear{angle}deg_250')
     for angle,ph,sten in zip(angles,phases,startingens):
-        yield from buildeputable(sten, 500, 20, 2, 14000, ph, "L", "250", f'linear{angle}deg_250')
-    for angle,ph,sten in zip(angles,phases,startingens):
-        yield from buildeputable(sten, 500, 20, 2, 14000, ph, "L3", "250", f'linear{180-angle}deg_250')
+        yield from buildeputable(sten, 500, 10, 2, 14000, ph, "L3", "250", f'linear{180-angle}deg_250')
+
+    startgaps = [33271.94497611413,
+                29889.652490430373,
+                27174.560460333993,
+                24965.844827621615,
+                23564.225919905086,
+                22983.602525718445,
+                22874.408275853402,
+                23677.309482826902]
+
+    for angle,ph,stgp in zip(angles,phases,startgaps):
+        yield from buildeputable(400, 1400, 20, 4, stgp, ph, "L", "1200", f'linear{angle}deg_1200')
+    for angle,ph,stgp in zip(angles,phases,startgaps):
+        yield from buildeputable(400, 1400, 20, 4, stgp, ph, "L3", "1200", f'linear{180-angle}deg_1200')
+
 
     # 1200l/pp from 400 to 1400 eV
     # then third harmonic from 1000 to 2200 eV
