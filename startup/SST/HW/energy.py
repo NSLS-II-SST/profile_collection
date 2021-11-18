@@ -137,12 +137,12 @@ class EnPos(PseudoPositioner):
         """Run a forward (pseudo -> real) calculation"""
         # print('In forward')
         ret = self.RealPosition(
-            epugap=self.gap(pseudo_pos.energy, pseudo_pos.polarization),
+            epugap=self.gap(pseudo_pos.energy, pseudo_pos.polarization,self.scanlock.get()),
             monoen=pseudo_pos.energy,
             epuphase=abs(self.phase(pseudo_pos.energy, pseudo_pos.polarization)),
             mir3Pitch=self.m3pitchcalc(pseudo_pos.energy,self.scanlock.get()),
             epumode=self.mode(pseudo_pos.polarization),
-            harmonic=self.choose_harmonic(pseudo_pos.energy,pseudo_pos.polarization,self.scanlock.get())
+            #harmonic=self.choose_harmonic(pseudo_pos.energy,pseudo_pos.polarization,self.scanlock.get())
         )
         # print('finished forward')
         return ret
@@ -336,9 +336,10 @@ class EnPos(PseudoPositioner):
         self,
         energy,
         pol,
-        harmonic=1
+        locked,
     ):
-        energy = energy / harmonic
+        self.harmonic.set(self.choose_harmonic(energy, pol, locked))
+        energy = energy / self.harmonic.get()
 
         if (pol == -1) and 105 < energy < 1200:
             encalc = energy - 105.002
