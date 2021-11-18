@@ -140,9 +140,9 @@ class EnPos(PseudoPositioner):
             epugap=self.gap(pseudo_pos.energy, pseudo_pos.polarization),
             monoen=pseudo_pos.energy,
             epuphase=abs(self.phase(pseudo_pos.energy, pseudo_pos.polarization)),
-            mir3Pitch=self.m3pitchcalc(pseudo_pos.energy,pseudo_pos.scanlock),
+            mir3Pitch=self.m3pitchcalc(pseudo_pos.energy,self.scanlock.get()),
             epumode=self.mode(pseudo_pos.polarization),
-            harmonic=self.choose_harmonic(pseudo_pos.energy,pseudo_pos.polarization,pseudo_pos.scanlock)
+            harmonic=self.choose_harmonic(pseudo_pos.energy,pseudo_pos.polarization,self.scanlock.get())
         )
         # print('finished forward')
         return ret
