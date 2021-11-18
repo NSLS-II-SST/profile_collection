@@ -6,6 +6,7 @@ from ophyd import (
     PseudoSingle,
     EpicsMotor,
     EpicsSignal,
+    Signal,
 )
 from ophyd import Component as Cpt
 import bluesky.plan_stubs as bps
@@ -126,6 +127,9 @@ class EnPos(PseudoPositioner):
     epumode = Cpt(EpuMode,'SR:C07-ID:G1A{SST1:1-Ax:Phase}Phs:Mode',
                           name='EPU Mode', kind='normal')
 
+    scanlock = Cpt(Signal,value=0,name="Lock Harmonic, Pitch, Grating for scan",kind='config')
+    harmonic = Cpt(Signal, value=1, name="EPU Harmonic",kind='config')
+    M3offset = Cpt(Signal, value=7.91, name="EPU Harmonic",kind='config')
     rotation_motor = None
 
     @pseudo_position_argument
@@ -136,8 +140,9 @@ class EnPos(PseudoPositioner):
             epugap=self.gap(pseudo_pos.energy, pseudo_pos.polarization),
             monoen=pseudo_pos.energy,
             epuphase=abs(self.phase(pseudo_pos.energy, pseudo_pos.polarization)),
-            mir3Pitch=self.m3pitchcalc(pseudo_pos.energy),
-            epumode=self.mode(pseudo_pos.polarization)
+            mir3Pitch=self.m3pitchcalc(pseudo_pos.energy,pseudo_pos.scanlock),
+            epumode=self.mode(pseudo_pos.polarization),
+            harmonic=self.choose_harmonic(pseudo_pos.energy,pseudo_pos.polarization,pseudo_pos.scanlock)
         )
         # print('finished forward')
         return ret
@@ -187,76 +192,76 @@ class EnPos(PseudoPositioner):
             ),
             colored(
                 "{:.2f}".format(self.epugap.user_setpoint.get())
-                .rstrip("0")
-                .rstrip("."),
+                    .rstrip("0")
+                    .rstrip("."),
                 "yellow",
             ),
             colored(
                 "{:.2f}".format(self.epugap.user_readback.get())
-                .rstrip("0")
-                .rstrip("."),
+                    .rstrip("0")
+                    .rstrip("."),
                 "yellow",
             ),
             colored(
                 "{:.2f}".format(self.epuphase.user_setpoint.get())
-                .rstrip("0")
-                .rstrip("."),
+                    .rstrip("0")
+                    .rstrip("."),
                 "yellow",
             ),
             colored(
                 "{:.2f}".format(self.epuphase.user_readback.get())
-                .rstrip("0")
-                .rstrip("."),
+                    .rstrip("0")
+                    .rstrip("."),
                 "yellow",
             ),
             colored(
                 "{:.2f}".format(self.epumode.setpoint.get())
-                .rstrip("0")
-                .rstrip("."),
+                    .rstrip("0")
+                    .rstrip("."),
                 "yellow",
             ),
             colored(
                 "{:.2f}".format(self.epumode.readback.get())
-                .rstrip("0")
-                .rstrip("."),
+                    .rstrip("0")
+                    .rstrip("."),
                 "yellow",
             ),
             colored(
                 "{:.2f}".format(self.monoen.grating.user_setpoint.get())
-                .rstrip("0")
-                .rstrip("."),
+                    .rstrip("0")
+                    .rstrip("."),
                 "yellow",
             ),
             colored(
                 "{:.2f}".format(self.monoen.grating.user_readback.get())
-                .rstrip("0")
-                .rstrip("."),
+                    .rstrip("0")
+                    .rstrip("."),
                 "yellow",
             ),
             colored(self.monoen.gratingx.setpoint.get(),
-                "yellow",
-            ),
+                    "yellow",
+                    ),
             colored(self.monoen.gratingx.readback.get(),
-                "yellow",
-            ),
+                    "yellow",
+                    ),
             colored(
                 "{:.2f}".format(self.monoen.mirror2.user_setpoint.get())
-                .rstrip("0")
-                .rstrip("."),
+                    .rstrip("0")
+                    .rstrip("."),
                 "yellow",
             ),
             colored(
                 "{:.2f}".format(self.monoen.mirror2.user_readback.get())
-                .rstrip("0")
-                .rstrip("."),
+                    .rstrip("0")
+                    .rstrip("."),
                 "yellow",
             ),
             colored(self.monoen.mirror2x.setpoint.get(),
-                "yellow",
-            ),
+                    "yellow",
+                    ),
             colored(self.monoen.mirror2x.readback.get(),
-                "yellow",
-            ),
+                    "yellow",
+                    ),
             colored(
                 "{:.2f}".format(self.monoen.cff.get()).rstrip("0").rstrip("."), "yellow"
             ),
@@ -275,14 +280,14 @@ class EnPos(PseudoPositioner):
             ),
             colored(
                 "{:.2f}".format(self.polarization.readback.get())
-                .rstrip("0")
-                .rstrip("."),
+                    .rstrip("0")
+                    .rstrip("."),
                 "yellow",
             ),
             colored(
                 "{:.2f}".format(self.sample_polarization.readback.get())
-                .rstrip("0")
-                .rstrip("."),
+                    .rstrip("0")
+                    .rstrip("."),
                 "yellow",
             ),
         )
@@ -331,20 +336,11 @@ class EnPos(PseudoPositioner):
         self,
         energy,
         pol,
-        grating="best",
-        harmonic="best",
-        en_cutoff=1100,
-        verbose=False,
+        harmonic=1
     ):
-        if (energy > en_cutoff and harmonic != "1") or harmonic == "3":
-            energy = energy / 3
+        energy = energy / harmonic
 
         if (pol == -1) and 105 < energy < 1200:
-            phase = 15000
-            #g250_gap = float(self.C250_gap.interp(Energies=energy))
-            #g250_intens = float(self.C250_intens.interp(Energies=energy))
-            #g1200_gap = float(self.C1200_gap.interp(Energies=energy))
-            #g1200_intens = float(self.C1200_intens.interp(Energies=energy))
             encalc = energy - 105.002
             gap = 13979
             gap += 82.857 * encalc ** 1
@@ -358,11 +354,6 @@ class EnPos(PseudoPositioner):
             gap += 3.4687e-22 * encalc ** 9
             return max(14000, gap)
         elif (pol == -0.5) and 105 < energy < 1200:
-            phase = 15000
-            #g250_gap = float(self.C250_gap.interp(Energies=energy))
-            #g250_intens = float(self.C250_intens.interp(Energies=energy))
-            #g1200_gap = float(self.C1200_gap.interp(Energies=energy))
-            #g1200_intens = float(self.C1200_intens.interp(Energies=energy))
             encalc = energy - 104.996
             gap = 14013
             gap += 82.76 * encalc ** 1
@@ -398,16 +389,7 @@ class EnPos(PseudoPositioner):
         else:
             return np.nan
 
-        if verbose:
-            print(f"For pol {pol}, energy {energy} phase {phase}: ")
-            print(f"  . 250 l/mm grating: gap = {g250_gap}, intensity {g250_intens}")
-            print(f"  . 1200 l/mm grating: gap = {g1200_gap}, intensity {g1200_intens}")
-
-        if grating == "250" and np.isnan(g250_gap):
-            return min(100000, max(14000, g1200_gap))
-        elif grating == "1200" and np.isnan(g1200_gap):
-            return min(100000, max(14000, g250_gap))
-        elif np.isnan(g250_gap):
+        if np.isnan(g250_gap):
             return min(100000, max(14000, g1200_gap))
         else:
             return min(100000, max(14000, g250_gap))
@@ -418,10 +400,8 @@ class EnPos(PseudoPositioner):
         elif pol == -0.5:
             return 15000
         elif 90 < pol <= 180:
-            return -min(
-                29500,
-                max(0, float(self.polphase.interp(pol=180 - pol, method="cubic"))),
-            )
+            return -min(29500,max(0,
+                                float(self.polphase.interp(pol=180 - pol, method="cubic"))))
         else:
             return min(
                 29500, max(0, float(self.polphase.interp(pol=pol, method="cubic")))
@@ -457,13 +437,26 @@ class EnPos(PseudoPositioner):
             / np.pi
         )
 
-    def m3pitchcalc(self,energy):
+    def m3pitchcalc(self,energy,locked):
         pitch = self.mir3Pitch.setpoint.get()
-        if "1200" in self.monoen.gratingx.readback.get():
-            pitch =  7.8951+0.038807*np.exp(-(energy-100)/91.942)+0.050123*np.exp(-(energy-100)/1188.9)
+        if locked:
+            return pitch
+        elif "1200" in self.monoen.gratingx.readback.get():
+            pitch =  self.M3offset.value+0.038807*np.exp(-(energy-100)/91.942)+0.050123*np.exp(-(energy-100)/1188.9)
         elif "250" in self.monoen.gratingx.readback.get():
-            pitch =  7.8956+0.022665*np.exp(-(energy-90)/37.746)+0.024897*np.exp(-(energy-90)/450.9)
+            pitch =  self.M3offset.value+0.022665*np.exp(-(energy-90)/37.746)+0.024897*np.exp(-(energy-90)/450.9)
         return round(100*pitch)/100
+
+    def choose_harmonic(self,energy,pol,locked):
+        if locked:
+            return self.harmonic.get()
+        elif energy < 1200:
+            return 1
+        else:
+            return 3
+
+    def scanlock_calc(self):
+        return self.locked
 
 def base_set_polarization(pol, en):
     yield from bps.mv(en.polarization, pol)
