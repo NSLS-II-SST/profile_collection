@@ -338,7 +338,7 @@ class EnPos(PseudoPositioner):
     ):
         if (energy > en_cutoff and harmonic != "1") or harmonic == "3":
             energy = energy / 3
-            
+
         if (pol == -1) and 105 < energy < 1200:
             phase = 15000
             #g250_gap = float(self.C250_gap.interp(Energies=energy))
@@ -458,12 +458,12 @@ class EnPos(PseudoPositioner):
         )
 
     def m3pitchcalc(self,energy):
+        pitch = self.mir3Pitch.setpoint.get()
         if "1200" in self.monoen.gratingx.readback.get():
-            return 7.8951+0.038807*np.exp(-(energy-100)/91.942)+0.050123*np.exp(-(energy-100)/1188.9)
+            pitch =  7.8951+0.038807*np.exp(-(energy-100)/91.942)+0.050123*np.exp(-(energy-100)/1188.9)
         elif "250" in self.monoen.gratingx.readback.get():
-            return 7.8956+0.022665*np.exp(-(energy-90)/37.746)+0.024897*np.exp(-(energy-90)/450.9)
-        else:
-            return 7.93
+            pitch =  7.8956+0.022665*np.exp(-(energy-90)/37.746)+0.024897*np.exp(-(energy-90)/450.9)
+        return round(100*pitch)/100
 
 def base_set_polarization(pol, en):
     yield from bps.mv(en.polarization, pol)
@@ -844,6 +844,3 @@ def epugap_from_en_pol(energy, polarization):
         else:
             gap = None
     return gap
-
-
-
