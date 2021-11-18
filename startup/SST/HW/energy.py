@@ -129,7 +129,7 @@ class EnPos(PseudoPositioner):
 
     scanlock = Cpt(Signal,value=0,name="Lock Harmonic, Pitch, Grating for scan",kind='config')
     harmonic = Cpt(Signal, value=1, name="EPU Harmonic",kind='config')
-    M3offset = Cpt(Signal, value=7.91, name="EPU Harmonic",kind='config')
+    m3offset = Cpt(Signal, value=7.91, name="EPU Harmonic",kind='config')
     rotation_motor = None
 
     @pseudo_position_argument
@@ -442,9 +442,9 @@ class EnPos(PseudoPositioner):
         if locked:
             return pitch
         elif "1200" in self.monoen.gratingx.readback.get():
-            pitch =  self.M3offset.value+0.038807*np.exp(-(energy-100)/91.942)+0.050123*np.exp(-(energy-100)/1188.9)
+            pitch =  self.m3offset.get()+0.038807*np.exp(-(energy-100)/91.942)+0.050123*np.exp(-(energy-100)/1188.9)
         elif "250" in self.monoen.gratingx.readback.get():
-            pitch =  self.M3offset.value+0.022665*np.exp(-(energy-90)/37.746)+0.024897*np.exp(-(energy-90)/450.9)
+            pitch =  self.m3offset.get()+0.022665*np.exp(-(energy-90)/37.746)+0.024897*np.exp(-(energy-90)/450.9)
         return round(100*pitch)/100
 
     def choose_harmonic(self,energy,pol,locked):
