@@ -773,13 +773,13 @@ def fly_scan_eliot(scan_params, polarization=0, grating="best", *, md={}):
             print("moving to starting position")
             yield from wait(group="EPU")
             print("Mono in start position")
-            yield from bps.mv(epu_gap, en.gap(start_en, pol))
+            yield from bps.mv(epu_gap, en.gap(start_en, pol,en.scanlock.get()))
             print("EPU in start position")
             if step == 0:
                 monopos = mono_en.readback.get()
                 yield from bps.abs_set(
                     epu_gap,
-                    en.gap(monopos, pol, grating=grating),
+                    en.gap(monopos, pol,en.scanlock.get()),
                     wait=False,
                     group="EPU",
                 )
@@ -793,7 +793,7 @@ def fly_scan_eliot(scan_params, polarization=0, grating="best", *, md={}):
                 monopos = mono_en.readback.get()
                 yield from bps.abs_set(
                     epu_gap,
-                    en.gap(monopos, pol, grating=grating),
+                    en.gap(monopos, pol,en.scanlock.get()),
                     wait=False,
                     group="EPU",
                 )
@@ -875,13 +875,13 @@ def fly_scan_mono_epu(scan_params, polarization=0, grating="best", *, md={}):
             print("moving to starting position")
             yield from wait(group="EPU")
             print("Mono in start position")
-            yield from bps.mv(epu_gap, en.gap(start_en, pol))
+            yield from bps.mv(epu_gap, en.gap(start_en, pol,en.scanlock.get()))
             print("EPU in start position")
             if step == 0:
                 monopos = mono_en.readback.get()
                 yield from bps.abs_set(
                     epu_gap,
-                    en.gap(monopos, pol, grating=grating),
+                    en.gap(monopos, pol,en.scanlock.get()),
                     wait=False,
                     group="EPU",
                 )
@@ -895,7 +895,7 @@ def fly_scan_mono_epu(scan_params, polarization=0, grating="best", *, md={}):
                 monopos = mono_en.readback.get()
                 yield from bps.abs_set(
                     epu_gap,
-                    en.gap(monopos, pol, grating=grating),
+                    en.gap(monopos, pol,en.scanlock.get()),
                     wait=False,
                     group="EPU",
                 )
