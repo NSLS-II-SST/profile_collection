@@ -1503,7 +1503,11 @@ def full_ca_scan_nd(
     # create a list of energies
     energies = np.arange(320, 340, 5)
     energies = np.append(energies, np.arange(340, 345, 1))
-    energies = np.append(energies, np.arange(345, 355, 0.5))
+    energies = np.append(energies, np.arange(345, 349, 0.5))
+    energies = np.append(energies, np.arange(349, 349.5, 0.1))
+    energies = np.append(energies, np.arange(349.5, 352.5, 0.25))
+    energies = np.append(energies, np.arange(352.5, 353, 0.1))
+    energies = np.append(energies, np.arange(353, 355, .5))
     energies = np.append(energies, np.arange(355, 360, 1))
     times = energies.copy()
 
