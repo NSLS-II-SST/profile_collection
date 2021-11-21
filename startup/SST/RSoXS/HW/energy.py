@@ -62,7 +62,15 @@ def set_polarization(pol):
 
 def grating_to_1200(hopgx=None,hopgy=None,hopgtheta=None):
     moved = yield from base_grating_to_1200(mono_en, en)
-    if moved and isinstance(hopgx,float) and isinstance(hopgy,float) and isinstance(hopgtheta,float):
+    try:
+        x = float(hopgx)
+        y = float(hopgy)
+        th = float(hopgtheta)
+    except Exception:
+        x = None
+        y = None
+        th = None
+    if moved and isinstance(x,float) and isinstance(y,float) and isinstance(th,float):
         ensave = en.energy.setpoint.get()
         xsave = sam_X.user_setpoint.get()
         ysave = sam_Y.user_setpoint.get()
@@ -87,14 +95,22 @@ def grating_to_1200(hopgx=None,hopgy=None,hopgtheta=None):
 
 def grating_to_250(hopgx=None,hopgy=None,hopgtheta=None):
     moved = yield from base_grating_to_250(mono_en, en)
-    if moved and isinstance(hopgx,float) and isinstance(hopgy,float) and isinstance(hopgtheta,float):
+    try:
+        x = float(hopgx)
+        y = float(hopgy)
+        th = float(hopgtheta)
+    except Exception:
+        x = None
+        y = None
+        th = None
+    if moved and isinstance(x,float) and isinstance(y,float) and isinstance(th,float):
         ensave = en.energy.setpoint.get()
         xsave = sam_X.user_setpoint.get()
         ysave = sam_Y.user_setpoint.get()
         thsave = sam_Th.user_setpoint.get()
         bec.enable_plots()
         Sample_TEY.kind='hinted'
-        yield from bps.mv(sam_X,hopgx,sam_Y,hopgy,sam_Th,hopgtheta)
+        yield from bps.mv(sam_X,x,sam_Y,y,sam_Th,th)
         yield from bps.mv(en.polarization, 0)
         yield from bps.mv(en, 291.65)
         yield from bps.mv(Shutter_control,1)

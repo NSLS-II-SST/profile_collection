@@ -87,7 +87,8 @@ def buildeputable(
     peaklist=[]
     for energy in ens:
         yield from bps.mv(mono_en, energy)
-        yield from bps.mv(en.mir3Pitch,en.m3pitchcalc(energy))
+        yield from bps.mv(en.scanlock,False)
+        yield from bps.mv(en.mir3Pitch,en.m3pitchcalc(energy,False))
         yield from bps.mv(epu_gap, max(14000, startinggap - 500 * widfract))
         yield from bps.mv(Shutter_enable, 0)
         yield from bps.mv(Shutter_control, 1)
@@ -138,7 +139,6 @@ def buildeputable(
 
 def do_some_eputables_2021_en():
 
-
     yield from load_configuration("WAXSNEXAFS")
 
     #yield from buildeputable(105, 850, 10, 2, 14000, 15000,'C','250','C_250')
@@ -158,11 +158,11 @@ def do_some_eputables_2021_en():
               21948.115314738126,
               24889.02500863509]
 
-    startingens = [95,125,155,185,200,200,185,160]
-    for angle,ph,sten in zip(angles[5:],phases[5:],startingens[5:]):
-        yield from buildeputable(sten, 500, 10, 2, 14000, ph, "L", "250", f'linear{angle}deg_250')
-    for angle,ph,sten in zip(angles,phases,startingens):
-        yield from buildeputable(sten, 500, 10, 2, 14000, ph, "L3", "250", f'linear{180-angle}deg_250')
+#    startingens = [95,125,155,185,200,200,185,160]
+#    for angle,ph,sten in zip(angles[5:],phases[5:],startingens[5:]):
+#        yield from buildeputable(sten, 500, 10, 2, 14000, ph, "L", "250", f'linear{angle}deg_250')
+#    for angle,ph,sten in zip(angles,phases,startingens):
+#        yield from buildeputable(sten, 500, 10, 2, 14000, ph, "L3", "250", f'linear{180-angle}deg_250')
 
     startgaps = [33271.94497611413,
                 29889.652490430373,
@@ -173,7 +173,7 @@ def do_some_eputables_2021_en():
                 22874.408275853402,
                 23677.309482826902]
 
-    for angle,ph,stgp in zip(angles,phases,startgaps):
+    for angle,ph,stgp in zip(angles[6:],phases[6:],startgaps[6:]):
         yield from buildeputable(400, 1400, 20, 4, stgp, ph, "L", "1200", f'linear{angle}deg_1200')
     for angle,ph,stgp in zip(angles,phases,startgaps):
         yield from buildeputable(400, 1400, 20, 4, stgp, ph, "L3", "1200", f'linear{180-angle}deg_1200')
