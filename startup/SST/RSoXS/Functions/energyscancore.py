@@ -254,7 +254,7 @@ def en_scan_core(
     sigcycler += cycler(Shutter_open_time, shutter_times)
     print(newdets)
     print(signals)
-    yield from scan_eliot(newdets + signals, sigcycler, Shutter_open_time, md=md)
+    yield from bp.scan_nd(newdets + signals, sigcycler, md=md)
 
 
 def NEXAFS_scan_core(
