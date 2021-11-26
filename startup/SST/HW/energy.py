@@ -66,6 +66,7 @@ class Monochromator(PVPositioner):
     Scan_Start = Cpt(EpicsSignal,":START_CMD.PROC",name="MONO scan start command",kind="normal")
     Scan_Stop = Cpt(EpicsSignal,":ENERGY_ST_CMD.PROC",name="MONO scan start command",kind="normal")
 
+    scanlock = Cpt(Signal,value=0,name='lock flag for during scans')
     done = Cpt(EpicsSignalRO, ":ERDY_STS")
     done_value = 1
     stop_signal = Cpt(EpicsSignal, ":ENERGY_ST_CMD")
@@ -398,7 +399,7 @@ class EnPos(PseudoPositioner):
         elif pol == -0.5:
             return 15000
         elif 90 < pol <= 180:
-            return -min(29500.0,max(0.0,float(self.polphase.interp(pol=180 - pol, method="cubic"))))
+            return -min(29500.0, max(0.0,float(self.polphase.interp(pol=180 - pol, method="cubic"))))
         else:
             return min(29500.0, max(0.0, float(self.polphase.interp(pol=pol, method="cubic"))))
 
@@ -454,9 +455,6 @@ class EnPos(PseudoPositioner):
             return 1
         else:
             return 3
-
-    def scanlock_calc(self):
-        return self.locked
 
 
 def base_set_polarization(pol, en):
