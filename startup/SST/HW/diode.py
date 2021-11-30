@@ -1,4 +1,5 @@
-from ophyd import EpicsSignal, PVPositionerPC, Signal, SubscriptionStatus, Component
+from ophyd import EpicsSignal, PVPositionerPC, Signal, Component
+from ophyd.status import SubscriptionStatus
 from ..CommonFunctions.functions import run_report
 
 
