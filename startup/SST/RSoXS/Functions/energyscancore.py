@@ -597,7 +597,7 @@ def scan_eliot(detectors, cycler, shutter_sig = shutter_open_set, *, md={}):
     @bpp.run_decorator(md=_md)
     def inner_scan_eliot():
         # this makes the reading step easier (usually done by trigger_and_read)
-        #devices = separate_devices(list(detectors) + motors)  # remove redundant entries
+        devices = separate_devices(list(detectors) + motors)  # remove redundant entries
         # removing this to read the detecors and motors seperately
 
         # go to first motor position
