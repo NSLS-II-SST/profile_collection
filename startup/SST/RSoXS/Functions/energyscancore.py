@@ -248,7 +248,7 @@ def en_scan_core(
         sigcycler += cycler(det.cam.acquire_time, times.copy())
     sigcycler += cycler(Shutter_open_time, shutter_times)
 
-    yield from bp.scan_eliot(newdets + signals, sigcycler, md=md)
+    yield from scan_eliot(newdets + signals, sigcycler, md=md)
     yield from bps.mv(energy.scanlock, 0)
 
 
@@ -560,7 +560,7 @@ def scan_eliot(detectors, cycler, shutter_sig = shutter_open_set, *, md={}):
 
     Parameters
     ----------
-    detectors : list
+    detectors : list - strong requirement that they NOT be mixed with cycler motors
     cycler : Cycler
         list of dictionaries mapping motors to positions
     shutter_sig : Device to set (to None) and wait for it to go to 0 before ending step
@@ -597,7 +597,8 @@ def scan_eliot(detectors, cycler, shutter_sig = shutter_open_set, *, md={}):
     @bpp.run_decorator(md=_md)
     def inner_scan_eliot():
         # this makes the reading step easier (usually done by trigger_and_read)
-        devices = separate_devices(list(detectors) + motors)  # remove redundant entries
+        #devices = separate_devices(list(detectors) + motors)  # remove redundant entries
+        # removing this to read the detecors and motors seperately
 
         # go to first motor position
         yield Msg("checkpoint")
@@ -621,12 +622,19 @@ def scan_eliot(detectors, cycler, shutter_sig = shutter_open_set, *, md={}):
 
         # step through the list
         for step in list(cycler)[1:]:  # this is not repeating the first step
+            # within loop, read motors, move to next motor position, read detectors
+            # create primary step,
+
+            yield Msg("checkpoint")
+
             # detectors are still potentially reading out
             # wait for motor movement to end - make sure we aren't sending a move command before they are done
-            yield from bps.wait(group=motorgrp)  # now wait for motors, before moving on to next step
+            yield from create("primary") # create a primary step
+            for motor in motors:
+                yield from read(motor)
 
             # move to next position - detectors might still be reading at this point
-            yield Msg("checkpoint")
+
             motorgrp = _short_uid("set")  # stolen from move per_step to break out the wait
             for motor, pos in step.items():
                 if pos == pos_cache[motor]:
@@ -640,27 +648,30 @@ def scan_eliot(detectors, cycler, shutter_sig = shutter_open_set, *, md={}):
                 yield from wait(group=detgrp) # wait for the detectors to be finished
 
             # read detectors
-            yield from create("primary") # create a primary step
-            for obj in devices:
+            # yield from create("primary") # create a primary step moving to above first read
+            for obj in detectors: # changing from devices to detectors - to separate out reads
                 yield from read(obj) # read out the detectors (the motor may be moving still)
             yield from save()
 
             # the shutter is closed at this point, so now is the time to set the exposure watcher
 
-            yield from bps.abs_set(shutter_sig, None, timeout=120,group="shutter")
+            yield from bps.abs_set(shutter_sig, None, timeout=20,group="shutter")
             # the motor may be moving still, but generally it is actually fine
             # trigger next detector step
+
+            yield from bps.wait(group=motorgrp)  # now wait for motors, before moving on to next step
+            # this is the safe way to do it, ensuring that the exposure can't possibly start
+            # before the energy and motors are done moving - but this might cause delays
+
             detgrp = _short_uid("trigger")
             no_wait = True
-            for obj in list(
-                detectors
-            ):  # changing this from devices, I don't want to trigger motors while they
-                # may still be in a set() - I will just read them without a trigger
+            for obj in list(detectors):
                 if hasattr(obj, "trigger"):
                     no_wait = False
                     yield from trigger(obj, group=detgrp)
 
-            # wait for the shutter to have opened and close successfully
+            # wait for the shutter to have opened and closed successfully
+            # sending none to the set command triggers a special status monitor
             yield from bps.wait(group="shutter")
 
             # detectors are likely still reading out, but the photons are done, so we can move the motors - loop
@@ -674,7 +685,7 @@ def scan_eliot(detectors, cycler, shutter_sig = shutter_open_set, *, md={}):
 
         # read detectors the final time
         yield from create("primary")
-        for obj in devices:
+        for obj in devices: # here we want to read all of the motors and detectors
             yield from read(obj)
         yield from save()
 
