@@ -344,7 +344,7 @@ class EnPos(PseudoPositioner):
         self.harmonic.set(self.choose_harmonic(energy, pol, locked))
         energy = energy / self.harmonic.get()
 
-        if (pol == -1) and 105 < energy < 1200:
+        if (pol == -1):
             encalc = energy - 105.002
             gap = 13979.0
             gap +=   82.857      * encalc ** 1
@@ -357,7 +357,7 @@ class EnPos(PseudoPositioner):
             gap +=   -1.7862e-18 * encalc ** 8
             gap +=    3.4687e-22 * encalc ** 9
             return max(14000.0,min(100000.0, gap))
-        elif (pol == -0.5) and 105 < energy < 1200:
+        elif (pol == -0.5):
             encalc = energy - 104.996
             gap = 14013.0
             gap +=   82.76       * encalc ** 1
