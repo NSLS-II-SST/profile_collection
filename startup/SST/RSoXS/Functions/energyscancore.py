@@ -683,12 +683,16 @@ def scan_eliot(detectors, cycler, shutter_sig = shutter_open_set, *, md={}):
         # wait for the final motor movement
         yield Msg("wait", None, group=motorgrp)
 
-        # read detectors the final time
+        # read detectors and motors the final time
         yield from create("primary")
-        for obj in devices: # here we want to read all of the motors and detectors
-            yield from read(obj)
+        for motor in motors:
+            yield from read(motor)
+    #    for obj in devices: # here we want to read all of the motors and detectors
+    #        yield from read(obj)
+    #    yield from save()
+        for obj in detectors: # changing from devices to detectors - to separate out reads
+            yield from read(obj) # read out the detectors (the motor may be moving still)
         yield from save()
-
 
     return (yield from inner_scan_eliot())
 
