@@ -41,7 +41,7 @@ suspend_shutter1 = SuspendBoolHigh(
     post_plan=beamup_notice,
 )
 
-RE.install_suspender(suspend_shutter1)
+# RE.install_suspender(suspend_shutter1)
 # RE.install_suspender(suspend_shutter4)
 # RE.install_suspender(suspend_gvll)
 
@@ -55,7 +55,7 @@ suspend_current = SuspendFloor(
     post_plan=beamup_notice,
 )
 
-RE.install_suspender(suspend_current)
+#RE.install_suspender(suspend_current)
 
 suspendx = SuspendBoolHigh(
     sam_X.enc_lss,
@@ -71,7 +71,7 @@ suspendgx = SuspendBoolHigh(
     "resume automatically.",
     pre_plan=enc_clr_gx,
 )
-RE.install_suspender(suspendx)
+#RE.install_suspender(suspendx)
 
 
 # if there is no scatter, pause
@@ -82,11 +82,11 @@ mail_handler = OSEmailHandler()
 mail_handler.setLevel(
     "ERROR"
 )  # Only email for if the level is ERROR or higher (CRITICAL).
-logger.addHandler(mail_handler)
+#logger.addHandler(mail_handler)
 
 safe_handler = MakeSafeHandler()
 safe_handler.setLevel("ERROR")  # is this correct?
-logger.addHandler(safe_handler)
+#logger.addHandler(safe_handler)
 
 
 def turn_on_checks():
