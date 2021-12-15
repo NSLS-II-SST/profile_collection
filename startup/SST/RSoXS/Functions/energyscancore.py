@@ -548,7 +548,7 @@ def one_shuttered_step(detectors, step, pos_cache):
     )  # now wait for motors, before moving on to next step
 
 
-def scan_eliot(detectors, cycler, shutter_sig = shutter_open_set, *, md={}):
+def scan_eliot(detectors, cycler, shutter_sig = None, *, md={}):
     """
     Scan over an arbitrary N-dimensional trajectory.
     1.) begin movement as soon as photon part of detection ends
@@ -588,7 +588,8 @@ def scan_eliot(detectors, cycler, shutter_sig = shutter_open_set, *, md={}):
         pass
     else:
         _md["hints"].setdefault("dimensions", dimensions)
-
+    if shutter_sig is None:
+        shutter_sig = shutter_open_set
     pos_cache = defaultdict(lambda: None)  # where last position is stashed
     cycler = utils.merge_cycler(cycler)
     motors = list(cycler.keys)

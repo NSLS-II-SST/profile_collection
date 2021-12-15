@@ -56,9 +56,9 @@ if not is_re_worker_active():
 
 
 # from .Functions.startup import sd
-
+#
 sd.baseline.extend(
-    [
+     [
         sam_viewer,
         sam_X,
         sam_Y,
@@ -117,7 +117,7 @@ sd.baseline.extend(
 )
 
 # from .Functions.startup import sd
-
+#
 sd.monitors.extend(
     [
         Shutter_control,
@@ -135,7 +135,7 @@ sd.monitors.extend(
 )
 
 # setup the preprocessors
-
+#
 RE.preprocessors.append(dark_frame_preprocessor_waxs)
 RE.preprocessors.append(dark_frame_preprocessor_saxs)
 

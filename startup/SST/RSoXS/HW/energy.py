@@ -1,7 +1,7 @@
 import bluesky.plan_stubs as bps
 import bluesky.plans as bp
 from ...HW.energy import (
-    EnPos,
+    EnPos,EnSimEPUPos,
     base_grating_to_250,
     base_grating_to_1200,
     base_set_polarization,

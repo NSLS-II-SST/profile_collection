@@ -819,6 +819,85 @@ def custom_rsoxs_scan(
         **kwargs
     )
 
+def custom_rotate_rsoxs_scan(
+    energies=[((270, 340, 1.0), 2.0)],
+    angles = None,
+    master_plan=None,
+    diode_range=8,
+    m3_pitch=8.00,
+    grating="1200",
+    md=None,
+    enscan_type="custom_rotate_rsoxs_scan",
+    **kwargs
+):
+    """
+    custom_rsoxs_scan
+    @param master_plan: a category of higher level plan which you might want to sort by
+    @param enscan_type: the granular level plan you might want to sort by - generally for timing or data lookup
+    @param md: metadata to push through to lower level plans and eventually a bluesky document
+    @param multiple: default exposure times is multipled by this
+    @param diode_range: integer range for the dilde
+    @param m3_pitch: pitch value for M3 for this energy range - check before scans
+    @param grating: '1200' high energy or '250' low energy
+    @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
+    @return: Do a step scan and take images
+    """
+    plan_name = "custom_rsoxs_scan"
+    # grab locals
+    arguments = dict(locals())
+    clean_up_md(arguments, md, **kwargs)
+    newenergies = []
+    newtimes = []
+    if md is None:
+        md={}
+
+    if (
+        len(
+            read_input(
+                "Starting a specified energy scan hit enter in "
+                "the next 3 seconds to abort",
+                "abort",
+                "",
+                3,
+            )
+        )
+        > 0
+    ):
+        return
+    for ((start, stop, step), exp) in energies:
+        tempenergies = np.arange(start, stop, step)
+        newenergies = np.append(newenergies, tempenergies)
+        temptimes = tempenergies.copy()
+        temptimes[:] = exp
+        newtimes = np.append(newtimes, temptimes)
+    if isinstance(angles,list):
+        for angle in angles:
+            yield from en_scan_core(
+                energies=newenergies,
+                times=newtimes,
+                enscan_type=enscan_type,
+                md=md,
+                master_plan=master_plan,
+                diode_range=diode_range,
+                m3_pitch=m3_pitch,
+                grating=grating,
+                angle=angle,
+                **kwargs
+            )
+    else:
+        yield from en_scan_core(
+            energies=newenergies,
+            times=newtimes,
+            enscan_type=enscan_type,
+            md=md,
+            master_plan=master_plan,
+            diode_range=diode_range,
+            m3_pitch=m3_pitch,
+            grating=grating,
+            **kwargs
+        )
+
+
 
 def short_sulfurl_scan_nd(
     multiple=1.0,

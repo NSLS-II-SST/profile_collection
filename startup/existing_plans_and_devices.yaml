@@ -72,6 +72,12 @@ existing_devices:
     is_movable: true
     is_readable: true
     module: builtins
+  EnSimEPUPos:
+    classname: type
+    is_flyable: false
+    is_movable: true
+    is_readable: true
+    module: builtins
   EpicsMotor:
     classname: type
     is_flyable: false
@@ -90,6 +96,12 @@ existing_devices:
     is_movable: true
     is_readable: true
     module: builtins
+  EpuMode:
+    classname: type
+    is_flyable: false
+    is_movable: true
+    is_readable: true
+    module: builtins
   Exit_Slit:
     classname: PrettyMotorFMBO
     is_flyable: false
@@ -100,6 +112,18 @@ existing_devices:
     classname: type
     is_flyable: false
     is_movable: false
+    is_readable: true
+    module: builtins
+  FMBHexapodMirrorAxisStandAlonePitch:
+    classname: type
+    is_flyable: false
+    is_movable: true
+    is_readable: true
+    module: builtins
+  FMB_Mono_Grating_Type:
+    classname: type
+    is_flyable: false
+    is_movable: true
     is_readable: true
     module: builtins
   HexapodMirror:
@@ -186,6 +210,12 @@ existing_devices:
     is_movable: true
     is_readable: true
     module: builtins
+  PVPositionerPC:
+    classname: type
+    is_flyable: false
+    is_movable: true
+    is_readable: true
+    module: builtins
   PrettyMotor:
     classname: type
     is_flyable: false
@@ -240,6 +270,12 @@ existing_devices:
     is_movable: false
     is_readable: true
     module: SST.Base.cameras
+  ShutterSet:
+    classname: type
+    is_flyable: false
+    is_movable: true
+    is_readable: true
+    module: builtins
   Shutter_Y:
     classname: PrettyMotorFMBO
     is_flyable: false
@@ -300,19 +336,37 @@ existing_devices:
     is_movable: false
     is_readable: true
     module: SST.Base.cameras
+  Signal:
+    classname: type
+    is_flyable: false
+    is_movable: true
+    is_readable: true
+    module: builtins
   SimGreatEyes:
     classname: type
     is_flyable: false
     is_movable: false
     is_readable: true
     module: builtins
-  Slit1_IB_I:
+  Slit1_Current_Bottom:
     classname: EpicsSignalRO
     is_flyable: false
     is_movable: true
     is_readable: true
     module: ophyd.signal
-  Slit1_Top_I:
+  Slit1_Current_Inboard:
+    classname: EpicsSignalRO
+    is_flyable: false
+    is_movable: true
+    is_readable: true
+    module: ophyd.signal
+  Slit1_Current_Outboard:
+    classname: EpicsSignalRO
+    is_flyable: false
+    is_movable: true
+    is_readable: true
+    module: ophyd.signal
+  Slit1_Current_Top:
     classname: EpicsSignalRO
     is_flyable: false
     is_movable: true
@@ -397,25 +451,7 @@ existing_devices:
     is_readable: true
     module: ophyd.areadetector.plugins
   en:
-    classname: EnPos
-    is_flyable: false
-    is_movable: true
-    is_readable: true
-    module: SST.HW.energy
-  epu_gap:
-    classname: UndulatorMotor
-    is_flyable: false
-    is_movable: true
-    is_readable: true
-    module: SST.HW.energy
-  epu_mode:
-    classname: EpicsSignal
-    is_flyable: false
-    is_movable: true
-    is_readable: true
-    module: ophyd.signal
-  epu_phase:
-    classname: UndulatorMotor
+    classname: EnSimEPUPos
     is_flyable: false
     is_movable: true
     is_readable: true
@@ -672,6 +708,12 @@ existing_devices:
     is_movable: false
     is_readable: true
     module: SST.RSoXS.Base.detectors
+  shutter_open_set:
+    classname: ShutterSet
+    is_flyable: false
+    is_movable: true
+    is_readable: true
+    module: SST.HW.diode
   slits1:
     classname: Slits
     is_flyable: false
@@ -818,16 +860,6 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: openshutter
-    - default: '7.9'
-      kind:
-        name: POSITIONAL_OR_KEYWORD
-        value: 1
-      name: m3_pitch
-    - default: '7'
-      kind:
-        name: POSITIONAL_OR_KEYWORD
-        value: 1
-      name: diode_range
     - default: '0'
       kind:
         name: POSITIONAL_OR_KEYWORD
@@ -848,6 +880,11 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: master_plan
+    - default: 'True'
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: locked
     - default: None
       kind:
         name: POSITIONAL_OR_KEYWORD
@@ -904,16 +941,11 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: open_each_step
-    - default: '7.94'
+    - default: 'True'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
-      name: m3_pitch
-    - default: '6'
-      kind:
-        name: POSITIONAL_OR_KEYWORD
-        value: 1
-      name: diode_range
+      name: lockscan
     - default: '0'
       kind:
         name: POSITIONAL_OR_KEYWORD
@@ -1213,7 +1245,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: master_plan
-    - default: '6'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -1249,6 +1281,47 @@ existing_plans:
     module: bluesky.plan_stubs
     name: checkpoint
     parameters: []
+    properties:
+      is_generator: true
+  count:
+    description: Take one or more readings from detectors.
+    module: bluesky.plans
+    name: count
+    parameters:
+    - description: list of 'readable' objects
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: detectors
+    - default: '1'
+      description: 'number of readings to take; default is 1
+
+
+        If None, capture data until canceled'
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: num
+    - default: None
+      description: Time delay in seconds between successive readings; default is 0.
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: delay
+    - default: None
+      description: "hook for customizing action of inner loop (messages per step)\n\
+        Expected signature ::\n\n   def f(detectors: Iterable[OphydObj]) -> Generator[Msg]:\n\
+        \       ..."
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: per_shot
+    - default: None
+      description: metadata
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: md
     properties:
       is_generator: true
   create:
@@ -1292,7 +1365,7 @@ existing_plans:
     module: SST.RSoXS.Functions.energyscans
     name: custom_rsoxs_scan
     parameters:
-    - default: '[((270, 340, 1), 2)]'
+    - default: '[((270, 340, 1.0), 2.0)]'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -1302,7 +1375,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: master_plan
-    - default: '6'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -1421,16 +1494,11 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: enscan_type
-    - default: '7.94'
+    - default: 'True'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
-      name: m3_pitch
-    - default: '6'
-      kind:
-        name: POSITIONAL_OR_KEYWORD
-        value: 1
-      name: diode_range
+      name: lockscan
     - default: '0'
       kind:
         name: POSITIONAL_OR_KEYWORD
@@ -1561,7 +1629,7 @@ existing_plans:
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
-      name: pols
+      name: polarizations
     - default: '{}'
       kind:
         name: POSITIONAL_OR_KEYWORD
@@ -1641,7 +1709,7 @@ existing_plans:
     module: SST.RSoXS.Functions.NEXAFSscans
     name: fly_Boron_NEXAFS
     parameters:
-    - default: '0.05'
+    - default: '0.2'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -1651,7 +1719,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: pol
-    - default: '6'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -1704,7 +1772,7 @@ existing_plans:
     module: SST.RSoXS.Functions.NEXAFSscans
     name: fly_Calcium_NEXAFS
     parameters:
-    - default: '0.15'
+    - default: '0.2'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -1714,7 +1782,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: pol
-    - default: '7'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -1767,7 +1835,7 @@ existing_plans:
     module: SST.RSoXS.Functions.NEXAFSscans
     name: fly_Carbon_NEXAFS
     parameters:
-    - default: '0.1'
+    - default: '0.2'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -1777,12 +1845,12 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: pol
-    - default: '7'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: diode_range
-    - default: '7.98'
+    - default: '7.94'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -1830,7 +1898,7 @@ existing_plans:
     module: SST.RSoXS.Functions.NEXAFSscans
     name: fly_Fluorine_NEXAFS
     parameters:
-    - default: '0.3'
+    - default: '0.4'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -1840,7 +1908,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: pol
-    - default: '7'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -1893,7 +1961,7 @@ existing_plans:
     module: SST.RSoXS.Functions.NEXAFSscans
     name: fly_Nitrogen_NEXAFS
     parameters:
-    - default: '0.1'
+    - default: '0.2'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -1903,7 +1971,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: pol
-    - default: '7'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -1956,7 +2024,7 @@ existing_plans:
     module: SST.RSoXS.Functions.NEXAFSscans
     name: fly_Oxygen_NEXAFS
     parameters:
-    - default: '0.1'
+    - default: '0.2'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -1966,7 +2034,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: pol
-    - default: '7'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -2019,7 +2087,7 @@ existing_plans:
     module: SST.RSoXS.Functions.NEXAFSscans
     name: fly_SiliconK_NEXAFS
     parameters:
-    - default: '0.2'
+    - default: '0.4'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -2029,7 +2097,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: pol
-    - default: '6'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -2082,7 +2150,7 @@ existing_plans:
     module: SST.RSoXS.Functions.NEXAFSscans
     name: fly_SiliconL_NEXAFS
     parameters:
-    - default: '0.1'
+    - default: '0.2'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -2092,7 +2160,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: pol
-    - default: '6'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -2145,7 +2213,7 @@ existing_plans:
     module: SST.RSoXS.Functions.NEXAFSscans
     name: fly_SulfurL_NEXAFS
     parameters:
-    - default: '0.1'
+    - default: '0.2'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -2155,7 +2223,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: pol
-    - default: '7'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -2210,11 +2278,11 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: polarization
-    - default: '''best'''
+    - default: '1'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
-      name: grating
+      name: locked
     - default: '{}'
       description: metadata
       kind:
@@ -2286,7 +2354,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: multiple
-    - default: '7'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -2344,7 +2412,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: pol
-    - default: '7'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -2431,7 +2499,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: multiple
-    - default: '6'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -2498,7 +2566,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: multiple
-    - default: '7'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -2565,7 +2633,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: multiple
-    - default: '7'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -2632,7 +2700,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: multiple
-    - default: '7'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -2699,7 +2767,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: multiple
-    - default: '7'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -2766,7 +2834,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: multiple
-    - default: '6'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -2833,7 +2901,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: multiple
-    - default: '7'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -2900,7 +2968,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: multiple
-    - default: '7'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -2939,13 +3007,43 @@ existing_plans:
   grating_to_1200:
     module: SST.RSoXS.HW.energy
     name: grating_to_1200
-    parameters: []
+    parameters:
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: hopgx
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: hopgy
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: hopgtheta
     properties:
       is_generator: true
   grating_to_250:
     module: SST.RSoXS.HW.energy
     name: grating_to_250
-    parameters: []
+    parameters:
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: hopgx
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: hopgy
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: hopgtheta
     properties:
       is_generator: true
   image_bar:
@@ -3004,21 +3102,21 @@ existing_plans:
     parameters: []
     properties:
       is_generator: true
-  mirror1_pos:
-    module: SST.RSoXS.Functions.configurations
-    name: mirror1_pos
-    parameters: []
-    properties:
-      is_generator: true
   mirror3_NEXAFSpos:
     module: SST.RSoXS.Functions.configurations
     name: mirror3_NEXAFSpos
     parameters: []
     properties:
       is_generator: true
-  mirror3_pos:
+  mirror_pos_NEXAFS:
     module: SST.RSoXS.Functions.configurations
-    name: mirror3_pos
+    name: mirror_pos_NEXAFS
+    parameters: []
+    properties:
+      is_generator: true
+  mirror_pos_rsoxs:
+    module: SST.RSoXS.Functions.configurations
+    name: mirror_pos_rsoxs
     parameters: []
     properties:
       is_generator: true
@@ -3026,9 +3124,9 @@ existing_plans:
     module: SST.RSoXS.Functions.alignment
     name: move_to_location
     parameters:
-    - default: '[{''motor'': ''x'', ''position'': 1.8994, ''order'': 0}, {''motor'':
-        ''y'', ''position'': 15.273500000000013, ''order'': 0}, {''motor'': ''z'',
-        ''position'': 0.0, ''order'': 0}, {''motor'': ''th'', ''position'': 180.00280000000004,
+    - default: '[{''motor'': ''x'', ''position'': 0.0, ''order'': 0}, {''motor'':
+        ''y'', ''position'': 344.9985, ''order'': 0}, {''motor'': ''z'', ''position'':
+        0.0, ''order'': 0}, {''motor'': ''th'', ''position'': 2.842170943040401e-14,
         ''order'': 0}]'
       kind:
         name: POSITIONAL_OR_KEYWORD
@@ -3148,7 +3246,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: multiple
-    - default: '7'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -3383,11 +3481,14 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: cycler
-    - description: signal to read to get the exposure time (in ms)
+    - default: None
+      description: 'this signals the end of photons, not the end of the detector trigger
+
+        it is safe to move to the next step once this signal is 0'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
-      name: exp_time
+      name: shutter_sig
     - default: '{}'
       description: metadata
       kind:
@@ -3443,7 +3544,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: multiple
-    - default: '7'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -3510,7 +3611,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: multiple
-    - default: '6'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -3577,7 +3678,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: multiple
-    - default: '7'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -3644,7 +3745,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: multiple
-    - default: '7'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -3711,7 +3812,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: multiple
-    - default: '7'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -3778,7 +3879,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: multiple
-    - default: '6'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -3845,7 +3946,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: multiple
-    - default: '7'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -3912,7 +4013,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: multiple
-    - default: '6'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -4135,6 +4236,11 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: pol
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: angle
     - default: '1'
       kind:
         name: POSITIONAL_OR_KEYWORD
@@ -4291,7 +4397,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: multiple
-    - default: '7'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -4362,7 +4468,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: multiple
-    - default: '7'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -4429,7 +4535,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: multiple
-    - default: '7'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -4496,7 +4602,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: multiple
-    - default: '7'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -4563,7 +4669,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: multiple
-    - default: '7'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -4630,7 +4736,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: multiple
-    - default: '7'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -4722,11 +4828,13 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: detectors
-    - description: detector field whose output is to maximize
+    - description: 'detector fields whose output is to maximize
+
+        (the first will be the primary, but secondardy maxes will be recorded)'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
-      name: signal
+      name: signals
     - description: any 'settable' object (motor, temp controller, etc.)
       kind:
         name: POSITIONAL_OR_KEYWORD
@@ -4818,7 +4926,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: multiple
-    - default: '7'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -4885,7 +4993,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: multiple
-    - default: '6'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -4952,7 +5060,7 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: multiple
-    - default: '7'
+    - default: '8'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1

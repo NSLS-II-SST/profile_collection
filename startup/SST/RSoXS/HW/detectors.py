@@ -90,12 +90,17 @@ def snapshot(secs=0, count=1, name=None, energy=None, detn="saxs"):
         set_exposure(secs)
     if name is not None:
         RE.md["sample_name"] = name
-
-    yield from bp.count([det, en.energy], num=count)
-
+    #yield from bp.count([det, en.energy], num=count)
+    print(det)
+    print(bp.count)
+    print(count)
+    yield from bp.count([det], num=count)
     if name is not None:
         RE.md["sample_name"] = samsave
 
+#adding for testing
+
+count = bp.count
 
 def dark_plan_saxs():
     yield from saxs_det.skinnyunstage()
@@ -150,9 +155,9 @@ dark_frame_preprocessor_waxs = bluesky_darkframes.DarkFramePreprocessor(
         Det_W.user_setpoint,
         waxs_det.cam.bin_x,
         waxs_det.cam.bin_y,
-        sam_X.user_setpoint,
-        sam_Th.user_setpoint,
-        sam_Y.user_setpoint,
+        #sam_X.user_setpoint,
+        #sam_Th.user_setpoint,
+        #sam_Y.user_setpoint,
     ],
     limit=20,
 )

@@ -1437,7 +1437,7 @@ def zoffset(af1zoff, af2zoff, y, front=True, height=0.25, af1y=-186.3, af2y=4):
 
     # offset the line by the front/back offset + height
     if front:
-        return z0 - 3.5 - height
+        return z0 - 2.5 - height
     else:
         return z0 + height
     # return the offset intersect
@@ -1519,6 +1519,7 @@ def find_fiducials(f2=[6, 3.5, -3, 1.1]):
                 xnum,
             )
             yield from bps.mv(Shutter_control, 0)
+            yield from bps.sleep(3)
             maxlocs.append(bec.peaks.max["WAXS Beamstop"][0])
     print(
         maxlocs
