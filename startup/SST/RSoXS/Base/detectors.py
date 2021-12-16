@@ -88,10 +88,12 @@ class RSOXSGreatEyesDetector(SingleTriggerV33, GreatEyesDetector):
     def sim_mode_on(self):
         self.useshutter = False
         self.cam.sync.set(0)
+        self.cam.shutter_mode.det(0)
 
     def sim_mode_off(self):
         self.useshutter = True
         self.cam.sync.set(1)
+        self.cam.shutter_mode.det(2)
 
     def stage(self, *args, **kwargs):
         self.cam.temperature_actual.read()
@@ -138,19 +140,21 @@ class RSOXSGreatEyesDetector(SingleTriggerV33, GreatEyesDetector):
 
     def shutter(self):
         switch = {0: "disabled", 1: "enabled", 3: "unknown", 4: "unknown", 2: "enabled"}
-        return "Shutter is {}".format(switch[self.cam.sync.get()])
+        #return "Shutter is {}".format(switch[self.cam.sync.get()])
+        return "Shutter is {}".format(switch[self.cam.shutter_mode.get()])
         # return ('Shutter is {}'.format(switch[self.cam.shutter_mode.get()]))
 
     def shutter_on(self):
         # self.cam.sync.set(1)
         if self.useshutter:
-            self.cam.sync.set(1)
+            #self.cam.sync.set(1)
+            self.cam.shutter_mode.det(2)
         else:
             print("not turning on shutter because detector is in simulation mode")
 
     def shutter_off(self):
         # self.cam.sync.set(0)
-        self.cam.sync.set(0)
+        self.cam.shutter_mode.det(0)
 
     def unstage(self, *args, **kwargs):
         if self.useshutter:
