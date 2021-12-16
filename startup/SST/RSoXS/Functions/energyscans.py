@@ -689,6 +689,68 @@ def short_carbon_scan_nd(
     )
 
 
+
+def full_siliconk_scan_nd(
+    multiple=1.0,
+    grating="1200",
+    master_plan=None,
+    md={},
+    enscan_type="full_siliconk_scan_nd",
+    **kwargs
+):
+    """
+    full_siliconk_scan_nd
+    @param master_plan: a category of higher level plan which you might want to sort by
+    @param enscan_type: the granular level plan you might want to sort by - generally for timing or data lookup
+    @param md: metadata to push through to lower level plans and eventually a bluesky document
+    @param multiple: default exposure times is multipled by this
+    @param diode_range: integer range for the dilde
+    @param m3_pitch: pitch value for M3 for this energy range - check before scans
+    @param grating: '1200' high energy or '250' low energy
+    @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
+    @return: Do a step scan and take images
+    """
+    plan_name = "full_siliconk_scan_nd"
+    # grab locals
+    arguments = dict(locals())
+    clean_up_md(arguments, md, **kwargs)
+    if (
+        len(
+            read_input(
+                "Starting a short Silicon K energy scan hit enter in "
+                "the next 3 seconds to abort",
+                "abort",
+                "",
+                3,
+            )
+        )
+        > 0
+    ):
+        return
+
+    # create a list of energies
+    energies = np.arange(1830, 1870, 1)
+    times = energies.copy()
+
+    # Define exposures times for different energy ranges
+    times[energies >= 286] = 2.0
+    times *= multiple
+
+    # use these energies and exposure times to scan energy and record detectors and signals
+    yield from en_scan_core(
+        energies=energies,
+        times=times,
+        enscan_type=enscan_type,
+        md=md,
+        master_plan=master_plan,
+        grating=grating,
+        **kwargs
+    )
+
+
+
+
+
 def short_carbon_scan_nonaromatic(
     multiple=1.0,
     diode_range=8,
