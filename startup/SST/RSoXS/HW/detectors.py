@@ -14,10 +14,10 @@ from ...CommonFunctions.functions import run_report
 run_report(__file__)
 
 
-# saxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:1}', name='Small Angle CCD Detector',
-#                                  read_attrs=['tiff', 'stats1.total'])
-# saxs_det.transform_type = 3
-# saxs_det.cam.ensure_nonblocking()
+saxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:1}', name='Small Angle CCD Detector',
+                                 read_attrs=['tiff', 'stats1.total'])
+saxs_det.transform_type = 3
+saxs_det.cam.ensure_nonblocking()
 #
 waxs_det = RSOXSGreatEyesDetector(
     "XF:07ID1-ES:1{GE:2}",
@@ -29,15 +29,15 @@ waxs_det.transform_type = 1
 waxs_det.cam.ensure_nonblocking()
 
 
-# saxs_det.stats1.name = "SAXS fullframe"
+saxs_det.stats1.name = "SAXS fullframe"
 waxs_det.stats1.name = "WAXS fullframe"
-# saxs_det.stats1.kind = 'hinted'
+saxs_det.stats1.kind = 'hinted'
 waxs_det.stats1.kind = "hinted"
-# saxs_det.stats1.total.kind = 'hinted'
+saxs_det.stats1.total.kind = 'hinted'
 waxs_det.stats1.total.kind = "hinted"
 
-
-saxs_det = SimGreatEyes(name="Simulated SAXS camera")
+# to simulate, use this line, and comment out the relevent detector above
+# saxs_det = SimGreatEyes(name="Simulated SAXS camera")
 
 
 def set_exposure(exposure):
@@ -105,7 +105,7 @@ count = bp.count
 def dark_plan_saxs():
     yield from saxs_det.skinnyunstage()
     yield from saxs_det.skinnystage()
-    #ield from bps.mv(saxs_det.cam.sync, 0)
+    #yield from bps.mv(saxs_det.cam.sync, 0)
     yield from bps.mv(saxs_det.cam.shutter_mode, 0)
     yield from bps.trigger(saxs_det, group="darkframe-trigger")
     yield from bps.wait("darkframe-trigger")

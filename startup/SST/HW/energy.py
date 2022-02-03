@@ -15,7 +15,7 @@ import pathlib
 import numpy as np
 import xarray as xr
 from ..CommonFunctions.functions import boxed_text, colored, run_report
-from ..Base.motors import PrettyMotorFMBO
+from ..Base.motors import PrettyMotorFMBO, DeadbandMixin
 from ..Base.mirrors import FMBHexapodMirrorAxisStandAlonePitch
 from ..HW.shutters import psh4
 from ..HW.motors import grating, mirror2
@@ -25,7 +25,7 @@ from ..HW.mirrors import mir3
 run_report(__file__)
 
 
-class UndulatorMotor(EpicsMotor):
+class UndulatorMotor(DeadbandMixin,EpicsMotor):
     user_setpoint = Cpt(EpicsSignal, "-SP", limits=True)
     done = Cpt(EpicsSignalRO, ".MOVN")
     done_value = 0
@@ -49,7 +49,7 @@ class FMB_Mono_Grating_Type(PVPositioner):
     clear_encoder_loss = Cpt(EpicsSignal,'_ENC_LSS_CLR_CMD.PROC')
     done = Cpt(EpicsSignal,'_AXIS_STS')
 
-class Monochromator(PVPositioner):
+class Monochromator(DeadbandMixin, PVPositioner):
     setpoint = Cpt(EpicsSignal, ":ENERGY_SP", kind="normal")
     readback = Cpt(EpicsSignalRO, ":ENERGY_MON", kind="hinted")
 

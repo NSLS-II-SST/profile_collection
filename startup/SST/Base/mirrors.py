@@ -7,6 +7,7 @@ from ophyd import (
 )
 from ophyd import FormattedComponent as FmtCpt
 from ..CommonFunctions.functions import run_report
+from ..Base.motors import DeadbandMixin
 
 
 run_report(__file__)
@@ -32,7 +33,7 @@ class FMBHexapodMirrorAxis(PVPositioner):
     done_value = 0
 
 
-class FMBHexapodMirrorAxisStandAlonePitch(PVPositioner):
+class FMBHexapodMirrorAxisStandAlonePitch(DeadbandMixin,PVPositioner):
     readback = Cpt(EpicsSignalRO, "-Ax:P}Mtr_MON")
     setpoint = Cpt(EpicsSignal, "-Ax:P}Mtr_POS_SP")
     actuate = Cpt(EpicsSignal, "}MOVE_CMD.PROC")
