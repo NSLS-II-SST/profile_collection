@@ -17,6 +17,7 @@ from ..startup import bec
 
 run_report(__file__)
 
+#en = EnSimEPUPos("", rotation_motor=sam_Th, name="en")
 en = EnPos("", rotation_motor=sam_Th, name="en")
 en.energy.kind = "hinted"
 en.monoen.kind = "normal"

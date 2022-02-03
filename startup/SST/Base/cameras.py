@@ -110,8 +110,8 @@ class StandardProsilicaWithTIFF(StandardProsilica):
     tiff = Cpt(
         TIFFPluginWithFileStore,
         suffix="TIFF1:",
-        write_path_template="/areadata/images/data/%Y/%m/%d/",
-        root="/areadata/images/data/",
+        write_path_template="/nsls2/data/sst1/assets/%Y/%m/%d/",
+        root="/nsls2/data/sst1/assets",
     )
 
 
@@ -119,6 +119,6 @@ class StandardProsilicaWithTIFFV33(StandardProsilicaV33):
     tiff = Cpt(
         TIFFPluginWithFileStore,
         suffix="TIFF1:",
-        write_path_template="/areadata/images/data/%Y/%m/%d/",
-        root="/areadata/images/data/",
+        write_path_template="/nsls2/data/sst1/assets/%Y/%m/%d/",
+        root="/nsls2/data/sst1/assets",
     )
