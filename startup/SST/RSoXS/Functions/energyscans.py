@@ -831,7 +831,7 @@ def collins_carbon_survey_fixedpol(
     times = [5.0,1.0,1.0,1.0],
     polarizations=[-1,0,90],
     md={},
-    pol=None
+    pol=None,
     enscan_type="short_carbon_scan_nonaromatic",
     **kwargs
 ):
@@ -886,10 +886,8 @@ def collins_carbon_survey_fixedpol(
             times=times,
             enscan_type=enscan_type,
             md=md,
-            pol=pol
+            pol=pol,
             master_plan=master_plan,
-            diode_range=diode_range,
-            m3_pitch=m3_pitch,
             grating=grating,
             **kwargs
         )
