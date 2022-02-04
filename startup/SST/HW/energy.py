@@ -25,7 +25,7 @@ from ..HW.mirrors import mir3
 run_report(__file__)
 
 
-class UndulatorMotor(DeadbandMixin,EpicsMotor):
+class UndulatorMotor(EpicsMotor):
     user_setpoint = Cpt(EpicsSignal, "-SP", limits=True)
     done = Cpt(EpicsSignalRO, ".MOVN")
     done_value = 0
