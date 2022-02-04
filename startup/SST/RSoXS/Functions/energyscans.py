@@ -919,7 +919,7 @@ def collins_carbon_survey_fixedpol(
     if pol is not None:
         print('Error: you cannot give this plan a polarization')
         raise ValueError('Error: you cannot give this plan a polarization')
-    if len(times) != len(energies)
+    if len(times) != len(energies):
         print('Error: Energies and times must be the same length')
         raise ValueError('Error: Energies and times must be the same length')
     for time in times:
