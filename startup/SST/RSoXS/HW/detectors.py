@@ -106,6 +106,10 @@ def dark_plan_saxs():
     yield from saxs_det.skinnyunstage()
     yield from saxs_det.skinnystage()
     #yield from bps.mv(saxs_det.cam.sync, 0)
+    # take note what the current acq mode is
+    # change it to multiple
+    oldmode = saxs_det.cam.image_mode.get()
+    yield from bps.abs_set(saxs_det.cam.image_mode,1)
     yield from bps.mv(saxs_det.cam.shutter_mode, 0)
     yield from bps.trigger(saxs_det, group="darkframe-trigger")
     yield from bps.wait("darkframe-trigger")
@@ -114,6 +118,8 @@ def dark_plan_saxs():
     if saxs_det.useshutter:
         #yield from bps.mv(saxs_det.cam.sync, 1)
         yield from bps.mv(saxs_det.cam.shutter_mode, 2)
+    # if we changed the acq mode, change it back)
+    yield from bps.abs_set(saxs_det.cam.image_mode,oldmode)
     yield from saxs_det.skinnyunstage()
     yield from saxs_det.skinnystage()
     return snapshot
@@ -122,7 +128,11 @@ def dark_plan_saxs():
 def dark_plan_waxs():
     yield from waxs_det.skinnyunstage()
     yield from waxs_det.skinnystage()
-    #yield from bps.mv(waxs_det.cam.sync, 0)
+    # yield from bps.mv(waxs_det.cam.sync, 0)
+    # take note what the current acq mode is
+    # change it to multiple
+    oldmode = waxs_det.cam.image_mode.get()
+    yield from bps.abs_set(waxs_det.cam.image_mode,1)
     yield from bps.mv(waxs_det.cam.shutter_mode, 0)
     yield from bps.trigger(waxs_det, group="darkframe-trigger")
     yield from bps.wait("darkframe-trigger")
@@ -131,6 +141,8 @@ def dark_plan_waxs():
     if waxs_det.useshutter:
         #yield from bps.mv(waxs_det.cam.sync, 1)
         yield from bps.mv(waxs_det.cam.shutter_mode, 2)
+    # if we changed the acq mode, change it back)
+    yield from bps.abs_set(waxs_det.cam.image_mode,oldmode)
     yield from waxs_det.skinnyunstage()
     yield from waxs_det.skinnystage()
     return snapshot

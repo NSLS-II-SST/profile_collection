@@ -961,19 +961,22 @@ def fly_scan_dets(scan_params,dets, polarization=0, locked = 1, *, md={}):
 
     """
     _md = {
-        "detectors": [mono_en.name],
-        "motors": [mono_en.name],
-        "plan_name": "fly_scan_eliot",
+        "detectors": [mono_en.name,Shutter_control.name],
+        "motors": [mono_en.name,Shutter_control.name],
+        "plan_name": "fly_scan_RSoXS",
         "hints": {},
     }
     _md.update(md or {})
-    devices = [mono_en]
 
-    @bpp.monitor_during_decorator([mono_en])
-    @bpp.stage_decorator(list(devices))
+    devices = [mono_en]
+    @bpp.monitor_during_decorator([mono_en,Shutter_control]) # add shutter
+    #@bpp.stage_decorator(list(devices)) # staging the detector # do explicitely
     @bpp.run_decorator(md=_md)
     def inner_scan_eliot():
         # start the scan parameters to the monoscan PVs
+        for det in dets:
+            yield from stage(det)
+            yield from abs_set(det.cam.image_mode, 2) # set continuous mode
         yield Msg("checkpoint")
         if np.isnan(polarization):
             pol = en.polarization.setpoint.get()
@@ -1002,9 +1005,6 @@ def fly_scan_dets(scan_params,dets, polarization=0, locked = 1, *, md={}):
             print("Mono in start position")
             yield from bps.mv(epu_gap, en.gap(start_en, pol, locked))
             print("EPU in start position")
-            print("Starting detector stream")
-            # TODO start the detectors collecting in continuous mode
-
             if step == 0:
                 monopos = mono_en.readback.get()
                 yield from bps.abs_set(
@@ -1014,6 +1014,10 @@ def fly_scan_dets(scan_params,dets, polarization=0, locked = 1, *, md={}):
                     group="EPU",
                 )
                 yield from wait(group="EPU")
+            print("Starting detector stream")
+            # start the detectors collecting in continuous mode
+            for det in dets:
+                yield from trigger(det, group="det_trigger")
             # start the mono scan
             print("starting the fly")
             yield from bps.mv(Mono_Scan_Start, 1)
@@ -1033,8 +1037,16 @@ def fly_scan_dets(scan_params,dets, polarization=0, locked = 1, *, md={}):
                 yield from save()
             print(f"Mono reached {monopos} which appears to be near {end_en}")
             print("Stopping Detector stream")
-            # TODO stop the detectors collecting in continuous mode
+            for det in dets:
+                yield from abs_set(det.cam.acquire, 0)
+            for det in dets:
+                yield from read(det)
+                yield from save(det)
+
             step += 1
+        for det in dets:
+            yield from unstage(det)
+            yield from abs_set(det.cam.image_mode, 1)
 
     return (yield from inner_scan_eliot())
 
