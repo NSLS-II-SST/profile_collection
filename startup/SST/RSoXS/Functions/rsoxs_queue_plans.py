@@ -13,6 +13,7 @@ from .energyscans import (
     short_zincl_scan_nd,
     short_carbon_scan_nd,
     short_carbon_scan_nonaromatic,
+    collins_carbon_survey_fixedpol,
     short_fluorine_scan_nd,
     survey_scan_highenergy,
     very_short_carbon_scan_nd,

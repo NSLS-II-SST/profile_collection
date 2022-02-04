@@ -821,6 +821,82 @@ def short_carbon_scan_nonaromatic(
     )
 
 
+
+
+def collins_carbon_survey_fixedpol(
+    multiple=1.0,
+    grating="1200",
+    master_plan=None,
+    energies = [270.0,283.5,284.5,285.3],
+    times = [5.0,1.0,1.0,1.0],
+    polarizations=[-1,0,90],
+    md={},
+    pol=None
+    enscan_type="short_carbon_scan_nonaromatic",
+    **kwargs
+):
+    """
+    collins_carbon_survey_fixedpol
+    @param master_plan: a category of higher level plan which you might want to sort by
+    @param enscan_type: the granular level plan you might want to sort by - generally for timing or data lookup
+    @param md: metadata to push through to lower level plans and eventually a bluesky document
+    @param multiple: default exposure times is multipled by this
+    @param diode_range: integer range for the dilde
+    @param m3_pitch: pitch value for M3 for this energy range - check before scans
+    @param grating: '1200' high energy or '250' low energy
+    @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
+    @return: Do a step scan and take images
+    """
+    if pol is not None:
+        print('Error: you cannot give this plan a polarization')
+        raise ValueError('Error: you cannot give this plan a polarization')
+    if len(times) != len(energies)
+        print('Error: Energies and times must be the same length')
+        raise ValueError('Error: Energies and times must be the same length')
+    for time in times:
+        if time > 20 or time <0 :
+            print('invalid time')
+            raise ValueError('invalid exposure time')
+    plan_name = "collins_carbon_survey_fixedpol"
+    # grab locals
+    arguments = dict(locals())
+    clean_up_md(arguments, md, **kwargs)
+    if (
+        len(
+            read_input(
+                "Starting A Collins Group Energy and Polarization scan hit enter in "
+                "the next 3 seconds to abort",
+                "abort",
+                "",
+                3,
+            )
+        )
+        > 0
+    ):
+        return
+
+    # create a list of energies
+
+    times = times * multiple
+
+    # use these energies and exposure times to scan energy and record detectors and signals
+    for pol in polarizations:
+        yield from en_scan_core(
+            energies=energies,
+            times=times,
+            enscan_type=enscan_type,
+            md=md,
+            pol=pol
+            master_plan=master_plan,
+            diode_range=diode_range,
+            m3_pitch=m3_pitch,
+            grating=grating,
+            **kwargs
+        )
+
+
+
+
 def custom_rsoxs_scan(
     energies=[((270, 340, 1.0), 2.0)],
     master_plan=None,
