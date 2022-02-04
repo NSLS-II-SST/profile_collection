@@ -49,7 +49,7 @@ class FMB_Mono_Grating_Type(PVPositioner):
     clear_encoder_loss = Cpt(EpicsSignal,'_ENC_LSS_CLR_CMD.PROC')
     done = Cpt(EpicsSignal,'_AXIS_STS')
 
-class Monochromator(DeadbandMixin, PVPositioner):
+class Monochromator(PVPositioner):
     setpoint = Cpt(EpicsSignal, ":ENERGY_SP", kind="normal")
     readback = Cpt(EpicsSignalRO, ":ENERGY_MON", kind="hinted")
 
