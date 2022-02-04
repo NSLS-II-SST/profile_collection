@@ -272,11 +272,6 @@ def NEXAFS_scan_core(
 ):
     if sim_mode:
         return f"NEXAFS scan from {min(energies)} eV to {max(energies)} eV"
-    # set mirror 3 pitch
-    yield from bps.abs_set(mir3.Pitch, m3_pitch, wait=True)
-    # set the diode range
-    #yield from bps.mv(DiodeRange, diode_range)
-    # set exposure
     set_exposure(exp_time)
     # set grating
     if 'hopg_loc' in md.keys():
@@ -424,6 +419,141 @@ def NEXAFS_fly_scan_core(
 
     else:
         yield from fly_scan_eliot(scan_params, md=md, locked=locked, polarization=pol)
+    yield from bps.mv(en.scanlock, 0) # unlock energy parameters at the end
+
+
+
+def RSoXS_fly_scan_core(
+    scan_params,
+    exp_time,
+    dets,
+    angle=None,
+    openshutter=False,
+    pol=0,
+    grating="best",
+    enscan_type=None,
+    master_plan=None,
+    locked = True,
+    md=None,
+    sim_mode=False,
+    **kwargs #extraneous settings from higher level plans are ignored
+):
+    # grab locals
+    if md is None:
+        md = {}
+    arguments = dict(locals())
+    del arguments["md"]  # no recursion here!
+    if md is None:
+        md = {}
+    md.setdefault("plan_history", [])
+    md["plan_history"].append(
+        {"plan_name": "NEXAFS_fly_scan_core", "arguments": arguments}
+    )
+    md.update({"plan_name": enscan_type, "master_plan": master_plan})
+
+    # validate inputs
+    valid = True
+    validation = ""
+    newdets = []
+    for det in dets:
+        if not isinstance(det, Device):
+            try:
+                newdets.append(eval(det))
+            except Exception:
+                valid = False
+                validation += f"detector {det} is not an ophyd device\n"
+    if len(newdets) < 1:
+        valid = False
+        validation += "No detectors are given\n"
+    energies = np.empty(0)
+    speeds = []
+    for scanparam in scan_params:
+        (sten, enden, speed) = scanparam
+        energies = np.append(energies, np.linspace(sten, enden, 10))
+        speeds.append(speed)
+    if len(energies) < 10:
+        valid = False
+        validation += f"scan parameters {scan_params} could not be parsed\n"
+    if min(energies) < 70 or max(energies) > 2200:
+        valid = False
+        validation += "energy input is out of range for SST 1\n"
+    if grating == "1200":
+        if min(energies) < 150:
+            valid = False
+            validation += "energy is to low for the 1200 l/mm grating\n"
+    elif grating == "250":
+        if max(energies) > 1000:
+            valid = False
+            validation += "energy is too high for 250 l/mm grating\n"
+    else:
+        valid = False
+        validation += "invalid grating was chosen"
+    if pol < -1 or pol > 180:
+        valid = False
+        validation += f"polarization of {pol} is not valid\n"
+    if angle is not None:
+        if -155 > angle or angle > 195:
+            valid = False
+            validation += f"angle of {angle} is out of range\n"
+    if sim_mode:
+        if valid:
+            retstr = f"scanning {newdets} from {min(energies)} eV to {max(energies)} eV on the {grating} l/mm grating\n"
+            retstr += f"    in {len(times)} steps with exposure times from {min(times)} to {max(times)} seconds\n"
+            return retstr
+        else:
+            return validation
+    if sim_mode:
+        if valid:
+            retstr = f"fly scanning from {min(energies)} eV to {max(energies)} eV on the {grating} l/mm grating\n"
+            retstr += f"    at speeds from {max(speeds)} to {max(speeds)} ev/second\n"
+            return retstr
+        else:
+            return validation
+    if not valid:
+        raise ValueError(validation)
+
+    if 'hopg_loc' in md.keys():
+        hopgx = md['hopg_loc']['x']
+        hopgy = md['hopg_loc']['y']
+        hopgth = md['hopg_loc']['th']
+    else:
+        hopgx = None
+        hopgy = None
+        hopgth = None
+    if grating == "1200":
+        yield from grating_to_1200(hopgx=hopgx,hopgy=hopgy,hopgtheta=hopgth)
+    elif grating == "250":
+        yield from grating_to_250(hopgx=hopgx,hopgy=hopgy,hopgtheta=hopgth)
+
+    if np.isnan(pol):
+        pol = en.polarization.setpoint.get()
+    else:
+        yield from set_polarization(pol)
+
+
+
+    if angle is not None:
+        print(f'moving angle to {angle}')
+        yield from rotate_now(angle)
+    for det in newdets:
+        det.cam.acquire_time.kind = "hinted"
+
+    shutter_times = [i * 1000 for i in times]
+    yield from bps.mv(en.scanlock, 0)
+    yield from bps.mv(en, energies[0])  # move to the initial energy (unlocked)
+
+    en.read()
+    samplepol = en.sample_polarization.setpoint.get()
+    (en_start, en_stop, en_speed) = scan_params[0]
+    yield from bps.mv(en.scanlock, 0) # unlock parameters
+    yield from bps.mv(en, en_start)  # move to the initial energy
+    if locked:
+        yield from bps.mv(en.scanlock, 1) # lock parameters for scan, if requested
+    print(f"Effective sample polarization is {samplepol}")
+
+    set_exposure(exp_time)
+
+    yield from fly_scan_dets(scan_params,newdets, md=md, locked=locked, polarization=pol)
     yield from bps.mv(en.scanlock, 0) # unlock energy parameters at the end
 
 ## HACK HACK
@@ -798,6 +928,116 @@ def fly_scan_eliot(scan_params, polarization=0, locked = 1, *, md={}):
             step += 1
 
     return (yield from inner_scan_eliot())
+
+
+
+
+def fly_scan_dets(scan_params,dets, polarization=0, locked = 1, *, md={}):
+    """
+    Specific scan for SST-1 monochromator fly scan, while catching up with the undulator
+
+    scan proceeds as:
+    1.) set up the flying parameters in the monochromator
+    2.) move to the starting position in both undulator and monochromator
+    3.) begin the scan (take baseline, begin monitors)
+    4.) read the current mono readback
+    5.) set the undulator to move to the corresponding position
+    6.) if the mono is still running (not at end position), return to step 4
+    7.) if the mono is done, load the next parameters and start at step 1
+    8.) if no more parameters, end the scan
+
+    Parameters
+    ----------
+    scan_params : a list of tuples consisting of:
+        (start_en : eV to begin the scan,
+        stop_en : eV to stop the scan,
+        speed_en : eV / second to move the monochromator)
+        the stop energy of each tuple should match the start of the next to make a continuous scan
+            although this is not strictly enforced to allow for flexibility
+    pol : polarization to run the scan
+    grating : grating to run the scan
+    md : dict, optional
+        metadata
+
+    """
+    _md = {
+        "detectors": [mono_en.name],
+        "motors": [mono_en.name],
+        "plan_name": "fly_scan_eliot",
+        "hints": {},
+    }
+    _md.update(md or {})
+    devices = [mono_en]
+
+    @bpp.monitor_during_decorator([mono_en])
+    @bpp.stage_decorator(list(devices))
+    @bpp.run_decorator(md=_md)
+    def inner_scan_eliot():
+        # start the scan parameters to the monoscan PVs
+        yield Msg("checkpoint")
+        if np.isnan(polarization):
+            pol = en.polarization.setpoint.get()
+        else:
+            yield from set_polarization(polarization)
+            pol = polarization
+        step = 0
+        for (start_en, end_en, speed_en) in scan_params:
+            print(f"starting fly from {start_en} to {end_en} at {speed_en} eV/second")
+            yield Msg("checkpoint")
+            print("Preparing mono for fly")
+            yield from bps.mv(
+                Mono_Scan_Start_ev,
+                start_en,
+                Mono_Scan_Stop_ev,
+                end_en,
+                Mono_Scan_Speed_ev,
+                speed_en,
+            )
+            # move to the initial position
+            if step > 0:
+                yield from wait(group="EPU")
+            yield from bps.abs_set(mono_en, start_en, group="EPU")
+            print("moving to starting position")
+            yield from wait(group="EPU")
+            print("Mono in start position")
+            yield from bps.mv(epu_gap, en.gap(start_en, pol, locked))
+            print("EPU in start position")
+            print("Starting detector stream")
+            # TODO start the detectors collecting in continuous mode
+
+            if step == 0:
+                monopos = mono_en.readback.get()
+                yield from bps.abs_set(
+                    epu_gap,
+                    en.gap(monopos, pol, locked),
+                    wait=False,
+                    group="EPU",
+                )
+                yield from wait(group="EPU")
+            # start the mono scan
+            print("starting the fly")
+            yield from bps.mv(Mono_Scan_Start, 1)
+            monopos = mono_en.readback.get()
+            while np.abs(monopos - end_en) > 0.1:
+                yield from wait(group="EPU")
+                monopos = mono_en.readback.get()
+                yield from bps.abs_set(
+                    epu_gap,
+                    en.gap(monopos, pol, locked),
+                    wait=False,
+                    group="EPU",
+                )
+                yield from create("primary")
+                for obj in devices:
+                    yield from read(obj)
+                yield from save()
+            print(f"Mono reached {monopos} which appears to be near {end_en}")
+            print("Stopping Detector stream")
+            # TODO stop the detectors collecting in continuous mode
+            step += 1
+
+    return (yield from inner_scan_eliot())
+
 
 
 def fly_scan_mono_epu(scan_params, polarization=0, grating="best", *, md={}):
