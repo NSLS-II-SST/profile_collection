@@ -946,7 +946,7 @@ def collins_carbon_survey_fixedpol(
 
     # create a list of energies
 
-    times = times * multiple
+    times = [time * multiple for time in times]
 
     # use these energies and exposure times to scan energy and record detectors and signals
     for pol in polarizations:
