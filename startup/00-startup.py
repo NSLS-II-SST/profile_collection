@@ -137,7 +137,7 @@ sd.monitors.extend(
 # setup the preprocessors
 #
 RE.preprocessors.append(dark_frame_preprocessor_waxs)
-RE.preprocessors.append(dark_frame_preprocessor_saxs)
+# RE.preprocessors.append(dark_frame_preprocessor_saxs)
 
 # setup the contingencies
 
