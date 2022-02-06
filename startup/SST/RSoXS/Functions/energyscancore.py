@@ -248,7 +248,7 @@ def en_scan_core(
         sigcycler += cycler(det.cam.acquire_time, times.copy())
     sigcycler += cycler(Shutter_open_time, shutter_times)
 
-    yield from scan_eliot(newdets + signals, sigcycler, md=md)
+    yield from bp.scan_nd(newdets + signals, sigcycler, md=md)
     yield from bps.mv(energy.scanlock, 0)
 
 
@@ -766,6 +766,11 @@ def scan_eliot(detectors, cycler, shutter_sig = None, *, md={}):
 
             # move to next position - detectors might still be reading at this point
 
+            # in plans with longer distances between steps, this can be dangerous
+
+            if not no_wait: # if the detectors are even triggered - RSoXS detectors will be
+                yield from wait(group=detgrp) # wait for the detectors to be finished
+
             motorgrp = _short_uid("set")  # stolen from move per_step to break out the wait
             for motor, pos in step.items():
                 if pos == pos_cache[motor]:
@@ -775,8 +780,6 @@ def scan_eliot(detectors, cycler, shutter_sig = None, *, md={}):
                 pos_cache[motor] = pos
             # now motors are moving, and potentially the detectors are still reading out
             # wait for detector trigger from last step to finish
-            if not no_wait: # if the detectors are even triggered - RSoXS detectors will be
-                yield from wait(group=detgrp) # wait for the detectors to be finished
 
             # read detectors
             # yield from create("primary") # create a primary step moving to above first read
