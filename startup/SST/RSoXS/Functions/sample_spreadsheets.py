@@ -15,6 +15,7 @@ from .energyscans import (
     full_carbon_scan_nd,
     full_carbon_scan_nonaromatic,
     full_fluorine_scan_nd,
+    full_iron_scan_nd,
     full_nitrogen_scan_nd,
     full_oxygen_scan_nd,
     short_calcium_scan_nd,
@@ -44,6 +45,7 @@ from .energyscans import (
 )
 from .NEXAFSscans import (
     fly_Oxygen_NEXAFS,
+    fly_Iron_NEXAFS,
     fly_Nitrogen_NEXAFS,
     fly_Fluorine_NEXAFS,
     fly_Boron_NEXAFS,
