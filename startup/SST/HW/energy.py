@@ -25,13 +25,13 @@ from ..HW.mirrors import mir3
 run_report(__file__)
 
 
-class UndulatorMotor(EpicsMotor):
+class UndulatorMotor(DeadbandMixin,EpicsMotor):
     user_setpoint = Cpt(EpicsSignal, "-SP", limits=True)
     done = Cpt(EpicsSignalRO, ".MOVN")
     done_value = 0
 
 
-class EpuMode(PVPositionerPC):
+class EpuMode(DeadbandMixin,PVPositionerPC):
     setpoint = Cpt(EpicsSignal,"-SP", kind="normal")
     readback = Cpt(EpicsSignal,"-RB", kind="normal")
 
@@ -49,7 +49,7 @@ class FMB_Mono_Grating_Type(PVPositioner):
     clear_encoder_loss = Cpt(EpicsSignal,'_ENC_LSS_CLR_CMD.PROC')
     done = Cpt(EpicsSignal,'_AXIS_STS')
 
-class Monochromator(PVPositioner):
+class Monochromator(DeadbandMixin,PVPositioner):
     setpoint = Cpt(EpicsSignal, ":ENERGY_SP", kind="normal")
     readback = Cpt(EpicsSignalRO, ":ENERGY_MON", kind="hinted")
 

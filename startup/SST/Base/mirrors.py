@@ -33,7 +33,7 @@ class FMBHexapodMirrorAxis(PVPositioner):
     done_value = 0
 
 
-class FMBHexapodMirrorAxisStandAlonePitch(PVPositioner):
+class FMBHexapodMirrorAxisStandAlonePitch(DeadbandMixin,PVPositioner):
     readback = Cpt(EpicsSignalRO, "-Ax:P}Mtr_MON")
     setpoint = Cpt(EpicsSignal, "-Ax:P}Mtr_POS_SP")
     actuate = Cpt(EpicsSignal, "}MOVE_CMD.PROC")
