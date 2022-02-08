@@ -210,7 +210,6 @@ class PrettyMotor(EpicsMotor):
 class PrettyMotorFMBO(FMBOEpicsMotor, PrettyMotor):
     pass
 
-
 class DeadbandMixin(Device, PositionerBase):
     """
     Should be the leftmost class in the inheritance list so that it grabs move first!
@@ -223,9 +222,24 @@ class DeadbandMixin(Device, PositionerBase):
     adding overhead to scans.
     """
     tolerance = Cpt(Signal, value=-1, kind='config')
+    move_latch = Cpt(Signal, value=0, kind="omitted")
+
+    def _done_moving(self, success=True, timestamp=None, value=None, **kwargs):
+        '''Call when motion has completed.  Runs ``SUB_DONE`` subscription.'''
+        if self.move_latch.get():
+            # print(f"{timestamp}: {self.name} marked done")
+            if success:
+                self._run_subs(sub_type=self.SUB_DONE, timestamp=timestamp,
+                               value=value)
+
+            self._run_subs(sub_type=self._SUB_REQ_DONE, success=success,
+                           timestamp=timestamp)
+            self._reset_sub(self._SUB_REQ_DONE)
+            self.move_latch.put(0)
 
     def move(self, position, wait=True, **kwargs):
         tolerance = self.tolerance.get()
+        self.move_latch.put(1)
         if tolerance < 0:
             return super().move(position, wait=wait, **kwargs)
         else:
@@ -234,13 +248,19 @@ class DeadbandMixin(Device, PositionerBase):
             done_value = getattr(self, "done_value", 1)
             def check_deadband(value, timestamp, **kwargs):
                 if abs(value - setpoint) < tolerance:
-                    self._move_changed(timestamp=timestamp, value=done_value)
+                    # print(f"{timestamp}: {self.name} {value} within tolerance of {setpoint}, sending {done_value}")
+                    self._done_moving(timestamp=timestamp, success=True, value=done_value)
+                else:
+                    pass
+                    # print(f"{timestamp}: {self.name}, {value} not within {tolerance} of {setpoint}")
 
-            def clear_deadband(*args, **kwargs):
+            def clear_deadband(*args, timestamp, **kwargs):
+                # print(f"{timestamp}: Ran deadband clear for {self.name}")
                 self.clear_sub(check_deadband, event_type=self.SUB_READBACK)
 
-            self.subscribe(check_deadband, event_type=self.SUB_READBACK, run=False)
             self.subscribe(clear_deadband, event_type=self._SUB_REQ_DONE, run=False)
+            self.subscribe(check_deadband, event_type=self.SUB_READBACK, run=True)
+
             try:
                 if wait:
                     status_wait(status)

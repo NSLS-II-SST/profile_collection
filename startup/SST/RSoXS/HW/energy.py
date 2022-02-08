@@ -22,9 +22,13 @@ en = EnPos("", rotation_motor=sam_Th, name="en")
 en.energy.kind = "hinted"
 en.monoen.kind = "normal"
 mono_en = en.monoen
+mono_en.tolerance.set(0.02)
 epu_gap = en.epugap
+epu_gap.tolerance.set(2)
 epu_phase = en.epuphase
+epu_phase.tolerance.set(2)
 epu_mode = en.epumode
+en.mir3Pitch.tolerance.set(0.01)
 mono_en.readback.kind = "normal"
 en.epugap.kind = "normal"
 en.epuphase.kind = "normal"

@@ -27,8 +27,7 @@ run_report(__file__)
 
 class UndulatorMotor(DeadbandMixin,EpicsMotor):
     user_setpoint = Cpt(EpicsSignal, "-SP", limits=True)
-    done = Cpt(EpicsSignalRO, ".MOVN")
-    done_value = 0
+
 
 
 class EpuMode(DeadbandMixin,PVPositionerPC):
