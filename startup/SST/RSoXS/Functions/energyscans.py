@@ -416,8 +416,6 @@ def full_iron_scan_nd(
         enscan_type=enscan_type,
         md=md,
         master_plan=master_plan,
-        diode_range=diode_range,
-        m3_pitch=m3_pitch,
         grating=grating,
         **kwargs
     )
