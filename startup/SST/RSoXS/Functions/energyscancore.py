@@ -39,7 +39,7 @@ from ..HW.energy import (
 )
 from ...HW.mirrors import mir3
 from ..HW.detectors import waxs_det
-from ..HW.signals import DiodeRange
+from ..HW.signals import DiodeRange,Beamstop_WAXS,Beamstop_SAXS,Izero_Mesh,Sample_TEY
 from ..Functions.alignment import rotate_now
 from ..Functions.common_procedures import set_exposure
 from ...HW.diode import (
@@ -329,6 +329,7 @@ def NEXAFS_fly_scan_core(
     grating="best",
     enscan_type=None,
     master_plan=None,
+    signals = [Beamstop_WAXS,Beamstop_SAXS,Izero_Mesh,Sample_TEY],
     locked = True,
     md=None,
     sim_mode=False,
@@ -346,7 +347,6 @@ def NEXAFS_fly_scan_core(
         {"plan_name": "NEXAFS_fly_scan_core", "arguments": arguments}
     )
     md.update({"plan_name": enscan_type, "master_plan": master_plan})
-
     # validate inputs
     valid = True
     validation = ""
@@ -414,7 +414,7 @@ def NEXAFS_fly_scan_core(
     if openshutter:
         yield from bps.mv(Shutter_enable, 0)
         yield from bps.mv(Shutter_control, 1)
-        yield from fly_scan_eliot(scan_params, md=md, locked=locked, polarization=pol)
+        yield from fly_scan_eliot(scan_params,sigs=signals, md=md, locked=locked, polarization=pol)
         yield from bps.mv(Shutter_control, 0)
 
     else:
@@ -831,7 +831,7 @@ def scan_eliot(detectors, cycler, shutter_sig = None, *, md={}):
     return (yield from inner_scan_eliot())
 
 
-def fly_scan_eliot(scan_params, polarization=0, locked = 1, *, md={}):
+def fly_scan_eliot(scan_params,sigs, polarization=0, locked = 1, *, md={}):
     """
     Specific scan for SST-1 monochromator fly scan, while catching up with the undulator
 
@@ -866,7 +866,7 @@ def fly_scan_eliot(scan_params, polarization=0, locked = 1, *, md={}):
         "hints": {},
     }
     _md.update(md or {})
-    devices = [mono_en]
+    devices = [mono_en]+sigs
 
     @bpp.monitor_during_decorator([mono_en])
     @bpp.stage_decorator(list(devices))
