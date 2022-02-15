@@ -922,6 +922,7 @@ def fly_scan_eliot(scan_params,sigs=[], polarization=0, locked = 1, *, md={}):
             # start the mono scan
             print("starting the fly")
             yield from bps.mv(Mono_Scan_Start, 1)
+            yield from bps.mv(Mono_Scan_Start, 1)
             monopos = mono_en.readback.get()
             while np.abs(monopos - end_en) > 0.1:
                 yield from wait(group="EPU")
