@@ -142,9 +142,9 @@ def dark_plan_waxs():
         #yield from bps.mv(waxs_det.cam.sync, 1)
         yield from bps.mv(waxs_det.cam.shutter_mode, 2)
     # if we changed the acq mode, change it back)
-    yield from bps.abs_set(waxs_det.cam.image_mode,oldmode)
     yield from waxs_det.skinnyunstage()
     yield from waxs_det.skinnystage()
+    yield from bps.abs_set(waxs_det.cam.image_mode,oldmode)
     return snapshot
 
 

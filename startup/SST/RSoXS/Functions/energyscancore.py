@@ -972,13 +972,13 @@ def fly_scan_dets(scan_params,dets, polarization=0, locked = 1, *, md={}):
     _md.update(md or {})
 
     devices = [mono_en]
-    @bpp.monitor_during_decorator([mono_en,Shutter_control]) # add shutter
+    @bpp.monitor_during_decorator([mono_en]) # add shutter
     #@bpp.stage_decorator(list(devices)) # staging the detector # do explicitely
     @bpp.run_decorator(md=_md)
     def inner_scan_eliot():
         # start the scan parameters to the monoscan PVs
         for det in dets:
-            yield from stage(det)
+            yield from bps.stage(det)
             yield from abs_set(det.cam.image_mode, 2) # set continuous mode
         yield Msg("checkpoint")
         if np.isnan(polarization):
