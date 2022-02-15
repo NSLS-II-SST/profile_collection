@@ -82,6 +82,7 @@ def full_Carbon_NEXAFS(
 
 def fly_Carbon_NEXAFS(
     speed=0.2,
+    cycles=0,
     pol=0,
     diode_range=8,
     m3_pitch=7.94,
@@ -127,6 +128,7 @@ def fly_Carbon_NEXAFS(
         m3_pitch=m3_pitch,
         pol=pol,
         grating=grating,
+        cycles=cycles,
         **kwargs
     )
 

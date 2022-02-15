@@ -329,7 +329,7 @@ def NEXAFS_fly_scan_core(
     grating="best",
     enscan_type=None,
     master_plan=None,
-
+    cycles=0,
     locked = True,
     md=None,
     sim_mode=False,
@@ -411,6 +411,15 @@ def NEXAFS_fly_scan_core(
     if locked:
         yield from bps.mv(en.scanlock, 1) # lock parameters for scan, if requested
     print(f"Effective sample polarization is {samplepol}")
+
+    if cycles>0:
+        rev_scan_params = []
+        for (start, stop, speed) in scan_params:
+            rev_scan_params += [(stop, start, speed)]
+        scan_params += rev_scan_params
+        scan_params *= int(cycles)
+
+
     if openshutter:
         yield from bps.mv(Shutter_enable, 0)
         yield from bps.mv(Shutter_control, 1)
