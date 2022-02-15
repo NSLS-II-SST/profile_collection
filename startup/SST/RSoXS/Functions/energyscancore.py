@@ -418,7 +418,7 @@ def NEXAFS_fly_scan_core(
         yield from bps.mv(Shutter_control, 0)
 
     else:
-        yield from fly_scan_eliot(scan_params, md=md, locked=locked, polarization=pol)
+        yield from fly_scan_eliot(scan_params,sigs=signals, md=md, locked=locked, polarization=pol)
     yield from bps.mv(en.scanlock, 0) # unlock energy parameters at the end
 
 
@@ -831,7 +831,7 @@ def scan_eliot(detectors, cycler, shutter_sig = None, *, md={}):
     return (yield from inner_scan_eliot())
 
 
-def fly_scan_eliot(scan_params, polarization=0, locked = 1, *, md={}):
+def fly_scan_eliot(scan_params,sigs=[], polarization=0, locked = 1, *, md={}):
     """
     Specific scan for SST-1 monochromator fly scan, while catching up with the undulator
 
