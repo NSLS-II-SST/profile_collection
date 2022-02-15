@@ -329,7 +329,7 @@ def NEXAFS_fly_scan_core(
     grating="best",
     enscan_type=None,
     master_plan=None,
-    signals = [Beamstop_WAXS,Beamstop_SAXS,Izero_Mesh,Sample_TEY],
+
     locked = True,
     md=None,
     sim_mode=False,
@@ -398,7 +398,7 @@ def NEXAFS_fly_scan_core(
         yield from grating_to_1200(hopgx=hopgx,hopgy=hopgy,hopgtheta=hopgth)
     elif grating == "250":
         yield from grating_to_250(hopgx=hopgx,hopgy=hopgy,hopgtheta=hopgth)
-
+    signals = [Beamstop_WAXS, Beamstop_SAXS, Izero_Mesh, Sample_TEY]
     if np.isnan(pol):
         pol = en.polarization.setpoint.get()
     else:
@@ -831,7 +831,7 @@ def scan_eliot(detectors, cycler, shutter_sig = None, *, md={}):
     return (yield from inner_scan_eliot())
 
 
-def fly_scan_eliot(scan_params,sigs, polarization=0, locked = 1, *, md={}):
+def fly_scan_eliot(scan_params, polarization=0, locked = 1, *, md={}):
     """
     Specific scan for SST-1 monochromator fly scan, while catching up with the undulator
 
