@@ -415,7 +415,7 @@ def NEXAFS_fly_scan_core(
     if cycles>0:
         rev_scan_params = []
         for (start, stop, speed) in scan_params:
-            rev_scan_params += [(stop, start, speed)]
+            rev_scan_params = [(stop, start, speed)]+rev_scan_params
         scan_params += rev_scan_params
         scan_params *= int(cycles)
 
