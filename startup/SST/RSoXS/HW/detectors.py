@@ -178,5 +178,26 @@ dark_frame_preprocessor_waxs = bluesky_darkframes.DarkFramePreprocessor(
     limit=20,
 )
 
+dark_frame_preprocessor_waxs_spirals = bluesky_darkframes.DarkFramePreprocessor(
+    dark_plan=dark_plan_waxs,
+    detector=waxs_det,
+    max_age=120,
+    locked_signals=[
+        waxs_det.cam.acquire_time,
+        Det_W.user_setpoint,
+        waxs_det.cam.bin_x,
+        waxs_det.cam.bin_y,
+        #sam_X.user_setpoint,
+        #sam_Th.user_setpoint,
+        #sam_Y.user_setpoint,
+    ],
+    limit=20,
+)
+
+
+
+
+
+
 dark_frames_enable_waxs = make_decorator(dark_frame_preprocessor_waxs)()
 dark_frames_enable_saxs = make_decorator(dark_frame_preprocessor_saxs)()

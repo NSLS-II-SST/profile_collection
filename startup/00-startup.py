@@ -134,10 +134,32 @@ sd.monitors.extend(
     ]
 )
 
-# setup the preprocessors
-#
-RE.preprocessors.append(dark_frame_preprocessor_waxs)
-# RE.preprocessors.append(dark_frame_preprocessor_saxs)
+
+
+def waxs_spiral_mode():
+    try:
+        RE.preprocessors.remove(dark_frame_preprocessor_waxs_spirals)
+    except ValueError:
+        pass
+    try:
+        RE.preprocessors.remove(dark_frame_preprocessor_waxs)
+    except ValueError:
+        pass
+    RE.preprocessors.append(dark_frame_preprocessor_waxs_spirals)
+
+def waxs_normal_mode():
+    try:
+        RE.preprocessors.remove(dark_frame_preprocessor_waxs_spirals)
+    except ValueError:
+        pass
+    try:
+        RE.preprocessors.remove(dark_frame_preprocessor_waxs)
+    except ValueError:
+        pass
+    RE.preprocessors.append(dark_frame_preprocessor_waxs)
+
+
+waxs_normal_mode()
 
 # setup the contingencies
 
