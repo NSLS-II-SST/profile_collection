@@ -160,7 +160,7 @@ def waxs_normal_mode():
 
 
 waxs_normal_mode()
-
+RE.preprocessors.append(dark_frame_preprocessor_saxs)
 # setup the contingencies
 
 from SST.RSoXS.HW.contingencies import *
