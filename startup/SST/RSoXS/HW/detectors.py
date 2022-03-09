@@ -14,10 +14,10 @@ from ...CommonFunctions.functions import run_report
 run_report(__file__)
 
 
- saxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:1}', name='Small Angle CCD Detector',
+saxs_det = RSOXSGreatEyesDetector('XF:07ID1-ES:1{GE:1}', name='Small Angle CCD Detector',
                                   read_attrs=['tiff', 'stats1.total'])
- saxs_det.transform_type = 3
- saxs_det.cam.ensure_nonblocking()
+saxs_det.transform_type = 3
+saxs_det.cam.ensure_nonblocking()
 #
 waxs_det = RSOXSGreatEyesDetector(
     "XF:07ID1-ES:1{GE:2}",
