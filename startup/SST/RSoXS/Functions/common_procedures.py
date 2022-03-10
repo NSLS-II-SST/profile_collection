@@ -10,6 +10,7 @@ from bluesky.run_engine import Msg
 from ..HW.signals import (
     Izero_Mesh,
     Beamstop_WAXS,
+    Beamstop_SAXS,
     Slit1_Current_Top,
     Slit1_Current_Bottom,
     Slit1_Current_Inboard,

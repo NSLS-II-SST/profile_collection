@@ -50,7 +50,7 @@ def Izero_out():
 
 
 def DetS_in():
-    yield from bps.mv(Det_S, 0)
+    yield from bps.mv(Det_S, -15)
 
 
 def DetS_edge():
@@ -58,7 +58,7 @@ def DetS_edge():
 
 
 def DetS_out():
-    yield from bps.mv(Det_S, -94)
+    yield from bps.mv(Det_S, -100)
 
 
 def DetW_edge():
@@ -234,7 +234,7 @@ def SAXSmode():
     yield from psh10.close_plan()
     yield from slits_in_SAXS()
     yield from bps.mv(
-        Shutter_Y, 2.2, Izero_Y, -29, Det_S, 0, Det_W, -94, BeamStopW, 3, BeamStopS, 67
+        Shutter_Y, 2.2, Izero_Y, -29, Det_S, -15, Det_W, -94, BeamStopW, 3, BeamStopS, 67
     )
 
 
@@ -256,7 +256,7 @@ def SAXS():
             {"motor": Shutter_Y, "position": 2.2, "order": 0},
             {"motor": Izero_Y, "position": -29, "order": 0},
             {"motor": Det_W, "position": -94, "order": 0},
-            {"motor": Det_S, "position": 0, "order": 0},
+            {"motor": Det_S, "position": -15, "order": 0},
             {"motor": BeamStopS, "position": 67.7, "order": 0},
             {"motor": BeamStopW, "position": 3, "order": 1},
             {"motor": Exit_Slit, "position": -3.05, "order": 2},
@@ -292,7 +292,7 @@ def SAXSNEXAFS():
             {"motor": Shutter_Y, "position": 2.2, "order": 0},
             {"motor": Izero_Y, "position": -29, "order": 0},
             {"motor": Det_W, "position": -94, "order": 0},
-            {"motor": Det_S, "position": -94, "order": 0},
+            {"motor": Det_S, "position": -100, "order": 0},
             {"motor": BeamStopS, "position": 67.7, "order": 0},
             {"motor": BeamStopW, "position": 3, "order": 1},
             {"motor": Exit_Slit, "position": -3.05, "order": 2},
@@ -328,7 +328,7 @@ def TEYNEXAFS():
             {"motor": Shutter_Y, "position": 2.2, "order": 0},
             {"motor": Izero_Y, "position": -29, "order": 0},
             {"motor": Det_W, "position": -94, "order": 0},
-            {"motor": Det_S, "position": -94, "order": 0},
+            {"motor": Det_S, "position": -100, "order": 0},
             {"motor": BeamStopS, "position": 3, "order": 0},
             {"motor": BeamStopW, "position": 3, "order": 1},
             {"motor": Exit_Slit, "position": -3.05, "order": 2},
@@ -406,7 +406,7 @@ def WAXSNEXAFS_SAXSslits():
             {"motor": Shutter_Y, "position": 2.2, "order": 0},
             {"motor": Izero_Y, "position": -29, "order": 1},
             {"motor": Det_W, "position": -94, "order": 1},
-            {"motor": Det_S, "position": -94, "order": 1},
+            {"motor": Det_S, "position": -100, "order": 1},
             {"motor": BeamStopW, "position": 71.4, "order": 1},
             {"motor": Exit_Slit, "position": -3.05, "order": 2},
         ],
@@ -475,7 +475,7 @@ def WAXSNEXAFS():
             {"motor": Shutter_Y, "position": 2.2, "order": 0},
             {"motor": Izero_Y, "position": -29, "order": 1},
             {"motor": Det_W, "position": -94, "order": 1},
-            {"motor": Det_S, "position": -94, "order": 1},
+            {"motor": Det_S, "position": -100, "order": 1},
             {"motor": BeamStopW, "position": 71.4, "order": 1},
             {"motor": Exit_Slit, "position": -3.05, "order": 2},
         ],
@@ -510,7 +510,7 @@ def oldTEYNEXAFS():
             {"motor": Shutter_Y, "position": 2.2, "order": 1},
             {"motor": Izero_Y, "position": -29, "order": 1},
             {"motor": Det_W, "position": -94, "order": 1},
-            {"motor": Det_S, "position": -94, "order": 1},
+            {"motor": Det_S, "position": -100, "order": 1},
             {"motor": BeamStopW, "position": 71.4, "order": 0},
             {"motor": BeamStopS, "position": 3, "order": 1},
         ],
@@ -539,8 +539,8 @@ def all_out():
         144,
         Det_W,
         -94,
-#        Det_S,
-#        -94,
+        Det_S,
+        -100,
         BeamStopW,
         3,
         BeamStopS,

@@ -1495,8 +1495,8 @@ def find_fiducials(f2=[6, 3.5, -3, 1.1]):
     startxss = [f2, [3.84, 2.94, 0.55, 1.1]]
     yield from bps.mv(Shutter_enable, 0)
     yield from bps.mv(Shutter_control, 0)
-    yield from load_configuration("WAXSNEXAFS")
-    Beamstop_WAXS.kind = "hinted"
+    yield from load_configuration("SAXSNEXAFS")
+    Beamstop_SAXS.kind = "hinted"
     #yield from bps.mv(DiodeRange, 7)
     bec.enable_plots()
     startys = [2, -188.0]  # af2 first because it is a safer location
@@ -1504,15 +1504,15 @@ def find_fiducials(f2=[6, 3.5, -3, 1.1]):
     for startxs, starty in zip(startxss, startys):
         yield from bps.mv(sam_Y, starty, sam_X, startxs[1], sam_Th, 0, sam_Z, 0)
         yield from bps.mv(Shutter_control, 1)
-        yield from bp.rel_scan([Beamstop_WAXS], sam_Y, -1, 0.5, 16)
+        yield from bp.rel_scan([Beamstop_SAXS], sam_Y, -1, 0.5, 16)
         yield from bps.mv(Shutter_control, 0)
-        maxlocs.append(bec.peaks.max["WAXS Beamstop"][0])
-        yield from bps.mv(sam_Y,bec.peaks.max["WAXS Beamstop"][0])
+        maxlocs.append(bec.peaks.max["SAXS Beamstop"][0])
+        yield from bps.mv(sam_Y,bec.peaks.max["SAXS Beamstop"][0])
         for startx, angle in zip(startxs, angles):
             yield from bps.mv(sam_X, startx, sam_Th, angle)
             yield from bps.mv(Shutter_control, 1)
             yield from bp.scan(
-                [Beamstop_WAXS],
+                [Beamstop_SAXS],
                 sam_X,
                 startx - 0.5 * xrange,
                 startx + 0.5 * xrange,
@@ -1520,7 +1520,7 @@ def find_fiducials(f2=[6, 3.5, -3, 1.1]):
             )
             yield from bps.mv(Shutter_control, 0)
             yield from bps.sleep(3)
-            maxlocs.append(bec.peaks.max["WAXS Beamstop"][0])
+            maxlocs.append(bec.peaks.max["SAXS Beamstop"][0])
     print(
         maxlocs
     )  # [af2y,af2xm90,af2x0,af2x90,af2x180,af1y,af1xm90,af1x0,af1x90,af1x180]
