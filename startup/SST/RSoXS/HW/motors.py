@@ -31,9 +31,11 @@ BeamStopS = PrettyMotorFMBO(
 Det_W = PrettyMotorFMBO(
     "XF:07ID2-ES1{Det-Ax:2}Mtr", name="Detector WAXS Translation", kind="hinted"
 )
-Det_S = prettymotor('XF:07ID2-ES1{Det-Ax:1}Mtr', name='Detector SAXS Translation',kind='hinted')
-#Det_S = motor1
-#Det_S.user_setpoint = Det_S.setpoint
+Det_S = PrettyMotorFMBO(
+    "XF:07ID2-ES1{Det-Ax:1}Mtr", name='Detector SAXS Translation',kind='hinted'
+)
+# Det_S = motor1
+# Det_S.user_setpoint = Det_S.setpoint
 Shutter_Y = PrettyMotorFMBO(
     "XF:07ID2-ES1{FSh-Ax:1}Mtr", name="Shutter Vertical Translation", kind="hinted"
 )
