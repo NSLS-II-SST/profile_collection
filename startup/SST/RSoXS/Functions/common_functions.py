@@ -1,6 +1,6 @@
 import json
 from numpy import array
-from ..HW.detectors import waxs_det
+from ..HW.detectors import waxs_det, saxs_det
 
 def giveme_inputs(*args, **kwargs):
     return args, kwargs

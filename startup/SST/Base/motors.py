@@ -239,8 +239,9 @@ class DeadbandMixin(Device, PositionerBase):
 
     def move(self, position, wait=True, **kwargs):
         tolerance = self.tolerance.get()
-        self.move_latch.put(1)
+
         if tolerance < 0:
+            self.move_latch.put(1)
             return super().move(position, wait=wait, **kwargs)
         else:
             status = super().move(position, wait=False, **kwargs)
@@ -248,8 +249,9 @@ class DeadbandMixin(Device, PositionerBase):
             done_value = getattr(self, "done_value", 1)
             def check_deadband(value, timestamp, **kwargs):
                 if abs(value - setpoint) < tolerance:
-                    # print(f"{timestamp}: {self.name} {value} within tolerance of {setpoint}, sending {done_value}")
-                    self._done_moving(timestamp=timestamp, success=True, value=done_value)
+                    self._done_moving(timestamp=timestamp,
+                                      success=True,
+                                      value=done_value)
                 else:
                     pass
                     # print(f"{timestamp}: {self.name}, {value} not within {tolerance} of {setpoint}")
@@ -259,6 +261,7 @@ class DeadbandMixin(Device, PositionerBase):
                 self.clear_sub(check_deadband, event_type=self.SUB_READBACK)
 
             self.subscribe(clear_deadband, event_type=self._SUB_REQ_DONE, run=False)
+            self.move_latch.put(1)
             self.subscribe(check_deadband, event_type=self.SUB_READBACK, run=True)
 
             try:

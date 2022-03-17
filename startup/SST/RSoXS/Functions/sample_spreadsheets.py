@@ -6,7 +6,7 @@ from numpy import array
 from ..HW.motors import sam_X, sam_Y, sam_Th, sam_Z
 from ..Functions.acquisitions import avg_scan_time
 from ..Functions import rsoxs_queue_plans
-from ..HW.detectors import waxs_det
+from ..HW.detectors import waxs_det, saxs_det
 
 
 from .energyscans import (

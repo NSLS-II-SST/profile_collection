@@ -1,5 +1,9 @@
 from ophyd import EpicsSignalRO, EpicsSignal
+from ophyd.status import StatusTimeoutError
 from ...CommonFunctions.functions import run_report
+from bluesky import plan_stubs as bps
+from bluesky import FailedStatus
+
 
 
 run_report(__file__)
@@ -36,6 +40,124 @@ Slit1_Current_Inboard = EpicsSignalRO(
 Slit1_Current_Outboard = EpicsSignalRO(
     "XF:07ID-ES1{Slt1:I400-1}:IC4_MON", name="RSoXS Slit 1 Out Board Current", kind="normal"
 )
+
+Slit1_i400_cap = EpicsSignal(
+    "XF:07ID-ES1{Slt1:I400-1}:CAP_SP", name="RSoXS Slit 1 i400 capasitor", kind="normal"
+,string=True)
+diode_i400_cap = EpicsSignal(
+    "XF:07ID-ES1{DMR:I400-1}:CAP_SP", name="RSoXS diode i400 capasitor", kind="normal"
+,string=True)
+Slit1_i400_enable = EpicsSignal(
+    "XF:07ID-ES1{Slt1:I400-1}:ENABLE_IC_UPDATES", name="RSoXS Slit 1 i400 enable", kind="normal"
+,string=True)
+diode_i400_enable = EpicsSignal(
+    "XF:07ID-ES1{DMR:I400-1}:ENABLE_IC_UPDATES", name="RSoXS diode i400 enable", kind="normal"
+,string=True)
+Slit1_i400_npnts = EpicsSignal(
+    "XF:07ID-ES1{Slt1:I400-1}:TRIGPOINTS_SP", name="RSoXS Slit 1 i400 trigger points", kind="normal"
+,string=True)
+diode_i400_npnts = EpicsSignal(
+    "XF:07ID-ES1{DMR:I400-1}:TRIGPOINTS_SP", name="RSoXS diode i400 trigger points", kind="normal"
+,string=True)
+Slit1_i400_mode = EpicsSignal(
+    "XF:07ID-ES1{Slt1:I400-1}:IC_UPDATE_MODE", name="RSoXS Slit 1 i400 mode", kind="normal"
+,string=True)
+diode_i400_mode = EpicsSignal(
+    "XF:07ID-ES1{DMR:I400-1}:IC_UPDATE_MODE", name="RSoXS diode i400 mode", kind="normal"
+,string=True)
+Slit1_i400_accum = EpicsSignal(
+    "XF:07ID-ES1{Slt1:I400-1}:ACCUM_SP", name="RSoXS Slit 1 i400 accumulation mode", kind="normal"
+,string=True)
+diode_i400_accum = EpicsSignal(
+    "XF:07ID-ES1{DMR:I400-1}:ACCUM_SP", name="RSoXS diode i400  accumulation mode", kind="normal"
+,string=True)
+
+
+diode_i400_PDU = EpicsSignal(
+    "XF:07ID-CT{RG:C1-PDU:1}Sw:8-Sel", name="RSoXS diode power control", kind="normal"
+,string=True)
+
+
+
+def setup_slit1_i400():
+    yield from bps.mv(slit1_i400_enable, 'Disabled')
+    try:
+        yield from bps.mv(slit1_i400_cap, '1000pF',timeout=1)
+    except FailedStatus:
+        pass
+    except StatusTimeoutError:
+        pass
+    try:
+        yield from bps.mv(slit1_i400_npnts, 940,timeout=1)
+    except FailedStatus:
+        pass
+    except StatusTimeoutError:
+        pass
+    try:
+        yield from bps.mv(slit1_i400_mode, 'Trigger Count',timeout=1)
+    except FailedStatus:
+        pass
+    except StatusTimeoutError:
+        pass
+    try:
+        yield from bps.mv(slit1_i400_accum, 'Interpolate',timeout=1)
+    except FailedStatus:
+        pass
+    except StatusTimeoutError:
+        pass
+    try:
+        yield from bps.mv(slit1_i400_enable, 'Enabled',timeout=1)
+    except FailedStatus:
+        pass
+    except StatusTimeoutError:
+        pass
+
+
+
+def setup_diode_i400():
+    yield from bps.mv(diode_i400_enable, 'Disabled')
+    try:
+        yield from bps.mv(diode_i400_cap, '1000pF',timeout=1)
+    except FailedStatus:
+        pass
+    except StatusTimeoutError:
+        pass
+    try:
+        yield from bps.mv(diode_i400_npnts, 940,timeout=1)
+    except FailedStatus:
+        pass
+    except StatusTimeoutError:
+        pass
+    try:
+        yield from bps.mv(diode_i400_mode, 'Trigger Count',timeout=1)
+    except FailedStatus:
+        pass
+    except StatusTimeoutError:
+        pass
+    try:
+        yield from bps.mv(diode_i400_accum, 'Interpolate',timeout=1)
+    except FailedStatus:
+        pass
+    except StatusTimeoutError:
+        pass
+    try:
+        yield from bps.mv(diode_i400_enable, 'Enabled',timeout=1)
+    except FailedStatus:
+        pass
+    except StatusTimeoutError:
+        pass
+
+
+def power_cycle_diode_i400():
+    yield from bps.mv(diode_i400_PDU,"Off")
+    yield from bps.sleep(2)
+    yield from bps.mv(diode_i400_PDU,"On")
+
+
+def reset_diodes():
+    yield from power_cycle_diode_i400()
+    yield from bps.sleep(5)
+    yield from setup_diode_i400()
 
 mir1_pressure = EpicsSignalRO(
     "XF:07IDA-VA:0{Mir:M1-CCG:1}P:Raw-I", name="Mirror 1 Vacuum Pressure", kind="normal"

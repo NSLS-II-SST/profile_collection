@@ -38,7 +38,7 @@ from ..HW.energy import (
     Mono_Scan_Stop_ev,
 )
 from ...HW.mirrors import mir3
-from ..HW.detectors import waxs_det
+from ..HW.detectors import waxs_det, saxs_det
 from ..HW.signals import DiodeRange,Beamstop_WAXS,Beamstop_SAXS,Izero_Mesh,Sample_TEY
 from ..Functions.alignment import rotate_now
 from ..Functions.common_procedures import set_exposure
@@ -888,8 +888,9 @@ def fly_scan_eliot(scan_params,sigs=[], polarization=0, locked = 1, *, md={}):
         else:
             yield from set_polarization(polarization)
             pol = polarization
-        step = 0
+
         for (start_en, end_en, speed_en) in scan_params:
+            step = 0
             print(f"starting fly from {start_en} to {end_en} at {speed_en} eV/second")
             yield Msg("checkpoint")
             print("Preparing mono for fly")
@@ -902,13 +903,15 @@ def fly_scan_eliot(scan_params,sigs=[], polarization=0, locked = 1, *, md={}):
                 speed_en,
             )
             # move to the initial position
-            if step > 0:
-                yield from wait(group="EPU")
-            yield from bps.abs_set(mono_en, start_en, group="EPU")
+            #if step > 0:
+            #    yield from wait(group="EPU")
+            yield from bps.abs_set(mono_en, start_en, group="mono")
             print("moving to starting position")
-            yield from wait(group="EPU")
+            yield from wait(group="mono")
             print("Mono in start position")
             yield from bps.mv(epu_gap, en.gap(start_en, pol, locked))
+            yield from bps.abs_set(epu_gap, en.gap(start_en, pol, locked), group="EPU")
+            yield from wait(group="EPU")
             print("EPU in start position")
             if step == 0:
                 monopos = mono_en.readback.get()
@@ -925,7 +928,6 @@ def fly_scan_eliot(scan_params,sigs=[], polarization=0, locked = 1, *, md={}):
             yield from bps.mv(Mono_Scan_Start, 1)
             monopos = mono_en.readback.get()
             while np.abs(monopos - end_en) > 0.1:
-                yield from wait(group="EPU")
                 monopos = mono_en.readback.get()
                 yield from bps.abs_set(
                     epu_gap,
@@ -937,6 +939,7 @@ def fly_scan_eliot(scan_params,sigs=[], polarization=0, locked = 1, *, md={}):
                 for obj in devices:
                     yield from read(obj)
                 yield from save()
+                yield from wait(group="EPU")
             print(f"Mono reached {monopos} which appears to be near {end_en}")
             step += 1
 
