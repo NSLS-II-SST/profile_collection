@@ -1,5 +1,7 @@
 import logging
-from bluesky.suspenders import SuspendBoolHigh, SuspendFloor, SuspendBoolLow
+from bluesky.suspenders import (
+SuspendBoolHigh, SuspendFloor, SuspendBoolLow, SuspendWhenChanged
+)
 from ...CommonFunctions.functions import run_report
 from ..Functions.contingencies import (
     beamdown_notice,
@@ -13,6 +15,7 @@ from ...HW.gatevalves import gvll
 from ...HW.shutters import psh4, psh1
 from ..HW.signals import ring_current
 from ..HW.motors import sam_X
+from ..HW.detectors import start_det_cooling,stop_det_cooling
 from ..startup import RE
 
 
@@ -54,6 +57,20 @@ suspend_current = SuspendFloor(
     pre_plan=beamdown_notice,
     post_plan=beamup_notice,
 )
+
+
+suspend_current = SuspendWhenChanged(
+    rsoxs_pg_main,
+    expected_value='LO<E-03',
+    allow_resume=True,
+    sleep=30,
+    tripped_message="Pressure in the Chamber is above the threshold for having cooling on",
+    pre_plan=stop_det_cooling,
+    post_plan=start_det_cooling,
+)
+
+
+
 
 RE.install_suspender(suspend_current)
 

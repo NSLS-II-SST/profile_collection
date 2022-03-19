@@ -18,6 +18,7 @@ from bluesky.preprocessors import rewindable_wrapper
 from bluesky.utils import short_uid, separate_devices, all_safe_rewind
 from collections import defaultdict
 from bluesky import preprocessors as bpp
+from bluesky import FailedStatus
 import numpy as np
 from ophyd import Device
 from ophyd.status import StatusTimeoutError
@@ -240,7 +241,17 @@ def en_scan_core(
     sigcycler = cycler(energy, energies)
     shutter_times = [i * 1000 for i in times]
     yield from bps.mv(energy.scanlock, 0)
-    yield from bps.mv(energy, energies[0])  # move to the initial energy (unlocked)
+    yield from bps.sleep(0.5)
+    try:
+        yield from bps.mv(energy, energies[0],timeout=5)  # move to the initial energy (unlocked)
+    except StatusTimeoutError:
+        print("energy didn't move the first time")
+        pass
+    except FailedStatus:
+        print("energy didn't move the first time")
+        pass
+    yield from bps.mv(energy, energies[0])
+
     if lockscan:
         yield from bps.mv(energy.scanlock, 1)  # lock the harmonic, grating, m3_pitch everything based on the first energy
 

@@ -1487,7 +1487,7 @@ def af_rotation(xfm90, xf0, xf90, xf180):
     return (x0, zoff, xoff)
 
 
-def find_fiducials(f2=[6, 3.5, -3, 1.1]):
+def find_fiducials(f2=[5.5, 3.5, -.5, 1.1]):
     thoffset = 1.6
     angles = [-90 + thoffset, 0 + thoffset, 90 + thoffset, 180 + thoffset]
     xrange = 3.5
@@ -1499,7 +1499,7 @@ def find_fiducials(f2=[6, 3.5, -3, 1.1]):
     Beamstop_SAXS.kind = "hinted"
     #yield from bps.mv(DiodeRange, 7)
     bec.enable_plots()
-    startys = [2, -188.0]  # af2 first because it is a safer location
+    startys = [3, -188.0]  # af2 first because it is a safer location
     maxlocs = []
     for startxs, starty in zip(startxss, startys):
         yield from bps.mv(sam_Y, starty, sam_X, startxs[1], sam_Th, 0, sam_Z, 0)
