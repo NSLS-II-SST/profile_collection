@@ -15,6 +15,7 @@ from ...HW.gatevalves import gvll
 from ...HW.shutters import psh4, psh1
 from ..HW.signals import ring_current
 from ..HW.motors import sam_X
+from ...HW.vacuum import rsoxs_pg_main
 from ..HW.detectors import start_det_cooling,stop_det_cooling
 from ..startup import RE
 
