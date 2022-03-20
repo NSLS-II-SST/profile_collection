@@ -1,13 +1,14 @@
 import datetime
+from bluesky import FailedStatus
 from .alignment import load_sample, load_configuration, avg_scan_time, move_to_location
 from .configurations import all_out
 from .sample_spreadsheets import save_samplesxls
 from operator import itemgetter
 from ..HW.slackbot import rsoxs_bot
+from ..HW.signals import check_diodes
 from ...CommonFunctions.functions import boxed_text, run_report, colored
 from ..startup import db
 from ..Functions import rsoxs_queue_plans
-
 run_report(__file__)
 
 
@@ -147,6 +148,7 @@ def run_bar(
             "such as project, configuration, sample_id, plan, plan_args, spriority, apriority"
         )
         return
+    failcount=0
     if dryrun:
         text = ""
         total_time = 0
@@ -203,8 +205,18 @@ def run_bar(
                 + f"\nTime so far: {str(total_time)}"
                 f"time remaining approx {time_sec(time_remaining)}"
             )
-            yield from load_configuration(step[2])  # move to configuration
+            failcount=0
+            success=False
+            while failcount < 3 and success is False:
+                try:
+                    yield from load_configuration(step[2])  # move to configuration
+                except FailedStatus:
+                    failcount += 1
+                    pass
+                finally:
+                    success = True
             yield from load_sample(step[5])  # move to sample / load sample metadata
+            yield from check_diodes()
             yield from do_acquisitions(
                 [step[6]]
             )  # run acquisition (will load configuration again)

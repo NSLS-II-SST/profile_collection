@@ -3,7 +3,7 @@ from ophyd.status import StatusTimeoutError
 from ...CommonFunctions.functions import run_report
 from bluesky import plan_stubs as bps
 from bluesky import FailedStatus
-
+from datetime import datetime as datet
 
 
 run_report(__file__)
@@ -158,6 +158,12 @@ def reset_diodes():
     yield from power_cycle_diode_i400()
     yield from bps.sleep(5)
     yield from setup_diode_i400()
+
+
+def check_diodes():
+    if datet.timestamp(datet.now())-Beamstop_SAXS.read()['SAXS Beamstop']['timestamp'] > 1
+        yield from reset_diodes()
+
 
 mir1_pressure = EpicsSignalRO(
     "XF:07IDA-VA:0{Mir:M1-CCG:1}P:Raw-I", name="Mirror 1 Vacuum Pressure", kind="normal"
