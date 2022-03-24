@@ -1487,12 +1487,12 @@ def af_rotation(xfm90, xf0, xf90, xf180):
     return (x0, zoff, xoff)
 
 
-def find_fiducials(f2=[5.5, 3.5, -.5, 1.1]):
+def find_fiducials(f2=[7.5, 3.5, -2.5, 1.1]):
     thoffset = 1.6
     angles = [-90 + thoffset, 0 + thoffset, 90 + thoffset, 180 + thoffset]
     xrange = 3.5
     xnum = 36
-    startxss = [f2, [3.84, 2.94, 0.55, 1.1]]
+    startxss = [f2, [4.2, 3.5, 1, 1.1]]
     yield from bps.mv(Shutter_enable, 0)
     yield from bps.mv(Shutter_control, 0)
     yield from load_configuration("SAXSNEXAFS")

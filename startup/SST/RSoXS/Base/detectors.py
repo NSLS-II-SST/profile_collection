@@ -88,12 +88,12 @@ class RSOXSGreatEyesDetector(SingleTriggerV33, GreatEyesDetector):
     def sim_mode_on(self):
         self.useshutter = False
         self.cam.sync.set(0)
-        self.cam.shutter_mode.det(0)
+        self.cam.shutter_mode.set(0)
 
     def sim_mode_off(self):
         self.useshutter = True
         self.cam.sync.set(1)
-        self.cam.shutter_mode.det(2)
+        self.cam.shutter_mode.set(2)
 
     def stage(self, *args, **kwargs):
         self.cam.temperature_actual.read()

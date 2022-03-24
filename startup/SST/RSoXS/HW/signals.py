@@ -161,7 +161,7 @@ def reset_diodes():
 
 
 def check_diodes():
-    if datet.timestamp(datet.now())-Beamstop_SAXS.read()['SAXS Beamstop']['timestamp'] > 1
+    if datet.timestamp(datet.now())-Beamstop_SAXS.read()['SAXS Beamstop']['timestamp'] > 1:
         yield from reset_diodes()
 
 
