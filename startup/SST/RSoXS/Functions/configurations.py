@@ -264,11 +264,12 @@ def SAXS():
         {
             "RSoXS_Config": "SAXS",
             "RSoXS_Main_DET": "SAXS",
+            "SAXS_Mask": [(473,472),(510,471),(515,1024),(476,1024)],
             "RSoXS_WAXS_SDD": None,
             "RSoXS_WAXS_BCX": None,
             "RSoXS_WAXS_BCY": None,
-            "RSoXS_SAXS_SDD": 487,
-            "RSoXS_SAXS_BCX": 489,
+            "RSoXS_SAXS_SDD": 489,
+            "RSoXS_SAXS_BCX": 492,
             "RSoXS_SAXS_BCY": 510,
         },
     ]
@@ -381,6 +382,7 @@ def WAXS_SAXSslits():
             "RSoXS_WAXS_SDD": 38.19,
             "RSoXS_WAXS_BCX": 396.3,
             "RSoXS_WAXS_BCY": 542.76,
+            "WAXS_Mask": [(367,545),(406,578),(880,0),(810,0)],
             "RSoXS_SAXS_SDD": None,
             "RSoXS_SAXS_BCX": None,
             "RSoXS_SAXS_BCY": None,

@@ -1034,7 +1034,7 @@ def custom_rotate_rsoxs_scan(
     **kwargs
 ):
     """
-    custom_rsoxs_scan
+    custom_rotate_rsoxs_scan
     @param master_plan: a category of higher level plan which you might want to sort by
     @param enscan_type: the granular level plan you might want to sort by - generally for timing or data lookup
     @param md: metadata to push through to lower level plans and eventually a bluesky document
@@ -1045,7 +1045,7 @@ def custom_rotate_rsoxs_scan(
     @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
     @return: Do a step scan and take images
     """
-    plan_name = "custom_rsoxs_scan"
+    plan_name = "custom_rotate_rsoxs_scan"
     # grab locals
     arguments = dict(locals())
     clean_up_md(arguments, md, **kwargs)

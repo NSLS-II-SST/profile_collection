@@ -422,7 +422,8 @@ def NEXAFS_fly_scan_core(
     if locked:
         yield from bps.mv(en.scanlock, 1) # lock parameters for scan, if requested
     print(f"Effective sample polarization is {samplepol}")
-
+    if len(kwargs)>0:
+        print(f'{kwargs} were entered as options, but are being ignored')
     if cycles>0:
         rev_scan_params = []
         for (start, stop, speed) in scan_params:
