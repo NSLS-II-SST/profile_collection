@@ -116,6 +116,15 @@ sd.baseline.extend(
         mir3,
         mir4,
         mir2_type,
+        Shutter_delay,
+        Shutter_trigger,
+        Shutter_open_time,
+        Light_control,
+        Shutter_enable,
+        Shutter_enable1,
+        Shutter_enable2,
+        Shutter_enable3,
+
     ]
 )
 
