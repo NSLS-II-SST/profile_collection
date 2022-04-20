@@ -2,8 +2,9 @@ from copy import deepcopy
 
 
 class testing_RE_md:
-    def __init__(self):
-        self.pre_test_md = deepcopy(RE.md)
+    def __init__(self, RE):
+        self.RE = RE
+        self.pre_test_md = deepcopy(self.RE.md)
 
     @property
     def _md(self):
@@ -76,7 +77,7 @@ class testing_RE_md:
         }
 
     def __enter__(self):
-        RE.md.update(self._md)
+        self.RE.md.update(self._md)
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        RE.md.update(self.pre_test_md)
+        self.RE.md.update(self.pre_test_md)
