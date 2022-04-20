@@ -3,6 +3,7 @@ from matplotlib import pyplot as plt
 import queue
 from PIL import Image
 from operator import itemgetter
+from copy import deepcopy
 import collections
 import numpy as np
 import datetime
@@ -29,6 +30,9 @@ from ..HW.motors import (
     Det_W,
     BeamStopW,
     BeamStopS,
+    TEMX,
+    TEMY,
+    TEMZ
 )
 from ..HW.slits import slits1, slits2, slits3
 from ...HW.motors import Exit_Slit
@@ -738,6 +742,11 @@ def sample_by_value_match(bar, key, string):
 
 def sample_by_name(bar, name):
     return sample_by_value_match(bar, "sample_name", name)
+
+
+def alignment_rel_scan(det,motor,start_rel,end_rel,steps):
+    savemd = RE.md.deepcopy()
+
 
 
 def offset_bar(bar, xoff, yoff, zoff, thoff):
