@@ -7,7 +7,8 @@ with testing_RE_md(RE):
     _ = db[uid].table(fill=True)
 
 print("Completed scan over variable energy.")
-print("Check /nsls2/data/sst1/legacy/RSoXS/suitcased_data/users for suitcase unpack.")
+print("Check the following for suitcase unpack.\n"
+      "/nsls2/data/sst1/legacy/RSoXS/suitcased_data/users/test-cycle/acceptance_test-NSLS2/auto/acceptance_test/...")
 print("".join(["=" for _ in range(80)]))
 
 
