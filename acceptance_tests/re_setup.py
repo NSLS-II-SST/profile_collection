@@ -80,4 +80,4 @@ class testing_RE_md:
         self.RE.md.update(self._md)
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        self.RE.md.update(self.pre_test_md)
+        self.RE.md = self.pre_test_md
