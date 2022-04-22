@@ -314,8 +314,6 @@ def SAXSNEXAFS():
 def TEYNEXAFS():
     return [
         [
-
-
             {"motor": slits1.vsize, "position": 0.025, "order": 0},
             {"motor": slits1.vcenter, "position": -0.55, "order": 0},
             {"motor": slits1.hsize, "position": 0.153, "order": 0},
