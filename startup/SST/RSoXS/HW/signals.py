@@ -190,6 +190,11 @@ Sample_TEY = EpicsSignalRO(
 )
 
 
+Izero_update_time = EpicsSignal(
+     "XF:07ID1-BI{EM:1}EM180:AveragingTime",
+     name="RSoXS quadem Averaging Time",
+     kind="normal",)
+
 DiodeRange = EpicsSignal("XF:07ID-ES1{DMR:I400-1}:RANGE_BP")
 
 # DM7_Diode = EpicsSignalRO('XF:07ID-BI{DM7:I400-1}:IC4_MON',name = 'DM7 Photodiode', kind='normal')
