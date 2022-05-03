@@ -4,7 +4,7 @@ from pathlib import Path
 paths = [
     path
     for path in Path(
-        "/nsls2/data/sst/rsox/shared/config/bluesky/collection_packages"
+        "/nsls2/data/sst/rsoxs/shared/config/bluesky/collection_packages"
     ).glob("*")
     if path.is_dir()
 ]
