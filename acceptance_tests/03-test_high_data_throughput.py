@@ -16,5 +16,5 @@ diode_i400_npnts.set(npnts)
 Izero_update_time.set(update_time)
 print("Completed high data frequency scan over variable energy.")
 print("Check the following for suitcase unpack.\n"
-      "/nsls2/data/sst1/legacy/RSoXS/suitcased_data/users/test-cycle/acceptance_test-NSLS2/auto/acceptance_test/...")
+      "/nsls2/data/sst/legacy/RSoXS/suitcased_data/users/test-cycle/acceptance_test-NSLS2/auto/acceptance_test/...")
 print("".join(["=" for _ in range(80)]))

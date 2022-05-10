@@ -65,10 +65,10 @@ class RSOXSGreatEyesDetector(SingleTriggerV33, GreatEyesDetector):
     tiff = C(
         TIFFPluginWithFileStore,
         "TIFF1:",
-        write_path_template="/nsls2/data/sst1/assets/%Y/%m/%d/",
-        read_path_template="/nsls2/data/sst1/assets/%Y/%m/%d/",
+        write_path_template="/nsls2/data/sst/assets/%Y/%m/%d/",
+        read_path_template="/nsls2/data/sst/assets/%Y/%m/%d/",
         read_attrs=[],
-        root="/nsls2/data/sst1/assets/",
+        root="/nsls2/data/sst/assets/",
     )
 
     stats1 = C(StatsPluginV33, "Stats1:")
