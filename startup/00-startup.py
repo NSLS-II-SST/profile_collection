@@ -1,43 +1,43 @@
-from SST.CommonFunctions.functions import run_report
+from sst.CommonFunctions.functions import run_report
 
 run_report(__file__)
 
-# SST devices  These all reference the Base classes and instantiate the objects themselves into the current namespace
-from SST.HW.gatevalves import *
-from SST.HW.shutters import *
-from SST.HW.vacuum import *
-from SST.HW.motors import *
-from SST.HW.mirrors import *
-from SST.HW.diode import *
-from SST.HW.energy import *
+# sst devices  These all reference the Base classes and instantiate the objects themselves into the current namespace
+from sst.HW.gatevalves import *
+from sst.HW.shutters import *
+from sst.HW.vacuum import *
+from sst.HW.motors import *
+from sst.HW.mirrors import *
+from sst.HW.diode import *
+from sst.HW.energy import *
 
-# SST code  # Common code
-from SST.Base.archiver import *
+# sst code  # Common code
+from sst.Base.archiver import *
 
 # RSoXS startup - bluesky RE / db / md definitions
-from SST.RSoXS.startup import *
+from sst.RSoXS.startup import *
 
 # RSoXS specific devices
-from SST.RSoXS.HW.motors import *
-from SST.RSoXS.HW.cameras import *
-from SST.RSoXS.HW.signals import *
-from SST.RSoXS.HW.detectors import *
-from SST.RSoXS.HW.slits import *
-from SST.RSoXS.HW.syringepump import *
-from SST.RSoXS.HW.energy import *
+from sst.RSoXS.HW.motors import *
+from sst.RSoXS.HW.cameras import *
+from sst.RSoXS.HW.signals import *
+from sst.RSoXS.HW.detectors import *
+from sst.RSoXS.HW.slits import *
+from sst.RSoXS.HW.syringepump import *
+from sst.RSoXS.HW.energy import *
 
 # RSoXS specific code
-from SST.RSoXS.Functions.alignment import *
-from SST.RSoXS.Functions.common_procedures import *
-from SST.RSoXS.Functions.configurations import *
-from SST.RSoXS.Functions.schemas import *
-from SST.RSoXS.Functions.PVdictionary import *
-from SST.RSoXS.Functions.energyscancore import *
-from SST.RSoXS.Functions.energyscans import *
-from SST.RSoXS.Functions.NEXAFSscans import *
-from SST.RSoXS.HW.slackbot import rsoxs_bot
-from SST.RSoXS.Functions.acquisitions import *
-from SST.RSoXS.Functions.sample_spreadsheets import *
+from sst.RSoXS.Functions.alignment import *
+from sst.RSoXS.Functions.common_procedures import *
+from sst.RSoXS.Functions.configurations import *
+from sst.RSoXS.Functions.schemas import *
+from sst.RSoXS.Functions.PVdictionary import *
+from sst.RSoXS.Functions.energyscancore import *
+from sst.RSoXS.Functions.energyscans import *
+from sst.RSoXS.Functions.NEXAFSscans import *
+from sst.RSoXS.HW.slackbot import rsoxs_bot
+from sst.RSoXS.Functions.acquisitions import *
+from sst.RSoXS.Functions.sample_spreadsheets import *
 
 
 try:
@@ -49,7 +49,7 @@ except ImportError:
 
 
 if not is_re_worker_active():
-    from SST.RSoXS.Functions.magics import *
+    from sst.RSoXS.Functions.magics import *
 
     user()  # print out the current user metadata
     beamline_status()  # print out the current sample metadata, motor position and detector status
@@ -175,4 +175,4 @@ waxs_normal_mode()
 RE.preprocessors.append(dark_frame_preprocessor_saxs)
 # setup the contingencies
 
-from SST.RSoXS.HW.contingencies import *
+from sst.RSoXS.HW.contingencies import *
