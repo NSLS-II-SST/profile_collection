@@ -1,3 +1,17 @@
+import sys
+from pathlib import Path
+
+paths = [
+    path
+    for path in Path(
+        "/nsls2/data/sst/rsoxs/shared/config/bluesky/collection_packages"
+    ).glob("*")
+    if path.is_dir()
+]
+for path in paths:
+    sys.path.append(str(path))
+
+
 from sst.CommonFunctions.functions import run_report
 
 run_report(__file__)
