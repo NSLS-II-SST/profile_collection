@@ -29,29 +29,29 @@ from sst.HW.energy import *
 from sst.Base.archiver import *
 
 # RSoXS startup - bluesky RE / db / md definitions
-from sst.RSoXS.startup import *
+from rsoxs.startup import *
 
 # RSoXS specific devices
-from sst.RSoXS.HW.motors import *
-from sst.RSoXS.HW.cameras import *
-from sst.RSoXS.HW.signals import *
-from sst.RSoXS.HW.detectors import *
-from sst.RSoXS.HW.slits import *
-from sst.RSoXS.HW.syringepump import *
-from sst.RSoXS.HW.energy import *
+from rsoxs.HW.motors import *
+from rsoxs.HW.cameras import *
+from rsoxs.HW.signals import *
+from rsoxs.HW.detectors import *
+from rsoxs.HW.slits import *
+from rsoxs.HW.syringepump import *
+from rsoxs.HW.energy import *
 
 # RSoXS specific code
-from sst.RSoXS.Functions.alignment import *
-from sst.RSoXS.Functions.common_procedures import *
-from sst.RSoXS.Functions.configurations import *
-from sst.RSoXS.Functions.schemas import *
-from sst.RSoXS.Functions.PVdictionary import *
-from sst.RSoXS.Functions.energyscancore import *
-from sst.RSoXS.Functions.energyscans import *
-from sst.RSoXS.Functions.NEXAFSscans import *
-from sst.RSoXS.HW.slackbot import rsoxs_bot
-from sst.RSoXS.Functions.acquisitions import *
-from sst.RSoXS.Functions.sample_spreadsheets import *
+from rsoxs.Functions.alignment import *
+from rsoxs.Functions.common_procedures import *
+from rsoxs.Functions.configurations import *
+from rsoxs.Functions.schemas import *
+from rsoxs.Functions.PVdictionary import *
+from rsoxs.Functions.energyscancore import *
+from rsoxs.Functions.energyscans import *
+from rsoxs.Functions.NEXAFSscans import *
+from rsoxs.HW.slackbot import rsoxs_bot
+from rsoxs.Functions.acquisitions import *
+from rsoxs.Functions.sample_spreadsheets import *
 
 
 try:
@@ -63,7 +63,7 @@ except ImportError:
 
 
 if not is_re_worker_active():
-    from sst.RSoXS.Functions.magics import *
+    from rsoxs.Functions.magics import *
 
     user()  # print out the current user metadata
     beamline_status()  # print out the current sample metadata, motor position and detector status
@@ -189,4 +189,4 @@ waxs_normal_mode()
 RE.preprocessors.append(dark_frame_preprocessor_saxs)
 # setup the contingencies
 
-from sst.RSoXS.HW.contingencies import *
+from rsoxs.HW.contingencies import *

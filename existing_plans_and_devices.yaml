@@ -221,7 +221,7 @@ existing_devices:
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: SST.RSoXS.Base.syringepump
+    module: rsoxs.Base.syringepump
   SampleViewer_cam:
     classname: StandardProsilicaWithTIFFV33
     is_flyable: false
@@ -671,7 +671,7 @@ existing_devices:
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: SST.RSoXS.Base.detectors
+    module: rsoxs.Base.detectors
   slits1:
     classname: Slits
     is_flyable: false
@@ -701,112 +701,112 @@ existing_devices:
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: SST.RSoXS.Base.detectors
+    module: rsoxs.Base.detectors
 existing_plans:
   BS_out:
-    module: SST.RSoXS.Functions.configurations
+    module: rsoxs.Functions.configurations
     name: BS_out
     parameters: []
     properties:
       is_generator: true
   BSs_in:
-    module: SST.RSoXS.Functions.configurations
+    module: rsoxs.Functions.configurations
     name: BSs_in
     parameters: []
     properties:
       is_generator: true
   BSs_out:
-    module: SST.RSoXS.Functions.configurations
+    module: rsoxs.Functions.configurations
     name: BSs_out
     parameters: []
     properties:
       is_generator: true
   BSw_in:
-    module: SST.RSoXS.Functions.configurations
+    module: rsoxs.Functions.configurations
     name: BSw_in
     parameters: []
     properties:
       is_generator: true
   BSw_out:
-    module: SST.RSoXS.Functions.configurations
+    module: rsoxs.Functions.configurations
     name: BSw_out
     parameters: []
     properties:
       is_generator: true
   DetS_edge:
-    module: SST.RSoXS.Functions.configurations
+    module: rsoxs.Functions.configurations
     name: DetS_edge
     parameters: []
     properties:
       is_generator: true
   DetS_in:
-    module: SST.RSoXS.Functions.configurations
+    module: rsoxs.Functions.configurations
     name: DetS_in
     parameters: []
     properties:
       is_generator: true
   DetS_out:
-    module: SST.RSoXS.Functions.configurations
+    module: rsoxs.Functions.configurations
     name: DetS_out
     parameters: []
     properties:
       is_generator: true
   DetW_edge:
-    module: SST.RSoXS.Functions.configurations
+    module: rsoxs.Functions.configurations
     name: DetW_edge
     parameters: []
     properties:
       is_generator: true
   DetW_in:
-    module: SST.RSoXS.Functions.configurations
+    module: rsoxs.Functions.configurations
     name: DetW_in
     parameters: []
     properties:
       is_generator: true
   DetW_out:
-    module: SST.RSoXS.Functions.configurations
+    module: rsoxs.Functions.configurations
     name: DetW_out
     parameters: []
     properties:
       is_generator: true
   Detectors_edge:
-    module: SST.RSoXS.Functions.configurations
+    module: rsoxs.Functions.configurations
     name: Detectors_edge
     parameters: []
     properties:
       is_generator: true
   Detectors_out:
-    module: SST.RSoXS.Functions.configurations
+    module: rsoxs.Functions.configurations
     name: Detectors_out
     parameters: []
     properties:
       is_generator: true
   Izero_diode:
-    module: SST.RSoXS.Functions.configurations
+    module: rsoxs.Functions.configurations
     name: Izero_diode
     parameters: []
     properties:
       is_generator: true
   Izero_mesh:
-    module: SST.RSoXS.Functions.configurations
+    module: rsoxs.Functions.configurations
     name: Izero_mesh
     parameters: []
     properties:
       is_generator: true
   Izero_out:
-    module: SST.RSoXS.Functions.configurations
+    module: rsoxs.Functions.configurations
     name: Izero_out
     parameters: []
     properties:
       is_generator: true
   Izero_screen:
-    module: SST.RSoXS.Functions.configurations
+    module: rsoxs.Functions.configurations
     name: Izero_screen
     parameters: []
     properties:
       is_generator: true
   NEXAFS_fly_scan_core:
-    module: SST.RSoXS.Functions.energyscancore
+    module: rsoxs.Functions.energyscancore
     name: NEXAFS_fly_scan_core
     parameters:
     - kind:
@@ -861,7 +861,7 @@ existing_plans:
     properties:
       is_generator: true
   NEXAFS_scan_core:
-    module: SST.RSoXS.Functions.energyscancore
+    module: rsoxs.Functions.energyscancore
     name: NEXAFS_scan_core
     parameters:
     - kind:
@@ -943,13 +943,13 @@ existing_plans:
     properties:
       is_generator: true
   SAXSmode:
-    module: SST.RSoXS.Functions.configurations
+    module: rsoxs.Functions.configurations
     name: SAXSmode
     parameters: []
     properties:
       is_generator: true
   Scan_izero_peak:
-    module: SST.RSoXS.Functions.common_procedures
+    module: rsoxs.Functions.common_procedures
     name: Scan_izero_peak
     parameters:
     - kind:
@@ -963,19 +963,19 @@ existing_plans:
     properties:
       is_generator: true
   Shutter_in:
-    module: SST.RSoXS.Functions.configurations
+    module: rsoxs.Functions.configurations
     name: Shutter_in
     parameters: []
     properties:
       is_generator: true
   Shutter_out:
-    module: SST.RSoXS.Functions.configurations
+    module: rsoxs.Functions.configurations
     name: Shutter_out
     parameters: []
     properties:
       is_generator: true
   WAXSmode:
-    module: SST.RSoXS.Functions.configurations
+    module: rsoxs.Functions.configurations
     name: WAXSmode
     parameters: []
     properties:
@@ -1016,7 +1016,7 @@ existing_plans:
     properties:
       is_generator: true
   all_out:
-    module: SST.RSoXS.Functions.configurations
+    module: rsoxs.Functions.configurations
     name: all_out
     parameters: []
     properties:
@@ -1064,19 +1064,19 @@ existing_plans:
     properties:
       is_generator: true
   beamdown_notice:
-    module: SST.RSoXS.Functions.contingencies
+    module: rsoxs.Functions.contingencies
     name: beamdown_notice
     parameters: []
     properties:
       is_generator: true
   beamup_notice:
-    module: SST.RSoXS.Functions.contingencies
+    module: rsoxs.Functions.contingencies
     name: beamup_notice
     parameters: []
     properties:
       is_generator: true
   buildeputable:
-    module: SST.RSoXS.Functions.common_procedures
+    module: rsoxs.Functions.common_procedures
     name: buildeputable
     parameters:
     - kind:
@@ -1123,7 +1123,7 @@ existing_plans:
     properties:
       is_generator: true
   buildeputablegaps:
-    module: SST.RSoXS.Functions.common_procedures
+    module: rsoxs.Functions.common_procedures
     name: buildeputablegaps
     parameters:
     - kind:
@@ -1187,7 +1187,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: SST.RSoXS.Functions.energyscans
+    module: rsoxs.Functions.energyscans
     name: cdsaxs_scan
     parameters:
     - default: '[(250, 2), (270, 2), (280, 2), (285, 2), (300, 2)]'
@@ -1281,7 +1281,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: SST.RSoXS.Functions.energyscans
+    module: rsoxs.Functions.energyscans
     name: custom_rsoxs_scan
     parameters:
     - default: '[((270, 340, 1), 2)]'
@@ -1326,31 +1326,31 @@ existing_plans:
     properties:
       is_generator: true
   dark_plan_saxs:
-    module: SST.RSoXS.HW.detectors
+    module: rsoxs.HW.detectors
     name: dark_plan_saxs
     parameters: []
     properties:
       is_generator: true
   dark_plan_waxs:
-    module: SST.RSoXS.HW.detectors
+    module: rsoxs.HW.detectors
     name: dark_plan_waxs
     parameters: []
     properties:
       is_generator: true
   do_2020_eputables:
-    module: SST.RSoXS.Functions.common_procedures
+    module: rsoxs.Functions.common_procedures
     name: do_2020_eputables
     parameters: []
     properties:
       is_generator: true
   do_2021_eputables3:
-    module: SST.RSoXS.Functions.common_procedures
+    module: rsoxs.Functions.common_procedures
     name: do_2021_eputables3
     parameters: []
     properties:
       is_generator: true
   do_HOPGscans_epu:
-    module: SST.RSoXS.Functions.NEXAFSscans
+    module: rsoxs.Functions.NEXAFSscans
     name: do_HOPGscans_epu
     parameters:
     - kind:
@@ -1364,13 +1364,13 @@ existing_plans:
     properties:
       is_generator: true
   do_some_eputables_2021_en:
-    module: SST.RSoXS.Functions.common_procedures
+    module: rsoxs.Functions.common_procedures
     name: do_some_eputables_2021_en
     parameters: []
     properties:
       is_generator: true
   en_scan_core:
-    module: SST.RSoXS.Functions.energyscancore
+    module: rsoxs.Functions.energyscancore
     name: en_scan_core
     parameters:
     - default: None
@@ -1446,19 +1446,19 @@ existing_plans:
     properties:
       is_generator: true
   enc_clr_gx:
-    module: SST.RSoXS.Functions.contingencies
+    module: rsoxs.Functions.contingencies
     name: enc_clr_gx
     parameters: []
     properties:
       is_generator: true
   enc_clr_x:
-    module: SST.RSoXS.Functions.contingencies
+    module: rsoxs.Functions.contingencies
     name: enc_clr_x
     parameters: []
     properties:
       is_generator: true
   find_fiducials:
-    module: SST.RSoXS.Functions.alignment
+    module: rsoxs.Functions.alignment
     name: find_fiducials
     parameters:
     - default: '[6, 3.5, -3, 1.1]'
@@ -1471,7 +1471,7 @@ existing_plans:
   fixed_pol_rotate_sample_nexafs:
     description: At fixed polarization, rotate the sample to do a traditional angle
       dependant NEXAFS measurement
-    module: SST.RSoXS.Functions.NEXAFSscans
+    module: rsoxs.Functions.NEXAFSscans
     name: fixed_pol_rotate_sample_nexafs
     parameters:
     - default: '''fly_Carbon_NEXAFS'''
@@ -1517,7 +1517,7 @@ existing_plans:
       polarization is calculated relative to the sample normal
 
       angles less than the grazing angle are not allowed and are ignored'
-    module: SST.RSoXS.Functions.NEXAFSscans
+    module: rsoxs.Functions.NEXAFSscans
     name: fixed_sample_rotate_pol_list_nexafs
     parameters:
     - default: '''fly_Carbon_NEXAFS'''
@@ -1563,7 +1563,7 @@ existing_plans:
       polarization is calculated relative to the sample normal
 
       angles less than the grazing angle are not allowed and are ignored'
-    module: SST.RSoXS.Functions.NEXAFSscans
+    module: rsoxs.Functions.NEXAFSscans
     name: fixed_sample_rotate_pol_nexafs
     parameters:
     - default: '''fly_Carbon_NEXAFS'''
@@ -1616,7 +1616,7 @@ existing_plans:
       and "250" are only valid choices)
 
       @return: perform a flying NEXAFS scan'
-    module: SST.RSoXS.Functions.NEXAFSscans
+    module: rsoxs.Functions.NEXAFSscans
     name: fly_Boron_NEXAFS
     parameters:
     - default: '0.05'
@@ -1679,7 +1679,7 @@ existing_plans:
       and "250" are only valid choices)
 
       @return: perform a flying NEXAFS scan'
-    module: SST.RSoXS.Functions.NEXAFSscans
+    module: rsoxs.Functions.NEXAFSscans
     name: fly_Calcium_NEXAFS
     parameters:
     - default: '0.15'
@@ -1742,7 +1742,7 @@ existing_plans:
       and "250" are only valid choices)
 
       @return: perform a flying NEXAFS scan'
-    module: SST.RSoXS.Functions.NEXAFSscans
+    module: rsoxs.Functions.NEXAFSscans
     name: fly_Carbon_NEXAFS
     parameters:
     - default: '0.1'
@@ -1805,7 +1805,7 @@ existing_plans:
       and "250" are only valid choices)
 
       @return: perform a flying NEXAFS scan'
-    module: SST.RSoXS.Functions.NEXAFSscans
+    module: rsoxs.Functions.NEXAFSscans
     name: fly_Fluorine_NEXAFS
     parameters:
     - default: '0.3'
@@ -1868,7 +1868,7 @@ existing_plans:
       and "250" are only valid choices)
 
       @return: perform a flying NEXAFS scan'
-    module: SST.RSoXS.Functions.NEXAFSscans
+    module: rsoxs.Functions.NEXAFSscans
     name: fly_Nitrogen_NEXAFS
     parameters:
     - default: '0.1'
@@ -1931,7 +1931,7 @@ existing_plans:
       and "250" are only valid choices)
 
       @return: perform a flying NEXAFS scan'
-    module: SST.RSoXS.Functions.NEXAFSscans
+    module: rsoxs.Functions.NEXAFSscans
     name: fly_Oxygen_NEXAFS
     parameters:
     - default: '0.1'
@@ -1994,7 +1994,7 @@ existing_plans:
       and "250" are only valid choices)
 
       @return: perform a flying NEXAFS scan'
-    module: SST.RSoXS.Functions.NEXAFSscans
+    module: rsoxs.Functions.NEXAFSscans
     name: fly_SiliconK_NEXAFS
     parameters:
     - default: '0.2'
@@ -2057,7 +2057,7 @@ existing_plans:
       and "250" are only valid choices)
 
       @return: perform a flying NEXAFS scan'
-    module: SST.RSoXS.Functions.NEXAFSscans
+    module: rsoxs.Functions.NEXAFSscans
     name: fly_SiliconL_NEXAFS
     parameters:
     - default: '0.1'
@@ -2120,7 +2120,7 @@ existing_plans:
       and "250" are only valid choices)
 
       @return: perform a flying NEXAFS scan'
-    module: SST.RSoXS.Functions.NEXAFSscans
+    module: rsoxs.Functions.NEXAFSscans
     name: fly_SulfurL_NEXAFS
     parameters:
     - default: '0.1'
@@ -2172,7 +2172,7 @@ existing_plans:
   fly_scan_eliot:
     description: Specific scan for SST-1 monochromator fly scan, while catching up
       with the undulator
-    module: SST.RSoXS.Functions.energyscancore
+    module: rsoxs.Functions.energyscancore
     name: fly_scan_eliot
     parameters:
     - description: "(start_en : eV to begin the scan,\nstop_en : eV to stop the scan,\n\
@@ -2204,7 +2204,7 @@ existing_plans:
   fly_scan_mono_epu:
     description: Specific scan for SST-1 monochromator fly scan, while catching up
       with the undulator
-    module: SST.RSoXS.Functions.energyscancore
+    module: rsoxs.Functions.energyscancore
     name: fly_scan_mono_epu
     parameters:
     - description: "(start_en : eV to begin the scan,\nstop_en : eV to stop the scan,\n\
@@ -2256,7 +2256,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: SST.RSoXS.Functions.energyscans
+    module: rsoxs.Functions.energyscans
     name: focused_carbon_scan_nd
     parameters:
     - default: '1.0'
@@ -2309,7 +2309,7 @@ existing_plans:
 
       I''m keeping this here just as a historical record / fallback in case flying
       stops working'
-    module: SST.RSoXS.Functions.NEXAFSscans
+    module: rsoxs.Functions.NEXAFSscans
     name: full_Carbon_NEXAFS
     parameters:
     - default: '[]'
@@ -2401,7 +2401,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: SST.RSoXS.Functions.energyscans
+    module: rsoxs.Functions.energyscans
     name: full_ca_scan_nd
     parameters:
     - default: '1.0'
@@ -2468,7 +2468,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: SST.RSoXS.Functions.energyscans
+    module: rsoxs.Functions.energyscans
     name: full_carbon_calcium_scan_nd
     parameters:
     - default: '1.0'
@@ -2535,7 +2535,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: SST.RSoXS.Functions.energyscans
+    module: rsoxs.Functions.energyscans
     name: full_carbon_scan_nd
     parameters:
     - default: '1.0'
@@ -2602,7 +2602,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: SST.RSoXS.Functions.energyscans
+    module: rsoxs.Functions.energyscans
     name: full_carbon_scan_nonaromatic
     parameters:
     - default: '1.0'
@@ -2669,7 +2669,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: SST.RSoXS.Functions.energyscans
+    module: rsoxs.Functions.energyscans
     name: full_fluorine_scan_nd
     parameters:
     - default: '1.0'
@@ -2736,7 +2736,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: SST.RSoXS.Functions.energyscans
+    module: rsoxs.Functions.energyscans
     name: full_nitrogen_scan_nd
     parameters:
     - default: '1.0'
@@ -2803,7 +2803,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: SST.RSoXS.Functions.energyscans
+    module: rsoxs.Functions.energyscans
     name: full_oxygen_scan_nd
     parameters:
     - default: '1.0'
@@ -2870,7 +2870,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: SST.RSoXS.Functions.energyscans
+    module: rsoxs.Functions.energyscans
     name: g_carbon_scan_nd
     parameters:
     - default: '1.0'
@@ -2915,7 +2915,7 @@ existing_plans:
     properties:
       is_generator: true
   image_bar:
-    module: SST.RSoXS.Functions.alignment
+    module: rsoxs.Functions.alignment
     name: image_bar
     parameters:
     - kind:
@@ -2935,7 +2935,7 @@ existing_plans:
     properties:
       is_generator: true
   isvar_scan:
-    module: SST.RSoXS.Functions.common_procedures
+    module: rsoxs.Functions.common_procedures
     name: isvar_scan
     parameters: []
     properties:
@@ -2944,7 +2944,7 @@ existing_plans:
     description: ':param config: string containing a name of a configuration
 
       :return:'
-    module: SST.RSoXS.Functions.alignment
+    module: rsoxs.Functions.alignment
     name: load_configuration
     parameters:
     - kind:
@@ -2955,7 +2955,7 @@ existing_plans:
       is_generator: true
   load_sample:
     description: move to a sample location and load the metadata with the sample information
-    module: SST.RSoXS.Functions.alignment
+    module: rsoxs.Functions.alignment
     name: load_sample
     parameters:
     - kind:
@@ -2965,31 +2965,31 @@ existing_plans:
     properties:
       is_generator: true
   mirror1_NEXAFSpos:
-    module: SST.RSoXS.Functions.configurations
+    module: rsoxs.Functions.configurations
     name: mirror1_NEXAFSpos
     parameters: []
     properties:
       is_generator: true
   mirror1_pos:
-    module: SST.RSoXS.Functions.configurations
+    module: rsoxs.Functions.configurations
     name: mirror1_pos
     parameters: []
     properties:
       is_generator: true
   mirror3_NEXAFSpos:
-    module: SST.RSoXS.Functions.configurations
+    module: rsoxs.Functions.configurations
     name: mirror3_NEXAFSpos
     parameters: []
     properties:
       is_generator: true
   mirror3_pos:
-    module: SST.RSoXS.Functions.configurations
+    module: rsoxs.Functions.configurations
     name: mirror3_pos
     parameters: []
     properties:
       is_generator: true
   move_to_location:
-    module: SST.RSoXS.Functions.alignment
+    module: rsoxs.Functions.alignment
     name: move_to_location
     parameters:
     - default: '[{''motor'': ''x'', ''position'': -0.0007999999999999119, ''order'':
@@ -3005,7 +3005,7 @@ existing_plans:
   normal_incidence_rotate_pol_nexafs:
     description: At normal incidence, rotate the polarization of the X-ray beam and
       conduct a NEXAFS scan at each polarization
-    module: SST.RSoXS.Functions.NEXAFSscans
+    module: rsoxs.Functions.NEXAFSscans
     name: normal_incidence_rotate_pol_nexafs
     parameters:
     - default: '''fly_Carbon_NEXAFS'''
@@ -3041,7 +3041,7 @@ existing_plans:
       is_generator: true
   one_shuttered_step:
     description: Inner loop of an N-dimensional step scan
-    module: SST.RSoXS.Functions.energyscancore
+    module: rsoxs.Functions.energyscancore
     name: one_shuttered_step
     parameters:
     - description: devices to read
@@ -3063,7 +3063,7 @@ existing_plans:
       is_generator: true
   one_trigger_nd_step:
     description: Inner loop of an N-dimensional step scan
-    module: SST.RSoXS.Functions.energyscancore
+    module: rsoxs.Functions.energyscancore
     name: one_trigger_nd_step
     parameters:
     - description: devices to read
@@ -3106,7 +3106,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: SST.RSoXS.Functions.energyscans
+    module: rsoxs.Functions.energyscans
     name: picky_carbon_scan_nd
     parameters:
     - default: '1.0'
@@ -3165,7 +3165,7 @@ existing_plans:
       \       assert ret is None\n    the plan is passed to `list` or some other iterator\
       \ that\n    repeatedly sends `None` into the plan to advance the\n    generator.\n\
       Returns\n-------\nval : Any or None\n    The \"single\" value of the device"
-    module: SST.RSoXS.Functions.energyscancore
+    module: rsoxs.Functions.energyscancore
     name: rd
     parameters:
     - kind:
@@ -3207,7 +3207,7 @@ existing_plans:
     properties:
       is_generator: true
   rotate_now:
-    module: SST.RSoXS.Functions.alignment
+    module: rsoxs.Functions.alignment
     name: rotate_now
     parameters:
     - kind:
@@ -3222,7 +3222,7 @@ existing_plans:
     properties:
       is_generator: true
   run_acquisition:
-    module: SST.RSoXS.Functions.acquisitions
+    module: rsoxs.Functions.acquisitions
     name: run_acquisition
     parameters:
     - kind:
@@ -3243,7 +3243,7 @@ existing_plans:
       \ automatically start back up\n@param retract_when_done: go to throughstation\
       \ mode at the end of all runs.\n@param save_as_complete: if a valid path, will\
       \ save the running bar to this position in case of failure\n@return:"
-    module: SST.RSoXS.Functions.acquisitions
+    module: rsoxs.Functions.acquisitions
     name: run_bar
     parameters:
     - kind:
@@ -3283,7 +3283,7 @@ existing_plans:
     properties:
       is_generator: true
   run_queue_plan:
-    module: SST.RSoXS.Functions.acquisitions
+    module: rsoxs.Functions.acquisitions
     name: run_queue_plan
     parameters:
     - kind:
@@ -3310,7 +3310,7 @@ existing_plans:
     properties:
       is_generator: true
   run_sample:
-    module: SST.RSoXS.Functions.acquisitions
+    module: rsoxs.Functions.acquisitions
     name: run_sample
     parameters:
     - kind:
@@ -3320,7 +3320,7 @@ existing_plans:
     properties:
       is_generator: true
   samxscan:
-    module: SST.RSoXS.Functions.alignment
+    module: rsoxs.Functions.alignment
     name: samxscan
     parameters: []
     properties:
@@ -3337,7 +3337,7 @@ existing_plans:
       \ as soon as photon part of detection ends\n        wait for shutter to close,\
       \ not for detector readout\n2.) do not wait for motor movement to finish before\
       \ beginnning detection step"
-    module: SST.RSoXS.Functions.energyscancore
+    module: rsoxs.Functions.energyscancore
     name: scan_eliot
     parameters:
     - kind:
@@ -3363,7 +3363,7 @@ existing_plans:
     properties:
       is_generator: true
   set_slit_offsets:
-    module: SST.RSoXS.HW.slits
+    module: rsoxs.HW.slits
     name: set_slit_offsets
     parameters: []
     properties:
@@ -3391,7 +3391,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: SST.RSoXS.Functions.energyscans
+    module: rsoxs.Functions.energyscans
     name: short_calcium_scan_nd
     parameters:
     - default: '1.0'
@@ -3458,7 +3458,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: SST.RSoXS.Functions.energyscans
+    module: rsoxs.Functions.energyscans
     name: short_carbon_scan_nd
     parameters:
     - default: '1.0'
@@ -3525,7 +3525,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: SST.RSoXS.Functions.energyscans
+    module: rsoxs.Functions.energyscans
     name: short_carbon_scan_nonaromatic
     parameters:
     - default: '1.0'
@@ -3592,7 +3592,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: SST.RSoXS.Functions.energyscans
+    module: rsoxs.Functions.energyscans
     name: short_fluorine_scan_nd
     parameters:
     - default: '1.0'
@@ -3659,7 +3659,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: SST.RSoXS.Functions.energyscans
+    module: rsoxs.Functions.energyscans
     name: short_nitrogen_scan_nd
     parameters:
     - default: '1.0'
@@ -3726,7 +3726,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: SST.RSoXS.Functions.energyscans
+    module: rsoxs.Functions.energyscans
     name: short_oxygen_scan_nd
     parameters:
     - default: '1.0'
@@ -3793,7 +3793,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: SST.RSoXS.Functions.energyscans
+    module: rsoxs.Functions.energyscans
     name: short_sulfurl_scan_nd
     parameters:
     - default: '1.0'
@@ -3860,7 +3860,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: SST.RSoXS.Functions.energyscans
+    module: rsoxs.Functions.energyscans
     name: short_zincl_scan_nd
     parameters:
     - default: '1.0'
@@ -3917,19 +3917,19 @@ existing_plans:
     properties:
       is_generator: true
   slits_in_SAXS:
-    module: SST.RSoXS.Functions.configurations
+    module: rsoxs.Functions.configurations
     name: slits_in_SAXS
     parameters: []
     properties:
       is_generator: true
   slits_in_WAXS:
-    module: SST.RSoXS.Functions.configurations
+    module: rsoxs.Functions.configurations
     name: slits_in_WAXS
     parameters: []
     properties:
       is_generator: true
   slits_out:
-    module: SST.RSoXS.Functions.configurations
+    module: rsoxs.Functions.configurations
     name: slits_out
     parameters: []
     properties:
@@ -3939,7 +3939,7 @@ existing_plans:
       needed before starting scans or snapping images
 
       :return:'
-    module: SST.RSoXS.HW.detectors
+    module: rsoxs.HW.detectors
     name: snapshot
     parameters:
     - default: '0'
@@ -3970,7 +3970,7 @@ existing_plans:
     properties:
       is_generator: true
   spiraldata:
-    module: SST.RSoXS.Functions.alignment
+    module: rsoxs.Functions.alignment
     name: spiraldata
     parameters:
     - default: '0.6'
@@ -4001,7 +4001,7 @@ existing_plans:
     properties:
       is_generator: true
   spiralsearch:
-    module: SST.RSoXS.Functions.alignment
+    module: rsoxs.Functions.alignment
     name: spiralsearch
     parameters:
     - default: '0.6'
@@ -4042,7 +4042,7 @@ existing_plans:
     properties:
       is_generator: true
   spiralsearch_all:
-    module: SST.RSoXS.Functions.alignment
+    module: rsoxs.Functions.alignment
     name: spiralsearch_all
     parameters:
     - default: '[]'
@@ -4063,7 +4063,7 @@ existing_plans:
     properties:
       is_generator: true
   spiralsearchwaxs:
-    module: SST.RSoXS.Functions.alignment
+    module: rsoxs.Functions.alignment
     name: spiralsearchwaxs
     parameters:
     - default: '0.6'
@@ -4089,7 +4089,7 @@ existing_plans:
     properties:
       is_generator: true
   spiralsearchwaxs_all:
-    module: SST.RSoXS.Functions.alignment
+    module: rsoxs.Functions.alignment
     name: spiralsearchwaxs_all
     parameters:
     - default: '[]'
@@ -4110,7 +4110,7 @@ existing_plans:
     properties:
       is_generator: true
   stability_scans:
-    module: SST.RSoXS.Functions.common_procedures
+    module: rsoxs.Functions.common_procedures
     name: stability_scans
     parameters:
     - kind:
@@ -4167,7 +4167,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: SST.RSoXS.Functions.energyscans
+    module: rsoxs.Functions.energyscans
     name: sufficient_carbon_scan_nd
     parameters:
     - default: '1.0'
@@ -4238,7 +4238,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: SST.RSoXS.Functions.energyscans
+    module: rsoxs.Functions.energyscans
     name: survey_scan_highenergy
     parameters:
     - default: '1.0'
@@ -4305,7 +4305,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: SST.RSoXS.Functions.energyscans
+    module: rsoxs.Functions.energyscans
     name: survey_scan_lowenergy
     parameters:
     - default: '1.0'
@@ -4372,7 +4372,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: SST.RSoXS.Functions.energyscans
+    module: rsoxs.Functions.energyscans
     name: survey_scan_veryhighenergy
     parameters:
     - default: '1.0'
@@ -4439,7 +4439,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: SST.RSoXS.Functions.energyscans
+    module: rsoxs.Functions.energyscans
     name: survey_scan_verylowenergy
     parameters:
     - default: '1.0'
@@ -4506,7 +4506,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: SST.RSoXS.Functions.energyscans
+    module: rsoxs.Functions.energyscans
     name: t_carbon_scan_nd
     parameters:
     - default: '1.0'
@@ -4598,7 +4598,7 @@ existing_plans:
       is_generator: true
   tune_max:
     description: 'plan: tune a motor to the maximum of signal(motor)'
-    module: SST.RSoXS.Functions.common_procedures
+    module: rsoxs.Functions.common_procedures
     name: tune_max
     parameters:
     - description: list of 'readable' objects
@@ -4666,7 +4666,7 @@ existing_plans:
     properties:
       is_generator: true
   vent:
-    module: SST.RSoXS.Functions.common_procedures
+    module: rsoxs.Functions.common_procedures
     name: vent
     parameters: []
     properties:
@@ -4694,7 +4694,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: SST.RSoXS.Functions.energyscans
+    module: rsoxs.Functions.energyscans
     name: very_short_carbon_scan_nd
     parameters:
     - default: '1.0'
@@ -4761,7 +4761,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: SST.RSoXS.Functions.energyscans
+    module: rsoxs.Functions.energyscans
     name: very_short_oxygen_scan_nd
     parameters:
     - default: '1.0'
@@ -4828,7 +4828,7 @@ existing_plans:
       @param kwargs: all extra parameters for general scans - see the inputs for en_scan_core
 
       @return: Do a step scan and take images'
-    module: SST.RSoXS.Functions.energyscans
+    module: rsoxs.Functions.energyscans
     name: veryshort_fluorine_scan_nd
     parameters:
     - default: '1.0'
