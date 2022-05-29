@@ -12,21 +12,21 @@ for path in paths:
     sys.path.append(str(path))
 
 
-from sst.CommonFunctions.functions import run_report
+from sst_funcs.printing import run_report
 
 run_report(__file__)
 
 # sst devices  These all reference the Base classes and instantiate the objects themselves into the current namespace
-from sst.HW.gatevalves import *
-from sst.HW.shutters import *
-from sst.HW.vacuum import *
-from sst.HW.motors import *
-from sst.HW.mirrors import *
-from sst.HW.diode import *
-from sst.HW.energy import *
+from sst_hw.gatevalves import *
+from sst_hw.shutters import *
+from sst_hw.vacuum import *
+from sst_hw.motors import *
+from sst_hw.mirrors import *
+from sst_hw.diode import *
+from sst_hw.energy import *
 
 # sst code  # Common code
-from sst.Base.archiver import *
+from sst_base.archiver import *
 
 # RSoXS startup - bluesky RE / db / md definitions
 from rsoxs.startup import *

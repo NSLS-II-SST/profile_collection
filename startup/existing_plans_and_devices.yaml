@@ -5,13 +5,13 @@ existing_devices:
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: SST.Base.motors
+    module: sst_base.motors
   BeamStopW:
     classname: PrettyMotorFMBO
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: SST.Base.motors
+    module: sst_base.motors
   Beamstop_SAXS:
     classname: EpicsSignalRO
     is_flyable: false
@@ -35,7 +35,7 @@ existing_devices:
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: SST.Base.cameras
+    module: sst_base.cameras
   Det_S:
     classname: SynAxis
     is_flyable: false
@@ -47,7 +47,7 @@ existing_devices:
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: SST.Base.motors
+    module: sst_base.motors
   Device:
     classname: type
     is_flyable: false
@@ -107,7 +107,7 @@ existing_devices:
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: SST.Base.motors
+    module: sst_base.motors
   FMBHexapodMirror:
     classname: type
     is_flyable: false
@@ -149,19 +149,19 @@ existing_devices:
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: SST.Base.motors
+    module: sst_base.motors
   Izero_cam:
     classname: StandardProsilica
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: SST.Base.cameras
+    module: sst_base.cameras
   Izero_ds:
     classname: PrettyMotorFMBO
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: SST.Base.motors
+    module: sst_base.motors
   Light_control:
     classname: EpicsSignal
     is_flyable: false
@@ -257,7 +257,7 @@ existing_devices:
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: SST.Base.cameras
+    module: sst_base.cameras
   Sample_TEY:
     classname: EpicsSignalRO
     is_flyable: false
@@ -269,7 +269,7 @@ existing_devices:
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: SST.Base.cameras
+    module: sst_base.cameras
   ShutterSet:
     classname: type
     is_flyable: false
@@ -281,7 +281,7 @@ existing_devices:
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: SST.Base.motors
+    module: sst_base.motors
   Shutter_control:
     classname: EpicsSignal
     is_flyable: false
@@ -335,7 +335,7 @@ existing_devices:
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: SST.Base.cameras
+    module: sst_base.cameras
   Signal:
     classname: type
     is_flyable: false
@@ -401,19 +401,19 @@ existing_devices:
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: SST.Base.motors
+    module: sst_base.motors
   TEMY:
     classname: PrettyMotor
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: SST.Base.motors
+    module: sst_base.motors
   TEMZ:
     classname: PrettyMotor
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: SST.Base.motors
+    module: sst_base.motors
   UndulatorMotor:
     classname: type
     is_flyable: false
@@ -431,7 +431,7 @@ existing_devices:
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: SST.Base.cameras
+    module: sst_base.cameras
   crosshair:
     classname: Overlay
     is_flyable: false
@@ -455,91 +455,91 @@ existing_devices:
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: SST.HW.energy
+    module: sst_hw.energy
   grating:
     classname: PrettyMotorFMBO
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: SST.Base.motors
+    module: sst_base.motors
   gratingx:
     classname: PrettyMotorFMBO
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: SST.Base.motors
+    module: sst_base.motors
   gv14:
     classname: EPS_Shutter
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: SST.Base.valves_and_shutters
+    module: sst_base.valves_and_shutters
   gv14a:
     classname: EPS_Shutter
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: SST.Base.valves_and_shutters
+    module: sst_base.valves_and_shutters
   gv15:
     classname: EPS_Shutter
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: SST.Base.valves_and_shutters
+    module: sst_base.valves_and_shutters
   gv26:
     classname: EPS_Shutter
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: SST.Base.valves_and_shutters
+    module: sst_base.valves_and_shutters
   gv27:
     classname: EPS_Shutter
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: SST.Base.valves_and_shutters
+    module: sst_base.valves_and_shutters
   gv27a:
     classname: EPS_Shutter
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: SST.Base.valves_and_shutters
+    module: sst_base.valves_and_shutters
   gv28:
     classname: EPS_Shutter
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: SST.Base.valves_and_shutters
+    module: sst_base.valves_and_shutters
   gvTEM:
     classname: EPS_Shutter
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: SST.Base.valves_and_shutters
+    module: sst_base.valves_and_shutters
   gvll:
     classname: EPS_Shutter
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: SST.Base.valves_and_shutters
+    module: sst_base.valves_and_shutters
   gvturbo:
     classname: EPS_Shutter
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: SST.Base.valves_and_shutters
+    module: sst_base.valves_and_shutters
   mir1:
     classname: FMBHexapodMirror
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: SST.Base.mirrors
+    module: sst_base.mirrors
   mir1OLD:
     classname: HexapodMirror
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: SST.Base.mirrors
+    module: sst_base.mirrors
   mir1_pressure:
     classname: EpicsSignalRO
     is_flyable: false
@@ -557,43 +557,43 @@ existing_devices:
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: SST.Base.mirrors
+    module: sst_base.mirrors
   mir3OLD:
     classname: HexapodMirror
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: SST.Base.mirrors
+    module: sst_base.mirrors
   mir4:
     classname: FMBHexapodMirror
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: SST.Base.mirrors
+    module: sst_base.mirrors
   mir4OLD:
     classname: HexapodMirror
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: SST.Base.mirrors
+    module: sst_base.mirrors
   mirror2:
     classname: PrettyMotorFMBO
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: SST.Base.motors
+    module: sst_base.motors
   mirror2x:
     classname: PrettyMotorFMBO
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: SST.Base.motors
+    module: sst_base.motors
   mono_en:
     classname: Monochromator
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: SST.HW.energy
+    module: sst_hw.energy
   motor1:
     classname: SynAxis
     is_flyable: false
@@ -605,25 +605,25 @@ existing_devices:
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: SST.Base.valves_and_shutters
+    module: sst_base.valves_and_shutters
   psh10:
     classname: EPS_Shutter
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: SST.Base.valves_and_shutters
+    module: sst_base.valves_and_shutters
   psh4:
     classname: EPS_Shutter
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: SST.Base.valves_and_shutters
+    module: sst_base.valves_and_shutters
   psh7:
     classname: EPS_Shutter
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: SST.Base.valves_and_shutters
+    module: sst_base.valves_and_shutters
   ring_current:
     classname: EpicsSignalRO
     is_flyable: false
@@ -677,31 +677,31 @@ existing_devices:
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: SST.Base.motors
+    module: sst_base.motors
   sam_X:
     classname: PrettyMotorFMBO
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: SST.Base.motors
+    module: sst_base.motors
   sam_Y:
     classname: PrettyMotorFMBO
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: SST.Base.motors
+    module: sst_base.motors
   sam_Z:
     classname: PrettyMotorFMBO
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: SST.Base.motors
+    module: sst_base.motors
   sam_viewer:
     classname: PrettyMotorFMBO
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: SST.Base.motors
+    module: sst_base.motors
   saxs_det:
     classname: SimGreatEyes
     is_flyable: false
@@ -713,25 +713,25 @@ existing_devices:
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: SST.HW.diode
+    module: sst_hw.diode
   slits1:
     classname: Slits
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: SST.Base.slits
+    module: sst_base.slits
   slits2:
     classname: Slits
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: SST.Base.slits
+    module: sst_base.slits
   slits3:
     classname: Slits
     is_flyable: false
     is_movable: true
     is_readable: true
-    module: SST.Base.slits
+    module: sst_base.slits
   stats_plugin:
     classname: StatsPlugin
     is_flyable: false
@@ -1062,7 +1062,7 @@ existing_plans:
     properties:
       is_generator: true
   base_grating_to_1200:
-    module: SST.HW.energy
+    module: sst_hw.energy
     name: base_grating_to_1200
     parameters:
     - kind:
@@ -1076,7 +1076,7 @@ existing_plans:
     properties:
       is_generator: true
   base_grating_to_250:
-    module: SST.HW.energy
+    module: sst_hw.energy
     name: base_grating_to_250
     parameters:
     - kind:
@@ -1090,7 +1090,7 @@ existing_plans:
     properties:
       is_generator: true
   base_set_polarization:
-    module: SST.HW.energy
+    module: sst_hw.energy
     name: base_set_polarization
     parameters:
     - kind:
