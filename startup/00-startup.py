@@ -90,10 +90,24 @@ sd.baseline.extend(
         Izero_ds,
         grating,
         mirror2,
+        mono_en.readback,
+        mono_en.setpoint,
+        mono_en.grating,
+        mono_en.grating.user_offset,
+        mono_en.gratingx,
+        mono_en.mirror2,
+        mono_en.mirror2.user_offset,
+        mono_en.mirror2x,
+        mono_en.readback,
+        mono_en.cff,
+        en.epugap,
+        en.epuphase,
+        en.epumode,
+        en.polarization,
+        en.sample_polarization,
         slits1,
         slits2,
         slits3,
-        en,
         ring_current,
         Beamstop_WAXS,
         Beamstop_SAXS,
@@ -138,6 +152,7 @@ sd.baseline.extend(
         Shutter_enable1,
         Shutter_enable2,
         Shutter_enable3,
+
 
     ]
 )
