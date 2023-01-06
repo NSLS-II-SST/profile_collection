@@ -48,11 +48,10 @@ from rsoxs.Functions.configurations import *
 from rsoxs.Functions.schemas import *
 from rsoxs.Functions.PVdictionary import *
 from rsoxs.Functions.energyscancore import *
-from rsoxs.Functions.energyscans import *
-from rsoxs.Functions.NEXAFSscans import *
+from rsoxs.Functions.rsoxs_plans import *
 from rsoxs.HW.slackbot import rsoxs_bot
-from rsoxs.Functions.acquisitions import *
-from rsoxs.Functions.sample_spreadsheets import *
+from rsoxs_scans.spreadsheets import *
+from rsoxs_scans.acquisition import *
 
 
 try:
