@@ -39,6 +39,7 @@ from rsoxs.HW.detectors import *
 from rsoxs.HW.slits import *
 from rsoxs.HW.syringepump import *
 from rsoxs.HW.energy import *
+from rsoxs.HW.lakeshore import *
 
 # RSoXS specific code
 from rsoxs.Functions.alignment import *
@@ -152,7 +153,7 @@ sd.baseline.extend(
         Shutter_enable1,
         Shutter_enable2,
         Shutter_enable3,
-
+        tem_tempstage
 
     ]
 )
@@ -162,6 +163,7 @@ sd.baseline.extend(
 sd.monitors.extend(
     [
         Shutter_control,
+        tem_tempstage.readback,
         mono_en.readback,
         ring_current,
         Beamstop_WAXS,
@@ -177,31 +179,7 @@ sd.monitors.extend(
 
 
 
-def waxs_spiral_mode():
-    try:
-        RE.preprocessors.remove(dark_frame_preprocessor_waxs_spirals)
-    except ValueError:
-        pass
-    try:
-        RE.preprocessors.remove(dark_frame_preprocessor_waxs)
-    except ValueError:
-        pass
-    RE.preprocessors.append(dark_frame_preprocessor_waxs_spirals)
 
-def waxs_normal_mode():
-    try:
-        RE.preprocessors.remove(dark_frame_preprocessor_waxs_spirals)
-    except ValueError:
-        pass
-    try:
-        RE.preprocessors.remove(dark_frame_preprocessor_waxs)
-    except ValueError:
-        pass
-    RE.preprocessors.append(dark_frame_preprocessor_waxs)
-
-
-waxs_normal_mode()
-RE.preprocessors.append(dark_frame_preprocessor_saxs)
 # setup the contingencies
 
 from rsoxs.HW.contingencies import *
