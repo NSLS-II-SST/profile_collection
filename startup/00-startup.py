@@ -49,6 +49,7 @@ from rsoxs.Functions.schemas import *
 from rsoxs.Functions.PVdictionary import *
 from rsoxs.Functions.energyscancore import *
 from rsoxs.Functions.rsoxs_plans import *
+from rsoxs.Functions.fly_alignment import *
 from rsoxs.HW.slackbot import rsoxs_bot
 from rsoxs_scans.spreadsheets import *
 from rsoxs_scans.acquisition import *
@@ -65,7 +66,6 @@ except ImportError:
 if not is_re_worker_active():
     from rsoxs.Functions.magics import *
 
-    user()  # print out the current user metadata
     beamline_status()  # print out the current sample metadata, motor position and detector status
 
 
