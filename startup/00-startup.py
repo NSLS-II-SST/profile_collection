@@ -153,7 +153,6 @@ sd.baseline.extend(
         Shutter_enable2,
         Shutter_enable3,
         tem_tempstage
-
     ]
 )
 
@@ -162,15 +161,17 @@ sd.baseline.extend(
 sd.monitors.extend(
     [
         Shutter_control,
-        tem_tempstage.readback,
+        #tem_tempstage.readback,
         mono_en.readback,
         ring_current,
         Beamstop_WAXS,
         Beamstop_SAXS,
-        Slit1_Current_Top,
-        Slit1_Current_Bottom,
-        Slit1_Current_Inboard,
-        Slit1_Current_Outboard,
+        Shutter_SAXS_count,
+        Shutter_WAXS_count,
+        #Slit1_Current_Top,
+        #Slit1_Current_Bottom,
+        #Slit1_Current_Inboard,
+        #Slit1_Current_Outboard,
         Izero_Mesh,
         Sample_TEY,
     ]
