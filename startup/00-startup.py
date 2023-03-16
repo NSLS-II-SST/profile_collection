@@ -152,6 +152,8 @@ sd.baseline.extend(
         Shutter_enable1,
         Shutter_enable2,
         Shutter_enable3,
+        Shutter_SAXS_count,
+        Shutter_WAXS_count,
         tem_tempstage
     ]
 )
