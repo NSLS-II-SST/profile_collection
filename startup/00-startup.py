@@ -163,8 +163,10 @@ sd.baseline.extend(
 sd.monitors.extend(
     [
         Shutter_control,
+        #Shutter_open_time,
         #tem_tempstage.readback,
         mono_en.readback,
+        mono_en.en_mon,
         ring_current,
         Beamstop_WAXS,
         Beamstop_SAXS,
