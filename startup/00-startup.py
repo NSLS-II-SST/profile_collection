@@ -167,6 +167,7 @@ sd.monitors.extend(
         #tem_tempstage.readback,
         #mono_en_int,
         mono_en.readback,
+        epu_gap.user_readback,
         #mono_en.en_mon,
         ring_current,
         Beamstop_WAXS,
