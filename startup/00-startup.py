@@ -43,6 +43,7 @@ from rsoxs.HW.lakeshore import *
 
 # RSoXS specific code
 from rsoxs.Functions.alignment import *
+from rsoxs.Functions.alignment_local import *
 from rsoxs.Functions.common_procedures import *
 from rsoxs.Functions.configurations import *
 from rsoxs.Functions.schemas import *
@@ -163,7 +164,7 @@ sd.baseline.extend(
 sd.monitors.extend(
     [
         Shutter_control,
-        #Shutter_open_time,
+        Shutter_open_time,
         #tem_tempstage.readback,
         #mono_en_int,
         mono_en.readback,
@@ -172,7 +173,7 @@ sd.monitors.extend(
         ring_current,
         Beamstop_WAXS,
         Beamstop_SAXS,
-        Shutter_SAXS_count,
+        #Shutter_SAXS_count,
         Shutter_WAXS_count,
         #Slit1_Current_Top,
         #Slit1_Current_Bottom,
