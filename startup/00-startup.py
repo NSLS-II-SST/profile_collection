@@ -51,6 +51,7 @@ from rsoxs.Functions.PVdictionary import *
 from rsoxs.Functions.energyscancore import *
 from rsoxs.Functions.rsoxs_plans import *
 from rsoxs.Functions.fly_alignment import *
+from rsoxs.Functions.spreadsheets import *
 from rsoxs.HW.slackbot import rsoxs_bot
 from rsoxs_scans.spreadsheets import *
 from rsoxs_scans.acquisition import *
@@ -167,20 +168,20 @@ sd.monitors.extend(
         Shutter_open_time,
         #tem_tempstage.readback,
         #mono_en_int,
-        mono_en.readback,
-        epu_gap.user_readback,
+        #mono_en.readback,
+        #epu_gap.user_readback,
         #mono_en.en_mon,
         ring_current,
-        Beamstop_WAXS,
-        Beamstop_SAXS,
+        #Beamstop_WAXS,
+        #Beamstop_SAXS,
         #Shutter_SAXS_count,
         Shutter_WAXS_count,
         #Slit1_Current_Top,
         #Slit1_Current_Bottom,
         #Slit1_Current_Inboard,
         #Slit1_Current_Outboard,
-        Izero_Mesh,
-        Sample_TEY,
+        #Izero_Mesh,
+        #Sample_TEY,
     ]
 )
 
