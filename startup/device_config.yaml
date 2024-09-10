@@ -1,0 +1,269 @@
+cameras:
+  _default:
+    _target_: sst_base.cameras.StandardProsilicaV33
+  bpm8:
+    prefix: "XF:07ID-BI{BPM:8}"
+    name: "BPM8"
+  bpm14:
+    prefix: "XF:07ID-BI{BPM:14}"
+    name: "BPM14"
+controllers:
+  adr:
+    _target_: sst_base.sim.DummyObject
+    prefix: 'XF:07ID-ES{UCAL:ADR}'
+    name: 'adr'
+detectors:
+  _default:
+    _target_: sst_base.detectors.scalar.ophScalar
+  i0:
+    prefix: "XF:07ID-BI[ADC:2-Ch:0]"
+    name: "ucal_i0up"
+    rescale: -1
+    _extra_:
+      sets:
+        default: normalization
+        transmission: normalization
+      threshold: 0.1
+  ref:
+    prefix: "XF:07ID-BI[ADC:1-Ch:5]"
+    name: "ucal_ref"
+    rescale: -1
+    _extra_:
+      sets:
+        default: reference
+        transmission: reference
+      threshold: 0.1
+  sc:
+    prefix: "XF:07ID-BI[ADC:2-Ch:1]"
+    name: "ucal_sc"
+    rescale: -1
+    _extra_:
+      sets:
+        default: primary
+      threshold: 0.1
+  i0mir:
+    _target_: sst_base.detectors.scalar.I400SingleCh
+    prefix: "XF:07ID-BI{DM7:I400-1}:IC3_MON"
+    name: "DM7_i400_i0mirror"
+  m4cd:
+    prefix: "XF:07ID-BI[ADC:2-Ch:2]"
+    name: "m4cd"
+  dm7diode:
+    prefix: "XF:07ID-BI[ADC:2-Ch:3]"
+    name: "dm7diode"
+  tes:
+    _target_: sst_base.sim.DummyObject
+    prefix: "tes"
+    name: "tes"
+    address: "10.66.48.41"
+    path: "/nsls2/data/sst/legacy/ucal/raw/%Y/%m/%2d"
+    port: 4000
+dms:
+  _default:
+    _target_: sst_base.motors.PrettyMotor
+  dm7:
+    prefix: "XF:07ID2-BI{Diag:07-Ax:Y}Mtr"
+    name: "DM7Motor"
+  dm8:
+    prefix: "XF:07ID2-BI{Diag:08-Ax:Y}Mtr"
+    name: "DM8Motor"
+diode:
+  _default:
+    _target_: ophyd.EpicsSignal
+    kind: "normal"
+  Shutter_enable:
+    prefix: "XF:07IDB-CT{DIODE-MTO:1}OutMaskBit:2-Sel"
+    name: "RSoXS Shutter Toggle Enable"
+  Shutter_enable1:
+    prefix: "XF:07IDB-CT{DIODE-MTO:1}InMaskBit:1-Sel"
+    name: "RSoXS Shutter Toggle Enable In1"
+  Shutter_enable2:
+    prefix: "XF:07IDB-CT{DIODE-MTO:1}InMaskBit:2-Sel"
+    name: "RSoXS Shutter Toggle Enable In2"
+    put_complete: False
+    auto_monitor: False
+  Shutter_enable3:
+    prefix: "XF:07IDB-CT{DIODE-MTO:1}InMaskBit:3-Sel"
+    name: "RSoXS Shutter Toggle Enable In3"
+  Shutter_control:
+    prefix: "XF:07IDB-CT{DIODE-Local:1}OutPt01:Data-Sel"
+    name: "RSoXS Shutter Toggle"
+  Shutter_delay:
+    prefix: "XF:07IDB-CT{DIODE-MTO:1}OutDelaySet:2-SP"
+    name: "RSoXS Shutter Delay (ms)"
+  Shutter_open_time:
+    prefix: "XF:07IDB-CT{DIODE-MTO:1}OutWidthSet:2-SP"
+    name: "RSoXS Shutter Opening Time (ms)"
+  Shutter_trigger:
+    prefix: "XF:07IDB-CT{DIODE-MTO:1}Trigger:PV-Cmd"
+    name: "RSoXS Shutter Trigger"
+  Light_control:
+    prefix: "XF:07IDB-CT{DIODE-Local:1}OutPt05:Data-Sel"
+    name: "RSoXS Light Toggle"
+  shutter_open_set:
+    _target_: sst_base.shutters.ShutterSet
+    prefix: 'XF:07IDB-CT{DIODE-MTO:1}Output:2'
+    name: "Shutter Open with Watcher"
+energy:
+  en:
+    _target_: ucal.new_energy.NewEnPos
+    prefix: ""
+    name: "en"
+gatevalves:
+  _default:
+    _target_: sst_base.shutters.EPS_Shutter
+    kind: hinted
+    shutter_type: GV
+    openval: 0
+    closeval: 1
+  gv14:
+    prefix: "XF:07IDA-VA:2{FS:6-GV:1}"
+    name: "Pre Mono Gate Valve"
+  gv14a:
+    prefix: "XF:07IDA-VA:2{FS:6-GV:2}"
+    name: "Mono Gate Valve"
+  gv15:
+    prefix: "XF:07IDB-VA:2{Mono:PGM-GV:1}"
+    name: "Pre Shutter Gate Valve"
+  gv26:
+    prefix: "XF:07IDB-VA:2{Mir:M3C-GV:1}"
+    name: "Post Shutter Gate Valve"
+    openval: 1
+    closeval: 0
+  gv27:
+    prefix: "XF:07IDB-VA:3{Slt:C-GV:1}"
+    name: "Upstream Gate Valve"
+    openval: 1
+    closeval: 0
+  gv27a:
+    prefix: "XF:07IDB-VA:2{RSoXS:Main-GV:1}"
+    name: "Izero-Main Gate Valve"
+    openval: 1
+    closeval: 0
+  gv28:
+    prefix: "XF:07IDB-VA:2{BT:1-GV:1}"
+    name: "Downstream Gate Valve"
+    openval: 1
+    closeval: 0
+  gvTEM:
+    prefix: "XF:07IDB-VA:2{RSoXS:Main-GV:2}"
+    name: "TEM Load Lock Gate Valve"
+  gvll:
+    prefix: "XF:07IDB-VA:2{RSoXS:LL-GV:1}"
+    name: "Load Lock Gate Valve"
+  gvturbo:
+    prefix: "XF:07IDB-VA:2{RSoXS:TP-GV:1}"
+    name: "Turbo Gate Valve"
+manipulators:
+  manipulator:
+    _target_: sst_funcs.manipulators.ManipulatorBuilder
+    prefix: "XF:07ID1-BI{UCAL-Ax:"
+    name: "manip"
+  multimesh:
+    _target_: sst_funcs.manipulators.MultiMeshBuilder
+    prefix: "XF:07ID1-BI{I0Up-Ax:"
+    name: "i0upmultimesh"
+mirrors:
+  _default:
+    _target_: sst_base.mirrors.FMBHexapodMirror
+    kind: hinted
+  mir2_type:
+    _target_: ophyd.EpicsSignal
+    prefix: "XF:07ID1-OP{Mono:PGM1-Ax:MirX}Mtr_TYPE_MON"
+    name: "SST 1 Mirror 2 Stripe"
+  mir4:
+    prefix: "XF:07ID2-OP{Mir:M4CD"
+    name: "SST 1 Mirror 4 fmb"
+  mir3:
+    prefix: "XF:07ID1-OP{Mir:M3ABC"
+    name: "SST 1 Mirror 3 fmb"
+  mir1:
+    prefix: "XF:07IDA-OP{Mir:M1"
+    name: "SST 1 Mirror 1 fmb"
+motors:
+  _default:
+    _target_: sst_base.motors.PrettyMotorFMBO
+    kind: hinted
+  Exit_Slit:
+    prefix: "XF:07ID2-BI{Slt:11-Ax:YGap}Mtr"
+    name: "Exit Slit of Mono Vertical Gap"
+  grating:
+    prefix: "XF:07ID1-OP{Mono:PGM1-Ax:GrtP}Mtr"
+    name: "Mono Grating"
+  mirror2:
+    prefix: "XF:07ID1-OP{Mono:PGM1-Ax:MirP}Mtr"
+    name: "Mono Mirror"
+  gratingx:
+    prefix: "XF:07ID1-OP{Mono:PGM1-Ax:GrtX}Mtr"
+    name: "Mono Grating"
+  mirror2x:
+    prefix: "XF:07ID1-OP{Mono:PGM1-Ax:MirX}Mtr"
+    name: "Mono Mirror"
+  i0upAu:
+    _target_: sst_base.motors.PrettyMotor
+    prefix: "XF:07ID1-BI{I0Up-Ax:Upper}Mtr"
+    name: "i0upAu"
+  tesz:
+    _target_: sst_base.motors.PrettyMotor
+    prefix: "XF:07ID1-BI{UCAL-Ax:DetX}Mtr"
+    name: "tesz"
+shutters:
+  _default:
+    _target_: sst_base.shutters.EPS_Shutter
+    shutter_type: PH
+    openval: 0
+    closeval: 1
+  psh1:
+    prefix: "XF:07ID-PPS{Sh:FE}"
+    name: "Front-End Shutter"
+    shutter_type: FE
+  psh4:
+    prefix: "XF:07IDA-PPS{PSh:4}"
+    name: "Hutch Photon Shutter"
+  psh10:
+    prefix: "XF:07IDA-PPS{PSh:10}"
+    name: "Upstream Photon Shutter"
+  psh7:
+    prefix: "XF:07IDA-PPS{PSh:7}"
+    name: "Downstream Photon Shutter"
+signals:
+  _default:
+    _target_: ophyd.EpicsSignalRO
+    kind: "normal"
+  ring_current:
+    prefix: "SR:OPS-BI{DCCT:1}I:Real-I"
+    name: "NSLS-II Ring Current"
+  sst_control:
+    prefix: "XF:07ID1-CT{Bl-Ctrl}Endstn-Sel"
+    name: "SST endstation in Control"
+    string: True
+  ring_status:
+    prefix: "SR-OPS{}Mode-Sts"
+    name: "NSLS-II Ring Status"
+    string: True
+vacuum:
+  _default:
+    _target_: ophyd.EpicsSignalRO
+    kind: hinted
+  rsoxs_ccg_izero:
+    prefix: "XF:07IDB-VA:2{RSoXS:DM-CCG:1}P:Raw-I"
+    name: "IZero Chamber Cold Cathode Gauge"
+  rsoxs_pg_izero:
+    prefix: "XF:07IDB-VA:2{RSoXS:DM-TCG:1}P:Raw-I"
+    name: "IZero Chamber Pirani Gauge"
+  rsoxs_ccg_main:
+    prefix: "XF:07IDB-VA:2{RSoXS:Main-CCG:1}P:Raw-I"
+    name: "Main Chamber Chamber Cold Cathode Gauge"
+  rsoxs_pg_main:
+    prefix: "XF:07IDB-VA:2{RSoXS:Main-TCG:1}P:Raw-I"
+    name: "Main Chamber Pirani Gauge"
+  rsoxs_ccg_ll:
+    prefix: "XF:07IDB-VA:2{RSoXS:LL-CCG:1}P:Raw-I"
+    name: "Load Lock Chamber Cold Cathode Gauge"
+  rsoxs_pg_ll:
+    prefix: "XF:07IDB-VA:2{RSoXS:LL-TCG:1}P:Raw-I"
+    name: "Load Lock Pirani Gauge"
+  rsoxs_ll_gpwr:
+    _target_: ophyd.EpicsSignal
+    prefix: "XF:07IDB-VA:2{RSoXS:LL-CCG:1}Pwr-Cmd"
+    name: "Power to Load Lock Gauge"

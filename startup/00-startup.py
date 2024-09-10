@@ -15,7 +15,7 @@ for path in paths:
 from sst_funcs.printing import run_report
 
 run_report(__file__)
-
+#
 # sst devices  These all reference the Base classes and instantiate the objects themselves into the current namespace
 from sst_hw.gatevalves import *
 from sst_hw.shutters import *
@@ -118,8 +118,7 @@ sd.baseline.extend(
         Slit1_Current_Inboard,
         Slit1_Current_Outboard,
         Izero_Diode,
-        Izero_Mesh,
-        DM4_PD,
+        Izero_Mesh, #
         mir1_pressure,
         rsoxs_ccg_izero,
         rsoxs_pg_izero,
