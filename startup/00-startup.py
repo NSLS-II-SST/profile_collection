@@ -12,6 +12,14 @@ for path in paths:
     sys.path.append(str(path))
 
 
+## Uses this package: https://github.com/xraygui/nbs-bl
+## Gives the path to profile_collection directory and looks for devices.toml file
+## This should replace any hardware imports from sst_hw, sst_base, and rsoxs.  rsoxs.Functions imports may have to stay until some of the functions are rewritten to become compliant with data security upgrades.
+from nbs_bl.configuration import load_and_configure_everything
+from nbs_bl.globalVars import GLOBAL_BEAMLINE as bl
+load_and_configure_everything()
+
+
 from sst_funcs.printing import run_report
 
 run_report(__file__)
