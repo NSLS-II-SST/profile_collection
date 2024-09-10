@@ -1,0 +1,165 @@
+## PK: I reorganized the devices from upstream to downstream along SST1 just to make sure I don't forget/duplicate something by accident.
+
+[ring_current]
+_target = "ophyd.EpicsSignalRO"
+_group = "signals"
+_role = "beam_current"
+kind = "normal"
+prefix = "SR:OPS-BI{DCCT:1}I:Real-I"
+name = "NSLS-II Ring Current"
+
+[FS1_cam]
+_target = "rsoxs.HW.cameras.StandardProsilicawstats" 
+_group = "all_standard_pros" ## PK: Does this need another group?
+prefix = "XF:07ID-BI{BPM:1}"
+name = "FS1 white beam stop Camera"
+read_attrs = ['tiff','stats5']
+
+[FS6_cam]
+_target = "rsoxs.HW.cameras.StandardProsilicawstats" 
+_group = "all_standard_pros" ## PK: Does this need another group?
+prefix = "XF:07ID-BI{BPM:6}"
+name = "FS6 Camera"
+read_attrs = ['tiff','stats5']
+
+[psh1]
+_target = "sst_base.shutters.EPS_Shutter"
+_group = "shutters"
+openval = 0
+closeval = 1
+prefix = "XF:07ID-PPS{Sh:FE}"
+name = "Front-End Shutter"
+shutter_type = "FE"
+
+[psh4]
+_target = "sst_base.shutters.EPS_Shutter"
+_group = "shutters"
+shutter_type = "PH"
+openval = 0
+closeval = 1
+prefix = "XF:07IDA-PPS{PSh:4}"
+name = "Hutch Photon Shutter"
+
+[FS7_cam]
+_target = "rsoxs.HW.cameras.StandardProsilicawstats"
+_group = "all_standard_pros" ## PK: Does this need another group?
+prefix = "XF:07ID-BI{BPM:7}"
+name = "FS7 pink beam stop Camera"
+read_attrs = ['tiff','stats5']
+
+[psh10]
+_target = "sst_base.shutters.EPS_Shutter"
+_group = "shutters"
+shutter_type = "PH"
+openval = 0
+closeval = 1
+prefix = "XF:07IDA-PPS{PSh:10}"
+name = "Photon Shutter 10"
+
+[Izero_cam]
+_target = "sst_base.cameras.StandardProsilica"
+_group = "all_standard_pros"
+prefix = "XF:07ID1-ES:1{Scr:1}"
+name = "Izero YAG Camera"
+
+[Sample_cam]
+_target = "sst_base.cameras.StandardProsilica"
+_group = "all_standard_pros"
+prefix = "XF:07ID1-ES:1{Scr:4}"
+name = "RSoXS Sample Area Camera" ## PK: Would like to rename to "RSoXS Sample optical area camera, front view"
+
+[Side_cam]
+_target = "sst_base.cameras.StandardProsilica"
+_group = "all_standard_pros"
+prefix = "XF:07ID1-ES:1{Scr:2}"
+name = "RSoXS Sample Area Camera" ## PK: Would like to rename to "RSoXS Sample optical area camera, side view"
+
+[sam_viewer]
+_target = "sst_base.motors.PrettyMotorFMBO"
+_group = "motors"
+prefix = "XF:07ID2-ES1{ImgY-Ax:1}Mtr"
+name = "RSoXS Sample Imager"
+kind = "hinted"
+
+[SampleViewer_cam]
+_target = "sst_base.cameras.ColorProsilicaWithTIFFV33"
+_group = "all_standard_pros"
+prefix = "XF:07ID1-ES:1{Scr:5}"
+name = "Sample Imager Detector Area Camera" ## PK: Would like to rename to "Solid sample bar imager detector area camera"
+read_attrs = ["tiff"]
+
+[sam_X]
+_target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
+_group = "motors"
+kind = "hinted"
+name = "RSoXS Sample Outboard-Inboard"
+prefix = "XF:07ID2-ES1{Stg-Ax:X}Mtr"
+
+[sam_Y]
+_target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
+_group = "motors"
+kind = "hinted"
+name = "RSoXS Sample Up-Down"
+prefix = "XF:07ID2-ES1{Stg-Ax:Y}Mtr"
+
+[sam_Z]
+_target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
+_group = "motors"
+kind = "hinted"
+name = "RSoXS Sample Downstream-Upstream"
+prefix = "XF:07ID2-ES1{Stg-Ax:Z}Mtr"
+
+[sam_Th]
+_target = "sst_base.motors.PrettyMotorFMBODeadband"
+_group = "motors"
+kind = "hinted"
+name = "RSoXS Sample Rotation"
+prefix = "XF:07ID2-ES1{Stg-Ax:Yaw}Mtr"
+
+[BeamStopW]
+_target = "sst_base.motors.PrettyMotorFMBODeadband"
+_group = "motors"
+kind = "hinted"
+name = "Beam Stop WAXS"
+prefix = "XF:07ID2-ES1{BS-Ax:1}Mtr"
+
+[tem_tempstage]
+_target = "rsoxs.HW.lakeshore.Lakeshore336Picky" 
+_group = "sample_environments" ## PK: I made a new group, feel free to rename.
+kind = "normal"
+name = "TEM temperature controller"
+prefix = "XF:07ID2-ES1{TCtrl:1}LS336:TC1:"
+
+[DetS_cam]
+_target = "sst_base.cameras.StandardProsilica"
+_group = "all_standard_pros"
+prefix = "XF:07ID1-ES:1{Scr:3}"
+name = "WAXS Detector Area Camera"
+
+[waxs_det]
+_target = "rsoxs.Base.detectors.RSOXSGreatEyesDetector" 
+_group = "all_standard_pros" ## PK: Not sure if this belongs elsewhere.
+prefix = "XF:07ID1-ES:1{GE:2}"
+name = "Wide Angle CCD Detector" ## PK: Not sure how this is different from DetS_cam
+read_attrs = ['tiff', 'stats1.total', 'saturated','under_exposed','cam']
+
+[psh7]
+_target = "sst_base.shutters.EPS_Shutter"
+_group = "shutters"
+_role = "default_shutter"
+shutter_type = "PH"
+openval = 0
+closeval = 1
+prefix = "XF:07IDA-PPS{PSh:7}"
+name = "Photon Shutter 7"
+
+[psh8]
+_target = "sst_base.shutters.EPS_Shutter"
+_group = "shutters"
+shutter_type = "PH"
+openval = 0
+closeval = 1
+prefix = "XF:07IDA-PPS{PSh:8}"
+name = "Photon Shutter 8"
+
+
