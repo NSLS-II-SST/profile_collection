@@ -123,6 +123,20 @@ kind = "hinted"
 name = "Beam Stop WAXS"
 prefix = "XF:07ID2-ES1{BS-Ax:1}Mtr"
 
+[Det_W]
+_target = "sst_base.motors.PrettyMotorFMBODeadband"
+_group = "motors"
+kind = "hinted"
+name = "Detector WAXS Translation"
+prefix = "XF:07ID2-ES1{Det-Ax:2}Mtr"
+
+[BeamStopS]
+_target = "sst_base.motors.PrettyMotorFMBODeadband"
+_group = "motors"
+kind = "hinted"
+name = "Beam Stop SAXS"
+prefix = "XF:07ID2-ES1{BS-Ax:2}Mtr"
+
 [tem_tempstage]
 _target = "rsoxs.HW.lakeshore.Lakeshore336Picky" 
 _group = "sample_environments" ## PK: I made a new group, feel free to rename.
