@@ -1,4 +1,4 @@
-## PK: I reorganized the devices from upstream to downstream along SST1 just to make sure I don't forget/duplicate something by accident.
+## Devices are organized from upstream to downstream along SST1.
 
 [ring_current]
 _target = "ophyd.EpicsSignalRO"
@@ -10,14 +10,14 @@ name = "NSLS-II Ring Current"
 
 [FS1_cam]
 _target = "rsoxs.HW.cameras.StandardProsilicawstats" 
-_group = "all_standard_pros" ## PK: Does this need another group?
+_group = "all_standard_pros" ## TODO: Does this need another group?
 prefix = "XF:07ID-BI{BPM:1}"
 name = "FS1 white beam stop Camera"
 read_attrs = ['tiff','stats5']
 
 [FS6_cam]
 _target = "rsoxs.HW.cameras.StandardProsilicawstats" 
-_group = "all_standard_pros" ## PK: Does this need another group?
+_group = "all_standard_pros" ## TODO: Does this need another group?
 prefix = "XF:07ID-BI{BPM:6}"
 name = "FS6 Camera"
 read_attrs = ['tiff','stats5']
@@ -42,7 +42,7 @@ name = "Hutch Photon Shutter"
 
 [FS7_cam]
 _target = "rsoxs.HW.cameras.StandardProsilicawstats"
-_group = "all_standard_pros" ## PK: Does this need another group?
+_group = "all_standard_pros" ## TODO: Does this need another group?
 prefix = "XF:07ID-BI{BPM:7}"
 name = "FS7 pink beam stop Camera"
 read_attrs = ['tiff','stats5']
@@ -56,23 +56,80 @@ closeval = 1
 prefix = "XF:07IDA-PPS{PSh:10}"
 name = "Photon Shutter 10"
 
+[sst_control]
+_target = "ophyd.EpicsSignalRO"
+_group = "signals"
+kind = "normal"
+prefix = "XF:07ID1-CT{Bl-Ctrl}Endstn-Sel"
+name = "SST endstation in Control"
+string = True
+
 [Izero_cam]
 _target = "sst_base.cameras.StandardProsilica"
 _group = "all_standard_pros"
 prefix = "XF:07ID1-ES:1{Scr:1}"
 name = "Izero YAG Camera"
 
+[Izero_Y]
+_target = "sst_base.motors.PrettyMotorFMBODeadband"
+_group = "motors"
+prefix = "XF:07ID2-ES1{Scr-Ax:1}Mtr"
+name = "Izero Assembly Vertical Translation" ## TODO: would like to name it something more generic like RSoXS diagnostic module to indicate that there is also a yag and photodiode
+kind = "hinted"
+
+[Izero_Diode] ## This is Jamie's definition, can be used for flyscanning (?)
+_target = "ophyd.EpicsSignalRO"
+_group = "signals"
+kind = "normal"
+prefix = "XF:07ID-ES1{DMR:I400-1}:IC3_MON"
+name = "Izero Photodiode"
+
+[Slit1_Current_Bottom]
+_target = "ophyd.EpicsSignalRO"
+_group = "signals"
+kind = "normal"
+prefix = "XF:07ID-ES1{Slt1:I400-1}:IC1_MON"
+name = "RSoXS Slit 1 Bottom Current"
+
+[Slit1_Current_Top]
+_target = "ophyd.EpicsSignalRO"
+_group = "signals"
+kind = "normal"
+prefix = "XF:07ID-ES1{Slt1:I400-1}:IC2_MON"
+name = "RSoXS Slit 1 Top Current"
+
+[Slit1_Current_Inboard]
+_target = "ophyd.EpicsSignalRO"
+_group = "signals"
+kind = "normal"
+prefix = "XF:07ID-ES1{Slt1:I400-1}:IC3_MON"
+name = "RSoXS Slit 1 In Board Current"
+
+[Slit1_Current_Outboard]
+_target = "ophyd.EpicsSignalRO"
+_group = "signals"
+kind = "normal"
+prefix = "XF:07ID-ES1{Slt1:I400-1}:IC4_MON"
+name = "RSoXS Slit 1 Out Board Current"
+
+[Shutter_Y]
+_target = "sst_base.motors.PrettyMotorFMBODeadband"
+_group = "motors"
+prefix = "XF:07ID2-ES1{FSh-Ax:1}Mtr"
+name = "Shutter Vertical Translation"
+kind = "hinted"
+
 [Sample_cam]
 _target = "sst_base.cameras.StandardProsilica"
 _group = "all_standard_pros"
 prefix = "XF:07ID1-ES:1{Scr:4}"
-name = "RSoXS Sample Area Camera" ## PK: Would like to rename to "RSoXS Sample optical area camera, front view"
+name = "RSoXS Sample Area Camera" ## TODO: Would like to rename to "RSoXS Sample optical area camera, front view"
 
 [Side_cam]
 _target = "sst_base.cameras.StandardProsilica"
 _group = "all_standard_pros"
 prefix = "XF:07ID1-ES:1{Scr:2}"
-name = "RSoXS Sample Area Camera" ## PK: Would like to rename to "RSoXS Sample optical area camera, side view"
+name = "RSoXS Sample Area Camera" ## TODO: Would like to rename to "RSoXS Sample optical area camera, side view"
 
 [sam_viewer]
 _target = "sst_base.motors.PrettyMotorFMBO"
@@ -85,7 +142,7 @@ kind = "hinted"
 _target = "sst_base.cameras.ColorProsilicaWithTIFFV33"
 _group = "all_standard_pros"
 prefix = "XF:07ID1-ES:1{Scr:5}"
-name = "Sample Imager Detector Area Camera" ## PK: Would like to rename to "Solid sample bar imager detector area camera"
+name = "Sample Imager Detector Area Camera" ## TODO: Would like to rename to "Solid sample bar imager detector area camera"
 read_attrs = ["tiff"]
 
 [sam_X]
@@ -116,12 +173,47 @@ kind = "hinted"
 name = "RSoXS Sample Rotation"
 prefix = "XF:07ID2-ES1{Stg-Ax:Yaw}Mtr"
 
-[BeamStopW]
+[TEMX]
+_target = "sst_base.motors.PrettyMotor"
+_group = "motors"
+kind = "hinted"
+name = "RSoXS TEM Upstream-Downstream"  ## TODO: I would like to update the variable names so that they are consistent with NSLS II coordinates, in which x is inboard-outboard and z is upstream-downstream.
+prefix = "XF:07ID1-ES:1{Smpl-Ax:X}Mtr"
+
+[TEMY]
+_target = "sst_base.motors.PrettyMotor"
+_group = "motors"
+kind = "hinted"
+name = "RSoXS TEM Up-Down"
+prefix = "XF:07ID1-ES:1{Smpl-Ax:Y}Mtr"
+
+[TEMZ]
+_target = "sst_base.motors.PrettyMotor"
+_group = "motors"
+kind = "hinted"
+name = "RSoXS TEM Inboard-Outboard"
+prefix = "XF:07ID1-ES:1{Smpl-Ax:Z}Mtr"
+
+[tem_tempstage]
+_target = "rsoxs.HW.lakeshore.Lakeshore336Picky" 
+_group = "sample_environments" ## TODO: I made a new group, feel free to rename.
+kind = "normal"
+name = "TEM temperature controller"
+prefix = "XF:07ID2-ES1{TCtrl:1}LS336:TC1:"
+
+[BeamStopW] ## TODO: rename so that it is more obvious which is a signal vs. a motor
 _target = "sst_base.motors.PrettyMotorFMBODeadband"
 _group = "motors"
 kind = "hinted"
 name = "Beam Stop WAXS"
 prefix = "XF:07ID2-ES1{BS-Ax:1}Mtr"
+
+[Beamstop_WAXS] ## This is Jamie's definition, can be used for flyscanning (?)
+_target = "ophyd.EpicsSignalRO"
+_group = "signals"
+kind = "normal"
+prefix = "XF:07ID-ES1{DMR:I400-1}:IC1_MON"
+name = "WAXS Beamstop"
 
 [Det_W]
 _target = "sst_base.motors.PrettyMotorFMBODeadband"
@@ -130,6 +222,13 @@ kind = "hinted"
 name = "Detector WAXS Translation"
 prefix = "XF:07ID2-ES1{Det-Ax:2}Mtr"
 
+[waxs_det]
+_target = "rsoxs.Base.detectors.RSOXSGreatEyesDetector" 
+_group = "all_standard_pros" ## TODO: Not sure if this belongs elsewhere.
+prefix = "XF:07ID1-ES:1{GE:2}"
+name = "Wide Angle CCD Detector" ## TODO: Not sure how this is different from DetS_cam
+read_attrs = ['tiff', 'stats1.total', 'saturated','under_exposed','cam']
+
 [BeamStopS]
 _target = "sst_base.motors.PrettyMotorFMBODeadband"
 _group = "motors"
@@ -137,25 +236,25 @@ kind = "hinted"
 name = "Beam Stop SAXS"
 prefix = "XF:07ID2-ES1{BS-Ax:2}Mtr"
 
-[tem_tempstage]
-_target = "rsoxs.HW.lakeshore.Lakeshore336Picky" 
-_group = "sample_environments" ## PK: I made a new group, feel free to rename.
+[Beamstop_SAXS] ## This is Jamie's definition, can be used for flyscanning (?)
+_target = "ophyd.EpicsSignalRO"
+_group = "signals"
 kind = "normal"
-name = "TEM temperature controller"
-prefix = "XF:07ID2-ES1{TCtrl:1}LS336:TC1:"
+prefix = "XF:07ID-ES1{DMR:I400-1}:IC2_MON"
+name = "SAXS Beamstop"
+
+[Det_S]
+_target = "sst_base.motors.PrettyMotorFMBODeadband"
+_group = "motors"
+kind = "hinted"
+name = "Detector SAXS Translation"
+prefix = "XF:07ID2-ES1{Det-Ax:1}Mtr"
 
 [DetS_cam]
 _target = "sst_base.cameras.StandardProsilica"
 _group = "all_standard_pros"
 prefix = "XF:07ID1-ES:1{Scr:3}"
 name = "WAXS Detector Area Camera"
-
-[waxs_det]
-_target = "rsoxs.Base.detectors.RSOXSGreatEyesDetector" 
-_group = "all_standard_pros" ## PK: Not sure if this belongs elsewhere.
-prefix = "XF:07ID1-ES:1{GE:2}"
-name = "Wide Angle CCD Detector" ## PK: Not sure how this is different from DetS_cam
-read_attrs = ['tiff', 'stats1.total', 'saturated','under_exposed','cam']
 
 [psh7]
 _target = "sst_base.shutters.EPS_Shutter"
@@ -167,6 +266,26 @@ closeval = 1
 prefix = "XF:07IDA-PPS{PSh:7}"
 name = "Photon Shutter 7"
 
+[Izero_ds]
+_target = "sst_base.motors.PrettyMotorFMBO"
+_group = "motors"
+prefix = "XF:07ID2-BI{Diag:07-Ax:Y}Mtr"
+name = "Downstream Izero DM7 Vertical Translation" ## TODO: would like to name it something more generic like diagnostic module 7 to indicate that there is also a yag and photodiode.  In the description, I can indicate that it is downstream of RSoXS.
+kind = "hinted"
+
+[dm7] ## TODO: I believe this is a repeat of the above Izero_ds, but the motor class and normal vs. hinting is different, so I am not sure which one is more correct
+_target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
+_group = "motors"
+prefix = "XF:07ID2-BI{Diag:07-Ax:Y}Mtr"
+name = "Downstream diagnostic module translation" 
+kind = "normal"
+
+[bpm13_sum]
+_target = "ophyd.EpicsSignalRO"
+_group = "signals"
+prefix = "XF:07ID-BI{BPM:13}Stats5:Total_RBV"
+name = "Downstream Izero Phosphor Intensity"
+
 [psh8]
 _target = "sst_base.shutters.EPS_Shutter"
 _group = "shutters"
@@ -177,3 +296,4 @@ prefix = "XF:07IDA-PPS{PSh:8}"
 name = "Photon Shutter 8"
 
 
+## TODO: I would like to rename some of the devices, but I will do so after those definitions have been successfully removed from the rsoxs repository
