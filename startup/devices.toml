@@ -8,7 +8,24 @@ kind = "normal"
 prefix = "SR:OPS-BI{DCCT:1}I:Real-I"
 name = "NSLS-II Ring Current"
 
-[FS1_cam]
+[Slits_EPU60_Frontend] ## TODO: This likely needs to get fixed/updated.  When I made this into a Slits object, I was not able to use functions like .wh().  I would get TypeError: unsupported operand type(s) for -: 'NoneType' and 'NoneType'
+_target = "sst_base.slits.Slits"
+_group = "slits"
+prefix = "FE:C07A-OP{Slt:34-Ax:"
+name = "EPU60 frontend slits"
+kind = "hinted"
+concurrent = 1
+
+[psh1]
+_target = "sst_base.shutters.EPS_Shutter"
+_group = "shutters"
+openval = 0
+closeval = 1
+prefix = "XF:07ID-PPS{Sh:FE}"
+name = "Front-End Shutter"
+shutter_type = "FE"
+
+[FS1_cam] ## TODO: Not sure if this is upstream or downstream of PSH1
 _target = "rsoxs.HW.cameras.StandardProsilicawstats" 
 _group = "all_standard_pros" ## TODO: Does this need another group?
 prefix = "XF:07ID-BI{BPM:1}"
@@ -21,15 +38,6 @@ _group = "all_standard_pros" ## TODO: Does this need another group?
 prefix = "XF:07ID-BI{BPM:6}"
 name = "FS6 Camera"
 read_attrs = ['tiff','stats5']
-
-[psh1]
-_target = "sst_base.shutters.EPS_Shutter"
-_group = "shutters"
-openval = 0
-closeval = 1
-prefix = "XF:07ID-PPS{Sh:FE}"
-name = "Front-End Shutter"
-shutter_type = "FE"
 
 [psh4]
 _target = "sst_base.shutters.EPS_Shutter"
