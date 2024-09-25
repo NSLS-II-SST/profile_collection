@@ -170,10 +170,11 @@ prefix = "XF:07ID-ES1{DMR:I400-1}:IC3_MON"
 name = "Izero Photodiode"
 
 [Izero_cam]
-_target = "sst_base.cameras.StandardProsilica"
+_target = "rsoxs.HW.cameras.StandardProsilicawstats"
 _group = "all_standard_pros"
 prefix = "XF:07ID1-ES:1{Scr:1}"
 name = "Izero YAG Camera"
+read_attrs=['tiff','stats5']
 
 [Izero_Y]
 _target = "sst_base.motors.PrettyMotorFMBODeadband"
