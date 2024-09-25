@@ -25,6 +25,13 @@ prefix = "XF:07ID-PPS{Sh:FE}"
 name = "Front-End Shutter"
 shutter_type = "FE"
 
+[mir1_pressure]
+_target = "ophyd.EpicsSignalRO"
+_group = "signals"
+kind = "normal"
+prefix = "XF:07IDA-VA:0{Mir:M1-CCG:1}P:Raw-I"
+name = "Mirror 1 Vacuum Pressure"
+
 [FS1_cam] ## TODO: Not sure if this is upstream or downstream of PSH1
 _target = "rsoxs.HW.cameras.StandardProsilicawstats" 
 _group = "all_standard_pros" ## TODO: Does this need another group?
@@ -71,26 +78,6 @@ kind = "normal"
 prefix = "XF:07ID1-CT{Bl-Ctrl}Endstn-Sel"
 name = "SST endstation in Control"
 string = True
-
-[Izero_cam]
-_target = "sst_base.cameras.StandardProsilica"
-_group = "all_standard_pros"
-prefix = "XF:07ID1-ES:1{Scr:1}"
-name = "Izero YAG Camera"
-
-[Izero_Y]
-_target = "sst_base.motors.PrettyMotorFMBODeadband"
-_group = "motors"
-prefix = "XF:07ID2-ES1{Scr-Ax:1}Mtr"
-name = "Izero Assembly Vertical Translation" ## TODO: would like to name it something more generic like RSoXS diagnostic module to indicate that there is also a yag and photodiode
-kind = "hinted"
-
-[Izero_Diode] ## This is Jamie's definition, can be used for flyscanning (?)
-_target = "ophyd.EpicsSignalRO"
-_group = "signals"
-kind = "normal"
-prefix = "XF:07ID-ES1{DMR:I400-1}:IC3_MON"
-name = "Izero Photodiode"
 
 [Slit1_Current_Bottom]
 _target = "ophyd.EpicsSignalRO"
@@ -152,12 +139,62 @@ prefix = "XF:07ID-ES1{Slt1:I400-1}:PERIOD_SP"
 name = "RSoXS Slit 1 i400  read time"
 string = True
 
+[Slit1_i400_mode]
+_target = "ophyd.EpicsSignal"
+_group = "signals"
+kind = "normal"
+prefix = "XF:07ID-ES1{Slt1:I400-1}:IC_UPDATE_MODE"
+name = "RSoXS Slit 1 i400 mode"
+string = True
+
+[Slit1_i400_accum]
+_target = "ophyd.EpicsSignal"
+_group = "signals"
+kind = "normal"
+prefix = "RSoXS Slit 1 i400 accumulation mode"
+name = "RSoXS Slit 1 i400 mode"
+string = True
+
+[Izero_Mesh]
+_target = "ophyd.EpicsSignalRO"
+_group = "signals"
+kind = "normal"
+prefix = "XF:07ID1-BI{EM:1}EM180:Current2:MeanValue_RBV"
+name = "RSoXS Au Mesh Current"
+
+[Izero_Diode] ## This is Jamie's definition, can be used for flyscanning (?)
+_target = "ophyd.EpicsSignalRO"
+_group = "signals"
+kind = "normal"
+prefix = "XF:07ID-ES1{DMR:I400-1}:IC3_MON"
+name = "Izero Photodiode"
+
+[Izero_cam]
+_target = "sst_base.cameras.StandardProsilica"
+_group = "all_standard_pros"
+prefix = "XF:07ID1-ES:1{Scr:1}"
+name = "Izero YAG Camera"
+
+[Izero_Y]
+_target = "sst_base.motors.PrettyMotorFMBODeadband"
+_group = "motors"
+prefix = "XF:07ID2-ES1{Scr-Ax:1}Mtr"
+name = "Izero Assembly Vertical Translation" ## TODO: would like to name it something more generic like RSoXS diagnostic module to indicate that there is also a yag and photodiode
+kind = "hinted"
+
 [Shutter_Y]
 _target = "sst_base.motors.PrettyMotorFMBODeadband"
 _group = "motors"
 prefix = "XF:07ID2-ES1{FSh-Ax:1}Mtr"
 name = "Shutter Vertical Translation"
 kind = "hinted"
+
+[Sample_TEY]
+_target = "ophyd.EpicsSignalRO"
+_group = "signals"
+kind = "normal"
+prefix = "XF:07ID1-BI{EM:1}EM180:Current4:MeanValue_RBV"
+name = "RSoXS Sample Current"
 
 [Sample_cam]
 _target = "sst_base.cameras.StandardProsilica"
@@ -267,8 +304,48 @@ string = True
 _target = "ophyd.EpicsSignal"
 _group = "signals"
 kind = "normal"
+prefix = "XF:07ID-ES1{DMR:I400-1}:TRIGPOINTS_SP"
+name = "RSoXS diode i400 trigger points"
+string = True
+
+[diode_i400_npnts]
+_target = "ophyd.EpicsSignal"
+_group = "signals"
+kind = "normal"
 prefix = "XF:07ID-ES1{DMR:I400-1}:ENABLE_IC_UPDATES"
 name = "RSoXS diode i400 enable"
+string = True
+
+[diode_i400_mode]
+_target = "ophyd.EpicsSignal"
+_group = "signals"
+kind = "normal"
+prefix = "XF:07ID-ES1{DMR:I400-1}:IC_UPDATE_MODE"
+name = "RSoXS diode i400 mode"
+string = True
+
+[diode_i400_accum]
+_target = "ophyd.EpicsSignal"
+_group = "signals"
+kind = "normal"
+prefix = "XF:07ID-ES1{DMR:I400-1}:ACCUM_SP"
+name = "RSoXS diode i400  accumulation mode"
+string = True
+
+[diode_i400_read_time]
+_target = "ophyd.EpicsSignal"
+_group = "signals"
+kind = "normal"
+prefix = "XF:07ID-ES1{DMR:I400-1}:PERIOD_SP"
+name = "RSoXS diode i400 read time"
+string = True
+
+[diode_i400_PDU]
+_target = "ophyd.EpicsSignal"
+_group = "signals"
+kind = "normal"
+prefix = "XF:07ID-CT{RG:C1-PDU:1}Sw:8-Sel"
+name = "RSoXS diode power control"
 string = True
 
 [Det_W]
