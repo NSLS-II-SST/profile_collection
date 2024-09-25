@@ -55,6 +55,14 @@ closeval = 1
 prefix = "XF:07IDA-PPS{PSh:4}"
 name = "Hutch Photon Shutter"
 
+## GV14
+
+## M2 and PGM
+
+## GV15
+
+## M3
+
 [FS7_cam]
 _target = "rsoxs.HW.cameras.StandardProsilicawstats"
 _group = "all_standard_pros" ## TODO: Does this need another group?
@@ -70,6 +78,14 @@ openval = 0
 closeval = 1
 prefix = "XF:07IDA-PPS{PSh:10}"
 name = "Photon Shutter 10"
+
+## GV26
+
+## DM6 and FS12
+
+## Precision slit C
+
+## GV27
 
 [sst_control]
 _target = "ophyd.EpicsSignalRO"
@@ -183,12 +199,18 @@ prefix = "XF:07ID2-ES1{Scr-Ax:1}Mtr"
 name = "Izero Assembly Vertical Translation" ## TODO: would like to name it something more generic like RSoXS diagnostic module to indicate that there is also a yag and photodiode
 kind = "hinted"
 
+## RSoXS slit 2
+
 [Shutter_Y]
 _target = "sst_base.motors.PrettyMotorFMBODeadband"
 _group = "motors"
 prefix = "XF:07ID2-ES1{FSh-Ax:1}Mtr"
-name = "Shutter Vertical Translation"
+name = "Shutter Vertical Translation" ## Fast shutter
 kind = "hinted"
+
+## GV27A
+
+## RSoXS slit 3
 
 [Sample_TEY]
 _target = "ophyd.EpicsSignalRO"
@@ -390,6 +412,8 @@ _group = "all_standard_pros"
 prefix = "XF:07ID1-ES:1{Scr:3}"
 name = "WAXS Detector Area Camera"
 
+## GV28
+
 [psh7]
 _target = "sst_base.shutters.EPS_Shutter"
 _group = "shutters"
@@ -399,6 +423,8 @@ openval = 0
 closeval = 1
 prefix = "XF:07IDA-PPS{PSh:7}"
 name = "Photon Shutter 7"
+
+## M4C/M4D
 
 [Izero_ds]
 _target = "sst_base.motors.PrettyMotorFMBO"
@@ -420,6 +446,10 @@ _group = "signals"
 prefix = "XF:07ID-BI{BPM:13}Stats5:Total_RBV"
 name = "Downstream Izero Phosphor Intensity"
 
+## GV29
+
+## LARIAT 1
+
 [psh8]
 _target = "sst_base.shutters.EPS_Shutter"
 _group = "shutters"
@@ -428,6 +458,26 @@ openval = 0
 closeval = 1
 prefix = "XF:07IDA-PPS{PSh:8}"
 name = "Photon Shutter 8"
+
+## GV30
+
+## M5C
+
+## FS14
+
+## GV31
+
+## PEY NEXAFS
+
+## PSH9
+
+## GV32
+
+## FS15
+
+## GV33
+
+## LARIAT 2
 
 
 ## TODO: I would like to rename some of the devices, but I will do so after those definitions have been successfully removed from the rsoxs repository
