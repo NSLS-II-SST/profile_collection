@@ -32,12 +32,13 @@ kind = "normal"
 prefix = "XF:07IDA-VA:0{Mir:M1-CCG:1}P:Raw-I"
 name = "Mirror 1 Vacuum Pressure"
 
-[FS1_cam] ## TODO: Not sure if this is upstream or downstream of PSH1
+[FS1_cam]
 _target = "rsoxs.HW.cameras.StandardProsilicawstats" 
 _group = "all_standard_pros" ## TODO: Does this need another group?
 prefix = "XF:07ID-BI{BPM:1}"
 name = "FS1 white beam stop Camera"
 read_attrs = ['tiff','stats5']
+## Unfortunately, the full white beam cannot be captured on this screen.  The right edge of the beam is captured, and the left side is cut off by a rounded viewport.
 
 [FS6_cam]
 _target = "rsoxs.HW.cameras.StandardProsilicawstats" 
