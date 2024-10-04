@@ -38,7 +38,9 @@ _group = "all_standard_pros" ## TODO: Does this need another group?
 prefix = "XF:07ID-BI{BPM:1}"
 name = "FS1 white beam stop Camera"
 read_attrs = ['tiff','stats5']
-## Unfortunately, the full white beam cannot be captured on this screen.  The right edge of the beam is captured, and the left side is cut off by a rounded viewport.
+## This is a rectangular mask through which both the soft and tender beams pass, and the frame can be used as a fluorescence screen.
+## As a result, the rounded edge of the beam is visible on the frame, but it is cut off on the straight inner edge of the frame.
+## M1 reflects the beam through the mask/frame.
 
 [FS6_cam]
 _target = "rsoxs.HW.cameras.StandardProsilicawstats" 
