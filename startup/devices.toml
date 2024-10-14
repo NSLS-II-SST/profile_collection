@@ -1,4 +1,5 @@
 ## Devices are organized from upstream to downstream along SST1.
+## TODO: Archive all signals on this list
 
 [ring_current]
 _target = "ophyd.EpicsSignalRO"
@@ -15,6 +16,7 @@ prefix = "FE:C07A-OP{Slt:34-Ax:"
 name = "EPU60 frontend slits"
 kind = "hinted"
 concurrent = 1
+## TODO: After this is fixed, archive signal
 
 [psh1]
 _target = "sst_base.shutters.EPS_Shutter"
