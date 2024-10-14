@@ -172,7 +172,7 @@ string = True
 _target = "ophyd.EpicsSignal"
 _group = "signals"
 kind = "normal"
-prefix = "RSoXS Slit 1 i400 accumulation mode"
+prefix = "XF:07ID-ES1{Slt1:I400-1}:ACCUM_SP"
 name = "RSoXS Slit 1 i400 mode"
 string = True
 
