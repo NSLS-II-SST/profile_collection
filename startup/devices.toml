@@ -1,5 +1,5 @@
 ## Devices are organized from upstream to downstream along SST1.
-## TODO: Archive all signals on this list
+## Everything on this list other than 2D camera images are being archived.  TODO: make sure all new additions are archived.
 
 [ring_current]
 _target = "ophyd.EpicsSignalRO"
