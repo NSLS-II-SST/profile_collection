@@ -173,7 +173,7 @@ sd.monitors.extend(
     [
         Shutter_control,
         Shutter_open_time,
-        tem_tempstage.readback,
+        #tem_tempstage.readback,
         #mono_en_int,
         #mono_en.readback,
         #epu_gap.user_readback,
