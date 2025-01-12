@@ -161,28 +161,28 @@ sd.baseline.extend(
 
 # from .Functions.startup import sd
 #
-sd.monitors.extend(
-    [
-        Shutter_control,
-        Shutter_open_time,
-        #tem_tempstage.readback,
-        #mono_en_int,
-        #mono_en.readback,
-        #epu_gap.user_readback,
-        #mono_en.en_mon,
-        ring_current,
-        #Beamstop_WAXS,
-        #Beamstop_SAXS,
-        #Shutter_SAXS_count,
-        Shutter_WAXS_count,
-        #Slit1_Current_Top,
-        #Slit1_Current_Bottom,
-        #Slit1_Current_Inboard,
-        #Slit1_Current_Outboard,
-        #Izero_Mesh,
-        #Sample_TEY,
-    ]
-)
+# sd.monitors.extend(
+#     [
+#         Shutter_control,
+#         Shutter_open_time,
+#         #tem_tempstage.readback,
+#         #mono_en_int,
+#         #mono_en.readback,
+#         #epu_gap.user_readback,
+#         #mono_en.en_mon,
+#         ring_current,
+#         #Beamstop_WAXS,
+#         #Beamstop_SAXS,
+#         #Shutter_SAXS_count,
+#         Shutter_WAXS_count,
+#         #Slit1_Current_Top,
+#         #Slit1_Current_Bottom,
+#         #Slit1_Current_Inboard,
+#         #Slit1_Current_Outboard,
+#         #Izero_Mesh,
+#         #Sample_TEY,
+#     ]
+# )
 
 
 
