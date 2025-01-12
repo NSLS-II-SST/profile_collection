@@ -9,6 +9,83 @@ kind = "normal"
 prefix = "SR:OPS-BI{DCCT:1}I:Real-I"
 name = "NSLS-II Ring Current"
 
+[Offset_C07U42_Horizontal] ## Want to remove the C07 portion from undulator name
+_target = "ophyd.EpicsSignalRO"
+_group = "signals"
+kind = "normal"
+prefix = "SR:C31-{AI}Aie7:Offset-x-Cal"
+name = "Offset_C07U42_Horizontal"
+
+[Offset_C07U42_Vertical]
+_target = "ophyd.EpicsSignalRO"
+_group = "signals"
+kind = "normal"
+prefix = "SR:C31-{AI}Aie7:Offset-y-Cal"
+name = "Offset_C07U42_Vertical"
+
+[Angle_C07U42_Horizontal] 
+_target = "ophyd.EpicsSignalRO"
+_group = "signals"
+kind = "normal"
+prefix = "SR:C31-{AI}Aie7:Angle-x-Cal"
+name = "Angle_C07U42_Horizontal"
+
+[Angle_C07U42_Vertical]
+_target = "ophyd.EpicsSignalRO"
+_group = "signals"
+kind = "normal"
+prefix = "SR:C31-{AI}Aie7:Angle-y-Cal"
+name = "Angle_C07U42_Vertical"
+
+[Gap_C07U42]
+_target = "ophyd.EpicsSignalRO"
+_group = "signals"
+kind = "normal"
+prefix = "SR:C07-ID:G1A{SST2:1-Ax:Gap}-Mtr.RBV"
+name = "Gap_C07U42"
+
+[Offset_EPU60_Horizontal]
+_target = "ophyd.EpicsSignalRO"
+_group = "signals"
+kind = "normal"
+prefix = "SR:C31-{AI}Aie7-2:Offset-x-Cal"
+name = "Offset_EPU60_Horizontal"
+
+[Offset_EPU60_Vertical]
+_target = "ophyd.EpicsSignalRO"
+_group = "signals"
+kind = "normal"
+prefix = "SR:C31-{AI}Aie7-2:Offset-y-Cal"
+name = "Offset_EPU60_Vertical"
+
+[Angle_EPU60_Horizontal]
+_target = "ophyd.EpicsSignalRO"
+_group = "signals"
+kind = "normal"
+prefix = "SR:C31-{AI}Aie7-2:Angle-x-Cal"
+name = "Angle_EPU60_Horizontal"
+
+[Angle_EPU60_Vertical]
+_target = "ophyd.EpicsSignalRO"
+_group = "signals"
+kind = "normal"
+prefix = "SR:C31-{AI}Aie7-2:Angle-y-Cal"
+name = "Angle_EPU60_Vertical"
+
+[Gap_EPU60]
+_target = "ophyd.EpicsSignalRO"
+_group = "signals"
+kind = "normal"
+prefix = "SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr.RBV"
+name = "Gap_EPU60"
+
+[Phase_EPU60]
+_target = "ophyd.EpicsSignalRO"
+_group = "signals"
+kind = "normal"
+prefix = "SR:C07-ID:G1A{SST1:1-Ax:Phase}-Mtr.RBV"
+name = "Phase_EPU60"
+
 [Slits_EPU60_Frontend] ## TODO: This likely needs to get fixed/updated.  When I made this into a Slits object, I was not able to use functions like .wh().  I would get TypeError: unsupported operand type(s) for -: 'NoneType' and 'NoneType'
 _target = "sst_base.slits.Slits"
 _group = "slits"
@@ -26,6 +103,20 @@ closeval = 1
 prefix = "XF:07ID-PPS{Sh:FE}"
 name = "Front-End Shutter"
 shutter_type = "FE"
+
+[Temperature_L1]
+_target = "ophyd.EpicsSignalRO"
+_group = "signals"
+kind = "normal"
+prefix = "XF:07IDA-OP{Mir:L1}T:Msk-I"
+name = "Temperature_L1"
+
+[Temperature_M1]
+_target = "ophyd.EpicsSignalRO"
+_group = "signals"
+kind = "normal"
+prefix = "XF:07IDA-OP{Mir:1}T:Msk-I"
+name = "Temperature_M1"
 
 [mir1_pressure]
 _target = "ophyd.EpicsSignalRO"
@@ -63,11 +154,23 @@ name = "Hutch Photon Shutter"
 ## GV14
 
 ## M2 and PGM
-## RSoXS 250 l/mm grating is made from nickel oxide.  1200 l/mm grating is made from gold.
+## RSoXS 250 l/mm grating is made from nickel oxide.  250 l/mm is made from gold.  1200 l/mm grating is made from gold.
+[Temperature_MonoPGM]
+_target = "ophyd.EpicsSignalRO"
+_group = "signals"
+kind = "normal"
+prefix = "XF:07IDA-OP{Mono:PGM}T:Grg-I"
+name = "Temperature_MonoPGM"
 
 ## GV15
 
 ## M3
+[Temperature_M3]
+_target = "ophyd.EpicsSignalRO"
+_group = "signals"
+kind = "normal"
+prefix = "XF:07IDA-OP{Mir:2}T:Mir-I"
+name = "Temperature_M3"
 
 [FS7_cam]
 _target = "rsoxs.HW.cameras.StandardProsilicawstats"
@@ -181,7 +284,7 @@ string = True
 _target = "ophyd.EpicsSignalRO"
 _group = "signals"
 kind = "normal"
-prefix = "XF:07ID1-BI{EM:1}EM180:Current2:MeanValue_RBV"
+prefix = "XF:07ID-ES1{Slt1:I400-1}:IC1_MON"
 name = "RSoXS Au Mesh Current"
 
 [Izero_Diode] ## This is Jamie's definition, can be used for flyscanning (?)
@@ -205,6 +308,13 @@ prefix = "XF:07ID2-ES1{Scr-Ax:1}Mtr"
 name = "Izero Assembly Vertical Translation" ## TODO: would like to name it something more generic like RSoXS diagnostic module to indicate that there is also a yag and photodiode
 kind = "hinted"
 
+[Izero_update_time] ## No longer relevant because quadEM is broken
+_target = "ophyd.EpicsSignal"
+_group = "signals"
+kind = "normal"
+prefix = "XF:07ID1-BI{EM:1}EM180:AveragingTime"
+name = "RSoXS quadem Averaging Time"
+
 ## RSoXS slit 2
 
 [Shutter_Y]
@@ -222,7 +332,7 @@ kind = "hinted"
 _target = "ophyd.EpicsSignalRO"
 _group = "signals"
 kind = "normal"
-prefix = "XF:07ID1-BI{EM:1}EM180:Current4:MeanValue_RBV"
+prefix = "XF:07ID-ES1{Slt1:I400-1}:IC2_MON"
 name = "RSoXS Sample Current"
 
 [Sample_cam]
@@ -377,6 +487,11 @@ prefix = "XF:07ID-CT{RG:C1-PDU:1}Sw:8-Sel"
 name = "RSoXS diode power control"
 string = True
 
+[DiodeRange]
+_target = "ophyd.EpicsSignal"
+_group = "signals"
+prefix = "XF:07ID-ES1{DMR:I400-1}:RANGE_BP"
+
 [Det_W]
 _target = "sst_base.motors.PrettyMotorFMBODeadband"
 _group = "motors"
@@ -418,6 +533,24 @@ _group = "all_standard_pros"
 prefix = "XF:07ID1-ES:1{Scr:3}"
 name = "WAXS Detector Area Camera"
 
+[mc19_fault]
+_target = "ophyd.EpicsSignalRO"
+_group = "signals"
+prefix = "SST1_Upstream:MC19AmpFaultSum-Sts"
+name = "MC19 Amp Fault"
+
+[mc20_fault]
+_target = "ophyd.EpicsSignalRO"
+_group = "signals"
+prefix = "SST1_Upstream:MC20AmpFaultSum-Sts"
+name = "MC20 Amp Fault"
+
+[mc21_fault]
+_target = "ophyd.EpicsSignalRO"
+_group = "signals"
+prefix = "SST1_Upstream:MC21AmpFaultSum-Sts"
+name = "MC21 Amp Fault"
+
 ## GV28
 
 [psh7]
@@ -432,6 +565,19 @@ name = "Photon Shutter 7"
 
 ## M4C/M4D
 
+[DownstreamLargeDiode] 
+_target = "ophyd.EpicsSignalRO"
+_group = "signals"
+kind = "normal"
+prefix = "XF:07ID-ES1{DMR:I400-1}:IC4_MON"
+name = "DownstreamLargeDiode"
+
+[bpm13_sum]
+_target = "ophyd.EpicsSignalRO"
+_group = "signals"
+prefix = "XF:07ID-BI{BPM:13}Stats5:Total_RBV"
+name = "Downstream Izero Phosphor Intensity"
+
 [Izero_ds]
 _target = "sst_base.motors.PrettyMotorFMBO"
 _group = "motors"
@@ -445,12 +591,6 @@ _group = "motors"
 prefix = "XF:07ID2-BI{Diag:07-Ax:Y}Mtr"
 name = "Downstream diagnostic module translation" 
 kind = "normal"
-
-[bpm13_sum]
-_target = "ophyd.EpicsSignalRO"
-_group = "signals"
-prefix = "XF:07ID-BI{BPM:13}Stats5:Total_RBV"
-name = "Downstream Izero Phosphor Intensity"
 
 ## GV29
 
