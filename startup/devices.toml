@@ -1,5 +1,6 @@
 ## Devices are organized from upstream to downstream along SST1.
 ## Everything on this list other than 2D camera images are being archived.  TODO: make sure all new additions are archived.
+## TODO: Remaining items to copy over from rsoxs are rsoxs/Functions/PVdictionary.py, but nothing actually links to this dictionary.
 
 [ring_current]
 _target = "ophyd.EpicsSignalRO"
