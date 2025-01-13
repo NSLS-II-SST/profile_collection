@@ -9,6 +9,14 @@ kind = "normal"
 prefix = "SR:OPS-BI{DCCT:1}I:Real-I"
 name = "NSLS-II Ring Current"
 
+[ring_current_int]
+_target = "sst_base.detectors.scalar.ophScalar"
+_group = "signals"
+_role = "beam_current"
+kind = "normal"
+prefix = "SR:OPS-BI{DCCT:1}I:Real-I"
+name = "NSLS-II Ring Current"
+
 [Offset_C07U42_Horizontal] ## Want to remove the C07 portion from undulator name
 _target = "ophyd.EpicsSignalRO"
 _group = "signals"
@@ -79,8 +87,22 @@ kind = "normal"
 prefix = "SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr.RBV"
 name = "Gap_EPU60"
 
+[Gap_EPU60_int]
+_target = "sst_base.detectors.scalar.ophScalar"
+_group = "signals"
+kind = "normal"
+prefix = "SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr.RBV"
+name = "Gap_EPU60"
+
 [Phase_EPU60]
 _target = "ophyd.EpicsSignalRO"
+_group = "signals"
+kind = "normal"
+prefix = "SR:C07-ID:G1A{SST1:1-Ax:Phase}-Mtr.RBV"
+name = "Phase_EPU60"
+
+[Phase_EPU60_int]
+_target = "sst_base.detectors.scalar.ophScalar"
 _group = "signals"
 kind = "normal"
 prefix = "SR:C07-ID:G1A{SST1:1-Ax:Phase}-Mtr.RBV"
@@ -155,6 +177,13 @@ name = "Hutch Photon Shutter"
 
 ## M2 and PGM
 ## RSoXS 250 l/mm grating is made from nickel oxide.  250 l/mm is made from gold.  1200 l/mm grating is made from gold.
+[mono_en_int]
+_target = "sst_base.detectors.scalar.ophScalar"
+_group = "signals"
+kind = "normal"
+prefix = "XF:07ID1-OP{Mono:PGM1-Ax::ENERGY_MON"
+name = "Energy"
+
 [Temperature_MonoPGM]
 _target = "ophyd.EpicsSignalRO"
 _group = "signals"
@@ -204,8 +233,23 @@ prefix = "XF:07ID1-CT{Bl-Ctrl}Endstn-Sel"
 name = "SST endstation in Control"
 string = True
 
+[slits1]
+_target = "sst_base.slits.Slits"
+_group = "slits"
+kind = "hinted"
+prefix = "XF:07ID2-ES1{Slt1-Ax:"
+name = "Upstream Scatter Slits"
+concurrent = 1
+
 [Slit1_Current_Bottom]
 _target = "ophyd.EpicsSignalRO"
+_group = "signals"
+kind = "normal"
+prefix = "XF:07ID-ES1{Slt1:I400-1}:IC1_MON"
+name = "RSoXS Slit 1 Bottom Current"
+
+[Slit1_Current_Bottom_int]
+_target = "sst_base.detectors.scalar.ophScalar"
 _group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC1_MON"
@@ -218,6 +262,13 @@ kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC2_MON"
 name = "RSoXS Slit 1 Top Current"
 
+[Slit1_Current_Top_int]
+_target = "sst_base.detectors.scalar.ophScalar"
+_group = "signals"
+kind = "normal"
+prefix = "XF:07ID-ES1{Slt1:I400-1}:IC2_MON"
+name = "RSoXS Slit 1 Top Current"
+
 [Slit1_Current_Inboard]
 _target = "ophyd.EpicsSignalRO"
 _group = "signals"
@@ -225,8 +276,22 @@ kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC3_MON"
 name = "RSoXS Slit 1 In Board Current"
 
+[Slit1_Current_Inboard_int]
+_target = "sst_base.detectors.scalar.ophScalar"
+_group = "signals"
+kind = "normal"
+prefix = "XF:07ID-ES1{Slt1:I400-1}:IC3_MON"
+name = "RSoXS Slit 1 In Board Current"
+
 [Slit1_Current_Outboard]
 _target = "ophyd.EpicsSignalRO"
+_group = "signals"
+kind = "normal"
+prefix = "XF:07ID-ES1{Slt1:I400-1}:IC4_MON"
+name = "RSoXS Slit 1 Out Board Current"
+
+[Slit1_Current_Outboard_int]
+_target = "sst_base.detectors.scalar.ophScalar"
 _group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC4_MON"
@@ -287,6 +352,13 @@ kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC1_MON"
 name = "RSoXS Au Mesh Current"
 
+[Izero_Mesh_int]
+_target = "sst_base.detectors.scalar.ophScalar"
+_group = "signals"
+kind = "normal"
+prefix = "XF:07ID-ES1{Slt1:I400-1}:IC1_MON"
+name = "RSoXS Au Mesh Current"
+
 [Izero_Diode] ## This is Jamie's definition, can be used for flyscanning (?)
 _target = "ophyd.EpicsSignalRO"
 _group = "signals"
@@ -316,6 +388,13 @@ prefix = "XF:07ID1-BI{EM:1}EM180:AveragingTime"
 name = "RSoXS quadem Averaging Time"
 
 ## RSoXS slit 2
+[slits2]
+_target = "sst_base.slits.Slits"
+_group = "slits"
+kind = "hinted"
+prefix = "XF:07ID2-ES1{Slt2-Ax:"
+name = "Middle Scatter Slits"
+concurrent = 1
 
 [Shutter_Y]
 _target = "sst_base.motors.PrettyMotorFMBODeadband"
@@ -327,9 +406,23 @@ kind = "hinted"
 ## GV27A
 
 ## RSoXS slit 3
+[slits3]
+_target = "sst_base.slits.Slits"
+_group = "slits"
+kind = "hinted"
+prefix = "XF:07ID2-ES1{Slt3-Ax:"
+name = "Final Scatter Slits"
+concurrent = 1
 
 [Sample_TEY]
 _target = "ophyd.EpicsSignalRO"
+_group = "signals"
+kind = "normal"
+prefix = "XF:07ID-ES1{Slt1:I400-1}:IC2_MON"
+name = "RSoXS Sample Current"
+
+[Sample_TEY_int]
+_target = "sst_base.detectors.scalar.ophScalar"
 _group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC2_MON"
@@ -417,6 +510,12 @@ kind = "normal"
 name = "TEM temperature controller"
 prefix = "XF:07ID2-ES1{TCtrl:1}LS336:TC1:"
 
+[SP]
+_target = "rsoxs.Base.syringepump.Syringe_Pump" 
+_group = "sample_environments"
+name = "sp"
+prefix = "XF:07ID1-ES"
+
 [BeamStopW] ## TODO: rename so that it is more obvious which is a signal vs. a motor
 _target = "sst_base.motors.PrettyMotorFMBODeadband"
 _group = "motors"
@@ -425,7 +524,14 @@ name = "Beam Stop WAXS"
 prefix = "XF:07ID2-ES1{BS-Ax:1}Mtr"
 
 [Beamstop_WAXS] ## This is Jamie's definition, can be used for flyscanning (?)
-_target = "ophyd.EpicsSignalRO"
+_target = "ophyd.EpicsSignalRO"  ## Unlike the ophScalar signals, these signals collect a single data point and do not do any averaging or statistics. 
+_group = "signals"
+kind = "normal"
+prefix = "XF:07ID-ES1{DMR:I400-1}:IC1_MON"
+name = "WAXS Beamstop"
+
+[Beamstop_WAXS_int]
+_target = "sst_base.detectors.scalar.ophScalar" ## These signals are scalars (integrating detectors).  Each data point that is written out is the average of several "sub" data points.  Other statistics, such as standard deviation, median, etc. are available.  ## TODO: Would it be possible to combine this with the non-integrating signal and can toggle between which type to use?
 _group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{DMR:I400-1}:IC1_MON"
@@ -520,6 +626,13 @@ kind = "normal"
 prefix = "XF:07ID-ES1{DMR:I400-1}:IC2_MON"
 name = "SAXS Beamstop"
 
+[Beamstop_SAXS_int]
+_target = "sst_base.detectors.scalar.ophScalar"
+_group = "signals"
+kind = "normal"
+prefix = "XF:07ID-ES1{DMR:I400-1}:IC2_MON"
+name = "SAXS Beamstop"
+
 [Det_S]
 _target = "sst_base.motors.PrettyMotorFMBODeadband"
 _group = "motors"
@@ -567,6 +680,13 @@ name = "Photon Shutter 7"
 
 [DownstreamLargeDiode] 
 _target = "ophyd.EpicsSignalRO"
+_group = "signals"
+kind = "normal"
+prefix = "XF:07ID-ES1{DMR:I400-1}:IC4_MON"
+name = "DownstreamLargeDiode"
+
+[DownstreamLargeDiode_int] 
+_target = "sst_base.detectors.scalar.ophScalar"
 _group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{DMR:I400-1}:IC4_MON"
