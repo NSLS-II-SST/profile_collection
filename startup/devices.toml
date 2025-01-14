@@ -232,7 +232,7 @@ _group = "signals"
 kind = "normal"
 prefix = "XF:07ID1-CT{Bl-Ctrl}Endstn-Sel"
 name = "SST endstation in Control"
-string = True
+string = true
 
 [slits1]
 _target = "sst_base.slits.Slits"
@@ -304,7 +304,7 @@ _group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:CAP_SP"
 name = "RSoXS Slit 1 i400 capasitor"
-string = True
+string = true
 
 [Slit1_i400_enable]
 _target = "ophyd.EpicsSignal"
@@ -312,7 +312,7 @@ _group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:ENABLE_IC_UPDATES"
 name = "RSoXS Slit 1 i400 enable"
-string = True
+string = true
 
 [Slit1_i400_npnts]
 _target = "ophyd.EpicsSignal"
@@ -320,7 +320,7 @@ _group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:TRIGPOINTS_SP"
 name = "RSoXS Slit 1 i400 trigger points"
-string = True
+string = true
 
 [Slit1_i400_read_time]
 _target = "ophyd.EpicsSignal"
@@ -328,7 +328,7 @@ _group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:PERIOD_SP"
 name = "RSoXS Slit 1 i400  read time"
-string = True
+string = true
 
 [Slit1_i400_mode]
 _target = "ophyd.EpicsSignal"
@@ -336,7 +336,7 @@ _group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC_UPDATE_MODE"
 name = "RSoXS Slit 1 i400 mode"
-string = True
+string = true
 
 [Slit1_i400_accum]
 _target = "ophyd.EpicsSignal"
@@ -344,7 +344,7 @@ _group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:ACCUM_SP"
 name = "RSoXS Slit 1 i400 mode"
-string = True
+string = true
 
 [Izero_Mesh]
 _target = "ophyd.EpicsSignalRO"
@@ -544,7 +544,7 @@ _group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{DMR:I400-1}:CAP_SP"
 name = "RSoXS diode i400 capasitor"
-string = True
+string = true
 
 [diode_i400_enable]
 _target = "ophyd.EpicsSignal"
@@ -552,7 +552,7 @@ _group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{DMR:I400-1}:TRIGPOINTS_SP"
 name = "RSoXS diode i400 trigger points"
-string = True
+string = true
 
 [diode_i400_npnts]
 _target = "ophyd.EpicsSignal"
@@ -560,7 +560,7 @@ _group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{DMR:I400-1}:ENABLE_IC_UPDATES"
 name = "RSoXS diode i400 enable"
-string = True
+string = true
 
 [diode_i400_mode]
 _target = "ophyd.EpicsSignal"
@@ -568,7 +568,7 @@ _group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{DMR:I400-1}:IC_UPDATE_MODE"
 name = "RSoXS diode i400 mode"
-string = True
+string = true
 
 [diode_i400_accum]
 _target = "ophyd.EpicsSignal"
@@ -576,7 +576,7 @@ _group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{DMR:I400-1}:ACCUM_SP"
 name = "RSoXS diode i400  accumulation mode"
-string = True
+string = true
 
 [diode_i400_read_time]
 _target = "ophyd.EpicsSignal"
@@ -584,7 +584,7 @@ _group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{DMR:I400-1}:PERIOD_SP"
 name = "RSoXS diode i400 read time"
-string = True
+string = true
 
 [diode_i400_PDU]
 _target = "ophyd.EpicsSignal"
@@ -592,7 +592,7 @@ _group = "signals"
 kind = "normal"
 prefix = "XF:07ID-CT{RG:C1-PDU:1}Sw:8-Sel"
 name = "RSoXS diode power control"
-string = True
+string = true
 
 [DiodeRange]
 _target = "ophyd.EpicsSignal"
