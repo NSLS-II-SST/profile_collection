@@ -4,114 +4,124 @@
 
 [ring_current]
 _target = "ophyd.EpicsSignalRO"
+kind = "normal"
 _group = "signals"
 _role = "beam_current"
-kind = "normal"
 prefix = "SR:OPS-BI{DCCT:1}I:Real-I"
 name = "NSLS-II Ring Current"
 
 [ring_current_int]
 _target = "sst_base.detectors.scalar.ophScalar"
-_group = "signals"
-_role = "beam_current"
 kind = "normal"
 prefix = "SR:OPS-BI{DCCT:1}I:Real-I"
 name = "NSLS-II Ring Current"
 
-[Offset_C07U42_Horizontal] ## Want to remove the C07 portion from undulator name
+[ring_status]
 _target = "ophyd.EpicsSignalRO"
 _group = "signals"
+_role = "beam_status"
+kind = "normal"
+prefix = "SR-OPS{}Mode-Sts"
+name = "NSLS-II Ring Status"
+string = true
+
+[en]
+_target = "sst_base.energy.EnPosFactory"
+_group = "source"
+_load_order = 2
+prefix = ""
+name = "en"
+
+[energy]
+_alias = "en.energy"
+_group = "motors"
+_role = "energy"
+_load_order = 2
+
+
+[Offset_C07U42_Horizontal] ## Want to remove the C07 portion from undulator name
+_target = "ophyd.EpicsSignalRO"
 kind = "normal"
 prefix = "SR:C31-{AI}Aie7:Offset-x-Cal"
 name = "Offset_C07U42_Horizontal"
 
 [Offset_C07U42_Vertical]
 _target = "ophyd.EpicsSignalRO"
-_group = "signals"
 kind = "normal"
 prefix = "SR:C31-{AI}Aie7:Offset-y-Cal"
 name = "Offset_C07U42_Vertical"
 
 [Angle_C07U42_Horizontal] 
 _target = "ophyd.EpicsSignalRO"
-_group = "signals"
 kind = "normal"
 prefix = "SR:C31-{AI}Aie7:Angle-x-Cal"
 name = "Angle_C07U42_Horizontal"
 
 [Angle_C07U42_Vertical]
 _target = "ophyd.EpicsSignalRO"
-_group = "signals"
+
 kind = "normal"
 prefix = "SR:C31-{AI}Aie7:Angle-y-Cal"
 name = "Angle_C07U42_Vertical"
 
 [Gap_C07U42]
 _target = "ophyd.EpicsSignalRO"
-_group = "signals"
+
 kind = "normal"
 prefix = "SR:C07-ID:G1A{SST2:1-Ax:Gap}-Mtr.RBV"
 name = "Gap_C07U42"
 
 [Offset_EPU60_Horizontal]
 _target = "ophyd.EpicsSignalRO"
-_group = "signals"
 kind = "normal"
 prefix = "SR:C31-{AI}Aie7-2:Offset-x-Cal"
 name = "Offset_EPU60_Horizontal"
 
 [Offset_EPU60_Vertical]
 _target = "ophyd.EpicsSignalRO"
-_group = "signals"
 kind = "normal"
 prefix = "SR:C31-{AI}Aie7-2:Offset-y-Cal"
 name = "Offset_EPU60_Vertical"
 
 [Angle_EPU60_Horizontal]
 _target = "ophyd.EpicsSignalRO"
-_group = "signals"
 kind = "normal"
 prefix = "SR:C31-{AI}Aie7-2:Angle-x-Cal"
 name = "Angle_EPU60_Horizontal"
 
 [Angle_EPU60_Vertical]
 _target = "ophyd.EpicsSignalRO"
-_group = "signals"
 kind = "normal"
 prefix = "SR:C31-{AI}Aie7-2:Angle-y-Cal"
 name = "Angle_EPU60_Vertical"
 
 [Gap_EPU60]
 _target = "ophyd.EpicsSignalRO"
-_group = "signals"
 kind = "normal"
 prefix = "SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr.RBV"
 name = "Gap_EPU60"
 
 [Gap_EPU60_int]
 _target = "sst_base.detectors.scalar.ophScalar"
-_group = "signals"
 kind = "normal"
 prefix = "SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr.RBV"
 name = "Gap_EPU60"
 
 [Phase_EPU60]
 _target = "ophyd.EpicsSignalRO"
-_group = "signals"
 kind = "normal"
 prefix = "SR:C07-ID:G1A{SST1:1-Ax:Phase}-Mtr.RBV"
 name = "Phase_EPU60"
 
 [Phase_EPU60_int]
 _target = "sst_base.detectors.scalar.ophScalar"
-_group = "signals"
 kind = "normal"
 prefix = "SR:C07-ID:G1A{SST1:1-Ax:Phase}-Mtr.RBV"
 name = "Phase_EPU60"
 
 [Slits_EPU60_Frontend] ## TODO: This likely needs to get fixed/updated.  When I made this into a Slits object, I was not able to use functions like .wh().  I would get TypeError: unsupported operand type(s) for -: 'NoneType' and 'NoneType'
-_target = "sst_base.slits.Slits"
-_group = "slits"
+_target = "sst_base.slits.FMBOQuadSlits"
+_group = "motors"
 prefix = "FE:C07A-OP{Slt:34-Ax:"
 name = "EPU60 frontend slits"
 kind = "hinted"
@@ -129,21 +139,19 @@ shutter_type = "FE"
 
 [Temperature_L1]
 _target = "ophyd.EpicsSignalRO"
-_group = "signals"
 kind = "normal"
 prefix = "XF:07IDA-OP{Mir:L1}T:Msk-I"
 name = "Temperature_L1"
 
 [Temperature_M1]
 _target = "ophyd.EpicsSignalRO"
-_group = "signals"
 kind = "normal"
 prefix = "XF:07IDA-OP{Mir:1}T:Msk-I"
 name = "Temperature_M1"
 
 [mir1_pressure]
 _target = "ophyd.EpicsSignalRO"
-_group = "signals"
+_group = "vacuum"
 kind = "normal"
 prefix = "XF:07IDA-VA:0{Mir:M1-CCG:1}P:Raw-I"
 name = "Mirror 1 Vacuum Pressure"
@@ -180,14 +188,12 @@ name = "Hutch Photon Shutter"
 ## RSoXS 250 l/mm grating is made from nickel oxide.  250 l/mm is made from gold.  1200 l/mm grating is made from gold.
 [mono_en_int]
 _target = "sst_base.detectors.scalar.ophScalar"
-_group = "signals"
 kind = "normal"
 prefix = "XF:07ID1-OP{Mono:PGM1-Ax::ENERGY_MON"
 name = "Energy"
 
 [Temperature_MonoPGM]
 _target = "ophyd.EpicsSignalRO"
-_group = "signals"
 kind = "normal"
 prefix = "XF:07IDA-OP{Mono:PGM}T:Grg-I"
 name = "Temperature_MonoPGM"
@@ -197,7 +203,6 @@ name = "Temperature_MonoPGM"
 ## M3
 [Temperature_M3]
 _target = "ophyd.EpicsSignalRO"
-_group = "signals"
 kind = "normal"
 prefix = "XF:07IDA-OP{Mir:2}T:Mir-I"
 name = "Temperature_M3"
@@ -235,72 +240,67 @@ name = "SST endstation in Control"
 string = true
 
 [slits1]
-_target = "sst_base.slits.Slits"
-_group = "slits"
+_target = "sst_base.slits.FMBOQuadSlits"
+_group = "motors"
 kind = "hinted"
 prefix = "XF:07ID2-ES1{Slt1-Ax:"
 name = "Upstream Scatter Slits"
 concurrent = 1
 
+[slit_size]
+_alias = "slits1.vsize"
+_role = "slits"
+
 [Slit1_Current_Bottom]
 _target = "ophyd.EpicsSignalRO"
-_group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC1_MON"
 name = "RSoXS Slit 1 Bottom Current"
 
 [Slit1_Current_Bottom_int]
 _target = "sst_base.detectors.scalar.ophScalar"
-_group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC1_MON"
 name = "RSoXS Slit 1 Bottom Current"
 
 [Slit1_Current_Top]
 _target = "ophyd.EpicsSignalRO"
-_group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC2_MON"
 name = "RSoXS Slit 1 Top Current"
 
 [Slit1_Current_Top_int]
 _target = "sst_base.detectors.scalar.ophScalar"
-_group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC2_MON"
 name = "RSoXS Slit 1 Top Current"
 
 [Slit1_Current_Inboard]
 _target = "ophyd.EpicsSignalRO"
-_group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC3_MON"
 name = "RSoXS Slit 1 In Board Current"
 
 [Slit1_Current_Inboard_int]
 _target = "sst_base.detectors.scalar.ophScalar"
-_group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC3_MON"
 name = "RSoXS Slit 1 In Board Current"
 
 [Slit1_Current_Outboard]
 _target = "ophyd.EpicsSignalRO"
-_group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC4_MON"
 name = "RSoXS Slit 1 Out Board Current"
 
 [Slit1_Current_Outboard_int]
 _target = "sst_base.detectors.scalar.ophScalar"
-_group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC4_MON"
 name = "RSoXS Slit 1 Out Board Current"
 
 [Slit1_i400_cap]
 _target = "ophyd.EpicsSignal"
-_group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:CAP_SP"
 name = "RSoXS Slit 1 i400 capasitor"
@@ -308,7 +308,6 @@ string = true
 
 [Slit1_i400_enable]
 _target = "ophyd.EpicsSignal"
-_group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:ENABLE_IC_UPDATES"
 name = "RSoXS Slit 1 i400 enable"
@@ -316,7 +315,6 @@ string = true
 
 [Slit1_i400_npnts]
 _target = "ophyd.EpicsSignal"
-_group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:TRIGPOINTS_SP"
 name = "RSoXS Slit 1 i400 trigger points"
@@ -324,7 +322,6 @@ string = true
 
 [Slit1_i400_read_time]
 _target = "ophyd.EpicsSignal"
-_group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:PERIOD_SP"
 name = "RSoXS Slit 1 i400  read time"
@@ -332,7 +329,6 @@ string = true
 
 [Slit1_i400_mode]
 _target = "ophyd.EpicsSignal"
-_group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC_UPDATE_MODE"
 name = "RSoXS Slit 1 i400 mode"
@@ -340,7 +336,6 @@ string = true
 
 [Slit1_i400_accum]
 _target = "ophyd.EpicsSignal"
-_group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:ACCUM_SP"
 name = "RSoXS Slit 1 i400 mode"
@@ -348,21 +343,20 @@ string = true
 
 [Izero_Mesh]
 _target = "ophyd.EpicsSignalRO"
-_group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC1_MON"
 name = "RSoXS Au Mesh Current"
 
 [Izero_Mesh_int]
 _target = "sst_base.detectors.scalar.ophScalar"
-_group = "signals"
+_group = "detectors"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC1_MON"
 name = "RSoXS Au Mesh Current"
 
 [Izero_Diode] ## This is Jamie's definition, can be used for flyscanning (?)
 _target = "ophyd.EpicsSignalRO"
-_group = "signals"
+
 kind = "normal"
 prefix = "XF:07ID-ES1{DMR:I400-1}:IC3_MON"
 name = "Izero Photodiode"
@@ -383,15 +377,15 @@ kind = "hinted"
 
 [Izero_update_time] ## No longer relevant because quadEM is broken
 _target = "ophyd.EpicsSignal"
-_group = "signals"
+
 kind = "normal"
 prefix = "XF:07ID1-BI{EM:1}EM180:AveragingTime"
 name = "RSoXS quadem Averaging Time"
 
 ## RSoXS slit 2
 [slits2]
-_target = "sst_base.slits.Slits"
-_group = "slits"
+_target = "sst_base.slits.FMBOQuadSlits"
+_group = "motors"
 kind = "hinted"
 prefix = "XF:07ID2-ES1{Slt2-Ax:"
 name = "Middle Scatter Slits"
@@ -408,8 +402,8 @@ kind = "hinted"
 
 ## RSoXS slit 3
 [slits3]
-_target = "sst_base.slits.Slits"
-_group = "slits"
+_target = "sst_base.slits.FMBOQuadSlits"
+_group = "motors"
 kind = "hinted"
 prefix = "XF:07ID2-ES1{Slt3-Ax:"
 name = "Final Scatter Slits"
@@ -417,14 +411,13 @@ concurrent = 1
 
 [Sample_TEY]
 _target = "ophyd.EpicsSignalRO"
-_group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC2_MON"
 name = "RSoXS Sample Current"
 
 [Sample_TEY_int]
 _target = "sst_base.detectors.scalar.ophScalar"
-_group = "signals"
+_group = "detectors"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC2_MON"
 name = "RSoXS Sample Current"
@@ -455,33 +448,44 @@ prefix = "XF:07ID1-ES:1{Scr:5}"
 name = "Sample Imager Detector Area Camera" ## TODO: Would like to rename to "Solid sample bar imager detector area camera"
 read_attrs = ["tiff"]
 
+[manipulator]
+_target = "rsoxs.HW.manipulator.ManipulatorBuilderRSOXS"
+_group = "manipulators"
+_role = "primary_sampleholder"
+prefix = "XF:07ID2-ES1{Stg-Ax:"
+name = "manipulator"
+
 [sam_X]
-_target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
+#_target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
 _group = "motors"
+_alias = "manipulator.x"
 kind = "hinted"
 name = "RSoXS Sample Outboard-Inboard"
-prefix = "XF:07ID2-ES1{Stg-Ax:X}Mtr"
+#prefix = "XF:07ID2-ES1{Stg-Ax:X}Mtr"
 
 [sam_Y]
-_target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
+#_target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
 _group = "motors"
+_alias = "manipulator.y"
 kind = "hinted"
 name = "RSoXS Sample Up-Down"
-prefix = "XF:07ID2-ES1{Stg-Ax:Y}Mtr"
+#prefix = "XF:07ID2-ES1{Stg-Ax:Y}Mtr"
 
 [sam_Z]
-_target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
+#_target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
 _group = "motors"
+_alias = "manipulator.z"
 kind = "hinted"
 name = "RSoXS Sample Downstream-Upstream"
-prefix = "XF:07ID2-ES1{Stg-Ax:Z}Mtr"
+#prefix = "XF:07ID2-ES1{Stg-Ax:Z}Mtr"
 
 [sam_Th]
-_target = "sst_base.motors.PrettyMotorFMBODeadband"
+#_target = "sst_base.motors.PrettyMotorFMBODeadband"
+_alias = "manipulator.r"
 _group = "motors"
 kind = "hinted"
 name = "RSoXS Sample Rotation"
-prefix = "XF:07ID2-ES1{Stg-Ax:Yaw}Mtr"
+#prefix = "XF:07ID2-ES1{Stg-Ax:Yaw}Mtr"
 
 [TEMX]
 _target = "sst_base.motors.PrettyMotor"
@@ -526,21 +530,18 @@ prefix = "XF:07ID2-ES1{BS-Ax:1}Mtr"
 
 [Beamstop_WAXS] ## This is Jamie's definition, can be used for flyscanning (?)
 _target = "ophyd.EpicsSignalRO"  ## Unlike the ophScalar signals, these signals collect a single data point and do not do any averaging or statistics. 
-_group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{DMR:I400-1}:IC1_MON"
 name = "WAXS Beamstop"
 
 [Beamstop_WAXS_int]
 _target = "sst_base.detectors.scalar.ophScalar" ## These signals are scalars (integrating detectors).  Each data point that is written out is the average of several "sub" data points.  Other statistics, such as standard deviation, median, etc. are available.  ## TODO: Would it be possible to combine this with the non-integrating signal and can toggle between which type to use?
-_group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{DMR:I400-1}:IC1_MON"
 name = "WAXS Beamstop"
 
 [diode_i400_cap]
 _target = "ophyd.EpicsSignal"
-_group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{DMR:I400-1}:CAP_SP"
 name = "RSoXS diode i400 capasitor"
@@ -548,7 +549,6 @@ string = true
 
 [diode_i400_enable]
 _target = "ophyd.EpicsSignal"
-_group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{DMR:I400-1}:TRIGPOINTS_SP"
 name = "RSoXS diode i400 trigger points"
@@ -556,7 +556,6 @@ string = true
 
 [diode_i400_npnts]
 _target = "ophyd.EpicsSignal"
-_group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{DMR:I400-1}:ENABLE_IC_UPDATES"
 name = "RSoXS diode i400 enable"
@@ -564,7 +563,6 @@ string = true
 
 [diode_i400_mode]
 _target = "ophyd.EpicsSignal"
-_group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{DMR:I400-1}:IC_UPDATE_MODE"
 name = "RSoXS diode i400 mode"
@@ -572,7 +570,6 @@ string = true
 
 [diode_i400_accum]
 _target = "ophyd.EpicsSignal"
-_group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{DMR:I400-1}:ACCUM_SP"
 name = "RSoXS diode i400  accumulation mode"
@@ -580,7 +577,6 @@ string = true
 
 [diode_i400_read_time]
 _target = "ophyd.EpicsSignal"
-_group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{DMR:I400-1}:PERIOD_SP"
 name = "RSoXS diode i400 read time"
@@ -588,7 +584,6 @@ string = true
 
 [diode_i400_PDU]
 _target = "ophyd.EpicsSignal"
-_group = "signals"
 kind = "normal"
 prefix = "XF:07ID-CT{RG:C1-PDU:1}Sw:8-Sel"
 name = "RSoXS diode power control"
@@ -596,7 +591,6 @@ string = true
 
 [DiodeRange]
 _target = "ophyd.EpicsSignal"
-_group = "signals"
 prefix = "XF:07ID-ES1{DMR:I400-1}:RANGE_BP"
 
 [Det_W]
@@ -622,14 +616,12 @@ prefix = "XF:07ID2-ES1{BS-Ax:2}Mtr"
 
 [Beamstop_SAXS] ## This is Jamie's definition, can be used for flyscanning (?)
 _target = "ophyd.EpicsSignalRO"
-_group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{DMR:I400-1}:IC2_MON"
 name = "SAXS Beamstop"
 
 [Beamstop_SAXS_int]
 _target = "sst_base.detectors.scalar.ophScalar"
-_group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{DMR:I400-1}:IC2_MON"
 name = "SAXS Beamstop"
@@ -649,19 +641,16 @@ name = "WAXS Detector Area Camera"
 
 [mc19_fault]
 _target = "ophyd.EpicsSignalRO"
-_group = "signals"
 prefix = "SST1_Upstream:MC19AmpFaultSum-Sts"
 name = "MC19 Amp Fault"
 
 [mc20_fault]
 _target = "ophyd.EpicsSignalRO"
-_group = "signals"
 prefix = "SST1_Upstream:MC20AmpFaultSum-Sts"
 name = "MC20 Amp Fault"
 
 [mc21_fault]
 _target = "ophyd.EpicsSignalRO"
-_group = "signals"
 prefix = "SST1_Upstream:MC21AmpFaultSum-Sts"
 name = "MC21 Amp Fault"
 
@@ -681,21 +670,18 @@ name = "Photon Shutter 7"
 
 [DownstreamLargeDiode] 
 _target = "ophyd.EpicsSignalRO"
-_group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{DMR:I400-1}:IC4_MON"
 name = "DownstreamLargeDiode"
 
 [DownstreamLargeDiode_int] 
 _target = "sst_base.detectors.scalar.ophScalar"
-_group = "signals"
 kind = "normal"
 prefix = "XF:07ID-ES1{DMR:I400-1}:IC4_MON"
 name = "DownstreamLargeDiode"
 
 [bpm13_sum]
 _target = "ophyd.EpicsSignalRO"
-_group = "signals"
 prefix = "XF:07ID-BI{BPM:13}Stats5:Total_RBV"
 name = "Downstream Izero Phosphor Intensity"
 

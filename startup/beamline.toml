@@ -1,2 +1,17 @@
+[configuration]
+has_slits = true
+has_motorized_samples = true
+has_motorized_eref = true
+
 [settings]
 modules = ['rsoxs.startup']
+
+[settings.redis.md]
+host = "info.sst.nsls2.bnl.gov"
+prefix = "rsoxs-"
+
+[settings.redis.info]
+host = "info.sst.nsls2.bnl.gov"
+prefix = "rsoxs-"
+port = 60737
+db = 2
