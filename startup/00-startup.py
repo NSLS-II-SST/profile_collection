@@ -11,59 +11,42 @@ paths = [
 for path in paths:
     sys.path.append(str(path))
 
-
 ## Uses this package: https://github.com/xraygui/nbs-bl
 ## Gives the path to profile_collection directory and looks for devices.toml file
 ## This should replace any hardware imports from sst_hw, sst_base, and rsoxs.  rsoxs.Functions imports may have to stay until some of the functions are rewritten to become compliant with data security upgrades.
 from nbs_bl.configuration import load_and_configure_everything
-from nbs_bl.globalVars import GLOBAL_BEAMLINE as bl
 load_and_configure_everything()
 
-
-from sst_funcs.printing import run_report
+from rsoxs.startup import RE, db, sd, md
+from nbs_bl.printing import run_report
 
 run_report(__file__)
-#
-# sst devices  These all reference the Base classes and instantiate the objects themselves into the current namespace
-from sst_hw.gatevalves import *
-from sst_hw.shutters import *
-from sst_hw.vacuum import *
-from sst_hw.motors import *
-from sst_hw.mirrors import *
-from sst_hw.diode import *
-from sst_hw.energy import *
 
 # sst code  # Common code
-from sst_base.archiver import *
-
-# RSoXS startup - bluesky RE / db / md definitions
-from rsoxs.startup import *
-
-# RSoXS specific devices
-from rsoxs.HW.motors import *
-from rsoxs.HW.cameras import *
-from rsoxs.HW.signals import *
-from rsoxs.HW.detectors import *
-from rsoxs.HW.slits import *
-from rsoxs.HW.syringepump import *
-from rsoxs.HW.energy import *
-from rsoxs.HW.lakeshore import *
-
-# RSoXS specific code
+# from sst_base.archiver import *
 from rsoxs.Functions.alignment import *
-from rsoxs.Functions.alignment_local import *
-from rsoxs.Functions.common_procedures import *
-from rsoxs.Functions.configurations import *
-from rsoxs.Functions.schemas import *
-from rsoxs.Functions.PVdictionary import *
-from rsoxs.Functions.energyscancore import *
-from rsoxs.Functions.rsoxs_plans import *
-from rsoxs.Functions.fly_alignment import *
-from rsoxs.Functions.spreadsheets import *
-from rsoxs.HW.slackbot import rsoxs_bot
-from rsoxs_scans.spreadsheets import *
-from rsoxs_scans.acquisition import *
+# from rsoxs.Functions.alignment_local import *
+# from rsoxs.Functions.common_procedures import *
+# from rsoxs.Functions.configurations import *
+# from rsoxs.Functions.schemas import *
+# from rsoxs.Functions.PVdictionary import *
+# from rsoxs.Functions.energyscancore import *
+# from rsoxs.Functions.rsoxs_plans import *
+# from rsoxs.Functions.fly_alignment import *
+# from rsoxs.Functions.spreadsheets import *
+# from rsoxs.HW.slackbot import rsoxs_bot
+# from rsoxs_scans.spreadsheets import *
+# from rsoxs_scans.acquisition import *
+from nslsii import configure_kafka_publisher, configure_bluesky_logging, configure_ipython_logging
+from nslsii.common.ipynb.logutils import log_exception
 
+ipython = get_ipython()
+
+#nslsii.configure_base(get_ipython().user_ns, "rsoxs", bec=False, configure_logging=True, publish_documents_with_kafka=True)
+configure_kafka_publisher(RE, beamline_name="rsoxs")
+RE.subscribe(db.insert)
+configure_bluesky_logging(ipython=ipython)
+configure_ipython_logging(exception_logger=log_exception, ipython=ipython)
 
 try:
     from bluesky_queueserver import is_re_worker_active
@@ -78,9 +61,10 @@ if not is_re_worker_active():
 
     beamline_status()  # print out the current sample metadata, motor position and detector status
 
-
+print("Extending Baseline")
 # from .Functions.startup import sd
 #
+"""
 sd.baseline.extend(
      [
         sam_viewer,
@@ -166,7 +150,7 @@ sd.baseline.extend(
         tem_tempstage
     ]
 )
-
+"""
 # from .Functions.startup import sd
 #
 # sd.monitors.extend(
