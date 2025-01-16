@@ -119,16 +119,16 @@ kind = "normal"
 prefix = "SR:C07-ID:G1A{SST1:1-Ax:Phase}-Mtr.RBV"
 name = "Phase_EPU60"
 
-[Slits_EPU60_Frontend] ## TODO: This likely needs to get fixed/updated.  When I made this into a Slits object, I was not able to use functions like .wh().  I would get TypeError: unsupported operand type(s) for -: 'NoneType' and 'NoneType'
-_target = "sst_base.slits.FMBOQuadSlits"
-_group = "motors"
-prefix = "FE:C07A-OP{Slt:34-Ax:"
-name = "EPU60 frontend slits"
-kind = "hinted"
-concurrent = 1
+#[Slits_EPU60_Frontend] ## TODO: This likely needs to get fixed/updated.  When I made this into a Slits object, I was not able to use functions like .wh().  I would get TypeError: unsupported operand type(s) for -: 'NoneType' and 'NoneType'
+#_target = "sst_base.slits.FMBOQuadSlits"
+#_group = "motors"
+#prefix = "FE:C07A-OP{Slt:34-Ax:"
+#name = "EPU60 frontend slits"
+#kind = "hinted"
+#concurrent = 1
 ## TODO: After this is fixed, archive signal
 
-[psh1]
+[FEsh1]
 _target = "sst_base.shutters.EPS_Shutter"
 _group = "shutters"
 openval = 0
@@ -142,6 +142,13 @@ _target = "ophyd.EpicsSignalRO"
 kind = "normal"
 prefix = "XF:07IDA-OP{Mir:L1}T:Msk-I"
 name = "Temperature_L1"
+
+[mir1]
+_target = "sst_base.mirrors.FMBHexapodMirror"
+_group = "motors"
+prefix = "XF:07IDA-OP{Mir:M1"
+name = "SST 1 Mirror 1 fmb" 
+kind = "hinted"
 
 [Temperature_M1]
 _target = "ophyd.EpicsSignalRO"
@@ -182,7 +189,15 @@ closeval = 1
 prefix = "XF:07IDA-PPS{PSh:4}"
 name = "Hutch Photon Shutter"
 
-## GV14
+[gv14]
+_target = "sst_base.shutters.EPS_Shutter"
+_group = "gate_valves"
+shutter_type = "GV"
+openval = 0
+closeval = 1
+prefix = "XF:07IDA-VA:2{FS:6-GV:1}"
+name = "Pre Mono Gate Valve"
+kind = "hinted"
 
 ## M2 and PGM
 ## RSoXS 250 l/mm grating is made from nickel oxide.  250 l/mm is made from gold.  1200 l/mm grating is made from gold.
@@ -192,6 +207,34 @@ kind = "normal"
 prefix = "XF:07ID1-OP{Mono:PGM1-Ax::ENERGY_MON"
 name = "Energy"
 
+[mirror2] ## angle
+_target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
+_group = "motors"
+kind = "hinted"
+prefix = "XF:07ID1-OP{Mono:PGM1-Ax:MirP}Mtr"
+name = "Mono Mirror"
+
+[mirror2x]
+_target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
+_group = "motors"
+kind = "hinted"
+prefix = "XF:07ID1-OP{Mono:PGM1-Ax:MirX}Mtr"
+name = "Mono Mirror"
+
+[grating] ## angle
+_target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
+_group = "motors"
+kind = "hinted"
+prefix = "XF:07ID1-OP{Mono:PGM1-Ax:GrtP}Mtr"
+name = "Mono Grating"
+
+[gratingx]
+_target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
+_group = "motors"
+kind = "hinted"
+prefix = "XF:07ID1-OP{Mono:PGM1-Ax:GrtX}Mtr"
+name = "Mono Grating"
+
 [Temperature_MonoPGM]
 _target = "ophyd.EpicsSignalRO"
 kind = "normal"
@@ -200,7 +243,13 @@ name = "Temperature_MonoPGM"
 
 ## GV15
 
-## M3
+[mir3]
+_target = "sst_base.mirrors.FMBHexapodMirror"
+_group = "motors"
+prefix = "XF:07ID1-OP{Mir:M3ABC"
+name = "SST 1 Mirror 3 fmb"
+kind = "hinted"
+
 [Temperature_M3]
 _target = "ophyd.EpicsSignalRO"
 kind = "normal"
@@ -227,7 +276,12 @@ name = "Photon Shutter 10"
 
 ## DM6 and FS12
 
-## Precision slit C
+[Exit_Slit] ## Precision slit C
+_target = "sst_base.motors.PrettyMotorFMBO"
+_group = "motors"
+kind = "hinted"
+prefix = "XF:07ID2-BI{Slt:11-Ax:YGap}Mtr"
+name = "Exit Slit of Mono Vertical Gap"
 
 ## GV27
 
@@ -391,6 +445,19 @@ prefix = "XF:07ID2-ES1{Slt2-Ax:"
 name = "Middle Scatter Slits"
 concurrent = 1
 
+[Shutter_control]
+_target = "rsoxs.HW.motors.ShutterWait"
+_group = "motors"
+prefix = "XF:07ID2-ES1{FSh-Ax:1}Mtr"
+name = "RSoXS Shutter Toggle"
+kind = "normal"
+
+[Shutter_open_time]
+_target = "ophyd.EpicsSignal"
+prefix = "XF:07IDB-CT{DIODE-MTO:1}OutWidthSet:2-SP"
+name = "RSoXS Shutter Opening Time (ms)"
+kind = "normal"
+
 [Shutter_Y]
 _target = "sst_base.motors.PrettyMotorFMBODeadband"
 _group = "motors"
@@ -399,8 +466,16 @@ name = "Shutter Vertical Translation" ## Fast shutter
 kind = "hinted"
 
 ## GV27A
+[gv27a]
+_target = "sst_base.shutters.EPS_Shutter"
+_group = "gate_valves"
+shutter_type = "GV"
+openval = 0
+closeval = 1
+prefix = "XF:07IDB-VA:2{RSoXS:Main-GV:1}"
+name = "Izero-Main Gate Valve"
+kind = "hinted"
 
-## RSoXS slit 3
 [slits3]
 _target = "sst_base.slits.FMBOQuadSlits"
 _group = "motors"
@@ -486,6 +561,17 @@ _group = "motors"
 kind = "hinted"
 name = "RSoXS Sample Rotation"
 #prefix = "XF:07ID2-ES1{Stg-Ax:Yaw}Mtr"
+
+[gvll]
+_target = "sst_base.shutters.EPS_Shutter"
+_group = "gate_valves"
+shutter_type = "GV"
+openval = 0
+closeval = 1
+prefix = "XF:07IDB-VA:2{RSoXS:LL-GV:1}"
+name = "Load Lock Gate Valve"
+kind = "hinted"
+
 
 [TEMX]
 _target = "sst_base.motors.PrettyMotor"
@@ -644,15 +730,45 @@ _target = "ophyd.EpicsSignalRO"
 prefix = "SST1_Upstream:MC19AmpFaultSum-Sts"
 name = "MC19 Amp Fault"
 
+[MC19_disable]
+_target = "ophyd.EpicsSignal"
+kind = "normal"
+prefix = "XF:07IDB-CT{DIODE-Local:1}OutPt08:Data-Sel"
+name = "MC19_disable"
+
 [mc20_fault]
 _target = "ophyd.EpicsSignalRO"
 prefix = "SST1_Upstream:MC20AmpFaultSum-Sts"
 name = "MC20 Amp Fault"
 
+[MC20_disable]
+_target = "ophyd.EpicsSignal"
+kind = "normal"
+prefix = "XF:07IDB-CT{DIODE-Local:1}OutPt07:Data-Sel"
+name = "MC20_disable"
+
 [mc21_fault]
 _target = "ophyd.EpicsSignalRO"
 prefix = "SST1_Upstream:MC21AmpFaultSum-Sts"
 name = "MC21 Amp Fault"
+
+[MC21_disable]
+_target = "ophyd.EpicsSignal"
+kind = "normal"
+prefix = "XF:07IDB-CT{DIODE-Local:1}OutPt06:Data-Sel"
+name = "MC21_disable"
+
+[rsoxs_pg_main_val]
+_target = "ophyd.EpicsSignalRO"
+kind = "hinted"
+prefix = "XF:07IDB-VA:2{RSoXS:Main-TCG:1}P-I"
+name = "Main Chamber Pirani Gauge value"
+
+[rsoxs_ccg_main_val]
+_target = "ophyd.EpicsSignalRO"
+kind = "hinted"
+prefix = "XF:07IDB-VA:2{RSoXS:Main-CCG:1}P-I"
+name = "Main Chamber Chamber Cold Cathode Gauge"
 
 ## GV28
 
@@ -666,7 +782,12 @@ closeval = 1
 prefix = "XF:07IDA-PPS{PSh:7}"
 name = "Photon Shutter 7"
 
-## M4C/M4D
+[mir4OLD]
+_target = "sst_base.mirrors.HexapodMirror"
+_group = "motors"
+prefix = "XF:07ID2-OP{Mir:M4CD-Ax:"
+name = "SST 1 Mirror 4" 
+kind = "hinted"
 
 [DownstreamLargeDiode] 
 _target = "ophyd.EpicsSignalRO"
@@ -731,6 +852,9 @@ name = "Photon Shutter 8"
 ## GV33
 
 ## LARIAT 2
+
+
+
 
 
 ## TODO: I would like to rename some of the devices, but I will do so after those definitions have been successfully removed from the rsoxs repository
