@@ -33,10 +33,10 @@ from rsoxs.Functions.PVdictionary import *  ## TODO: probably delete, not actual
 from rsoxs.Functions.energyscancore import *
 #from rsoxs.Functions.rsoxs_plans import *
 from rsoxs.Functions.fly_alignment import *
-# from rsoxs.Functions.spreadsheets import *
-# from rsoxs.HW.slackbot import rsoxs_bot
-# from rsoxs_scans.spreadsheets import *
-# from rsoxs_scans.acquisition import *
+from rsoxs.Functions.spreadsheets import *
+from rsoxs.HW.slackbot import rsoxs_bot
+from rsoxs_scans.spreadsheets import *
+from rsoxs_scans.acquisition import *
 from nslsii import configure_kafka_publisher, configure_bluesky_logging, configure_ipython_logging
 from nslsii.common.ipynb.logutils import log_exception
 
