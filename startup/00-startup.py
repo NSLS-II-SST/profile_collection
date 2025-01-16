@@ -28,7 +28,7 @@ from rsoxs.Functions.alignment import *
 from rsoxs.Functions.alignment_local import *
 from rsoxs.Functions.common_procedures import *
 from rsoxs.Functions.configurations import *
-# from rsoxs.Functions.schemas import *
+from rsoxs.Functions.schemas import *
 # from rsoxs.Functions.PVdictionary import *
 # from rsoxs.Functions.energyscancore import *
 # from rsoxs.Functions.rsoxs_plans import *
