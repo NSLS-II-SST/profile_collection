@@ -24662,6 +24662,12 @@ existing_plans:
     parameters: []
     properties:
       is_generator: true
+  High_Gain_diode_i400:
+    module: rsoxs.HW.signals
+    name: High_Gain_diode_i400
+    parameters: []
+    properties:
+      is_generator: true
   Izero_diode:
     module: rsoxs.Functions.configurations
     name: Izero_diode
@@ -25073,6 +25079,44 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: samples
+    properties:
+      is_generator: true
+  do_nexafs:
+    description: "inputs:\n    edge,\n    speed='normal',\n    ratios=None,\n    cycles=0,\n\
+      \    pol_mode=\"sample\",\n    polarizations = [0],\n    angles = None,\n  \
+      \  grating='rsoxs',\n    diode_range='high',\n    temperatures=None,\n    temp_ramp_speed=10,\n\
+      \    temp_wait=True,\n    md = None,"
+    module: rsoxs.Functions.rsoxs_plans
+    name: do_nexafs
+    parameters:
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: md
+    - kind:
+        name: VAR_KEYWORD
+        value: 4
+      name: kwargs
+    properties:
+      is_generator: true
+  do_nexafs_step:
+    description: "inputs:\n    edge,\n    exposure_time = 1,\n    frames='full',\n\
+      \    ratios=None,\n    repeats =1,\n    polarizations = [0],\n    angles = None,\n\
+      \    grating='rsoxs',\n    diode_range='high',\n    temperatures=None,\n   \
+      \ temp_ramp_speed=10,\n    temp_wait=True,\n    md=None,"
+    module: rsoxs.Functions.rsoxs_plans
+    name: do_nexafs_step
+    parameters:
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: md
+    - kind:
+        name: VAR_KEYWORD
+        value: 4
+      name: kwargs
     properties:
       is_generator: true
   do_rsoxs:
@@ -25573,7 +25617,7 @@ existing_plans:
     module: rsoxs.Functions.alignment
     name: move_to_location
     parameters:
-    - default: '[{''motor'': ''x'', ''position'': -0.0010049999999992565, ''order'':
+    - default: '[{''motor'': ''x'', ''position'': -0.0010200000000040177, ''order'':
         0}, {''motor'': ''y'', ''position'': 345.00002, ''order'': 0}, {''motor'':
         ''z'', ''position'': -0.4390849999999915, ''order'': 0}, {''motor'': ''th'',
         ''position'': 0.005337560999976176, ''order'': 0}]'
@@ -28993,6 +29037,64 @@ existing_plans:
       name: force
     properties:
       is_generator: true
+  run_bar:
+    description: _summary_
+    module: rsoxs.Functions.rsoxs_plans
+    name: run_bar
+    parameters:
+    - default: None
+      description: _description_
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: bar
+    - default: '[''apriority'']'
+      description: _description_, by default ["apriority"]
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: sort_by
+    - default: '[False]'
+      description: _description_, by default [False]
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: rev
+    - default: 'False'
+      description: _description_, by default False
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: verbose
+    - default: 'False'
+      description: _description_, by default False
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: dry_run
+    - default: '''all'''
+      description: _description_, by default 'all'
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: group
+    - default: 'False'
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: repeat_previous_runs
+    properties:
+      is_generator: true
+  run_queue_step:
+    module: rsoxs.Functions.rsoxs_plans
+    name: run_queue_step
+    parameters:
+    - kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: step
+    properties:
+      is_generator: true
   samxscan:
     module: rsoxs.Functions.alignment
     name: samxscan
@@ -29025,6 +29127,12 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: ulim
+    properties:
+      is_generator: true
+  setup_diode_i400:
+    module: rsoxs.HW.signals
+    name: setup_diode_i400
+    parameters: []
     properties:
       is_generator: true
   single_gen:

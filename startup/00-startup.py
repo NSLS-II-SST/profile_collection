@@ -31,7 +31,7 @@ from rsoxs.Functions.configurations import *
 from rsoxs.Functions.schemas import *
 from rsoxs.Functions.PVdictionary import *  ## TODO: probably delete, not actually used
 from rsoxs.Functions.energyscancore import *
-#from rsoxs.Functions.rsoxs_plans import *
+from rsoxs.Functions.rsoxs_plans import *
 from rsoxs.Functions.fly_alignment import *
 from rsoxs.Functions.spreadsheets import *
 from rsoxs.HW.slackbot import rsoxs_bot
