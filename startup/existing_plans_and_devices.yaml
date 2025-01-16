@@ -24686,6 +24686,165 @@ existing_plans:
     parameters: []
     properties:
       is_generator: true
+  NEXAFS_fly_scan_core:
+    module: rsoxs.Functions.energyscancore
+    name: NEXAFS_fly_scan_core
+    parameters:
+    - kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: scan_params
+    - default: 'True'
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: openshutter
+    - default: '0'
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: pol
+    - default: '''best'''
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: grating
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: enscan_type
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: master_plan
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: angle
+    - default: '0'
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: cycles
+    - default: 'True'
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: locked
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: md
+    - default: 'False'
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: sim_mode
+    - kind:
+        name: VAR_KEYWORD
+        value: 4
+      name: kwargs
+    properties:
+      is_generator: true
+  NEXAFS_step_scan_core:
+    module: rsoxs.Functions.energyscancore
+    name: NEXAFS_step_scan_core
+    parameters:
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: dets
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: energy
+    - default: 'True'
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: lockscan
+    - default: '''no change'''
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: grating
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: energies
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: times
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: polarizations
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: locations
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: temperatures
+    - default: 'True'
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: temp_wait
+    - default: 'False'
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: temps_with_locations
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: enscan_type
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: master_plan
+    - default: 'False'
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: sim_mode
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: md
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: signals
+    - default: 'False'
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: check_exp
+    - kind:
+        name: VAR_KEYWORD
+        value: 4
+      name: kwargs
+    properties:
+      is_generator: true
   Scan_izero_peak:
     module: rsoxs.Functions.common_procedures
     name: Scan_izero_peak
@@ -24874,6 +25033,12 @@ existing_plans:
       name: md
     properties:
       is_generator: true
+  cleanup:
+    module: rsoxs.Functions.energyscancore
+    name: cleanup
+    parameters: []
+    properties:
+      is_generator: true
   clear_one_roi:
     module: nbs_bl.plans.plan_stubs
     name: clear_one_roi
@@ -24945,6 +25110,61 @@ existing_plans:
     module: rsoxs.Functions.contingencies
     name: enc_clr_x
     parameters: []
+    properties:
+      is_generator: true
+  finalize_wrapper:
+    description: try...finally helper
+    module: bluesky.preprocessors
+    name: finalize_wrapper
+    parameters:
+    - description: a generator, list, or similar containing `Msg` objects
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: plan
+    - description: 'a generator, list, or similar containing `Msg` objects or a callable
+
+        that reurns one; attempted to be run no matter what happens in the
+
+        first plan'
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: final_plan
+    - default: 'False'
+      description: 'If the plan should pause before running the clean final_plan in
+
+        the case of an Exception.  This is intended as a debugging tool only.'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: pause_for_debug
+    properties:
+      is_generator: true
+  fly_find_fiducials:
+    module: rsoxs.Functions.fly_alignment
+    name: fly_find_fiducials
+    parameters:
+    - default: '[3.5, -1, -2.4, 1.5]'
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: f2
+    - default: '[2.0, -0.9, -1.5, 0.8]'
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: f1
+    - default: '-187.5'
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: y1
+    - default: '2'
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: y2
     properties:
       is_generator: true
   fly_max:
@@ -25039,6 +25259,35 @@ existing_plans:
       name: kwargs
     properties:
       is_generator: true
+  fly_plan:
+    module: rsoxs.Functions.fly_alignment
+    name: fly_plan
+    parameters:
+    - kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: motor
+    - kind:
+        name: VAR_POSITIONAL
+        value: 2
+      name: scan_params
+    - default: '0.5'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: exposure_time
+    - default: '[]'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: flyer_list
+    - default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: md
+    properties:
+      is_generator: true
   fly_scan:
     description: Flyscan one motor in a trajectory
     module: nbs_bl.plans.flyscan_base
@@ -25084,6 +25333,64 @@ existing_plans:
         name: KEYWORD_ONLY
         value: 3
       name: period
+    properties:
+      is_generator: true
+  flyer_scan_energy:
+    description: Specific scan for SST-1 monochromator fly scan, while catching up
+      with the undulator
+    module: rsoxs.Functions.energyscancore
+    name: flyer_scan_energy
+    parameters:
+    - description: "(start_en : eV to begin the scan,\nstop_en : eV to stop the scan,\n\
+        speed_en : eV / second to move the monochromator)\nthe stop energy of each\
+        \ tuple should match the start of the next to make a continuous scan\n   \
+        \ although this is not strictly enforced to allow for flexibility"
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: scan_params
+    - default: '{}'
+      description: metadata
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: md
+    - default: 'True'
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: locked
+    - default: '0'
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: polarization
+    properties:
+      is_generator: true
+  flystream_during_wrapper:
+    description: "Kickoff and collect \"flyer\" (asynchronously collect) objects during\
+      \ runs.\nThis is a preprocessor that insert messages immediately after a run\
+      \ is\nopened and before it is closed.\nParameters\n----------\nplan : iterable\
+      \ or iterator\n    a generator, list, or similar containing `Msg` objects\n\
+      flyers : collection\n    objects that support the flyer interface\nYields\n\
+      ------\nmsg : Msg\n    messages from plan with 'kickoff', 'wait' and 'collect'\
+      \ messages\n    inserted\nSee Also\n--------\n:func:`bluesky.plans.fly`"
+    module: rsoxs.Functions.fly_alignment
+    name: flystream_during_wrapper
+    parameters:
+    - kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: plan
+    - kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: flyers
+    - default: 'False'
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: stream
     properties:
       is_generator: true
   grating_to_1200:
@@ -25245,11 +25552,28 @@ existing_plans:
     parameters: []
     properties:
       is_generator: true
+  monitor_during_wrapper:
+    description: Monitor (asynchronously read) devices during runs.
+    module: bluesky.preprocessors
+    name: monitor_during_wrapper
+    parameters:
+    - description: a generator, list, or similar containing `Msg` objects
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: plan
+    - description: objects that support the Signal interface
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: signals
+    properties:
+      is_generator: true
   move_to_location:
     module: rsoxs.Functions.alignment
     name: move_to_location
     parameters:
-    - default: '[{''motor'': ''x'', ''position'': -0.0009750000000039449, ''order'':
+    - default: '[{''motor'': ''x'', ''position'': -0.0010499999999993292, ''order'':
         0}, {''motor'': ''y'', ''position'': 345.00002, ''order'': 0}, {''motor'':
         ''z'', ''position'': -0.4390849999999915, ''order'': 0}, {''motor'': ''th'',
         ''position'': 0.005337560999976176, ''order'': 0}]'
@@ -28350,6 +28674,106 @@ existing_plans:
       name: md
     properties:
       is_generator: true
+  new_en_scan_core:
+    module: rsoxs.Functions.energyscancore
+    name: new_en_scan_core
+    parameters:
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: dets
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: energy
+    - default: 'True'
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: lockscan
+    - default: '''no change'''
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: grating
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: energies
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: times
+    - default: '1'
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: repeats
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: polarizations
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: locations
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: temperatures
+    - default: 'True'
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: temp_wait
+    - default: 'False'
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: temps_with_locations
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: enscan_type
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: master_plan
+    - default: 'False'
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: sim_mode
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: md
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: signals
+    - default: 'False'
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: check_exposure
+    - kind:
+        name: VAR_KEYWORD
+        value: 4
+      name: kwargs
+    properties:
+      is_generator: true
   one_nd_sticky_exp_step:
     description: Inner loop of an N-dimensional step scan
     module: rsoxs.Functions.per_steps
@@ -28383,6 +28807,123 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: remember
+    properties:
+      is_generator: true
+  plan_mutator:
+    description: Alter the contents of a plan on the fly by changing or inserting
+      messages.
+    module: bluesky.preprocessors
+    name: plan_mutator
+    parameters:
+    - description: a generator that yields messages (`Msg` objects)
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: plan
+    - description: "This function takes in a message and specifies messages(s) to\
+        \ replace\nit with. The function must account for what type of response the\n\
+        message would prompt. For example, an 'open_run' message causes the\nRunEngine\
+        \ to send a uid string back to the plan, while a 'set' message\ncauses the\
+        \ RunEngine to send a status object back to the plan. The\nfunction should\
+        \ return a pair of generators ``(head, tail)`` that yield\nmessages. The last\
+        \ message out of the ``head`` generator is the one\nwhose response will be\
+        \ sent back to the host plan. Therefore, that\nmessage should prompt a response\
+        \ compatible with the message that it is\nreplacing. Any responses to all\
+        \ other messages will be swallowed. As\nshorthand, either ``head`` or ``tail``\
+        \ can be replaced by ``None``.\nThis means:\n\n* ``(None, None)`` No-op. Let\
+        \ the original message pass through.\n* ``(head, None)`` Mutate and/or insert\
+        \ messages before the original\n  message.\n* ``(head, tail)`` As above, and\
+        \ additionally insert messages after.\n* ``(None, tail)`` Let the original\
+        \ message pass through and then\n  insert messages after.\n\nThe reason for\
+        \ returning a pair of generators instead of just one is to\nprovide a way\
+        \ to specify which message's response should be sent out to\nthe host plan.\
+        \ Again, it's the last message yielded by the first\ngenerator (``head``)."
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: msg_proc
+    properties:
+      is_generator: true
+  ramp_motor_scan:
+    module: rsoxs.Functions.fly_alignment
+    name: ramp_motor_scan
+    parameters:
+    - kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: start_pos
+    - kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: stop_pos
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: motor
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: detector_channels
+    - default: '0.2'
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: sleep
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: velocity
+    - default: 'False'
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: open_shutter
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: md
+    properties:
+      is_generator: true
+  ramp_plan_with_multiple_monitors:
+    module: rsoxs.Functions.fly_alignment
+    name: ramp_plan_with_multiple_monitors
+    parameters:
+    - kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: go_plan
+    - kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: monitor_list
+    - kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: inner_plan_func
+    - default: 'True'
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: take_pre_data
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: timeout
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: period
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: md
     properties:
       is_generator: true
   ramp_temp_test:
@@ -28419,6 +28960,22 @@ existing_plans:
     module: rsoxs.Functions.common_procedures
     name: reset_amps
     parameters: []
+    properties:
+      is_generator: true
+  rewindable_wrapper:
+    description: Toggle the 'rewindable' state of the RE
+    module: bluesky.preprocessors
+    name: rewindable_wrapper
+    parameters:
+    - description: The plan to wrap in a 'rewindable' or 'not rewindable' context
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: plan
+    - kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: rewindable
     properties:
       is_generator: true
   rotate_now:
@@ -28468,6 +29025,18 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: ulim
+    properties:
+      is_generator: true
+  single_gen:
+    description: Turn a single message into a plan
+    module: bluesky.utils
+    name: single_gen
+    parameters:
+    - description: a single message
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: msg
     properties:
       is_generator: true
   slits_in_SAXS:

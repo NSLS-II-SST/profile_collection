@@ -119,6 +119,7 @@ kind = "normal"
 prefix = "SR:C07-ID:G1A{SST1:1-Ax:Phase}-Mtr.RBV"
 name = "Phase_EPU60"
 
+## TODO: This causes issue with GUI, so may need fixing or may need to be tried again when there is beam
 #[Slits_EPU60_Frontend] ## TODO: This likely needs to get fixed/updated.  When I made this into a Slits object, I was not able to use functions like .wh().  I would get TypeError: unsupported operand type(s) for -: 'NoneType' and 'NoneType'
 #_target = "sst_base.slits.FMBOQuadSlits"
 #_group = "motors"
