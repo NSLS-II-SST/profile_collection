@@ -452,6 +452,13 @@ prefix = "XF:07ID2-ES1{FSh-Ax:1}Mtr"
 name = "RSoXS Shutter Toggle"
 kind = "normal"
 
+[Shutter_enable]
+_target = "ophyd.EpicsSignal"
+_group = "motors"
+prefix = "XF:07IDB-CT{DIODE-MTO:1}OutMaskBit:2-Sel"
+name = "RSoXS Shutter Toggle Enable"
+kind = "normal"
+
 [Shutter_open_time]
 _target = "ophyd.EpicsSignal"
 prefix = "XF:07IDB-CT{DIODE-MTO:1}OutWidthSet:2-SP"
@@ -465,7 +472,6 @@ prefix = "XF:07ID2-ES1{FSh-Ax:1}Mtr"
 name = "Shutter Vertical Translation" ## Fast shutter
 kind = "hinted"
 
-## GV27A
 [gv27a]
 _target = "sst_base.shutters.EPS_Shutter"
 _group = "gate_valves"
@@ -561,6 +567,12 @@ _group = "motors"
 kind = "hinted"
 name = "RSoXS Sample Rotation"
 #prefix = "XF:07ID2-ES1{Stg-Ax:Yaw}Mtr"
+
+[rsoxs_ll_gpwr]
+_target = "ophyd.EpicsSignal"
+kind = "hinted"
+prefix = "XF:07IDB-VA:2{RSoXS:LL-CCG:1}Pwr-Cmd"
+name = "Power to Load Lock Gauge"
 
 [gvll]
 _target = "sst_base.shutters.EPS_Shutter"
@@ -770,7 +782,15 @@ kind = "hinted"
 prefix = "XF:07IDB-VA:2{RSoXS:Main-CCG:1}P-I"
 name = "Main Chamber Chamber Cold Cathode Gauge"
 
-## GV28
+[gv28]
+_target = "sst_base.shutters.EPS_Shutter"
+_group = "gate_valves"
+shutter_type = "GV"
+openval = 0
+closeval = 1
+prefix = "XF:07IDB-VA:2{BT:1-GV:1}"
+name = "Downstream Gate Valve"
+kind = "hinted"
 
 [psh7]
 _target = "sst_base.shutters.EPS_Shutter"

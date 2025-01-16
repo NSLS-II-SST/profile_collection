@@ -26,7 +26,7 @@ run_report(__file__)
 # from sst_base.archiver import *
 from rsoxs.Functions.alignment import *
 from rsoxs.Functions.alignment_local import *
-# from rsoxs.Functions.common_procedures import *
+from rsoxs.Functions.common_procedures import *
 from rsoxs.Functions.configurations import *
 # from rsoxs.Functions.schemas import *
 # from rsoxs.Functions.PVdictionary import *
