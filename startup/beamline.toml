@@ -6,6 +6,9 @@ has_motorized_eref = true
 [settings]
 modules = ['rsoxs.startup']
 
+[settings.plans]
+xas = ['regions.toml']
+
 [settings.redis.md]
 host = "info.sst.nsls2.bnl.gov"
 prefix = "rsoxs-"

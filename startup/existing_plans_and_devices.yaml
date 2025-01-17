@@ -24998,6 +24998,139 @@ existing_plans:
       name: grating
     properties:
       is_generator: true
+  c_xas:
+    description: 'Perform an in-place xas scan for  with energy pattern [260, 263,
+      1, 284, 0.5, 292, 0.1, 300, 0.2, 310, 0.4, 320, 0.5, 350, 2] '
+    module: nbs_bl.plans.preprocessors
+    name: c_xas
+    parameters:
+    - default: None
+      description: 'hook for customizing action of inner loop (messages per step)
+
+        Expected signature:
+
+        ``f(detectors, motor, step) -> plan (a generator)``'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: per_step
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A comment that will be added into the run metadata. If not provided,
+        no comment will be added.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: comment
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A group name label that will be added into the run metadata.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: group_name
+    - annotation:
+        type: list
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: plot_detectors
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline exit slit prior to the plan
+        start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eslit
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The sample id. If given, the selected sample metadata is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample
+    - annotation:
+        type: typing.Optional[dict]
+      default: '{}'
+      description: 'A dictionary of positions relative to the sample center. Parameters
+        not given will be assumed to
+
+        be the default for the sampleholder (typically moving the sample into the
+        beam at a typical angle)'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample_position
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The energy reference sample. If given, the selected reference sample
+        is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eref_sample
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline energy prior to the plan start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: energy
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: polarization
+    - annotation:
+        type: int
+      default: '1'
+      description: Number of times to repeat the scan
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: repeat
+    - default: '[]'
+      description: A list of extra detectors to be activated for the scan, by default
+        [].
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: extra_dets
+    - annotation:
+        type: float
+      default: '0'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: shift
+    - annotation:
+        type: typing.Optional[dict]
+      default: None
+      description: metadata
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: md
+    properties:
+      is_generator: true
   cdsaxs_scan:
     module: rsoxs.Functions.energyscancore
     name: cdsaxs_scan
@@ -25039,6 +25172,140 @@ existing_plans:
       name: md
     properties:
       is_generator: true
+  ce_xas:
+    description: 'Perform an in-place xas scan for  with energy pattern [855, 865,
+      1, 870, 0.5, 875, 0.2, 885, 0.1, 891, 0.2, 901, 0.1, 905, 0.2, 910, 0.5, 935,
+      1] '
+    module: nbs_bl.plans.preprocessors
+    name: ce_xas
+    parameters:
+    - default: None
+      description: 'hook for customizing action of inner loop (messages per step)
+
+        Expected signature:
+
+        ``f(detectors, motor, step) -> plan (a generator)``'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: per_step
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A comment that will be added into the run metadata. If not provided,
+        no comment will be added.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: comment
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A group name label that will be added into the run metadata.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: group_name
+    - annotation:
+        type: list
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: plot_detectors
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline exit slit prior to the plan
+        start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eslit
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The sample id. If given, the selected sample metadata is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample
+    - annotation:
+        type: typing.Optional[dict]
+      default: '{}'
+      description: 'A dictionary of positions relative to the sample center. Parameters
+        not given will be assumed to
+
+        be the default for the sampleholder (typically moving the sample into the
+        beam at a typical angle)'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample_position
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The energy reference sample. If given, the selected reference sample
+        is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eref_sample
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline energy prior to the plan start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: energy
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: polarization
+    - annotation:
+        type: int
+      default: '1'
+      description: Number of times to repeat the scan
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: repeat
+    - default: '[]'
+      description: A list of extra detectors to be activated for the scan, by default
+        [].
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: extra_dets
+    - annotation:
+        type: float
+      default: '0'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: shift
+    - annotation:
+        type: typing.Optional[dict]
+      default: None
+      description: metadata
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: md
+    properties:
+      is_generator: true
   cleanup:
     module: rsoxs.Functions.energyscancore
     name: cleanup
@@ -25053,6 +25320,273 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: label
+    properties:
+      is_generator: true
+  co_xas:
+    description: 'Perform an in-place xas scan for  with energy pattern [755, 765,
+      1, 772, 0.5, 775, 0.2, 784, 0.1, 790, 0.2, 797, 0.1, 800, 0.2, 805, 0.5, 810,
+      1, 830, 2] '
+    module: nbs_bl.plans.preprocessors
+    name: co_xas
+    parameters:
+    - default: None
+      description: 'hook for customizing action of inner loop (messages per step)
+
+        Expected signature:
+
+        ``f(detectors, motor, step) -> plan (a generator)``'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: per_step
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A comment that will be added into the run metadata. If not provided,
+        no comment will be added.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: comment
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A group name label that will be added into the run metadata.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: group_name
+    - annotation:
+        type: list
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: plot_detectors
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline exit slit prior to the plan
+        start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eslit
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The sample id. If given, the selected sample metadata is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample
+    - annotation:
+        type: typing.Optional[dict]
+      default: '{}'
+      description: 'A dictionary of positions relative to the sample center. Parameters
+        not given will be assumed to
+
+        be the default for the sampleholder (typically moving the sample into the
+        beam at a typical angle)'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample_position
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The energy reference sample. If given, the selected reference sample
+        is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eref_sample
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline energy prior to the plan start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: energy
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: polarization
+    - annotation:
+        type: int
+      default: '1'
+      description: Number of times to repeat the scan
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: repeat
+    - default: '[]'
+      description: A list of extra detectors to be activated for the scan, by default
+        [].
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: extra_dets
+    - annotation:
+        type: float
+      default: '0'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: shift
+    - annotation:
+        type: typing.Optional[dict]
+      default: None
+      description: metadata
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: md
+    properties:
+      is_generator: true
+  cu_xas:
+    description: 'Perform an in-place xas scan for  with energy pattern [915, 920,
+      0.5, 926, 0.25, 934.5, 0.17, 947, 0.25, 954, 0.2, 960, 0.5, 980, 1] '
+    module: nbs_bl.plans.preprocessors
+    name: cu_xas
+    parameters:
+    - default: None
+      description: 'hook for customizing action of inner loop (messages per step)
+
+        Expected signature:
+
+        ``f(detectors, motor, step) -> plan (a generator)``'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: per_step
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A comment that will be added into the run metadata. If not provided,
+        no comment will be added.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: comment
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A group name label that will be added into the run metadata.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: group_name
+    - annotation:
+        type: list
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: plot_detectors
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline exit slit prior to the plan
+        start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eslit
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The sample id. If given, the selected sample metadata is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample
+    - annotation:
+        type: typing.Optional[dict]
+      default: '{}'
+      description: 'A dictionary of positions relative to the sample center. Parameters
+        not given will be assumed to
+
+        be the default for the sampleholder (typically moving the sample into the
+        beam at a typical angle)'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample_position
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The energy reference sample. If given, the selected reference sample
+        is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eref_sample
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline energy prior to the plan start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: energy
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: polarization
+    - annotation:
+        type: int
+      default: '1'
+      description: Number of times to repeat the scan
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: repeat
+    - default: '[]'
+      description: A list of extra detectors to be activated for the scan, by default
+        [].
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: extra_dets
+    - annotation:
+        type: float
+      default: '0'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: shift
+    - annotation:
+        type: typing.Optional[dict]
+      default: None
+      description: metadata
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: md
     properties:
       is_generator: true
   do_2020_eputables:
@@ -25154,6 +25688,403 @@ existing_plans:
     module: rsoxs.Functions.contingencies
     name: enc_clr_x
     parameters: []
+    properties:
+      is_generator: true
+  energy_step_scan:
+    module: rsoxs.Functions.energyscancore
+    name: energy_step_scan
+    parameters:
+    - kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: energies
+    - kind:
+        name: VAR_POSITIONAL
+        value: 2
+      name: args
+    - default: None
+      description: 'hook for customizing action of inner loop (messages per step)
+
+        Expected signature:
+
+        ``f(detectors, motor, step) -> plan (a generator)``'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: per_step
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A comment that will be added into the run metadata. If not provided,
+        no comment will be added.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: comment
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A group name label that will be added into the run metadata.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: group_name
+    - annotation:
+        type: list
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: plot_detectors
+    - default: '[]'
+      description: A list of extra detectors to be activated for the scan, by default
+        [].
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: extra_dets
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline exit slit prior to the plan
+        start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eslit
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The sample id. If given, the selected sample metadata is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample
+    - annotation:
+        type: typing.Optional[dict]
+      default: '{}'
+      description: 'A dictionary of positions relative to the sample center. Parameters
+        not given will be assumed to
+
+        be the default for the sampleholder (typically moving the sample into the
+        beam at a typical angle)'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample_position
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The energy reference sample. If given, the selected reference sample
+        is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eref_sample
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline energy prior to the plan start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: energy
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: polarization
+    - annotation:
+        type: int
+      default: '1'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: repeat
+    - annotation:
+        type: typing.Optional[dict]
+      default: None
+      description: metadata
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: md
+    properties:
+      is_generator: true
+  f_xas:
+    description: 'Perform an in-place xas scan for  with energy pattern [650, 680,
+      0.3, 705, 0.1, 720, 0.2, 730, 0.4] '
+    module: nbs_bl.plans.preprocessors
+    name: f_xas
+    parameters:
+    - default: None
+      description: 'hook for customizing action of inner loop (messages per step)
+
+        Expected signature:
+
+        ``f(detectors, motor, step) -> plan (a generator)``'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: per_step
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A comment that will be added into the run metadata. If not provided,
+        no comment will be added.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: comment
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A group name label that will be added into the run metadata.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: group_name
+    - annotation:
+        type: list
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: plot_detectors
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline exit slit prior to the plan
+        start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eslit
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The sample id. If given, the selected sample metadata is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample
+    - annotation:
+        type: typing.Optional[dict]
+      default: '{}'
+      description: 'A dictionary of positions relative to the sample center. Parameters
+        not given will be assumed to
+
+        be the default for the sampleholder (typically moving the sample into the
+        beam at a typical angle)'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample_position
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The energy reference sample. If given, the selected reference sample
+        is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eref_sample
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline energy prior to the plan start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: energy
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: polarization
+    - annotation:
+        type: int
+      default: '1'
+      description: Number of times to repeat the scan
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: repeat
+    - default: '[]'
+      description: A list of extra detectors to be activated for the scan, by default
+        [].
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: extra_dets
+    - annotation:
+        type: float
+      default: '0'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: shift
+    - annotation:
+        type: typing.Optional[dict]
+      default: None
+      description: metadata
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: md
+    properties:
+      is_generator: true
+  fe_xas:
+    description: 'Perform an in-place xas scan for  with energy pattern [690, 700,
+      1, 704, 0.5, 707, 0.2, 715, 0.1, 719, 0.5, 725, 0.1, 730, 0.5, 760, 1] '
+    module: nbs_bl.plans.preprocessors
+    name: fe_xas
+    parameters:
+    - default: None
+      description: 'hook for customizing action of inner loop (messages per step)
+
+        Expected signature:
+
+        ``f(detectors, motor, step) -> plan (a generator)``'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: per_step
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A comment that will be added into the run metadata. If not provided,
+        no comment will be added.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: comment
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A group name label that will be added into the run metadata.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: group_name
+    - annotation:
+        type: list
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: plot_detectors
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline exit slit prior to the plan
+        start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eslit
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The sample id. If given, the selected sample metadata is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample
+    - annotation:
+        type: typing.Optional[dict]
+      default: '{}'
+      description: 'A dictionary of positions relative to the sample center. Parameters
+        not given will be assumed to
+
+        be the default for the sampleholder (typically moving the sample into the
+        beam at a typical angle)'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample_position
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The energy reference sample. If given, the selected reference sample
+        is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eref_sample
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline energy prior to the plan start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: energy
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: polarization
+    - annotation:
+        type: int
+      default: '1'
+      description: Number of times to repeat the scan
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: repeat
+    - default: '[]'
+      description: A list of extra detectors to be activated for the scan, by default
+        [].
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: extra_dets
+    - annotation:
+        type: float
+      default: '0'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: shift
+    - annotation:
+        type: typing.Optional[dict]
+      default: None
+      description: metadata
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: md
     properties:
       is_generator: true
   finalize_wrapper:
@@ -25521,6 +26452,139 @@ existing_plans:
       name: bar
     properties:
       is_generator: true
+  k_xas:
+    description: 'Perform an in-place xas scan for  with energy pattern [275, 295,
+      0.2, 310, 0.1, 320, 0.2] '
+    module: nbs_bl.plans.preprocessors
+    name: k_xas
+    parameters:
+    - default: None
+      description: 'hook for customizing action of inner loop (messages per step)
+
+        Expected signature:
+
+        ``f(detectors, motor, step) -> plan (a generator)``'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: per_step
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A comment that will be added into the run metadata. If not provided,
+        no comment will be added.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: comment
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A group name label that will be added into the run metadata.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: group_name
+    - annotation:
+        type: list
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: plot_detectors
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline exit slit prior to the plan
+        start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eslit
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The sample id. If given, the selected sample metadata is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample
+    - annotation:
+        type: typing.Optional[dict]
+      default: '{}'
+      description: 'A dictionary of positions relative to the sample center. Parameters
+        not given will be assumed to
+
+        be the default for the sampleholder (typically moving the sample into the
+        beam at a typical angle)'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample_position
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The energy reference sample. If given, the selected reference sample
+        is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eref_sample
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline energy prior to the plan start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: energy
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: polarization
+    - annotation:
+        type: int
+      default: '1'
+      description: Number of times to repeat the scan
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: repeat
+    - default: '[]'
+      description: A list of extra detectors to be activated for the scan, by default
+        [].
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: extra_dets
+    - annotation:
+        type: float
+      default: '0'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: shift
+    - annotation:
+        type: typing.Optional[dict]
+      default: None
+      description: metadata
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: md
+    properties:
+      is_generator: true
   load_configuration:
     description: ':param config: string containing a name of a configuration
 
@@ -25572,6 +26636,139 @@ existing_plans:
       name: sim_mode
     properties:
       is_generator: true
+  mg_xas:
+    description: 'Perform an in-place xas scan for  with energy pattern [1270, 1300,
+      0.3, 1340, 0.2, 1360, 0.5, 1380, 1] '
+    module: nbs_bl.plans.preprocessors
+    name: mg_xas
+    parameters:
+    - default: None
+      description: 'hook for customizing action of inner loop (messages per step)
+
+        Expected signature:
+
+        ``f(detectors, motor, step) -> plan (a generator)``'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: per_step
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A comment that will be added into the run metadata. If not provided,
+        no comment will be added.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: comment
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A group name label that will be added into the run metadata.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: group_name
+    - annotation:
+        type: list
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: plot_detectors
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline exit slit prior to the plan
+        start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eslit
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The sample id. If given, the selected sample metadata is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample
+    - annotation:
+        type: typing.Optional[dict]
+      default: '{}'
+      description: 'A dictionary of positions relative to the sample center. Parameters
+        not given will be assumed to
+
+        be the default for the sampleholder (typically moving the sample into the
+        beam at a typical angle)'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample_position
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The energy reference sample. If given, the selected reference sample
+        is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eref_sample
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline energy prior to the plan start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: energy
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: polarization
+    - annotation:
+        type: int
+      default: '1'
+      description: Number of times to repeat the scan
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: repeat
+    - default: '[]'
+      description: A list of extra detectors to be activated for the scan, by default
+        [].
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: extra_dets
+    - annotation:
+        type: float
+      default: '0'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: shift
+    - annotation:
+        type: typing.Optional[dict]
+      default: None
+      description: metadata
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: md
+    properties:
+      is_generator: true
   mirror1_NEXAFSpos:
     module: rsoxs.Functions.configurations
     name: mirror1_NEXAFSpos
@@ -25596,6 +26793,405 @@ existing_plans:
     parameters: []
     properties:
       is_generator: true
+  mn_xas:
+    description: 'Perform an in-place xas scan for  with energy pattern [625, 635,
+      0.5, 638, 0.2, 645, 0.1, 650, 0.2, 655, 0.1, 670, 0.5, 690, 1] '
+    module: nbs_bl.plans.preprocessors
+    name: mn_xas
+    parameters:
+    - default: None
+      description: 'hook for customizing action of inner loop (messages per step)
+
+        Expected signature:
+
+        ``f(detectors, motor, step) -> plan (a generator)``'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: per_step
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A comment that will be added into the run metadata. If not provided,
+        no comment will be added.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: comment
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A group name label that will be added into the run metadata.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: group_name
+    - annotation:
+        type: list
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: plot_detectors
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline exit slit prior to the plan
+        start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eslit
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The sample id. If given, the selected sample metadata is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample
+    - annotation:
+        type: typing.Optional[dict]
+      default: '{}'
+      description: 'A dictionary of positions relative to the sample center. Parameters
+        not given will be assumed to
+
+        be the default for the sampleholder (typically moving the sample into the
+        beam at a typical angle)'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample_position
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The energy reference sample. If given, the selected reference sample
+        is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eref_sample
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline energy prior to the plan start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: energy
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: polarization
+    - annotation:
+        type: int
+      default: '1'
+      description: Number of times to repeat the scan
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: repeat
+    - default: '[]'
+      description: A list of extra detectors to be activated for the scan, by default
+        [].
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: extra_dets
+    - annotation:
+        type: float
+      default: '0'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: shift
+    - annotation:
+        type: typing.Optional[dict]
+      default: None
+      description: metadata
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: md
+    properties:
+      is_generator: true
+  mo2_xas:
+    description: 'Perform an in-place xas scan for  with energy pattern [380, 390,
+      0.3, 415, 0.2, 425, 0.3] '
+    module: nbs_bl.plans.preprocessors
+    name: mo2_xas
+    parameters:
+    - default: None
+      description: 'hook for customizing action of inner loop (messages per step)
+
+        Expected signature:
+
+        ``f(detectors, motor, step) -> plan (a generator)``'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: per_step
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A comment that will be added into the run metadata. If not provided,
+        no comment will be added.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: comment
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A group name label that will be added into the run metadata.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: group_name
+    - annotation:
+        type: list
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: plot_detectors
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline exit slit prior to the plan
+        start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eslit
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The sample id. If given, the selected sample metadata is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample
+    - annotation:
+        type: typing.Optional[dict]
+      default: '{}'
+      description: 'A dictionary of positions relative to the sample center. Parameters
+        not given will be assumed to
+
+        be the default for the sampleholder (typically moving the sample into the
+        beam at a typical angle)'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample_position
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The energy reference sample. If given, the selected reference sample
+        is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eref_sample
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline energy prior to the plan start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: energy
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: polarization
+    - annotation:
+        type: int
+      default: '1'
+      description: Number of times to repeat the scan
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: repeat
+    - default: '[]'
+      description: A list of extra detectors to be activated for the scan, by default
+        [].
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: extra_dets
+    - annotation:
+        type: float
+      default: '0'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: shift
+    - annotation:
+        type: typing.Optional[dict]
+      default: None
+      description: metadata
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: md
+    properties:
+      is_generator: true
+  mo_xas:
+    description: 'Perform an in-place xas scan for  with energy pattern [220, 225,
+      0.3, 240, 0.1, 250, 0.3] '
+    module: nbs_bl.plans.preprocessors
+    name: mo_xas
+    parameters:
+    - default: None
+      description: 'hook for customizing action of inner loop (messages per step)
+
+        Expected signature:
+
+        ``f(detectors, motor, step) -> plan (a generator)``'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: per_step
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A comment that will be added into the run metadata. If not provided,
+        no comment will be added.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: comment
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A group name label that will be added into the run metadata.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: group_name
+    - annotation:
+        type: list
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: plot_detectors
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline exit slit prior to the plan
+        start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eslit
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The sample id. If given, the selected sample metadata is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample
+    - annotation:
+        type: typing.Optional[dict]
+      default: '{}'
+      description: 'A dictionary of positions relative to the sample center. Parameters
+        not given will be assumed to
+
+        be the default for the sampleholder (typically moving the sample into the
+        beam at a typical angle)'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample_position
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The energy reference sample. If given, the selected reference sample
+        is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eref_sample
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline energy prior to the plan start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: energy
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: polarization
+    - annotation:
+        type: int
+      default: '1'
+      description: Number of times to repeat the scan
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: repeat
+    - default: '[]'
+      description: A list of extra detectors to be activated for the scan, by default
+        [].
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: extra_dets
+    - annotation:
+        type: float
+      default: '0'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: shift
+    - annotation:
+        type: typing.Optional[dict]
+      default: None
+      description: metadata
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: md
+    properties:
+      is_generator: true
   monitor_during_wrapper:
     description: Monitor (asynchronously read) devices during runs.
     module: bluesky.preprocessors
@@ -25617,7 +27213,7 @@ existing_plans:
     module: rsoxs.Functions.alignment
     name: move_to_location
     parameters:
-    - default: '[{''motor'': ''x'', ''position'': -0.0010200000000040177, ''order'':
+    - default: '[{''motor'': ''x'', ''position'': -0.0009900000000016007, ''order'':
         0}, {''motor'': ''y'', ''position'': 345.00002, ''order'': 0}, {''motor'':
         ''z'', ''position'': -0.4390849999999915, ''order'': 0}, {''motor'': ''th'',
         ''position'': 0.005337560999976176, ''order'': 0}]'
@@ -25625,6 +27221,272 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: locs
+    properties:
+      is_generator: true
+  n_xas:
+    description: 'Perform an in-place xas scan for  with energy pattern [380, 395,
+      0.5, 397, 0.1, 403, 0.05, 407, 0.1, 417, 0.2, 440, 0.5, 480, 2] '
+    module: nbs_bl.plans.preprocessors
+    name: n_xas
+    parameters:
+    - default: None
+      description: 'hook for customizing action of inner loop (messages per step)
+
+        Expected signature:
+
+        ``f(detectors, motor, step) -> plan (a generator)``'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: per_step
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A comment that will be added into the run metadata. If not provided,
+        no comment will be added.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: comment
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A group name label that will be added into the run metadata.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: group_name
+    - annotation:
+        type: list
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: plot_detectors
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline exit slit prior to the plan
+        start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eslit
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The sample id. If given, the selected sample metadata is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample
+    - annotation:
+        type: typing.Optional[dict]
+      default: '{}'
+      description: 'A dictionary of positions relative to the sample center. Parameters
+        not given will be assumed to
+
+        be the default for the sampleholder (typically moving the sample into the
+        beam at a typical angle)'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample_position
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The energy reference sample. If given, the selected reference sample
+        is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eref_sample
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline energy prior to the plan start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: energy
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: polarization
+    - annotation:
+        type: int
+      default: '1'
+      description: Number of times to repeat the scan
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: repeat
+    - default: '[]'
+      description: A list of extra detectors to be activated for the scan, by default
+        [].
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: extra_dets
+    - annotation:
+        type: float
+      default: '0'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: shift
+    - annotation:
+        type: typing.Optional[dict]
+      default: None
+      description: metadata
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: md
+    properties:
+      is_generator: true
+  na_xas:
+    description: 'Perform an in-place xas scan for  with energy pattern [1055, 1065,
+      1.0, 1070, 0.2, 1080, 0.1, 1100, 0.2, 1140, 1.0] '
+    module: nbs_bl.plans.preprocessors
+    name: na_xas
+    parameters:
+    - default: None
+      description: 'hook for customizing action of inner loop (messages per step)
+
+        Expected signature:
+
+        ``f(detectors, motor, step) -> plan (a generator)``'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: per_step
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A comment that will be added into the run metadata. If not provided,
+        no comment will be added.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: comment
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A group name label that will be added into the run metadata.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: group_name
+    - annotation:
+        type: list
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: plot_detectors
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline exit slit prior to the plan
+        start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eslit
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The sample id. If given, the selected sample metadata is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample
+    - annotation:
+        type: typing.Optional[dict]
+      default: '{}'
+      description: 'A dictionary of positions relative to the sample center. Parameters
+        not given will be assumed to
+
+        be the default for the sampleholder (typically moving the sample into the
+        beam at a typical angle)'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample_position
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The energy reference sample. If given, the selected reference sample
+        is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eref_sample
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline energy prior to the plan start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: energy
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: polarization
+    - annotation:
+        type: int
+      default: '1'
+      description: Number of times to repeat the scan
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: repeat
+    - default: '[]'
+      description: A list of extra detectors to be activated for the scan, by default
+        [].
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: extra_dets
+    - annotation:
+        type: float
+      default: '0'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: shift
+    - annotation:
+        type: typing.Optional[dict]
+      default: None
+      description: metadata
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: md
     properties:
       is_generator: true
   nbs_count:
@@ -28818,6 +30680,272 @@ existing_plans:
       name: kwargs
     properties:
       is_generator: true
+  ni_xas:
+    description: 'Perform an in-place xas scan for  with energy pattern [830, 840,
+      1, 845, 0.5, 848, 0.2, 858, 0.1, 867, 0.2, 874, 0.1, 882, 0.5, 900, 1] '
+    module: nbs_bl.plans.preprocessors
+    name: ni_xas
+    parameters:
+    - default: None
+      description: 'hook for customizing action of inner loop (messages per step)
+
+        Expected signature:
+
+        ``f(detectors, motor, step) -> plan (a generator)``'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: per_step
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A comment that will be added into the run metadata. If not provided,
+        no comment will be added.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: comment
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A group name label that will be added into the run metadata.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: group_name
+    - annotation:
+        type: list
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: plot_detectors
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline exit slit prior to the plan
+        start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eslit
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The sample id. If given, the selected sample metadata is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample
+    - annotation:
+        type: typing.Optional[dict]
+      default: '{}'
+      description: 'A dictionary of positions relative to the sample center. Parameters
+        not given will be assumed to
+
+        be the default for the sampleholder (typically moving the sample into the
+        beam at a typical angle)'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample_position
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The energy reference sample. If given, the selected reference sample
+        is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eref_sample
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline energy prior to the plan start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: energy
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: polarization
+    - annotation:
+        type: int
+      default: '1'
+      description: Number of times to repeat the scan
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: repeat
+    - default: '[]'
+      description: A list of extra detectors to be activated for the scan, by default
+        [].
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: extra_dets
+    - annotation:
+        type: float
+      default: '0'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: shift
+    - annotation:
+        type: typing.Optional[dict]
+      default: None
+      description: metadata
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: md
+    properties:
+      is_generator: true
+  o_xas:
+    description: 'Perform an in-place xas scan for  with energy pattern [515, 520,
+      0.5, 526, 0.2, 535, 0.05, 545, 0.1, 555, 0.25, 585, 0.5, 600, 1] '
+    module: nbs_bl.plans.preprocessors
+    name: o_xas
+    parameters:
+    - default: None
+      description: 'hook for customizing action of inner loop (messages per step)
+
+        Expected signature:
+
+        ``f(detectors, motor, step) -> plan (a generator)``'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: per_step
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A comment that will be added into the run metadata. If not provided,
+        no comment will be added.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: comment
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A group name label that will be added into the run metadata.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: group_name
+    - annotation:
+        type: list
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: plot_detectors
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline exit slit prior to the plan
+        start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eslit
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The sample id. If given, the selected sample metadata is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample
+    - annotation:
+        type: typing.Optional[dict]
+      default: '{}'
+      description: 'A dictionary of positions relative to the sample center. Parameters
+        not given will be assumed to
+
+        be the default for the sampleholder (typically moving the sample into the
+        beam at a typical angle)'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample_position
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The energy reference sample. If given, the selected reference sample
+        is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eref_sample
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline energy prior to the plan start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: energy
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: polarization
+    - annotation:
+        type: int
+      default: '1'
+      description: Number of times to repeat the scan
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: repeat
+    - default: '[]'
+      description: A list of extra detectors to be activated for the scan, by default
+        [].
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: extra_dets
+    - annotation:
+        type: float
+      default: '0'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: shift
+    - annotation:
+        type: typing.Optional[dict]
+      default: None
+      description: metadata
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: md
+    properties:
+      is_generator: true
   one_nd_sticky_exp_step:
     description: Inner loop of an N-dimensional step scan
     module: rsoxs.Functions.per_steps
@@ -28886,6 +31014,12 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: msg_proc
+    properties:
+      is_generator: true
+  post_scan_hardware_reset:
+    module: rsoxs.Functions.energyscancore
+    name: post_scan_hardware_reset
+    parameters: []
     properties:
       is_generator: true
   ramp_motor_scan:
@@ -29037,6 +31171,141 @@ existing_plans:
       name: force
     properties:
       is_generator: true
+  rsoxs_step_scan:
+    description: Step scanned RSoXS function with WAXS Detector
+    module: rsoxs.Functions.energyscancore
+    name: rsoxs_step_scan
+    parameters:
+    - description: "For one dimension, ``motor, [point1, point2, ....]``.\nIn general:\n\
+        \n.. code-block:: python\n\n    motor1, [point1, point2, ...],\n    motor2,\
+        \ [point1, point2, ...],\n    ...,\n    motorN, [point1, point2, ...]\n\n\
+        Motors can be any 'settable' object (motor, temp controller, etc.)"
+      kind:
+        name: VAR_POSITIONAL
+        value: 2
+      name: args
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A comment that will be added into the run metadata. If not provided,
+        no comment will be added.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: comment
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A group name label that will be added into the run metadata.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: group_name
+    - annotation:
+        type: list
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: plot_detectors
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline exit slit prior to the plan
+        start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eslit
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The sample id. If given, the selected sample metadata is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample
+    - annotation:
+        type: typing.Optional[dict]
+      default: '{}'
+      description: 'A dictionary of positions relative to the sample center. Parameters
+        not given will be assumed to
+
+        be the default for the sampleholder (typically moving the sample into the
+        beam at a typical angle)'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample_position
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The energy reference sample. If given, the selected reference sample
+        is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eref_sample
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline energy prior to the plan start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: energy
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: polarization
+    - annotation:
+        type: int
+      default: '1'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: repeat
+    - annotation:
+        type: typing.Optional[dict]
+      default: None
+      description: metadata
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: md
+    - annotation:
+        type: float
+      default: '0'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: shift
+    - default: '[]'
+      description: A list of extra detectors to be activated for the scan, by default
+        [].
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: extra_dets
+    - default: '1'
+      description: If greater than 1, take multiple exposures per step
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: n_exposures
+    properties:
+      is_generator: true
   run_bar:
     description: _summary_
     module: rsoxs.Functions.rsoxs_plans
@@ -29133,6 +31402,139 @@ existing_plans:
     module: rsoxs.HW.signals
     name: setup_diode_i400
     parameters: []
+    properties:
+      is_generator: true
+  si_xas:
+    description: 'Perform an in-place xas scan for  with energy pattern [1820, 1835,
+      0.5, 1875, 0.2, 1910, 0.5] '
+    module: nbs_bl.plans.preprocessors
+    name: si_xas
+    parameters:
+    - default: None
+      description: 'hook for customizing action of inner loop (messages per step)
+
+        Expected signature:
+
+        ``f(detectors, motor, step) -> plan (a generator)``'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: per_step
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A comment that will be added into the run metadata. If not provided,
+        no comment will be added.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: comment
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A group name label that will be added into the run metadata.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: group_name
+    - annotation:
+        type: list
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: plot_detectors
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline exit slit prior to the plan
+        start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eslit
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The sample id. If given, the selected sample metadata is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample
+    - annotation:
+        type: typing.Optional[dict]
+      default: '{}'
+      description: 'A dictionary of positions relative to the sample center. Parameters
+        not given will be assumed to
+
+        be the default for the sampleholder (typically moving the sample into the
+        beam at a typical angle)'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample_position
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The energy reference sample. If given, the selected reference sample
+        is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eref_sample
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline energy prior to the plan start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: energy
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: polarization
+    - annotation:
+        type: int
+      default: '1'
+      description: Number of times to repeat the scan
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: repeat
+    - default: '[]'
+      description: A list of extra detectors to be activated for the scan, by default
+        [].
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: extra_dets
+    - annotation:
+        type: float
+      default: '0'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: shift
+    - annotation:
+        type: typing.Optional[dict]
+      default: None
+      description: metadata
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: md
     properties:
       is_generator: true
   single_gen:
@@ -29256,6 +31658,139 @@ existing_plans:
       name: kwargs
     properties:
       is_generator: true
+  sr_xas:
+    description: 'Perform an in-place xas scan for  with energy pattern [245, 255,
+      1, 260, 0.5, 265, 0.2, 290, 0.1, 300, 0.2, 310, 0.4, 320, 1] '
+    module: nbs_bl.plans.preprocessors
+    name: sr_xas
+    parameters:
+    - default: None
+      description: 'hook for customizing action of inner loop (messages per step)
+
+        Expected signature:
+
+        ``f(detectors, motor, step) -> plan (a generator)``'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: per_step
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A comment that will be added into the run metadata. If not provided,
+        no comment will be added.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: comment
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A group name label that will be added into the run metadata.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: group_name
+    - annotation:
+        type: list
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: plot_detectors
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline exit slit prior to the plan
+        start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eslit
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The sample id. If given, the selected sample metadata is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample
+    - annotation:
+        type: typing.Optional[dict]
+      default: '{}'
+      description: 'A dictionary of positions relative to the sample center. Parameters
+        not given will be assumed to
+
+        be the default for the sampleholder (typically moving the sample into the
+        beam at a typical angle)'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample_position
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The energy reference sample. If given, the selected reference sample
+        is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eref_sample
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline energy prior to the plan start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: energy
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: polarization
+    - annotation:
+        type: int
+      default: '1'
+      description: Number of times to repeat the scan
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: repeat
+    - default: '[]'
+      description: A list of extra detectors to be activated for the scan, by default
+        [].
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: extra_dets
+    - annotation:
+        type: float
+      default: '0'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: shift
+    - annotation:
+        type: typing.Optional[dict]
+      default: None
+      description: metadata
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: md
+    properties:
+      is_generator: true
   stability_scans:
     module: rsoxs.Functions.common_procedures
     name: stability_scans
@@ -29270,6 +31805,27 @@ existing_plans:
     module: rsoxs.HW.detectors
     name: start_det_cooling
     parameters: []
+    properties:
+      is_generator: true
+  step_scan_energy:
+    module: rsoxs.Functions.energyscancore
+    name: step_scan_energy
+    parameters:
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: energies
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: detectors
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: exposure_times
     properties:
       is_generator: true
   stop_det_cooling:
@@ -29327,6 +31883,139 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: check_exposure
+    properties:
+      is_generator: true
+  ti_xas:
+    description: 'Perform an in-place xas scan for  with energy pattern [430, 450,
+      1, 470, 0.1, 480, 0.2, 500, 0.5, 510, 1] '
+    module: nbs_bl.plans.preprocessors
+    name: ti_xas
+    parameters:
+    - default: None
+      description: 'hook for customizing action of inner loop (messages per step)
+
+        Expected signature:
+
+        ``f(detectors, motor, step) -> plan (a generator)``'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: per_step
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A comment that will be added into the run metadata. If not provided,
+        no comment will be added.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: comment
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A group name label that will be added into the run metadata.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: group_name
+    - annotation:
+        type: list
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: plot_detectors
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline exit slit prior to the plan
+        start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eslit
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The sample id. If given, the selected sample metadata is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample
+    - annotation:
+        type: typing.Optional[dict]
+      default: '{}'
+      description: 'A dictionary of positions relative to the sample center. Parameters
+        not given will be assumed to
+
+        be the default for the sampleholder (typically moving the sample into the
+        beam at a typical angle)'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample_position
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The energy reference sample. If given, the selected reference sample
+        is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eref_sample
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline energy prior to the plan start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: energy
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: polarization
+    - annotation:
+        type: int
+      default: '1'
+      description: Number of times to repeat the scan
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: repeat
+    - default: '[]'
+      description: A list of extra detectors to be activated for the scan, by default
+        [].
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: extra_dets
+    - annotation:
+        type: float
+      default: '0'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: shift
+    - annotation:
+        type: typing.Optional[dict]
+      default: None
+      description: metadata
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: md
     properties:
       is_generator: true
   tune_max:
@@ -29466,6 +32155,277 @@ existing_plans:
       name: scan_time
     properties:
       is_generator: true
+  v_xas:
+    description: 'Perform an in-place xas scan for  with energy pattern [505, 510,
+      0.2, 535, 0.1, 545, 0.2, 565, 0.3] '
+    module: nbs_bl.plans.preprocessors
+    name: v_xas
+    parameters:
+    - default: None
+      description: 'hook for customizing action of inner loop (messages per step)
+
+        Expected signature:
+
+        ``f(detectors, motor, step) -> plan (a generator)``'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: per_step
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A comment that will be added into the run metadata. If not provided,
+        no comment will be added.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: comment
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A group name label that will be added into the run metadata.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: group_name
+    - annotation:
+        type: list
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: plot_detectors
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline exit slit prior to the plan
+        start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eslit
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The sample id. If given, the selected sample metadata is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample
+    - annotation:
+        type: typing.Optional[dict]
+      default: '{}'
+      description: 'A dictionary of positions relative to the sample center. Parameters
+        not given will be assumed to
+
+        be the default for the sampleholder (typically moving the sample into the
+        beam at a typical angle)'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample_position
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The energy reference sample. If given, the selected reference sample
+        is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eref_sample
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline energy prior to the plan start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: energy
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: polarization
+    - annotation:
+        type: int
+      default: '1'
+      description: Number of times to repeat the scan
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: repeat
+    - default: '[]'
+      description: A list of extra detectors to be activated for the scan, by default
+        [].
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: extra_dets
+    - annotation:
+        type: float
+      default: '0'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: shift
+    - annotation:
+        type: typing.Optional[dict]
+      default: None
+      description: metadata
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: md
+    properties:
+      is_generator: true
+  variable_energy_scan:
+    module: rsoxs.Functions.energyscancore
+    name: variable_energy_scan
+    parameters:
+    - description: "For one dimension, ``motor, [point1, point2, ....]``.\nIn general:\n\
+        \n.. code-block:: python\n\n    motor1, [point1, point2, ...],\n    motor2,\
+        \ [point1, point2, ...],\n    ...,\n    motorN, [point1, point2, ...]\n\n\
+        Motors can be any 'settable' object (motor, temp controller, etc.)"
+      kind:
+        name: VAR_POSITIONAL
+        value: 2
+      name: args
+    - default: None
+      description: 'hook for customizing action of inner loop (messages per step)
+
+        Expected signature:
+
+        ``f(detectors, motor, step) -> plan (a generator)``'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: per_step
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A comment that will be added into the run metadata. If not provided,
+        no comment will be added.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: comment
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A group name label that will be added into the run metadata.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: group_name
+    - annotation:
+        type: list
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: plot_detectors
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline exit slit prior to the plan
+        start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eslit
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The sample id. If given, the selected sample metadata is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample
+    - annotation:
+        type: typing.Optional[dict]
+      default: '{}'
+      description: 'A dictionary of positions relative to the sample center. Parameters
+        not given will be assumed to
+
+        be the default for the sampleholder (typically moving the sample into the
+        beam at a typical angle)'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample_position
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The energy reference sample. If given, the selected reference sample
+        is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eref_sample
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline energy prior to the plan start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: energy
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: polarization
+    - annotation:
+        type: int
+      default: '1'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: repeat
+    - annotation:
+        type: typing.Optional[dict]
+      default: None
+      description: metadata
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: md
+    - default: '[]'
+      description: A list of extra detectors to be activated for the scan, by default
+        [].
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: extra_dets
+    - annotation:
+        type: float
+      default: '0'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: shift
+    properties:
+      is_generator: true
   vent:
     module: rsoxs.Functions.common_procedures
     name: vent
@@ -29476,5 +32436,138 @@ existing_plans:
     module: rsoxs.HW.contingencies
     name: waxs_back_on
     parameters: []
+    properties:
+      is_generator: true
+  zn_xas:
+    description: 'Perform an in-place xas scan for  with energy pattern [1010, 1015,
+      0.5, 1030, 0.125, 1040, 0.2, 1060, 0.25, 1080, 1.0] '
+    module: nbs_bl.plans.preprocessors
+    name: zn_xas
+    parameters:
+    - default: None
+      description: 'hook for customizing action of inner loop (messages per step)
+
+        Expected signature:
+
+        ``f(detectors, motor, step) -> plan (a generator)``'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: per_step
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A comment that will be added into the run metadata. If not provided,
+        no comment will be added.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: comment
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: A group name label that will be added into the run metadata.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: group_name
+    - annotation:
+        type: list
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: plot_detectors
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline exit slit prior to the plan
+        start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eslit
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The sample id. If given, the selected sample metadata is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample
+    - annotation:
+        type: typing.Optional[dict]
+      default: '{}'
+      description: 'A dictionary of positions relative to the sample center. Parameters
+        not given will be assumed to
+
+        be the default for the sampleholder (typically moving the sample into the
+        beam at a typical angle)'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: sample_position
+    - annotation:
+        type: typing.Optional[str]
+      default: None
+      description: The energy reference sample. If given, the selected reference sample
+        is set
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: eref_sample
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      description: If not None, will set the beamline energy prior to the plan start.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: energy
+    - annotation:
+        type: typing.Optional[float]
+      default: None
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: polarization
+    - annotation:
+        type: int
+      default: '1'
+      description: Number of times to repeat the scan
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: repeat
+    - default: '[]'
+      description: A list of extra detectors to be activated for the scan, by default
+        [].
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: extra_dets
+    - annotation:
+        type: float
+      default: '0'
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: shift
+    - annotation:
+        type: typing.Optional[dict]
+      default: None
+      description: metadata
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: md
     properties:
       is_generator: true
