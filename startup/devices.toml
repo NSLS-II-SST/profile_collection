@@ -1,12 +1,14 @@
 ## Devices are organized from upstream to downstream along SST1.
+## Add devices to groups such that they can show up as options in GUI.  e.g., "detectors" group can contain all devices that will always collect data for all scans.  Devices can belong to multiple groups.
 ## Everything on this list other than 2D camera images are being archived.  TODO: make sure all new additions are archived.
 
+## This .toml file is essentially a dictionary.
 ## Booleans should be lowercase true/false in .toml files
 
 [ring_current]
 _target = "ophyd.EpicsSignalRO"
 kind = "normal"
-_group = "signals"
+_group = ["signals", "detectors"]
 _role = "beam_current"
 prefix = "SR:OPS-BI{DCCT:1}I:Real-I"
 name = "NSLS-II Ring Current"
@@ -877,6 +879,4 @@ name = "Photon Shutter 8"
 
 
 
-
-
-## TODO: I would like to rename some of the devices, but I will do so after those definitions have been successfully removed from the rsoxs repository
+## The version of this file prior to January 14, 2025 is a faithful copy over of devices from the rsoxs package.  TODO: Rename some of the devices, and also group associated PVs into a single ophyd object (e.g., manipulator).
