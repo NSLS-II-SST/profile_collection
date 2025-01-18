@@ -8,6 +8,7 @@ modules = ['rsoxs.startup']
 
 [settings.plans]
 xas = ['regions.toml']
+rsoxs = ['regions.toml']
 
 [settings.redis.md]
 host = "info.sst.nsls2.bnl.gov"

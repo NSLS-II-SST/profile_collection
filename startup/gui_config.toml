@@ -2,7 +2,7 @@
 header = "ucal_header_widget"
 
 [gui.tabs]
-include = ["nbs-gui-queue", "nbs-gui-console", "kafka-table-tab", "nbs-gui-monitor"]
+include = ["nbs-gui-queue", "nbs-gui-console", "kafka-table-tab", "nbs-gui-monitor", "sst-gui-samples"]
 
 [models.beamline]
 primary_energy = "en"

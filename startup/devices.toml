@@ -615,7 +615,7 @@ name = "TEM temperature controller"
 prefix = "XF:07ID2-ES1{TCtrl:1}LS336:TC1:"
 
 [SP]
-_target = "rsoxs.Base.syringepump.Syringe_Pump" 
+_target = "rsoxs.devices.syringepump.Syringe_Pump" 
 _group = "sample_environments"
 name = "sp"
 prefix = "XF:07ID1-ES"
@@ -700,7 +700,7 @@ name = "Detector WAXS Translation"
 prefix = "XF:07ID2-ES1{Det-Ax:2}Mtr"
 
 [waxs_det]
-_target = "rsoxs.Base.detectors.RSOXSGreatEyesDetector" 
+_target = "rsoxs.devices.detectors.RSOXSGreatEyesDetector" 
 _group = "all_standard_pros" ## TODO: Not sure if this belongs elsewhere.
 prefix = "XF:07ID1-ES:1{GE:2}"
 name = "Wide Angle CCD Detector" ## TODO: Not sure how this is different from DetS_cam
