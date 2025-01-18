@@ -1,3 +1,5 @@
+## Goal is to keep this file and generally profile_collection package as minimal as possible such that main changes here would be made by NSLS II DSSI (e.g., changing Kafka), and DSSI would not have to edit rsoxs package.
+
 import sys
 from pathlib import Path
 
