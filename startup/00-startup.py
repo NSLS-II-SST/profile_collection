@@ -1,3 +1,8 @@
+## profile_collection is a "bootstrapping" mechanism that triggers the rsoxs package and other beamline codebase to be loaded into the beamline computers.
+## profile_collection is located in .ipython, which is separate from the rest of the beamline codebase (e.g., the rsoxs package).  It isan IPython profile, not a normal "python package".
+## The rsoxs package should not be placed in this same ~/.ipython directory, nor should the contents of profile_collection be consolidated into the rsoxs package.  This has been attempted before and does not work.
+## Configuration files (e.g., devices.toml, regions.toml) belong in this codebase.  It is easier to find the location of an IPython Profile such as profile_collection, but harder to locate these configuration files from the rsoxs package.
+
 ## Goal is to keep this file and generally profile_collection package as minimal as possible such that main changes here would be made by NSLS II DSSI (e.g., changing Kafka), and DSSI would not have to edit rsoxs package.
 
 import sys
