@@ -168,7 +168,7 @@ prefix = "XF:07IDA-VA:0{Mir:M1-CCG:1}P:Raw-I"
 name = "Mirror 1 Vacuum Pressure"
 
 [FS1_cam]
-_target = "rsoxs.HW.cameras.StandardProsilicawstats" 
+_target = "rsoxs.devices.cameras.StandardProsilicawstats" 
 _group = "all_standard_pros" ## TODO: Does this need another group?
 prefix = "XF:07ID-BI{BPM:1}"
 name = "FS1 white beam stop Camera"
@@ -178,7 +178,7 @@ read_attrs = ['tiff','stats5']
 ## M1 reflects the beam through the mask/frame.
 
 [FS6_cam]
-_target = "rsoxs.HW.cameras.StandardProsilicawstats" 
+_target = "rsoxs.devices.cameras.StandardProsilicawstats" 
 _group = "all_standard_pros" ## TODO: Does this need another group?
 prefix = "XF:07ID-BI{BPM:6}"
 name = "FS6 Camera"
@@ -261,7 +261,7 @@ prefix = "XF:07IDA-OP{Mir:2}T:Mir-I"
 name = "Temperature_M3"
 
 [FS7_cam]
-_target = "rsoxs.HW.cameras.StandardProsilicawstats"
+_target = "rsoxs.devices.cameras.StandardProsilicawstats"
 _group = "all_standard_pros" ## TODO: Does this need another group?
 prefix = "XF:07ID-BI{BPM:7}"
 name = "FS7 pink beam stop Camera"
@@ -420,7 +420,7 @@ prefix = "XF:07ID-ES1{DMR:I400-1}:IC3_MON"
 name = "Izero Photodiode"
 
 [Izero_cam]
-_target = "rsoxs.HW.cameras.StandardProsilicawstats"
+_target = "rsoxs.devices.cameras.StandardProsilicawstats"
 _group = "all_standard_pros"
 prefix = "XF:07ID1-ES:1{Scr:1}"
 name = "Izero YAG Camera"
