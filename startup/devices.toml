@@ -398,6 +398,7 @@ kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:ACCUM_SP"
 name = "RSoXS Slit 1 i400 mode"
 string = true
+## This I400 does not have an associated PDU the way the diode_i400 has.  To power cycle this I400, just disconnect and reconnect the cable.
 
 [Izero_Mesh]
 _target = "ophyd.EpicsSignalRO"
@@ -696,6 +697,7 @@ kind = "normal"
 prefix = "XF:07ID-CT{RG:C1-PDU:1}Sw:8-Sel"
 name = "RSoXS diode power control"
 string = true
+## This is a PDU (power distribution unit) (possibly in the rack with motor controllers and IOCs, TODO: trace cables) that can individually turn on/off all outlets.  Should be outlet #8, and we should have control over ports 1-8.
 
 [DiodeRange]
 _target = "ophyd.EpicsSignal"
