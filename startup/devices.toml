@@ -469,6 +469,12 @@ prefix = "XF:07IDB-CT{DIODE-MTO:1}OutWidthSet:2-SP"
 name = "RSoXS Shutter Opening Time (ms)"
 kind = "normal"
 
+[Shutter_delay]
+_target = "ophyd.EpicsSignal"
+prefix = "XF:07IDB-CT{DIODE-MTO:1}OutDelaySet:2-SP"
+name = "RSoXS Shutter Delay (ms)"
+kind = "normal"
+
 [Shutter_Y]
 _target = "sst_base.motors.PrettyMotorFMBODeadband"
 _group = "motors"
@@ -541,36 +547,36 @@ prefix = "XF:07ID2-ES1{Stg-Ax:"
 name = "manipulator"
 
 [sam_X]
-#_target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
+_target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
 _group = "motors"
 _alias = "manipulator.x"
 kind = "hinted"
 name = "RSoXS Sample Outboard-Inboard"
-#prefix = "XF:07ID2-ES1{Stg-Ax:X}Mtr"
+prefix = "XF:07ID2-ES1{Stg-Ax:X}Mtr"
 
 [sam_Y]
-#_target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
+_target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
 _group = "motors"
 _alias = "manipulator.y"
 kind = "hinted"
 name = "RSoXS Sample Up-Down"
-#prefix = "XF:07ID2-ES1{Stg-Ax:Y}Mtr"
+prefix = "XF:07ID2-ES1{Stg-Ax:Y}Mtr"
 
 [sam_Z]
-#_target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
+_target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
 _group = "motors"
 _alias = "manipulator.z"
 kind = "hinted"
 name = "RSoXS Sample Downstream-Upstream"
-#prefix = "XF:07ID2-ES1{Stg-Ax:Z}Mtr"
+prefix = "XF:07ID2-ES1{Stg-Ax:Z}Mtr"
 
 [sam_Th]
-#_target = "sst_base.motors.PrettyMotorFMBODeadband"
+_target = "sst_base.motors.PrettyMotorFMBODeadband"
 _alias = "manipulator.r"
 _group = "motors"
 kind = "hinted"
 name = "RSoXS Sample Rotation"
-#prefix = "XF:07ID2-ES1{Stg-Ax:Yaw}Mtr"
+prefix = "XF:07ID2-ES1{Stg-Ax:Yaw}Mtr"
 
 [rsoxs_ll_gpwr]
 _target = "ophyd.EpicsSignal"
@@ -625,7 +631,7 @@ prefix = "XF:07ID1-ES"
 
 [BeamStopW] ## TODO: rename so that it is more obvious which is a signal vs. a motor
 _target = "sst_base.motors.PrettyMotorFMBODeadband"
-_group = "motors"
+ _group = "motors"
 kind = "hinted"
 name = "Beam Stop WAXS"
 prefix = "XF:07ID2-ES1{BS-Ax:1}Mtr"
@@ -705,6 +711,7 @@ prefix = "XF:07ID2-ES1{Det-Ax:2}Mtr"
 [waxs_det]
 _target = "rsoxs.devices.detectors.RSOXSGreatEyesDetector" 
 _group = "all_standard_pros" ## TODO: Not sure if this belongs elsewhere.
+_load_order = 2
 prefix = "XF:07ID1-ES:1{GE:2}"
 name = "Wide Angle CCD Detector" ## TODO: Not sure how this is different from DetS_cam
 read_attrs = ['tiff', 'stats1.total', 'saturated','under_exposed','cam']

@@ -2966,19 +2966,19 @@ existing_devices:
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: rsoxs.HW.cameras
+    module: rsoxs.devices.cameras
   FS6_cam:
     classname: StandardProsilicawstats
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: rsoxs.HW.cameras
+    module: rsoxs.devices.cameras
   FS7_cam:
     classname: StandardProsilicawstats
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: rsoxs.HW.cameras
+    module: rsoxs.devices.cameras
   Gap_C07U42:
     classname: EpicsSignalRO
     is_flyable: false
@@ -3671,7 +3671,7 @@ existing_devices:
     is_flyable: false
     is_movable: false
     is_readable: true
-    module: rsoxs.HW.cameras
+    module: rsoxs.devices.cameras
   Izero_ds:
     classname: PrettyMotorFMBO
     components:
@@ -5365,6 +5365,12 @@ existing_devices:
     is_movable: true
     is_readable: true
     module: rsoxs.HW.motors
+  Shutter_delay:
+    classname: EpicsSignal
+    is_flyable: false
+    is_movable: true
+    is_readable: true
+    module: ophyd.signal
   Shutter_enable:
     classname: EpicsSignal
     is_flyable: false
@@ -25565,6 +25571,12 @@ existing_plans:
       name: md
     properties:
       is_generator: true
+  cleanup:
+    module: rsoxs.Functions.energyscancore
+    name: cleanup
+    parameters: []
+    properties:
+      is_generator: true
   clear_one_roi:
     module: nbs_bl.plans.plan_stubs
     name: clear_one_roi
@@ -26922,9 +26934,12 @@ existing_plans:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: detectors
-    - description: "detector fields whose output is to maximize\n(the first will be\
-        \ maximized, but secondardy maxes will be recorded during the scans for the\
-        \ first - \nif the maxima are not in the same range this will not be useful)"
+    - description: 'detector fields whose output is to maximize
+
+        (the first will be maximized, but secondardy maxes will be recorded during
+        the scans for the first -
+
+        if the maxima are not in the same range this will not be useful)'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -27078,6 +27093,38 @@ existing_plans:
         name: KEYWORD_ONLY
         value: 3
       name: period
+    properties:
+      is_generator: true
+  flyer_scan_energy:
+    description: Specific scan for SST-1 monochromator fly scan, while catching up
+      with the undulator
+    module: rsoxs.Functions.energyscancore
+    name: flyer_scan_energy
+    parameters:
+    - description: "(start_en : eV to begin the scan,\nstop_en : eV to stop the scan,\n\
+        speed_en : eV / second to move the monochromator)\nthe stop energy of each\
+        \ tuple should match the start of the next to make a continuous scan\n   \
+        \ although this is not strictly enforced to allow for flexibility"
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: scan_params
+    - default: '{}'
+      description: metadata
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: md
+    - default: 'True'
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: locked
+    - default: '0'
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: polarization
     properties:
       is_generator: true
   flystream_during_wrapper:
@@ -28610,10 +28657,10 @@ existing_plans:
     module: rsoxs.Functions.alignment
     name: move_to_location
     parameters:
-    - default: '[{''motor'': ''x'', ''position'': -0.001454999999999984, ''order'':
-        0}, {''motor'': ''y'', ''position'': 345.00002, ''order'': 0}, {''motor'':
-        ''z'', ''position'': -0.4390849999999915, ''order'': 0}, {''motor'': ''th'',
-        ''position'': 0.005337560999976176, ''order'': 0}]'
+    - default: '[{''motor'': ''x'', ''position'': -0.004834999999999923, ''order'':
+        0}, {''motor'': ''y'', ''position'': 341.00002, ''order'': 0}, {''motor'':
+        ''z'', ''position'': -0.5541199999999975, ''order'': 0}, {''motor'': ''th'',
+        ''position'': 0.02593692599998576, ''order'': 0}]'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -33053,6 +33100,22 @@ existing_plans:
     parameters: []
     properties:
       is_generator: true
+  rewindable_wrapper:
+    description: Toggle the 'rewindable' state of the RE
+    module: bluesky.preprocessors
+    name: rewindable_wrapper
+    parameters:
+    - description: The plan to wrap in a 'rewindable' or 'not rewindable' context
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: plan
+    - kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: rewindable
+    properties:
+      is_generator: true
   rotate_now:
     module: rsoxs.Functions.alignment
     name: rotate_now
@@ -33638,6 +33701,97 @@ existing_plans:
     parameters: []
     properties:
       is_generator: true
+  spiral_survey:
+    description: conduct a spiral grid pattern of exposures
+    module: rsoxs.alignment2.spiral_scans
+    name: spiral_survey
+    parameters:
+    - default: '0.6'
+      description: _description_, by default 0.6
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: diameter
+    - default: '0.2'
+      description: _description_, by default 0.2
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: stepsize
+    - default: '270'
+      description: _description_, by default 270 -148.3
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: energy
+    - default: '0'
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: pol
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: angle
+    - default: '1'
+      description: _description_, by default 1
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: exposure
+    - default: '1'
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: repeats
+    - default: None
+      description: _description_, by default None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: master_plan
+    - default: '''spiral'''
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: enscan_type
+    - default: '[]'
+      description: _description_, by default []
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: dets
+    - default: 'False'
+      description: _description_, by default False
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: sim_mode
+    - default: None
+      description: _description_, by default None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: grating
+    - default: None
+      description: the sample dictionary, by default None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: md
+    - default: 'False'
+      description: force a spiral even if one was already started, by default False
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: force
+    - kind:
+        name: VAR_KEYWORD
+        value: 4
+      name: kwargs
+    properties:
+      is_generator: true
   spiralsearch:
     description: conduct a spiral grid pattern of exposures
     module: rsoxs.Functions.alignment
@@ -34005,6 +34159,27 @@ existing_plans:
     module: rsoxs.HW.detectors
     name: start_det_cooling
     parameters: []
+    properties:
+      is_generator: true
+  step_scan_energy:
+    module: rsoxs.Functions.energyscancore
+    name: step_scan_energy
+    parameters:
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: energies
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: detectors
+    - default: None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: exposure_times
     properties:
       is_generator: true
   stop_det_cooling:
