@@ -28657,10 +28657,10 @@ existing_plans:
     module: rsoxs.Functions.alignment
     name: move_to_location
     parameters:
-    - default: '[{''motor'': ''x'', ''position'': -0.004834999999999923, ''order'':
+    - default: '[{''motor'': ''x'', ''position'': -0.013030000000000541, ''order'':
         0}, {''motor'': ''y'', ''position'': 341.00002, ''order'': 0}, {''motor'':
         ''z'', ''position'': -0.5541199999999975, ''order'': 0}, {''motor'': ''th'',
-        ''position'': 0.02593692599998576, ''order'': 0}]'
+        ''position'': 0.028683508000028723, ''order'': 0}]'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -33703,7 +33703,7 @@ existing_plans:
       is_generator: true
   spiral_survey:
     description: conduct a spiral grid pattern of exposures
-    module: rsoxs.alignment2.spiral_scans
+    module: rsoxs.alignment.spiral_scans
     name: spiral_survey
     parameters:
     - default: '0.6'

@@ -8,6 +8,13 @@
 import sys
 from pathlib import Path
 
+## 20250130 - adding in capabilities from configure_base that are no longer used after recent code upgrade
+## Needs to be imported before alignment_local.py, I think
+import matplotlib.pyplot as plt
+import bluesky.callbacks as bc
+from bluesky.callbacks import *
+plt.ion()
+
 paths = [
     path
     for path in Path(
@@ -46,12 +53,14 @@ from rsoxs.HW.slackbot import rsoxs_bot
 from rsoxs_scans.spreadsheets import *
 from rsoxs_scans.acquisition import *
 from rsoxs.plans.rsoxs import *
+import nslsii
 from nslsii import configure_kafka_publisher, configure_bluesky_logging, configure_ipython_logging
 from nslsii.common.ipynb.logutils import log_exception
 
 ipython = get_ipython()
 
-#nslsii.configure_base(get_ipython().user_ns, "rsoxs", bec=False, configure_logging=True, publish_documents_with_kafka=True)
+
+#nslsii.configure_base(get_ipython().user_ns, "rsoxs", bec=False, configure_logging=True, publish_documents_with_kafka=False) ## 20250130 - Adding this back to ensure we did not lose anything from before, but it set up a PersistentDict and 
 configure_kafka_publisher(RE, beamline_name="rsoxs")
 RE.subscribe(db.insert)
 configure_bluesky_logging(ipython=ipython)

@@ -453,7 +453,7 @@ concurrent = 1
 [Shutter_control]
 _target = "rsoxs.HW.motors.ShutterWait"
 _group = "motors"
-prefix = "XF:07ID2-ES1{FSh-Ax:1}Mtr"
+prefix = "XF:07IDB-CT{DIODE-Local:1}OutPt01:Data-Sel"
 name = "RSoXS Shutter Toggle"
 kind = "normal"
 
