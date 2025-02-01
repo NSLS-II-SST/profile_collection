@@ -1,5 +1,7 @@
 ## Devices are organized from upstream to downstream along SST1.
 ## Add devices to groups such that they can show up as options in GUI.  e.g., "detectors" group can contain all devices that will always collect data for all scans.  Devices can belong to multiple groups.
+## _baseline = true adds unchanging variables to the baseline to show the value at the start and end of the scan
+
 ## Everything on this list other than 2D camera images are being archived.  TODO: make sure all new additions are archived.
 
 ## This .toml file is essentially a dictionary.
@@ -8,7 +10,7 @@
 [ring_current]
 _target = "ophyd.EpicsSignalRO"
 kind = "normal"
-_group = ["signals", "detectors"]
+_group = ["detectors", "signals"] ## Trying to keep group names in alphabetical order for better organization
 _role = "beam_current"
 prefix = "SR:OPS-BI{DCCT:1}I:Real-I"
 name = "NSLS-II Ring Current"
@@ -153,6 +155,7 @@ _group = "motors"
 prefix = "XF:07IDA-OP{Mir:M1"
 name = "SST 1 Mirror 1 fmb" 
 kind = "hinted"
+_baseline = true
 
 [Temperature_M1]
 _target = "ophyd.EpicsSignalRO"
@@ -216,28 +219,32 @@ _target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
 _group = "motors"
 kind = "hinted"
 prefix = "XF:07ID1-OP{Mono:PGM1-Ax:MirP}Mtr"
-name = "Mono Mirror"
+name = "Mono Mirror angle"
+_baseline = true
 
 [mirror2x]
 _target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
 _group = "motors"
 kind = "hinted"
 prefix = "XF:07ID1-OP{Mono:PGM1-Ax:MirX}Mtr"
-name = "Mono Mirror"
+name = "Mono Mirror x"
+_baseline = true
 
 [grating] ## angle
 _target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
 _group = "motors"
 kind = "hinted"
 prefix = "XF:07ID1-OP{Mono:PGM1-Ax:GrtP}Mtr"
-name = "Mono Grating"
+name = "Mono Grating angle"
+_baseline = true
 
 [gratingx]
 _target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
 _group = "motors"
 kind = "hinted"
 prefix = "XF:07ID1-OP{Mono:PGM1-Ax:GrtX}Mtr"
-name = "Mono Grating"
+name = "Mono Grating x"
+_baseline = true
 
 [Temperature_MonoPGM]
 _target = "ophyd.EpicsSignalRO"
@@ -253,6 +260,7 @@ _group = "motors"
 prefix = "XF:07ID1-OP{Mir:M3ABC"
 name = "SST 1 Mirror 3 fmb"
 kind = "hinted"
+_baseline = true
 
 [Temperature_M3]
 _target = "ophyd.EpicsSignalRO"
@@ -286,6 +294,7 @@ _group = "motors"
 kind = "hinted"
 prefix = "XF:07ID2-BI{Slt:11-Ax:YGap}Mtr"
 name = "Exit Slit of Mono Vertical Gap"
+_baseline = true
 
 ## GV27
 
@@ -645,6 +654,7 @@ name = "WAXS Beamstop"
 
 [Beamstop_WAXS_int]
 _target = "sst_base.detectors.scalar.ophScalar" ## These signals are scalars (integrating detectors).  Each data point that is written out is the average of several "sub" data points.  Other statistics, such as standard deviation, median, etc. are available.  ## TODO: Would it be possible to combine this with the non-integrating signal and can toggle between which type to use?
+_group = ["detectors", "signals"]
 kind = "normal"
 prefix = "XF:07ID-ES1{DMR:I400-1}:IC1_MON"
 name = "WAXS Beamstop"
@@ -733,6 +743,7 @@ name = "SAXS Beamstop"
 
 [Beamstop_SAXS_int]
 _target = "sst_base.detectors.scalar.ophScalar"
+_group = ["detectors", "signals"]
 kind = "normal"
 prefix = "XF:07ID-ES1{DMR:I400-1}:IC2_MON"
 name = "SAXS Beamstop"

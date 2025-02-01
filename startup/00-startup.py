@@ -85,6 +85,8 @@ if not is_re_worker_active():
 print("Extending Baseline")
 # from .Functions.startup import sd
 #
+
+## TODO: delete thee code below, but add the important devices to baseline in devices.toml
 """
 sd.baseline.extend(
      [

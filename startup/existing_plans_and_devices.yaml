@@ -6086,6 +6086,30 @@ existing_devices:
     is_movable: true
     is_readable: true
     module: ophyd.signal
+  camera:
+    classname: StandardProsilicawstats
+    is_flyable: false
+    is_movable: false
+    is_readable: true
+    module: rsoxs.devices.cameras
+  crosshair:
+    classname: Overlay
+    is_flyable: false
+    is_movable: false
+    is_readable: true
+    module: ophyd.areadetector.plugins
+  crosshair_saxs:
+    classname: Overlay
+    is_flyable: false
+    is_movable: false
+    is_readable: true
+    module: ophyd.areadetector.plugins
+  crosshair_side:
+    classname: Overlay
+    is_flyable: false
+    is_movable: false
+    is_readable: true
+    module: ophyd.areadetector.plugins
   diode_i400_PDU:
     classname: EpicsSignal
     is_flyable: false
@@ -24552,6 +24576,12 @@ existing_devices:
     is_movable: true
     is_readable: true
     module: ophyd.signal
+  stats_plugin:
+    classname: StatsWCentroid
+    is_flyable: false
+    is_movable: false
+    is_readable: true
+    module: rsoxs.devices.cameras
   tem_tempstage:
     classname: Lakeshore336Picky
     components:
@@ -25037,14 +25067,6 @@ existing_plans:
     - annotation:
         type: typing.Optional[float]
       default: None
-      description: The exposure time in seconds for all detectors, by default None.
-      kind:
-        name: KEYWORD_ONLY
-        value: 3
-      name: dwell
-    - annotation:
-        type: typing.Optional[float]
-      default: None
       description: If not None, will set the beamline exit slit prior to the plan
         start.
       kind:
@@ -25123,6 +25145,12 @@ existing_plans:
         name: KEYWORD_ONLY
         value: 3
       name: n_exposures
+    - default: '1'
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
     - annotation:
         type: typing.Optional[dict]
       default: None
@@ -25341,14 +25369,6 @@ existing_plans:
     - annotation:
         type: typing.Optional[float]
       default: None
-      description: The exposure time in seconds for all detectors, by default None.
-      kind:
-        name: KEYWORD_ONLY
-        value: 3
-      name: dwell
-    - annotation:
-        type: typing.Optional[float]
-      default: None
       description: If not None, will set the beamline exit slit prior to the plan
         start.
       kind:
@@ -25427,6 +25447,12 @@ existing_plans:
         name: KEYWORD_ONLY
         value: 3
       name: n_exposures
+    - default: '1'
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
     - annotation:
         type: typing.Optional[dict]
       default: None
@@ -25621,14 +25647,6 @@ existing_plans:
     - annotation:
         type: typing.Optional[float]
       default: None
-      description: The exposure time in seconds for all detectors, by default None.
-      kind:
-        name: KEYWORD_ONLY
-        value: 3
-      name: dwell
-    - annotation:
-        type: typing.Optional[float]
-      default: None
       description: If not None, will set the beamline exit slit prior to the plan
         start.
       kind:
@@ -25707,6 +25725,12 @@ existing_plans:
         name: KEYWORD_ONLY
         value: 3
       name: n_exposures
+    - default: '1'
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
     - annotation:
         type: typing.Optional[dict]
       default: None
@@ -25884,14 +25908,6 @@ existing_plans:
     - annotation:
         type: typing.Optional[float]
       default: None
-      description: The exposure time in seconds for all detectors, by default None.
-      kind:
-        name: KEYWORD_ONLY
-        value: 3
-      name: dwell
-    - annotation:
-        type: typing.Optional[float]
-      default: None
       description: If not None, will set the beamline exit slit prior to the plan
         start.
       kind:
@@ -25970,6 +25986,12 @@ existing_plans:
         name: KEYWORD_ONLY
         value: 3
       name: n_exposures
+    - default: '1'
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
     - annotation:
         type: typing.Optional[dict]
       default: None
@@ -26378,14 +26400,6 @@ existing_plans:
     - annotation:
         type: typing.Optional[float]
       default: None
-      description: The exposure time in seconds for all detectors, by default None.
-      kind:
-        name: KEYWORD_ONLY
-        value: 3
-      name: dwell
-    - annotation:
-        type: typing.Optional[float]
-      default: None
       description: If not None, will set the beamline exit slit prior to the plan
         start.
       kind:
@@ -26464,6 +26478,12 @@ existing_plans:
         name: KEYWORD_ONLY
         value: 3
       name: n_exposures
+    - default: '1'
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
     - annotation:
         type: typing.Optional[dict]
       default: None
@@ -26640,14 +26660,6 @@ existing_plans:
     - annotation:
         type: typing.Optional[float]
       default: None
-      description: The exposure time in seconds for all detectors, by default None.
-      kind:
-        name: KEYWORD_ONLY
-        value: 3
-      name: dwell
-    - annotation:
-        type: typing.Optional[float]
-      default: None
       description: If not None, will set the beamline exit slit prior to the plan
         start.
       kind:
@@ -26726,6 +26738,12 @@ existing_plans:
         name: KEYWORD_ONLY
         value: 3
       name: n_exposures
+    - default: '1'
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
     - annotation:
         type: typing.Optional[dict]
       default: None
@@ -27270,14 +27288,6 @@ existing_plans:
     - annotation:
         type: typing.Optional[float]
       default: None
-      description: The exposure time in seconds for all detectors, by default None.
-      kind:
-        name: KEYWORD_ONLY
-        value: 3
-      name: dwell
-    - annotation:
-        type: typing.Optional[float]
-      default: None
       description: If not None, will set the beamline exit slit prior to the plan
         start.
       kind:
@@ -27356,6 +27366,12 @@ existing_plans:
         name: KEYWORD_ONLY
         value: 3
       name: n_exposures
+    - default: '1'
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
     - annotation:
         type: typing.Optional[dict]
       default: None
@@ -27583,14 +27599,6 @@ existing_plans:
     - annotation:
         type: typing.Optional[float]
       default: None
-      description: The exposure time in seconds for all detectors, by default None.
-      kind:
-        name: KEYWORD_ONLY
-        value: 3
-      name: dwell
-    - annotation:
-        type: typing.Optional[float]
-      default: None
       description: If not None, will set the beamline exit slit prior to the plan
         start.
       kind:
@@ -27669,6 +27677,12 @@ existing_plans:
         name: KEYWORD_ONLY
         value: 3
       name: n_exposures
+    - default: '1'
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
     - annotation:
         type: typing.Optional[dict]
       default: None
@@ -27869,14 +27883,6 @@ existing_plans:
     - annotation:
         type: typing.Optional[float]
       default: None
-      description: The exposure time in seconds for all detectors, by default None.
-      kind:
-        name: KEYWORD_ONLY
-        value: 3
-      name: dwell
-    - annotation:
-        type: typing.Optional[float]
-      default: None
       description: If not None, will set the beamline exit slit prior to the plan
         start.
       kind:
@@ -27955,6 +27961,12 @@ existing_plans:
         name: KEYWORD_ONLY
         value: 3
       name: n_exposures
+    - default: '1'
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
     - annotation:
         type: typing.Optional[dict]
       default: None
@@ -28131,14 +28143,6 @@ existing_plans:
     - annotation:
         type: typing.Optional[float]
       default: None
-      description: The exposure time in seconds for all detectors, by default None.
-      kind:
-        name: KEYWORD_ONLY
-        value: 3
-      name: dwell
-    - annotation:
-        type: typing.Optional[float]
-      default: None
       description: If not None, will set the beamline exit slit prior to the plan
         start.
       kind:
@@ -28217,6 +28221,12 @@ existing_plans:
         name: KEYWORD_ONLY
         value: 3
       name: n_exposures
+    - default: '1'
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
     - annotation:
         type: typing.Optional[dict]
       default: None
@@ -28393,14 +28403,6 @@ existing_plans:
     - annotation:
         type: typing.Optional[float]
       default: None
-      description: The exposure time in seconds for all detectors, by default None.
-      kind:
-        name: KEYWORD_ONLY
-        value: 3
-      name: dwell
-    - annotation:
-        type: typing.Optional[float]
-      default: None
       description: If not None, will set the beamline exit slit prior to the plan
         start.
       kind:
@@ -28479,6 +28481,12 @@ existing_plans:
         name: KEYWORD_ONLY
         value: 3
       name: n_exposures
+    - default: '1'
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
     - annotation:
         type: typing.Optional[dict]
       default: None
@@ -28657,10 +28665,10 @@ existing_plans:
     module: rsoxs.Functions.alignment
     name: move_to_location
     parameters:
-    - default: '[{''motor'': ''x'', ''position'': -0.013030000000000541, ''order'':
-        0}, {''motor'': ''y'', ''position'': 341.00002, ''order'': 0}, {''motor'':
-        ''z'', ''position'': -0.5541199999999975, ''order'': 0}, {''motor'': ''th'',
-        ''position'': 0.028683508000028723, ''order'': 0}]'
+    - default: '[{''motor'': ''x'', ''position'': -0.8837550000000007, ''order'':
+        0}, {''motor'': ''y'', ''position'': 47.33333499999999, ''order'': 0}, {''motor'':
+        ''z'', ''position'': -0.34676999999999225, ''order'': 0}, {''motor'': ''th'',
+        ''position'': 180.00533551299998, ''order'': 0}]'
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
@@ -28697,14 +28705,6 @@ existing_plans:
         name: KEYWORD_ONLY
         value: 3
       name: plot_detectors
-    - annotation:
-        type: typing.Optional[float]
-      default: None
-      description: The exposure time in seconds for all detectors, by default None.
-      kind:
-        name: KEYWORD_ONLY
-        value: 3
-      name: dwell
     - annotation:
         type: typing.Optional[float]
       default: None
@@ -28786,6 +28786,12 @@ existing_plans:
         name: KEYWORD_ONLY
         value: 3
       name: n_exposures
+    - default: '1'
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
     - annotation:
         type: typing.Optional[dict]
       default: None
@@ -28962,14 +28968,6 @@ existing_plans:
     - annotation:
         type: typing.Optional[float]
       default: None
-      description: The exposure time in seconds for all detectors, by default None.
-      kind:
-        name: KEYWORD_ONLY
-        value: 3
-      name: dwell
-    - annotation:
-        type: typing.Optional[float]
-      default: None
       description: If not None, will set the beamline exit slit prior to the plan
         start.
       kind:
@@ -29048,6 +29046,12 @@ existing_plans:
         name: KEYWORD_ONLY
         value: 3
       name: n_exposures
+    - default: '1'
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
     - annotation:
         type: typing.Optional[dict]
       default: None
@@ -32415,14 +32419,6 @@ existing_plans:
     - annotation:
         type: typing.Optional[float]
       default: None
-      description: The exposure time in seconds for all detectors, by default None.
-      kind:
-        name: KEYWORD_ONLY
-        value: 3
-      name: dwell
-    - annotation:
-        type: typing.Optional[float]
-      default: None
       description: If not None, will set the beamline exit slit prior to the plan
         start.
       kind:
@@ -32501,6 +32497,12 @@ existing_plans:
         name: KEYWORD_ONLY
         value: 3
       name: n_exposures
+    - default: '1'
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
     - annotation:
         type: typing.Optional[dict]
       default: None
@@ -32677,14 +32679,6 @@ existing_plans:
     - annotation:
         type: typing.Optional[float]
       default: None
-      description: The exposure time in seconds for all detectors, by default None.
-      kind:
-        name: KEYWORD_ONLY
-        value: 3
-      name: dwell
-    - annotation:
-        type: typing.Optional[float]
-      default: None
       description: If not None, will set the beamline exit slit prior to the plan
         start.
       kind:
@@ -32763,6 +32757,12 @@ existing_plans:
         name: KEYWORD_ONLY
         value: 3
       name: n_exposures
+    - default: '1'
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
     - annotation:
         type: typing.Optional[dict]
       default: None
@@ -33171,14 +33171,6 @@ existing_plans:
     - annotation:
         type: typing.Optional[float]
       default: None
-      description: The exposure time in seconds for all detectors, by default None.
-      kind:
-        name: KEYWORD_ONLY
-        value: 3
-      name: dwell
-    - annotation:
-        type: typing.Optional[float]
-      default: None
       description: If not None, will set the beamline exit slit prior to the plan
         start.
       kind:
@@ -33264,6 +33256,12 @@ existing_plans:
         name: KEYWORD_ONLY
         value: 3
       name: n_exposures
+    - default: '1'
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
     properties:
       is_generator: true
   run_bar:
@@ -33442,14 +33440,6 @@ existing_plans:
     - annotation:
         type: typing.Optional[float]
       default: None
-      description: The exposure time in seconds for all detectors, by default None.
-      kind:
-        name: KEYWORD_ONLY
-        value: 3
-      name: dwell
-    - annotation:
-        type: typing.Optional[float]
-      default: None
       description: If not None, will set the beamline exit slit prior to the plan
         start.
       kind:
@@ -33528,6 +33518,12 @@ existing_plans:
         name: KEYWORD_ONLY
         value: 3
       name: n_exposures
+    - default: '1'
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
     - annotation:
         type: typing.Optional[dict]
       default: None
@@ -33916,14 +33912,6 @@ existing_plans:
     - annotation:
         type: typing.Optional[float]
       default: None
-      description: The exposure time in seconds for all detectors, by default None.
-      kind:
-        name: KEYWORD_ONLY
-        value: 3
-      name: dwell
-    - annotation:
-        type: typing.Optional[float]
-      default: None
       description: If not None, will set the beamline exit slit prior to the plan
         start.
       kind:
@@ -34002,6 +33990,12 @@ existing_plans:
         name: KEYWORD_ONLY
         value: 3
       name: n_exposures
+    - default: '1'
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
     - annotation:
         type: typing.Optional[dict]
       default: None
@@ -34214,29 +34208,40 @@ existing_plans:
     properties:
       is_generator: true
   take_exposure_corrected_reading:
+    description: Trigger and read detectors with automatic exposure time correction.
     module: rsoxs.plans.per_steps
     name: take_exposure_corrected_reading
     parameters:
     - default: None
+      description: List of detectors to trigger and read
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: detectors
     - default: None
+      description: Function to use for triggering and reading. If None, uses trigger_and_read_with_shutter
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: take_reading
     - default: None
+      description: Shutter device to control during reading
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: shutter
     - default: 'False'
+      description: Whether to check and correct exposure time, by default False
       kind:
         name: POSITIONAL_OR_KEYWORD
         value: 1
       name: check_exposure
+    - default: None
+      description: Primary detector that controls timing, by default None
+      kind:
+        name: POSITIONAL_OR_KEYWORD
+        value: 1
+      name: lead_detector
     properties:
       is_generator: true
   ti_rsoxs:
@@ -34269,14 +34274,6 @@ existing_plans:
         name: KEYWORD_ONLY
         value: 3
       name: plot_detectors
-    - annotation:
-        type: typing.Optional[float]
-      default: None
-      description: The exposure time in seconds for all detectors, by default None.
-      kind:
-        name: KEYWORD_ONLY
-        value: 3
-      name: dwell
     - annotation:
         type: typing.Optional[float]
       default: None
@@ -34358,6 +34355,12 @@ existing_plans:
         name: KEYWORD_ONLY
         value: 3
       name: n_exposures
+    - default: '1'
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
     - annotation:
         type: typing.Optional[dict]
       default: None
@@ -34671,14 +34674,6 @@ existing_plans:
     - annotation:
         type: typing.Optional[float]
       default: None
-      description: The exposure time in seconds for all detectors, by default None.
-      kind:
-        name: KEYWORD_ONLY
-        value: 3
-      name: dwell
-    - annotation:
-        type: typing.Optional[float]
-      default: None
       description: If not None, will set the beamline exit slit prior to the plan
         start.
       kind:
@@ -34757,6 +34752,12 @@ existing_plans:
         name: KEYWORD_ONLY
         value: 3
       name: n_exposures
+    - default: '1'
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
     - annotation:
         type: typing.Optional[dict]
       default: None
@@ -35083,14 +35084,6 @@ existing_plans:
     - annotation:
         type: typing.Optional[float]
       default: None
-      description: The exposure time in seconds for all detectors, by default None.
-      kind:
-        name: KEYWORD_ONLY
-        value: 3
-      name: dwell
-    - annotation:
-        type: typing.Optional[float]
-      default: None
       description: If not None, will set the beamline exit slit prior to the plan
         start.
       kind:
@@ -35169,6 +35162,12 @@ existing_plans:
         name: KEYWORD_ONLY
         value: 3
       name: n_exposures
+    - default: '1'
+      description: The exposure time in seconds for all detectors, by default None.
+      kind:
+        name: KEYWORD_ONLY
+        value: 3
+      name: dwell
     - annotation:
         type: typing.Optional[dict]
       default: None
