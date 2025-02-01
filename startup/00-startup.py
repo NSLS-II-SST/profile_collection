@@ -53,6 +53,9 @@ from rsoxs.HW.slackbot import rsoxs_bot
 from rsoxs_scans.spreadsheets import *
 from rsoxs_scans.acquisition import *
 from rsoxs.plans.rsoxs import *
+
+from rsoxs.HW.cameras import * ## 20250131 - temporary solution to using crosshairs, need a better long-term solution
+
 import nslsii
 from nslsii import configure_kafka_publisher, configure_bluesky_logging, configure_ipython_logging
 from nslsii.common.ipynb.logutils import log_exception
