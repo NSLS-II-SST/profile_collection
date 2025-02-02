@@ -35,13 +35,22 @@ _target = "sst_base.energy.EnPosFactory"
 _group = "source"
 _load_order = 2
 prefix = ""
-name = "en"
+name = "en" ## TODO: what is the difference between en and energy?
+_baseline = true
 
 [energy]
 _alias = "en.energy"
 _group = "motors"
 _role = "energy"
 _load_order = 2
+_baseline = true
+
+[polarization]
+_alias = "en.polarization"
+_group = "motors"
+_role = "polarization" ## This is the lab frame polarization
+_load_order = 2
+_baseline = true
 
 
 [Offset_C07U42_Horizontal] ## Want to remove the C07 portion from undulator name

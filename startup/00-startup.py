@@ -39,6 +39,7 @@ run_report(__file__)
 # sst code  # Common code
 # from sst_base.archiver import *
 from rsoxs.devices.cameras import configure_cameras
+from rsoxs.plans.rsoxs import *
 from rsoxs.plans.runAcquisitions import *
 
 from rsoxs.Functions.alignment import *
@@ -54,7 +55,6 @@ from rsoxs.Functions.spreadsheets import *
 from rsoxs.HW.slackbot import rsoxs_bot
 from rsoxs_scans.spreadsheets import *
 from rsoxs_scans.acquisition import *
-from rsoxs.plans.rsoxs import *
 
 from rsoxs.HW.cameras import * ## 20250131 - temporary solution to using crosshairs, need a better long-term solution
 
