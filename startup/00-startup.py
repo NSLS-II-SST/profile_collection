@@ -39,6 +39,8 @@ run_report(__file__)
 # sst code  # Common code
 # from sst_base.archiver import *
 from rsoxs.devices.cameras import configure_cameras
+from rsoxs.plans.runAcquisitions import *
+
 from rsoxs.Functions.alignment import *
 from rsoxs.Functions.alignment_local import *
 from rsoxs.Functions.common_procedures import *
