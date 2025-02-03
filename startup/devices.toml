@@ -1,5 +1,6 @@
 ## Devices are organized from upstream to downstream along SST1.
-## Add devices to groups such that they can show up as options in GUI.  e.g., "detectors" group can contain all devices that will always collect data for all scans.  Devices can belong to multiple groups.
+## Add devices to groups such that they can show up as options in GUI.  Devices can belong to multiple groups.
+## "detectors" group can contain all devices that will always collect data for all scans.
 ## _baseline = true adds unchanging variables to the baseline to show the value at the start and end of the scan
 
 ## Everything on this list other than 2D camera images are being archived.  TODO: make sure all new additions are archived.
@@ -359,6 +360,7 @@ name = "RSoXS Slit 1 In Board Current"
 
 [Slit1_Current_Inboard_int]
 _target = "sst_base.detectors.scalar.ophScalar"
+_group = ["detectors", "signals"]
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC3_MON"
 name = "RSoXS Slit 1 In Board Current"
@@ -371,6 +373,7 @@ name = "RSoXS Slit 1 Out Board Current"
 
 [Slit1_Current_Outboard_int]
 _target = "sst_base.detectors.scalar.ophScalar"
+_group = ["detectors", "signals"]
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC4_MON"
 name = "RSoXS Slit 1 Out Board Current"
@@ -572,6 +575,7 @@ _alias = "manipulator.x"
 kind = "hinted"
 name = "RSoXS Sample Outboard-Inboard"
 prefix = "XF:07ID2-ES1{Stg-Ax:X}Mtr"
+_baseline = true
 
 [sam_Y]
 _target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
@@ -580,6 +584,7 @@ _alias = "manipulator.y"
 kind = "hinted"
 name = "RSoXS Sample Up-Down"
 prefix = "XF:07ID2-ES1{Stg-Ax:Y}Mtr"
+_baseline = true
 
 [sam_Z]
 _target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
@@ -588,6 +593,7 @@ _alias = "manipulator.z"
 kind = "hinted"
 name = "RSoXS Sample Downstream-Upstream"
 prefix = "XF:07ID2-ES1{Stg-Ax:Z}Mtr"
+_baseline = true
 
 [sam_Th]
 _target = "sst_base.motors.PrettyMotorFMBODeadband"
@@ -596,6 +602,7 @@ _group = "motors"
 kind = "hinted"
 name = "RSoXS Sample Rotation"
 prefix = "XF:07ID2-ES1{Stg-Ax:Yaw}Mtr"
+_baseline = true
 
 [rsoxs_ll_gpwr]
 _target = "ophyd.EpicsSignal"
