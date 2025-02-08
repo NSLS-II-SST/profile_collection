@@ -809,6 +809,7 @@ _target = "ophyd.EpicsSignal"
 kind = "normal"
 prefix = "XF:07IDB-CT{DIODE-Local:1}OutPt06:Data-Sel"
 name = "MC21_disable"
+## 20250131 - PEWin32Pro2 software for running in open-loop mode is available at: https://brookhavenlab.sharepoint.com/sites/NSLS2DSSI/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FNSLS2DSSI%2FShared%20Documents%2FHardware%2FMotion%2FBrick%20LV%20TPMac%2C%20PPMac%2FBrick%20LV%20TPMac%2C%20PPMac%2FPewin%20Software&viewid=4ce5067d%2D9e28%2D4d34%2D9650%2Deed2cd454ac0
 
 [rsoxs_pg_main_val]
 _target = "ophyd.EpicsSignalRO"

@@ -41,6 +41,7 @@ run_report(__file__)
 from rsoxs.devices.cameras import configure_cameras
 from rsoxs.plans.rsoxs import *
 from rsoxs.plans.runAcquisitions import *
+from rsoxs.configurationSetup.configurationLoadSave import *
 
 from rsoxs.Functions.alignment import *
 from rsoxs.Functions.alignment_local import *
@@ -51,9 +52,9 @@ from rsoxs.Functions.PVdictionary import *  ## TODO: probably delete, not actual
 from rsoxs.Functions.energyscancore import *
 from rsoxs.Functions.rsoxs_plans import *
 from rsoxs.Functions.fly_alignment import *
-from rsoxs.Functions.spreadsheets import *
+#from rsoxs.Functions.spreadsheets import *
 from rsoxs.HW.slackbot import rsoxs_bot
-from rsoxs_scans.spreadsheets import *
+#from rsoxs_scans.spreadsheets import *
 from rsoxs_scans.acquisition import *
 
 from rsoxs.HW.cameras import * ## 20250131 - temporary solution to using crosshairs, need a better long-term solution
