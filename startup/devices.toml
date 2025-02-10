@@ -917,3 +917,5 @@ name = "Photon Shutter 8"
 
 
 ## The version of this file prior to January 14, 2025 is a faithful copy over of devices from the rsoxs package.  TODO: Rename some of the devices, and also group associated PVs into a single ophyd object (e.g., manipulator).
+
+## TODO: I would like to rename some of the devices.  The plan is to only rename devices where I have refactored the associated code so that I can more easily troubleshoot variable references.
