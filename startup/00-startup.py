@@ -42,6 +42,7 @@ from rsoxs.devices.cameras import configure_cameras
 from rsoxs.plans.rsoxs import *
 from rsoxs.plans.runAcquisitions import *
 from rsoxs.configurationSetup.configurationLoadSave import *
+from rsoxs.alignment.fiducials import *
 
 from rsoxs.Functions.alignment import *
 from rsoxs.Functions.alignment_local import *
