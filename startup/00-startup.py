@@ -43,6 +43,7 @@ from rsoxs.plans.rsoxs import *
 from rsoxs.plans.runAcquisitions import *
 from rsoxs.configurationSetup.configurationLoadSave import *
 from rsoxs.alignment.fiducials import *
+from rsoxs.alignment.energy_calibration import *
 
 from rsoxs.Functions.alignment import *
 from rsoxs.Functions.alignment_local import *

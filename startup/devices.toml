@@ -562,7 +562,7 @@ name = "Sample Imager Detector Area Camera" ## TODO: Would like to rename to "So
 read_attrs = ["tiff"]
 
 [manipulator]
-_target = "rsoxs.HW.manipulator.ManipulatorBuilderRSOXS"
+_target = "rsoxs.devices.manipulator.ManipulatorBuilderRSOXS"
 _group = ["manipulators", "motors"]
 _role = "primary_sampleholder"
 prefix = "XF:07ID2-ES1{Stg-Ax:"
@@ -737,7 +737,7 @@ name = "Detector WAXS Translation"
 prefix = "XF:07ID2-ES1{Det-Ax:2}Mtr"
 
 [waxs_det]
-_target = "rsoxs.devices.waxs.WAXSDetectorFactory" 
+_target = "rsoxs.devices.waxs.WaxsDetectorFactory" 
 _group = "all_standard_pros" ## TODO: Not sure if this belongs elsewhere.
 _load_order = 2
 prefix = "XF:07ID1-ES:1{GE:2}"
