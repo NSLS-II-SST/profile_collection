@@ -213,3 +213,6 @@ sd.baseline.extend(
 # setup the contingencies
 
 from rsoxs.HW.contingencies import *
+
+
+## TODO: make new profile_collection_local package.  Consider setting a global variable LOCAL = True such that hardware cannot be moved in rsoxs functions.
