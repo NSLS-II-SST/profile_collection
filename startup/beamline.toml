@@ -5,6 +5,7 @@ has_motorized_eref = false
 
 [settings]
 modules = ['rsoxs.startup']
+plan_decorators = ["rsoxs_waxs"]
 
 [settings.plans]
 xas = ['regions.toml']

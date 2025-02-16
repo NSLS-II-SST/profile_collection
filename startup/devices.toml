@@ -474,6 +474,7 @@ concurrent = 1
 [Shutter_control]
 _target = "rsoxs.HW.motors.ShutterWait"
 _group = "motors"
+_baseline = true ## To check that the shutter starts closed and ends closed for non-camera scans
 prefix = "XF:07IDB-CT{DIODE-Local:1}OutPt01:Data-Sel"
 name = "RSoXS Shutter Toggle"
 kind = "normal"
