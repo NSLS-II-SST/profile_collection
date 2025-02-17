@@ -40,7 +40,7 @@ run_report(__file__)
 # from sst_base.archiver import *
 from rsoxs.devices.cameras import configure_cameras
 from rsoxs.plans.rsoxs import *
-from rsoxs.plans.runAcquisitions import *
+from rsoxs.plans.run_acquisitions import *
 from rsoxs.configuration_setup.configurationLoadSave import *
 from rsoxs.configuration_setup.configurations_instrument import *
 from rsoxs.alignment.fiducials import *
