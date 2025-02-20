@@ -1,7 +1,7 @@
 ## Devices are organized from upstream to downstream along SST1.
 ## Add devices to groups such that they can show up as options in GUI.  Devices can belong to multiple groups.
 ## "detectors" group can contain all devices that will always collect data for all scans.
-## _baseline = true adds unchanging variables to the baseline to show the value at the start and end of the scan
+## _baseline = true adds unchanging variables to the baseline to show the value at the start and end of the scan.  Cannot have both _int and non-int version of PV saved as baseline.
 
 ## Everything on this list other than 2D camera images are being archived.  TODO: make sure all new additions are archived.
 
@@ -15,12 +15,14 @@ _group = ["detectors", "signals"] ## Trying to keep group names in alphabetical 
 _role = "beam_current"
 prefix = "SR:OPS-BI{DCCT:1}I:Real-I"
 name = "NSLS-II Ring Current"
+#_baseline = true ## Probably can remove, but Eliot had it in baseline
 
 [ring_current_int]
 _target = "sst_base.detectors.scalar.ophScalar"
 kind = "normal"
 prefix = "SR:OPS-BI{DCCT:1}I:Real-I"
 name = "NSLS-II Ring Current"
+_baseline = true
 
 [ring_status]
 _target = "ophyd.EpicsSignalRO"
@@ -115,24 +117,28 @@ _target = "ophyd.EpicsSignalRO"
 kind = "normal"
 prefix = "SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr.RBV"
 name = "Gap_EPU60"
+#_baseline = true
 
 [Gap_EPU60_int]
 _target = "sst_base.detectors.scalar.ophScalar"
 kind = "normal"
 prefix = "SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr.RBV"
 name = "Gap_EPU60"
+_baseline = true
 
 [Phase_EPU60]
 _target = "ophyd.EpicsSignalRO"
 kind = "normal"
 prefix = "SR:C07-ID:G1A{SST1:1-Ax:Phase}-Mtr.RBV"
 name = "Phase_EPU60"
+#_baseline = true
 
 [Phase_EPU60_int]
 _target = "sst_base.detectors.scalar.ophScalar"
 kind = "normal"
 prefix = "SR:C07-ID:G1A{SST1:1-Ax:Phase}-Mtr.RBV"
 name = "Phase_EPU60"
+_baseline = true
 
 ## TODO: This causes issue with GUI, so may need fixing or may need to be tried again when there is beam
 #[Slits_EPU60_Frontend] ## TODO: This likely needs to get fixed/updated.  When I made this into a Slits object, I was not able to use functions like .wh().  I would get TypeError: unsupported operand type(s) for -: 'NoneType' and 'NoneType'
@@ -152,6 +158,7 @@ closeval = 1
 prefix = "XF:07ID-PPS{Sh:FE}"
 name = "Front-End Shutter"
 shutter_type = "FE"
+_baseline = true
 
 [Temperature_L1]
 _target = "ophyd.EpicsSignalRO"
@@ -179,6 +186,7 @@ _group = "vacuum"
 kind = "normal"
 prefix = "XF:07IDA-VA:0{Mir:M1-CCG:1}P:Raw-I"
 name = "Mirror 1 Vacuum Pressure"
+_baseline = true
 
 [FS1_cam]
 _target = "rsoxs.devices.cameras.StandardProsilicawstats" 
@@ -205,6 +213,7 @@ openval = 0
 closeval = 1
 prefix = "XF:07IDA-PPS{PSh:4}"
 name = "Hutch Photon Shutter"
+_baseline = true
 
 [gv14]
 _target = "sst_base.shutters.EPS_Shutter"
@@ -215,6 +224,7 @@ closeval = 1
 prefix = "XF:07IDA-VA:2{FS:6-GV:1}"
 name = "Pre Mono Gate Valve"
 kind = "hinted"
+_baseline = true
 
 ## M2 and PGM
 ## RSoXS 250 l/mm grating is made from nickel oxide.  250 l/mm is made from gold.  1200 l/mm grating is made from gold.
@@ -293,6 +303,7 @@ openval = 0
 closeval = 1
 prefix = "XF:07IDA-PPS{PSh:10}"
 name = "Photon Shutter 10"
+_baseline = true
 
 ## GV26
 
@@ -323,6 +334,8 @@ kind = "hinted"
 prefix = "XF:07ID2-ES1{Slt1-Ax:"
 name = "Upstream Scatter Slits"
 concurrent = 1
+_baseline = true
+## Want these slits to be placed at the vertical focal point of the beam (dictated by M2/PGM) such that the vertical aperture can be used to control energy resolution.
 
 [slit_size]
 _alias = "slits1.vsize"
@@ -333,30 +346,35 @@ _target = "ophyd.EpicsSignalRO"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC1_MON"
 name = "RSoXS Slit 1 Bottom Current"
+#_baseline = true
 
 [Slit1_Current_Bottom_int]
 _target = "sst_base.detectors.scalar.ophScalar"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC1_MON"
 name = "RSoXS Slit 1 Bottom Current"
+_baseline = true
 
 [Slit1_Current_Top]
 _target = "ophyd.EpicsSignalRO"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC2_MON"
 name = "RSoXS Slit 1 Top Current"
+#_baseline = true
 
 [Slit1_Current_Top_int]
 _target = "sst_base.detectors.scalar.ophScalar"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC2_MON"
 name = "RSoXS Slit 1 Top Current"
+_baseline = true
 
 [Slit1_Current_Inboard]
 _target = "ophyd.EpicsSignalRO"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC3_MON"
 name = "RSoXS Slit 1 In Board Current"
+#_baseline = true
 
 [Slit1_Current_Inboard_int]
 _target = "sst_base.detectors.scalar.ophScalar"
@@ -364,12 +382,14 @@ _group = ["detectors", "signals"]
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC3_MON"
 name = "RSoXS Slit 1 In Board Current"
+_baseline = true
 
 [Slit1_Current_Outboard]
 _target = "ophyd.EpicsSignalRO"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC4_MON"
 name = "RSoXS Slit 1 Out Board Current"
+#_baseline = true
 
 [Slit1_Current_Outboard_int]
 _target = "sst_base.detectors.scalar.ophScalar"
@@ -377,6 +397,7 @@ _group = ["detectors", "signals"]
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC4_MON"
 name = "RSoXS Slit 1 Out Board Current"
+_baseline = true
 
 [Slit1_i400_cap]
 _target = "ophyd.EpicsSignal"
@@ -426,6 +447,7 @@ _target = "ophyd.EpicsSignalRO"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC1_MON"
 name = "RSoXS Au Mesh Current"
+#_baseline = true
 
 [Izero_Mesh_int]
 _target = "sst_base.detectors.scalar.ophScalar"
@@ -433,9 +455,11 @@ _group = "detectors"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC1_MON"
 name = "RSoXS Au Mesh Current"
+_baseline = true
 
 [Izero_Diode] ## This is Jamie's definition, can be used for flyscanning (?)
 _target = "ophyd.EpicsSignalRO"
+_baseline = true
 
 kind = "normal"
 prefix = "XF:07ID-ES1{DMR:I400-1}:IC3_MON"
@@ -454,6 +478,7 @@ _group = "motors"
 prefix = "XF:07ID2-ES1{Scr-Ax:1}Mtr"
 name = "Izero Assembly Vertical Translation" ## TODO: would like to name it something more generic like RSoXS diagnostic module to indicate that there is also a yag and photodiode
 kind = "hinted"
+_baseline = true
 
 [Izero_update_time] ## No longer relevant because quadEM is broken
 _target = "ophyd.EpicsSignal"
@@ -470,6 +495,7 @@ kind = "hinted"
 prefix = "XF:07ID2-ES1{Slt2-Ax:"
 name = "Middle Scatter Slits"
 concurrent = 1
+_baseline = true
 
 [Shutter_control]
 _target = "rsoxs.HW.motors.ShutterWait"
@@ -485,18 +511,21 @@ _group = "motors"
 prefix = "XF:07IDB-CT{DIODE-MTO:1}OutMaskBit:2-Sel"
 name = "RSoXS Shutter Toggle Enable"
 kind = "normal"
+_baseline = true
 
 [Shutter_open_time]
 _target = "ophyd.EpicsSignal"
 prefix = "XF:07IDB-CT{DIODE-MTO:1}OutWidthSet:2-SP"
 name = "RSoXS Shutter Opening Time (ms)"
 kind = "normal"
+_baseline = true
 
 [Shutter_delay]
 _target = "ophyd.EpicsSignal"
 prefix = "XF:07IDB-CT{DIODE-MTO:1}OutDelaySet:2-SP"
 name = "RSoXS Shutter Delay (ms)"
 kind = "normal"
+_baseline = true
 
 [Shutter_Y]
 _target = "sst_base.motors.PrettyMotorFMBODeadband"
@@ -504,6 +533,7 @@ _group = "motors"
 prefix = "XF:07ID2-ES1{FSh-Ax:1}Mtr"
 name = "Shutter Vertical Translation" ## Fast shutter
 kind = "hinted"
+_baseline = true
 
 [gv27a]
 _target = "sst_base.shutters.EPS_Shutter"
@@ -514,6 +544,7 @@ closeval = 1
 prefix = "XF:07IDB-VA:2{RSoXS:Main-GV:1}"
 name = "Izero-Main Gate Valve"
 kind = "hinted"
+_baseline = true
 
 [slits3]
 _target = "sst_base.slits.FMBOQuadSlits"
@@ -522,6 +553,8 @@ kind = "hinted"
 prefix = "XF:07ID2-ES1{Slt3-Ax:"
 name = "Final Scatter Slits"
 concurrent = 1
+_baseline = true
+## This is the last set of guard slits before the beam hits the sample.  Ideally want these slits as close as possible to the sample.
 
 [Sample_TEY]
 _target = "ophyd.EpicsSignalRO"
@@ -554,6 +587,7 @@ _group = "motors"
 prefix = "XF:07ID2-ES1{ImgY-Ax:1}Mtr"
 name = "RSoXS Sample Imager"
 kind = "hinted"
+_baseline = true
 
 [SampleViewer_cam]
 _target = "sst_base.cameras.ColorProsilicaWithTIFFV33"
@@ -610,6 +644,7 @@ _target = "ophyd.EpicsSignal"
 kind = "hinted"
 prefix = "XF:07IDB-VA:2{RSoXS:LL-CCG:1}Pwr-Cmd"
 name = "Power to Load Lock Gauge"
+_baseline = true
 
 [gvll]
 _target = "sst_base.shutters.EPS_Shutter"
@@ -620,6 +655,7 @@ closeval = 1
 prefix = "XF:07IDB-VA:2{RSoXS:LL-GV:1}"
 name = "Load Lock Gate Valve"
 kind = "hinted"
+_baseline = true
 
 
 [TEMX]
@@ -628,6 +664,7 @@ _group = "motors"
 kind = "hinted"
 name = "RSoXS TEM Upstream-Downstream"  ## TODO: I would like to update the variable names so that they are consistent with NSLS II coordinates, in which x is inboard-outboard and z is upstream-downstream.
 prefix = "XF:07ID1-ES:1{Smpl-Ax:X}Mtr"
+_baseline = true
 
 [TEMY]
 _target = "sst_base.motors.PrettyMotor"
@@ -635,6 +672,7 @@ _group = "motors"
 kind = "hinted"
 name = "RSoXS TEM Up-Down"
 prefix = "XF:07ID1-ES:1{Smpl-Ax:Y}Mtr"
+_baseline = true
 
 [TEMZ]
 _target = "sst_base.motors.PrettyMotor"
@@ -642,6 +680,7 @@ _group = "motors"
 kind = "hinted"
 name = "RSoXS TEM Inboard-Outboard"
 prefix = "XF:07ID1-ES:1{Smpl-Ax:Z}Mtr"
+_baseline = true
 
 [tem_tempstage]
 _target = "rsoxs.HW.lakeshore.Lakeshore336Picky" 
@@ -649,6 +688,7 @@ _group = "sample_environments" ## TODO: I made a new group, feel free to rename.
 kind = "normal"
 name = "TEM temperature controller"
 prefix = "XF:07ID2-ES1{TCtrl:1}LS336:TC1:"
+_baseline = true
 
 [SP]
 _target = "rsoxs.devices.syringepump.Syringe_Pump" 
@@ -662,12 +702,14 @@ _target = "sst_base.motors.PrettyMotorFMBODeadband"
 kind = "hinted"
 name = "Beam Stop WAXS"
 prefix = "XF:07ID2-ES1{BS-Ax:1}Mtr"
+_baseline = true
 
 [Beamstop_WAXS] ## This is Jamie's definition, can be used for flyscanning (?)
 _target = "ophyd.EpicsSignalRO"  ## Unlike the ophScalar signals, these signals collect a single data point and do not do any averaging or statistics. 
 kind = "normal"
 prefix = "XF:07ID-ES1{DMR:I400-1}:IC1_MON"
 name = "WAXS Beamstop"
+#_baseline = true
 
 [Beamstop_WAXS_int]
 _target = "sst_base.detectors.scalar.ophScalar" ## These signals are scalars (integrating detectors).  Each data point that is written out is the average of several "sub" data points.  Other statistics, such as standard deviation, median, etc. are available.  ## TODO: Would it be possible to combine this with the non-integrating signal and can toggle between which type to use?
@@ -736,6 +778,7 @@ _group = "motors"
 kind = "hinted"
 name = "Detector WAXS Translation"
 prefix = "XF:07ID2-ES1{Det-Ax:2}Mtr"
+_baseline = true
 
 [waxs_det]
 _target = "rsoxs.devices.waxs.WaxsDetectorFactory" 
@@ -751,12 +794,14 @@ _group = "motors"
 kind = "hinted"
 name = "Beam Stop SAXS"
 prefix = "XF:07ID2-ES1{BS-Ax:2}Mtr"
+_baseline = true
 
 [Beamstop_SAXS] ## This is Jamie's definition, can be used for flyscanning (?)
 _target = "ophyd.EpicsSignalRO"
 kind = "normal"
 prefix = "XF:07ID-ES1{DMR:I400-1}:IC2_MON"
 name = "SAXS Beamstop"
+#_baseline = true
 
 [Beamstop_SAXS_int]
 _target = "sst_base.detectors.scalar.ophScalar"
@@ -771,6 +816,7 @@ _group = "motors"
 kind = "hinted"
 name = "Detector SAXS Translation"
 prefix = "XF:07ID2-ES1{Det-Ax:1}Mtr"
+_baseline = true
 
 [DetS_cam]
 _target = "sst_base.cameras.StandardProsilica"
@@ -817,12 +863,14 @@ _target = "ophyd.EpicsSignalRO"
 kind = "hinted"
 prefix = "XF:07IDB-VA:2{RSoXS:Main-TCG:1}P-I"
 name = "Main Chamber Pirani Gauge value"
+_baseline = true
 
 [rsoxs_ccg_main_val]
 _target = "ophyd.EpicsSignalRO"
 kind = "hinted"
 prefix = "XF:07IDB-VA:2{RSoXS:Main-CCG:1}P-I"
 name = "Main Chamber Chamber Cold Cathode Gauge"
+_baseline = true
 
 [gv28]
 _target = "sst_base.shutters.EPS_Shutter"
@@ -833,6 +881,7 @@ closeval = 1
 prefix = "XF:07IDB-VA:2{BT:1-GV:1}"
 name = "Downstream Gate Valve"
 kind = "hinted"
+_baseline = true
 
 [psh7]
 _target = "sst_base.shutters.EPS_Shutter"
@@ -874,6 +923,7 @@ _group = "motors"
 prefix = "XF:07ID2-BI{Diag:07-Ax:Y}Mtr"
 name = "Downstream Izero DM7 Vertical Translation" ## TODO: would like to name it something more generic like diagnostic module 7 to indicate that there is also a yag and photodiode.  In the description, I can indicate that it is downstream of RSoXS.
 kind = "hinted"
+_baseline = true
 
 [dm7] ## TODO: I believe this is a repeat of the above Izero_ds, but the motor class and normal vs. hinting is different, so I am not sure which one is more correct
 _target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
@@ -920,3 +970,6 @@ name = "Photon Shutter 8"
 ## The version of this file prior to January 14, 2025 is a faithful copy over of devices from the rsoxs package.  TODO: Rename some of the devices, and also group associated PVs into a single ophyd object (e.g., manipulator).
 
 ## TODO: I would like to rename some of the devices.  The plan is to only rename devices where I have refactored the associated code so that I can more easily troubleshoot variable references.
+## TODO: For now, I am just adding all items that were in Eliot's baseline to the new baseline.  However, it would be good to revisit the items and see what can be eliminated.
+## Re: baseline, mono_en items have not been added.  Some are included separately but not as part of mono_en object
+## Re: some gate valve, ccg, pg, and shutter values are not included but likely not needed for analysis.
