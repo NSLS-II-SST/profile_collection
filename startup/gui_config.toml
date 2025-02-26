@@ -1,0 +1,39 @@
+[gui]
+header = "ucal_header_widget"
+
+[gui.tabs]
+include = ["nbs-gui-queue", "nbs-gui-console", "kafka-table-tab", "nbs-gui-monitor", "sst-gui-samples"]
+
+[models.beamline]
+primary_energy = "en"
+primary_manipulator = "manipulator"
+loader = "nbs_bl.qt.models.beamline.SSTBeamlineModel"
+
+[devices]
+psh1 = { visible = false, view_only = true }
+en = { "_role" = "energy", "load_order" = 1 }
+slits1 = { "_role" = "slits" }
+
+[loaders]
+"EnPosFactory" = "nbs_bl.qt.models.energy.EnergyModel"
+"I400SingleCh" = "nbs_gui.models.ScalarModel"
+"PrettyMotorFMBO" = "nbs_gui.models.MotorModel"
+"PrettyMotor" = "nbs_gui.models.MotorModel"
+"PrettyMotorFMBODeadband" = "nbs_gui.models.MotorModel"
+"PrettyMotorFMBODeadbandFlyer" = "nbs_gui.models.MotorModel"
+"FMBHexapodMirror" = "nbs_gui.models.MotorTupleModel"
+"EpicsSignalRO" = "nbs_gui.models.PVModel"
+"EpicsSignal" = "nbs_gui.models.PVModel"
+"ShutterSet" = "nbs_gui.models.GVModel"
+"EPS_Shutter" = "nbs_gui.models.GVModel"
+"ManipulatorBuilderRSOXS" = "nbs_gui.models.PseudoPositionerModel"
+"ophScalar" = "nbs_gui.models.ScalarModel"
+"ADCBuffer" = "nbs_gui.models.ScalarModel"
+"EpicsMotor" = "nbs_gui.models.MotorModel"
+"MultiMeshBuilder" = "nbs_gui.models.PseudoPositionerModel"
+"QuadSlits" = "sst_base.qt.models.quadSlits.QuadSlitsModel"
+"FMBOQuadSlits" = "sst_base.qt.models.quadSlits.QuadSlitsModel"
+
+[kafka]
+config_file = "/etc/bluesky/kafka.yml"
+bl_acronym = "rsoxs"

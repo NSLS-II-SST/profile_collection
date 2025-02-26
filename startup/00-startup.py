@@ -1,5 +1,19 @@
+## profile_collection is a "bootstrapping" mechanism that triggers the rsoxs package and other beamline codebase to be loaded into the beamline computers.
+## profile_collection is located in .ipython, which is separate from the rest of the beamline codebase (e.g., the rsoxs package).  It isan IPython profile, not a normal "python package".
+## The rsoxs package should not be placed in this same ~/.ipython directory, nor should the contents of profile_collection be consolidated into the rsoxs package.  This has been attempted before and does not work.
+## Configuration files (e.g., devices.toml, regions.toml) belong in this codebase.  It is easier to find the location of an IPython Profile such as profile_collection, but harder to locate these configuration files from the rsoxs package.
+
+## Goal is to keep this file and generally profile_collection package as minimal as possible such that main changes here would be made by NSLS II DSSI (e.g., changing Kafka), and DSSI would not have to edit rsoxs package.
+
 import sys
 from pathlib import Path
+
+## 20250130 - adding in capabilities from configure_base that are no longer used after recent code upgrade
+## Needs to be imported before alignment_local.py, I think
+import matplotlib.pyplot as plt
+import bluesky.callbacks as bc
+from bluesky.callbacks import *
+plt.ion()
 
 paths = [
     path
@@ -11,51 +25,57 @@ paths = [
 for path in paths:
     sys.path.append(str(path))
 
+## Uses this package: https://github.com/xraygui/nbs-bl
+## Gives the path to profile_collection directory and looks for devices.toml file
+## This should replace any hardware imports from sst_hw, sst_base, and rsoxs.  rsoxs.Functions imports may have to stay until some of the functions are rewritten to become compliant with data security upgrades.
+from nbs_bl.configuration import load_and_configure_everything
+load_and_configure_everything()
 
-from sst_funcs.printing import run_report
+from rsoxs.startup import RE, db, sd, md
+from nbs_bl.printing import run_report
 
 run_report(__file__)
-#
-# sst devices  These all reference the Base classes and instantiate the objects themselves into the current namespace
-from sst_hw.gatevalves import *
-from sst_hw.shutters import *
-from sst_hw.vacuum import *
-from sst_hw.motors import *
-from sst_hw.mirrors import *
-from sst_hw.diode import *
-from sst_hw.energy import *
 
 # sst code  # Common code
-from sst_base.archiver import *
+# from sst_base.archiver import *
+from rsoxs.devices.cameras import configure_cameras
+from rsoxs.plans.rsoxs import *
+from rsoxs.plans.run_acquisitions import *
+from rsoxs.configuration_setup.configurationLoadSave import *
+from rsoxs.configuration_setup.configurations_instrument import *
+from rsoxs.alignment.fiducials import *
+from rsoxs.alignment.energy_calibration import *
 
-# RSoXS startup - bluesky RE / db / md definitions
-from rsoxs.startup import *
-
-# RSoXS specific devices
-from rsoxs.HW.motors import *
-from rsoxs.HW.cameras import *
-from rsoxs.HW.signals import *
-from rsoxs.HW.detectors import *
-from rsoxs.HW.slits import *
-from rsoxs.HW.syringepump import *
-from rsoxs.HW.energy import *
-from rsoxs.HW.lakeshore import *
-
-# RSoXS specific code
+## Eliot's old code
+from rsoxs.HW.cameras import * ## 20250131 - temporary solution to using crosshairs, need a better long-term solution
 from rsoxs.Functions.alignment import *
 from rsoxs.Functions.alignment_local import *
-from rsoxs.Functions.common_procedures import *
-from rsoxs.Functions.configurations import *
-from rsoxs.Functions.schemas import *
-from rsoxs.Functions.PVdictionary import *
-from rsoxs.Functions.energyscancore import *
-from rsoxs.Functions.rsoxs_plans import *
-from rsoxs.Functions.fly_alignment import *
-from rsoxs.Functions.spreadsheets import *
-from rsoxs.HW.slackbot import rsoxs_bot
-from rsoxs_scans.spreadsheets import *
-from rsoxs_scans.acquisition import *
+#from rsoxs.Functions.common_procedures import *
+#from rsoxs.Functions.configurations import *
+#from rsoxs.Functions.schemas import * ## Was never being used
+#from rsoxs.Functions.PVdictionary import *  ## TODO: probably delete, not actually used
+#from rsoxs.Functions.energyscancore import *
+#from rsoxs.Functions.rsoxs_plans import *
+#from rsoxs.Functions.fly_alignment import *
+#from rsoxs.Functions.spreadsheets import *
+#from rsoxs.HW.slackbot import rsoxs_bot
+#from rsoxs_scans.spreadsheets import *
+#from rsoxs_scans.acquisition import *
 
+
+
+import nslsii
+from nslsii import configure_kafka_publisher, configure_bluesky_logging, configure_ipython_logging
+from nslsii.common.ipynb.logutils import log_exception
+
+ipython = get_ipython()
+
+
+#nslsii.configure_base(get_ipython().user_ns, "rsoxs", bec=False, configure_logging=True, publish_documents_with_kafka=False) ## 20250130 - Adding this back to ensure we did not lose anything from before, but it set up a PersistentDict and 
+configure_kafka_publisher(RE, beamline_name="rsoxs")
+RE.subscribe(db.insert)
+configure_bluesky_logging(ipython=ipython)
+configure_ipython_logging(exception_logger=log_exception, ipython=ipython)
 
 try:
     from bluesky_queueserver import is_re_worker_active
@@ -70,9 +90,12 @@ if not is_re_worker_active():
 
     beamline_status()  # print out the current sample metadata, motor position and detector status
 
-
+print("Extending Baseline")
 # from .Functions.startup import sd
 #
+
+## TODO: delete thee code below, but add the important devices to baseline in devices.toml
+"""
 sd.baseline.extend(
      [
         sam_viewer,
@@ -158,7 +181,7 @@ sd.baseline.extend(
         tem_tempstage
     ]
 )
-
+"""
 # from .Functions.startup import sd
 #
 # sd.monitors.extend(
@@ -190,3 +213,6 @@ sd.baseline.extend(
 # setup the contingencies
 
 from rsoxs.HW.contingencies import *
+
+
+## TODO: make new profile_collection_local package.  Consider setting a global variable LOCAL = True such that hardware cannot be moved in rsoxs functions.

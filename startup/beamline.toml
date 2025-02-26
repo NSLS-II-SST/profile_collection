@@ -1,0 +1,28 @@
+[configuration]
+has_slits = true
+has_motorized_samples = true
+has_motorized_eref = false
+
+[settings]
+modules = ['rsoxs.startup']
+plan_decorators = ["rsoxs_waxs"]
+
+[settings.plans]
+xas = ['regions.toml']
+rsoxs = ['regions.toml']
+
+[settings.redis.md]
+host = "info.sst.nsls2.bnl.gov"
+prefix = "rsoxs-"
+
+[settings.redis.config]
+host = "info.sst.nsls2.bnl.gov"
+prefix = "rsoxs-"
+port = 60737
+db = 1
+
+[settings.redis.info]
+host = "info.sst.nsls2.bnl.gov"
+prefix = "rsoxs-"
+port = 60737
+db = 2
