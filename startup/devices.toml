@@ -471,6 +471,7 @@ _group = "all_standard_pros"
 prefix = "XF:07ID1-ES:1{Scr:1}"
 name = "Izero YAG Camera"
 read_attrs=['tiff','stats5']
+## Manufacturer: Allied Vision Mako (some other cameras for flurescence screens are Alled Vision Prosilica, but all image processesing is done with classes named Prosilica)
 
 [Izero_Y]
 _target = "sst_base.motors.PrettyMotorFMBODeadband"
