@@ -1,5 +1,5 @@
 [gui]
-header = "ucal_header_widget"
+header = "sst-gui-header"
 
 [gui.tabs]
 include = ["nbs-gui-queue", "nbs-gui-console", "kafka-table-tab", "nbs-gui-monitor", "sst-gui-samples"]
@@ -11,11 +11,12 @@ loader = "nbs_bl.qt.models.beamline.SSTBeamlineModel"
 
 [devices]
 psh1 = { visible = false, view_only = true }
+FEsh1 = { visible = true, view_only = true }
 en = { "_role" = "energy", "load_order" = 1 }
 slits1 = { "_role" = "slits" }
 
 [loaders]
-"EnPosFactory" = "nbs_bl.qt.models.energy.EnergyModel"
+"EnPosFactory" = "sst_base.qt.models.energy.SST1EnergyModel"
 "I400SingleCh" = "nbs_gui.models.ScalarModel"
 "PrettyMotorFMBO" = "nbs_gui.models.MotorModel"
 "PrettyMotor" = "nbs_gui.models.MotorModel"

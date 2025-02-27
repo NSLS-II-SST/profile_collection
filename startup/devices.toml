@@ -450,10 +450,10 @@ name = "RSoXS Au Mesh Current"
 #_baseline = true
 
 [Izero_Mesh_int]
-_target = "sst_base.detectors.scalar.ophScalar"
+_target = "sst_base.detectors.scalar.ADCBuffer"
 _group = "detectors"
 kind = "normal"
-prefix = "XF:07ID-ES1{Slt1:I400-1}:IC1_MON"
+prefix = "XF:07ID-BI[ADC:2-Ch:0]"
 name = "RSoXS Au Mesh Current"
 _baseline = true
 

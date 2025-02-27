@@ -7,12 +7,19 @@
 
 import sys
 from pathlib import Path
+from tiled.client import from_profile
+import os
+import time as ttime
 
 ## 20250130 - adding in capabilities from configure_base that are no longer used after recent code upgrade
 ## Needs to be imported before alignment_local.py, I think
 import matplotlib.pyplot as plt
 import bluesky.callbacks as bc
 from bluesky.callbacks import *
+from bluesky.utils import ProgressBarManager
+
+
+
 plt.ion()
 
 paths = [
@@ -71,11 +78,38 @@ from nslsii.common.ipynb.logutils import log_exception
 ipython = get_ipython()
 
 
-#nslsii.configure_base(get_ipython().user_ns, "rsoxs", bec=False, configure_logging=True, publish_documents_with_kafka=False) ## 20250130 - Adding this back to ensure we did not lose anything from before, but it set up a PersistentDict and 
+
+class TiledInserter:
+    def insert(self, name, doc):
+        ATTEMPTS = 20
+        error = None
+        for attempt in range(ATTEMPTS):
+            try:
+                tiled_writing_client.post_document(name, doc)
+            except Exception as exc:
+                print("Document saving failure:", repr(exc))
+                error = exc
+            else:
+                break
+            ttime.sleep(2)
+        else:
+            # Out of attempts
+            raise error
+
+# Define tiled catalog
+tiled_writing_client = from_profile("nsls2", api_key=os.environ["TILED_BLUESKY_WRITING_API_KEY_RSOXS"])["rsoxs"]["raw"]
+tiled_inserter = TiledInserter()
+#c = tiled_reading_client = from_profile("nsls2")["rsoxs"]["raw"]
+#db = Broker(c)
+
+#nslsii.configure_base(get_ipython().user_ns, tiled_inserter, publish_documents_with_kafka=False, pbar=True)
 configure_kafka_publisher(RE, beamline_name="rsoxs")
-RE.subscribe(db.insert)
+
+RE.subscribe(tiled_inserter.insert)
 configure_bluesky_logging(ipython=ipython)
 configure_ipython_logging(exception_logger=log_exception, ipython=ipython)
+
+
 
 try:
     from bluesky_queueserver import is_re_worker_active
@@ -85,8 +119,10 @@ except ImportError:
         return False
 
 
-if not is_re_worker_active():
+if not is_re_worker_active(): ## If not running queueserver, run these
     from rsoxs.Functions.magics import *
+    pbar_manager = ProgressBarManager()
+    RE.waiting_hook = pbar_manager
 
     beamline_status()  # print out the current sample metadata, motor position and detector status
 
