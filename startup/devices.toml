@@ -1,12 +1,18 @@
-## Devices are organized from upstream to downstream along SST1.
-## Add devices to groups such that they can show up as options in GUI.  Devices can belong to multiple groups.
+## Devices are organized from upstream to downstream along SST1. This .toml file is essentially a dictionary.
+
+## Add devices to groups (_group) such that they can show up as options in GUI.  Devices can belong to multiple groups.
 ## "detectors" group can contain all devices that will always collect data for all scans.
+
+## kind can be set to "hinted", "normal", "config", and "omitted".  "hinted" and "normal" are ambiguous in what they mean.  "config" means that the readout value is only written out once and not multiple times.  "omitted" means it is never written out.
+
 ## _baseline = true adds unchanging variables to the baseline to show the value at the start and end of the scan.  Cannot have both _int and non-int version of PV saved as baseline.
+
+## Booleans should be lowercase true/false in .toml files
 
 ## Everything on this list other than 2D camera images are being archived.  TODO: make sure all new additions are archived.
 
-## This .toml file is essentially a dictionary.
-## Booleans should be lowercase true/false in .toml files
+
+
 
 #[ring_current_epics]
 #_target = "ophyd.EpicsSignalRO"
