@@ -11,9 +11,13 @@ loader = "nbs_bl.qt.models.beamline.SSTBeamlineModel"
 
 [devices]
 psh1 = { visible = false, view_only = true }
-FEsh1 = { visible = true, view_only = true }
+fesh = { visible = true, view_only = true }
 en = { "_role" = "energy", "load_order" = 1 }
 slits1 = { "_role" = "slits" }
+slits1_inboard_current = { visible = false }
+slits1_outboard_current = { visible = false }
+
+
 
 [loaders]
 "EnPosFactory" = "sst_base.qt.models.energy.SST1EnergyModel"

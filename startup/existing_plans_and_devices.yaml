@@ -12,18 +12,6 @@ existing_devices:
     is_movable: true
     is_readable: true
     module: ophyd.signal
-  Angle_EPU60_Horizontal:
-    classname: EpicsSignalRO
-    is_flyable: false
-    is_movable: true
-    is_readable: true
-    module: ophyd.signal
-  Angle_EPU60_Vertical:
-    classname: EpicsSignalRO
-    is_flyable: false
-    is_movable: true
-    is_readable: true
-    module: ophyd.signal
   BeamStopS:
     classname: PrettyMotorFMBODeadband
     components:
@@ -1113,73 +1101,6 @@ existing_devices:
     is_readable: true
     module: ophyd.signal
   Beamstop_SAXS_int:
-    classname: ophScalar
-    components:
-      exposure_time:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      mean:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      median:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      npts:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      offset:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      rescale:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      std:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      sum:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      target:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-    is_flyable: true
-    is_movable: false
-    is_readable: true
-    module: sst_base.detectors.scalar
-  Beamstop_WAXS:
-    classname: EpicsSignalRO
-    is_flyable: false
-    is_movable: true
-    is_readable: true
-    module: ophyd.signal
-  Beamstop_WAXS_int:
     classname: ophScalar
     components:
       exposure_time:
@@ -2401,1277 +2322,12 @@ existing_devices:
     is_movable: false
     is_readable: true
     module: sst_base.detectors.scalar
-  Exit_Slit:
-    classname: PrettyMotorFMBO
-    components:
-      abdec:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      abdec_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      acceleration:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      amfae:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      amfae_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      amfe:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      amfe_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      ampen:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      ampen_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      asscs:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      asscs_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      clr_enc_lss:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      daerr:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      daerr_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      direction_of_travel:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      dvzer:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      dvzer_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      dwpro:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      dwpro_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      enable:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      enc_lss:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      enc_lss_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      encoder:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      errtg:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      errtg_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      fafoe:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      fafoe_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      frpos:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      frpos_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      high_limit_switch:
-        classname: EpicsSignalRO
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      high_limit_travel:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      hocpl:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      hocpl_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      home_cmd:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      home_forward:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      home_reverse:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      hsrch:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      hsrch_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      iffe:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      iffe_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      inpos:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      inpos_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      intmo:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      intmo_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      kill:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      loopm:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      loopm_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      low_limit_switch:
-        classname: EpicsSignalRO
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      low_limit_travel:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      mlim:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      mlim_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      motor_done_move:
-        classname: EpicsSignalRO
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      motor_egu:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      motor_is_moving:
-        classname: EpicsSignalRO
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      motor_stop:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      mtact:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      mtact_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      offset_freeze_switch:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      phsra:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      phsra_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      plim:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      plim_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      prefe:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      prefe_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      resolution:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      set_use_switch:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      sodpl:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      sodpl_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      sopl:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      sopl_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      swpoc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      swpoc_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      tiact:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      tiact_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      trmov:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      trmov_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      user_offset:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      user_offset_dir:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      user_readback:
-        classname: EpicsSignalRO
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      user_setpoint:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      uwpen:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      uwpen_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      uwsen:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      uwsen_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      velocity:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      wfoer:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      wfoer_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-    is_flyable: false
-    is_movable: true
-    is_readable: true
-    module: sst_base.motors
-  FEsh1:
-    classname: EPS_Shutter
-    components:
-      cls:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      error:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      opn:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      state:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-    is_flyable: false
-    is_movable: false
-    is_readable: true
-    module: sst_base.shutters
-  FS1_cam:
-    classname: StandardProsilicawstats
-    is_flyable: false
-    is_movable: false
-    is_readable: true
-    module: rsoxs.devices.cameras
-  FS6_cam:
-    classname: StandardProsilicawstats
-    is_flyable: false
-    is_movable: false
-    is_readable: true
-    module: rsoxs.devices.cameras
-  FS7_cam:
-    classname: StandardProsilicawstats
-    is_flyable: false
-    is_movable: false
-    is_readable: true
-    module: rsoxs.devices.cameras
   Gap_C07U42:
     classname: EpicsSignalRO
     is_flyable: false
     is_movable: true
     is_readable: true
     module: ophyd.signal
-  Gap_EPU60:
-    classname: EpicsSignalRO
-    is_flyable: false
-    is_movable: true
-    is_readable: true
-    module: ophyd.signal
-  Gap_EPU60_int:
-    classname: ophScalar
-    components:
-      exposure_time:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      mean:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      median:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      npts:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      offset:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      rescale:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      std:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      sum:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      target:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-    is_flyable: true
-    is_movable: false
-    is_readable: true
-    module: sst_base.detectors.scalar
-  Izero_Diode:
-    classname: EpicsSignalRO
-    is_flyable: false
-    is_movable: true
-    is_readable: true
-    module: ophyd.signal
-  Izero_Mesh:
-    classname: EpicsSignalRO
-    is_flyable: false
-    is_movable: true
-    is_readable: true
-    module: ophyd.signal
-  Izero_Mesh_int:
-    classname: ADCBuffer
-    components:
-      exposure_time:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      mean:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      median:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      npts:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      offset:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      rescale:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      std:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      sum:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      target:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-    is_flyable: true
-    is_movable: false
-    is_readable: true
-    module: sst_base.detectors.scalar
-  Izero_Y:
-    classname: PrettyMotorFMBODeadband
-    components:
-      abdec:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      abdec_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      acceleration:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      amfae:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      amfae_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      amfe:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      amfe_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      ampen:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      ampen_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      asscs:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      asscs_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      clr_enc_lss:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      daerr:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      daerr_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      direction_of_travel:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      dvzer:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      dvzer_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      dwpro:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      dwpro_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      enable:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      enc_lss:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      enc_lss_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      encoder:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      errtg:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      errtg_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      fafoe:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      fafoe_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      frpos:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      frpos_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      high_limit_switch:
-        classname: EpicsSignalRO
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      high_limit_travel:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      hocpl:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      hocpl_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      home_cmd:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      home_forward:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      home_reverse:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      hsrch:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      hsrch_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      iffe:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      iffe_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      inpos:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      inpos_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      intmo:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      intmo_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      kill:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      loopm:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      loopm_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      low_limit_switch:
-        classname: EpicsSignalRO
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      low_limit_travel:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      mlim:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      mlim_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      motor_done_move:
-        classname: EpicsSignalRO
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      motor_egu:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      motor_is_moving:
-        classname: EpicsSignalRO
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      motor_stop:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      move_latch:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      mtact:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      mtact_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      offset_freeze_switch:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      phsra:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      phsra_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      plim:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      plim_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      prefe:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      prefe_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      resolution:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      set_use_switch:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      sodpl:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      sodpl_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      sopl:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      sopl_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      swpoc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      swpoc_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      tiact:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      tiact_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      tolerance:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      trmov:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      trmov_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      user_offset:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      user_offset_dir:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      user_readback:
-        classname: EpicsSignalRO
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      user_setpoint:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      uwpen:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      uwpen_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      uwsen:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      uwsen_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      velocity:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      wfoer:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      wfoer_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-    is_flyable: false
-    is_movable: true
-    is_readable: true
-    module: sst_base.motors
-  Izero_cam:
-    classname: StandardProsilicawstats
-    is_flyable: false
-    is_movable: false
-    is_readable: true
-    module: rsoxs.devices.cameras
   Izero_ds:
     classname: PrettyMotorFMBO
     components:
@@ -4201,12 +2857,6 @@ existing_devices:
     is_movable: true
     is_readable: true
     module: sst_base.motors
-  Izero_update_time:
-    classname: EpicsSignal
-    is_flyable: false
-    is_movable: true
-    is_readable: true
-    module: ophyd.signal
   MC19_disable:
     classname: EpicsSignal
     is_flyable: false
@@ -4237,85 +2887,6 @@ existing_devices:
     is_movable: true
     is_readable: true
     module: ophyd.signal
-  Offset_EPU60_Horizontal:
-    classname: EpicsSignalRO
-    is_flyable: false
-    is_movable: true
-    is_readable: true
-    module: ophyd.signal
-  Offset_EPU60_Vertical:
-    classname: EpicsSignalRO
-    is_flyable: false
-    is_movable: true
-    is_readable: true
-    module: ophyd.signal
-  Phase_EPU60:
-    classname: EpicsSignalRO
-    is_flyable: false
-    is_movable: true
-    is_readable: true
-    module: ophyd.signal
-  Phase_EPU60_int:
-    classname: ophScalar
-    components:
-      exposure_time:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      mean:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      median:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      npts:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      offset:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      rescale:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      std:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      sum:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      target:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-    is_flyable: true
-    is_movable: false
-    is_readable: true
-    module: sst_base.detectors.scalar
   SP:
     classname: Syringe_Pump
     components:
@@ -4813,850 +3384,17 @@ existing_devices:
     is_readable: true
     module: sst_base.detectors.scalar
   Sample_cam:
-    classname: StandardProsilica
+    classname: StandardProsilicaWithTIFF
     is_flyable: false
     is_movable: false
     is_readable: true
     module: sst_base.cameras
-  Shutter_Y:
-    classname: PrettyMotorFMBODeadband
-    components:
-      abdec:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      abdec_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      acceleration:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      amfae:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      amfae_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      amfe:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      amfe_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      ampen:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      ampen_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      asscs:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      asscs_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      clr_enc_lss:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      daerr:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      daerr_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      direction_of_travel:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      dvzer:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      dvzer_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      dwpro:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      dwpro_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      enable:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      enc_lss:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      enc_lss_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      encoder:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      errtg:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      errtg_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      fafoe:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      fafoe_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      frpos:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      frpos_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      high_limit_switch:
-        classname: EpicsSignalRO
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      high_limit_travel:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      hocpl:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      hocpl_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      home_cmd:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      home_forward:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      home_reverse:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      hsrch:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      hsrch_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      iffe:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      iffe_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      inpos:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      inpos_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      intmo:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      intmo_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      kill:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      loopm:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      loopm_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      low_limit_switch:
-        classname: EpicsSignalRO
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      low_limit_travel:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      mlim:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      mlim_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      motor_done_move:
-        classname: EpicsSignalRO
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      motor_egu:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      motor_is_moving:
-        classname: EpicsSignalRO
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      motor_stop:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      move_latch:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      mtact:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      mtact_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      offset_freeze_switch:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      phsra:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      phsra_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      plim:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      plim_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      prefe:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      prefe_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      resolution:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      set_use_switch:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      sodpl:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      sodpl_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      sopl:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      sopl_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      swpoc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      swpoc_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      tiact:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      tiact_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      tolerance:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      trmov:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      trmov_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      user_offset:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      user_offset_dir:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      user_readback:
-        classname: EpicsSignalRO
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      user_setpoint:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      uwpen:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      uwpen_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      uwsen:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      uwsen_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      velocity:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      wfoer:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      wfoer_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-    is_flyable: false
-    is_movable: true
-    is_readable: true
-    module: sst_base.motors
-  Shutter_control:
-    classname: ShutterWait
-    is_flyable: false
-    is_movable: true
-    is_readable: true
-    module: rsoxs.HW.motors
-  Shutter_delay:
-    classname: EpicsSignal
-    is_flyable: false
-    is_movable: true
-    is_readable: true
-    module: ophyd.signal
-  Shutter_enable:
-    classname: EpicsSignal
-    is_flyable: false
-    is_movable: true
-    is_readable: true
-    module: ophyd.signal
-  Shutter_open_time:
-    classname: EpicsSignal
-    is_flyable: false
-    is_movable: true
-    is_readable: true
-    module: ophyd.signal
   Side_cam:
-    classname: StandardProsilica
+    classname: StandardProsilicaWithTIFF
     is_flyable: false
     is_movable: false
     is_readable: true
     module: sst_base.cameras
-  Slit1_Current_Bottom:
-    classname: EpicsSignalRO
-    is_flyable: false
-    is_movable: true
-    is_readable: true
-    module: ophyd.signal
-  Slit1_Current_Bottom_int:
-    classname: ophScalar
-    components:
-      exposure_time:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      mean:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      median:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      npts:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      offset:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      rescale:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      std:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      sum:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      target:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-    is_flyable: true
-    is_movable: false
-    is_readable: true
-    module: sst_base.detectors.scalar
-  Slit1_Current_Inboard:
-    classname: EpicsSignalRO
-    is_flyable: false
-    is_movable: true
-    is_readable: true
-    module: ophyd.signal
-  Slit1_Current_Inboard_int:
-    classname: ophScalar
-    components:
-      exposure_time:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      mean:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      median:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      npts:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      offset:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      rescale:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      std:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      sum:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      target:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-    is_flyable: true
-    is_movable: false
-    is_readable: true
-    module: sst_base.detectors.scalar
-  Slit1_Current_Outboard:
-    classname: EpicsSignalRO
-    is_flyable: false
-    is_movable: true
-    is_readable: true
-    module: ophyd.signal
-  Slit1_Current_Outboard_int:
-    classname: ophScalar
-    components:
-      exposure_time:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      mean:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      median:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      npts:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      offset:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      rescale:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      std:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      sum:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      target:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-    is_flyable: true
-    is_movable: false
-    is_readable: true
-    module: sst_base.detectors.scalar
-  Slit1_Current_Top:
-    classname: EpicsSignalRO
-    is_flyable: false
-    is_movable: true
-    is_readable: true
-    module: ophyd.signal
-  Slit1_Current_Top_int:
-    classname: ophScalar
-    components:
-      exposure_time:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      mean:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      median:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      npts:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      offset:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      rescale:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      std:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      sum:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      target:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-    is_flyable: true
-    is_movable: false
-    is_readable: true
-    module: sst_base.detectors.scalar
   Slit1_i400_accum:
     classname: EpicsSignal
     is_flyable: false
@@ -6056,30 +3794,79 @@ existing_devices:
     is_movable: true
     is_readable: true
     module: sst_base.motors
-  Temperature_L1:
+  angle_EPU60_horizontal:
     classname: EpicsSignalRO
     is_flyable: false
     is_movable: true
     is_readable: true
     module: ophyd.signal
-  Temperature_M1:
+  angle_EPU60_vertical:
     classname: EpicsSignalRO
     is_flyable: false
     is_movable: true
     is_readable: true
     module: ophyd.signal
-  Temperature_M3:
-    classname: EpicsSignalRO
-    is_flyable: false
-    is_movable: true
+  beamstop_waxs:
+    classname: ophScalar
+    components:
+      exposure_time:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      mean:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      median:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      npts:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      offset:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      rescale:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      std:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      sum:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      target:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+    is_flyable: true
+    is_movable: false
     is_readable: true
-    module: ophyd.signal
-  Temperature_MonoPGM:
-    classname: EpicsSignalRO
-    is_flyable: false
-    is_movable: true
-    is_readable: true
-    module: ophyd.signal
+    module: sst_base.detectors.scalar
   bpm13_sum:
     classname: EpicsSignalRO
     is_flyable: false
@@ -8429,6 +6216,55 @@ existing_devices:
     is_movable: true
     is_readable: true
     module: nbs_bl.devices.motors
+  fesh:
+    classname: EPS_Shutter
+    components:
+      cls:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      error:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      opn:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      state:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+    is_flyable: false
+    is_movable: false
+    is_readable: true
+    module: sst_base.shutters
+  fs1_cam:
+    classname: StandardProsilicawstats
+    is_flyable: false
+    is_movable: false
+    is_readable: true
+    module: rsoxs.devices.cameras
+  fs6_cam:
+    classname: StandardProsilicawstats
+    is_flyable: false
+    is_movable: false
+    is_readable: true
+    module: rsoxs.devices.cameras
+  fs7_cam:
+    classname: StandardProsilicawstats
+    is_flyable: false
+    is_movable: false
+    is_readable: true
+    module: rsoxs.devices.cameras
   grating:
     classname: PrettyMotorFMBODeadbandFlyer
     components:
@@ -8971,7 +6807,314 @@ existing_devices:
     is_readable: true
     module: sst_base.motors
   gratingx:
-    classname: PrettyMotorFMBODeadbandFlyer
+    classname: FMB_Mono_Grating_Type
+    components:
+      actuate:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      clear_encoder_loss:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      done:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      enable:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      home:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      kill:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      readback:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      setpoint:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+    is_flyable: false
+    is_movable: true
+    is_readable: true
+    module: sst_base.energy
+  gv14:
+    classname: EPS_Shutter
+    components:
+      cls:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      error:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      opn:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      state:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+    is_flyable: false
+    is_movable: false
+    is_readable: true
+    module: sst_base.shutters
+  gv27a:
+    classname: EPS_Shutter
+    components:
+      cls:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      error:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      opn:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      state:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+    is_flyable: false
+    is_movable: false
+    is_readable: true
+    module: sst_base.shutters
+  gv28:
+    classname: EPS_Shutter
+    components:
+      cls:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      error:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      opn:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      state:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+    is_flyable: false
+    is_movable: false
+    is_readable: true
+    module: sst_base.shutters
+  gvll:
+    classname: EPS_Shutter
+    components:
+      cls:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      error:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      opn:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      state:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+    is_flyable: false
+    is_movable: false
+    is_readable: true
+    module: sst_base.shutters
+  izero_cam:
+    classname: StandardProsilicawstats
+    is_flyable: false
+    is_movable: false
+    is_readable: true
+    module: rsoxs.devices.cameras
+  izero_diode:
+    classname: ophScalar
+    components:
+      exposure_time:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      mean:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      median:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      npts:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      offset:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      rescale:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      std:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      sum:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      target:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+    is_flyable: true
+    is_movable: false
+    is_readable: true
+    module: sst_base.detectors.scalar
+  izero_mesh:
+    classname: ADCBuffer
+    components:
+      exposure_time:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      mean:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      median:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      npts:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      offset:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      rescale:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      std:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      sum:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      target:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+    is_flyable: true
+    is_movable: false
+    is_readable: true
+    module: sst_base.detectors.scalar
+  izero_y:
+    classname: PrettyMotorFMBODeadband
     components:
       abdec:
         classname: EpicsSignal
@@ -9507,134 +7650,10 @@ existing_devices:
         is_movable: true
         is_readable: true
         module: ophyd.signal
-    is_flyable: true
+    is_flyable: false
     is_movable: true
     is_readable: true
     module: sst_base.motors
-  gv14:
-    classname: EPS_Shutter
-    components:
-      cls:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      error:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      opn:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      state:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-    is_flyable: false
-    is_movable: false
-    is_readable: true
-    module: sst_base.shutters
-  gv27a:
-    classname: EPS_Shutter
-    components:
-      cls:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      error:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      opn:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      state:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-    is_flyable: false
-    is_movable: false
-    is_readable: true
-    module: sst_base.shutters
-  gv28:
-    classname: EPS_Shutter
-    components:
-      cls:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      error:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      opn:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      state:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-    is_flyable: false
-    is_movable: false
-    is_readable: true
-    module: sst_base.shutters
-  gvll:
-    classname: EPS_Shutter
-    components:
-      cls:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      error:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      opn:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      state:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-    is_flyable: false
-    is_movable: false
-    is_readable: true
-    module: sst_base.shutters
   manipulator:
     classname: Manipulator
     components:
@@ -12135,6 +10154,12 @@ existing_devices:
     is_movable: true
     is_readable: true
     module: ophyd.signal
+  mir1_temperature:
+    classname: EpicsSignalRO
+    is_flyable: false
+    is_movable: true
+    is_readable: true
+    module: ophyd.signal
   mir3:
     classname: FMBHexapodMirror
     components:
@@ -12364,6 +10389,12 @@ existing_devices:
     is_movable: false
     is_readable: true
     module: sst_base.mirrors
+  mir3_temperature:
+    classname: EpicsSignalRO
+    is_flyable: false
+    is_movable: true
+    is_readable: true
+    module: ophyd.signal
   mir4OLD:
     classname: HexapodMirror
     components:
@@ -12949,117 +10980,21 @@ existing_devices:
     is_readable: true
     module: sst_base.motors
   mirror2x:
-    classname: PrettyMotorFMBODeadbandFlyer
+    classname: FMB_Mono_Grating_Type
     components:
-      abdec:
+      actuate:
         classname: EpicsSignal
         is_flyable: false
         is_movable: true
         is_readable: true
         module: ophyd.signal
-      abdec_desc:
+      clear_encoder_loss:
         classname: EpicsSignal
         is_flyable: false
         is_movable: true
         is_readable: true
         module: ophyd.signal
-      acceleration:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      amfae:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      amfae_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      amfe:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      amfe_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      ampen:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      ampen_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      asscs:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      asscs_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      clr_enc_lss:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      daerr:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      daerr_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      direction_of_travel:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      dvzer:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      dvzer_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      dwpro:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      dwpro_desc:
+      done:
         classname: EpicsSignal
         is_flyable: false
         is_movable: true
@@ -13071,145 +11006,7 @@ existing_devices:
         is_movable: true
         is_readable: true
         module: ophyd.signal
-      enc_lss:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      enc_lss_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      encoder:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      errtg:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      errtg_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      fafoe:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      fafoe_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      frpos:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      frpos_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      high_limit_switch:
-        classname: EpicsSignalRO
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      high_limit_travel:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      hocpl:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      hocpl_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      home_cmd:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      home_forward:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      home_reverse:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      hsrch:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      hsrch_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      iffe:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      iffe_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      inpos:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      inpos_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      intmo:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      intmo_desc:
+      home:
         classname: EpicsSignal
         is_flyable: false
         is_movable: true
@@ -13221,274 +11018,22 @@ existing_devices:
         is_movable: true
         is_readable: true
         module: ophyd.signal
-      loopm:
+      readback:
         classname: EpicsSignal
         is_flyable: false
         is_movable: true
         is_readable: true
         module: ophyd.signal
-      loopm_desc:
+      setpoint:
         classname: EpicsSignal
         is_flyable: false
         is_movable: true
         is_readable: true
         module: ophyd.signal
-      low_limit_switch:
-        classname: EpicsSignalRO
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      low_limit_travel:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      mlim:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      mlim_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      motor_done_move:
-        classname: EpicsSignalRO
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      motor_egu:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      motor_is_moving:
-        classname: EpicsSignalRO
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      motor_stop:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      move_latch:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      mtact:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      mtact_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      offset_freeze_switch:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      phsra:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      phsra_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      plim:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      plim_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      prefe:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      prefe_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      resolution:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      set_use_switch:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      sodpl:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      sodpl_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      sopl:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      sopl_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      swpoc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      swpoc_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      tiact:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      tiact_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      tolerance:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      trmov:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      trmov_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      user_offset:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      user_offset_dir:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      user_readback:
-        classname: EpicsSignalRO
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      user_setpoint:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      uwpen:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      uwpen_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      uwsen:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      uwsen_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      velocity:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      wfoer:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      wfoer_desc:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-    is_flyable: true
+    is_flyable: false
     is_movable: true
     is_readable: true
-    module: sst_base.motors
+    module: sst_base.energy
   mono_en:
     classname: Monochromator
     components:
@@ -14748,67 +12293,24 @@ existing_devices:
     is_movable: true
     is_readable: true
     module: sst_base.energy
-  mono_en_int:
-    classname: ophScalar
-    components:
-      exposure_time:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      mean:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      median:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      npts:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      offset:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      rescale:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      std:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      sum:
-        classname: Signal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-      target:
-        classname: EpicsSignal
-        is_flyable: false
-        is_movable: true
-        is_readable: true
-        module: ophyd.signal
-    is_flyable: true
-    is_movable: false
+  mono_pgm_temperature:
+    classname: EpicsSignalRO
+    is_flyable: false
+    is_movable: true
     is_readable: true
-    module: sst_base.detectors.scalar
+    module: ophyd.signal
+  offset_EPU60_horizontal:
+    classname: EpicsSignalRO
+    is_flyable: false
+    is_movable: true
+    is_readable: true
+    module: ophyd.signal
+  offset_EPU60_vertical:
+    classname: EpicsSignalRO
+    is_flyable: false
+    is_movable: true
+    is_readable: true
+    module: ophyd.signal
   polarization:
     classname: PseudoSingle
     components:
@@ -14953,12 +12455,6 @@ existing_devices:
     is_readable: true
     module: sst_base.shutters
   ring_current:
-    classname: EpicsSignalRO
-    is_flyable: false
-    is_movable: true
-    is_readable: true
-    module: ophyd.signal
-  ring_current_int:
     classname: ophScalar
     components:
       exposure_time:
@@ -17736,6 +15232,571 @@ existing_devices:
     is_movable: true
     is_readable: true
     module: sst_base.motors
+  shutter_control:
+    classname: ShutterWait
+    is_flyable: false
+    is_movable: true
+    is_readable: true
+    module: rsoxs.HW.motors
+  shutter_delay:
+    classname: EpicsSignal
+    is_flyable: false
+    is_movable: true
+    is_readable: true
+    module: ophyd.signal
+  shutter_enable:
+    classname: EpicsSignal
+    is_flyable: false
+    is_movable: true
+    is_readable: true
+    module: ophyd.signal
+  shutter_open_time:
+    classname: EpicsSignal
+    is_flyable: false
+    is_movable: true
+    is_readable: true
+    module: ophyd.signal
+  shutter_y:
+    classname: PrettyMotorFMBODeadband
+    components:
+      abdec:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      abdec_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      acceleration:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      amfae:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      amfae_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      amfe:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      amfe_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      ampen:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      ampen_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      asscs:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      asscs_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      clr_enc_lss:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      daerr:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      daerr_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      direction_of_travel:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      dvzer:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      dvzer_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      dwpro:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      dwpro_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      enable:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      enc_lss:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      enc_lss_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      encoder:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      errtg:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      errtg_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      fafoe:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      fafoe_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      frpos:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      frpos_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      high_limit_switch:
+        classname: EpicsSignalRO
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      high_limit_travel:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      hocpl:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      hocpl_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      home_cmd:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      home_forward:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      home_reverse:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      hsrch:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      hsrch_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      iffe:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      iffe_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      inpos:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      inpos_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      intmo:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      intmo_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      kill:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      loopm:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      loopm_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      low_limit_switch:
+        classname: EpicsSignalRO
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      low_limit_travel:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      mlim:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      mlim_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      motor_done_move:
+        classname: EpicsSignalRO
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      motor_egu:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      motor_is_moving:
+        classname: EpicsSignalRO
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      motor_stop:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      move_latch:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      mtact:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      mtact_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      offset_freeze_switch:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      phsra:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      phsra_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      plim:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      plim_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      prefe:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      prefe_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      resolution:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      set_use_switch:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      sodpl:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      sodpl_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      sopl:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      sopl_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      swpoc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      swpoc_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      tiact:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      tiact_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      tolerance:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      trmov:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      trmov_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      user_offset:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      user_offset_dir:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      user_readback:
+        classname: EpicsSignalRO
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      user_setpoint:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      uwpen:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      uwpen_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      uwsen:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      uwsen_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      velocity:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      wfoer:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      wfoer_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+    is_flyable: false
+    is_movable: true
+    is_readable: true
+    module: sst_base.motors
   slit_size:
     classname: PseudoSingle
     components:
@@ -19954,6 +18015,250 @@ existing_devices:
     is_movable: true
     is_readable: true
     module: sst_base.slits
+  slits1_bottom_current:
+    classname: ophScalar
+    components:
+      exposure_time:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      mean:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      median:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      npts:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      offset:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      rescale:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      std:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      sum:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      target:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+    is_flyable: true
+    is_movable: false
+    is_readable: true
+    module: sst_base.detectors.scalar
+  slits1_inboard_current:
+    classname: ophScalar
+    components:
+      exposure_time:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      mean:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      median:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      npts:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      offset:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      rescale:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      std:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      sum:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      target:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+    is_flyable: true
+    is_movable: false
+    is_readable: true
+    module: sst_base.detectors.scalar
+  slits1_outboard_current:
+    classname: ophScalar
+    components:
+      exposure_time:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      mean:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      median:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      npts:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      offset:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      rescale:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      std:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      sum:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      target:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+    is_flyable: true
+    is_movable: false
+    is_readable: true
+    module: sst_base.detectors.scalar
+  slits1_top_current:
+    classname: ophScalar
+    components:
+      exposure_time:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      mean:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      median:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      npts:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      offset:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      rescale:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      std:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      sum:
+        classname: Signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      target:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+    is_flyable: true
+    is_movable: false
+    is_readable: true
+    module: sst_base.detectors.scalar
   slits2:
     classname: FMBOQuadSlits
     components:
@@ -24352,6 +22657,1102 @@ existing_devices:
     is_movable: true
     is_readable: true
     module: sst_base.slits
+  slits_frontend:
+    classname: QuadSlits
+    components:
+      bottom:
+        classname: EpicsMotor
+        components:
+          acceleration:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          direction_of_travel:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          high_limit_switch:
+            classname: EpicsSignalRO
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          high_limit_travel:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          home_forward:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          home_reverse:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          low_limit_switch:
+            classname: EpicsSignalRO
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          low_limit_travel:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          motor_done_move:
+            classname: EpicsSignalRO
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          motor_egu:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          motor_is_moving:
+            classname: EpicsSignalRO
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          motor_stop:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          offset_freeze_switch:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          set_use_switch:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          user_offset:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          user_offset_dir:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          user_readback:
+            classname: EpicsSignalRO
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          user_setpoint:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          velocity:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.epics_motor
+      hcenter:
+        classname: PseudoSingle
+        components:
+          readback:
+            classname: AttributeSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          setpoint:
+            classname: AttributeSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.pseudopos
+      hsize:
+        classname: PseudoSingle
+        components:
+          readback:
+            classname: AttributeSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          setpoint:
+            classname: AttributeSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.pseudopos
+      inboard:
+        classname: EpicsMotor
+        components:
+          acceleration:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          direction_of_travel:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          high_limit_switch:
+            classname: EpicsSignalRO
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          high_limit_travel:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          home_forward:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          home_reverse:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          low_limit_switch:
+            classname: EpicsSignalRO
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          low_limit_travel:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          motor_done_move:
+            classname: EpicsSignalRO
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          motor_egu:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          motor_is_moving:
+            classname: EpicsSignalRO
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          motor_stop:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          offset_freeze_switch:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          set_use_switch:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          user_offset:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          user_offset_dir:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          user_readback:
+            classname: EpicsSignalRO
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          user_setpoint:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          velocity:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.epics_motor
+      outboard:
+        classname: EpicsMotor
+        components:
+          acceleration:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          direction_of_travel:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          high_limit_switch:
+            classname: EpicsSignalRO
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          high_limit_travel:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          home_forward:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          home_reverse:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          low_limit_switch:
+            classname: EpicsSignalRO
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          low_limit_travel:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          motor_done_move:
+            classname: EpicsSignalRO
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          motor_egu:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          motor_is_moving:
+            classname: EpicsSignalRO
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          motor_stop:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          offset_freeze_switch:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          set_use_switch:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          user_offset:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          user_offset_dir:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          user_readback:
+            classname: EpicsSignalRO
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          user_setpoint:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          velocity:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.epics_motor
+      top:
+        classname: EpicsMotor
+        components:
+          acceleration:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          direction_of_travel:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          high_limit_switch:
+            classname: EpicsSignalRO
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          high_limit_travel:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          home_forward:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          home_reverse:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          low_limit_switch:
+            classname: EpicsSignalRO
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          low_limit_travel:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          motor_done_move:
+            classname: EpicsSignalRO
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          motor_egu:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          motor_is_moving:
+            classname: EpicsSignalRO
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          motor_stop:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          offset_freeze_switch:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          set_use_switch:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          user_offset:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          user_offset_dir:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          user_readback:
+            classname: EpicsSignalRO
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          user_setpoint:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          velocity:
+            classname: EpicsSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.epics_motor
+      vcenter:
+        classname: PseudoSingle
+        components:
+          readback:
+            classname: AttributeSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          setpoint:
+            classname: AttributeSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.pseudopos
+      vsize:
+        classname: PseudoSingle
+        components:
+          readback:
+            classname: AttributeSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+          setpoint:
+            classname: AttributeSignal
+            is_flyable: false
+            is_movable: true
+            is_readable: true
+            module: ophyd.signal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.pseudopos
+    is_flyable: false
+    is_movable: true
+    is_readable: true
+    module: sst_base.slits
+  slitsc:
+    classname: PrettyMotorFMBO
+    components:
+      abdec:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      abdec_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      acceleration:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      amfae:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      amfae_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      amfe:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      amfe_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      ampen:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      ampen_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      asscs:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      asscs_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      clr_enc_lss:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      daerr:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      daerr_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      direction_of_travel:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      dvzer:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      dvzer_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      dwpro:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      dwpro_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      enable:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      enc_lss:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      enc_lss_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      encoder:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      errtg:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      errtg_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      fafoe:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      fafoe_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      frpos:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      frpos_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      high_limit_switch:
+        classname: EpicsSignalRO
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      high_limit_travel:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      hocpl:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      hocpl_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      home_cmd:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      home_forward:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      home_reverse:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      hsrch:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      hsrch_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      iffe:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      iffe_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      inpos:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      inpos_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      intmo:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      intmo_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      kill:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      loopm:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      loopm_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      low_limit_switch:
+        classname: EpicsSignalRO
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      low_limit_travel:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      mlim:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      mlim_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      motor_done_move:
+        classname: EpicsSignalRO
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      motor_egu:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      motor_is_moving:
+        classname: EpicsSignalRO
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      motor_stop:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      mtact:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      mtact_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      offset_freeze_switch:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      phsra:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      phsra_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      plim:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      plim_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      prefe:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      prefe_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      resolution:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      set_use_switch:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      sodpl:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      sodpl_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      sopl:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      sopl_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      swpoc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      swpoc_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      tiact:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      tiact_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      trmov:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      trmov_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      user_offset:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      user_offset_dir:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      user_readback:
+        classname: EpicsSignalRO
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      user_setpoint:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      uwpen:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      uwpen_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      uwsen:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      uwsen_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      velocity:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      wfoer:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+      wfoer_desc:
+        classname: EpicsSignal
+        is_flyable: false
+        is_movable: true
+        is_readable: true
+        module: ophyd.signal
+    is_flyable: false
+    is_movable: true
+    is_readable: true
+    module: sst_base.motors
   sst_control:
     classname: EpicsSignalRO
     is_flyable: false
@@ -24425,6 +23826,12 @@ existing_devices:
     is_movable: true
     is_readable: true
     module: rsoxs.HW.lakeshore
+  temperature_L1:
+    classname: EpicsSignalRO
+    is_flyable: false
+    is_movable: true
+    is_readable: true
+    module: ophyd.signal
   waxs_det:
     classname: RSOXSGreatEyesDetector
     is_flyable: false
@@ -24572,6 +23979,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -24586,6 +23994,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -24723,7 +24132,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
-      description: Number of times to repeat the scan
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -24744,6 +24153,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -24956,6 +24366,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -24970,6 +24381,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -25108,7 +24520,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
-      description: Number of times to repeat the scan
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -25129,6 +24541,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -25285,6 +24698,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -25299,6 +24713,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -25437,7 +24852,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
-      description: Number of times to repeat the scan
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -25458,6 +24873,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -25603,6 +25019,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -25617,6 +25034,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -25754,7 +25172,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
-      description: Number of times to repeat the scan
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -25775,6 +25193,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -25932,6 +25351,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -25946,6 +25366,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -26083,7 +25504,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
-      description: Number of times to repeat the scan
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -26104,6 +25525,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -26249,6 +25671,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -26263,6 +25686,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -26400,7 +25824,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
-      description: Number of times to repeat the scan
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -26421,6 +25845,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -26770,6 +26195,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -26784,6 +26210,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -26921,7 +26348,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
-      description: Number of times to repeat the scan
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -26942,6 +26369,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -27148,6 +26576,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -27162,6 +26591,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -27299,7 +26729,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
-      description: Number of times to repeat the scan
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -27320,6 +26750,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -27465,6 +26896,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -27479,6 +26911,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -27616,7 +27049,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
-      description: Number of times to repeat the scan
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -27637,6 +27070,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -27782,6 +27216,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -27796,6 +27231,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -27933,7 +27369,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
-      description: Number of times to repeat the scan
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -27954,6 +27390,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -28099,6 +27536,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -28113,6 +27551,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -28250,7 +27689,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
-      description: Number of times to repeat the scan
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -28271,6 +27710,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -28343,8 +27783,8 @@ existing_plans:
     module: rsoxs.Functions.alignment
     name: move_to_location
     parameters:
-    - default: '[{''motor'': ''x'', ''position'': 0.2991299999999981, ''order'': 0},
-        {''motor'': ''y'', ''position'': 345.30005500000004, ''order'': 0}, {''motor'':
+    - default: '[{''motor'': ''x'', ''position'': 0.29905499999999563, ''order'':
+        0}, {''motor'': ''y'', ''position'': 345.29964, ''order'': 0}, {''motor'':
         ''z'', ''position'': -0.34676999999999225, ''order'': 0}, {''motor'': ''th'',
         ''position'': -0.007022058000018205, ''order'': 0}]'
       kind:
@@ -28457,6 +27897,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -28471,6 +27912,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -28608,7 +28050,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
-      description: Number of times to repeat the scan
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -28629,6 +28071,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -28774,6 +28217,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -28788,6 +28232,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -28925,7 +28370,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
-      description: Number of times to repeat the scan
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -28946,6 +28391,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -29095,6 +28541,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -29122,6 +28569,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -29266,6 +28714,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -29286,6 +28735,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -29457,6 +28907,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -29484,6 +28935,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -29626,6 +29078,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -29653,6 +29106,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -29802,6 +29256,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -29822,6 +29277,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -29985,6 +29441,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -30012,6 +29469,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -30141,6 +29599,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -30168,6 +29627,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -30307,6 +29767,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -30334,6 +29795,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -30476,6 +29938,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -30503,6 +29966,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -30651,6 +30115,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -30678,6 +30143,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -30806,6 +30272,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -30833,6 +30300,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -30972,6 +30440,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -30999,6 +30468,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -31134,6 +30604,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -31161,6 +30632,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -31326,6 +30798,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -31353,6 +30826,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -31518,6 +30992,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -31545,6 +31020,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -31696,6 +31172,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -31723,6 +31200,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -31858,6 +31336,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -31885,6 +31364,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -32011,6 +31491,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -32038,6 +31519,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -32214,6 +31696,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -32241,6 +31724,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -32416,6 +31900,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -32443,6 +31928,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -32604,6 +32090,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -32631,6 +32118,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -32774,6 +32262,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -32788,6 +32277,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -32933,6 +32423,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -32947,6 +32438,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -33084,7 +32576,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
-      description: Number of times to repeat the scan
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -33105,6 +32597,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -33250,6 +32743,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -33264,6 +32758,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -33401,7 +32896,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
-      description: Number of times to repeat the scan
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -33422,6 +32917,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -33636,6 +33132,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -33650,6 +33147,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -34419,6 +33917,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -34433,6 +33932,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -34570,7 +34070,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
-      description: Number of times to repeat the scan
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -34591,6 +34091,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -34673,6 +34174,7 @@ existing_plans:
     properties:
       is_generator: true
   spiral_scan:
+    description: Spiral Scan with motor arguments filled
     module: rsoxs.plans.rsoxs
     name: spiral_scan
     parameters:
@@ -34751,6 +34253,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -34807,6 +34310,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -35019,6 +34523,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -35033,6 +34538,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -35170,7 +34676,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
-      description: Number of times to repeat the scan
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -35191,6 +34697,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -35374,6 +34881,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -35388,6 +34896,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -35525,7 +35034,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
-      description: Number of times to repeat the scan
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -35546,6 +35055,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -35691,6 +35201,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -35705,6 +35216,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -35842,7 +35354,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
-      description: Number of times to repeat the scan
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -35863,6 +35375,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -36014,6 +35527,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -36028,6 +35542,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -36165,7 +35680,7 @@ existing_plans:
     - annotation:
         type: int
       default: '1'
-      description: Number of times to repeat the scan
+      description: The number of times to repeat the entire scan
       kind:
         name: KEYWORD_ONLY
         value: 3
@@ -36186,6 +35701,7 @@ existing_plans:
         value: 3
       name: dwell
     - default: '1'
+      description: Number of exposures for the Greateyes detector to take per step
       kind:
         name: KEYWORD_ONLY
         value: 3

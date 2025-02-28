@@ -38,7 +38,7 @@ for path in paths:
 from nbs_bl.configuration import load_and_configure_everything
 load_and_configure_everything()
 
-from rsoxs.startup import RE, db, sd, md
+from rsoxs.startup import RE, sd, md # db
 from nbs_bl.printing import run_report
 
 run_report(__file__)
@@ -81,13 +81,13 @@ ipython = get_ipython()
 
 class TiledInserter:
     def insert(self, name, doc):
-        ATTEMPTS = 20
+        ATTEMPTS = 4
         error = None
         for attempt in range(ATTEMPTS):
             try:
                 tiled_writing_client.post_document(name, doc)
             except Exception as exc:
-                print("Document saving failure:", repr(exc))
+                print(f"Tiled Insertion Failure for document {name}:", repr(exc))
                 error = exc
             else:
                 break
@@ -98,14 +98,16 @@ class TiledInserter:
 
 # Define tiled catalog
 tiled_writing_client = from_profile("nsls2", api_key=os.environ["TILED_BLUESKY_WRITING_API_KEY_RSOXS"])["rsoxs"]["raw"]
-tiled_inserter = TiledInserter()
+#tiled_writing_client = from_profile("rsoxs")
+# tiled_inserter = TiledInserter()
 #c = tiled_reading_client = from_profile("nsls2")["rsoxs"]["raw"]
 #db = Broker(c)
 
 #nslsii.configure_base(get_ipython().user_ns, tiled_inserter, publish_documents_with_kafka=False, pbar=True)
 configure_kafka_publisher(RE, beamline_name="rsoxs")
 
-RE.subscribe(tiled_inserter.insert)
+#RE.subscribe(tiled_inserter.insert)
+RE.subscribe(tiled_writing_client.post_document)
 configure_bluesky_logging(ipython=ipython)
 configure_ipython_logging(exception_logger=log_exception, ipython=ipython)
 
@@ -126,125 +128,8 @@ if not is_re_worker_active(): ## If not running queueserver, run these
 
     beamline_status()  # print out the current sample metadata, motor position and detector status
 
-print("Extending Baseline")
-# from .Functions.startup import sd
-#
 
 ## TODO: delete thee code below, but add the important devices to baseline in devices.toml
-"""
-sd.baseline.extend(
-     [
-        sam_viewer,
-        sam_X,
-        sam_Y,
-        sam_Z,
-        sam_Th,
-        TEMZ,
-        TEMY,
-        TEMX,
-        BeamStopS,
-        BeamStopW,
-        Det_S,
-        Det_W,
-        Shutter_Y,
-        Izero_Y,
-        Izero_ds,
-        grating,
-        mirror2,
-        mono_en.readback,
-        mono_en.setpoint,
-        mono_en.grating,
-        mono_en.grating.user_offset,
-        mono_en.gratingx,
-        mono_en.mirror2,
-        mono_en.mirror2.user_offset,
-        mono_en.mirror2x,
-        mono_en.readback,
-        mono_en.cff,
-        en.epugap,
-        en.epuphase,
-        en.epumode,
-        en.polarization,
-        en.sample_polarization,
-        slits1,
-        slits2,
-        slits3,
-        ring_current,
-        Beamstop_WAXS,
-        Beamstop_SAXS,
-        Slit1_Current_Top,
-        Slit1_Current_Bottom,
-        Slit1_Current_Inboard,
-        Slit1_Current_Outboard,
-        Izero_Diode,
-        Izero_Mesh, #
-        mir1_pressure,
-        rsoxs_ccg_izero,
-        rsoxs_pg_izero,
-        rsoxs_ccg_main,
-        rsoxs_pg_main,
-        rsoxs_ccg_ll,
-        rsoxs_pg_ll,
-        rsoxs_ll_gpwr,
-        FEsh1,
-        psh4,
-        psh10,
-        psh7,
-        gv14,
-        gv14a,
-        gv15,
-        gv26,
-        gv27,
-        gv27a,
-        gv28,
-        gvTEM,
-        gvll,
-        gvturbo,
-        mir1,
-        mir3,
-        mir4,
-        mir2_type,
-        Shutter_delay,
-        Shutter_trigger,
-        Shutter_open_time,
-        Light_control,
-        Shutter_enable,
-        Shutter_enable1,
-        Shutter_enable2,
-        Shutter_enable3,
-        Shutter_SAXS_count,
-        Shutter_WAXS_count,
-        tem_tempstage
-    ]
-)
-"""
-# from .Functions.startup import sd
-#
-# sd.monitors.extend(
-#     [
-#         Shutter_control,
-#         Shutter_open_time,
-#         #tem_tempstage.readback,
-#         #mono_en_int,
-#         #mono_en.readback,
-#         #epu_gap.user_readback,
-#         #mono_en.en_mon,
-#         ring_current,
-#         #Beamstop_WAXS,
-#         #Beamstop_SAXS,
-#         #Shutter_SAXS_count,
-#         Shutter_WAXS_count,
-#         #Slit1_Current_Top,
-#         #Slit1_Current_Bottom,
-#         #Slit1_Current_Inboard,
-#         #Slit1_Current_Outboard,
-#         #Izero_Mesh,
-#         #Sample_TEY,
-#     ]
-# )
-
-
-
 
 # setup the contingencies
 
