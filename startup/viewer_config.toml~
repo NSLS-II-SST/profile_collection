@@ -1,0 +1,18 @@
+[[catalog]]
+label = "NEXAFS"
+url = "https://tiled.nsls2.bnl.gov"
+catalog_keys = ["nexafs", "raw"]
+catalog_model = "nbscatalog"
+autoload = true
+
+[[catalog]]
+label = "RSoXS Demo"
+url = "http://tiled-demo.blueskyproject.io"
+catalog_keys = ["rsoxs", "raw"]
+catalog_model = "blueskycatalog"
+
+[[catalog]]
+label = "BMM Demo"
+url = "http://tiled-demo.blueskyproject.io"
+catalog_keys = ["bmm","raw"]
+catalog_model = "blueskycatalog"

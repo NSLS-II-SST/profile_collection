@@ -1,28 +1,35 @@
-## Devices are organized from upstream to downstream along SST1.
-## Add devices to groups such that they can show up as options in GUI.  Devices can belong to multiple groups.
+## Devices are organized from upstream to downstream along SST1. This .toml file is essentially a dictionary.
+
+## Add devices to groups (_group) such that they can show up as options in GUI.  Devices can belong to multiple groups.
 ## "detectors" group can contain all devices that will always collect data for all scans.
+
+## kind can be set to "hinted", "normal", "config", and "omitted".  "hinted" and "normal" are ambiguous in what they mean.  "config" means that the readout value is only written out once and not multiple times.  "omitted" means it is never written out.
+
 ## _baseline = true adds unchanging variables to the baseline to show the value at the start and end of the scan.  Cannot have both _int and non-int version of PV saved as baseline.
+
+## Booleans should be lowercase true/false in .toml files
 
 ## Everything on this list other than 2D camera images are being archived.  TODO: make sure all new additions are archived.
 
-## This .toml file is essentially a dictionary.
-## Booleans should be lowercase true/false in .toml files
 
-[ring_current]
-_target = "ophyd.EpicsSignalRO"
+
+
+#[ring_current_epics]
+#_target = "ophyd.EpicsSignalRO"
+#kind = "normal"
+#_group = ["detectors", "signals"] ## Trying to keep group names in alphabetical order for better organization
+#_role = "beam_current"
+#prefix = "SR:OPS-BI{DCCT:1}I:Real-I"
+#name = "NSLS-II Ring Current EpicsSignal"
+#_baseline = true ## Probably can remove, but Eliot had it in baseline
+
+[ring_current] # was ring_current_int
+_target = "sst_base.detectors.scalar.ophScalar"
 kind = "normal"
-_group = ["detectors", "signals"] ## Trying to keep group names in alphabetical order for better organization
+_group = ["detectors", "signals"]
 _role = "beam_current"
 prefix = "SR:OPS-BI{DCCT:1}I:Real-I"
 name = "NSLS-II Ring Current"
-#_baseline = true ## Probably can remove, but Eliot had it in baseline
-
-[ring_current_int]
-_target = "sst_base.detectors.scalar.ophScalar"
-kind = "normal"
-prefix = "SR:OPS-BI{DCCT:1}I:Real-I"
-name = "NSLS-II Ring Current"
-_baseline = true
 
 [ring_status]
 _target = "ophyd.EpicsSignalRO"
@@ -40,6 +47,7 @@ _load_order = 2
 prefix = ""
 name = "en" ## TODO: what is the difference between en and energy?
 _baseline = true
+## Relates to EPU and mono motors
 
 [energy]
 _alias = "en.energy"
@@ -53,8 +61,6 @@ _alias = "en.polarization"
 _group = "motors"
 _role = "polarization" ## This is the lab frame polarization
 _load_order = 2
-_baseline = true
-
 
 [Offset_C07U42_Horizontal] ## Want to remove the C07 portion from undulator name
 _target = "ophyd.EpicsSignalRO"
@@ -76,73 +82,44 @@ name = "Angle_C07U42_Horizontal"
 
 [Angle_C07U42_Vertical]
 _target = "ophyd.EpicsSignalRO"
-
 kind = "normal"
 prefix = "SR:C31-{AI}Aie7:Angle-y-Cal"
 name = "Angle_C07U42_Vertical"
 
 [Gap_C07U42]
 _target = "ophyd.EpicsSignalRO"
-
 kind = "normal"
 prefix = "SR:C07-ID:G1A{SST2:1-Ax:Gap}-Mtr.RBV"
 name = "Gap_C07U42"
 
-[Offset_EPU60_Horizontal]
+[offset_EPU60_horizontal]
 _target = "ophyd.EpicsSignalRO"
 kind = "normal"
 prefix = "SR:C31-{AI}Aie7-2:Offset-x-Cal"
 name = "Offset_EPU60_Horizontal"
 
-[Offset_EPU60_Vertical]
+[offset_EPU60_vertical]
 _target = "ophyd.EpicsSignalRO"
 kind = "normal"
 prefix = "SR:C31-{AI}Aie7-2:Offset-y-Cal"
 name = "Offset_EPU60_Vertical"
 
-[Angle_EPU60_Horizontal]
+[angle_EPU60_horizontal]
 _target = "ophyd.EpicsSignalRO"
 kind = "normal"
 prefix = "SR:C31-{AI}Aie7-2:Angle-x-Cal"
 name = "Angle_EPU60_Horizontal"
 
-[Angle_EPU60_Vertical]
+[angle_EPU60_vertical]
 _target = "ophyd.EpicsSignalRO"
 kind = "normal"
 prefix = "SR:C31-{AI}Aie7-2:Angle-y-Cal"
 name = "Angle_EPU60_Vertical"
 
-[Gap_EPU60]
-_target = "ophyd.EpicsSignalRO"
-kind = "normal"
-prefix = "SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr.RBV"
-name = "Gap_EPU60"
-#_baseline = true
-
-[Gap_EPU60_int]
-_target = "sst_base.detectors.scalar.ophScalar"
-kind = "normal"
-prefix = "SR:C07-ID:G1A{SST1:1-Ax:Gap}-Mtr.RBV"
-name = "Gap_EPU60"
-_baseline = true
-
-[Phase_EPU60]
-_target = "ophyd.EpicsSignalRO"
-kind = "normal"
-prefix = "SR:C07-ID:G1A{SST1:1-Ax:Phase}-Mtr.RBV"
-name = "Phase_EPU60"
-#_baseline = true
-
-[Phase_EPU60_int]
-_target = "sst_base.detectors.scalar.ophScalar"
-kind = "normal"
-prefix = "SR:C07-ID:G1A{SST1:1-Ax:Phase}-Mtr.RBV"
-name = "Phase_EPU60"
-_baseline = true
 
 ## TODO: This causes issue with GUI, so may need fixing or may need to be tried again when there is beam
-#[Slits_EPU60_Frontend] ## TODO: This likely needs to get fixed/updated.  When I made this into a Slits object, I was not able to use functions like .wh().  I would get TypeError: unsupported operand type(s) for -: 'NoneType' and 'NoneType'
-#_target = "sst_base.slits.FMBOQuadSlits"
+#[slits_frontend] ## TODO: This likely needs to get fixed/updated.  When I made this into a Slits object, I was not able to use functions like .wh().  I would get TypeError: unsupported operand type(s) for -: 'NoneType' and 'NoneType'
+#_target = "sst_base.slits.QuadSlits"
 #_group = "motors"
 #prefix = "FE:C07A-OP{Slt:34-Ax:"
 #name = "EPU60 frontend slits"
@@ -150,7 +127,7 @@ _baseline = true
 #concurrent = 1
 ## TODO: After this is fixed, archive signal
 
-[FEsh1]
+[fesh] # was FEsh1
 _target = "sst_base.shutters.EPS_Shutter"
 _group = "shutters"
 openval = 0
@@ -160,7 +137,7 @@ name = "Front-End Shutter"
 shutter_type = "FE"
 _baseline = true
 
-[Temperature_L1]
+[temperature_L1] # was Temperature_L1
 _target = "ophyd.EpicsSignalRO"
 kind = "normal"
 prefix = "XF:07IDA-OP{Mir:L1}T:Msk-I"
@@ -174,7 +151,7 @@ name = "SST 1 Mirror 1 fmb"
 kind = "hinted"
 _baseline = true
 
-[Temperature_M1]
+[mir1_temperature] # was Temperature_M1
 _target = "ophyd.EpicsSignalRO"
 kind = "normal"
 prefix = "XF:07IDA-OP{Mir:1}T:Msk-I"
@@ -188,21 +165,25 @@ prefix = "XF:07IDA-VA:0{Mir:M1-CCG:1}P:Raw-I"
 name = "Mirror 1 Vacuum Pressure"
 _baseline = true
 
-[FS1_cam]
-_target = "rsoxs.devices.cameras.StandardProsilicawstats" 
+[fs1_cam] # was FS1_cam
+_target = "rsoxs.devices.cameras.StandardProsilicawstatsFactory" 
 _group = "all_standard_pros" ## TODO: Does this need another group?
 prefix = "XF:07ID-BI{BPM:1}"
 name = "FS1 white beam stop Camera"
+camera_name = "fs1_cam-1"
+date_template = "%Y/%m"
 read_attrs = ['tiff','stats5']
 ## This is a rectangular mask through which both the soft and tender beams pass, and the frame can be used as a fluorescence screen.
 ## As a result, the rounded edge of the beam is visible on the frame, but it is cut off on the straight inner edge of the frame.  The camera is as far back as can be placed, so a larger portion of the beam cannot be seen.
 ## M1 reflects the beam through the mask/frame.
 
-[FS6_cam]
-_target = "rsoxs.devices.cameras.StandardProsilicawstats" 
+[fs6_cam] #was FS6_cam
+_target = "rsoxs.devices.cameras.StandardProsilicawstatsFactory" 
 _group = "all_standard_pros" ## TODO: Does this need another group?
 prefix = "XF:07ID-BI{BPM:6}"
 name = "FS6 Camera"
+camera_name = "fs6_cam-1"
+date_template = "%Y/%m"
 read_attrs = ['tiff','stats5']
 
 [psh4]
@@ -228,49 +209,36 @@ _baseline = true
 
 ## M2 and PGM
 ## RSoXS 250 l/mm grating is made from nickel oxide.  250 l/mm is made from gold.  1200 l/mm grating is made from gold.
-[mono_en_int]
-_target = "sst_base.detectors.scalar.ophScalar"
-kind = "normal"
-prefix = "XF:07ID1-OP{Mono:PGM1-Ax::ENERGY_MON"
-name = "Energy"
 
 [mirror2] ## angle
-_target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
+_alias = "en.monoen.mirror2"
 _group = "motors"
-kind = "hinted"
-prefix = "XF:07ID1-OP{Mono:PGM1-Ax:MirP}Mtr"
-name = "Mono Mirror angle"
+_load_order = 2
 _baseline = true
 
 [mirror2x]
-_target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
+_alias = "en.monoen.mirror2x"
 _group = "motors"
-kind = "hinted"
-prefix = "XF:07ID1-OP{Mono:PGM1-Ax:MirX}Mtr"
-name = "Mono Mirror x"
+_load_order = 2
 _baseline = true
 
 [grating] ## angle
-_target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
+_alias = "en.monoen.grating"
 _group = "motors"
-kind = "hinted"
-prefix = "XF:07ID1-OP{Mono:PGM1-Ax:GrtP}Mtr"
-name = "Mono Grating angle"
+_load_order = 2
 _baseline = true
 
 [gratingx]
-_target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
+_alias = "en.monoen.gratingx"
 _group = "motors"
-kind = "hinted"
-prefix = "XF:07ID1-OP{Mono:PGM1-Ax:GrtX}Mtr"
-name = "Mono Grating x"
+_load_order = 2
 _baseline = true
 
-[Temperature_MonoPGM]
+[mono_pgm_temperature] #was Temperature_MonoPGM
 _target = "ophyd.EpicsSignalRO"
 kind = "normal"
 prefix = "XF:07IDA-OP{Mono:PGM}T:Grg-I"
-name = "Temperature_MonoPGM"
+name = "mono_pgm_temperature"
 
 ## GV15
 
@@ -282,17 +250,19 @@ name = "SST 1 Mirror 3 fmb"
 kind = "hinted"
 _baseline = true
 
-[Temperature_M3]
+[mir3_temperature] #was Temperature_M3
 _target = "ophyd.EpicsSignalRO"
 kind = "normal"
 prefix = "XF:07IDA-OP{Mir:2}T:Mir-I"
-name = "Temperature_M3"
+name = "mir3_temperature"
 
-[FS7_cam]
-_target = "rsoxs.devices.cameras.StandardProsilicawstats"
+[fs7_cam] #was FS7_cam
+_target = "rsoxs.devices.cameras.StandardProsilicawstatsFactory"
 _group = "all_standard_pros" ## TODO: Does this need another group?
 prefix = "XF:07ID-BI{BPM:7}"
 name = "FS7 pink beam stop Camera"
+camera_name = "fs7_cam-1"
+date_template = "%Y/%m"
 read_attrs = ['tiff','stats5']
 
 [psh10]
@@ -309,7 +279,7 @@ _baseline = true
 
 ## DM6 and FS12
 
-[Exit_Slit] ## Precision slit C
+[slitsc] # was Exit_Slit # Precision slit C
 _target = "sst_base.motors.PrettyMotorFMBO"
 _group = "motors"
 kind = "hinted"
@@ -339,65 +309,35 @@ _baseline = true
 
 [slit_size]
 _alias = "slits1.vsize"
+_group = "motors"
 _role = "slits"
 
-[Slit1_Current_Bottom]
-_target = "ophyd.EpicsSignalRO"
-kind = "normal"
-prefix = "XF:07ID-ES1{Slt1:I400-1}:IC1_MON"
-name = "RSoXS Slit 1 Bottom Current"
-#_baseline = true
 
-[Slit1_Current_Bottom_int]
+[slits1_bottom_current] # was Slit1_Current_Bottom and Slit1_Current_Bottom_int
 _target = "sst_base.detectors.scalar.ophScalar"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC1_MON"
 name = "RSoXS Slit 1 Bottom Current"
-_baseline = true
 
-[Slit1_Current_Top]
-_target = "ophyd.EpicsSignalRO"
-kind = "normal"
-prefix = "XF:07ID-ES1{Slt1:I400-1}:IC2_MON"
-name = "RSoXS Slit 1 Top Current"
-#_baseline = true
-
-[Slit1_Current_Top_int]
+[slits1_top_current] #was Slit1_Current_Top_int and Slit1_Current_Top 
 _target = "sst_base.detectors.scalar.ophScalar"
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC2_MON"
 name = "RSoXS Slit 1 Top Current"
-_baseline = true
 
-[Slit1_Current_Inboard]
-_target = "ophyd.EpicsSignalRO"
+[slits1_inboard_current] # was Slit1_Current_Inboard_int and Slit1_Current_Inboard 
+_target = "sst_base.detectors.scalar.ophScalar"
+_group = ["detectors"]
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC3_MON"
 name = "RSoXS Slit 1 In Board Current"
-#_baseline = true
 
-[Slit1_Current_Inboard_int]
+[slits1_outboard_current] # was Slit1_Current_Outboard_int and Slit1_Current_Outboard 
 _target = "sst_base.detectors.scalar.ophScalar"
-_group = ["detectors", "signals"]
-kind = "normal"
-prefix = "XF:07ID-ES1{Slt1:I400-1}:IC3_MON"
-name = "RSoXS Slit 1 In Board Current"
-_baseline = true
-
-[Slit1_Current_Outboard]
-_target = "ophyd.EpicsSignalRO"
+_group = ["detectors"]
 kind = "normal"
 prefix = "XF:07ID-ES1{Slt1:I400-1}:IC4_MON"
 name = "RSoXS Slit 1 Out Board Current"
-#_baseline = true
-
-[Slit1_Current_Outboard_int]
-_target = "sst_base.detectors.scalar.ophScalar"
-_group = ["detectors", "signals"]
-kind = "normal"
-prefix = "XF:07ID-ES1{Slt1:I400-1}:IC4_MON"
-name = "RSoXS Slit 1 Out Board Current"
-_baseline = true
 
 [Slit1_i400_cap]
 _target = "ophyd.EpicsSignal"
@@ -442,50 +382,39 @@ name = "RSoXS Slit 1 i400 mode"
 string = true
 ## This I400 does not have an associated PDU the way the diode_i400 has.  To power cycle this I400, just disconnect and reconnect the cable.
 
-[Izero_Mesh]
-_target = "ophyd.EpicsSignalRO"
+
+[izero_mesh] #was Izero_Mesh_int and Izero_Mesh
+_target = "sst_base.detectors.scalar.ADCBuffer"
+_group = "detectors"
 kind = "normal"
-prefix = "XF:07ID-ES1{Slt1:I400-1}:IC1_MON"
+prefix = "XF:07ID-BI[ADC:2-Ch:0]"
 name = "RSoXS Au Mesh Current"
 #_baseline = true
 
-[Izero_Mesh_int]
-_target = "sst_base.detectors.scalar.ophScalar"
-_group = "detectors"
-kind = "normal"
-prefix = "XF:07ID-ES1{Slt1:I400-1}:IC1_MON"
-name = "RSoXS Au Mesh Current"
-_baseline = true
-
-[Izero_Diode] ## This is Jamie's definition, can be used for flyscanning (?)
-_target = "ophyd.EpicsSignalRO"
-_baseline = true
-
+[izero_diode] # was Izero_Diode # This is Jamie's definition, can be used for flyscanning (?)
+_target = "sst_base.detectors.scalar.ophScalar" #"ophyd.EpicsSignalRO"
+#_baseline = true
 kind = "normal"
 prefix = "XF:07ID-ES1{DMR:I400-1}:IC3_MON"
 name = "Izero Photodiode"
 
-[Izero_cam]
-_target = "rsoxs.devices.cameras.StandardProsilicawstats"
+[izero_cam] # was Izero_cam
+_target = "rsoxs.devices.cameras.StandardProsilicawstatsFactory"
 _group = "all_standard_pros"
 prefix = "XF:07ID1-ES:1{Scr:1}"
 name = "Izero YAG Camera"
+camera_name = "izero_cam-1"
+date_template = "%Y/%m"
 read_attrs=['tiff','stats5']
+## Manufacturer: Allied Vision Mako (some other cameras for flurescence screens are Alled Vision Prosilica, but all image processesing is done with classes named Prosilica)
 
-[Izero_Y]
+[izero_y] # was Izero_Y
 _target = "sst_base.motors.PrettyMotorFMBODeadband"
 _group = "motors"
 prefix = "XF:07ID2-ES1{Scr-Ax:1}Mtr"
 name = "Izero Assembly Vertical Translation" ## TODO: would like to name it something more generic like RSoXS diagnostic module to indicate that there is also a yag and photodiode
 kind = "hinted"
 _baseline = true
-
-[Izero_update_time] ## No longer relevant because quadEM is broken
-_target = "ophyd.EpicsSignal"
-
-kind = "normal"
-prefix = "XF:07ID1-BI{EM:1}EM180:AveragingTime"
-name = "RSoXS quadem Averaging Time"
 
 ## RSoXS slit 2
 [slits2]
@@ -497,7 +426,7 @@ name = "Middle Scatter Slits"
 concurrent = 1
 _baseline = true
 
-[Shutter_control]
+[shutter_control] #was Shutter_control
 _target = "rsoxs.HW.motors.ShutterWait"
 _group = "motors"
 _baseline = true ## To check that the shutter starts closed and ends closed for non-camera scans
@@ -505,7 +434,7 @@ prefix = "XF:07IDB-CT{DIODE-Local:1}OutPt01:Data-Sel"
 name = "RSoXS Shutter Toggle"
 kind = "normal"
 
-[Shutter_enable]
+[shutter_enable] #was Shutter_enable
 _target = "ophyd.EpicsSignal"
 _group = "motors"
 prefix = "XF:07IDB-CT{DIODE-MTO:1}OutMaskBit:2-Sel"
@@ -513,21 +442,21 @@ name = "RSoXS Shutter Toggle Enable"
 kind = "normal"
 _baseline = true
 
-[Shutter_open_time]
+[shutter_open_time] #was Shutter_open_time
 _target = "ophyd.EpicsSignal"
 prefix = "XF:07IDB-CT{DIODE-MTO:1}OutWidthSet:2-SP"
 name = "RSoXS Shutter Opening Time (ms)"
 kind = "normal"
 _baseline = true
 
-[Shutter_delay]
+[shutter_delay] # was Shutter_delay
 _target = "ophyd.EpicsSignal"
 prefix = "XF:07IDB-CT{DIODE-MTO:1}OutDelaySet:2-SP"
 name = "RSoXS Shutter Delay (ms)"
 kind = "normal"
 _baseline = true
 
-[Shutter_Y]
+[shutter_y] # was Shutter_Y
 _target = "sst_base.motors.PrettyMotorFMBODeadband"
 _group = "motors"
 prefix = "XF:07ID2-ES1{FSh-Ax:1}Mtr"
@@ -563,23 +492,29 @@ prefix = "XF:07ID-ES1{Slt1:I400-1}:IC2_MON"
 name = "RSoXS Sample Current"
 
 [Sample_TEY_int]
-_target = "sst_base.detectors.scalar.ophScalar"
+_target = "sst_base.detectors.scalar.ADCBuffer"
 _group = "detectors"
 kind = "normal"
-prefix = "XF:07ID-ES1{Slt1:I400-1}:IC2_MON"
+prefix = "XF:07ID-BI[ADC:2-Ch:2]"
 name = "RSoXS Sample Current"
 
 [Sample_cam]
-_target = "sst_base.cameras.StandardProsilica"
+_target = "sst_base.cameras.StandardProsilicaWithTIFFFactory"
 _group = "all_standard_pros"
 prefix = "XF:07ID1-ES:1{Scr:4}"
 name = "RSoXS Sample Area Camera" ## TODO: Would like to rename to "RSoXS Sample optical area camera, front view"
+camera_name = "sample_cam-1"
+date_template = "%Y/%m"
+read_attrs = ["tiff"]
 
 [Side_cam]
-_target = "sst_base.cameras.StandardProsilica"
+_target = "sst_base.cameras.StandardProsilicaWithTIFFFactory"
 _group = "all_standard_pros"
 prefix = "XF:07ID1-ES:1{Scr:2}"
 name = "RSoXS Sample Area Camera" ## TODO: Would like to rename to "RSoXS Sample optical area camera, side view"
+camera_name = "side_cam-1"
+date_template = "%Y/%m"
+read_attrs = ["tiff"]
 
 [sam_viewer]
 _target = "sst_base.motors.PrettyMotorFMBO"
@@ -590,10 +525,12 @@ kind = "hinted"
 _baseline = true
 
 [SampleViewer_cam]
-_target = "sst_base.cameras.ColorProsilicaWithTIFFV33"
+_target = "sst_base.cameras.ColorProsilicaWithTIFFV33Factory"
 _group = "all_standard_pros"
 prefix = "XF:07ID1-ES:1{Scr:5}"
 name = "Sample Imager Detector Area Camera" ## TODO: Would like to rename to "Solid sample bar imager detector area camera"
+camera_name = "sampleviewer_cam-1"
+date_template = "%Y/%m/%d"
 read_attrs = ["tiff"]
 
 [manipulator]
@@ -704,16 +641,16 @@ name = "Beam Stop WAXS"
 prefix = "XF:07ID2-ES1{BS-Ax:1}Mtr"
 _baseline = true
 
-[Beamstop_WAXS] ## This is Jamie's definition, can be used for flyscanning (?)
-_target = "ophyd.EpicsSignalRO"  ## Unlike the ophScalar signals, these signals collect a single data point and do not do any averaging or statistics. 
-kind = "normal"
-prefix = "XF:07ID-ES1{DMR:I400-1}:IC1_MON"
-name = "WAXS Beamstop"
+#[Beamstop_WAXS] ## This is Jamie's definition, can be used for flyscanning (?)
+#_target = "ophyd.EpicsSignalRO"  ## Unlike the ophScalar signals, these signals collect a single data point and do not do any averaging or statistics. 
+#kind = "normal"
+#prefix = "XF:07ID-ES1{DMR:I400-1}:IC1_MON"
+#name = "WAXS Beamstop"
 #_baseline = true
 
-[Beamstop_WAXS_int]
+[beamstop_waxs] # was Beamstop_WAXS_int
 _target = "sst_base.detectors.scalar.ophScalar" ## These signals are scalars (integrating detectors).  Each data point that is written out is the average of several "sub" data points.  Other statistics, such as standard deviation, median, etc. are available.  ## TODO: Would it be possible to combine this with the non-integrating signal and can toggle between which type to use?
-_group = ["detectors", "signals"]
+_group = ["detectors"]
 kind = "normal"
 prefix = "XF:07ID-ES1{DMR:I400-1}:IC1_MON"
 name = "WAXS Beamstop"
@@ -805,7 +742,7 @@ name = "SAXS Beamstop"
 
 [Beamstop_SAXS_int]
 _target = "sst_base.detectors.scalar.ophScalar"
-_group = ["detectors", "signals"]
+_group = ["detectors"]
 kind = "normal"
 prefix = "XF:07ID-ES1{DMR:I400-1}:IC2_MON"
 name = "SAXS Beamstop"

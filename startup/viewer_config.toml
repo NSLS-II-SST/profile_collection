@@ -1,0 +1,13 @@
+[[catalog]]
+label = "RSoXS Tiled Catalog"
+url = "https://tiled.nsls2.bnl.gov"
+catalog_keys = ["rsoxs", "raw"]
+catalog_model = "nbscatalog"
+autoload = true
+
+[[catalog]]
+label = "RSoXS Live Kafka"
+source_type = "kafka"
+config_file = "/etc/bluesky/kafka.yml"
+beamline_acronym = "rsoxs"
+autoload = true
