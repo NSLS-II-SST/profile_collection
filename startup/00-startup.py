@@ -48,7 +48,7 @@ run_report(__file__)
 from rsoxs.devices.cameras import configure_cameras
 from rsoxs.plans.rsoxs import *
 from rsoxs.plans.run_acquisitions import *
-from rsoxs.configuration_setup.configuration_load_save_sanitize import *
+from rsoxs.configuration_setup.configuration_load_save import *
 from rsoxs.configuration_setup.configurations_instrument import *
 from rsoxs.alignment.fiducials import *
 from rsoxs.alignment.energy_calibration import *
