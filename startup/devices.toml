@@ -387,7 +387,7 @@ string = true
 _target = "sst_base.detectors.scalar.ADCBuffer"
 _group = "detectors"
 kind = "normal"
-prefix = "XF:07ID-BI[ADC:2-Ch:0]"
+prefix = "XF:07ID-BI[ADC:2-Ch:0]" #prefix = "XF:07ID-ES1{Slt1:I400-1}:IC1_MON" #prefix = "XF:07ID-BI[ADC:2-Ch:0]"
 name = "RSoXS Au Mesh Current"
 #_baseline = true
 
@@ -538,42 +538,42 @@ _target = "rsoxs.devices.manipulator.ManipulatorBuilderRSOXS"
 _group = ["manipulators", "motors"]
 _role = "primary_sampleholder"
 prefix = "XF:07ID2-ES1{Stg-Ax:"
-name = "manipulator"
+name = "solid_sample"
 
 [sam_X]
-_target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
+#_target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
 _group = "motors"
 _alias = "manipulator.x"
-kind = "hinted"
-name = "RSoXS Sample Outboard-Inboard"
-prefix = "XF:07ID2-ES1{Stg-Ax:X}Mtr"
+#kind = "hinted"
+#name = "RSoXS Sample Outboard-Inboard"
+#prefix = "XF:07ID2-ES1{Stg-Ax:X}Mtr"
 _baseline = true
 
 [sam_Y]
-_target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
+#_target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
 _group = "motors"
 _alias = "manipulator.y"
-kind = "hinted"
-name = "RSoXS Sample Up-Down"
-prefix = "XF:07ID2-ES1{Stg-Ax:Y}Mtr"
+#kind = "hinted"
+#name = "RSoXS Sample Up-Down"
+#prefix = "XF:07ID2-ES1{Stg-Ax:Y}Mtr"
 _baseline = true
 
 [sam_Z]
-_target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
+#_target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
 _group = "motors"
 _alias = "manipulator.z"
-kind = "hinted"
-name = "RSoXS Sample Downstream-Upstream"
-prefix = "XF:07ID2-ES1{Stg-Ax:Z}Mtr"
+#kind = "hinted"
+#name = "RSoXS Sample Downstream-Upstream"
+#prefix = "XF:07ID2-ES1{Stg-Ax:Z}Mtr"
 _baseline = true
 
 [sam_Th]
-_target = "sst_base.motors.PrettyMotorFMBODeadband"
+#_target = "sst_base.motors.PrettyMotorFMBODeadband"
 _alias = "manipulator.r"
 _group = "motors"
-kind = "hinted"
-name = "RSoXS Sample Rotation"
-prefix = "XF:07ID2-ES1{Stg-Ax:Yaw}Mtr"
+#kind = "hinted"
+#name = "RSoXS Sample Rotation"
+#prefix = "XF:07ID2-ES1{Stg-Ax:Yaw}Mtr"
 _baseline = true
 
 [rsoxs_ll_gpwr]

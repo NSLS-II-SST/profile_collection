@@ -3,7 +3,7 @@ label = "RSoXS Tiled Catalog"
 url = "https://tiled.nsls2.bnl.gov"
 catalog_keys = ["rsoxs", "raw"]
 catalog_model = "nbscatalog"
-autoload = true
+autoload = false
 
 [[catalog]]
 label = "RSoXS Live Kafka"
