@@ -869,7 +869,13 @@ prefix = "XF:07ID2-BI{Diag:07-Ax:Y}Mtr"
 name = "Downstream diagnostic module translation" 
 kind = "normal"
 
-## GV29
+[dm7_cam] 
+_target = "sst_base.cameras.StandardProsilicawstatsFactory"
+prefix = "XF:07ID-BI{BPM:13}"
+name = "dm7_cam"
+camera_name = "fs13_cam-1"
+date_template = "%Y/%m"
+read_attrs = ['tiff','stats5']
 
 ## LARIAT 1
 
@@ -889,6 +895,20 @@ name = "Photon Shutter 8"
 ## FS14
 
 ## GV31
+
+[dm8]
+_target = "sst_base.motors.PrettyMotor"
+prefix = "XF:07ID2-BI{Diag:08-Ax:Y}Mtr"
+name = "DM8Motor"
+
+[dm8_cam] #was 
+_target = "sst_base.cameras.StandardProsilicawstatsFactory"
+prefix = "XF:07ID-BI{BPM:14}"
+name = "dm8_cam"
+camera_name = "fs14_cam-1"
+date_template = "%Y/%m"
+read_attrs = ['tiff','stats5']
+
 
 ## PEY NEXAFS
 
