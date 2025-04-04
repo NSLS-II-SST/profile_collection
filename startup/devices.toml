@@ -424,7 +424,9 @@ prefix = "XF:07IDB-CT{DIODE-Local:1}OutPt01:Data-Sel"
 name = "RSoXS Shutter Toggle"
 kind = "normal"
 ## Specs and manual of amplifier (dsm linear piezoelectric amplifier, model: VF-500 XR5, serial number: E18-01499): https://www.dynamic-structures.com/product/open-loop-vf-500
+## The amplifier at the beamline is a specialized version likely with some customization.
 ## Input is a TTL signal from WAXS CCD camera through shutter PV filtered through DIODE box so that delays can be added and the signal can be turned off.  TTL signal is amplified to a -30 to 200V signal while controlling the current so that the piezo shutter is not burnt out
+## Shutter should only be activated using a controlled amplifier and never manually, as it requires 160 V with correct polarity, otherwise, the piezo could get damaged.
 
 [shutter_enable] #was Shutter_enable
 _target = "ophyd.EpicsSignal"
