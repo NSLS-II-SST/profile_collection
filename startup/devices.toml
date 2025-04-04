@@ -416,16 +416,6 @@ name = "Izero Assembly Vertical Translation" ## TODO: would like to name it some
 kind = "hinted"
 _baseline = true
 
-## RSoXS slit 2
-[slits2]
-_target = "sst_base.slits.FMBOQuadSlits"
-_group = "motors"
-kind = "hinted"
-prefix = "XF:07ID2-ES1{Slt2-Ax:"
-name = "Middle Scatter Slits"
-concurrent = 1
-_baseline = true
-
 [shutter_control] #was Shutter_control
 _target = "rsoxs.HW.motors.ShutterWait"
 _group = "motors"
@@ -462,6 +452,16 @@ _group = "motors"
 prefix = "XF:07ID2-ES1{FSh-Ax:1}Mtr"
 name = "Shutter Vertical Translation" ## Fast shutter
 kind = "hinted"
+_baseline = true
+
+## RSoXS slit 2
+[slits2]
+_target = "sst_base.slits.FMBOQuadSlits"
+_group = "motors"
+kind = "hinted"
+prefix = "XF:07ID2-ES1{Slt2-Ax:"
+name = "Middle Scatter Slits"
+concurrent = 1
 _baseline = true
 
 [gv27a]
