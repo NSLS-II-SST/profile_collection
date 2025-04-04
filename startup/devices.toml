@@ -427,6 +427,7 @@ kind = "normal"
 ## The amplifier at the beamline is a specialized version likely with some customization.
 ## Input is a TTL signal from WAXS CCD camera through shutter PV filtered through DIODE box so that delays can be added and the signal can be turned off.  TTL signal is amplified to a -30 to 200V signal while controlling the current so that the piezo shutter is not burnt out
 ## Shutter should only be activated using a controlled amplifier and never manually, as it requires 160 V with correct polarity, otherwise, the piezo could get damaged.
+## Specs and manual for XRS1-900 Piezo Shutter: https://www.dynamic-structures.com/product/xrs1-900
 
 [shutter_enable] #was Shutter_enable
 _target = "ophyd.EpicsSignal"
