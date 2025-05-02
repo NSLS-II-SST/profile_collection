@@ -859,20 +859,20 @@ _target = "ophyd.EpicsSignalRO"
 prefix = "XF:07ID-BI{BPM:13}Stats5:Total_RBV"
 name = "Downstream Izero Phosphor Intensity"
 
-[Izero_ds]
-_target = "sst_base.motors.PrettyMotorFMBO"
-_group = "motors"
-prefix = "XF:07ID2-BI{Diag:07-Ax:Y}Mtr"
-name = "Downstream Izero DM7 Vertical Translation" ## TODO: would like to name it something more generic like diagnostic module 7 to indicate that there is also a yag and photodiode.  In the description, I can indicate that it is downstream of RSoXS.
-kind = "hinted"
-_baseline = true
+#[Izero_ds]
+#_target = "sst_base.motors.PrettyMotorFMBO"
+#_group = "motors"
+#prefix = "XF:07ID2-BI{Diag:07-Ax:Y}Mtr"
+#name = "Downstream Izero DM7 Vertical Translation" ## TODO: would like to name it something more generic like diagnostic module 7 to indicate that there is also a yag and photodiode.  In the description, I can indicate that it is downstream of RSoXS.
+#kind = "hinted"
+#_baseline = true
 
-[dm7] ## TODO: I believe this is a repeat of the above Izero_ds, but the motor class and normal vs. hinting is different, so I am not sure which one is more correct
-_target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
-_group = "motors"
-prefix = "XF:07ID2-BI{Diag:07-Ax:Y}Mtr"
-name = "Downstream diagnostic module translation" 
-kind = "normal"
+#[dm7] ## TODO: I believe this is a repeat of the above Izero_ds, but the motor class and normal vs. hinting is different, so I am not sure which one is more correct
+#_target = "sst_base.motors.PrettyMotorFMBODeadbandFlyer"
+#_group = "motors"
+#prefix = "XF:07ID2-BI{Diag:07-Ax:Y}Mtr"
+#name = "Downstream diagnostic module translation" 
+#kind = "normal"
 
 [dm7_cam] 
 _target = "sst_base.cameras.StandardProsilicawstatsFactory"
